@@ -1,0 +1,2 @@
+class Wish < Listing
+end

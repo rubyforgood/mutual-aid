@@ -1,0 +1,2 @@
+class Offering < Listing
+end

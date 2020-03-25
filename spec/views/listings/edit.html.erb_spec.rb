@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "listings/edit", type: :view do
   before(:each) do
-    @listing = assign(:listing, Listing.create!(
-      title: "MyString",
-      description: "MyText",
-      type: ""
-    ))
+    @listing = assign(:listing, create(:listing))
   end
 
   it "renders the edit listing form" do

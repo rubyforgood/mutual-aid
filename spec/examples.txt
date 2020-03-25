@@ -1,0 +1,32 @@
+example_id                                        | status  | run_time        |
+------------------------------------------------- | ------- | --------------- |
+./spec/helpers/listings_helper_spec.rb[1:1]       | pending | 0 seconds       |
+./spec/models/listing_spec.rb[1:1]                | pending | 0.00001 seconds |
+./spec/models/offering_spec.rb[1:1]               | pending | 0.00001 seconds |
+./spec/models/resource_spec.rb[1:1]               | pending | 0.00001 seconds |
+./spec/models/wish_spec.rb[1:1]                   | pending | 0.00001 seconds |
+./spec/requests/listings_spec.rb[1:1:1]           | pending | 0.00102 seconds |
+./spec/requests/listings_spec.rb[1:2:1]           | pending | 0.00055 seconds |
+./spec/requests/listings_spec.rb[1:3:1]           | passed  | 0.02859 seconds |
+./spec/requests/listings_spec.rb[1:4:1]           | pending | 0.00049 seconds |
+./spec/requests/listings_spec.rb[1:5:1:1]         | pending | 0.00194 seconds |
+./spec/requests/listings_spec.rb[1:5:1:2]         | pending | 0.00073 seconds |
+./spec/requests/listings_spec.rb[1:5:2:1]         | pending | 0.00098 seconds |
+./spec/requests/listings_spec.rb[1:5:2:2]         | pending | 0.00054 seconds |
+./spec/requests/listings_spec.rb[1:6:1:1]         | pending | 0.00049 seconds |
+./spec/requests/listings_spec.rb[1:6:1:2]         | pending | 0.00053 seconds |
+./spec/requests/listings_spec.rb[1:6:2:1]         | pending | 0.00061 seconds |
+./spec/requests/listings_spec.rb[1:7:1]           | pending | 0.00049 seconds |
+./spec/requests/listings_spec.rb[1:7:2]           | pending | 0.00073 seconds |
+./spec/routing/listings_routing_spec.rb[1:1:1]    | passed  | 0.00069 seconds |
+./spec/routing/listings_routing_spec.rb[1:1:2]    | passed  | 0.00063 seconds |
+./spec/routing/listings_routing_spec.rb[1:1:3]    | passed  | 0.00104 seconds |
+./spec/routing/listings_routing_spec.rb[1:1:4]    | passed  | 0.00066 seconds |
+./spec/routing/listings_routing_spec.rb[1:1:5]    | passed  | 0.00145 seconds |
+./spec/routing/listings_routing_spec.rb[1:1:6]    | passed  | 0.00928 seconds |
+./spec/routing/listings_routing_spec.rb[1:1:7]    | passed  | 0.00097 seconds |
+./spec/routing/listings_routing_spec.rb[1:1:8]    | passed  | 0.00064 seconds |
+./spec/views/listings/edit.html.erb_spec.rb[1:1]  | passed  | 0.00945 seconds |
+./spec/views/listings/index.html.erb_spec.rb[1:1] | passed  | 0.00677 seconds |
+./spec/views/listings/new.html.erb_spec.rb[1:1]   | passed  | 0.0044 seconds  |
+./spec/views/listings/show.html.erb_spec.rb[1:1]  | passed  | 0.0135 seconds  |

@@ -3,6 +3,7 @@ FactoryBot.define do
     title { "Randomly Generated Listing" }
     description { "A Description" }
     type { %w(Offering Resource Wish).sample }
+    zip { "10101" }
 
     factory :offering do
       title { "An Offering" }

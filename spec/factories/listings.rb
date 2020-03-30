@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :listing do
     title { "Randomly Generated Listing" }
     description { "A Description" }
-    type { %w(Offering Resource Wish).sample }
+    type { %w(Offering Resource Need).sample }
     zip { "10101" }
 
     factory :offering do
@@ -15,9 +15,9 @@ FactoryBot.define do
       type { "Resource" }
     end
 
-    factory :wish do  
-      title { "A Wish" }
-      type { "Wish" }    
+    factory :need do
+      title { "A Request" }
+      type { "Need" }
     end
   end
 end

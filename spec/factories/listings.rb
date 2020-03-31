@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :listing do
     type { %w(Offering Resource Need).sample }
-    zip { "10101" }
+
+    association :location
 
     factory :offering, class: "Offering" do
       type { "Offering" }

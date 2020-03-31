@@ -9,12 +9,7 @@ RSpec.describe "listings/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", listing_path(@listing), "post" do
-
-      assert_select "input[name=?]", "listing[title]"
-
-      assert_select "textarea[name=?]", "listing[description]"
-
-      assert_select "input[name=?]", "listing[type]"
+      # assert_select "input[email=?]", "listing[email]"
     end
   end
 end

@@ -3,8 +3,6 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
       <th>Type</th>
       <th colspan="3"></th>
     </tr>
@@ -13,8 +11,6 @@
   <tbody>
     <% @listings.each do |listing| %>
       <tr>
-        <td><%= listing.title %></td>
-        <td><%= listing.description %></td>
         <td><%= listing.type %></td>
         <td><%= link_to 'Show', listing %></td>
         <td><%= link_to 'Edit', edit_listing_path(listing) %></td>

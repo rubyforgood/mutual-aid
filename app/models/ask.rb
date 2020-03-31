@@ -1,0 +1,2 @@
+class Ask < Listing
+end

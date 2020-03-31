@@ -1,23 +1,15 @@
 FactoryBot.define do
   factory :listing do
-    title { "Randomly Generated Listing" }
-    description { "A Description" }
-    type { %w(Offering Resource Need).sample }
-    zip { "10101" }
+    type { %w(Offer Ask).sample }
 
-    factory :offering do
-      title { "An Offering" }
-      type { "Offering" }
+    association :location
+
+    factory :offer, class: "Offer" do
+      type { "Offer" }
     end
 
-    factory :resource do
-      title { "A Community Resource" }
-      type { "Resource" }
-    end
-
-    factory :need do
-      title { "A Request" }
-      type { "Need" }
+    factory :ask, class: "Ask" do
+      type { "Ask" }
     end
   end
 end

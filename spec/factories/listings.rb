@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :listing do
-    type { %w(Offering Resource Need).sample }
+    type { %w(Offering Resource Ask).sample }
 
     association :location
 
@@ -12,8 +12,8 @@ FactoryBot.define do
       type { "Resource" }
     end
 
-    factory :need, class: "Need" do
-      type { "Need" }
+    factory :ask, class: "Ask" do
+      type { "Ask" }
     end
   end
 end

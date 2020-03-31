@@ -5,17 +5,17 @@ FactoryBot.define do
     type { %w(Offering Resource Need).sample }
     zip { "10101" }
 
-    factory :offering do
+    factory :offering, class: "Offering" do
       title { "An Offering" }
       type { "Offering" }
     end
 
-    factory :resource do
+    factory :resource, class: "Resource" do
       title { "A Community Resource" }
       type { "Resource" }
     end
 
-    factory :need do
+    factory :need, class: "Need" do
       title { "A Request" }
       type { "Need" }
     end

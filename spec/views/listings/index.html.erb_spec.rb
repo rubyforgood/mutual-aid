@@ -7,7 +7,6 @@ RSpec.describe "listings/index", type: :view do
 
   it "renders a list of listings" do
     render
-    assert_select "tr>td", text: "Randomly Generated Listing".to_s, count: 2
-    assert_select "tr>td", text: "A Description".to_s, count: 2
+    assert_select "tbody>tr", count: 2
   end
 end

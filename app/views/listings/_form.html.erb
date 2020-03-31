@@ -2,7 +2,6 @@
   <% if listing.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
-
       <ul>
         <% listing.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,20 +10,12 @@
     </div>
   <% end %>
 
+  <!--
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
   </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :type %>
-  </div>
+  -->
 
   <div class="actions">
     <%= form.submit %>

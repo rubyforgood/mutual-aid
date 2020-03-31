@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Listing, type: :model do
-  let(:listing) { build(:offering) }
+  let(:listing) { build(:offer) }
 
   describe 'tagging' do
     example 'smoke test' do

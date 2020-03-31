@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :listing do
-    type { %w(Offering Resource Ask).sample }
+    type { %w(Offer Resource Ask).sample }
 
     association :location
 
-    factory :offering, class: "Offering" do
-      type { "Offering" }
+    factory :offer, class: "Offer" do
+      type { "Offer" }
     end
 
     factory :resource, class: "Resource" do

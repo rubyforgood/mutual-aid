@@ -1,0 +1,12 @@
+<% if notice %>
+  <div class="alert alert-info alert-dismissible text-center short-response" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= notice.html_safe %>
+  </div>
+<% end %>
+<% if alert %>
+  <div class="alert alert-danger alert-dismissible text-center short-response" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h1><%= alert.html_safe %></h1>
+  </div>
+<% end %>

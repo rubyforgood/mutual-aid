@@ -1,2 +1,0 @@
-class Resource < Listing
-end

@@ -1,0 +1,47 @@
+<p>
+  <strong>Name:</strong>
+  <%= @external_resource.name %>
+</p>
+
+<p>
+  <strong>Tags:</strong>
+  <%= @external_resource.tags %>
+</p>
+
+<p>
+  <strong>Website url:</strong>
+  <%= @external_resource.website_url %>
+</p>
+
+<p>
+  <strong>Facebook url:</strong>
+  <%= @external_resource.facebook_url %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @external_resource.phone %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @external_resource.description %>
+</p>
+
+<p>
+  <strong>Display on website:</strong>
+  <%= @external_resource.display_on_website %>
+</p>
+
+<p>
+  <strong>Youtube identifier:</strong>
+  <%= @external_resource.youtube_identifier %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @external_resource.location_id %>
+</p>
+
+<%= link_to 'Edit', edit_external_resource_path(@external_resource) %> |
+<%= link_to 'Back', external_resources_path %>

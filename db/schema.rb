@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_123807) do
+ActiveRecord::Schema.define(version: 2020_04_01_105929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "external_resources", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "website_url"
+    t.string "facebook_url"
+    t.string "phone"
+    t.string "description"
+    t.boolean "display_on_website", default: true, null: false
+    t.string "youtube_identifier"
+    t.bigint "location_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "tags", default: [], array: true
+    t.index ["display_on_website"], name: "index_external_resources_on_display_on_website"
+    t.index ["location_id"], name: "index_external_resources_on_location_id"
+    t.index ["tags"], name: "index_external_resources_on_tags", using: :gin
+  end
 
   create_table "listings", force: :cascade do |t|
     t.string "type"
@@ -64,5 +81,6 @@ ActiveRecord::Schema.define(version: 2020_04_01_123807) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "external_resources", "locations"
   add_foreign_key "listings", "locations"
 end

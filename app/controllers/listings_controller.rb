@@ -1,5 +1,7 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :set_listing,    only: [:show, :destroy]
+  before_action :set_form,       only: [:edit, :update]
+  before_action :set_empty_form, only: [:new, :create]
 
   # GET /listings
   # GET /listings.json
@@ -12,42 +14,27 @@ class ListingsController < ApplicationController
   def show
   end
 
-  # GET /listings/new
   def new
-    @listing = Listing.new
   end
 
-  # GET /listings/1/edit
   def edit
   end
 
-  # POST /listings
-  # POST /listings.json
   def create
-    @listing = Listing.new(listing_params)
-
-    respond_to do |format|
-      if @listing.save
-        format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
-        format.json { render :show, status: :created, location: @listing }
-      else
-        format.html { render :new }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
-      end
+    if @listing.validate(params[:listing])
+      @listing.save
+      redirect_to @listing, notice: 'Listing was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /listings/1
-  # PATCH/PUT /listings/1.json
   def update
-    respond_to do |format|
-      if @listing.update(listing_params)
-        format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
-        format.json { render :show, status: :ok, location: @listing }
-      else
-        format.html { render :edit }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
-      end
+    if @listing.validate(params[:listing])
+      @listing.save
+      redirect_to @listing, notice: 'Listing was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -62,13 +49,16 @@ class ListingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_listing
       @listing = Listing.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def listing_params
-      params.require(:listing).permit(:fix_me)
+    def set_form
+      @listing = ListingForm.new(Listing.find(params[:id]))
+    end
+
+    def set_empty_form
+      @listing = ListingForm.new(Listing.new(location: Location.new))
     end
 end

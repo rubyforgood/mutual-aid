@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_105929) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "street"
+    t.string "street_address"
     t.string "city"
     t.string "state", limit: 2
     t.string "zip", limit: 5

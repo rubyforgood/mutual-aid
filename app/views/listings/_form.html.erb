@@ -12,8 +12,24 @@
 
   <p class="lead">
   No private information you enter below will be visible or shared publicly.
-  and you can leave blank any fields you prefer not to to fill out.
+  You can leave blank any fields you prefer not to to fill out, except those
+  marked mith an asterisk (<span style="color: orange">*</span>)
   </p>
+
+  <div class="form-group required">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group required">
+    <%= form.label :email %>
+    <%= form.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group required">
+    <%= form.label :phone %>
+    <%= form.phone_field :phone, class: "form-control" %>
+  </div>
 
   <%= form.fields_for :location do |location_form| %>
     <div class="form-group">

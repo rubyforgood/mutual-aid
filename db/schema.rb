@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_072342) do
+ActiveRecord::Schema.define(version: 2020_04_01_123807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 2020_04_01_072342) do
     t.text "tags", default: [], array: true
     t.integer "state", default: 0
     t.bigint "location_id"
+    t.string "name"
+    t.string "email"
+    t.string "phone"
     t.index ["location_id"], name: "index_listings_on_location_id"
     t.index ["tags"], name: "index_listings_on_tags", using: :gin
   end

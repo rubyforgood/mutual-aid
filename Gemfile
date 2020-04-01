@@ -23,12 +23,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem "font-awesome-rails"
 gem 'devise'
 gem 'simple_form'
-
-gem 'bootstrap', '~> 4.4.1'
-gem 'jquery-rails'
-gem "font-awesome-rails"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

@@ -1,29 +1,61 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="row text-center login-screen" style="vertical-align:middle;">
+  <div class="col-md-6 col-md-offset-2 logo-image text-center">
+    <%= image_tag 'logo.png', height: 300, alt: 'festi logo'%>
   </div>
+  <div class="col-md-4 text-center">
+    <% if current_user %>
+      <h2>You are already logged in</h2>
+      <% if current_user&.admin? %>
+        <%= link_to("<span class='fa fa-menu #{ENV['NAVBAR_ICON_COLOR_CLASS']}'></span><span class='text-black text-bold'> Go back to admin</span>".html_safe,
+                    admin_path,
+                    class: "btn btn-default button #{ENV['NAVBAR_ICON_COLOR_CLASS']}",
+                    title: "Logout") %>
+      <% end %>
+    <% else %>
+      <h2>Sign up</h2>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="form-group">
+          <%= f.input :email,
+                      required: true,
+                      email_field: true,
+                      autofocus: true,
+                      autocomplete: "email",
+                      input_html: {class: "form-control form-field-display-block required-field wide-response"},
+                      label_html: {class: "form-field-display-block"} %>
+        </div>
+
+        <div class="form-group">
+          <%= f.input :password,
+                      required: true,
+                      email_field: true,
+                      autofocus: true,
+                      autocomplete: "new-password",
+                      # hint: ("<em>(#{@minimum_password_length} characters minimum)</em>".html_safe if @minimum_password_length),
+                      input_html: {class: "form-control form-field-display-block required-field wide-response"},
+                      label_html: {class: "form-field-display-block"} %>
+        </div>
+
+        <div class="form-group">
+          <%= f.input :password_confirmation,
+                      required: true,
+                      email_field: true,
+                      autofocus: true,
+                      autocomplete: "new-password",
+                      hint: ("<em>(#{@minimum_password_length} characters minimum)</em>".html_safe if @minimum_password_length),
+                      input_html: {class: "form-control form-field-display-block required-field wide-response"},
+                      label_html: {class: "form-field-display-block"} %>
+        </div>
+
+        <div class="actions" id="login_button">
+          <%= f.button :submit, "Sign up", class: "btn btn-success button" %>
+        </div>
+      <% end %>
+    <% end %>
+    <br>
+    <%= render "devise/shared/links" %>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

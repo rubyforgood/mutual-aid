@@ -23,6 +23,8 @@ RSpec.describe "/listings", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
+  before { sign_in create(:user) }
+
   describe "GET /index" do
     it "renders a successful response" do
       Listing.create! valid_attributes

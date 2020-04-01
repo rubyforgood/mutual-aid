@@ -1,3 +1,7 @@
+
+<%# current_user ||= User.first %>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,14 +14,25 @@
   </head>
 
   <body>
-    <div class="notices-and-alerts">
-      <%= render partial: "layouts/notices_and_alerts" %>
-    </div>
-    <div class="devise-button">
+    <%= favicon_link_tag asset_path('logo.png'), :rel => 'icon', :type => "image/x-icon" %>
+
+    <div class="wrapper">
       <% if current_user %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, no_confirm: true %>
+        <%= render partial: "layouts/sidebar" %>
       <% end %>
+
+      <div id="content">
+        <% if current_user %>
+          <%= render partial: "layouts/navbar" %>
+        <% else %>
+          <div style="padding-top: 5em;"></div>
+        <% end %>
+
+        <%= render partial: "layouts/notices_and_alerts" %>
+        <%= yield %>
+
+      </div>
     </div>
-    <%= yield %>
   </body>
+
 </html>

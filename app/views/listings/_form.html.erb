@@ -36,6 +36,25 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= form.label :tags %>
+    <%= form.collection_check_boxes(:tags, ListingForm.all_tags, :itself, :itself) do |b| %>
+      <%# Derived from https://bootsnipp.com/snippets/M2bda %>
+      <div class="form-group mb-0">
+        <%= b.check_box(class: "d-none") %>
+        <div class="btn-group">
+          <%= b.label(class: "btn btn-sm btn-outline-secondary") do %>
+            <span>&#10003;</span> <!-- made visible via css when checked -->
+            <span> </span>
+          <% end %>
+          <%= b.label(class: "btn btn-sm btn-outline-secondary btn-block") do %>
+            <%= b.value.capitalize %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= form.submit 'Submit', class: "btn btn-primary" %>
   </div>

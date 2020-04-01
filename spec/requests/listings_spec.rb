@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "/listings", type: :request do
   let(:valid_attributes) {{
     location_attributes: {zip: "12345"},
+    tags: ["", "cash"]
   }}
 
   let(:invalid_attributes) {{
@@ -59,6 +60,11 @@ RSpec.describe "/listings", type: :request do
       it "redirects to the created listing" do
         post listings_url, params: { listing: valid_attributes }
         expect(response).to redirect_to(listing_url(Listing.last))
+      end
+
+      it "does not save a blank tag" do
+        post listings_url, params: { listing: valid_attributes }
+        expect(Listing.all_tags).not_to include("")
       end
     end
 

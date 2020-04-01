@@ -27,4 +27,8 @@ class ListingForm < Reform::Form
   def self.all_tags
     DEFAULT_TAGS | Listing.all_tags
   end
+
+  def tags=(array)
+    super(array - [""])
+  end
 end

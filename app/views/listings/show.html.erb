@@ -1,6 +1,15 @@
+<h2>Offer/Ask</h2>
 <p>
-  <strong>Type:</strong>
-  <%= @listing.type %>
+  <strong>City:</strong>
+  <%= @listing.location.city %>
+</p>
+<p>
+  <strong>Zip:</strong>
+  <%= @listing.location.zip %>
+</p>
+<p>
+  <strong>Street address:</strong>
+  <%= @listing.location.street_address %>
 </p>
 
 <%= link_to 'Edit', edit_listing_path(@listing) %> |

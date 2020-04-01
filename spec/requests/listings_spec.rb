@@ -19,9 +19,9 @@ RSpec.describe "/listings", type: :request do
     end
   end
 
-  pending "GET /show" do
+  describe "GET /show" do
     it "renders a successful response" do
-      listing = Listing.create! valid_attributes
+      listing = create(:listing)
       get listing_url(listing)
       expect(response).to be_successful
     end
@@ -39,9 +39,9 @@ RSpec.describe "/listings", type: :request do
     end
   end
 
-  pending "GET /edit" do
+  describe "GET /edit" do
     it "render a successful response" do
-      listing = Listing.create! valid_attributes
+      listing = create(:listing)
       get edit_listing_url(listing)
       expect(response).to be_successful
     end
@@ -76,30 +76,29 @@ RSpec.describe "/listings", type: :request do
     end
   end
 
-  pending "PATCH /update" do
+  describe "PATCH /update" do
+    let(:listing) { create(:listing) }
+
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+        location_attributes: {street_address: 'changed'},
+      }}
+
+      before do
+        patch listing_url(listing), params: { listing: new_attributes }
+      end
 
       it "updates the requested listing" do
-        listing = Listing.create! valid_attributes
-        patch listing_url(listing), params: { listing: new_attributes }
-        listing.reload
-        skip("Add assertions for updated state")
+        expect(listing.reload.location.street_address).to eq('changed')
       end
 
       it "redirects to the listing" do
-        listing = Listing.create! valid_attributes
-        patch listing_url(listing), params: { listing: new_attributes }
-        listing.reload
         expect(response).to redirect_to(listing_url(listing))
       end
     end
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        listing = Listing.create! valid_attributes
         patch listing_url(listing), params: { listing: invalid_attributes }
         expect(response).to be_successful
       end

@@ -39,6 +39,9 @@ ActiveRecord::Schema.define(version: 2020_04_01_105929) do
     t.text "tags", default: [], array: true
     t.integer "state", default: 0
     t.bigint "location_id"
+    t.string "name"
+    t.string "email"
+    t.string "phone"
     t.index ["location_id"], name: "index_listings_on_location_id"
     t.index ["tags"], name: "index_listings_on_tags", using: :gin
   end

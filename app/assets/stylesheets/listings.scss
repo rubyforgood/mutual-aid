@@ -5,6 +5,12 @@
 .listing-form {
   max-width: 800px;
 
+  .form-group.required > label:first-child:after {
+    content: '*';
+    color: orange;
+    margin-left: 2px;
+  }
+
   .form-group input[type="checkbox"] + .btn-group > label span {
     width: 20px;
   }

@@ -1,4 +1,4 @@
-<%= form_with(model: listing, local: true) do |form| %>
+<%= form_with(model: listing, local: true, class: 'listing-form') do |form| %>
   <% if listing.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
@@ -10,14 +10,33 @@
     </div>
   <% end %>
 
-  <!--
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-  -->
+  <p class="lead">
+  No private information you enter below will be visible or shared publicly.
+  and you can leave blank any fields you prefer not to to fill out.
+  </p>
+
+  <%= form.fields_for :location do |location_form| %>
+    <div class="form-group">
+      <%= location_form.label :city %>
+      <%= location_form.text_field :city, list: "cities", class: "form-control", placeholder: "Select one of the cities below or type another in..." %>
+      <datalist id="cities">
+        <%= LocationForm::CITIES.each do |city| %>
+          <option value="<%= city %>"></option>
+        <% end %>
+      </datalist>
+    </div>
+    <div class="form-group">
+      <%= location_form.label :zip %>
+      <%= location_form.text_field :zip, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= location_form.label :street_address %>
+      <%= location_form.text_field :street_address, class: "form-control" %>
+      <small class="form-text text-muted">You may enter a proximate address, eg "1200 Block, 1st St"</small>
+    </div>
+  <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Submit', class: "btn btn-primary" %>
   </div>
 <% end %>

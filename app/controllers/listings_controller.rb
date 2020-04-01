@@ -12,28 +12,22 @@ class ListingsController < ApplicationController
   def show
   end
 
-  # GET /listings/new
   def new
-    @listing = Listing.new
+    @listing = empty_form
   end
 
   # GET /listings/1/edit
   def edit
   end
 
-  # POST /listings
-  # POST /listings.json
   def create
-    @listing = Listing.new(listing_params)
+    @listing = empty_form
 
-    respond_to do |format|
-      if @listing.save
-        format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
-        format.json { render :show, status: :created, location: @listing }
-      else
-        format.html { render :new }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
-      end
+    if @listing.validate(params[:listing])
+      @listing.save
+      redirect_to @listing, notice: 'Listing was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -70,5 +64,9 @@ class ListingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def listing_params
       params.require(:listing).permit(:fix_me)
+    end
+
+    def empty_form
+      ListingForm.new(Listing.new(location: Location.new))
     end
 end

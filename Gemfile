@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem "font-awesome-rails"
 gem 'devise'
+gem 'reform-rails'
 gem 'simple_form'
 
 # Use Active Storage variant

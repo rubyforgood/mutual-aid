@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-9">
+    <h1>Resources</h1>
+    <br>
+  </div>
+  <div class="col-md-2">
+    <%= link_to "<span class='fa fa-plus-square'></span> <span class='text-black'>Add new</span>".html_safe,
+                new_external_resource_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
+<div class="row col-md-12">
+  <table class="table table-hover table-curved table-condensed">
+    <tbody>
+    <% @external_resources.each do |external_resource| %>
+      <% if external_resource.display_on_website? %>
+        <tr>
+          <td>
+            <strong><%= external_resource.name %></strong>
+            <%= link_to("<span class='fa fa-globe'></span>".html_safe,
+                        external_resource.website_url,
+                        title: "Go to #{external_resource.website_url}",
+                        class: "btn btn-default") if external_resource.website_url.present? %>
+            <%= link_to("<span class='fa fa-facebook'></span>".html_safe,
+                        external_resource.facebook_url,
+                        title: "Go to #{external_resource.facebook_url}",
+                        class: "btn btn-default") if external_resource.facebook_url.present? %>
+            <br>
+            <%= " | " + external_resource.tags + " | " if external_resource.tags.any? %>
+            <em><%= link_to(external_resource.description.truncate(100), external_resource_path(external_resource)) %></em>
+          </td>
+          <td>
+            <%= link_to("<span class='fa fa-eye'></span>".html_safe,
+                        external_resource,
+                        title: "View #{external_resource.name}",
+                        class: "btn btn-default") %>
+            <%= link_to("<span class='fa fa-edit'></span>".html_safe,
+                        edit_external_resource_path(external_resource) ,
+                        title: "Edit #{external_resource.name}",
+                        class: "btn btn-default") if current_user %>
+            <%= link_to("<span class='fa fa-times-circle'></span>".html_safe,
+                        external_resource, method: :delete, data: { confirm: 'Are you sure?' },
+                        title: "View #{external_resource.name}",
+                        class: "btn btn-default") if current_user %>
+            <br>
+            <%= external_resource.phone %> <%= external_resource.location&.address %>
+            <br>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

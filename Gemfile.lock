@@ -69,6 +69,7 @@ GEM
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
+    bulma (0.1.0)
     byebug (11.1.1)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
@@ -283,6 +284,7 @@ DEPENDENCIES
   annotate
   binding_of_caller
   bootsnap (>= 1.4.2)
+  bulma
   byebug
   devise
   factory_bot_rails

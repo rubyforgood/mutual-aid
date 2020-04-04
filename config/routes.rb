@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
 
   resources :external_resources
-  devise_for :users
 
   resources :listings
 
-  root to: "listings#index"
+  resource :landing_page, only: [:show]
+
+  root to: "landing_page#show"
 end

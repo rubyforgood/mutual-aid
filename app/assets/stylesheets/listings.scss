@@ -5,25 +5,25 @@
 .listing-form {
   max-width: 800px;
 
-  .form-group.required > label:first-child:after {
+  .field.required > label:first-child:after {
     content: '*';
     color: orange;
     margin-left: 2px;
   }
 
-  .form-group input[type="checkbox"] + .btn-group > label span {
+  .field input[type="checkbox"] + label span {
     width: 20px;
   }
-  .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+  .field input[type="checkbox"] + label span:first-child {
     display: none;
   }
-  .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+  .field input[type="checkbox"] + label span:last-child {
     display: inline-block;
   }
-  .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+  .field input[type="checkbox"]:checked + label span:first-child {
     display: inline-block;
   }
-  .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+  .field input[type="checkbox"]:checked + label span:last-child {
     display: none;
   }
 }

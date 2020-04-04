@@ -16,23 +16,23 @@
   marked mith an asterisk (<span style="color: orange">*</span>)
   </p>
 
-  <div class="form-group required">
+  <div class="field required">
     <%= form.label :name %>
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="form-group required">
+  <div class="field required">
     <%= form.label :email %>
     <%= form.email_field :email, class: "form-control" %>
   </div>
 
-  <div class="form-group required">
+  <div class="field required">
     <%= form.label :phone %>
     <%= form.phone_field :phone, class: "form-control" %>
   </div>
 
   <%= form.fields_for :location do |location_form| %>
-    <div class="form-group">
+    <div class="field">
       <%= location_form.label :city %>
       <%= location_form.text_field :city, list: "cities", class: "form-control", placeholder: "Select one of the cities below or type another in..." %>
       <datalist id="cities">
@@ -41,37 +41,36 @@
         <% end %>
       </datalist>
     </div>
-    <div class="form-group">
+    <div class="field">
       <%= location_form.label :zip %>
       <%= location_form.text_field :zip, class: "form-control" %>
     </div>
-    <div class="form-group">
+    <div class="field">
       <%= location_form.label :street_address %>
       <%= location_form.text_field :street_address, class: "form-control" %>
       <small class="form-text text-muted">You may enter a proximate address, eg "1200 Block, 1st St"</small>
     </div>
   <% end %>
 
-  <div class="field">
+  <div>
     <%= form.label :tags %>
     <%= form.collection_check_boxes(:tags, ListingForm.all_tags, :itself, :itself) do |b| %>
       <%# Derived from https://bootsnipp.com/snippets/M2bda %>
-      <div class="form-group mb-0">
-        <%= b.check_box(class: "d-none") %>
-        <div class="btn-group">
-          <%= b.label(class: "btn btn-sm btn-outline-secondary") do %>
-            <span>&#10003;</span> <!-- made visible via css when checked -->
-            <span> </span>
-          <% end %>
-          <%= b.label(class: "btn btn-sm btn-outline-secondary btn-block") do %>
-            <%= b.value.capitalize %>
-          <% end %>
-        </div>
+      <div class="field is-grouped mb-0">
+        <%# FIXME: is-hidden class not working? Buttons also need more work %>
+        <%= b.check_box(class: "is-hidden", style: "display: none") %>
+        <%= b.label(class: "button is-small is-outlined") do %>
+          <span>&#10003;</span> <!-- made visible via css when checked -->
+          <span> </span>
+        <% end %>
+        <%= b.label(class: "button is-small is-outlined") do %>
+          <%= b.value.capitalize %>
+        <% end %>
       </div>
     <% end %>
   </div>
 
   <div class="actions">
-    <%= form.submit 'Submit', class: "btn btn-primary" %>
+    <%= form.submit 'Submit', class: "button button-primary" %>
   </div>
 <% end %>

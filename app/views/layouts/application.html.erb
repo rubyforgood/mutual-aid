@@ -15,6 +15,7 @@
     </div>
     <div class="devise-button">
       <% if current_user %>
+        <%= link_to "Account", edit_user_registration_path %>
         <%= link_to "Log out", destroy_user_session_path, method: :delete, no_confirm: true %>
       <% end %>
     </div>

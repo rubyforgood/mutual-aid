@@ -1,16 +1,16 @@
 const { environment } = require('@rails/webpacker')
 const { VueLoaderPlugin } = require('vue-loader')
 const vue = require('./loaders/vue')
-const webpack = require('webpack')
-
-environment.plugins.prepend('Provide',
-  new webpack.ProvidePlugin({
-    $: 'jquery/src/jquery',
-    jQuery: 'jquery/src/jquery',
-    Popper: ['popper.js', 'default']
-  })
-)
 
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.loaders.prepend('vue', vue)
+
+environment.config.merge({
+  output: {
+    // Exposes the export from last pack (application.js) as a global var.
+    // https://webpack.js.org/configuration/output/#outputlibrary
+    library: ['EntryPoints'],
+  },
+})
+
 module.exports = environment

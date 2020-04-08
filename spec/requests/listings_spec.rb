@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe "/listings", type: :request do
   let(:valid_attributes) {{
     location_attributes: {zip: "12345"},
-    tags: ["", "cash"]
+    tags: ["", "cash"],
+    name: Faker::Name.name,
+    email: Faker::Internet.email,
+    phone: Faker::PhoneNumber.phone_number
   }}
 
   let(:invalid_attributes) {{
@@ -83,11 +86,12 @@ RSpec.describe "/listings", type: :request do
   end
 
   describe "PATCH /update" do
-    let(:listing) { create(:listing) }
+    let(:listing) { create(:listing, :with_contact_info) }
 
     context "with valid parameters" do
+      let(:new_street_address) { Faker::Address.street_address }
       let(:new_attributes) {{
-        location_attributes: {street_address: 'changed'},
+        location_attributes: {street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI')},
       }}
 
       before do
@@ -95,7 +99,7 @@ RSpec.describe "/listings", type: :request do
       end
 
       it "updates the requested listing" do
-        expect(listing.reload.location.street_address).to eq('changed')
+        expect(listing.reload.location.street_address).to eq(new_street_address)
       end
 
       it "redirects to the listing" do

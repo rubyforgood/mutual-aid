@@ -44,7 +44,7 @@ commands:
             set -euxo pipefail
             bundle config path .bundle
             bin/rails db:setup
-            bin/rspec
+            bin/rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml
 
 jobs:
   bundle:
@@ -72,6 +72,8 @@ jobs:
     steps:
       - checkout
       - test_suite
+      - store_test_results:
+          path: ~/rspec
 
 workflows:
   version: 2.1

@@ -50,6 +50,9 @@ end
 
 group :test do
   gem 'faker'
+
+  # an XML formatter is required for fancier CircleCI results
+  gem 'rspec_junit_formatter'
 end
 
 group :development do

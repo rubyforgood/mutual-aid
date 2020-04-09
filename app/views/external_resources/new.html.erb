@@ -1,5 +1,7 @@
-<h1>New External Resource</h1>
-
-<%= render 'form', external_resource: @external_resource %>
-
-<%= link_to 'Back', external_resources_path %>
+<h1 class="title">New External Resource</h1>
+<div class="section">
+  <%= render 'form', external_resource: @external_resource %>
+  <div class="mt-1">
+    <%= link_to 'Back', external_resources_path %>
+  </div>
+</div>

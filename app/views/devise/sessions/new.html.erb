@@ -1,52 +1,49 @@
-<div class="row text-center login-screen" style="vertical-align:middle;">
-  <div class="col-md-6 col-md-offset-2 logo-image text-center">
-    <%= image_tag 'logo.png', height: 300, alt: 'festi logo'%>
+<div class="columns text-center login-screen" style="vertical-align:middle;">
+  <div class="column is-half logo-image text-center">
+    <%= image_tag 'logo.png', width: 300, alt: 'festi logo'%>
   </div>
-  <div class="col-md-4 text-center">
-    <% if current_user %>
-      <h2>You are already logged in</h2>
-      <% if current_user&.admin? %>
-        <%= link_to("<span class='fa fa-menu #{ENV['NAVBAR_ICON_COLOR_CLASS']}'></span><span class='text-black text-bold'> Go back to admin</span>".html_safe,
-                    admin_path,
-                    class: "btn btn-default button #{ENV['NAVBAR_ICON_COLOR_CLASS']}",
-                    title: "Logout") %>
-      <% end %>
-    <% else %>
-      <!--<h2>Log in</h2>-->
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
-        <div class="form-inputs">
-          <div class="form-group">
-            <%= f.input :email,
-                        required: true,
-                        email_field: true,
-                        autofocus: true,
-                        input_html: {class: "form-control form-field-display-block required-field wide-response"},
-                        label_html: {class: "form-field-display-block"} %>
-          </div>
+  <div class="column is-half text-center">
+    <div class="section">
+      <% if current_user %>
+        <h2>You are already logged in</h2>
+        <% if current_user&.admin? %>
+          <%= link_to("<span class='fa fa-menu #{ENV['NAVBAR_ICON_COLOR_CLASS']}'></span><span class='text-black text-bold'> Go back to admin</span>".html_safe,
+                      admin_path,
+                      class: "btn btn-default button #{ENV['NAVBAR_ICON_COLOR_CLASS']}",
+                      title: "Logout") %>
+        <% end %>
+      <% else %>
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="form-inputs">
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <%= f.input_field :email,
+                            required: true,
+                            :class => "input"%>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <%= f.input :password,
-                        required: true,
-                        email_field: true,
-                        autofocus: true,
-                        autocomplete: "off",
-                        input_html: {class: "form-control form-field-display-block required-field wide-response"},
-                        label_html: {class: "form-field-display-block"} %>
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <%= f.input_field :password,
+                            required: true,
+                            email_field: true,
+                            autofocus: true,
+                            :class => "input",
+                            :type => "password"%>
+              </div>
+            </div>
+            <div class="" id="login_button">
+              <%= f.button :submit, "Log in", class: "button is-link is-outlined" %>
+            </div>
           </div>
-        </div>
-
-        <!--<%# if devise_mapping.rememberable? -%>-->
-        <!--<div class="col-md-12 form-actions">-->
-        <!--<%#= f.check_box :remember_me, label: "Remember me" %>-->
-        <!--</div>-->
-        <!--<%# end -%>-->
-        <div class="actions" id="login_button">
-          <%= f.button :submit, "Log in", class: "btn btn-success button" %>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
-    <br>
-    <%= render "devise/shared/links" %>
+      <br>
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
 </div>

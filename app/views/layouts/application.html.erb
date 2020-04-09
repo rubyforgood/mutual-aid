@@ -9,15 +9,33 @@
     <%= javascript_pack_tag 'application' %>
   </head>
 
-  <body>
+  <body class='has-navbar-fixed-top'>
+    <nav class='navbar is-fixed-top is-white'>
+      <div class='navbar-brand'>
+        <div class='navbar-item'>
+          <%= image_tag 'logo.png', height: 300, alt: 'festi logo'%>
+        </div>
+        <% if current_user %>
+          <div class='navbar-item'>
+            <%= link_to "Account", edit_user_registration_path %>
+          </div>
+          <div class='navbar-item'>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, no_confirm: true, :class=>"button is-danger is-outlined"%>
+          </div>
+        <% else %>  
+          <div class='navbar-item'>
+            <%= link_to "Log in", new_user_session_path, :class=>"button is-primary" %>
+          </div>
+        <% end %>
+      </div>
+      <div class='navbar-menu is-mobile'>
+        <div class="navbar-end">
+          <p>test item</p>
+        </div>
+      </div>
+    </nav>
     <div class="notices-and-alerts">
       <%= render partial: "layouts/notices_and_alerts" %>
-    </div>
-    <div class="devise-button">
-      <% if current_user %>
-        <%= link_to "Account", edit_user_registration_path %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, no_confirm: true %>
-      <% end %>
     </div>
     <%= yield %>
   </body>

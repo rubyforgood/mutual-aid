@@ -45,6 +45,10 @@ group :development, :test do
   gem 'factory_bot_rails'
 end
 
+group :test do
+  gem 'faker'
+end
+
 group :development do
   gem 'annotate'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

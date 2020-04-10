@@ -1,20 +1,8 @@
-<h1>Welcome</h1>
-
-<ul>
-  <li><%= link_to 'Listings', listings_path %></li>
-  <li><%= link_to 'External resources', external_resources_path %></li>
-</ul>
-
-<!--
-Example of how to incorporate a Vue instance into a server-rendered page
-TODO: remove this once we have a real example
-
-<div id="hello" />
+<div id="orientation"></div>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    EntryPoints.hello('#hello', {
-      message: 'Hello from ERB',
+    EntryPoints.orientation('#orientation', {
+      organization: 'Mutual-Aid'
     })
   })
 </script>
--->

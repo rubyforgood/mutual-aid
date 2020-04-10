@@ -1,25 +1,27 @@
-<h1>Listings</h1>
+<div class="section">
+  <h1 class="title">Listings</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @listings.each do |listing| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= listing.type %></td>
-        <td><%= link_to 'Show', listing %></td>
-        <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-        <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Type</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @listings.each do |listing| %>
+        <tr>
+          <td><%= listing.type %></td>
+          <td><%= link_to 'Show', listing %></td>
+          <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
+          <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Listing', new_listing_path %>
+  <br>
+
+  <%= link_to 'New Listing', new_listing_path %>
+</div>

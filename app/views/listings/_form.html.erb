@@ -1,7 +1,8 @@
+<div class='section'>
 <%= form_with(model: listing, local: true, class: 'listing-form') do |form| %>
   <% if listing.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+      <h2 class="subtitle"><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
       <ul>
         <% listing.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -17,24 +18,24 @@
   </p>
 
   <div class="field required">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control" %>
+    <%= form.label :name, :class=>"label" %>
+    <%= form.text_field :name, class: "input" %>
   </div>
 
   <div class="field required">
-    <%= form.label :email %>
-    <%= form.email_field :email, class: "form-control" %>
+    <%= form.label :email, :class=>"label" %>
+    <%= form.email_field :email, class: "input" %>
   </div>
 
   <div class="field required">
-    <%= form.label :phone %>
-    <%= form.phone_field :phone, class: "form-control" %>
+    <%= form.label :phone, :class=>"label"%>
+    <%= form.phone_field :phone, class: "input" %>
   </div>
 
   <%= form.fields_for :location do |location_form| %>
     <div class="field">
-      <%= location_form.label :city %>
-      <%= location_form.text_field :city, list: "cities", class: "form-control", placeholder: "Select one of the cities below or type another in..." %>
+      <%= location_form.label :city, :class=>"label"%>
+      <%= location_form.text_field :city, list: "cities", class: "input", placeholder: "Select one of the cities below or type another in..." %>
       <datalist id="cities">
         <%= LocationForm::CITIES.each do |city| %>
           <option value="<%= city %>"></option>
@@ -42,12 +43,12 @@
       </datalist>
     </div>
     <div class="field">
-      <%= location_form.label :zip %>
-      <%= location_form.text_field :zip, class: "form-control" %>
+      <%= location_form.label :zip, :class=>"label"%>
+      <%= location_form.text_field :zip, class: "input" %>
     </div>
     <div class="field">
-      <%= location_form.label :street_address %>
-      <%= location_form.text_field :street_address, class: "form-control" %>
+      <%= location_form.label :street_address, :class=>"label" %>
+      <%= location_form.text_field :street_address, class: "input" %>
       <small class="form-text text-muted">You may enter a proximate address, eg "1200 Block, 1st St"</small>
     </div>
   <% end %>
@@ -71,6 +72,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit 'Submit', class: "button button-primary" %>
+    <%= form.submit 'Submit', class: "button button-primary mt-1" %>
   </div>
 <% end %>
+</div>

@@ -31,3 +31,8 @@ yarn-debug.log*
 .yarn-integrity
 
 /spec/examples.txt
+
+# Ignore the recommended dontenv ingored files
+.env.development.local
+.env.test.local
+.env.local

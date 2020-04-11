@@ -2,10 +2,13 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :external_resources
-
   resources :listings
 
-  resource :landing_page, only: [:show]
+  resources :public, only: [:landing_page]
 
-  root to: "landing_page#show"
+  authenticated :user do
+    root :to => 'admin#landing_page', as: :authenticated_root
+  end
+
+  root :to => 'public#landing_page'
 end

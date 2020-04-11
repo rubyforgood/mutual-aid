@@ -17,10 +17,7 @@
   marked mith an asterisk (<span style="color: orange">*</span>)
   </p>
 
-  <div class="field required">
-    <%= form.label :name, :class=>"label" %>
-    <%= form.text_field :name, class: "input" %>
-  </div>
+  <div id="listingForm"></div>
 
   <div class="field required">
     <%= form.label :email, :class=>"label" %>
@@ -76,3 +73,10 @@
   </div>
 <% end %>
 </div>
+
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+    EntryPoints.listingForm('#listingForm')
+  })
+
+</script>

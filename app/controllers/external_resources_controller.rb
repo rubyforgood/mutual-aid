@@ -1,4 +1,6 @@
 class ExternalResourcesController < ApplicationController
+
+  before_action :authenticate_user!, except: [:new, :create]
   before_action :set_external_resource, only: [:show, :edit, :update, :destroy]
 
   def index

@@ -1,9 +1,9 @@
 <template>
  <div class="field"
    v-bind:class="{required: required}">
-   <label class="label" :for="dataName">{{labelText}}</label>
+   <label class="label" :for="name">{{label}}</label>
    <div class="control">
-     <input class="input" :type="inputType" :name="dataName">
+     <input class="input" :type="type" :name="dataName" v-model="dataValue" @input="doUpdate">
    </div>
   </div>
 </template>
@@ -11,10 +11,21 @@
 <script>
 export default {
   props: {
-    labelText: { type: String },
-    inputType: { type: String, default: 'text'},
-    dataName: { type: String },
-    required: { type: Boolean, default: false}
+    label: { type: String },
+    type: { type: String, default: 'text'},
+    name: { type: String },
+    value: { type: String, default: ''},
+    required: { type: Boolean, default: false},
+  },
+  data () {
+    return {
+      dataValue: this.value
+    }
+  },
+  methods: {
+    doUpdate() {
+      this.$emit('input', this.dataValue)
+    }
   }
 }
 </script>

@@ -1,4 +1,6 @@
-/*** Commenting out global css, preferring bootstrap defaults
+/* Commenting all of this to give Bulma a clean slate
+ * ...
+
 body {
   background-color: #fff;
   color: #333;
@@ -29,7 +31,6 @@ th {
 
 td {
   padding: 0 5px 7px; }
-***/
 
 div.field,
 div.actions {
@@ -65,3 +66,6 @@ div.actions {
 
 label {
   display: block; }
+
+ * ...
+*/

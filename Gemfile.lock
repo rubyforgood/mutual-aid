@@ -69,6 +69,7 @@ GEM
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
+    bulma (0.1.0)
     byebug (11.1.1)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
@@ -261,9 +262,6 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
     uber (0.1.0)
@@ -291,6 +289,7 @@ DEPENDENCIES
   annotate
   binding_of_caller
   bootsnap (>= 1.4.2)
+  bulma
   byebug
   devise
   dotenv-rails
@@ -312,7 +311,6 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
-  turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (~> 4.0)

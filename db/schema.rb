@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_123807) do
+ActiveRecord::Schema.define(version: 2020_04_12_132525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,13 +21,14 @@ ActiveRecord::Schema.define(version: 2020_04_01_123807) do
     t.string "facebook_url"
     t.string "phone"
     t.string "description"
-    t.boolean "display_on_website", default: true, null: false
     t.string "youtube_identifier"
     t.bigint "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "tags", default: [], array: true
-    t.index ["display_on_website"], name: "index_external_resources_on_display_on_website"
+    t.boolean "reviewed", default: false, null: false
+    t.date "display_on_website_start"
+    t.date "display_on_website_end"
     t.index ["location_id"], name: "index_external_resources_on_location_id"
     t.index ["tags"], name: "index_external_resources_on_tags", using: :gin
   end

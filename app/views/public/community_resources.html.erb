@@ -1,0 +1,35 @@
+<div class="columns is-marginless">
+  <div class="column is-9">
+    <h1 class="title">Resources</h1>
+    <br>
+  </div>
+  <div class="column is-2">
+    <%= link_to "<span class='fa fa-plus-square'></span> <span class='pl-05 has-text-white'>Add resource</span>".html_safe,
+                new_external_resource_path, class: "button is-info" %>
+  </div>
+</div>
+
+<div class="row col-md-12">
+  <table class="table table-hover table-curved table-condensed">
+    <tbody>
+      <% @external_resources.each do |external_resource| %>
+        <tr>
+          <td>
+            <strong><%= external_resource.name %></strong>
+            <%= link_to("<span class='fa fa-globe'></span><span>Website</span>".html_safe,
+                        external_resource.website_url,
+                        title: "Go to #{external_resource.website_url}",
+                        class: "btn btn-default") if external_resource.website_url.present? %>
+            <%= link_to("<span class='fa fa-facebook'></span><span>Facebook</span>".html_safe,
+                        external_resource.facebook_url,
+                        title: "Go to #{external_resource.facebook_url}",
+                        class: "btn btn-default") if external_resource.facebook_url.present? %>
+            <br>
+            <%= " | " + external_resource.tags + " | " if external_resource.tags.any? %>
+            <em><%= external_resource.description.truncate(100) %> <%= link_to("More", external_resource_path(external_resource)) if external_resource.description.length > 100 %></em>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :listings
 
   resources :public, only: [:landing_page]
-
+  get "/community_resources", to: "public#community_resources"
   authenticated :user do
     root :to => 'admin#landing_page', as: :authenticated_root
   end

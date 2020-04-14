@@ -1,0 +1,51 @@
+<div class="columns is-marginless">
+  <div class="column is-9">
+    <h1 class="title">Resources</h1>
+    <br>
+  </div>
+  <div class="column is-2">
+    <%= link_to "<span class='fa fa-plus-square'></span> <span class='pl-05 has-text-white'>Add resource</span>".html_safe,
+                new_external_resource_path, class: "button is-info" %>
+  </div>
+</div>
+
+<div class="row col-md-12">
+  <table class="table table-hover table-curved table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Tags</th>
+        <th>Displaying on website?</th>
+        <th>Reviewed</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @external_resources.each do |external_resource| %>
+        <tr>
+          <td>
+            <strong><%= external_resource.name %></strong>
+          </td>
+          <td>
+            <strong><%= external_resource.description.truncate(20) %></strong>
+          </td>
+          <td>
+            <%= " | " + external_resource.tags + " | " if external_resource.tags.any? %>
+          </td>
+          <td class="has-text-centered"><%= yes_no(external_resource.displaying_on_website?) %></td>
+          <td class="has-text-centered"><%= yes_no(external_resource.reviewed) %></td>
+          <td>
+            <%= link_to("<span class='fa fa-edit'></span><span></span>".html_safe,
+                        edit_external_resource_path(external_resource) ,
+                        title: "Edit #{external_resource.name}",
+                        class: "btn btn-default") if current_user %>
+            <br>
+            <%= external_resource.phone %> <%= external_resource.location&.address %>
+            <br>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

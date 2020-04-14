@@ -14,17 +14,12 @@
  *= require_self
  */
 
+$input-placeholder-color: hsl(0, 0%, 86%); //has-text-grey-lighter
 @import "bulma/bulma";
 @import "font-awesome";
 
 .text-center {
   text-align: center;
-}
-.text-white {
-  color: white;
-}
-.text-black {
-  color: black;
 }
 .main-footer {
   position: absolute;
@@ -32,4 +27,18 @@
   width: 100%;
   height: 60px;
   line-height: 60px;
+}
+
+//# hacks for simple-form + bulma
+.is-inline-flex {
+  display: inline-flex;
+}
+.select {
+  vertical-align: baseline;
+}
+.form-actions {
+  padding-top: 3em;
+}
+.select:not(.is-multiple):not(.is-loading)::after, .navbar-link:not(.is-arrowless)::after {
+  margin-top: 2.5em;
 }

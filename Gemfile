@@ -47,6 +47,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'factory_bot_rails'
   gem 'pry'
+  gem 'pry-byebug'
   gem 'rspec-rails'
 end
 

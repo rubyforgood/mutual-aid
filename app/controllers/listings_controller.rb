@@ -3,7 +3,7 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
 
   before_action :set_listing,    only: [:show, :destroy]
-  before_action :set_form,       only: [:edit, :update]
+  before_action :set_form,       only: [:edit, :update, :match]
   before_action :set_empty_form, only: [:new, :create]
 
   # GET /listings
@@ -20,13 +20,16 @@ class ListingsController < ApplicationController
   def new
   end
 
+  def match
+  end
+
   def edit
   end
 
   def create
     if @listing.validate(params[:listing])
       @listing.save
-      redirect_to @listing, notice: 'Listing was successfully created.'
+      redirect_to root_path, notice: 'Listing was successfully created.'
     else
       render :new
     end
@@ -35,7 +38,7 @@ class ListingsController < ApplicationController
   def update
     if @listing.validate(params[:listing])
       @listing.save
-      redirect_to @listing, notice: 'Listing was successfully updated.'
+      redirect_to listings_path, notice: 'Listing was successfully updated.'
     else
       render :edit
     end

@@ -1,0 +1,37 @@
+<div class="columns is-marginless">
+  <div class="column is-9">
+    <h1 class="title">SystemTags</h1>
+    <br>
+  </div>
+  <div class="column is-2">
+    <%= render "layouts/add_new_button", table_name: "system_tags" %>
+  </div>
+</div>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Display to public</th>
+      <th>Parent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @system_tags.each do |system_tag| %>
+      <tr>
+        <td><%= system_tag.name.titleize %></td>
+        <td><%= system_tag.description&.truncate(20) %></td>
+        <td class="has-text-centered"><%= yes_no(system_tag.display_to_public) %> (<%= system_tag.display_order if system_tag.display_to_public? %>)</td>
+        <td><%= system_tag.parent&.name&.titleize %></td>
+        <td><%= link_to 'Edit', edit_system_tag_path(system_tag) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New SystemTag', new_system_tag_path %>

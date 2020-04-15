@@ -1,0 +1,9 @@
+<% record ||= nil %>
+<% table_name = record.class.table_name %>
+<% plural_table_name ||= table_name.to_s %>
+<% singular_table_name ||= table_name.to_s.singularize %>
+
+<h1 class="title"><%= action_name.titleize %> <%= action_name == "index" ? plural_table_name : record.class %></h1>
+<div class="section">
+  <%= render 'form', singular_table_name => record %>
+</div>

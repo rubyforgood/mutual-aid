@@ -1,1 +1,13 @@
-<%= render "external_resources/index" %>
+<div class="columns is-marginless">
+  <div class="column is-9">
+    <h1 class="title">Resources</h1>
+    <br>
+  </div>
+  <div class="column is-2">
+    <%= render "layouts/add_new_button", table_name: "external_resources" %>
+  </div>
+</div>
+
+<div class="row col-md-12">
+  <%= render "index" %>
+</div>

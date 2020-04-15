@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @shared_account.name %>
+</p>
+
+<p>
+  <strong>Account url:</strong>
+  <%= @shared_account.account_url %>
+</p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @shared_account.username %>
+</p>
+
+<p>
+  <strong>Password hint:</strong>
+  <%= @shared_account.password_hint %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @shared_account.notes %>
+</p>
+
+<%= link_to 'Edit', edit_shared_account_path(@shared_account) %> |
+<%= link_to 'Back', shared_accounts_path %>

@@ -1,0 +1,31 @@
+<div class="columns is-marginless">
+  <div class="column is-9">
+    <h1 class="title"><%= plural_table_name.titleize %></h1>
+    <br>
+  </div>
+  <div class="column is-2">
+    <%%= render "layouts/add_new_button", table_name: <%= plural_table_name %> %>
+  </div>
+</div>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+  <tr>
+    <% attributes.reject(&:password_digest?).each do |attribute| -%>
+      <th><%= attribute.human_name %></th>
+    <% end -%>
+    <th>Edit</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <tr>
+      <% attributes.reject(&:password_digest?).each do |attribute| -%>
+        <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
+      <% end -%>
+      <td><%%= link_to 'Edit', edit_<%= singular_route_name %>_path(<%= singular_table_name %>) %></td>
+    </tr>
+  <%% end %>
+  </tbody>
+</table>

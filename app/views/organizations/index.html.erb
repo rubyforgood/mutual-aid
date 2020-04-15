@@ -1,0 +1,45 @@
+<div class="columns is-marginless">
+  <div class="column is-9">
+    <h1 class="title">Organizations</h1>
+    <br>
+  </div>
+  <div class="column is-2">
+    <%= render "layouts/add_new_button", table_name: organizations %>
+  </div>
+</div>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+  <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Facebook url</th>
+          <th>Website url</th>
+          <th>Phone</th>
+          <th>Point of contact</th>
+          <th>Is instance owner</th>
+          <th>Has sms account</th>
+          <th>Has hosting account</th>
+          <th>Has mailer account</th>
+        <th>Edit</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @organizations.each do |organization| %>
+    <tr>
+              <td><%= organization.name %></td>
+              <td><%= organization.description %></td>
+              <td><%= organization.facebook_url %></td>
+              <td><%= organization.website_url %></td>
+              <td><%= organization.phone %></td>
+              <td><%= organization.point_of_contact_id %></td>
+              <td><%= organization.is_instance_owner %></td>
+              <td><%= organization.has_sms_account %></td>
+              <td><%= organization.has_hosting_account %></td>
+              <td><%= organization.has_mailer_account %></td>
+            <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

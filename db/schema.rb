@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_12_132525) do
+ActiveRecord::Schema.define(version: 2020_04_14_141725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "announcements", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.date "display_date_start"
+    t.date "display_date_end"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "communication_logs", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.string "channel"
+    t.datetime "sent_at"
+    t.boolean "needs_follow_up"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_communication_logs_on_person_id"
+  end
 
   create_table "external_resources", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +73,76 @@ ActiveRecord::Schema.define(version: 2020_04_12_132525) do
     t.string "zip", limit: 5
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "description"
+    t.string "region"
+    t.string "neighborhood"
+    t.string "county"
+    t.string "facebook_url"
+    t.string "website_url"
+    t.string "phone"
+    t.string "location_type"
+    t.bigint "parent_id"
+    t.index ["parent_id"], name: "index_locations_on_parent_id"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "email"
+    t.string "phone_2"
+    t.string "email_2"
+    t.text "skills"
+    t.text "notes"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_people_on_user_id"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.bigint "location_id", null: false
+    t.bigint "person_id", null: false
+    t.string "position_type"
+    t.string "name"
+    t.string "description"
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "is_primary"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_positions_on_location_id"
+    t.index ["person_id"], name: "index_positions_on_person_id"
+  end
+
+  create_table "shared_accounts", force: :cascade do |t|
+    t.string "name"
+    t.string "account_url"
+    t.string "username"
+    t.string "password_hint"
+    t.string "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "system_tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.boolean "display_to_public", default: true, null: false
+    t.integer "display_order", default: 10, null: false
+    t.string "created_by"
+    t.bigint "parent_id"
+    t.string "parent_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["description"], name: "index_system_tags_on_description"
+    t.index ["display_order"], name: "index_system_tags_on_display_order"
+    t.index ["display_to_public"], name: "index_system_tags_on_display_to_public"
+    t.index ["name"], name: "index_system_tags_on_name"
+    t.index ["parent_id"], name: "index_system_tags_on_parent_id"
+    t.index ["parent_type"], name: "index_system_tags_on_parent_type"
   end
 
   create_table "users", force: :cascade do |t|
@@ -82,6 +171,10 @@ ActiveRecord::Schema.define(version: 2020_04_12_132525) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "communication_logs", "people"
   add_foreign_key "external_resources", "locations"
   add_foreign_key "listings", "locations"
+  add_foreign_key "people", "users"
+  add_foreign_key "positions", "locations"
+  add_foreign_key "positions", "people"
 end

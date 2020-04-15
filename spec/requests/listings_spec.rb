@@ -73,9 +73,9 @@ RSpec.describe "/listings", type: :request do
          .and change(Location, :count).by(1)
       end
 
-      it "redirects to the created listing" do
+      it "redirects to the root" do
         post listings_url, params: { listing: valid_attributes }
-        expect(response).to redirect_to(listing_url(Listing.last))
+        expect(response).to redirect_to(root_path)
       end
 
       it "does not save a blank tag" do
@@ -115,8 +115,8 @@ RSpec.describe "/listings", type: :request do
         expect(listing.reload.location.street_address).to eq(new_street_address)
       end
 
-      it "redirects to the listing" do
-        expect(response).to redirect_to(listing_url(listing))
+      it "redirects to the listings index" do
+        expect(response).to redirect_to(listings_url)
       end
     end
 

@@ -9,7 +9,7 @@
           <h2 class='subtitle is-4'>Want to help?</h2>
         </div>
         <div>
-          <p>Let us know how you'd like to <a href='/listings/new'>contribute</a>.</p>
+          <p>Let us know how you'd like to <a href='/listings/offers/new'>contribute</a>.</p>
         </div>
       </div>
       <div class='column'>
@@ -17,7 +17,7 @@
           <h2 class='subtitle is-4'>Need some help?</h2>
         </div>
         <div>
-          <p>How can our network <a href='/listings/new'>help you</a>?</p>
+          <p>How can our network <a href='/listings/asks/new'>help you</a>?</p>
         </div>
       </div>
       <div class='column'>

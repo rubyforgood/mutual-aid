@@ -9,24 +9,28 @@
   </div>
 </div>
 
-<div class="row col-md-12">
+<div class="row">
   <table class="table table-hover table-curved table-condensed">
     <tbody>
       <% @external_resources.each do |external_resource| %>
         <tr>
           <td>
             <strong><%= external_resource.name %></strong>
-            <%= link_to("<span class='fa fa-globe'></span><span>Website</span>".html_safe,
+            <br>
+            <%= " | " + external_resource.tags + " | " if external_resource.tags.any? %>
+            <em><%= external_resource.description.truncate(100) %> <%= link_to("More", external_resource_path(external_resource)) if external_resource.description.length > 100 %></em>
+            <br>
+            <%= link_to("<span class='fa fa-globe button'></span><span></span>".html_safe,
                         external_resource.website_url,
                         title: "Go to #{external_resource.website_url}",
                         class: "btn btn-default") if external_resource.website_url.present? %>
-            <%= link_to("<span class='fa fa-facebook'></span><span>Facebook</span>".html_safe,
+            <%= link_to("<span class='fa fa-facebook button'></span><span></span>".html_safe,
                         external_resource.facebook_url,
                         title: "Go to #{external_resource.facebook_url}",
                         class: "btn btn-default") if external_resource.facebook_url.present? %>
             <br>
-            <%= " | " + external_resource.tags + " | " if external_resource.tags.any? %>
-            <em><%= external_resource.description.truncate(100) %> <%= link_to("More", external_resource_path(external_resource)) if external_resource.description.length > 100 %></em>
+            <br>
+            <br>
           </td>
         </tr>
       <% end %>

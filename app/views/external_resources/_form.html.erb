@@ -45,7 +45,5 @@
     <%= form.association :location, label: "City/neighborhood", label_method: "address" %>
   </div>
 
-  <div class="form-actions">
-    <%= form.submit :class=>"button mt-1 is-info"%>
-  </div>
+  <%= render "layouts/view_template_form_buttons", f: form %>
 <% end %>

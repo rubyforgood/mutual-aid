@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @communication_log.person_id %>
+</p>
+
+<p>
+  <strong>Channel:</strong>
+  <%= @communication_log.channel %>
+</p>
+
+<p>
+  <strong>Sent at:</strong>
+  <%= @communication_log.sent_at %>
+</p>
+
+<p>
+  <strong>Needs follow up:</strong>
+  <%= @communication_log.needs_follow_up %>
+</p>
+
+<%= link_to 'Edit', edit_communication_log_path(@communication_log) %> |
+<%= link_to 'Back', communication_logs_path %>

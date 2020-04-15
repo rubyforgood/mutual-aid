@@ -2,12 +2,15 @@ class ListingForm < Reform::Form
   DEFAULT_TAGS = [
     'prepared meals',
     'groceries',
+    'housing',
     'household supplies',
     'cleaning',
+    'clothing',
     'laundry',
     'home repairs',
     'yard work',
     'childcare',
+    'storage',
     'dog walking',
     'pet sitting',
     'emotional support',
@@ -17,7 +20,9 @@ class ListingForm < Reform::Form
     'making calls',
     'tech support',
     'translation',
+    'healhcare',
     'cash',
+    'Information about financial assistance'
   ]
 
   collection :tags

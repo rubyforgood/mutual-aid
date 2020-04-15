@@ -8,4 +8,8 @@ class User < ApplicationRecord
     true # TODO - connect this to pundit
   end
 
+  def name_as_badge
+    "#{email}"
+  end
+
 end

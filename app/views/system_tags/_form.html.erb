@@ -1,0 +1,28 @@
+<%= simple_form_for @system_tag, wrapper: :default, defaults: { wrapper: false } do |f| %>
+  <% if @system_tag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@system_tag.errors.count, "error") %> prohibited this system_tag from being saved:</h2>
+
+      <ul>
+        <% @system_tag.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="f-inputs">
+    <div class="field is-grouped">
+      <%= f.input :name, input_html: { style: "width: 30em;" } %>
+      <%= f.association :parent, collection: @parent_system_tags %>
+    </div>
+    <%= f.input :description, as: :text, input_html: { rows: 2 } %>
+    <div class="field is-grouped">
+      <%= f.input :display_to_public %>
+      <%= f.input :display_order %>
+    </div>
+    <%= f.input :created_by %>
+  </div>
+
+  <%= render "layouts/view_template_form_buttons", f: f %>
+<% end %>

@@ -41,7 +41,7 @@
 <script>
 export default {
   props: {
-    showingGrid: { type: Boolean, default: true},
+    showingList: { type: Boolean, default: true},
     groups: { type: Object }
   },
   data() {

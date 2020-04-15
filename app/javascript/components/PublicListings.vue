@@ -11,7 +11,7 @@
       <div class='listing-grid'>
         <div class='listing-grid-nav-left is-pulled-left'>
           <div class='listing-grid-nav-block' v-for="grouping in groupingTypes" :key="grouping.name">
-            <div class='listing-grid-nav-block-title'>{{ grouping.name}}</div>
+            <div class='listing-grid-nav-block-title title is-5'>{{ grouping.name}}</div>
             <ul class='listing-grid-nav-list' v-for="item in grouping.items" :key="item.name">
               <li class='listing-grid-nav-list-item'><input type='checkbox' /> {{ item.name }} </li>
             </ul>

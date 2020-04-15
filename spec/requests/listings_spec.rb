@@ -15,11 +15,24 @@ RSpec.describe "/listings", type: :request do
 
   before { sign_in create(:user) }
 
-  pending "GET /index" do
+  describe "GET /index" do
     it "renders a successful response" do
-      Listing.create! valid_attributes
+      create(:listing)
       get listings_url
       expect(response).to be_successful
+    end
+
+    it "can respond with json" do
+      expected_listing = create(:listing)
+      headers = { "ACCEPT" => "application/json" }
+      get listings_url, headers: headers
+      json_response = JSON.parse(response.body)
+      comparison_keys = %w[id type created_at updated_at type]
+      expect(json_response['listings'].length).to eq 1
+      listing_result = json_response['listings'][0]
+      expected_time_format = "#{expected_listing.created_at.to_formatted_s(:long)} #{expected_listing.created_at.zone}"
+      expect(listing_result['created_at']).to eq expected_time_format
+      expect(listing_result['name']).to eq expected_listing.name
     end
   end
 

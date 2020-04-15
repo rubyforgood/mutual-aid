@@ -55,6 +55,7 @@ export default {
   created() {
     var _this = this
     var itemList = [
+      // Hard coded for now to test functionality
       'Acme Township',
       'Blair Township',
       'East Bay Township',

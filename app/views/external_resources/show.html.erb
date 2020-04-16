@@ -29,8 +29,8 @@
 </p>
 
 <p>
-  <strong>Display on website:</strong>
-  <%= @external_resource.display_on_website %>
+  <strong>Displaying on website:</strong>
+  <%= @external_resource.displaying_on_website? %>
 </p>
 
 <p>
@@ -43,5 +43,9 @@
   <%= @external_resource.location_id %>
 </p>
 
-<%= link_to 'Edit', edit_external_resource_path(@external_resource) %> |
+<p>
+  <strong>Reviewed:</strong>
+  <%= @external_resource.reviewed %>
+</p>
+
 <%= link_to 'Back', external_resources_path %>

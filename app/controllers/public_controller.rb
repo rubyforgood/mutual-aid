@@ -5,4 +5,8 @@ class PublicController < ActionController::Base
   def landing_page
   end
 
+  def community_resources
+    @external_resources = ExternalResource.all
+  end
+
 end

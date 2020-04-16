@@ -22,7 +22,10 @@
       </div>
       <div class='column'>
         <div>
-          <h2 class='subtitle is-4'><a href='/external_resources/new'>Is there an outside resource we should know about?</a></h2>
+          <h2 class='subtitle is-4'>Community resources</h2>
+        </div>
+        <div>
+          <p>Is there a <a href='/external_resources/new'>local resource</a> we should know about? </p>
         </div>
       </div>
     </div>

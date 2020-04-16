@@ -352,20 +352,19 @@
                   <div class="card">
                     <header class="card-header">
                       <p class="card-header-title">
-                        <span class='tag is-primary is-light'>Care</span>
-                        <span class='tag is-primary is-light'>Animal care</span>
+                        <span class='title is-6'>Short title they entered for their ask (50 chars)</span>
+                        <a href="#" class="card-header-icon" aria-label="more options"></a>
                       </p>
-                      <a href="#" class="card-header-icon" aria-label="more options">
-                        <span class='tag is-warning is-light'>This week</span>
-                      </a>
                     </header>
                     <div class="card-content">
                       <div class="content">
+                        <span class='tag is-primary is-light'>Care</span>
+                        <span class='tag is-primary is-light'>Animal care</span>
+                        <span class='tag is-warning is-light'>This week</span>
+                        <br>
                         <span class="tag">East Bay</span>
                         <span class="tag is-light"><i class="fa fa-building"></i></span>
                         <span class="tag is-light"><i class="fa fa-hourglass-start"></i> AM,PM,EVE</span>
-                        <br>
-                        <span class='title is-6'>Short title they entered for their ask (50 chars)</span>
                         <br>
                         Lorem ipsum Description they entered for their ask (100 chars) dolor sit amet, consectetur adipiscing elit. Asjeces nec iaculis mauris.
                          <br>

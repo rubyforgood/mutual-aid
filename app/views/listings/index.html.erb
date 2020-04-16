@@ -1,5 +1,7 @@
 <div class="section">
-<<<<<<< Updated upstream
+  <div class="title is-3">Find a way to share</div>
+</div>
+<div class="section">
   <div id="public-listings">
   </div>
 </div>
@@ -10,34 +12,3 @@
   })
 
 </script>
-=======
-  <h1 class="title"><%= controller_name.titleize %></h1>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Tags</th>
-        <th>Edit</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @listings.each do |listing| %>
-        <tr>
-          <td><%= listing.type %></td>
-          <td><%= listing.name %></td>
-          <td><%= listing.tags %></td>
-          <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-          <td><%= link_to 'Match', new_match_path(listing) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <br>
-
-  <%= link_to 'New Listing', new_listing_path %>
-</div>
->>>>>>> Stashed changes

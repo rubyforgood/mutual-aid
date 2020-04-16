@@ -1,31 +1,46 @@
 <template>
   <div class='orientation section'>
-    <h1 class='title'>Welcome</h1>
-    <AboutSection title='What is Mutual-Aid?' description="Mutual-aid is a movement. It's about connecting people with each other in a time of need. It's people helping people, because we can."/>
-    <AboutSection title="Where do you fit in?" description="If there are ways that you'd like to contribute to bettering the lives of the community around you. If there are needs of yours that your community could help you meet. Whatever your individual case may be, we're here to help you make that connection." />
+    <h1 class='title'>Welcome!</h1>
+    <div class='columns'>
+      <div class='column'>
+        <AboutSection title='What is Mutual-Aid?' description="Mutual-aid is a movement. It's about connecting people with each other in a time of need. It's people helping people, because we can."/>
+      </div>
+      <div class='column'>
+        <AboutSection title='Who are we?' description="We're your regional mutual aid group. Learn more"/>
+      </div>
+    </div>
+    <div class='has-text-center' style='text-align: center;'>
+       <AboutSection title="Where do you fit in?" description="Good neighbors share. Asking is a gift to the giver. Whatever your individual case may be, we're here to help you make connections." />
+    </div>
     <div class='columns'>
       <div class='column'>
         <div>
-          <h2 class='subtitle is-4'>Want to help?</h2>
-        </div>
-        <div>
-          <p>Let us know how you'd like to <a href='/listings/offers/new'>contribute</a>.</p>
-        </div>
-      </div>
-      <div class='column'>
-        <div>
-          <h2 class='subtitle is-4'>Need some help?</h2>
-        </div>
-        <div>
-          <p>How can our network <a href='/listings/asks/new'>help you</a>?</p>
+          <h2 class='subtitle is-3'>Need some help?</h2>
+          <div class='action-buttons'>
+            <span class="action-button"><span class='button is-primary is-outlined'>View offers</span></span>
+            <span class="action-button"><span class='button is-primary'>Submit an Ask</span></span>
+            <br>
+            <span class=''><a href='/community_resources'>Browse resources</a></span>
+            <!-- <span class="action-button"><span class='button is-primary is-outlined'>Browse resources</span></span> -->
+          </div>
         </div>
       </div>
       <div class='column'>
         <div>
-          <h2 class='subtitle is-4'>Community resources</h2>
-        </div>
-        <div>
-          <p>Is there a <a href='/external_resources/new'>local resource</a> we should know about? </p>
+          <h2 class='subtitle is-3'>Want to help?</h2>
+          <div class='action-buttons'>
+            <span class="action-button"><span class='button is-primary'>View Asks</span></span>
+            <span class="action-button"><span class='button is-primary is-outlined'>Submit an Offer</span></span>
+            <br>
+            <span class=''><a href='/external_resources/new'>Share a community resource</a></span>
+            <br>
+            <span class=''><a href='/listings/offers/new'>Donate money</a></span> | <span class=''><a href='/listings/offers/new'>Donate goods</a></span>
+            <br>
+            <span class=''><a href='/volunteers/new'>Volunteer</a></span>
+            <!-- <div class="action-button"><span class='button is-primary is-outlined'>Volunteer</span></div>
+            <div class="action-button"><span class='button is-primary is-outlined'>Donate</span></div>
+            <div class="action-button"><span class='button is-primary is-outlined'>Share a community resource</span></div> -->
+          </div>
         </div>
       </div>
     </div>

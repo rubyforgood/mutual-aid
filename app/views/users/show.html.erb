@@ -1,0 +1,48 @@
+<div class="title is-3">Profile</div>
+<div class="title is-5"><%= @user.participant&.name %></div>
+
+<p>
+  <strong>First name:</strong>
+  <%= @user.participant&.participant&.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @user.participant&.last_name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @user.participant&.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.participant&.email %>
+</p>
+
+<p>
+  <strong>Phone 2:</strong>
+  <%= @user.participant&.phone_2 %>
+</p>
+
+<p>
+  <strong>Email 2:</strong>
+  <%= @user.participant&.email_2 %>
+</p>
+
+<p>
+  <strong>Skills:</strong>
+  <%= @user.participant&.skills %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @user.participant&.notes %>
+</p>
+
+<p>
+  <strong>Permission level:</strong>
+</p>
+
+<%= link_to 'Edit', edit_person_path(@user) %>

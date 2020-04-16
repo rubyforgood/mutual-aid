@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_141725) do
+ActiveRecord::Schema.define(version: 2020_04_15_033652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 2020_04_14_141725) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["person_id"], name: "index_communication_logs_on_person_id"
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.float "value"
+    t.string "channel"
+    t.string "thank_you_sent"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_donations_on_person_id"
   end
 
   create_table "external_resources", force: :cascade do |t|
@@ -86,6 +97,22 @@ ActiveRecord::Schema.define(version: 2020_04_14_141725) do
     t.index ["parent_id"], name: "index_locations_on_parent_id"
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "facebook_url"
+    t.string "website_url"
+    t.string "phone"
+    t.bigint "point_of_contact_id", null: false
+    t.boolean "is_instance_owner"
+    t.boolean "has_sms_account"
+    t.boolean "has_hosting_account"
+    t.boolean "has_mailer_account"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["point_of_contact_id"], name: "index_organizations_on_point_of_contact_id"
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -127,20 +154,56 @@ ActiveRecord::Schema.define(version: 2020_04_14_141725) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "system_locations", force: :cascade do |t|
+    t.bigint "parent_id", null: false
+    t.bigint "organization_id", null: false
+    t.string "location_type"
+    t.string "street_address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "county"
+    t.string "region"
+    t.string "neighborhood"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_system_locations_on_organization_id"
+    t.index ["parent_id"], name: "index_system_locations_on_parent_id"
+  end
+
+  create_table "system_settings", force: :cascade do |t|
+    t.string "exchange_type"
+    t.boolean "separate_asks_offers"
+    t.boolean "allow_sms"
+    t.boolean "community_resources_module"
+    t.boolean "announcements_module"
+    t.boolean "positions_module"
+    t.boolean "donations_module"
+    t.boolean "shared_accounts_module"
+    t.boolean "chat_module"
+    t.text "landing_page_text_what"
+    t.text "landing_page_text_who"
+    t.text "landing_page_text_how"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "system_tags", force: :cascade do |t|
+    t.bigint "organization_id"
+    t.bigint "parent_id"
+    t.string "parent_type"
     t.string "name", null: false
     t.string "description"
     t.boolean "display_to_public", default: true, null: false
     t.integer "display_order", default: 10, null: false
     t.string "created_by"
-    t.bigint "parent_id"
-    t.string "parent_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["description"], name: "index_system_tags_on_description"
     t.index ["display_order"], name: "index_system_tags_on_display_order"
     t.index ["display_to_public"], name: "index_system_tags_on_display_to_public"
     t.index ["name"], name: "index_system_tags_on_name"
+    t.index ["organization_id"], name: "index_system_tags_on_organization_id"
     t.index ["parent_id"], name: "index_system_tags_on_parent_id"
     t.index ["parent_type"], name: "index_system_tags_on_parent_type"
   end
@@ -172,9 +235,12 @@ ActiveRecord::Schema.define(version: 2020_04_14_141725) do
   end
 
   add_foreign_key "communication_logs", "people"
+  add_foreign_key "donations", "people"
   add_foreign_key "external_resources", "locations"
   add_foreign_key "listings", "locations"
   add_foreign_key "people", "users"
   add_foreign_key "positions", "locations"
   add_foreign_key "positions", "people"
+  add_foreign_key "system_locations", "organizations"
+  add_foreign_key "system_tags", "organizations"
 end

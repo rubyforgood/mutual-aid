@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "tags/index", type: :view do
+RSpec.describe "system_tags/index", type: :view do
   before(:each) do
-    assign(:tags, [
-      Tag.create!(
+    assign(:system_tags, [
+      SystemTag.create!(
         name: "Name",
         description: "Description",
         display_to_public: false,
@@ -11,7 +11,7 @@ RSpec.describe "tags/index", type: :view do
         parent: nil,
         created_by: "Created By"
       ),
-      Tag.create!(
+      SystemTag.create!(
         name: "Name",
         description: "Description",
         display_to_public: false,
@@ -22,7 +22,7 @@ RSpec.describe "tags/index", type: :view do
     ])
   end
 
-  it "renders a list of tags" do
+  it "renders a list of system_tags" do
     render
     assert_select "tr>td", text: "Name".to_s, count: 2
     assert_select "tr>td", text: "Description".to_s, count: 2

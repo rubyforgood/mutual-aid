@@ -69,6 +69,6 @@ class SystemSettingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def system_setting_params
-      params.require(:system_setting).permit(:exchange_type, :separate_asks_offers, :allow_sms, :community_resources_module, :announcements_module, :positions_module, :donations_module, :shared_accounts_module, :chat_module, :landing_page_text)
+      params.require(:system_setting).permit(:exchange_type, :separate_asks_offers, :allow_sms, :community_resources_module, :announcements_module, :positions_module, :donations_module, :shared_accounts_module, :chat_module, :landing_page_text_what, :landing_page_text_who, :landing_page_text_how)
     end
 end

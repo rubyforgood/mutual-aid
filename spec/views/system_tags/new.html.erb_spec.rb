@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "tags/edit", type: :view do
+RSpec.describe "system_tags/new", type: :view do
   before(:each) do
-    @tag = assign(:tag, Tag.create!(
+    assign(:tag, SystemTag.new(
       name: "MyString",
       description: "MyString",
       display_to_public: false,
@@ -12,10 +12,10 @@ RSpec.describe "tags/edit", type: :view do
     ))
   end
 
-  it "renders the edit tag form" do
+  it "renders new tag form" do
     render
 
-    assert_select "form[action=?][method=?]", tag_path(@tag), "post" do
+    assert_select "form[action=?][method=?]", system_tags_path, "post" do
 
       assert_select "input[name=?]", "tag[name]"
 

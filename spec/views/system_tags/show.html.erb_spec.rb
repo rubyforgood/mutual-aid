@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "tags/show", type: :view do
+RSpec.describe "system_tags/show", type: :view do
   before(:each) do
-    @tag = assign(:tag, Tag.create!(
+    @tag = assign(:tag, SystemTag.create!(
       name: "Name",
       description: "Description",
       display_to_public: false,

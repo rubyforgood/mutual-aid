@@ -34,7 +34,7 @@
             <br>
             <span class=''><a href='/external_resources/new'>Share a community resource</a></span>
             <br>
-            <span class=''><a href='/listings/offers/new'>Donate money</a></span> | <span class=''><a href='/listings/offers/new'>Donate goods</a></span>
+            <span class=''><a href='/donations/new'>Donate money</a></span> | <span class=''><a href='/donations/new'>Donate goods</a></span>
             <br>
             <span class=''><a href='/volunteers/new'>Volunteer</a></span>
             <!-- <div class="action-button"><span class='button is-primary is-outlined'>Volunteer</span></div>

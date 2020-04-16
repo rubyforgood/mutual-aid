@@ -10,7 +10,9 @@ class CreateSystemSettings < ActiveRecord::Migration[6.0]
       t.boolean :donations_module
       t.boolean :shared_accounts_module
       t.boolean :chat_module
-      t.text :landing_page_text
+      t.text :landing_page_text_what
+      t.text :landing_page_text_who
+      t.text :landing_page_text_how
 
       t.timestamps
     end

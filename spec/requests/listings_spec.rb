@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "/listings", type: :request do
   let(:valid_attributes) {{
-    location_attributes: {zip: "12345"},
-    tags: ["", "cash"],
-    name: Faker::Name.name,
-    email: Faker::Internet.email,
-    phone: Faker::PhoneNumber.phone_number
+      location_attributes: {zip: "12345"},
+      system_tags: ["", "cash"],
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number
   }}
 
   let(:invalid_attributes) {{

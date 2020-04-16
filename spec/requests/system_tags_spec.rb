@@ -12,8 +12,8 @@
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/tags", type: :request do
-  # Tag. As you add validations to Tag, be sure to
+RSpec.describe "/system_tags", type: :request do
+  # SystemTag. As you add validations to SystemTag, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -25,58 +25,58 @@ RSpec.describe "/tags", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      Tag.create! valid_attributes
-      get tags_url
+      SystemTag.create! valid_attributes
+      get system_tags_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      tag = Tag.create! valid_attributes
-      get tag_url(tag)
+      system_tag = SystemTag.create! valid_attributes
+      get system_tag_url(system_tag)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_tag_url
+      get new_system_tag_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "render a successful response" do
-      tag = Tag.create! valid_attributes
-      get edit_tag_url(tag)
+      system_tag = SystemTag.create! valid_attributes
+      get edit_system_tag_url(system_tag)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Tag" do
+      it "creates a new SystemTag" do
         expect {
-          post tags_url, params: { tag: valid_attributes }
-        }.to change(Tag, :count).by(1)
+          post system_tags_url, params: { system_tag: valid_attributes }
+        }.to change(SystemTag, :count).by(1)
       end
 
-      it "redirects to the created tag" do
-        post tags_url, params: { tag: valid_attributes }
-        expect(response).to redirect_to(tag_url(Tag.last))
+      it "redirects to the created system_tag" do
+        post system_tags_url, params: { system_tag: valid_attributes }
+        expect(response).to redirect_to(system_tag_url(SystemTag.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Tag" do
+      it "does not create a new SystemTag" do
         expect {
-          post tags_url, params: { tag: invalid_attributes }
-        }.to change(Tag, :count).by(0)
+          post system_tags_url, params: { system_tag: invalid_attributes }
+        }.to change(SystemTag, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post tags_url, params: { tag: invalid_attributes }
+        post system_tags_url, params: { system_tag: invalid_attributes }
         expect(response).to be_successful
       end
     end
@@ -88,42 +88,42 @@ RSpec.describe "/tags", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested tag" do
-        tag = Tag.create! valid_attributes
-        patch tag_url(tag), params: { tag: new_attributes }
-        tag.reload
+      it "updates the requested system_tag" do
+        system_tag = SystemTag.create! valid_attributes
+        patch system_tag_url(system_tag), params: { system_tag: new_attributes }
+        system_tag.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the tag" do
-        tag = Tag.create! valid_attributes
-        patch tag_url(tag), params: { tag: new_attributes }
-        tag.reload
-        expect(response).to redirect_to(tag_url(tag))
+      it "redirects to the system_tag" do
+        system_tag = SystemTag.create! valid_attributes
+        patch system_tag_url(system_tag), params: { system_tag: new_attributes }
+        system_tag.reload
+        expect(response).to redirect_to(system_tag_url(system_tag))
       end
     end
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        tag = Tag.create! valid_attributes
-        patch tag_url(tag), params: { tag: invalid_attributes }
+        system_tag = SystemTag.create! valid_attributes
+        patch system_tag_url(system_tag), params: { system_tag: invalid_attributes }
         expect(response).to be_successful
       end
     end
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested tag" do
-      tag = Tag.create! valid_attributes
+    it "destroys the requested system_tag" do
+      system_tag = SystemTag.create! valid_attributes
       expect {
-        delete tag_url(tag)
-      }.to change(Tag, :count).by(-1)
+        delete system_tag_url(system_tag)
+      }.to change(SystemTag, :count).by(-1)
     end
 
-    it "redirects to the tags list" do
-      tag = Tag.create! valid_attributes
-      delete tag_url(tag)
-      expect(response).to redirect_to(tags_url)
+    it "redirects to the system_tags list" do
+      system_tag = SystemTag.create! valid_attributes
+      delete system_tag_url(system_tag)
+      expect(response).to redirect_to(system_tags_url)
     end
   end
 end

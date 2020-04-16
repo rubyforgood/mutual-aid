@@ -447,21 +447,22 @@ export default {
     var _this = this
     var itemList = [
       // Hard coded for now to test functionality
-      'Acme Township',
-      'Blair Township',
-      'East Bay Township',
-      'Fife Lake / Fife Lake Township',
-      'Garfield Township',
-      'Grant Township',
-      'Green Lake Township',
-      'Kingsley / Paradise Township',
-      'Long Lake Township',
-      'Mayfield Township',
-      'Peninsula Township',
-      'Traverse City',
-      'Union Township',
-      'Whitewater Township'
+      'Acme Township...', //',
+      'Blair Townshi...', //p',
+      'East Bay Town...', //ship',
+      'Fife Lake / F...', //ife Lake Township',
+      'Garfield Town...', //ship',
+      'Grant Townshi...', //p',
+      'Green Lake To...', //wnship',
+      'Kingsley / Pa...', //radise Township',
+      'Long Lake Tow...', //nship',
+      'Mayfield Town...', //ship',
+      'Peninsula Tow...', //nship',
+      'Traverse City...', //',
+      'Union Townshi...', //p',
+      'Whitewater To...', //wnship'
     ]
+    var urgencyList = [ 'Urgent', 'Anytime']
     itemList = itemList.map(function(value){ return {name: value}})
     _this.groupingTypes = [
       { name: 'Tags', items: [

@@ -41,7 +41,7 @@
             <div class="action-button"><span class='button is-primary is-outlined'>Donate</span></div>
             <div class="action-button"><span class='button is-primary is-outlined'>Share a community resource</span></div> -->
           </div>
-        </div>  
+        </div>
       </div>
     </div>
   </div>

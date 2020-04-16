@@ -22,7 +22,7 @@ class ExternalResourcesController < ApplicationController
 
     respond_to do |format|
       if @external_resource.save
-        format.html { redirect_to external_resources_path, notice: 'External resource was successfully created.' }
+        format.html { redirect_to @admin_status ? external_resources_path : community_resources_path, notice: "External resource was successfully submitted.#{ " We'll review." unless @admin_status }" }
         format.json { render :show, status: :created, location: @external_resource }
       else
         format.html { render :new }
@@ -34,7 +34,7 @@ class ExternalResourcesController < ApplicationController
   def update
     respond_to do |format|
       if @external_resource.update(external_resource_params)
-        format.html { redirect_to external_resources_path, notice: 'External resource was successfully updated.' }
+        format.html { redirect_to community_resources_path, notice: 'External resource was successfully updated.' }
         format.json { render :index, status: :ok, location: @external_resource }
       else
         format.html { render :edit }
@@ -46,7 +46,7 @@ class ExternalResourcesController < ApplicationController
   def destroy
     @external_resource.destroy
     respond_to do |format|
-      format.html { redirect_to external_resources_url, notice: 'External resource was successfully destroyed.' }
+      format.html { redirect_to community_resources_path, notice: 'External resource was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -59,8 +59,17 @@ class ExternalResourcesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def external_resource_params
-      params.require(:external_resource).permit(:name, :website_url, :facebook_url,
-                                                :phone, :description, :display_on_website,
-                                                :youtube_identifier, :location_id, tags: [])
+      params.require(:external_resource).permit(
+          :description,
+          :display_on_website_end,
+          :display_on_website_start,
+          :facebook_url,
+          :location_id,
+          :name,
+          :phone,
+          :reviewed,
+          :website_url,
+          :youtube_identifier,
+          tags: [])
     end
 end

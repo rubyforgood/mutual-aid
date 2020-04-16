@@ -5,8 +5,8 @@
   <div class="col-md-4 text-center">
     <% if current_user %>
       <h2>You are already logged in</h2>
-      <% if current_user&.admin? %>
-        <%= link_to("<span class='fa fa-menu #{ENV['NAVBAR_ICON_COLOR_CLASS']}'></span><span class='text-black text-bold'> Go back to admin</span>".html_safe,
+      <% if @admin_status %>
+        <%= link_to("<span class='fa fa-menu #{ENV['NAVBAR_ICON_COLOR_CLASS']}'></span><span class='has-text-black text-bold'> Go back to admin</span>".html_safe,
                     admin_path,
                     class: "btn btn-default button #{ENV['NAVBAR_ICON_COLOR_CLASS']}",
                     title: "Logout") %>

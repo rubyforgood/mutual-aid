@@ -1,4 +1,4 @@
-<%= simple_form_for(external_resource) do |form| %>
+<%= simple_form_for @external_resource, wrapper: :default, defaults: { wrapper: false } do |form| %>
   <% if external_resource.errors.any? %>
     <div id="error_explanation">
       <h2 class="subtitle"><%= pluralize(external_resource.errors.count, "error") %> prohibited this external_resource from being saved:</h2>
@@ -12,71 +12,37 @@
   <% end %>
 
   <div class="form-inputs">
+    <%= form.input :name, required: true, label: "Resource/organization name" %>
+    <%= form.input :description, required: true, as: :text, input_html: { rows: 2 } %>
+
+    <% if ["new", "create"].include?(action_name) %>
+      <%= form.hidden_field :reviewed %>
+    <% else %>
+      <%= form.input :reviewed %>
+    <% end %>
+
+    <div class="label">Display on website?</div>
     <div class="field is-grouped">
-      <div class="control is-expanded">
-        <div class="label">Name</div>
-          <%= form.input_field :name, :class=>"input is-inline-block"%>
-        </div>
-      <div class="control">
-        <div class="label">Display on website?</div>
-        <%= form.input_field :display_on_website %>
+      <div class="field">
+        <%= form.input :display_on_website_start, as: :date, include_blank: true %>
+      </div>
+      <div class="field">
+        <%= form.input :display_on_website_end, as: :date, include_blank: true %>
       </div>
     </div>
 
-    <div class="field">
-      <div class="label">Tags</div>
-      <div class="control">
-        <%= form.input_field :tags, :class=>"input"%>
-      </div>
-    </div>
-  </div>
+    <%= form.input :tags %>
 
-  <div class="form-inputs">
-    <div class="field">
-      <div class="label">Website URL</div>
-      <div class="control">
-        <%= form.input_field :website_url, :class=>"input" %>
-      </div>
+    <div class="label is-expanded">Links</div>
+    <div class="field is-grouped">
+      <%= form.input :facebook_url, placeholder: "https://www.google.com" %>
+      <%= form.input :website_url, placeholder: "https://www.google.com" %>
+      <%= form.input :facebook_url, placeholder: "https://www.google.com" %>
+      <%= form.input :youtube_identifier %>
     </div>
 
-    <div class="field">
-      <div class="label">Facebook URL</div>
-      <div class="control">
-        <%= form.input_field :facebook_url, :class=>"input" %>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="label">Youtube URL</div>
-      <div class="control">
-        <%= form.input_field :youtube_identifier, :class=>"input" %>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-inputs">
-    <div class="field">
-      <div class="label">Phone</div>
-      <div class="control">
-        <%= form.input_field :phone, :class=>"input" %>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="label">Location</div>
-      <div class="control">
-        <%= form.input_field :location_id, :class=>"input" %>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-inputs">
-    <div class="field">
-      <div class="label">Description</div>
-      <div class="control">
-        <%= form.input_field :description, :class=>"input" %>
-      </div>
-    </div>
+    <%= form.input :phone %>
+    <%= form.association :location, label: "City/neighborhood", label_method: "address" %>
   </div>
 
   <div class="form-actions">

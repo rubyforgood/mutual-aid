@@ -1,7 +1,6 @@
 class PublicController < ActionController::Base
 
   protect_from_forgery with: :exception
-  render layout: "application"
   include ApplicationHelper
 
   def about

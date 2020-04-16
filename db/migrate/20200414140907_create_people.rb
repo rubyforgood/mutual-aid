@@ -7,6 +7,8 @@ class CreatePeople < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :phone_2
       t.string :email_2
+      t.string :preferred_contact_method
+      t.string :preferred_contact_timeframe
       t.text :skills
       t.text :notes
       t.references :user, null: false, foreign_key: true

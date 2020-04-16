@@ -120,6 +120,8 @@ ActiveRecord::Schema.define(version: 2020_04_15_033652) do
     t.string "email"
     t.string "phone_2"
     t.string "email_2"
+    t.string "preferred_contact_method"
+    t.string "preferred_contact_timeframe"
     t.text "skills"
     t.text "notes"
     t.bigint "user_id", null: false

@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     member do
       get "/match", to: "listings#match", as: "match_listing"
       post "/match", to: "listings#match"
+      get "/match/confirm", to: "listings#confirm_match", as: "confirm_match_listing"
+      post "/match/confirm", to: "listings#confirm_match"
     end
     collection do
       resources :offers

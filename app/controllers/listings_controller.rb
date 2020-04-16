@@ -23,6 +23,9 @@ class ListingsController < ApplicationController
   def match
   end
 
+  def confirm_match
+  end
+
   def edit
   end
 

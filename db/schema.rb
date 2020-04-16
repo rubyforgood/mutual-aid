@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_033652) do
+ActiveRecord::Schema.define(version: 2020_04_16_141308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,19 @@ ActiveRecord::Schema.define(version: 2020_04_15_033652) do
     t.string "location_type"
     t.bigint "parent_id"
     t.index ["parent_id"], name: "index_locations_on_parent_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "owner_id"
+    t.string "owner_type"
+    t.string "asker_type"
+    t.integer "asker_id"
+    t.string "status"
+    t.string "notes"
+    t.boolean "tentative"
+    t.boolean "completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "organizations", force: :cascade do |t|

@@ -1,0 +1,219 @@
+<div class="title is-3">Identify matches</div>
+<div>
+  <div class='listing-body'>
+    <div class='listing-grid columns'>
+      <div class='listing-grid-nav-left is-pulled-left column is-3 box'>
+        <div class='column'>
+          <div class='column is-12'>
+            <div class='listing-grid-header title is-4'>FILTERS</div>
+            <div class='listing-grid-nav-block' v-for="grouping in groupingTypes" :key="grouping.name">
+              <div class='listing-grid-nav-block-title title is-6'>{{ grouping.name}}</div>
+              <ul class='listing-grid-nav-list' v-for="item in grouping.items" :key="item.name">
+                <li class='listing-grid-nav-list-item'>
+                  <input type='checkbox' /> {{ item.name }} <span class='tag is-light is-rounded'>42</span>
+                </li>
+              </ul>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='listing-grid-content column'>
+        <div class='control-bar box'>
+          <div class='control-bar-title-row columns'>
+            <div class='column is-2'>
+              <div class='title is-4'>MATCHES</div>
+            </div>
+            <div class='column is-4'>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="search" placeholder="Search">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-search"></i>
+                  </span>
+              </div>
+            </div>
+            <div class='column is-4'>
+              <div class='control-bar'>
+                <div class='control-bar-right-buttons buttons has-addons is-pulled-right'>
+                  <div class='button icon-list is-selected is-outlined is-primary'>List</div>
+                  <div class='button icon-grid is-selected is-outlined is-primary'>Grid</div>
+                  <div class='button icon-map is-selected is-outlined is-primary'>Map</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='control-bar-hint-row columns'>
+            <div class='column is-3'>
+              <em><a href='/listings/offers'>Switch to Offers</a></em>
+            </div>
+            <div class='column is-7 is-pull-right has-text-right'>
+              <em><a href='/listings/asks'>Expand all</a></em>
+            </div>
+          </div>
+        </div>
+        <div class='table list box'>
+          <table class='table table-hover table-curved table-condensed is-hoverable'>
+            <tbody>
+              <tr>
+              <td>
+                <div class='table grid box'>
+                  <table class='table table-hover table-curved table-condensed is-hoverable'>
+                    <tr>
+                      <td>
+                        <div class="card has-background-primary has-text-white">
+                          <header class="card-header">
+                            <p class="card-header-title">
+                              <span class='tag is-primary is-light'>Care</span>
+                              <span class='tag is-primary is-light'>Animal care</span>
+                            </p>
+                            <a href="#" class="card-header-icon" aria-label="more options">
+                              <span class='tag is-warning is-light'>This week</span>
+                            </a>
+                          </header>
+                          <div class="card-content">
+                            <div class="content">
+                              <span class="tag">East Bay</span>
+                              <span class="tag is-light"><i class="fa fa-building"></i></span>
+                              <span class="tag is-light"><i class="fa fa-hourglass-start"></i> AM,PM,EVE</span>
+                              <br>
+                              <span class='title is-6'>Short title they entered for their ask (50 chars)</span>
+                              <br>
+                              Lorem ipsum Description they entered for their ask (100 chars) dolor sit amet, consectetur adipiscing elit. Asjeces nec iaculis mauris.
+                              <br>
+                              <span class="title is-7 is-italic has-text-grey"><time datetime="2016-1-1">April 10, 2020 @ 3:35 PM EST</time></span>
+                              <span class="tag is-light"><i class="fa fa-map"></i> Near me?</span>
+                              <span class="tag is-light"><i class="fa fa-phone"></i></span>
+                              <span class="tag is-light"><i class="fa fa-mobile"></i></span>
+                              <span class="tag is-light"><i class="fa fa-envelope"></i></span>
+                              <i class="fa fa-facebook-messenger"></i>
+                            </div>
+                          </div>
+                          <footer class="card-footer">
+                            <span class="card-footer-item"><span class='button icon-list is-primary is-outlined has-text-white'>View Profile</span></span>
+                            <span class="card-footer-item"><span class='button icon-list is-primary is-outlined has-text-white'>Contact</span></span>
+                            <span class="card-footer-item"><span class='button icon-list is-primary is-outlined has-text-white'><i class="fa fa-edit is-outlined"></i></span></span>
+                            <!-- <span class="card-footer-item"><span class='button icon-list is-primary'>Contact</span></span> -->
+                          </footer>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="card">
+                          <header class="card-header">
+                            <p class="card-header-title">
+                              <span class='tag is-primary is-light'>Care</span>
+                              <span class='tag is-primary is-light'>Animal care</span>
+                            </p>
+                            <a href="#" class="card-header-icon" aria-label="more options">
+                              <span class='tag is-warning is-light'>This week</span>
+                            </a>
+                          </header>
+                          <div class="card-content">
+                            <div class="content">
+                              <span class="tag">East Bay</span>
+                              <span class="tag is-light"><i class="fa fa-building"></i></span>
+                              <span class="tag is-light"><i class="fa fa-hourglass-start"></i> AM,PM,EVE</span>
+                              <br>
+                              <span class='title is-6'>Short title they entered for their ask (50 chars)</span>
+                              <br>
+                              Lorem ipsum Description they entered for their ask (100 chars) dolor sit amet, consectetur adipiscing elit. Asjeces nec iaculis mauris.
+                              <br>
+                              <span class="title is-7 is-italic has-text-grey"><time datetime="2016-1-1">April 10, 2020 @ 3:35 PM EST</time></span>
+                              <span class="tag is-light"><i class="fa fa-map"></i> Near me?</span>
+                              <span class="tag is-light"><i class="fa fa-phone"></i></span>
+                              <span class="tag is-light"><i class="fa fa-mobile"></i></span>
+                              <span class="tag is-light"><i class="fa fa-envelope"></i></span>
+                              <i class="fa fa-facebook-messenger"></i>
+                            </div>
+                          </div>
+                          <footer class="card-footer">
+                            <span class="card-footer-item"><span class='button icon-list is-primary is-outlined'>View Profile</span></span>
+                            <span class="card-footer-item"><span class='button icon-list is-primary is-outlined'>Contact</span></span>
+                            <span class="card-footer-item"><span class='button icon-list is-primary'>Match</span></span>
+                          </footer>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="card">
+                          <header class="card-header">
+                            <p class="card-header-title">
+                              <span class='tag is-primary is-light'>Care</span>
+                              <span class='tag is-primary is-light'>Animal care</span>
+                            </p>
+                            <a href="#" class="card-header-icon" aria-label="more options">
+                              <span class='tag is-warning is-light'>This week</span>
+                            </a>
+                          </header>
+                          <div class="card-content">
+                            <div class="content">
+                              <span class="tag">East Bay</span>
+                              <span class="tag is-light"><i class="fa fa-building"></i></span>
+                              <span class="tag is-light"><i class="fa fa-hourglass-start"></i> AM,PM,EVE</span>
+                              <br>
+                              <span class='title is-6'>Short title they entered for their ask (50 chars)</span>
+                              <br>
+                              Lorem ipsum Description they entered for their ask (100 chars) dolor sit amet, consectetur adipiscing elit. Asjeces nec iaculis mauris.
+                              <br>
+                              <span class="title is-7 is-italic has-text-grey"><time datetime="2016-1-1">April 10, 2020 @ 3:35 PM EST</time></span>
+                              <span class="tag is-light"><i class="fa fa-map"></i> Near me?</span>
+                              <span class="tag is-light"><i class="fa fa-phone"></i></span>
+                              <span class="tag is-light"><i class="fa fa-mobile"></i></span>
+                              <span class="tag is-light"><i class="fa fa-envelope"></i></span>
+                              <i class="fa fa-facebook-messenger"></i>
+                            </div>
+                          </div>
+                          <footer class="card-footer">
+                            <span class="card-footer-item"><span class='button icon-list is-primary is-outlined'>View Profile</span></span>
+                            <span class="card-footer-item"><span class='button icon-list is-primary is-outlined'>Contact</span></span>
+                            <span class="card-footer-item"><span class='button icon-list is-primary'>Match</span></span>
+                          </footer>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="card">
+                          <header class="card-header">
+                            <p class="card-header-title">
+                              <span class='title is-6'>Short title they entered for their ask (50 chars)</span>
+                              <a href="#" class="card-header-icon" aria-label="more options"></a>
+                            </p>
+                          </header>
+                          <div class="card-content">
+                            <div class="content">
+                              <span class='tag is-primary is-light'>Care</span>
+                              <span class='tag is-primary is-light'>Animal care</span>
+                              <span class='tag is-warning is-light'>This week</span>
+                              <br>
+                              <span class="tag">East Bay</span>
+                              <span class="tag is-light"><i class="fa fa-building"></i></span>
+                              <span class="tag is-light"><i class="fa fa-hourglass-start"></i> AM,PM,EVE</span>
+                              <br>
+                              Lorem ipsum Description they entered for their ask (100 chars) dolor sit amet, consectetur adipiscing elit. Asjeces nec iaculis mauris.
+                              <br>
+                              <span class="title is-7 is-italic has-text-grey"><time datetime="2016-1-1">April 10, 2020 @ 3:35 PM EST</time></span>
+                              <span class="tag is-light"><i class="fa fa-map"></i> Near me?</span>
+                              <span class="tag is-light"><i class="fa fa-phone"></i></span>
+                              <span class="tag is-light"><i class="fa fa-mobile"></i></span>
+                              <span class="tag is-light"><i class="fa fa-envelope"></i></span>
+                              <i class="fa fa-facebook-messenger"></i>
+                            </div>
+                          </div>
+                          <footer class="card-footer">
+                            <span class="card-footer-item"><span class='button icon-list is-primary is-outlined'>View Profile</span></span>
+                            <span class="card-footer-item"><span class='button icon-list is-primary is-outlined'>Contact</span></span>
+                            <span class="card-footer-item"><span class='button icon-list is-primary'>Match</span></span>
+                          </footer>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

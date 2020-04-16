@@ -2,8 +2,8 @@ class ListingsController < ApplicationController
 
   before_action :authenticate_user!, except: [:new, :create]
 
-  before_action :set_listing,    only: [:show, :destroy]
-  before_action :set_form,       only: [:edit, :update, :match]
+  before_action :set_listing,    only: [:show, :destroy, :match]
+  before_action :set_form,       only: [:edit, :update]
   before_action :set_empty_form, only: [:new, :create]
 
   # GET /listings

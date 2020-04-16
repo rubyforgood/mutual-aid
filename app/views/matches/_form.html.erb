@@ -1,0 +1,14 @@
+<%= simple_form_for @match, wrapper: :default, defaults: { wrapper: false } do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :owner %>
+    <%= f.input :asker %>
+    <%= f.input :status %>
+    <%= f.input :notes %>
+    <%= f.input :tentative %>
+    <%= f.input :completed %>
+  </div>
+
+  <%= render "layouts/view_template_form_buttons", f: f, record: @match, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

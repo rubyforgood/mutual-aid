@@ -12,11 +12,23 @@ Rails.application.routes.draw do
   get "/news", to: "public#news_and_announcements", as: "news_and_announcements_public"
   get "/share", to: "public#share", as: "share_public"
 
+  resources :listings do
+    member do
+      get "/match", to: "listings#match", as: "match_listing"
+      post "/match", to: "listings#match"
+    end
+    collection do
+      resources :offers
+      resources :asks
+    end
+  end
+
   resources :announcements
   resources :communication_logs
   resources :donations
   resources :external_resources
   resources :locations
+  resources :matches
   resources :organizations
   resources :people
   resources :positions
@@ -25,16 +37,6 @@ Rails.application.routes.draw do
   resources :system_settings
   resources :system_tags
   resources :users
-
-  resources :listings do
-    member do
-      resources :match
-    end
-    collection do
-      resources :offers
-      resources :asks
-    end
-  end
 
   authenticated :user do
     root :to => 'admin#landing_page', as: :authenticated_root

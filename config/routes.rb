@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :announcements
   resources :communication_logs
+  resources :custom_form_questions
   resources :donations
   resources :external_resources
   resources :locations

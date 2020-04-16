@@ -1,0 +1,15 @@
+<%= simple_form_for @custom_form_question, wrapper: :default, defaults: { wrapper: false } do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :input_type %>
+    <%= f.input :is_required %>
+    <%= f.input :form_type %>
+    <%= f.input :option_list %>
+    <%= f.input :hint_text %>
+    <%= f.input :position %>
+  </div>
+
+  <%= render "layouts/view_template_form_buttons", f: f, record: @custom_form_question, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

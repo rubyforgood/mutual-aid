@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @custom_form_question.name %>
+</p>
+
+<p>
+  <strong>Input type:</strong>
+  <%= @custom_form_question.input_type %>
+</p>
+
+<p>
+  <strong>Is required:</strong>
+  <%= @custom_form_question.is_required %>
+</p>
+
+<p>
+  <strong>Form type:</strong>
+  <%= @custom_form_question.form_type %>
+</p>
+
+<p>
+  <strong>Option list:</strong>
+  <%= @custom_form_question.option_list %>
+</p>
+
+<p>
+  <strong>Hint text:</strong>
+  <%= @custom_form_question.hint_text %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @custom_form_question.position %>
+</p>
+
+<%= link_to 'Edit', edit_custom_form_question_path(@custom_form_question) %> |
+<%= link_to 'Back', custom_form_questions_path %>

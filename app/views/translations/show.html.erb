@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Translatable type:</strong>
+  <%= @translation.translatable_type %>
+</p>
+
+<p>
+  <strong>Translatable:</strong>
+  <%= @translation.translatable_id %>
+</p>
+
+<p>
+  <strong>English text:</strong>
+  <%= @translation.english_text %>
+</p>
+
+<p>
+  <strong>Translated text:</strong>
+  <%= @translation.translated_text %>
+</p>
+
+<p>
+  <strong>Submitted by:</strong>
+  <%= @translation.submitted_by %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @translation.approved %>
+</p>
+
+<%= link_to 'Edit', edit_translation_path(@translation) %> |
+<%= link_to 'Back', translations_path %>

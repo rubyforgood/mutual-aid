@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :system_locations
   resources :system_settings
   resources :system_tags
+  resources :translations
   resources :users
 
   authenticated :user do

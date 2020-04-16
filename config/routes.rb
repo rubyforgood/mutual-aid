@@ -12,18 +12,18 @@ Rails.application.routes.draw do
   get "/news", to: "public#news_and_announcements", as: "news_and_announcements_public"
   get "/share", to: "public#share", as: "share_public"
 
-  resources :system_locations
-  resources :system_tags
-  resources :organizations
-  resources :system_settings
-  resources :donations
-  resources :positions
-  resources :shared_accounts
   resources :announcements
   resources :communication_logs
-  resources :people
-  resources :locations
+  resources :donations
   resources :external_resources
+  resources :locations
+  resources :organizations
+  resources :people
+  resources :positions
+  resources :shared_accounts
+  resources :system_locations
+  resources :system_settings
+  resources :system_tags
   resources :users
 
   resources :listings do

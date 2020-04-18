@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "system_tags/show", type: :view do
   before(:each) do
-    @tag = assign(:tag, SystemTag.create!(
+    @system_tag = assign(:system_tag, SystemTag.create!(
       name: "Name",
       description: "Description",
       display_to_public: false,

@@ -27,8 +27,8 @@
   <tbody>
   <% @positions.each do |position| %>
     <tr>
-              <td><%= position.location_id %></td>
-              <td><%= position.person_id %></td>
+              <td><%= position.location&.name %></td>
+              <td><%= position.person&.name %></td>
               <td><%= position.position_type %></td>
               <td><%= position.name %></td>
               <td><%= position.description %></td>

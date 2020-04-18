@@ -9,8 +9,8 @@ RSpec.describe "locations/new", type: :view do
       description: "MyString",
       street_address: "MyString",
       city: "MyString",
-      state: "MyString",
-      zip: "MyString",
+      state: "NY",
+      zip: "12345",
       county: "MyString",
       facebook_url: "MyString",
       website_url: "MyString",
@@ -25,7 +25,7 @@ RSpec.describe "locations/new", type: :view do
 
       assert_select "input[name=?]", "location[name]"
 
-      assert_select "input[name=?]", "location[parent_id]"
+      assert_select "select[name=?]", "location[parent_id]"
 
       assert_select "input[name=?]", "location[location_type]"
 

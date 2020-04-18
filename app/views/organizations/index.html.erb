@@ -33,7 +33,7 @@
               <td><%= organization.facebook_url %></td>
               <td><%= organization.website_url %></td>
               <td><%= organization.phone %></td>
-              <td><%= organization.point_of_contact_id %></td>
+              <td><%= organization.point_of_contact&.name %></td>
               <td><%= organization.is_instance_owner %></td>
               <td><%= organization.has_sms_account %></td>
               <td><%= organization.has_hosting_account %></td>

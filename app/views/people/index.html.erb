@@ -35,7 +35,7 @@
               <td><%= person.email_2 %></td>
               <td><%= person.skills %></td>
               <td><%= person.notes %></td>
-              <td><%= person.user_id %></td>
+              <td><%= person.user&.name %></td>
             <td><%= link_to 'Edit', edit_person_path(person) %></td>
     </tr>
   <% end %>

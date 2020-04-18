@@ -11,14 +11,12 @@
 <table class="table table-hover table-curved table-condensed">
   <thead>
     <tr>
-      <th>Name</th>
       <th>Location type</th>
-      <th>Description</th>
-      <th>City</th>
+      <th>Street address</th>
+      <th>City, State</th>
+      <th>Zip</th>
       <th>County</th>
-      <th>Links</th>
-      <th>Contact</th>
-      <th>Phone</th>
+      <th>Parent</th>
       <th>Edit</th>
     </tr>
   </thead>
@@ -26,23 +24,12 @@
   <tbody>
   <% @locations.each do |location| %>
     <tr>
-      <td><%= location.full_name %></td>
       <td><%= location.location_type %></td>
-      <td><%= location.description %></td>
+      <td><%= location.street_address %></td>
       <td><%= location.city %><%= ", " + location.state if location.state %></td>
+      <td><%= location.zip %></td>
       <td><%= location.county %></td>
-      <td>
-        <%= link_to("<span class='fa fa-globe'></span><span>Website</span>".html_safe,
-                    location.website_url,
-                    title: "Go to #{location.website_url}",
-                    class: "btn btn-default") if location.website_url.present? %>
-        <%= link_to("<span class='fa fa-facebook'></span><span>Facebook</span>".html_safe,
-                    location.facebook_url,
-                    title: "Go to #{location.facebook_url}",
-                    class: "btn btn-default") if location.facebook_url.present? %>
-      </td>
-      <td><%= location.primary_contact&.name %></td>
-      <td><%= location.phone %></td>
+      <td><%= location.parent&.name %></td>
       <td><%= link_to 'Edit', edit_location_path(location) %></td>
     </tr>
   <% end %>

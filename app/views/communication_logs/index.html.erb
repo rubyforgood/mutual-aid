@@ -22,7 +22,7 @@
   <tbody>
   <% @communication_logs.each do |communication_log| %>
     <tr>
-              <td><%= communication_log.person_id %></td>
+              <td><%= communication_log.person&.name %></td>
               <td><%= communication_log.channel %></td>
               <td><%= communication_log.sent_at %></td>
               <td><%= communication_log.needs_follow_up %></td>

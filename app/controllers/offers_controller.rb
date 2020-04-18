@@ -1,1 +1,0 @@
-class OffersController < ListingsController; end

@@ -19,10 +19,6 @@ Rails.application.routes.draw do
       get "/match/confirm", to: "listings#confirm_match", as: "confirm_match_listing"
       post "/match/confirm", to: "listings#confirm_match"
     end
-    collection do
-      resources :offers
-      resources :asks
-    end
   end
 
   resources :announcements

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ListingForm do
   describe '.all_tags' do
-    let!(:listing) { create :offer, tags: ['a custom tag'] }
+    let!(:listing) { create :listing, tags: ['a custom tag'] }
 
     let(:default_tags) { ListingForm::DEFAULT_TAGS }
 

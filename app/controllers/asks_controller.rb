@@ -1,1 +1,0 @@
-class AsksController < ListingsController; end

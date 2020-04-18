@@ -4,14 +4,6 @@ FactoryBot.define do
 
     association :location
 
-    factory :offer, class: "Offer" do
-      type { "Offer" }
-    end
-
-    factory :ask, class: "Ask" do
-      type { "Ask" }
-    end
-
     trait :with_contact_info do
       name { Faker::Name.name }
       email { Faker::Internet.email}

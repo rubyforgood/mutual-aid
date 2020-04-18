@@ -8,8 +8,8 @@
 <div class="row">
   <table class="table table-hover table-curved table-condensed">
     <tbody>
-      <tr><td><%= link_to "View unmet Asks", asks_path %></td></tr>
-      <tr><td><%= link_to "View outstanding Offers", offers_path %></td></tr>
+      <tr><td><%= link_to "View unmet Asks", listings_path %></td></tr>
+      <tr><td><%= link_to "View outstanding Offers", listings_path %></td></tr>
       <tr><td><%= link_to "Manage Volunteers", volunteer_admin_path %></td></tr>
       <tr><td><%= link_to "Manage CommunityResources", external_resources_path(reviewed: false) %></td></tr>
       <% [

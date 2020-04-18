@@ -20,7 +20,7 @@ class ListingForm < Reform::Form
     'making calls',
     'tech support',
     'translation',
-    'healhcare',
+    'healthcare',
     'cash',
     'Information about financial assistance'
   ]

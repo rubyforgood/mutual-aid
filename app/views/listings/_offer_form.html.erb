@@ -1,0 +1,45 @@
+<% offer ||= listing %>
+<div class='section'>
+  <%= form_with(model: listing, local: true, class: 'listing-form') do |form| %>
+    <% if listing.errors.any? %>
+      <div id="error_explanation">
+        <h2 class="subtitle"><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+        <ul>
+          <% listing.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <p class="lead">
+      Information you enter below will be shared publicly unless you opt out.
+      Leave blank any fields you prefer not to to fill out, except those
+      marked mith an asterisk (<span style="color: orange">*</span>)
+    </p>
+
+    <hr>
+
+    <div class="field required">
+      <%= form.label :name, :class=>"label"%>
+      <%= form.text_field :name, class: "input", required: true %>
+      <small class="form-text text-muted">We'll create an account for you</small>
+    </div>
+
+    <hr>
+    <%= render "listings/form_contact_info", form: form %>
+    <hr>
+    <%= render "listings/form_tags_section", form: form %>
+    <hr>
+
+    <div class="field required">
+      <%= form.label :skills, :class=>"label"%>
+      <%= form.text_field :skills, class: "input", required: true %>
+      <small class="form-text text-muted">List any skills you have</small>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Submit', class: "button is-primary mt-1" %>
+    </div>
+  <% end %>
+</div>

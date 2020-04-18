@@ -1,0 +1,26 @@
+<div>
+  <%= form.label :tags, class: "label" %>
+  <%= form.collection_check_boxes(:tags, ListingForm.all_tags, :itself, :itself) do |b| %>
+    <%# Derived from https://bootsnipp.com/snippets/M2bda %>
+    <div class="field is-grouped mb-0">
+      <%# FIXME: is-hidden class not working? Buttons also need more work %>
+      <%= b.check_box(class: "is-hidden", style: "display: none") %>
+      <%= b.label(class: "button is-small is-outlined") do %>
+        <span>&#10003;</span> <!-- made visible via css when checked -->
+        <span> </span>
+      <% end %>
+      <%= b.label(class: "button is-small is-outlined") do %>
+        <%= b.value.capitalize %>
+      <% end %>
+      <%= b.label(class: "button is-small is-outlined") do %>
+        Urgency
+      <% end %>
+      <%= b.label(class: "button is-small is-outlined") do %>
+        Needed by date
+      <% end %>
+      <%= b.label(class: "button is-small is-outlined") do %>
+        Notes
+      <% end %>
+    </div>
+  <% end %>
+</div>

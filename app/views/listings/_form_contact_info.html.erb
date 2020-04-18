@@ -1,0 +1,60 @@
+<p class="lead">How may we contact you?</p>
+
+<div class="field is-grouped">
+  <div class="field required">
+    <%= form.label :email, :class=>"label" %>
+    <%= form.email_field :email, class: "input" %>
+    <small class="form-text text-muted">Email or a phone required</small>
+  </div>
+  <div class="field required">
+    <%= form.label :phone, :class=>"label"%>
+    <%= form.phone_field :phone, class: "input" %>
+  </div>
+  <div class="field required">
+    <div class="label">Preferred contact method?<span style="color: orange">*</span></div>
+    <div class="input">Call,Text,Email, No preference</div>
+  </div>
+</div>
+
+<div class="field is-grouped">
+  <div class="field required">
+    <div class="label">Availability</div>
+    <div class="input">AM/PM/EVE/WEEKDAY/WKND</div>
+  </div>
+  <div class="field required">
+    <div class="label">Neighbors can view my profile</div>
+    <%= form.check_box(class: "", style: "display: none") %>
+  </div>
+  <div class="field required">
+    <div class="label">Neighbors can view my asks and offers</div>
+    <%= form.check_box(class: "", style: "display: none") %>
+  </div>
+  <div class="field required">
+    <div class="label">Neighbors can contact me directly</div>
+    <%= form.check_box(class: "", style: "display: none") %>
+  </div>
+</div>
+
+<%= form.fields_for :location do |location_form| %>
+  <div class="field is-grouped">
+    <div class="field required">
+      <%= location_form.label :location, :class=>"label"%>
+      <%= location_form.text_field :city, list: "cities", class: "input",
+                                   placeholder: "Select or type another in..." %>
+      <datalist id="cities">
+        <%= LocationForm::CITIES.each do |city| %>
+          <option value="<%= city %>"></option>
+        <% end %>
+      </datalist>
+    </div>
+    <div class="field">
+      <%= location_form.label :zip, :class=>"label"%>
+      <%= location_form.text_field :zip, class: "input" %>
+    </div>
+    <div class="field">
+      <%= location_form.label :street_address, :class=>"label" %>
+      <%= location_form.text_field :street_address, class: "input" %>
+      <small class="form-text text-muted">Address or crosstreet, eg "1200 Block, 1st St"</small>
+    </div>
+  </div>
+<% end %>

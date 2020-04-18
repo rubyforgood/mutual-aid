@@ -1,0 +1,52 @@
+<% ask ||= listing %>
+<div class=''>
+  <%= form_with(model: listing, local: true, class: 'listing-form') do |form| %>
+    <% if listing.errors.any? %>
+      <div id="error_explanation">
+        <h2 class="subtitle"><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+        <ul>
+          <% listing.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <hr>
+    <%= render "listings/form_tags_section", form: form %>
+    <hr>
+    <p class="lead">
+      Leave blank any fields you'd like, except those
+      marked with an asterisk (<span style="color: orange">*</span>)
+    </p>
+    <hr>
+    <%= render "listings/form_contact_info", form: form %>
+    <hr>
+
+    <p class="lead">
+      Would you like to log in and check on the status of your asks?
+    </p>
+    <div class="field is-grouped">
+      <div class="field required">
+        <div class="label">Create login?</div>
+        <%= form.check_box(class: "", style: "display: none") %>
+        <small class="form-text text-muted">Log in</small>
+      </div>
+      <div class="field required">
+        <%= form.label :login_name, :class=>"label" %>
+        <%= form.text_field :name, class: "input" %>
+        <small class="form-text text-muted">Your name or a username</small>
+      </div>
+    </div>
+
+    <hr>
+    <p class="lead">
+      We will do our best to help. We're all in this together.
+    </p>
+    <hr>
+
+    <div class="actions">
+      <%= form.submit 'Submit', class: "button is-primary mt-1" %>
+    </div>
+  <% end %>
+</div>

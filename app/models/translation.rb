@@ -1,2 +1,0 @@
-class Translation < ApplicationRecord
-end

@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_145123) do
     t.string "facebook_url"
     t.string "website_url"
     t.string "phone"
-    t.bigint "point_of_contact_id", null: false
+    t.bigint "point_of_contact_id"
     t.boolean "is_instance_owner"
     t.boolean "has_sms_account"
     t.boolean "has_hosting_account"

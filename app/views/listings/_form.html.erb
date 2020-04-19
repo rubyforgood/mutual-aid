@@ -1,13 +1,13 @@
-<% resource ||= @listing %>
+<% resource ||= nil %>
 <% listing ||= resource %>
 
 <div class='section'>
-  <%= form_with(model: listing, local: true, class: 'listing-form') do |form| %>
-  <% if form.object.errors.any? %>
+<%= form_with(model: listing, local: true, class: 'listing-form') do |form| %>
+  <% if listing.errors.any? %>
     <div id="error_explanation">
       <h2 class="subtitle"><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
       <ul>
-        <% form.object.errors.full_messages.each do |message| %>
+        <% listing.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -15,9 +15,9 @@
   <% end %>
 
   <p class="lead">
-    No private information you enter below will be visible or shared publicly.
-    You can leave blank any fields you prefer not to to fill out, except those
-    marked mith an asterisk (<span style="color: orange">*</span>)
+  No private information you enter below will be visible or shared publicly.
+  You can leave blank any fields you prefer not to to fill out, except those
+  marked mith an asterisk (<span style="color: orange">*</span>)
   </p>
 
   <div class="field required">

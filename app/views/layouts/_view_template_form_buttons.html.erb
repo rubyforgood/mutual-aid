@@ -1,3 +1,5 @@
+<%# needs f for submit button %>
+
 <% klass_name = f.object.class.model_name.human.titleize.pluralize %>
 <% top_divider ||= true %>
 
@@ -8,7 +10,7 @@
 <% submit_button_name = submit_button_name || "go to #{klass_name}" %>
 <% submit_button_suffix ||= " index" %>
 
-<% cancel_button ||= link_to("Cancel and go to index", "/" + controller_name + "?fest_code=#{@fest_code}",
+<% cancel_button ||= link_to("Cancel and go to index", "/" + controller_name,
                              class: "button mt-1 is-default") %>
 
 <div class="form-actions">

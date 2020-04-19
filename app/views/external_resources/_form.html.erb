@@ -12,39 +12,40 @@
   <% end %>
 
   <div class="form-inputs">
-    <%= form.input :name, required: true, label: "Resource/organization name" %>
-    <%= form.input :description, required: true, as: :text, input_html: { rows: 2 } %>
+    <%= f.input :name, required: true, label: "Resource/organization name" %>
+    <%= f.input :description, required: true, as: :text, input_html: { rows: 2 } %>
 
     <% if ["new", "create"].include?(action_name) %>
-      <%= form.hidden_field :approved %>
+      <%= f.hidden_field :approved %>
     <% else %>
-      <%= form.input :approved %>
+      <%= f.input :approved %>
     <% end %>
 
     <div class="label">Dates to publish this resource</div>
     <div class="field is-grouped">
       <div class="field">
-        <%= form.input :publish_from, as: :date, include_blank: true %>
+        <%= f.input :publish_from, as: :date, include_blank: true %>
       </div>
       <div class="field">
-        <%= form.input :publish_until, as: :date, include_blank: true %>
+        <%= f.input :publish_until, as: :date, include_blank: true %>
       </div>
     </div>
 
     <div class="field is-grouped">
-      <%= form.input :tags %>
-      <%= form.association :location, label: "City/neighborhood", label_method: "address" %>
+      <%= f.input :tags %>
+      <%= f.association :system_location, label: "City/neighborhood", label_method: "location" %>
+      <%= f.association :organization %>
     </div>
 
     <div class="label is-expanded">Links</div>
     <div class="field is-grouped">
-      <%= form.input :facebook_url, placeholder: "https://www.google.com" %>
-      <%= form.input :website_url, placeholder: "https://www.google.com" %>
-      <%= form.input :facebook_url, placeholder: "https://www.google.com" %>
-      <%= form.input :youtube_identifier %>
+      <%= f.input :facebook_url, placeholder: "https://www.google.com" %>
+      <%= f.input :website_url, placeholder: "https://www.google.com" %>
+      <%= f.input :facebook_url, placeholder: "https://www.google.com" %>
+      <%= f.input :youtube_identifier %>
     </div>
 
-    <%= form.input :phone %>
+    <%= f.input :phone %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f %>

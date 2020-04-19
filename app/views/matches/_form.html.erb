@@ -2,8 +2,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :owner %>
-    <%= f.input :asker %>
+    <%= f.association :owner %>
+    <%= f.association :asker %>
     <%= f.input :status %>
     <%= f.input :notes %>
     <%= f.input :tentative %>

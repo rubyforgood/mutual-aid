@@ -28,7 +28,7 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.save
-        format.html { redirect_to @match, notice: 'Match was successfully created.' }
+        format.html { redirect_to share_public_path, notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class MatchesController < ApplicationController
   def update
     respond_to do |format|
       if @match.update(match_params)
-        format.html { redirect_to @match, notice: 'Match was successfully updated.' }
+        format.html { redirect_to share_public_path, notice: 'Match was successfully updated.' }
         format.json { render :show, status: :ok, location: @match }
       else
         format.html { render :edit }
@@ -69,6 +69,6 @@ class MatchesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def match_params
-      params.require(:match).permit(:owner, :asker, :status, :notes, :tentative, :completed)
+      params.require(:match).permit(:owner_id, :asker_id, :status, :notes, :tentative, :completed)
     end
 end

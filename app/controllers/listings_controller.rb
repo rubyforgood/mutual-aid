@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
 
   before_action :authenticate_user!, except: [:new, :create]
 
-  before_action :set_listing,    only: [:show, :destroy, :match]
+  before_action :set_listing,    only: [:show, :destroy, :match, :match_confirm]
   before_action :set_form,       only: [:edit, :update]
   before_action :set_empty_form, only: [:new, :create]
 
@@ -21,9 +21,12 @@ class ListingsController < ApplicationController
   end
 
   def match
+    @match = Match.new(asker: @listing)
+    @possible_owners = Listing.all # TODO - get this to be a filtered list -- need to add logic by which to match
   end
 
-  def confirm_match
+  def match_confirm
+    @match = Match.first # TODO - implement match id here
   end
 
   def edit

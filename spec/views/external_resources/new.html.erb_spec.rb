@@ -23,7 +23,7 @@ RSpec.describe "external_resources/new", type: :view do
     assert_select "#external_resource_publish_from_1i"
     assert_select "#external_resource_publish_until_1i"
     assert_select "#external_resource_system_location_id"
-    assert_select "#external_resource_system_organization_id"
+    assert_select "#external_resource_organization_id"
 
     assert_select "form input" do
       assert_select "input[id=?]", "external_resource_name"

@@ -19,34 +19,20 @@ RSpec.describe "external_resources/edit", type: :view do
 
   it "renders the edit external_resource form" do
     render
-    assert_select "form[action=?][method=?]", external_resource_path(@external_resource), "post" do
-      # binding.pry
-      assert_select "input[name=?]", "external_resource[name]"
 
-      assert_select "input[name=?]", "external_resource[website_url]"
+    assert_select "#external_resource_description"
+    assert_select "#external_resource_publish_from_1i"
+    assert_select "#external_resource_publish_until_1i"
+    assert_select "#external_resource_system_location_id"
+    assert_select "#external_resource_organization_id"
 
-      assert_select "input[name=?]", "external_resource[facebook_url]"
-
-      assert_select "input[name=?]", "external_resource[phone]"
-
-      assert_select "textarea[name=?]", "external_resource[description]"
-
-      # binding.pry # TODO - helppppppppp
-      # assert_select "select[id=?]", "external_resource[publish_from_1i"
-      # assert_select "select[id=?]", "external_resource[publish_from_2i"
-      # assert_select "select[id=?]", "external_resource[publish_from_3i"
-      #
-      # assert_select "select[id=?]", "external_resource[publish_until_1i"
-      # assert_select "select[id=?]", "external_resource[publish_until_2i"
-      # assert_select "select[id=?]", "external_resource[publish_until_3i"
-
-      assert_select "input[name=?]", "external_resource[youtube_identifier]"
-
-      assert_select "select[name=?]", "external_resource[system_location_id]"
-
-      assert_select "select[name=?]", "external_resource[organization_id]"
-
-      assert_select "input[name=?]", "external_resource[approved]"
+    assert_select "form input" do
+      assert_select "input[id=?]", "external_resource_name"
+      assert_select "input[id=?]", "external_resource_website_url"
+      assert_select "input[id=?]", "external_resource_facebook_url"
+      assert_select "input[id=?]", "external_resource_phone"
+      assert_select "input[id=?]", "external_resource_youtube_identifier"
+      assert_select "input[id=?]", "external_resource_approved"
     end
   end
 end

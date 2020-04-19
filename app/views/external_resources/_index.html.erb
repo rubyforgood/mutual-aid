@@ -5,8 +5,8 @@
     <th>Description</th>
     <th>Tags</th>
     <th>Location</th>
-    <th>Displaying on website?</th>
-    <th>Reviewed</th>
+    <th>Published?</th>
+    <th>Approved</th>
     <th>Edit</th>
   </tr>
   </thead>
@@ -25,8 +25,8 @@
       <td>
         <%= external_resource.phone %> <%= external_resource.location&.address %>
       </td>
-      <td class="has-text-centered"><%= yes_no(external_resource.displaying_on_website?) %></td>
-      <td class="has-text-centered"><%= yes_no(external_resource.reviewed) %></td>
+      <td class="has-text-centered"><%= yes_no(external_resource.published?) %></td>
+      <td class="has-text-centered"><%= yes_no(external_resource.approved) %></td>
       <td>
         <%= link_to("<span class='fa fa-edit'></span><span></span>".html_safe,
                     edit_external_resource_path(external_resource) ,

@@ -8,11 +8,11 @@ RSpec.describe "external_resources/show", type: :view do
       facebook_url: "Facebook Url",
       phone: "Phone",
       description: "Description",
-      display_on_website_start: Date.today,
-      display_on_website_end: Date.today,
+      publish_from: Date.today,
+      publish_until: Date.today,
       youtube_identifier: "Youtube Identifier",
       location: nil,
-      reviewed: true
+      approved: true
     ))
   end
 
@@ -26,6 +26,6 @@ RSpec.describe "external_resources/show", type: :view do
     expect(rendered).to match(/false/)
     expect(rendered).to match(/Youtube Identifier/)
     expect(rendered).to match(//)
-    expect(rendered).to match(/Reviewed/)
+    expect(rendered).to match(/Approved/)
   end
 end

@@ -8,11 +8,11 @@ RSpec.describe "external_resources/edit", type: :view do
       facebook_url: "MyString",
       phone: "MyString",
       description: "MyString",
-      display_on_website_start: Date.today,
-      display_on_website_end: Date.today + 30.days,
+      publish_from: Date.today,
+      publish_until: Date.today + 30.days,
       youtube_identifier: "MyString",
       location: nil,
-      reviewed: false
+      approved: false
     ))
   end
 
@@ -32,19 +32,19 @@ RSpec.describe "external_resources/edit", type: :view do
       assert_select "textarea[name=?]", "external_resource[description]"
 
       # binding.pry # TODO - helppppppppp
-      # assert_select "select[id=?]", "external_resource[display_on_website_start_1i"
-      # assert_select "select[id=?]", "external_resource[display_on_website_start_2i"
-      # assert_select "select[id=?]", "external_resource[display_on_website_start_3i"
+      # assert_select "select[id=?]", "external_resource[publish_from_1i"
+      # assert_select "select[id=?]", "external_resource[publish_from_2i"
+      # assert_select "select[id=?]", "external_resource[publish_from_3i"
       #
-      # assert_select "select[id=?]", "external_resource[display_on_website_end_1i"
-      # assert_select "select[id=?]", "external_resource[display_on_website_end_2i"
-      # assert_select "select[id=?]", "external_resource[display_on_website_end_3i"
+      # assert_select "select[id=?]", "external_resource[publish_until_1i"
+      # assert_select "select[id=?]", "external_resource[publish_until_2i"
+      # assert_select "select[id=?]", "external_resource[publish_until_3i"
 
       assert_select "input[name=?]", "external_resource[youtube_identifier]"
 
       assert_select "select[name=?]", "external_resource[location_id]"
 
-      assert_select "input[name=?]", "external_resource[reviewed]"
+      assert_select "input[name=?]", "external_resource[approved]"
     end
   end
 end

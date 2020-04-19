@@ -4,8 +4,8 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :description %>
-    <%= f.input :display_date_start %>
-    <%= f.input :display_date_end %>
+    <%= f.input :publish_from %>
+    <%= f.input :publish_until %>
   </div>
 
   <%= render "layouts/view_template_form_buttons", f: f, record: @announcement, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

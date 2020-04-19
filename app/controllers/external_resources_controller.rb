@@ -61,13 +61,13 @@ class ExternalResourcesController < ApplicationController
     def external_resource_params
       params.require(:external_resource).permit(
           :description,
-          :display_on_website_end,
-          :display_on_website_start,
+          :publish_until,
+          :publish_from,
           :facebook_url,
           :location_id,
           :name,
           :phone,
-          :reviewed,
+          :approved,
           :website_url,
           :youtube_identifier,
           tags: [])

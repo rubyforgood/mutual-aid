@@ -24,8 +24,8 @@
     <tr>
               <td><%= announcement.name %></td>
               <td><%= announcement.description %></td>
-              <td><%= announcement.display_date_start %></td>
-              <td><%= announcement.display_date_end %></td>
+              <td><%= announcement.publish_from %></td>
+              <td><%= announcement.publish_until %></td>
             <td><%= link_to 'Edit', edit_announcement_path(announcement) %></td>
     </tr>
   <% end %>

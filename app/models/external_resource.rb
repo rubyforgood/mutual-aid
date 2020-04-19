@@ -3,11 +3,11 @@ class ExternalResource < ApplicationRecord
 
   belongs_to :location, optional: true
 
-  def displaying_on_website?
+  def published?
     now = Time.now
-    reviewed &&
-    (display_on_website_start.present? ? display_on_website_start <= now : true) &&
-      (display_on_website_end == nil || now < display_on_website_end)
+    approved &&
+    (publish_from.present? ? publish_from <= now : true) &&
+      (publish_until == nil || now < publish_until)
   end
 
 end

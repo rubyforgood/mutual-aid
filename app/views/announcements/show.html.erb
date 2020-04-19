@@ -12,12 +12,12 @@
 
 <p>
   <strong>Display date start:</strong>
-  <%= @announcement.display_date_start %>
+  <%= @announcement.publish_from %>
 </p>
 
 <p>
   <strong>Display date end:</strong>
-  <%= @announcement.display_date_end %>
+  <%= @announcement.publish_until %>
 </p>
 
 <%= link_to 'Edit', edit_announcement_path(@announcement) %> |

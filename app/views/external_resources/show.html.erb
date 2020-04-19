@@ -30,7 +30,7 @@
 
 <p>
   <strong>Displaying on website:</strong>
-  <%= @external_resource.displaying_on_website? %>
+  <%= @external_resource.published? %>
 </p>
 
 <p>
@@ -44,8 +44,8 @@
 </p>
 
 <p>
-  <strong>Reviewed:</strong>
-  <%= @external_resource.reviewed %>
+  <strong>Approved:</strong>
+  <%= @external_resource.approved %>
 </p>
 
 <%= link_to 'Back', external_resources_path %>

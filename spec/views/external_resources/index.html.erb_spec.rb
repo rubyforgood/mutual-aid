@@ -9,11 +9,11 @@ RSpec.describe "external_resources/index", type: :view do
         facebook_url: "Facebook Url",
         phone: "Phone",
         description: "Description",
-        display_on_website_start: Date.today,
-        display_on_website_end: Date.today,
+        publish_from: Date.today,
+        publish_until: Date.today,
         youtube_identifier: "Youtube Identifier",
         location: nil,
-        reviewed: false
+        approved: false
       ),
       ExternalResource.create!(
         name: "Name",
@@ -21,11 +21,11 @@ RSpec.describe "external_resources/index", type: :view do
         facebook_url: "Facebook Url",
         phone: "Phone",
         description: "Description",
-        display_on_website_start: Date.today + 2.days,
-        display_on_website_end: Date.today + 7.days,
+        publish_from: Date.today + 2.days,
+        publish_until: Date.today + 7.days,
         youtube_identifier: "Youtube Identifier",
         location: nil,
-        reviewed: false
+        approved: false
       )
     ])
   end

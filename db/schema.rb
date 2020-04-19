@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_145123) do
+ActiveRecord::Schema.define(version: 2020_04_19_070333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2020_04_16_145123) do
   create_table "announcements", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.date "display_date_start"
-    t.date "display_date_end"
+    t.date "publish_from"
+    t.date "publish_until"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -68,9 +68,9 @@ ActiveRecord::Schema.define(version: 2020_04_16_145123) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "tags", default: [], array: true
-    t.boolean "reviewed", default: false, null: false
-    t.date "display_on_website_start"
-    t.date "display_on_website_end"
+    t.boolean "approved", default: false, null: false
+    t.date "publish_from"
+    t.date "publish_until"
     t.index ["location_id"], name: "index_external_resources_on_location_id"
     t.index ["tags"], name: "index_external_resources_on_tags", using: :gin
   end

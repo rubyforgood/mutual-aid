@@ -26,7 +26,7 @@
           <%= " | " + external_resource.tags + " | " if external_resource.tags.any? %>
         </td>
         <td>
-          <%= external_resource.phone %> <%= external_resource.location&.address %>
+          <%= external_resource.phone %> <%= external_resource.system_location&.name %>
         </td>
         <td class="has-text-centered"><%= yes_no(external_resource.published?) %></td>
         <td class="has-text-centered"><%= yes_no(external_resource.approved) %></td>

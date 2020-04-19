@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "locations/edit", type: :view do
   before(:each) do
+    @view_action_name = "edit"
     @location = assign(:location, Location.create!(
       name: "MyString",
       parent: nil,

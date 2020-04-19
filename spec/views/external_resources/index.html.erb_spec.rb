@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "external_resources/index", type: :view do
   before(:each) do
-    assign(:external_resources, [
-      ExternalResource.create!(
+    @view_action_name = "index"
+    @external_resources = [
+        create(:external_resource,
         name: "Name",
         website_url: "Website Url",
         facebook_url: "Facebook Url",
@@ -12,9 +13,10 @@ RSpec.describe "external_resources/index", type: :view do
         publish_from: Date.today,
         publish_until: Date.today,
         youtube_identifier: "Youtube Identifier",
+        system_location: create(:system_location),
         approved: false
       ),
-      ExternalResource.create!(
+        create(:external_resource,
         name: "Name",
         website_url: "Website Url",
         facebook_url: "Facebook Url",
@@ -23,9 +25,10 @@ RSpec.describe "external_resources/index", type: :view do
         publish_from: Date.today + 2.days,
         publish_until: Date.today + 7.days,
         youtube_identifier: "Youtube Identifier",
+        system_location: create(:system_location),
         approved: false
       )
-    ])
+    ]
   end
 
   it "renders a list of external_resources" do

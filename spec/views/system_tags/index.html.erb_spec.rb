@@ -4,6 +4,7 @@ RSpec.describe "system_tags/index", type: :view do
   let(:organization) { create(:organization) }
 
   before(:each) do
+    @view_action_name = "index"
     assign(:system_tags, [
       create(:system_tag,
         name: "Name",

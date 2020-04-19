@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "external_resources/edit", type: :view do
   before(:each) do
-    @external_resource = assign(:external_resource, ExternalResource.create!(
+    @view_action_name = "edit"
+    @external_resource = create(:external_resource,
       name: "MyString",
       website_url: "MyString",
       facebook_url: "MyString",
@@ -11,8 +12,9 @@ RSpec.describe "external_resources/edit", type: :view do
       publish_from: Date.today,
       publish_until: Date.today + 30.days,
       youtube_identifier: "MyString",
+      system_location: create(:system_location),
       approved: false
-    ))
+    )
   end
 
   it "renders the edit external_resource form" do
@@ -39,6 +41,10 @@ RSpec.describe "external_resources/edit", type: :view do
       # assert_select "select[id=?]", "external_resource[publish_until_3i"
 
       assert_select "input[name=?]", "external_resource[youtube_identifier]"
+
+      assert_select "select[name=?]", "external_resource[system_location_id]"
+
+      assert_select "select[name=?]", "external_resource[organization_id]"
 
       assert_select "input[name=?]", "external_resource[approved]"
     end

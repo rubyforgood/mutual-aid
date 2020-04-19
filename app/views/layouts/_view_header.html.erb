@@ -1,6 +1,6 @@
 <%# needs resource %>
 
-<% view_action_name ||= action_name || params[:action] %>
+<% view_action_name ||= action_name || params[:action] || @view_action_name %>
 <% table_name = resource ? resource.class.table_name : controller_name.classify.constantize.table_name %>
 <% plural_table_name ||= table_name.to_s %>
 <% singular_table_name ||= table_name.to_s.singularize %>

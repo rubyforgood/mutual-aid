@@ -33,7 +33,7 @@
 
     <div class="field is-grouped">
       <%= f.input :tags %>
-      <%= f.association :system_location, label: "City/neighborhood", label_method: "location" %>
+      <%= f.association :system_location, label: "City/neighborhood", label_method: "address" %>
       <%= f.association :organization %>
     </div>
 
@@ -41,7 +41,6 @@
     <div class="field is-grouped">
       <%= f.input :facebook_url, placeholder: "https://www.google.com" %>
       <%= f.input :website_url, placeholder: "https://www.google.com" %>
-      <%= f.input :facebook_url, placeholder: "https://www.google.com" %>
       <%= f.input :youtube_identifier %>
     </div>
 

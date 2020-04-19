@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "external_resources/show", type: :view do
   before(:each) do
+    @view_action_name = "show"
     @external_resource = assign(:external_resource, ExternalResource.create!(
       name: "Name",
       website_url: "Website Url",
@@ -11,6 +12,7 @@ RSpec.describe "external_resources/show", type: :view do
       publish_from: Date.today,
       publish_until: Date.today,
       youtube_identifier: "Youtube Identifier",
+      system_location: create(:system_location),
       approved: true
     ))
   end

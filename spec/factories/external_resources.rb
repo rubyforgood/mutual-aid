@@ -2,6 +2,6 @@ FactoryBot.define do
   factory :external_resource do
     name { "MyString" }
     description { "MyString" }
-    location { nil }
+    system_location
   end
 end

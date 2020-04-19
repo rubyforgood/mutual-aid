@@ -1,4 +1,6 @@
 class AnnouncementsController < ApplicationController
+
+  before_action :authenticate_user!, except: [:new, :create]
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 
   # GET /announcements
@@ -28,7 +30,7 @@ class AnnouncementsController < ApplicationController
 
     respond_to do |format|
       if @announcement.save
-        format.html { redirect_to announcements_path, notice: 'Announcement was successfully created.' }
+        format.html { redirect_to @admin_status ? announcements_path : news_and_announcements_public_path, notice: "Announcement was successfully submitted.#{ " We'll review." unless @admin_status }" }
         format.json { render :show, status: :created, location: @announcement }
       else
         format.html { render :new }
@@ -69,6 +71,6 @@ class AnnouncementsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def announcement_params
-      params.require(:announcement).permit(:name, :description, :publish_from, :publish_until)
+      params.require(:announcement).permit(:name, :description, :approved, :publish_from, :publish_until)
     end
 end

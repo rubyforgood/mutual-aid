@@ -4,6 +4,13 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :description %>
+
+    <% if ["new", "create"].include?(action_name) %>
+      <%= f.hidden_field :approved %>
+    <% else %>
+      <%= f.input :approved %>
+    <% end %>
+
     <%= f.input :publish_from %>
     <%= f.input :publish_until %>
   </div>

@@ -1,0 +1,32 @@
+<%# needs resource %>
+
+<% action_name ||= action_name %>
+<% table_name = resource ? resource.class.table_name : controller_name.classify.constantize.table_name %>
+<% plural_table_name ||= table_name.to_s %>
+<% singular_table_name ||= table_name.to_s.singularize %>
+<% page_title ||= action_name == "index" ? plural_table_name.titleize : "#{action_name.titleize} #{singular_table_name.titleize}" %>
+<% new_button ||= render "layouts/add_new_button", table_name: table_name %>
+
+<div class="section">
+  <% if action_name == "index" %>
+    <div class="columns is-marginless">
+      <div class="column is-9">
+        <h1 class="title"><%= page_title %></h1>
+        <br>
+      </div>
+      <% if new_button %>
+        <div class="column is-2">
+          <%= new_button %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="title is-3">
+      <%= page_title %>
+    </div>
+
+    <div class="section-detail">
+      <%= render 'form', singular_table_name => resource %>
+    </div>
+  <% end %>
+</div>

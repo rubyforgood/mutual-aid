@@ -2,13 +2,49 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :input_type %>
-    <%= f.input :is_required %>
-    <%= f.input :form_type %>
-    <%= f.input :option_list %>
-    <%= f.input :hint_text %>
+    <%= f.input :name,
+                as: :text,
+                label: "Question text (name)",
+                required: true,
+                hint: "(displayed on the form. max 2500 characters.)",
+                size: 2500,
+                input_html: { rows: 1 } %>
+    <%= f.input :input_type,
+                as: :select,
+                label: "Input/data type for the answer",
+                collection: @input_types_array,
+                required: true,
+                selected: f.object.input_type || "textarea" %>
+    <%= f.input :is_required,
+                as: :select,
+                label: "* Is required?",
+                hint: "(if yes, user must answer this)",
+                collection: { "Is not required": false,
+                              "Is required": true },
+                selected: f.object.is_required,
+                input_html: { value: f.object.is_required }  %>
+    <%= f.input :form_type,
+                as: :select,
+                label: "Form type",
+                hint: "(Form on which this question should be displayed)",
+                collection: { "Ask form" => "ask_form",
+                              "Offer form" => "offer_form" },
+                selected: f.object.form_type,
+                input_html: { value: f.object.form_type }  %>
+    <%= f.input :hint_text,
+                as: :text,
+                label: "Hint/help text (optional)",
+                hint: "(displays below the question)",
+                input_html: { value: f.object.hint_text,
+                              rows: 1 } %>
     <%= f.input :position %>
+
+    <%= f.input :option_list,
+                as: :array,
+                label: "Option list (if radio, select, or multiselect input type)",
+                input_html: { value: f.object.option_list&.reject(&:empty?),
+                              class: "input" } %>
+
   </div>
 
   <%= render "layouts/view_template_form_buttons", f: f, record: @custom_form_question, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

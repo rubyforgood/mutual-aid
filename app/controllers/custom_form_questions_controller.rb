@@ -15,10 +15,12 @@ class CustomFormQuestionsController < ApplicationController
   # GET /custom_form_questions/new
   def new
     @custom_form_question = CustomFormQuestion.new
+    @input_types_array = CustomFormQuestion::INPUT_TYPES_AND_STORAGE.keys
   end
 
   # GET /custom_form_questions/1/edit
   def edit
+    @input_types_array = CustomFormQuestion::INPUT_TYPES_AND_STORAGE.keys
   end
 
   # POST /custom_form_questions
@@ -28,7 +30,7 @@ class CustomFormQuestionsController < ApplicationController
 
     respond_to do |format|
       if @custom_form_question.save
-        format.html { redirect_to @custom_form_question, notice: 'Custom form question was successfully created.' }
+        format.html { redirect_to custom_form_questions_path, notice: 'Custom form question was successfully created.' }
         format.json { render :show, status: :created, location: @custom_form_question }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class CustomFormQuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @custom_form_question.update(custom_form_question_params)
-        format.html { redirect_to @custom_form_question, notice: 'Custom form question was successfully updated.' }
+        format.html { redirect_to custom_form_questions_path, notice: 'Custom form question was successfully updated.' }
         format.json { render :show, status: :ok, location: @custom_form_question }
       else
         format.html { render :edit }
@@ -69,6 +71,14 @@ class CustomFormQuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def custom_form_question_params
-      params.require(:custom_form_question).permit(:name, :input_type, :is_required, :form_type, :option_list, :hint_text, :position)
+      params.require(:custom_form_question).permit(
+          :input_type,
+          :is_required,
+          :form_type,
+          :hint_text,
+          :name,
+          :position,
+          option_list: [],
+          )
     end
 end

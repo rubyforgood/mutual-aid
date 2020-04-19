@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_073260) do
+ActiveRecord::Schema.define(version: 2020_04_19_073265) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,11 +40,11 @@ ActiveRecord::Schema.define(version: 2020_04_19_073260) do
     t.string "input_type"
     t.boolean "is_required"
     t.string "form_type"
-    t.string "option_list"
     t.string "hint_text"
     t.string "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "option_list", default: [], array: true
   end
 
   create_table "donations", force: :cascade do |t|

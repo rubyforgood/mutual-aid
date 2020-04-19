@@ -1,10 +1,10 @@
-<%= simple_form_for @external_resource, wrapper: :default, defaults: { wrapper: false } do |form| %>
-  <% if external_resource.errors.any? %>
+<%= simple_form_for @external_resource, wrapper: :default, defaults: { wrapper: false } do |f| %>
+  <% if f.object.errors.any? %>
     <div id="error_explanation">
       <h2 class="subtitle"><%= pluralize(external_resource.errors.count, "error") %> prohibited this external_resource from being saved:</h2>
 
       <ul>
-        <% external_resource.errors.full_messages.each do |message| %>
+        <% f.object.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

@@ -4,11 +4,11 @@
   <div class="section-detail">
     Are you sure you want to match:
     <br>
-    <%= @match.asker&.name %>
+    <%= @match.matchable_asker&.name %>
     <br>
     with
     <br>
-    <%= @match.offerer&.name %>
+    <%= @match.matchable_offerer&.name %>
   </div>
   <div class="section-detail">
     <%= link_to("Autogenerate system email to offer offerer", root_path, class: "button is-primary") %>

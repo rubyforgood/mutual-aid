@@ -5,12 +5,12 @@
 
   <p>
     <strong>Offerer:</strong>
-    <%= @match.offerer %>
+    <%= @match.matchable_offerer&.name %>
   </p>
 
   <p>
     <strong>Asker:</strong>
-    <%= @match.asker %>
+    <%= @match.matchable_asker&.name %>
   </p>
 
   <p>

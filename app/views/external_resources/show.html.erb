@@ -1,51 +1,55 @@
-<p>
+<%= render "layouts/view_header", resource: @external_resource %>
+
+<div class="section-detail">
+  <p>
   <strong>Name:</strong>
   <%= @external_resource.name %>
-</p>
+  </p>
 
-<p>
-  <strong>Tags:</strong>
-  <%= @external_resource.tags %>
-</p>
+  <p>
+    <strong>Tags:</strong>
+    <%= @external_resource.tags %>
+  </p>
 
-<p>
-  <strong>Website url:</strong>
-  <%= @external_resource.website_url %>
-</p>
+  <p>
+    <strong>Website url:</strong>
+    <%= @external_resource.website_url %>
+  </p>
 
-<p>
-  <strong>Facebook url:</strong>
-  <%= @external_resource.facebook_url %>
-</p>
+  <p>
+    <strong>Facebook url:</strong>
+    <%= @external_resource.facebook_url %>
+  </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @external_resource.phone %>
-</p>
+  <p>
+    <strong>Phone:</strong>
+    <%= @external_resource.phone %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @external_resource.description %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @external_resource.description %>
+  </p>
 
-<p>
-  <strong>Displaying on website:</strong>
-  <%= @external_resource.published? %>
-</p>
+  <p>
+    <strong>Displaying on website:</strong>
+    <%= @external_resource.published? %>
+  </p>
 
-<p>
-  <strong>Youtube identifier:</strong>
-  <%= @external_resource.youtube_identifier %>
-</p>
+  <p>
+    <strong>Youtube identifier:</strong>
+    <%= @external_resource.youtube_identifier %>
+  </p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @external_resource.location_id %>
-</p>
+  <p>
+    <strong>Location:</strong>
+    <%= @external_resource.location_id %>
+  </p>
 
-<p>
-  <strong>Approved:</strong>
-  <%= @external_resource.approved %>
-</p>
+  <p>
+    <strong>Approved:</strong>
+    <%= @external_resource.approved %>
+  </p>
 
-<%= link_to 'Back', external_resources_path %>
+  <%= link_to 'Back', external_resources_path %>
+</div>

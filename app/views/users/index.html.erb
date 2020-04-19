@@ -1,31 +1,25 @@
-<div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">User</h1>
-    <br>
-  </div>
-  <div class="column is-2">
-    <%= render "layouts/add_new_button", table_name: "users" %>
-  </div>
-</div>
+<%= render "layouts/view_header", resource: @users.first %>
 
-<table class="table table-hover table-curved table-condensed">
-  <thead>
+<div class="section-detail">
+  <table class="table table-hover table-curved table-condensed">
+    <thead>
     <tr>
       <th>Email</th>
       <th>Person</th>
       <th>Permission level</th>
       <th>Edit</th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.email %></td>
-      <td><%= user.person&.name %></td>
-      <td>[PERMISSION LEVEL]</td>
-      <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.person&.name %></td>
+        <td>[PERMISSION LEVEL]</td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

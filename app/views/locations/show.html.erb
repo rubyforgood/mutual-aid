@@ -1,64 +1,68 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/view_header", resource: @location %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @location.name %>
-</p>
+<div class="section-detail">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Parent:</strong>
-  <%= @location.parent_id %>
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @location.name %>
+  </p>
 
-<p>
-  <strong>Location type:</strong>
-  <%= @location.location_type %>
-</p>
+  <p>
+    <strong>Parent:</strong>
+    <%= @location.parent_id %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @location.description %>
-</p>
+  <p>
+    <strong>Location type:</strong>
+    <%= @location.location_type %>
+  </p>
 
-<p>
-  <strong>Street address:</strong>
-  <%= @location.street_address %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @location.description %>
+  </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @location.city %>
-</p>
+  <p>
+    <strong>Street address:</strong>
+    <%= @location.street_address %>
+  </p>
 
-<p>
-  <strong>State:</strong>
-  <%= @location.state %>
-</p>
+  <p>
+    <strong>City:</strong>
+    <%= @location.city %>
+  </p>
 
-<p>
-  <strong>Zip:</strong>
-  <%= @location.zip %>
-</p>
+  <p>
+    <strong>State:</strong>
+    <%= @location.state %>
+  </p>
 
-<p>
-  <strong>County:</strong>
-  <%= @location.county %>
-</p>
+  <p>
+    <strong>Zip:</strong>
+    <%= @location.zip %>
+  </p>
 
-<p>
-  <strong>Facebook url:</strong>
-  <%= @location.facebook_url %>
-</p>
+  <p>
+    <strong>County:</strong>
+    <%= @location.county %>
+  </p>
 
-<p>
-  <strong>Website url:</strong>
-  <%= @location.website_url %>
-</p>
+  <p>
+    <strong>Facebook url:</strong>
+    <%= @location.facebook_url %>
+  </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @location.phone %>
-</p>
+  <p>
+    <strong>Website url:</strong>
+    <%= @location.website_url %>
+  </p>
 
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+  <p>
+    <strong>Phone:</strong>
+    <%= @location.phone %>
+  </p>
+
+  <%= link_to 'Edit', edit_location_path(@location) %> |
+  <%= link_to 'Back', locations_path %>
+</div>

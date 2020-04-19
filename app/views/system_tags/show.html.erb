@@ -1,39 +1,43 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/view_header", resource: @system_tag %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @system_tag.name %>
-</p>
+<div class="section-detail">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @system_tag.description %>
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @system_tag.name %>
+  </p>
 
-<p>
-  <strong>Display to public:</strong>
-  <%= @system_tag.display_to_public %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @system_tag.description %>
+  </p>
 
-<p>
-  <strong>Display order:</strong>
-  <%= @system_tag.display_order %>
-</p>
+  <p>
+    <strong>Display to public:</strong>
+    <%= @system_tag.display_to_public %>
+  </p>
 
-<p>
-  <strong>Parent:</strong>
-  <%= @system_tag.parent_id %>
-</p>
+  <p>
+    <strong>Display order:</strong>
+    <%= @system_tag.display_order %>
+  </p>
 
-<p>
-  <strong>Organization:</strong>
-  <%= @system_tag.organization_id %>
-</p>
+  <p>
+    <strong>Parent:</strong>
+    <%= @system_tag.parent_id %>
+  </p>
 
-<p>
-  <strong>Created by:</strong>
-  <%= @system_tag.created_by %>
-</p>
+  <p>
+    <strong>Organization:</strong>
+    <%= @system_tag.organization_id %>
+  </p>
 
-<%= link_to 'Edit', edit_system_tag_path(@system_tag) %> |
-<%= link_to 'Back', system_tags_path %>
+  <p>
+    <strong>Created by:</strong>
+    <%= @system_tag.created_by %>
+  </p>
+
+  <%= link_to 'Edit', edit_system_tag_path(@system_tag) %> |
+  <%= link_to 'Back', system_tags_path %>
+</div>

@@ -1,39 +1,33 @@
-<div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">Custom Form Questions</h1>
-    <br>
-  </div>
-  <div class="column is-2">
-    <%= render "layouts/add_new_button", table_name: "custom_form_questions" %>
-  </div>
-</div>
+<%= render "layouts/view_header", resource: @custom_form_questions.first %>
 
-<table class="table table-hover table-curved table-condensed">
-  <thead>
-  <tr>
-          <th>Name</th>
-          <th>Input type</th>
-          <th>Is required</th>
-          <th>Form type</th>
-          <th>Option list</th>
-          <th>Hint text</th>
-          <th>Position</th>
+<div class="section-detail">
+  <table class="table table-hover table-curved table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Input type</th>
+        <th>Is required</th>
+        <th>Form type</th>
+        <th>Option list</th>
+        <th>Hint text</th>
+        <th>Position</th>
         <th>Edit</th>
-  </tr>
-  </thead>
+      </tr>
+    </thead>
 
-  <tbody>
-  <% @custom_form_questions.each do |custom_form_question| %>
-    <tr>
-              <td><%= custom_form_question.name %></td>
-              <td><%= custom_form_question.input_type %></td>
-              <td><%= custom_form_question.is_required %></td>
-              <td><%= custom_form_question.form_type %></td>
-              <td><%= custom_form_question.option_list %></td>
-              <td><%= custom_form_question.hint_text %></td>
-              <td><%= custom_form_question.position %></td>
-            <td><%= link_to 'Edit', edit_custom_form_question_path(custom_form_question) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+    <tbody>
+    <% @custom_form_questions.each do |custom_form_question| %>
+      <tr>
+        <td><%= custom_form_question.name %></td>
+        <td><%= custom_form_question.input_type %></td>
+        <td><%= custom_form_question.is_required %></td>
+        <td><%= custom_form_question.form_type %></td>
+        <td><%= custom_form_question.option_list %></td>
+        <td><%= custom_form_question.hint_text %></td>
+        <td><%= custom_form_question.position %></td>
+        <td><%= link_to 'Edit', edit_custom_form_question_path(custom_form_question) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

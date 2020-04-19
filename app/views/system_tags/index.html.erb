@@ -1,39 +1,33 @@
-<div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">System Tags</h1>
-    <br>
-  </div>
-  <div class="column is-2">
-    <%= render "layouts/add_new_button", table_name: "system_tags" %>
-  </div>
-</div>
+<%= render "layouts/view_header", resource: @system_tags.first %>
 
-<table class="table table-hover table-curved table-condensed">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Display to public</th>
-      <th>Display order</th>
-      <th>Parent</th>
-      <th>Organization</th>
-      <th>Created by</th>
-      <th>Edit</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @system_tags.each do |system_tag| %>
+<div class="section-detail">
+  <table class="table table-hover table-curved table-condensed">
+    <thead>
       <tr>
-        <td><%= system_tag.name %></td>
-        <td><%= system_tag.description %></td>
-        <td><%= system_tag.display_to_public %></td>
-        <td><%= system_tag.display_order %></td>
-        <td><%= system_tag.parent&.name %></td>
-        <td><%= system_tag.organization&.name %></td>
-        <td><%= system_tag.created_by %></td>
-        <td><%= link_to 'Edit', edit_system_tag_path(system_tag) %></td>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Display to public</th>
+        <th>Display order</th>
+        <th>Parent</th>
+        <th>Organization</th>
+        <th>Created by</th>
+        <th>Edit</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @system_tags.each do |system_tag| %>
+        <tr>
+          <td><%= system_tag.name %></td>
+          <td><%= system_tag.description %></td>
+          <td><%= system_tag.display_to_public %></td>
+          <td><%= system_tag.display_order %></td>
+          <td><%= system_tag.parent&.name %></td>
+          <td><%= system_tag.organization&.name %></td>
+          <td><%= system_tag.created_by %></td>
+          <td><%= link_to 'Edit', edit_system_tag_path(system_tag) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

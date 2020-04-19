@@ -1,12 +1,4 @@
-<div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">Locations</h1>
-    <br>
-  </div>
-  <div class="column is-2">
-    <%= render "layouts/add_new_button", table_name: "locations" %>
-  </div>
-</div>
+<%= render "layouts/view_header", resource: @locations.first %>
 
 <table class="table table-hover table-curved table-condensed">
   <thead>

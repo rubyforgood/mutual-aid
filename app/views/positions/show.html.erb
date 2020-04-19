@@ -1,49 +1,53 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/view_header", resource: @position %>
 
-<p>
-  <strong>Location:</strong>
-  <%= @position.location_id %>
-</p>
+<div class="section-detail">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Person:</strong>
-  <%= @position.person_id %>
-</p>
+  <p>
+    <strong>Location:</strong>
+    <%= @position.location_id %>
+  </p>
 
-<p>
-  <strong>Position type:</strong>
-  <%= @position.position_type %>
-</p>
+  <p>
+    <strong>Person:</strong>
+    <%= @position.person_id %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @position.name %>
-</p>
+  <p>
+    <strong>Position type:</strong>
+    <%= @position.position_type %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @position.description %>
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @position.name %>
+  </p>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @position.start_date %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @position.description %>
+  </p>
 
-<p>
-  <strong>End date:</strong>
-  <%= @position.end_date %>
-</p>
+  <p>
+    <strong>Start date:</strong>
+    <%= @position.start_date %>
+  </p>
 
-<p>
-  <strong>Is primary:</strong>
-  <%= @position.is_primary %>
-</p>
+  <p>
+    <strong>End date:</strong>
+    <%= @position.end_date %>
+  </p>
 
-<p>
-  <strong>Notes:</strong>
-  <%= @position.notes %>
-</p>
+  <p>
+    <strong>Is primary:</strong>
+    <%= @position.is_primary %>
+  </p>
 
-<%= link_to 'Edit', edit_position_path(@position) %> |
-<%= link_to 'Back', positions_path %>
+  <p>
+    <strong>Notes:</strong>
+    <%= @position.notes %>
+  </p>
+
+  <%= link_to 'Edit', edit_position_path(@position) %> |
+  <%= link_to 'Back', positions_path %>
+</div>

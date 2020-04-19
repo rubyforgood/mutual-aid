@@ -5,6 +5,6 @@ class Organization < ApplicationRecord
   validates :name, presence: true
 
   def primary_contact
-    positions.where(is_primary: true).last
+    positions.find_by(is_primary: true)
   end
 end

@@ -24,7 +24,7 @@
          ].each do |table_name, optional_text| %>
       <tr>
         <td>
-          <%= render "layouts/add_new_button", table_name: "table_name", hide_text: true, small_button: true %>
+          <%= render "layouts/view_add_new_button", table_name: "table_name", hide_text: true, small_button: true %>
           <%= link_to "#{optional_text || table_name.classify}", table_name %>
         </td>
       </tr>

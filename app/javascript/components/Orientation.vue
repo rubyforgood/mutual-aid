@@ -19,9 +19,6 @@
           <div class='action-buttons'>
             <span class="action-button"><span class='button is-primary is-outlined'>View offers</span></span>
             <span class="action-button"><span class='button is-primary'>Submit an Ask</span></span>
-            <br>
-            <span class=''><a href='/community_resources'>Browse resources</a></span>
-            <!-- <span class="action-button"><span class='button is-primary is-outlined'>Browse resources</span></span> -->
           </div>
         </div>
       </div>

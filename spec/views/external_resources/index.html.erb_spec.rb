@@ -12,7 +12,6 @@ RSpec.describe "external_resources/index", type: :view do
         publish_from: Date.today,
         publish_until: Date.today,
         youtube_identifier: "Youtube Identifier",
-        location: nil,
         approved: false
       ),
       ExternalResource.create!(
@@ -24,7 +23,6 @@ RSpec.describe "external_resources/index", type: :view do
         publish_from: Date.today + 2.days,
         publish_until: Date.today + 7.days,
         youtube_identifier: "Youtube Identifier",
-        location: nil,
         approved: false
       )
     ])

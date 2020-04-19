@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_073265) do
+ActiveRecord::Schema.define(version: 2020_04_19_101330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,14 +65,16 @@ ActiveRecord::Schema.define(version: 2020_04_19_073265) do
     t.string "phone"
     t.string "description"
     t.string "youtube_identifier"
-    t.bigint "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "tags", default: [], array: true
     t.boolean "approved", default: false, null: false
     t.date "publish_from"
     t.date "publish_until"
-    t.index ["location_id"], name: "index_external_resources_on_location_id"
+    t.bigint "system_location_id"
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_external_resources_on_organization_id"
+    t.index ["system_location_id"], name: "index_external_resources_on_system_location_id"
     t.index ["tags"], name: "index_external_resources_on_tags", using: :gin
   end
 
@@ -129,14 +131,12 @@ ActiveRecord::Schema.define(version: 2020_04_19_073265) do
     t.string "facebook_url"
     t.string "website_url"
     t.string "phone"
-    t.bigint "point_of_contact_id"
     t.boolean "is_instance_owner"
     t.boolean "has_sms_account"
     t.boolean "has_hosting_account"
     t.boolean "has_mailer_account"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["point_of_contact_id"], name: "index_organizations_on_point_of_contact_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -157,7 +157,6 @@ ActiveRecord::Schema.define(version: 2020_04_19_073265) do
   end
 
   create_table "positions", force: :cascade do |t|
-    t.bigint "location_id", null: false
     t.bigint "person_id", null: false
     t.string "position_type"
     t.string "name"
@@ -168,7 +167,8 @@ ActiveRecord::Schema.define(version: 2020_04_19_073265) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["location_id"], name: "index_positions_on_location_id"
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_positions_on_organization_id"
     t.index ["person_id"], name: "index_positions_on_person_id"
   end
 
@@ -183,8 +183,8 @@ ActiveRecord::Schema.define(version: 2020_04_19_073265) do
   end
 
   create_table "system_locations", force: :cascade do |t|
-    t.bigint "parent_id", null: false
-    t.bigint "organization_id", null: false
+    t.bigint "parent_id"
+    t.bigint "organization_id"
     t.string "location_type"
     t.string "street_address"
     t.string "city"
@@ -264,10 +264,11 @@ ActiveRecord::Schema.define(version: 2020_04_19_073265) do
 
   add_foreign_key "communication_logs", "people"
   add_foreign_key "donations", "people"
-  add_foreign_key "external_resources", "locations"
+  add_foreign_key "external_resources", "organizations"
+  add_foreign_key "external_resources", "system_locations"
   add_foreign_key "listings", "locations"
   add_foreign_key "people", "users"
-  add_foreign_key "positions", "locations"
+  add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
   add_foreign_key "system_locations", "organizations"
   add_foreign_key "system_tags", "organizations"

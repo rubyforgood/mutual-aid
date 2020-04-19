@@ -29,8 +29,8 @@
   </p>
 
   <p>
-    <strong>Point of contact:</strong>
-    <%= @organization.point_of_contact_id %>
+    <strong>Primary contact:</strong>
+    <%= @organization.primary_contact&.name %>
   </p>
 
   <p>

@@ -11,7 +11,6 @@ RSpec.describe "external_resources/show", type: :view do
       publish_from: Date.today,
       publish_until: Date.today,
       youtube_identifier: "Youtube Identifier",
-      location: nil,
       approved: true
     ))
   end

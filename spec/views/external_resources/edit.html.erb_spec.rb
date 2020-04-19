@@ -11,7 +11,6 @@ RSpec.describe "external_resources/edit", type: :view do
       publish_from: Date.today,
       publish_until: Date.today + 30.days,
       youtube_identifier: "MyString",
-      location: nil,
       approved: false
     ))
   end
@@ -40,8 +39,6 @@ RSpec.describe "external_resources/edit", type: :view do
       # assert_select "select[id=?]", "external_resource[publish_until_3i"
 
       assert_select "input[name=?]", "external_resource[youtube_identifier]"
-
-      assert_select "select[name=?]", "external_resource[location_id]"
 
       assert_select "input[name=?]", "external_resource[approved]"
     end

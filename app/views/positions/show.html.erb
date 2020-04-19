@@ -4,13 +4,13 @@
   <p id="notice"><%= notice %></p>
 
   <p>
-    <strong>Location:</strong>
-    <%= @position.location_id %>
+    <strong>Organization:</strong>
+    <%= @position.organization&.name %>
   </p>
 
   <p>
     <strong>Person:</strong>
-    <%= @position.person_id %>
+    <%= @position.person&.name %>
   </p>
 
   <p>

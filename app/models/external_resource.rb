@@ -1,7 +1,8 @@
 class ExternalResource < ApplicationRecord
   taggable_array :tags
 
-  belongs_to :location, optional: true
+  belongs_to :system_location
+  belongs_to :organization, optional: true # TODO - should this be optional???
 
   def self.published
     now_strftime = Time.now.strftime("%Y-%m-%d %H:%M")

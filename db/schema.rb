@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_101330) do
+ActiveRecord::Schema.define(version: 2020_04_19_161258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,10 +113,10 @@ ActiveRecord::Schema.define(version: 2020_04_19_101330) do
   end
 
   create_table "matches", force: :cascade do |t|
-    t.integer "owner_id"
-    t.string "owner_type"
-    t.string "asker_type"
-    t.integer "asker_id"
+    t.integer "matchable_offerer_id"
+    t.string "matchable_offerer_type"
+    t.string "matchable_asker_type"
+    t.integer "matchable_asker_id"
     t.string "status"
     t.string "notes"
     t.boolean "tentative"

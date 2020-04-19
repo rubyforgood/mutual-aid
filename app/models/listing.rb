@@ -2,8 +2,8 @@ class Listing < ApplicationRecord
   taggable_array :tags
 
   belongs_to :location
-  has_many :matches_as_asker
-  has_many :matches_as_owner
+  has_many :matches, as: :matchable_asker
+  has_many :matches, as: :matchable_offerer
 
   enum state: { received: 0, fulfilled: 1 }
 

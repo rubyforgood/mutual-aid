@@ -8,16 +8,16 @@
     <br>
     with
     <br>
-    <%= @match.owner&.name %>
+    <%= @match.offerer&.name %>
   </div>
   <div class="section-detail">
-    <%= link_to("Autogenerate system email to offer owner", root_path, class: "button is-primary") %>
+    <%= link_to("Autogenerate system email to offer offerer", root_path, class: "button is-primary") %>
     <br>
-    <%= link_to("Autogenerate system text to offer owner", root_path, class: "button is-primary") %>
+    <%= link_to("Autogenerate system text to offer offerer", root_path, class: "button is-primary") %>
     <br>
-    <%= link_to("Log email to offer owner", new_communication_log_path, class: "button is-primary") %>
+    <%= link_to("Log email to offer offerer", new_communication_log_path, class: "button is-primary") %>
     <br>
-    <%= link_to("Log text to offer owner", new_communication_log_path, class: "button is-primary") %>
+    <%= link_to("Log text to offer offerer", new_communication_log_path, class: "button is-primary") %>
     <br>
     <%= link_to("Cancel", root_path, class: "button is-primary is-outlined") %>
     <br>

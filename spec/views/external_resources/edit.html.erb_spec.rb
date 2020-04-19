@@ -17,7 +17,6 @@ RSpec.describe "external_resources/edit", type: :view do
   end
 
   it "renders the edit external_resource form" do
-    puts render
     render
     assert_select "form[action=?][method=?]", external_resource_path(@external_resource), "post" do
       # binding.pry

@@ -70,10 +70,10 @@ class MatchesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def match_params
       params.require(:match).permit(
-          :matchable_asker_id,
-          :matchable_offerer_id,
-          :matchable_asker_type,
-          :matchable_offerer_type,
+          :receiver_id,
+          :provider_id,
+          :receiver_type,
+          :provider_type,
           :status,
           :notes,
           :tentative,

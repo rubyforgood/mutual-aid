@@ -4,8 +4,8 @@ class ExternalResource < ApplicationRecord
   belongs_to :system_location
   belongs_to :organization, optional: true # TODO - should this be optional???
 
-  has_many :matches, as: :matchable_asker
-  has_many :matches, as: :matchable_offerer
+  has_many :matches, as: :receiver
+  has_many :matches, as: :provider
 
   def self.published
     now_strftime = Time.now.strftime("%Y-%m-%d %H:%M")

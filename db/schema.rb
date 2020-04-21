@@ -130,10 +130,10 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
   end
 
   create_table "matches", force: :cascade do |t|
-    t.integer "matchable_offerer_id"
-    t.string "matchable_offerer_type"
-    t.string "matchable_asker_type"
-    t.integer "matchable_asker_id"
+    t.integer "provider_id"
+    t.string "provider_type"
+    t.string "receiver_type"
+    t.integer "receiver_id"
     t.string "status"
     t.string "notes"
     t.boolean "tentative"

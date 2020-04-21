@@ -16,8 +16,8 @@
   <tbody>
     <% @matches.each do |match| %>
       <tr>
-        <td><%= match.matchable_asker&.name %></td>
-        <td><%= match.matchable_offerer&.name %></td>
+        <td><%= match.receiver&.name %></td>
+        <td><%= match.provider&.name %></td>
         <td><%= match.status %></td>
         <td><%= match.notes %></td>
         <td><%= match.tentative %></td>

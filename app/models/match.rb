@@ -1,4 +1,8 @@
 class Match < ApplicationRecord
-  belongs_to :matchable_asker, polymorphic: true
-  belongs_to :matchable_offerer, polymorphic: true
+  belongs_to :receiver, polymorphic: true
+  belongs_to :provider, polymorphic: true
+
+  INITIATORS = ["receiver", "provider"]
+
+  # belongs_to :coordinator, optional: true #, class_name: "Position" # TODO
 end

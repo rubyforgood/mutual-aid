@@ -2,11 +2,11 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :matchable_asker_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "ExternalResource"]] %>
-    <%= f.input :matchable_asker_id %>
+    <%= f.input :receiver_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "ExternalResource"]] %>
+    <%= f.input :receiver_id %>
 
-    <%= f.input :matchable_offerer_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "ExternalResource"]] %>
-    <%= f.input :matchable_offerer_id %>
+    <%= f.input :provider_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "ExternalResource"]] %>
+    <%= f.input :provider_id %>
 
     <%= f.input :status %>
     <%= f.input :notes %>

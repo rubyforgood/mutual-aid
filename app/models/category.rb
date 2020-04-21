@@ -1,7 +1,6 @@
-class SystemTag < ApplicationRecord
-  belongs_to :parent, optional: true, class_name: "SystemTag", inverse_of: :system_tags
-  belongs_to :organization, optional: true
-  has_many :system_tags, as: :parent, class_name: "SystemTag", foreign_key: :parent_id, inverse_of: :parent
+class Category < ApplicationRecord
+  belongs_to :parent, optional: true, class_name: "Category", inverse_of: :categories
+  has_many :categories, as: :parent, class_name: "Category", foreign_key: :parent_id, inverse_of: :parent
 
   DEFAULT_TAGS = [
       ['meals', 'prepared meals'],
@@ -29,7 +28,7 @@ class SystemTag < ApplicationRecord
   ]
 
   def full_name
-    "#{ parent.name.upcase + ": " if parent}#{parent ? name : name.upcase }"
+    "#{ parent&.name&.upcase + ": " if parent}#{parent.present? ? name : name.upcase }"
   end
-  
+
 end

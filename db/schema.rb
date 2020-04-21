@@ -25,6 +25,23 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
     t.boolean "approved"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.bigint "parent_id"
+    t.string "name", null: false
+    t.string "description"
+    t.boolean "display_to_public", default: true, null: false
+    t.integer "display_order", default: 10, null: false
+    t.boolean "is_created_by_admin", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["description"], name: "index_categories_on_description"
+    t.index ["display_order"], name: "index_categories_on_display_order"
+    t.index ["display_to_public"], name: "index_categories_on_display_to_public"
+    t.index ["is_created_by_admin"], name: "index_categories_on_is_created_by_admin"
+    t.index ["name"], name: "index_categories_on_name"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
+
   create_table "communication_logs", force: :cascade do |t|
     t.bigint "person_id", null: false
     t.string "channel"
@@ -216,26 +233,6 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "system_tags", force: :cascade do |t|
-    t.bigint "organization_id"
-    t.bigint "parent_id"
-    t.string "parent_type"
-    t.string "name", null: false
-    t.string "description"
-    t.boolean "display_to_public", default: true, null: false
-    t.integer "display_order", default: 10, null: false
-    t.string "created_by"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["description"], name: "index_system_tags_on_description"
-    t.index ["display_order"], name: "index_system_tags_on_display_order"
-    t.index ["display_to_public"], name: "index_system_tags_on_display_to_public"
-    t.index ["name"], name: "index_system_tags_on_name"
-    t.index ["organization_id"], name: "index_system_tags_on_organization_id"
-    t.index ["parent_id"], name: "index_system_tags_on_parent_id"
-    t.index ["parent_type"], name: "index_system_tags_on_parent_type"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -271,5 +268,4 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
   add_foreign_key "system_locations", "organizations"
-  add_foreign_key "system_tags", "organizations"
 end

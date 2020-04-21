@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "/listings", type: :request do
   let(:valid_attributes) {{
       location_attributes: {zip: "12345"},
-      system_tags: ["", "cash"],
+      categories: ["", "cash"],
       name: Faker::Name.name,
       email: Faker::Internet.email,
       phone: Faker::PhoneNumber.phone_number

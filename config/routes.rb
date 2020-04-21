@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :categories
   devise_for :users
 
   get "/admin", to: "admin#landing_page", as: "landing_page_admin"
@@ -34,7 +35,6 @@ Rails.application.routes.draw do
   resources :shared_accounts
   resources :system_locations
   resources :system_settings
-  resources :system_tags
   resources :users
 
   authenticated :user do

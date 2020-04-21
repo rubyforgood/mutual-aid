@@ -1,14 +1,11 @@
-<div class="section">
-  <div class="title is-3">Find a way to share</div>
-</div>
-<div class="section">
-  <div id="public-listings">
-  </div>
-</div>
+<section class="section">
+  <div id="entry-point" />
+</section>
 
 <script>
- document.addEventListener('DOMContentLoaded', () => {
-    EntryPoints.publicListings('#public-listings')
-  })
-
+document.addEventListener('DOMContentLoaded', () => {
+  // TODO: remove public listings (this, entry point, component) once Browse is ready
+  // EntryPoints.publicListings('#public-listings')
+  EntryPoints.browse('#entry-point')
+})
 </script>

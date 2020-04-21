@@ -1,5 +1,5 @@
 import Vue from 'our_vue'
-import {PublicListings} from '../components'
+import PublicListings from 'components/PublicListings'
 
 export default function(el) {
   new Vue({

@@ -1,3 +1,7 @@
+<!--
+  Note: leaving this under /components even though this is a page.
+  It may be worked on in another branch so want to avoid moving for now.
+-->
 <template>
   <div class='listing-body'>
     <div class='listing-grid columns'>

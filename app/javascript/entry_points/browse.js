@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Browse from '../pages/Browse'
+import Vue from 'our_vue'
+import Browse from 'pages/Browse'
 
 export default function(el) {
   new Vue({

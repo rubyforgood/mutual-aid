@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import AboutSection from "./AboutSection";
+import AboutSection from "components/AboutSection";
 
 export default {
   components:{

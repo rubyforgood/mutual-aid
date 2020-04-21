@@ -7,7 +7,7 @@
       <%= f.association :parent %>
     </div>
     <%= f.input :description, as: :text, input_html: { rows: 2 } %>
-    <div class="field is-grouped">
+    <div class="field is-horizontal">
       <%= f.input :display_to_public, as: :radio_buttons %>
       <%= f.input :display_order, as: :integer %>
       <%= f.input :is_created_by_admin, as: :radio_buttons %>

@@ -7,7 +7,7 @@
 <% page_title ||= view_action_name == "index" ? plural_table_name.titleize : "#{view_action_name.titleize} #{singular_table_name.titleize}" %>
 <% new_button ||= render "layouts/view_add_new_button", table_name: table_name %>
 
-<div class="section">
+<div class="view-header">
   <% if view_action_name == "index" %>
     <div class="columns is-marginless">
       <div class="column is-9">

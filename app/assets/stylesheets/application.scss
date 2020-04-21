@@ -32,17 +32,3 @@ $input-placeholder-color: hsl(0, 0%, 86%); //has-text-grey-lighter
 .section-detail {
   padding: 0rem 1.5rem 3rem 0rem;
 }
-
-//# hacks for simple-form + bulma
-.is-inline-flex {
-  display: inline-flex;
-}
-.select {
-  vertical-align: baseline;
-}
-.form-actions {
-  padding-top: 3em;
-}
-.select:not(.is-multiple):not(.is-loading)::after, .navbar-link:not(.is-arrowless)::after {
-  margin-top: 2.5em;
-}

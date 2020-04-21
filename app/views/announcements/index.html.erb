@@ -24,7 +24,7 @@
             <%= link_to("<span class='fa fa-edit'></span><span></span>".html_safe,
                         edit_announcement_path(announcement) ,
                         title: "Edit #{announcement.name}",
-                        class: "btn btn-default") if current_user %>
+                        class: "button") if current_user %>
           </td>
         </tr>
       <% end %>

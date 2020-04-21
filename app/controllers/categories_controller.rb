@@ -15,12 +15,12 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
-    @parent_categories = Category.order(:name).map{ |t| [t.name.titleize + "#{" (subcategory)" if t.categories.none?}", t.id] }
+    @parent_categories = Category.order(:name).map{ |t| [t.name.titleize, t.id] }
   end
 
   # GET /categories/1/edit
   def edit
-    @parent_categories = Category.order(:name).map{ |t| [t.name.titleize, t.id] }
+    @parent_categories = Category.where.not(id: @category.id).order(:name).map{ |t| [t.name.titleize, t.id] }
   end
 
   # POST /categories

@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <div class="field is-grouped">
       <%= f.input :name %>
-      <%= f.association :parent %>
+      <%= f.association :parent, collection: @parent_categories %>
     </div>
     <%= f.input :description, as: :text, input_html: { rows: 2 } %>
     <div class="field is-horizontal">

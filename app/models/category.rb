@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  belongs_to :parent, optional: true, class_name: "Category", inverse_of: :categories
+  belongs_to :parent, optional: true, class_name: "Category",foreign_key: :parent_id, inverse_of: :categories
   has_many :categories, as: :parent, class_name: "Category", foreign_key: :parent_id, inverse_of: :parent
 
   DEFAULT_TAGS = [

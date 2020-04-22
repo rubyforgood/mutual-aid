@@ -3,8 +3,8 @@
     <section>
       <Filters />
     </section>
-    <section v-if="showGrid">
-      <GridBrowser :listings="listings" :filters="filters" />
+    <section v-if="showTiles">
+      <TileBrowser :listings="listings" :filters="filters" />
     </section>
     <section v-else-if="showList">
       <ListBrowser :listings="listings" :filters="filters" />
@@ -14,19 +14,18 @@
 
 <script>
 import Filters from './browse/Filters'
-import GridBrowser from '../components/GridBrowser'
-import ListBrowser from '../components/ListBrowser'
+import TileBrowser from './browse/TileBrowser'
+import ListBrowser from './browse/ListBrowser'
 
 export default {
-  components: {Filters, GridBrowser, ListBrowser},
+  components: {Filters, TileBrowser, ListBrowser},
   props: {
     listings: {type: Array},
     categories: {type: Array},
-    timings: {type: Array},
     locations: {type: Array},
     filters: {type: Object},
-    showList: {type: Boolean, default: true},
-    showGrid: {type: Boolean, default: false},
+    showList: {type: Boolean, default: false},
+    showTiles: {type: Boolean, default: true},
   },
 }
 </script>

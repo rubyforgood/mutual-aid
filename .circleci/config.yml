@@ -16,35 +16,49 @@ commands:
           key: bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
           paths:
             - .bundle
-  yarn_install:
-    description: "Performs node module installation with yarn, relying on the CircleCI cache for performance"
+  node_modules_install:
+    description: "Performs node module installation, relying on the CircleCI cache for performance"
     steps:
       - restore_cache:
           keys:
-            - yarn-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+            - node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ checksum "package-lock.json" }}
       - run:
-          name: "Yarn Install"
-          command: bin/yarn install
+          name: "Node Modules Install"
+          command: |
+            set -euxo pipefail
+            npm i
+            bin/yarn install
       - save_cache:
-          key: yarn-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          key: node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-  test_suite:
-    description: "Run the test suite"
+  rspec_tests:
+    description: "Run the RSpec test suite"
     steps:
       - restore_cache:
           keys:
             - bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
       - restore_cache:
           keys:
-            - yarn-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+            - node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ checksum "package-lock.json" }}
       - run:
-          name: "Run the Test Suite"
+          name: "Run the RSpec Test Suite"
           command: |
             set -euxo pipefail
             bundle config path .bundle
             bin/rails db:setup
             bin/rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml
+  yarn_tests:
+    description: "Run the Mocha test suite"
+    steps:
+      - restore_cache:
+          keys:
+            - node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: "Run the Mocha Test Suite"
+          command: yarn test --reporter mocha-junit-reporter
+          environment:
+            MOCHA_FILE: ~/test/test-results.xml
 
 jobs:
   bundle:
@@ -53,13 +67,13 @@ jobs:
     steps:
       - checkout
       - bundle_install
-  yarn:
+  node_modules:
     docker:
       - <<: *docker_image
     steps:
       - checkout
-      - yarn_install
-  test:
+      - node_modules_install
+  ruby_tests:
     docker:
       - <<: *docker_image
         environment:
@@ -71,17 +85,31 @@ jobs:
           POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - checkout
-      - test_suite
+      - rspec_tests
       - store_test_results:
           path: ~/rspec
+  js_tests:
+    docker:
+      - <<: *docker_image
+    steps:
+      - checkout
+      - yarn_tests
+      - store_test_results:
+          path: ~/test
+      - store_artifacts:
+          path: ~/test
 
 workflows:
   version: 2.1
   mutual_aid:
     jobs:
       - bundle
-      - yarn
-      - test:
+      - node_modules
+      - ruby_tests:
           requires:
             - bundle
-            - yarn
+            - node_modules
+      - js_tests:
+          requires:
+            - node_modules
+

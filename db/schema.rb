@@ -52,6 +52,29 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
     t.index ["person_id"], name: "index_communication_logs_on_person_id"
   end
 
+  create_table "community_resources", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "website_url"
+    t.string "facebook_url"
+    t.string "phone"
+    t.string "description"
+    t.date "publish_from"
+    t.date "publish_until"
+    t.boolean "is_created_by_admin", default: true, null: false
+    t.boolean "is_approved", default: true, null: false
+    t.string "youtube_identifier"
+    t.bigint "location_id"
+    t.bigint "organization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "tags", default: [], array: true
+    t.index ["is_approved"], name: "index_community_resources_on_is_approved"
+    t.index ["is_created_by_admin"], name: "index_community_resources_on_is_created_by_admin"
+    t.index ["location_id"], name: "index_community_resources_on_location_id"
+    t.index ["organization_id"], name: "index_community_resources_on_organization_id"
+    t.index ["tags"], name: "index_community_resources_on_tags", using: :gin
+  end
+
   create_table "custom_form_questions", force: :cascade do |t|
     t.string "name"
     t.string "input_type"
@@ -85,9 +108,9 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "tags", default: [], array: true
-    t.boolean "approved", default: false, null: false
-    t.date "publish_from"
-    t.date "publish_until"
+    t.boolean "reviewed", default: false, null: false
+    t.date "display_on_website_start"
+    t.date "display_on_website_end"
     t.bigint "system_location_id"
     t.bigint "organization_id"
     t.index ["organization_id"], name: "index_external_resources_on_organization_id"
@@ -116,17 +139,6 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
     t.string "zip", limit: 5
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.string "description"
-    t.string "region"
-    t.string "neighborhood"
-    t.string "county"
-    t.string "facebook_url"
-    t.string "website_url"
-    t.string "phone"
-    t.string "location_type"
-    t.bigint "parent_id"
-    t.index ["parent_id"], name: "index_locations_on_parent_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -260,6 +272,8 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
   end
 
   add_foreign_key "communication_logs", "people"
+  add_foreign_key "community_resources", "locations"
+  add_foreign_key "community_resources", "organizations"
   add_foreign_key "donations", "people"
   add_foreign_key "external_resources", "organizations"
   add_foreign_key "external_resources", "system_locations"

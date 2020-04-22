@@ -9,7 +9,17 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
+    # TODO: these json strings are to be replaced with actual generators of data
+    @listings_json = '[
+      { "id": 1, "category_ids": [1], "timings": [1,2,3], "location": 1, "short_title":"Look after my kid", "description":"Lorem Ipsum is the name of my child"},
+      { "id": 2, "category_ids": [1,2], "timings": [1,2,3], "location": 12},
+      { "id": 3, "category_ids": [3], "timings": [3], "location": 1, "short_title":"bathroom help", "description":"I\'m afraid I\'ll fall and hurt my hip again. Can someone help me clean?"},
+    ]'
+    @categories_json = '[{"id":1, "name": "Care"}, {"id": 2, "name": "Meals"} {"id":3, "name": "Housework"}]'
+    @locations_json = '[
+      {"id":1, "name": "East Bay"},
+      {"id":2, "name": "Kings Bay"}
+    ]'
   end
 
   # GET /listings/1

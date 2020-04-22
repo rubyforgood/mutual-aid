@@ -1,87 +1,15 @@
-docker_image: &docker_image
-  image: circleci/ruby:2.7.0-node
-
 version: 2.1
-commands:
-  bundle_install:
-    description: "Performs the bundler installation, relying on the CircleCI cache for performance"
-    steps:
-      - restore_cache:
-          keys:
-            - bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: "Bundle Install"
-          command: bin/bundle install --path=.bundle
-      - save_cache:
-          key: bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - .bundle
-  yarn_install:
-    description: "Performs node module installation with yarn, relying on the CircleCI cache for performance"
-    steps:
-      - restore_cache:
-          keys:
-            - yarn-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
-      - run:
-          name: "Yarn Install"
-          command: bin/yarn install
-      - save_cache:
-          key: yarn-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
-  test_suite:
-    description: "Run the test suite"
-    steps:
-      - restore_cache:
-          keys:
-            - bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-      - restore_cache:
-          keys:
-            - yarn-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
-      - run:
-          name: "Run the Test Suite"
-          command: |
-            set -euxo pipefail
-            bundle config path .bundle
-            bin/rails db:setup
-            bin/rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml
+orbs:
+  ruby: circleci/ruby@0.1.2 
 
 jobs:
-  bundle:
+  build:
     docker:
-      - <<: *docker_image
+      - image: circleci/ruby:2.6.3-stretch-node
+    executor: ruby/default
     steps:
       - checkout
-      - bundle_install
-  yarn:
-    docker:
-      - <<: *docker_image
-    steps:
-      - checkout
-      - yarn_install
-  test:
-    docker:
-      - <<: *docker_image
-        environment:
-          RAILS_ENV: test
-      - image: circleci/postgres:latest
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_DB: mutualaid_test
-          POSTGRES_HOST_AUTH_METHOD: trust
-    steps:
-      - checkout
-      - test_suite
-      - store_test_results:
-          path: ~/rspec
-
-workflows:
-  version: 2.1
-  mutual_aid:
-    jobs:
-      - bundle
-      - yarn
-      - test:
-          requires:
-            - bundle
-            - yarn
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install

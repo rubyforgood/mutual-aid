@@ -4,8 +4,10 @@
   "dependencies": {
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
+    "babel-loader": "^8.1.0",
     "bulma": "^0.8.1",
     "css-loader": "^3.5.2",
+    "style-loader": "^1.1.4",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.1",
     "vue-template-compiler": "^2.6.11",
@@ -14,7 +16,6 @@
   "version": "0.1.0",
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.33",
-    "babel-loader": "^8.1.0",
     "jsdom": "^16.2.2",
     "jsdom-global": "^3.0.2",
     "mocha": "^6",

@@ -23,6 +23,6 @@
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "test": "env NODE_ENV=test mochapack --webpack-config config/webpack/test.js --require test/setup.js test/**/*.spec.js"
+    "test": "mochapack --webpack-config config/webpack/test.js --require test/setup.js test/**/*.spec.js"
   }
 }

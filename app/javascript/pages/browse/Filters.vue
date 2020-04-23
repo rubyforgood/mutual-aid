@@ -1,5 +1,5 @@
 <template>
-  <h2>Filters</h2>
+  <h2 class="title">Filters</h2>
 </template>
 
 <script>

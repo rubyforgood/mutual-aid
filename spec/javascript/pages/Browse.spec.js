@@ -4,13 +4,8 @@ import TileBrowser from 'pages/browse/TileBrowser'
 import { assert } from 'chai'
 
 describe('Browse', ()=>{
-  it('defaults to tiles view', ()=>{
+  it('renders the tile view by default', ()=>{
     const wrapper = shallowMount(Browse)
-    assert.isTrue(wrapper.props().showTiles)
-    assert.isFalse(wrapper.props().showList)
-  });
-  it('renders the tiles view', ()=>{
-    const wrapper = mount(Browse)
     assert.isTrue(wrapper.contains(TileBrowser))
-  });
+  })
 })

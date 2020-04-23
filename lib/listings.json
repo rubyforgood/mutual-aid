@@ -1,0 +1,31 @@
+{
+  "_comment": "This is useful seed data. It could go into `spec/fixtures` at some point. For now, we're using it as examples to develop against, so I've put it in `lib`",
+  "listings": [
+    {
+      "id": 1,
+      "categories": [1],
+      "timings": [1, 2, 3],
+      "location": 1,
+      "short_title": "Look after my kid",
+      "description": "Lorem Ipsum is the name of my child"
+    },
+    {"id": 2, "categories": [1, 2], "timings": [1, 2, 3], "location": 12},
+    {
+      "id": 3,
+      "categories": [3],
+      "timings": [3],
+      "location": 1,
+      "short_title": "bathroom help",
+      "description": "I'm afraid I'll fall and hurt my hip again. Can someone help me clean?"
+    }
+  ],
+  "categories": [
+    {"id": 1, "name": "Care"},
+    {"id": 2, "name": "Meals"},
+    {"id": 3, "name": "Housework"}
+  ],
+  "locations": [
+    {"id": 1, "name": "East Bay"},
+    {"id": 2, "name": "Kings Bay"}
+  ]
+}

@@ -27,3 +27,11 @@
     display: none;
   }
 }
+.tileBrowser-listItem {
+  &.box {
+    margin: 0.2em;
+  }
+  .tagList-tag {
+    margin: 0.1em;
+  }
+}

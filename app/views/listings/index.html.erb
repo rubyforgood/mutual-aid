@@ -6,6 +6,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   // TODO: remove public listings (this, entry point, component) once Browse is ready
   // EntryPoints.publicListings('#public-listings')
-  EntryPoints.browse('#entry-point', {listings: <%= raw json_escape(@listings_json) %> })
-})
+  EntryPoints.browse('#entry-point', {
+    listings: <%= raw json_escape(@listings.to_json) %>,
+    locations: <%= raw json_escape(@locations.to_json) %>,
+    categories: <%= raw json_escape(@categories.to_json) %>
+  });
+});
 </script>

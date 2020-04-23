@@ -12,8 +12,16 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'test'
 process.env.RAILS_ENV = process.env.RAILS_ENV || 'test'
 
 const environment = require('./environment')
+const nodeExternals = require('webpack-node-externals');
 
-const babelLoader = environment.loaders.get('babel')
-babelLoader.include.push(babelLoader.include[0].concat('../../test'))
+environment.config.merge({
+  output: {
+    devtoolModuleFilenameTemplate: '[absolute-resource-path]',
+    devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
+  },
+  mode: 'development',
+  externals: [nodeExternals()],
+  devtool: 'inline-cheap-module-source-map'
+})
 
 module.exports = environment.toWebpackConfig()

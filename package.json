@@ -18,6 +18,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.33",
+    "bdd-lazy-var": "^2.5.4",
     "chai": "^4.2.0",
     "jsdom": "^16.2.2",
     "jsdom-global": "^3.0.2",
@@ -30,6 +31,6 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "test": "mochapack --webpack-config config/webpack/test.js --require spec/javascript/setup.js --colors 'spec/javascript/**/*.spec.js'"
+    "test": "mochapack --webpack-config config/webpack/test.js --require spec/javascript/setup.js --colors -u bdd-lazy-var/global 'spec/javascript/**/*.spec.js'"
   }
 }

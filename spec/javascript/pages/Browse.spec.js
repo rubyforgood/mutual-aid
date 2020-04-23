@@ -4,38 +4,39 @@ import Browse from 'pages/Browse.vue'
 import ListBrowser from 'pages/browse/ListBrowser'
 import TileBrowser from 'pages/browse/TileBrowser'
 
-describe('Browse', function() {
-  beforeEach(function() {
-    this.wrapper = mount(Browse)
-  })
+describe('Browse', () => {
+  def('wrapper', () => mount(Browse))
 
-  describe('browser view', function() {
-    describe('starts in Tile view', function() {
-      it('renders the TileBrowser', function() {
-        assert.isTrue(this.wrapper.contains(TileBrowser))
-        assert.isFalse(this.wrapper.contains(ListBrowser))
+  describe('browser view', () => {
+    def('showTilesButton', () => $wrapper.find('button#show-tiles'))
+    def('showListButton',  () => $wrapper.find('button#show-list'))
+
+    describe('starts in Tile view', () => {
+      it('renders the TileBrowser', () => {
+        assert.isTrue($wrapper.contains(TileBrowser))
+        assert.isFalse($wrapper.contains(ListBrowser))
       })
 
-      it('disables the Tile view button', function() {
-        assert.equal(this.wrapper.find('button#show-tiles').attributes('disabled'), 'disabled')
-        assert.notExists(this.wrapper.find('button#show-list').attributes('disabled'))
+      it('disables the Tile view button', () => {
+        assert.equal($showTilesButton.attributes('disabled'), 'disabled')
+        assert.notExists($showListButton.attributes('disabled'))
       })
     })
 
-    describe('when switched to the List view', function() {
-      beforeEach(async function() {
-        this.wrapper.find('button#show-list').trigger('click')
-        await this.wrapper.vm.$nextTick()
+    describe('when switched to the List view', () => {
+      beforeEach(async () => {
+        $showListButton.trigger('click')
+        await $wrapper.vm.$nextTick()
       })
 
-      it('renders the ListBrowser', function() {
-        assert.isTrue(this.wrapper.contains(ListBrowser))
-        assert.isFalse(this.wrapper.contains(TileBrowser))
+      it('renders the ListBrowser', () => {
+        assert.isTrue($wrapper.contains(ListBrowser))
+        assert.isFalse($wrapper.contains(TileBrowser))
       })
 
-      it('disables the List view button', function() {
-        assert.equal(this.wrapper.find('button#show-list').attributes('disabled'), 'disabled')
-        assert.notExists(this.wrapper.find('button#show-tiles').attributes('disabled'))
+      it('disables the List view button', () => {
+        assert.equal($showListButton.attributes('disabled'), 'disabled')
+        assert.notExists($showTilesButton.attributes('disabled'))
       })
     })
   })

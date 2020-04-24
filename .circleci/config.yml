@@ -55,7 +55,7 @@ commands:
           name: "Run the Mocha Test Suite"
           command: yarn test --reporter mocha-junit-reporter
           environment:
-            MOCHA_FILE: ~/test/test-results.xml
+            MOCHA_FILE: test/test-results.xml
 
 jobs:
   bundle:
@@ -92,9 +92,9 @@ jobs:
       - checkout
       - yarn_tests
       - store_test_results:
-          path: ~/test
+          path: test
       - store_artifacts:
-          path: ~/test
+          path: test
 
 workflows:
   version: 2.1

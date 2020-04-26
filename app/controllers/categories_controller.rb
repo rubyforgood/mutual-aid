@@ -1,30 +1,22 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
-  # GET /categories
-  # GET /categories.json
   def index
     @categories = Category.all
   end
 
-  # GET /categories/1
-  # GET /categories/1.json
   def show
   end
 
-  # GET /categories/new
   def new
     @category = Category.new
     @parent_categories = Category.order(:name).map{ |t| [t.name.titleize, t.id] }
   end
 
-  # GET /categories/1/edit
   def edit
     @parent_categories = Category.where.not(id: @category.id).order(:name).map{ |t| [t.name.titleize, t.id] }
   end
 
-  # POST /categories
-  # POST /categories.json
   def create
     @category = Category.new(category_params)
 
@@ -40,8 +32,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /categories/1
-  # PATCH/PUT /categories/1.json
   def update
     respond_to do |format|
       if @category.update(category_params)
@@ -54,8 +44,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # DELETE /categories/1
-  # DELETE /categories/1.json
   def destroy
     @category.destroy
     respond_to do |format|
@@ -65,12 +53,10 @@ class CategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def category_params
       params.require(:category).permit(:name, :description, :parent_id, :display_to_public, :display_order, :is_created_by_admin, categories_attributes: [])
     end

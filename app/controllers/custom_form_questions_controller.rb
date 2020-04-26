@@ -1,30 +1,22 @@
 class CustomFormQuestionsController < ApplicationController
   before_action :set_custom_form_question, only: [:show, :edit, :update, :destroy]
 
-  # GET /custom_form_questions
-  # GET /custom_form_questions.json
   def index
     @custom_form_questions = CustomFormQuestion.all
   end
 
-  # GET /custom_form_questions/1
-  # GET /custom_form_questions/1.json
   def show
   end
 
-  # GET /custom_form_questions/new
   def new
     @custom_form_question = CustomFormQuestion.new
     @input_types_array = CustomFormQuestion::INPUT_TYPES_AND_STORAGE.keys
   end
 
-  # GET /custom_form_questions/1/edit
   def edit
     @input_types_array = CustomFormQuestion::INPUT_TYPES_AND_STORAGE.keys
   end
 
-  # POST /custom_form_questions
-  # POST /custom_form_questions.json
   def create
     @custom_form_question = CustomFormQuestion.new(custom_form_question_params)
 
@@ -39,8 +31,6 @@ class CustomFormQuestionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /custom_form_questions/1
-  # PATCH/PUT /custom_form_questions/1.json
   def update
     respond_to do |format|
       if @custom_form_question.update(custom_form_question_params)
@@ -53,8 +43,6 @@ class CustomFormQuestionsController < ApplicationController
     end
   end
 
-  # DELETE /custom_form_questions/1
-  # DELETE /custom_form_questions/1.json
   def destroy
     @custom_form_question.destroy
     respond_to do |format|
@@ -64,12 +52,10 @@ class CustomFormQuestionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_custom_form_question
       @custom_form_question = CustomFormQuestion.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def custom_form_question_params
       params.require(:custom_form_question).permit(
           :input_type,

@@ -13,9 +13,7 @@ class ListingsController < ApplicationController
     sample_data = File.open('lib/listings.json') do |file|
       JSON.load(file)
     end
-    @listings = sample_data["contributions"]
-    @categories = sample_data["categories"]
-    @locations = sample_data["service_areas"]
+    @contributions = sample_data["contributions"]
   end
 
   # GET /listings/1

@@ -4,10 +4,9 @@
     <div>
       <ul class="columns">
         <TileListItem
-          v-for="listing in listings"
-          :key="listing.id"
-          :helper="helper"
-          :listing="listing"
+          v-for="contribution in contributions"
+          :key="contribution.id"
+          v-bind="contribution"
           class="column"
         />
       </ul>
@@ -23,9 +22,7 @@ export default {
     TileListItem,
   },
   props: {
-    listings: Array,
-    locations: Array,
-    helper: Object,
+    contributions: Array,
   },
 }
 </script>

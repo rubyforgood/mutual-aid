@@ -1,5 +1,4 @@
-import { assert } from 'chai'
-import { mount, shallowMount } from '@vue/test-utils'
+import {mount, shallowMount} from '@vue/test-utils'
 import Browse from 'pages/Browse.vue'
 import ListBrowser from 'pages/browse/ListBrowser'
 import TileBrowser from 'pages/browse/TileBrowser'
@@ -9,7 +8,7 @@ describe('Browse', () => {
 
   describe('browser view', () => {
     def('showTilesButton', () => $wrapper.find('button#show-tiles'))
-    def('showListButton',  () => $wrapper.find('button#show-list'))
+    def('showListButton', () => $wrapper.find('button#show-list'))
 
     describe('starts in Tile view', () => {
       it('renders the TileBrowser', () => {

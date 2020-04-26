@@ -8,11 +8,11 @@
         <th>Location</th>
         <th>Details</th>
       </tr>
-      <tr v-for="listing in denormalizedListings" :key="listing.id">
-        <td><TagList :tags="listing.categoryTags" /></td>
-        <td>{{ listing.availability }}</td>
-        <td><TagList :tags="listing.locationTags" /></td>
-        <td>{{ listing.short_title }}</td>
+      <tr v-for="contribution in contributions" :key="contribution.id">
+        <td><TagList :tags="contribution.category_tags" /></td>
+        <td><TagList :tags="contribution.availability" tagClasses="is-light is-warning"/></td>
+        <td><TagList :tags="[contribution.service_area]" /></td>
+        <td>{{ contribution.short_title }}</td>
       </tr>
     </table>
   </div>
@@ -23,21 +23,8 @@ import TagList from 'components/TagList'
 
 export default {
   props: {
-    listings: {type: Array, default: () => []},
+    contributions: {type: Array, default: () => []},
     filters: Object,
-    helper: Object,
-  },
-  computed: {
-    denormalizedListings() {
-      var that = this
-      return this.listings.map((listing) => {
-        listing.categoryTags = listing.categories.map((category_id) =>
-          that.helper.category_for(category_id)
-        )
-        listing.locationTags = [that.helper.location_for(listing.location)]
-        return listing
-      })
-    },
   },
   components: {
     TagList,

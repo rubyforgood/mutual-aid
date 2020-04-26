@@ -21,6 +21,17 @@ it('can override some of the default classes', function () {
     },
   })
   assert.deepEqual(wrapper.classes(), ['tagList', 'parentClass'])
-  assert.deepEqual(wrapper.findAll('li').at(0).classes(), ['tagList-tag', 'childClass'])
-  assert.deepEqual(wrapper.findAll('li').at(1).classes(), ['tagList-tag', 'childClass'])
+  assert.deepEqual(wrapper.findAll('li').at(0).classes(), ['tagList-tag', 'tag', 'childClass'])
+  assert.deepEqual(wrapper.findAll('li').at(1).classes(), ['tagList-tag', 'tag', 'childClass'])
+})
+
+it('renders empty if the tags are invalid', function () {
+  var nullWrapper = shallowMount(TagList, {
+    propsData: {tags: null},
+  })
+  var emptyWrapper = shallowMount(TagList, {propsData: {tags: []}})
+  var nullEmptyWrapper = shallowMount(TagList, {propsData: {tags: [null]}})
+  assert.isTrue(nullWrapper.isEmpty())
+  assert.isTrue(emptyWrapper.isEmpty())
+  assert.isTrue(nullEmptyWrapper.isEmpty())
 })

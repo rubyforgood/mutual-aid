@@ -1,0 +1,14 @@
+//# hacks for simple-form + bulma
+
+.is-inline-flex {
+  display: inline-flex;
+}
+.select {
+  vertical-align: baseline;
+}
+.form-actions {
+  padding-top: 3em;
+}
+.select:not(.is-multiple):not(.is-loading)::after, .navbar-link:not(.is-arrowless)::after {
+  margin-top: 2.5em;
+}

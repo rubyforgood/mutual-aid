@@ -1,9 +1,6 @@
 @import 'font-awesome';
 
-@import './bulma_customization';
-@import 'bulma/bulma';
-
-@import 'buefy/dist/buefy.css';
+@import './bulma_and_buefy';
 
 @import './custom_spacing_helpers';
 @import './simple_form_customization';
@@ -13,5 +10,3 @@
 .text-center {
   text-align: center;
 }
-
-

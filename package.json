@@ -5,7 +5,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
     "babel-loader": "^8.1.0",
-    "bulma": "^0.8.1",
+    "buefy": "^0.8.17",
     "css-loader": "^3.5.2",
     "style-loader": "^1.1.4",
     "vue": "^2.6.11",

@@ -17,8 +17,10 @@
         <div>
           <h2 class='subtitle is-3'>Need some help?</h2>
           <div class='action-buttons'>
-            <span class="action-button"><span class='button is-primary is-outlined'>View offers</span></span>
-            <span class="action-button"><span class='button is-primary'>Submit an Ask</span></span>
+            <b-button type='is-primary' outlined>View offers</b-button>
+            <b-button type='is-primary'>Submit an Ask</b-button>
+            <br>
+            <span class=''><a href='/community_resources'>Browse resources</a></span>
           </div>
         </div>
       </div>
@@ -26,17 +28,14 @@
         <div>
           <h2 class='subtitle is-3'>Want to help?</h2>
           <div class='action-buttons'>
-            <span class="action-button"><span class='button is-primary'>View Asks</span></span>
-            <span class="action-button"><span class='button is-primary is-outlined'>Submit an Offer</span></span>
+            <b-button type='is-primary'>View Asks</b-button>
+            <b-button type='is-primary' outlined>Submit an Offer</b-button>
             <br>
             <span class=''><a href='/community_resources/new'>Share a community resource</a></span>
             <br>
             <span class=''><a href='/donations/new'>Donate money</a></span> | <span class=''><a href='/donations/new'>Donate goods</a></span>
             <br>
             <span class=''><a href='/volunteers/new'>Volunteer</a></span>
-            <!-- <div class="action-button"><span class='button is-primary is-outlined'>Volunteer</span></div>
-            <div class="action-button"><span class='button is-primary is-outlined'>Donate</span></div>
-            <div class="action-button"><span class='button is-primary is-outlined'>Share a community resource</span></div> -->
           </div>
         </div>
       </div>

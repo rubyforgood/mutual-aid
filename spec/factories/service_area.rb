@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :ServiceArea do
+  factory :service_area do
     parent { nil }
     name { Faker::Name.name }
   end

@@ -29,7 +29,7 @@
             <span class="action-button"><span class='button is-primary'>View Asks</span></span>
             <span class="action-button"><span class='button is-primary is-outlined'>Submit an Offer</span></span>
             <br>
-            <span class=''><a href='/external_resources/new'>Share a community resource</a></span>
+            <span class=''><a href='/community_resources/new'>Share a community resource</a></span>
             <br>
             <span class=''><a href='/donations/new'>Donate money</a></span> | <span class=''><a href='/donations/new'>Donate goods</a></span>
             <br>

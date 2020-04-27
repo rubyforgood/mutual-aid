@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "external_resources/show", type: :view do
+RSpec.describe "community_resources/show", type: :view do
   before(:each) do
     @view_action_name = "show"
-    @external_resource = assign(:external_resource, ExternalResource.create!(
+    @community_resource = assign(:community_resource, CommunityResource.create!(
       name: "Name",
       website_url: "Website Url",
       facebook_url: "Facebook Url",
@@ -13,7 +13,7 @@ RSpec.describe "external_resources/show", type: :view do
       publish_until: Date.today,
       youtube_identifier: "Youtube Identifier",
       system_location: create(:system_location),
-      approved: true
+      is_approved: true
     ))
   end
 

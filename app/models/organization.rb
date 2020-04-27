@@ -1,5 +1,5 @@
 class Organization < ApplicationRecord
-  has_many :external_resources
+  has_many :community_resources
   has_many :positions
 
   validates :name, presence: true

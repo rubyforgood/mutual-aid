@@ -6,6 +6,10 @@ class CreateLocations < ActiveRecord::Migration[6.0]
       t.string :state, limit: 2
       t.string :zip, limit: 5
 
+      t.string :county
+      t.string :region
+      t.string :neighborhood
+
       t.timestamps
     end
   end

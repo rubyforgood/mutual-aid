@@ -98,26 +98,6 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
     t.index ["person_id"], name: "index_donations_on_person_id"
   end
 
-  create_table "external_resources", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "website_url"
-    t.string "facebook_url"
-    t.string "phone"
-    t.string "description"
-    t.string "youtube_identifier"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "tags", default: [], array: true
-    t.boolean "reviewed", default: false, null: false
-    t.date "display_on_website_start"
-    t.date "display_on_website_end"
-    t.bigint "system_location_id"
-    t.bigint "organization_id"
-    t.index ["organization_id"], name: "index_external_resources_on_organization_id"
-    t.index ["system_location_id"], name: "index_external_resources_on_system_location_id"
-    t.index ["tags"], name: "index_external_resources_on_tags", using: :gin
-  end
-
   create_table "listings", force: :cascade do |t|
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
@@ -275,8 +255,6 @@ ActiveRecord::Schema.define(version: 2020_04_19_161258) do
   add_foreign_key "community_resources", "locations"
   add_foreign_key "community_resources", "organizations"
   add_foreign_key "donations", "people"
-  add_foreign_key "external_resources", "organizations"
-  add_foreign_key "external_resources", "system_locations"
   add_foreign_key "listings", "locations"
   add_foreign_key "people", "users"
   add_foreign_key "positions", "organizations"

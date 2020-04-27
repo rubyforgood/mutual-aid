@@ -8,7 +8,7 @@ class PublicController < ActionController::Base
 
   def community_resources
     @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin?
-    @external_resources = ExternalResource.where(approved: true).published
+    @community_resources = CommunityResource.where(is_approved: true).published
   end
 
   def landing_page

@@ -1,7 +1,7 @@
-<%= simple_form_for @external_resource do |f| %>
+<%= simple_form_for @community_resource do |f| %>
   <% if f.object.errors.any? %>
     <div id="error_explanation">
-      <h2 class="subtitle"><%= pluralize(external_resource.errors.count, "error") %> prohibited this external_resource from being saved:</h2>
+      <h2 class="subtitle"><%= pluralize(community_resource.errors.count, "error") %> prohibited this community_resource from being saved:</h2>
 
       <ul>
         <% f.object.errors.full_messages.each do |message| %>
@@ -16,9 +16,9 @@
     <%= f.input :description, required: true, as: :text, input_html: { rows: 2 } %>
 
     <% if ["new", "create"].include?(action_name) %>
-      <%= f.hidden_field :approved %>
+      <%= f.hidden_field :is_approved %>
     <% else %>
-      <%= f.input :approved %>
+      <%= f.input :is_approved %>
     <% end %>
 
     <div class="label">Dates to publish this resource</div>

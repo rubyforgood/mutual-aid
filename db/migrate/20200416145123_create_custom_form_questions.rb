@@ -7,7 +7,7 @@ class CreateCustomFormQuestions < ActiveRecord::Migration[6.0]
       t.string :form_type
       t.string :option_list
       t.string :hint_text
-      t.string :position
+      t.string :display_order
 
       t.timestamps
     end

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "external_resources/index", type: :view do
+RSpec.describe "community_resources/index", type: :view do
   before(:each) do
     @view_action_name = "index"
-    @external_resources = [
-        create(:external_resource,
+    @community_resources = [
+        create(:community_resource,
         name: "Name",
         website_url: "Website Url",
         facebook_url: "Facebook Url",
@@ -14,9 +14,9 @@ RSpec.describe "external_resources/index", type: :view do
         publish_until: Date.today,
         youtube_identifier: "Youtube Identifier",
         system_location: create(:system_location),
-        approved: false
+        is_approved: false
       ),
-        create(:external_resource,
+        create(:community_resource,
         name: "Name",
         website_url: "Website Url",
         facebook_url: "Facebook Url",
@@ -26,12 +26,12 @@ RSpec.describe "external_resources/index", type: :view do
         publish_until: Date.today + 7.days,
         youtube_identifier: "Youtube Identifier",
         system_location: create(:system_location),
-        approved: false
+        is_approved: false
       )
     ]
   end
 
-  it "renders a list of external_resources" do
+  it "renders a list of community_resources" do
     render
     skip
     # assert_select "tr", class: "external-resource", count: 2 # TODO add valid test here

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :external_resource do
+  factory :community_resource do
     name { "MyString" }
     description { "MyString" }
     system_location

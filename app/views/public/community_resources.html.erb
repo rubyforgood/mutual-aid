@@ -4,29 +4,29 @@
     <br>
   </div>
   <div class="column is-2">
-    <%= render "layouts/view_add_new_button", table_name: "external_resources" %>
+    <%= render "layouts/view_add_new_button", table_name: "community_resources" %>
   </div>
 </div>
 
 <div class="row">
   <table class="table table-hover table-curved table-condensed">
     <tbody>
-      <% @external_resources.each do |external_resource| %>
+      <% @community_resources.each do |community_resource| %>
         <tr>
           <td>
-            <strong><%= external_resource.name %></strong>
+            <strong><%= community_resource.name %></strong>
             <br>
-            <%= " | " + external_resource.tags + " | " if external_resource.tags.any? %>
-            <em><%= external_resource.description.truncate(100) %> <%= link_to("More", external_resource_path(external_resource)) if external_resource.description.length > 100 %></em>
+            <%= " | " + community_resource.tags + " | " if community_resource.tags.any? %>
+            <em><%= community_resource.description.truncate(100) %> <%= link_to("More", community_resource_path(community_resource)) if community_resource.description.length > 100 %></em>
             <br>
             <%= link_to("<span class='fa fa-globe button'></span><span></span>".html_safe,
-                        external_resource.website_url,
-                        title: "Go to #{external_resource.website_url}",
-                        class: "button") if external_resource.website_url.present? %>
+                        community_resource.website_url,
+                        title: "Go to #{community_resource.website_url}",
+                        class: "button") if community_resource.website_url.present? %>
             <%= link_to("<span class='fa fa-facebook button'></span><span></span>".html_safe,
-                        external_resource.facebook_url,
-                        title: "Go to #{external_resource.facebook_url}",
-                        class: "button") if external_resource.facebook_url.present? %>
+                        community_resource.facebook_url,
+                        title: "Go to #{community_resource.facebook_url}",
+                        class: "button") if community_resource.facebook_url.present? %>
             <br>
             <br>
             <br>

@@ -11,7 +11,7 @@
       <tr><td><%= link_to "View unmet Asks", listings_path %></td></tr>
       <tr><td><%= link_to "View outstanding Offers", listings_path %></td></tr>
       <tr><td><%= link_to "Manage Volunteers", volunteer_admin_path %></td></tr>
-      <tr><td><%= link_to "Manage CommunityResources", external_resources_path(approved: false) %></td></tr>
+      <tr><td><%= link_to "Manage CommunityResources", community_resources_path(is_approved: false) %></td></tr>
       <% [
           ["system_locations", "Locations and pods"],
           ["people"],

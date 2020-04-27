@@ -1,0 +1,53 @@
+<%= render "layouts/view_header", resource: @person %>
+
+<div class="section-detail">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>First name:</strong>
+    <%= @person.first_name %>
+  </p>
+
+  <p>
+    <strong>Last name:</strong>
+    <%= @person.last_name %>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <%= @person.phone %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @person.email %>
+  </p>
+
+  <p>
+    <strong>Phone 2:</strong>
+    <%= @person.phone_2 %>
+  </p>
+
+  <p>
+    <strong>Email 2:</strong>
+    <%= @person.email_2 %>
+  </p>
+
+  <p>
+    <strong>Skills:</strong>
+    <%= @person.skills %>
+  </p>
+
+  <p>
+    <strong>Notes:</strong>
+    <%= @person.notes %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= @person.user_id %>
+  </p>
+
+  <%= link_to 'Edit', edit_person_path(@person) %> |
+  <%= link_to 'Back', people_path %>
+</div>

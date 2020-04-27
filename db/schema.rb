@@ -10,48 +10,242 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_12_132525) do
+ActiveRecord::Schema.define(version: 2020_04_27_122237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "external_resources", force: :cascade do |t|
+  create_table "announcements", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.date "publish_from"
+    t.date "publish_until"
+    t.boolean "is_approved", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.bigint "parent_id"
+    t.string "name", null: false
+    t.string "description"
+    t.boolean "display_to_public", default: true, null: false
+    t.integer "display_order", default: 10, null: false
+    t.boolean "is_created_by_admin", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["description"], name: "index_categories_on_description"
+    t.index ["display_order"], name: "index_categories_on_display_order"
+    t.index ["display_to_public"], name: "index_categories_on_display_to_public"
+    t.index ["is_created_by_admin"], name: "index_categories_on_is_created_by_admin"
+    t.index ["name"], name: "index_categories_on_name"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
+
+  create_table "communication_logs", force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "match_id"
+    t.string "from_type"
+    t.string "to_type"
+    t.string "channel"
+    t.datetime "sent_at"
+    t.boolean "needs_follow_up", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_id"], name: "index_communication_logs_on_match_id"
+    t.index ["person_id"], name: "index_communication_logs_on_person_id"
+  end
+
+  create_table "community_resources", force: :cascade do |t|
+    t.bigint "service_area_id"
+    t.bigint "location_id"
+    t.bigint "organization_id"
     t.string "name", null: false
     t.string "website_url"
     t.string "facebook_url"
     t.string "phone"
     t.string "description"
+    t.date "publish_from"
+    t.date "publish_until"
+    t.boolean "is_created_by_admin", default: true, null: false
+    t.boolean "is_approved", default: true, null: false
     t.string "youtube_identifier"
-    t.bigint "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "tags", default: [], array: true
-    t.boolean "reviewed", default: false, null: false
-    t.date "display_on_website_start"
-    t.date "display_on_website_end"
-    t.index ["location_id"], name: "index_external_resources_on_location_id"
-    t.index ["tags"], name: "index_external_resources_on_tags", using: :gin
+    t.index ["is_approved"], name: "index_community_resources_on_is_approved"
+    t.index ["is_created_by_admin"], name: "index_community_resources_on_is_created_by_admin"
+    t.index ["location_id"], name: "index_community_resources_on_location_id"
+    t.index ["organization_id"], name: "index_community_resources_on_organization_id"
+    t.index ["service_area_id"], name: "index_community_resources_on_service_area_id"
+    t.index ["tags"], name: "index_community_resources_on_tags", using: :gin
+  end
+
+  create_table "custom_form_questions", force: :cascade do |t|
+    t.string "name"
+    t.string "input_type"
+    t.boolean "is_required", default: true, null: false
+    t.string "form_type"
+    t.text "option_list", default: [], array: true
+    t.string "hint_text"
+    t.string "display_order"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.float "value"
+    t.string "channel"
+    t.string "thank_you_sent"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_donations_on_person_id"
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.bigint "match_id", null: false
+    t.boolean "is_from_receiver", default: true, null: false
+    t.boolean "completed", default: false, null: false
+    t.integer "quality"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_id"], name: "index_feedbacks_on_match_id"
   end
 
   create_table "listings", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
     t.string "type"
+    t.integer "state", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "tags", default: [], array: true
-    t.integer "state", default: 0
     t.bigint "location_id"
-    t.string "name"
-    t.string "email"
-    t.string "phone"
     t.index ["location_id"], name: "index_listings_on_location_id"
     t.index ["tags"], name: "index_listings_on_tags", using: :gin
   end
 
   create_table "locations", force: :cascade do |t|
+    t.string "location_type"
     t.string "street_address"
     t.string "city"
     t.string "state", limit: 2
     t.string "zip", limit: 5
+    t.string "county"
+    t.string "region"
+    t.string "neighborhood"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "service_area_id"
+    t.index ["service_area_id"], name: "index_locations_on_service_area_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "provider_id"
+    t.string "provider_type"
+    t.string "receiver_type"
+    t.integer "receiver_id"
+    t.string "status"
+    t.string "notes"
+    t.boolean "tentative", default: true, null: false
+    t.boolean "completed", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.string "description"
+    t.string "facebook_url"
+    t.string "website_url"
+    t.string "phone"
+    t.boolean "is_instance_owner", default: true, null: false
+    t.boolean "has_sms_account", default: false, null: false
+    t.boolean "has_hosting_account", default: false, null: false
+    t.boolean "has_mailer_account", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "email"
+    t.string "phone_2"
+    t.string "email_2"
+    t.string "preferred_contact_method"
+    t.string "preferred_contact_timeframe"
+    t.text "skills"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_people_on_user_id"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "organization_id"
+    t.string "position_type"
+    t.string "name"
+    t.string "description"
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "is_primary", default: false, null: false
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_positions_on_organization_id"
+    t.index ["person_id"], name: "index_positions_on_person_id"
+  end
+
+  create_table "service_areas", force: :cascade do |t|
+    t.bigint "parent_id"
+    t.bigint "organization_id"
+    t.string "service_area_type"
+    t.string "name"
+    t.string "description"
+    t.boolean "display_to_public", default: true, null: false
+    t.integer "display_order", default: 10, null: false
+    t.boolean "is_created_by_admin", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["display_order"], name: "index_service_areas_on_display_order"
+    t.index ["display_to_public"], name: "index_service_areas_on_display_to_public"
+    t.index ["is_created_by_admin"], name: "index_service_areas_on_is_created_by_admin"
+    t.index ["name"], name: "index_service_areas_on_name"
+    t.index ["organization_id"], name: "index_service_areas_on_organization_id"
+    t.index ["parent_id"], name: "index_service_areas_on_parent_id"
+  end
+
+  create_table "shared_accounts", force: :cascade do |t|
+    t.string "name"
+    t.string "account_url"
+    t.string "username"
+    t.string "password_hint"
+    t.string "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "system_settings", force: :cascade do |t|
+    t.string "exchange_type", default: "peer_to_peer", null: false
+    t.boolean "separate_asks_offers", default: true, null: false
+    t.boolean "community_resources_module", default: true, null: false
+    t.boolean "announcements_module", default: true, null: false
+    t.boolean "donations_module", default: true, null: false
+    t.boolean "positions_module", default: true, null: false
+    t.boolean "shared_accounts_module", default: true, null: false
+    t.boolean "allow_sms", default: false, null: false
+    t.boolean "chat_module", default: true, null: false
+    t.text "landing_page_text_what"
+    t.text "landing_page_text_who"
+    t.text "landing_page_text_how"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -82,6 +276,17 @@ ActiveRecord::Schema.define(version: 2020_04_12_132525) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "external_resources", "locations"
+  add_foreign_key "communication_logs", "matches"
+  add_foreign_key "communication_logs", "people"
+  add_foreign_key "community_resources", "locations"
+  add_foreign_key "community_resources", "organizations"
+  add_foreign_key "community_resources", "service_areas"
+  add_foreign_key "donations", "people"
+  add_foreign_key "feedbacks", "matches"
   add_foreign_key "listings", "locations"
+  add_foreign_key "locations", "service_areas"
+  add_foreign_key "people", "users"
+  add_foreign_key "positions", "organizations"
+  add_foreign_key "positions", "people"
+  add_foreign_key "service_areas", "organizations"
 end

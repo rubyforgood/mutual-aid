@@ -21,7 +21,6 @@
             <b-button type='is-primary'>Submit an Ask</b-button>
             <br>
             <span class=''><a href='/community_resources'>Browse resources</a></span>
-            <!-- <span class="action-button"><span class='button is-primary is-outlined'>Browse resources</span></span> -->
           </div>
         </div>
       </div>
@@ -32,9 +31,9 @@
             <b-button type='is-primary'>View Asks</b-button>
             <b-button type='is-primary' outlined>Submit an Offer</b-button>
             <br>
-            <span class=''><a href='/external_resources/new'>Share a community resource</a></span>
+            <span class=''><a href='/community_resources/new'>Share a community resource</a></span>
             <br>
-            <span class=''><a href='/listings/offers/new'>Donate money</a></span> | <span class=''><a href='/listings/offers/new'>Donate goods</a></span>
+            <span class=''><a href='/donations/new'>Donate money</a></span> | <span class=''><a href='/donations/new'>Donate goods</a></span>
             <br>
             <span class=''><a href='/volunteers/new'>Volunteer</a></span>
           </div>

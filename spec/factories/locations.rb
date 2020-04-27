@@ -1,8 +1,10 @@
 FactoryBot.define do
   factory :location do
-    street_address { "111 E Grandview Pkwy" }
-    city           { "Traverse City" }
-    state          { "MI" }
-    zip            { "49684" }
+    location_type { "MyString" }
+    street_address { "MyString" }
+    city { "MyString" }
+    state { "NY" }
+    zip { "12345" }
+    county { "MyString" }
   end
 end

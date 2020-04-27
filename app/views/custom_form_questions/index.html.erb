@@ -1,0 +1,33 @@
+<%= render "layouts/view_header", resource: @custom_form_questions.first %>
+
+<div class="section-detail">
+  <table class="table table-hover table-curved table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Input type</th>
+        <th>Is required</th>
+        <th>Form type</th>
+        <th>Option list</th>
+        <th>Hint text</th>
+        <th>Display order</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% @custom_form_questions.each do |custom_form_question| %>
+      <tr>
+        <td><%= custom_form_question.name %></td>
+        <td><%= custom_form_question.input_type %></td>
+        <td><%= yes_no(custom_form_question.is_required) %></td>
+        <td><%= custom_form_question.form_type %></td>
+        <td><%= custom_form_question.option_list %></td>
+        <td><%= custom_form_question.hint_text %></td>
+        <td><%= custom_form_question.display_order %></td>
+        <td><%= edit_button(custom_form_question) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

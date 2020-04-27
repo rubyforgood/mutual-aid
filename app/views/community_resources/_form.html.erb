@@ -1,0 +1,52 @@
+<%= simple_form_for @community_resource do |f| %>
+  <% if f.object.errors.any? %>
+    <div id="error_explanation">
+      <h2 class="subtitle"><%= pluralize(community_resource.errors.count, "error") %> prohibited this community_resource from being saved:</h2>
+
+      <ul>
+        <% f.object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :name, required: true, label: "Resource/organization name" %>
+    <%= f.input :description, required: true, as: :text, input_html: { rows: 2 } %>
+
+    <% if ["new", "create"].include?(action_name) %>
+      <%= f.hidden_field :is_approved %>
+    <% else %>
+      <%= f.input :is_approved, as: :radio_buttons %>
+    <% end %>
+
+    <div class="label">Dates to publish this resource</div>
+    <div class="field is-grouped">
+      <div class="field">
+        <%= f.input :publish_from, as: :date, include_blank: true %>
+      </div>
+      <div class="field">
+        <%= f.input :publish_until, as: :date, include_blank: true %>
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <%= f.input :tags %>
+      <%= f.association :service_area, label: "Service area", label_method: "full_name" %>
+      <%= f.association :location, label: "Address", label_method: "address" %>
+      <%= f.association :organization %>
+    </div>
+
+    <div class="label is-expanded">Links</div>
+    <div class="field is-grouped">
+      <%= f.input :facebook_url, placeholder: "https://www.google.com" %>
+      <%= f.input :website_url, placeholder: "https://www.google.com" %>
+      <%= f.input :youtube_identifier %>
+    </div>
+
+    <%= f.input :phone %>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f %>
+<% end %>

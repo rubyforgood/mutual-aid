@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
 
   before_action :authenticate_user!, except: [:new, :create]
 
-  before_action :set_listing,    only: [:show, :destroy]
+  before_action :set_listing,    only: [:show, :destroy, :match, :match_confirm]
   before_action :set_form,       only: [:edit, :update]
   before_action :set_empty_form, only: [:new, :create]
 
@@ -20,13 +20,22 @@ class ListingsController < ApplicationController
   def new
   end
 
+  def match
+    @match = Match.new(asker: @listing)
+    @possible_owners = Listing.all # TODO - get this to be a filtered list -- need to add logic by which to match
+  end
+
+  def match_confirm
+    @match = Match.first # TODO - implement match id here
+  end
+
   def edit
   end
 
   def create
     if @listing.validate(params[:listing])
       @listing.save
-      redirect_to @listing, notice: 'Listing was successfully created.'
+      redirect_to root_path, notice: 'Listing was successfully created.'
     else
       render :new
     end
@@ -35,7 +44,7 @@ class ListingsController < ApplicationController
   def update
     if @listing.validate(params[:listing])
       @listing.save
-      redirect_to @listing, notice: 'Listing was successfully updated.'
+      redirect_to listings_path, notice: 'Listing was successfully updated.'
     else
       render :edit
     end

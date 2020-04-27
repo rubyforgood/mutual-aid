@@ -1,0 +1,25 @@
+<%= render "layouts/view_header", resource: @listing, page_title: "Confirm Match", view_action_name: "index", new_button: "" %>
+
+<div class="section">
+  <div class="section-detail">
+    Are you sure you want to match:
+    <br>
+    <%= @match.receiver&.name %>
+    <br>
+    with
+    <br>
+    <%= @match.provider&.name %>
+  </div>
+  <div class="section-detail">
+    <%= link_to("Autogenerate system email to offer offerer", root_path, class: "button is-primary") %>
+    <br>
+    <%= link_to("Autogenerate system text to offer offerer", root_path, class: "button is-primary") %>
+    <br>
+    <%= link_to("Log email to offer offerer", new_communication_log_path, class: "button is-primary") %>
+    <br>
+    <%= link_to("Log text to offer offerer", new_communication_log_path, class: "button is-primary") %>
+    <br>
+    <%= link_to("Cancel", root_path, class: "button is-primary is-outlined") %>
+    <br>
+  </div>
+</div>

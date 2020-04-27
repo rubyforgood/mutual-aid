@@ -1,0 +1,53 @@
+<%= render "layouts/view_header", resource: @location %>
+
+<div class="section-detail">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @location.name %>
+  </p>
+
+  <p>
+    <strong>Parent:</strong>
+    <%= @location.parent_id %>
+  </p>
+
+  <p>
+    <strong>Location type:</strong>
+    <%= @location.location_type %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @location.description %>
+  </p>
+
+  <p>
+    <strong>Street address:</strong>
+    <%= @location.street_address %>
+  </p>
+
+  <p>
+    <strong>City:</strong>
+    <%= @location.city %>
+  </p>
+
+  <p>
+    <strong>State:</strong>
+    <%= @location.state %>
+  </p>
+
+  <p>
+    <strong>Zip:</strong>
+    <%= @location.zip %>
+  </p>
+
+  <p>
+    <strong>County:</strong>
+    <%= @location.county %>
+  </p>
+
+  <%= link_to 'Edit', edit_location_path(@location) %> |
+  <%= link_to 'Back', locations_path %>
+</div>

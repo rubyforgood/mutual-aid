@@ -1,0 +1,2 @@
+class SharedAccount < ApplicationRecord
+end

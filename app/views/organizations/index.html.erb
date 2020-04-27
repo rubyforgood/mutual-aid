@@ -1,0 +1,37 @@
+<%= render "layouts/view_header", resource: @organizations.first %>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Facebook url</th>
+      <th>Website url</th>
+      <th>Phone</th>
+      <th>Primary contact</th>
+      <th>Is instance owner</th>
+      <th>Has sms account</th>
+      <th>Has hosting account</th>
+      <th>Has mailer account</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @organizations.each do |organization| %>
+      <tr>
+        <td><%= organization.name %></td>
+        <td><%= organization.description %></td>
+        <td><%= organization.facebook_url %></td>
+        <td><%= organization.website_url %></td>
+        <td><%= organization.phone %></td>
+        <td><%= organization.primary_contact&.name %></td>
+        <td><%= yes_no(organization.is_instance_owner) %></td>
+        <td><%= yes_no(organization.has_sms_account) %></td>
+        <td><%= yes_no(organization.has_hosting_account) %></td>
+        <td><%= yes_no(organization.has_mailer_account) %></td>
+        <td><%= edit_button(organization) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,55 @@
+<%= render "layouts/view_header", resource: @community_resource %>
+
+<div class="section-detail">
+  <p>
+  <strong>Name:</strong>
+  <%= @community_resource.name %>
+  </p>
+
+  <p>
+    <strong>Tags:</strong>
+    <%= @community_resource.tags %>
+  </p>
+
+  <p>
+    <strong>Website url:</strong>
+    <%= @community_resource.website_url %>
+  </p>
+
+  <p>
+    <strong>Facebook url:</strong>
+    <%= @community_resource.facebook_url %>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <%= @community_resource.phone %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @community_resource.description %>
+  </p>
+
+  <p>
+    <strong>Displaying on website:</strong>
+    <%= @community_resource.published? %>
+  </p>
+
+  <p>
+    <strong>Youtube identifier:</strong>
+    <%= @community_resource.youtube_identifier %>
+  </p>
+
+  <p>
+    <strong>ServiceArea:</strong>
+    <%= @community_resource.service_area&.name %>
+  </p>
+
+  <p>
+    <strong>Approved:</strong>
+    <%= @community_resource.is_approved %>
+  </p>
+
+  <%= link_to 'Back', community_resources_path %>
+</div>

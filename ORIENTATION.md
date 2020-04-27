@@ -28,7 +28,7 @@ Community norm: timing is difficult for all of us right now given the current un
     * Option for multiple languages
 * Site should ideally be whitelabelable so the mutual aid group is forefront, rather than a "user" themselves of a branded platform
 * Tags
-    * Categorization, which should match listing and external_resource categorization
+    * Categorization, which should match listing and community_resource categorization
     * Examples include: transportation, errands, money, housing, translation, etc
 * Listings
     * Listings vs UserProfiles: there's some nuance here between "I'm willing to offer transportation," and, "I can give rides on April 12 from 2-4pm." And an additional level of complexity for recurring asks and/or offers.
@@ -43,7 +43,7 @@ Community norm: timing is difficult for all of us right now given the current un
 * Asks
     * Should be simple, humane, dignified
     * Option to request a dispatcher or some sort of facilitation
-* External resources list
+* Community resources list
     * Resources clearinghouse — with a review/approval mechanism
     * Examples include local diaper banks, food pantries, etc
 * Pod/neighborhood
@@ -69,7 +69,7 @@ Community norm: timing is difficult for all of us right now given the current un
 * Bug reporting
 
 # Current status
-* Basic CRUD for external resources
+* Basic CRUD for Community resources
 * Basic CRUD for offer and ask (one of those so far)
 * Switch to Bulma CSS
 * Landing page

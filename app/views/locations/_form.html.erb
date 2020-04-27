@@ -1,0 +1,17 @@
+<%= simple_form_for @location do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :service_area, collection: @service_areas %>
+    <%= f.input :location_type %>
+    <%= f.input :street_address %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :zip %>
+    <%= f.input :county %>
+    <%= f.input :region %>
+    <%= f.input :neighborhood %>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, resource: @location, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

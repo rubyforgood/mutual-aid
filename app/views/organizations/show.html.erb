@@ -1,0 +1,58 @@
+<%= render "layouts/view_header", resource: @organization %>
+
+<div class="section-detail">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @organization.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @organization.description %>
+  </p>
+
+  <p>
+    <strong>Facebook url:</strong>
+    <%= @organization.facebook_url %>
+  </p>
+
+  <p>
+    <strong>Website url:</strong>
+    <%= @organization.website_url %>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <%= @organization.phone %>
+  </p>
+
+  <p>
+    <strong>Primary contact:</strong>
+    <%= @organization.primary_contact&.name %>
+  </p>
+
+  <p>
+    <strong>Is instance owner:</strong>
+    <%= @organization.is_instance_owner %>
+  </p>
+
+  <p>
+    <strong>Has sms account:</strong>
+    <%= @organization.has_sms_account %>
+  </p>
+
+  <p>
+    <strong>Has hosting account:</strong>
+    <%= @organization.has_hosting_account %>
+  </p>
+
+  <p>
+    <strong>Has mailer account:</strong>
+    <%= @organization.has_mailer_account %>
+  </p>
+
+  <%= link_to 'Edit', edit_organization_path(@organization) %> |
+  <%= link_to 'Back', organizations_path %>
+</div>

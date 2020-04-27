@@ -1,0 +1,34 @@
+<div class="columns is-marginless">
+  <div class="column is-9">
+    <h1 class="title">Admin</h1>
+    <br>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table table-hover table-curved table-condensed">
+    <tbody>
+      <tr><td><%= link_to "View unmet Asks", listings_path %></td></tr>
+      <tr><td><%= link_to "View outstanding Offers", listings_path %></td></tr>
+      <tr><td><%= link_to "Manage Volunteers", volunteer_admin_path %></td></tr>
+      <tr><td><%= link_to "Manage CommunityResources", community_resources_path(is_approved: false) %></td></tr>
+      <% [
+          ["service_areas", "Locations and pods"],
+          ["people"],
+          ["communication_logs"],
+          ["positions"],
+          ["announcements"],
+          ["categories"],
+          ["shared_accounts"],
+
+         ].each do |table_name, optional_text| %>
+      <tr>
+        <td>
+          <%= render "layouts/view_add_new_button", table_name: "table_name", hide_text: true, small_button: true %>
+          <%= link_to "#{optional_text || table_name.classify}", table_name %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

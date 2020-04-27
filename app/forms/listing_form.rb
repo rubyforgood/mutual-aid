@@ -2,12 +2,15 @@ class ListingForm < Reform::Form
   DEFAULT_TAGS = [
     'prepared meals',
     'groceries',
+    'housing',
     'household supplies',
     'cleaning',
+    'clothing',
     'laundry',
     'home repairs',
     'yard work',
     'childcare',
+    'storage',
     'dog walking',
     'pet sitting',
     'emotional support',
@@ -17,19 +20,14 @@ class ListingForm < Reform::Form
     'making calls',
     'tech support',
     'translation',
+    'healthcare',
     'cash',
+    'Information about financial assistance'
   ]
 
   collection :tags
 
   property :location, form: LocationForm
-  property :name
-  property :email
-  property :phone
-
-  validates :name,  presence: true
-  validates :email, presence: true
-  validates :phone, presence: true
 
   def self.all_tags
     DEFAULT_TAGS | Listing.all_tags

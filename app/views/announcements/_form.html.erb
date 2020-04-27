@@ -6,9 +6,9 @@
     <%= f.input :description %>
 
     <% if ["new", "create"].include?(action_name) %>
-      <%= f.hidden_field :approved %>
+      <%= f.hidden_field :is_approved %>
     <% else %>
-      <%= f.input :approved %>
+      <%= f.input :is_approved %>
     <% end %>
 
     <%= f.input :publish_from %>

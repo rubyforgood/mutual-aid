@@ -15,7 +15,7 @@ class PublicController < ActionController::Base
   end
 
   def news_and_announcements
-    @announcements = Announcement.where(approved: true).published
+    @announcements = Announcement.where(is_approved: true).published
   end
 
   def share

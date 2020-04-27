@@ -7,11 +7,13 @@
       <TagList :tags="locationTags" />
       <h5 class="subtitle">{{ listing.short_title }}</h5>
       <p>{{ listing.description }}</p>
+      <div>
+        <time :datetime="listing.publish_until"></time>
+      </div>
     </div>
     <div class="tileBrowser-listItem-actions">
-      <button>View Profile</button>
-      <button>Contact</button>
-      <button>Match</button>
+      <button class="button icon-list is-primary is-outlined">View Profile</button>
+      <button class="button icon-list is-primary is-outlined">Contact</button>
     </div>
   </li>
 </template>

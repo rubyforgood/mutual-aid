@@ -8,10 +8,10 @@ it('works with reasonable data', function () {
 
   var wrapper = mount(TileBrowser, {
     propsData: {
-      listings: testData.listings,
+      listings: testData.contributions,
       helper: new ListingDataAdapter({
         categories: testData.categories,
-        locations: testData.locations,
+        locations: testData.service_areas,
       }),
     },
   })

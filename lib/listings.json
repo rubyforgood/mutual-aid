@@ -1,8 +1,9 @@
 {
   "_comment": "This is useful seed data. It could go into `spec/fixtures` at some point. For now, we're using it as examples to develop against, so I've put it in `lib`",
-  "listings": [
+  "contributions": [
     {
       "id": 1,
+    "contribution_type": 1,
       "categories": [1],
       "availability": [1, 2, 3],
       "urgency": 1,
@@ -11,12 +12,11 @@
       "created_at": "2020-04-11T02:15:50.499Z",
       "service_area": 1,
       "map_location": "44.5,-85.1",
-      "match_type": 1,
       "short_title": "Look after my kid",
       "description": "Lorem Ipsum is the name of my child. They are a very nice child. You won't have much trouble, but they are young and need the help",
       "preferred_contact_types": [1,2]
     },
-    {"id": 2, "categories": [1, 2], "availability": [1, 2, 3], "urgency": 2, "publish_until": "2021-01-01", "publish_until_humanized": "this week","service_area": 2, "map_location": null, "match_type": 2, "preferred_contact_types": [1]},
+    {"id": 2, "categories": [1, 2], "availability": [1, 2, 3], "urgency": 2, "publish_until": "2021-01-01", "publish_until_humanized": "this week","service_area": 2, "map_location": null, "contribution_type": 2, "preferred_contact_types": [1]},
     {
       "id": 3,
       "categories": [3],
@@ -25,7 +25,7 @@
       "created_at": "2020-04-11T04:17:31.288Z",
       "publish_until": "2021-09-11",
       "service_area": 1,
-      "match_type": 1,
+      "contribution_type": 1,
       "short_title": "bathroom help, like cleaning specifically if that's okay",
       "description": "I'm afraid I'll fall and hurt my hip again. Can someone help me clean?",
       "preferred_contact_types": [2,3]
@@ -43,19 +43,21 @@
     {"id": 4, "name": "Traverse City", "long_name": "Traverse City Township"}
   ],
   "urgencies": [
-    {"id": 1, "name": "Emergency"},
+    {"id": 1, "name": "Critical"},
     {"id": 2, "name": "Urgent"},
     {"id": 3, "name": "Any Time"}
   ],
-  "match_type": [
-    {"id": 1, "name": "ask or offer"},
-    {"id": 2, "name": "profile"},
-    {"id": 3, "name": "community resource"},
-    {"id": 4, "name": "anonymous"}
+  "contribution_types": [
+    {"id": 1, "name": "ask"},
+    {"id": 2, "name": "offer"},
+    {"id": 3, "name": "ongoing"},
+    {"id": 4, "name": "community resource"}
   ],
   "contact_types": [
+    {"id": 0, "name": "none"},
     {"id": 1, "name": "text"},
     {"id": 2, "name": "call"},
-    {"id": 3, "name": "email"}
+    {"id": 3, "name": "email"},
+    {"id": 4, "name": "whatsapp"}
   ]
 }

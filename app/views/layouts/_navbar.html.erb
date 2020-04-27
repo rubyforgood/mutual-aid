@@ -1,47 +1,58 @@
 <nav class='navbar is-fixed-top is-white'>
-  <div class='navbar-brand'>
-    <div class='navbar-item'>
-      <a href='/'>
-        <%= image_tag 'logo.png', height: 300, alt: 'festi logo'%>
+  <div class="container">
+    <div class='navbar-brand'>
+      <div class='navbar-item'>
+        <a href='/'>
+          <%= image_tag 'logo.png', height: 300, alt: 'festi logo'%>
+        </a>
+      </div>
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
       </a>
     </div>
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class='navbar-menu'>
-    <div class="navbar-start">
-      <div class="navbar-item">
-        <%= link_to("About", about_public_path) %>
-      </div>
-      <div class="navbar-item">
-        <%= link_to("Share", share_public_path) %>
-      </div>
-      <div class="navbar-item">
-        <%= link_to("Community Resources", community_resources_public_path) %>
-      </div>
-      <div class="navbar-item">
-        <%= link_to("Announcements", news_and_announcements_public_path) %>
-      </div>
-    </div>
-    <div class="navbar-end">
-      <% if current_user %>
-        <div class='navbar-item'>
-          <%= link_to "Account", edit_user_registration_path %>
+    <div class='navbar-menu'>
+      <div class="navbar-start">
+        <div class="navbar-item">
+          <%= link_to("About", about_public_path) %>
         </div>
-        <div class='navbar-item'>
-          <%= link_to "Admin", landing_page_admin_path %>
+        <div class="navbar-item">
+          <%= link_to("Share", share_public_path) %>
         </div>
-        <div class='navbar-item'>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, no_confirm: true, :class=>"button is-danger is-outlined"%>
+        <div class="navbar-item">
+          <%= link_to("Community Resources", community_resources_public_path) %>
         </div>
-      <% else %>
-        <div class='navbar-item'>
-          <%= link_to "Log in", new_user_session_path, :class=>"button is-primary" %>
+        <div class="navbar-item">
+          <%= link_to("Announcements", news_and_announcements_public_path) %>
         </div>
-      <% end %>
+      </div>
+      <div class="navbar-end">
+        <% if current_user %>
+          <div class='navbar-item'>
+            <%= link_to "Account", edit_user_registration_path %>
+          </div>
+          <div class='navbar-item'>
+            <%= link_to "Admin", landing_page_admin_path %>
+          </div>
+          <div class='navbar-item'>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, no_confirm: true, :class=>"button is-danger is-outlined"%>
+          </div>
+        <% else %>
+          <div class='navbar-item'>
+            <%= link_to "Log in", new_user_session_path, :class=>"button is-primary" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </nav>
+
+<script>
+  const burger = document.querySelector('.navbar-burger')
+  const menu = document.querySelector('.navbar-menu')
+  burger.addEventListener('click', ()=> {
+    burger.classList.toggle('is-active')
+    menu.classList.toggle('is-active')
+  })
+</script>

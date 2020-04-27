@@ -7,6 +7,7 @@
     "babel-loader": "^8.1.0",
     "buefy": "^0.8.17",
     "css-loader": "^3.5.2",
+    "file-loader": "^6.0.0",
     "style-loader": "^1.1.4",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.1",

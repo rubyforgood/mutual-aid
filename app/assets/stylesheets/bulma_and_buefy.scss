@@ -1,0 +1,9 @@
+// Import Bulma's core if needed for customizations
+// @import "bulma/sass/utilities/_all";
+
+// Our customizations
+$input-placeholder-color: hsl(0, 0%, 86%); //has-text-grey-lighter
+
+
+@import "bulma/bulma";
+@import "buefy/src/scss/buefy";

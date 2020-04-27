@@ -8,7 +8,7 @@
       <th>City, State</th>
       <th>Zip</th>
       <th>County</th>
-      <th>Parent</th>
+      <th>ServiceArea</th>
       <th>Edit</th>
     </tr>
   </thead>
@@ -18,11 +18,11 @@
     <tr>
       <td><%= location.location_type %></td>
       <td><%= location.street_address %></td>
-      <td><%= location.city %><%= ", " + location.state if location.state %></td>
+      <td><%= location.city %><%= ", " + location.state if location.state.present? %></td>
       <td><%= location.zip %></td>
       <td><%= location.county %></td>
-      <td><%= location.parent&.name %></td>
-      <td><%= link_to 'Edit', edit_location_path(location) %></td>
+      <td><%= location.service_area&.name %></td>
+      <td><%= edit_button(location) %></td>
     </tr>
   <% end %>
   </tbody>

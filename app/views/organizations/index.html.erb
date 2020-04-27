@@ -26,11 +26,11 @@
         <td><%= organization.website_url %></td>
         <td><%= organization.phone %></td>
         <td><%= organization.primary_contact&.name %></td>
-        <td><%= organization.is_instance_owner %></td>
-        <td><%= organization.has_sms_account %></td>
-        <td><%= organization.has_hosting_account %></td>
-        <td><%= organization.has_mailer_account %></td>
-        <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
+        <td><%= yes_no(organization.is_instance_owner) %></td>
+        <td><%= yes_no(organization.has_sms_account) %></td>
+        <td><%= yes_no(organization.has_hosting_account) %></td>
+        <td><%= yes_no(organization.has_mailer_account) %></td>
+        <td><%= edit_button(organization) %></td>
       </tr>
     <% end %>
   </tbody>

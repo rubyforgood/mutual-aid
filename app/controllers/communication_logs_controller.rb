@@ -55,6 +55,14 @@ class CommunicationLogsController < ApplicationController
     end
 
     def communication_log_params
-      params.require(:communication_log).permit(:person_id, :channel, :sent_at, :needs_follow_up)
+      params.require(:communication_log).permit(
+          :person_id,
+          :match_id,
+          :channel,
+          :sent_at,
+          :from_type,
+          :to_type,
+          :needs_follow_up
+      )
     end
 end

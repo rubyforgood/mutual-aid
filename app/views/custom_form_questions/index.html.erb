@@ -10,7 +10,7 @@
         <th>Form type</th>
         <th>Option list</th>
         <th>Hint text</th>
-        <th>Position</th>
+        <th>Display order</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -20,12 +20,12 @@
       <tr>
         <td><%= custom_form_question.name %></td>
         <td><%= custom_form_question.input_type %></td>
-        <td><%= custom_form_question.is_required %></td>
+        <td><%= yes_no(custom_form_question.is_required) %></td>
         <td><%= custom_form_question.form_type %></td>
         <td><%= custom_form_question.option_list %></td>
         <td><%= custom_form_question.hint_text %></td>
-        <td><%= custom_form_question.position %></td>
-        <td><%= link_to 'Edit', edit_custom_form_question_path(custom_form_question) %></td>
+        <td><%= custom_form_question.display_order %></td>
+        <td><%= edit_button(custom_form_question) %></td>
       </tr>
     <% end %>
     </tbody>

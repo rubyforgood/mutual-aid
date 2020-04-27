@@ -20,12 +20,7 @@
             <strong><%= announcement.description.truncate(20) %></strong>
           </td>
           <td class="has-text-centered"><%= yes_no(announcement.published?) %></td>
-          <td>
-            <%= link_to("<span class='fa fa-edit'></span><span></span>".html_safe,
-                        edit_announcement_path(announcement) ,
-                        title: "Edit #{announcement.name}",
-                        class: "button") if current_user %>
-          </td>
+          <td><%= edit_button(announcement) %></td>
         </tr>
       <% end %>
     </tbody>

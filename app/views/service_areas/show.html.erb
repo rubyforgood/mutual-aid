@@ -1,0 +1,58 @@
+<%= render "layouts/view_header", resource: @service_area %>
+
+<div class="section-detail">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Parent:</strong>
+    <%= @service_area.parent_id %>
+  </p>
+
+  <p>
+    <strong>Organization:</strong>
+    <%= @service_area.organization_id %>
+  </p>
+
+  <p>
+    <strong>Location type:</strong>
+    <%= @service_area.service_area_type %>
+  </p>
+
+  <p>
+    <strong>Street address:</strong>
+    <%= @service_area.street_address %>
+  </p>
+
+  <p>
+    <strong>City:</strong>
+    <%= @service_area.city %>
+  </p>
+
+  <p>
+    <strong>State:</strong>
+    <%= @service_area.state %>
+  </p>
+
+  <p>
+    <strong>Zip:</strong>
+    <%= @service_area.zip %>
+  </p>
+
+  <p>
+    <strong>County:</strong>
+    <%= @service_area.county %>
+  </p>
+
+  <p>
+    <strong>Region:</strong>
+    <%= @service_area.region %>
+  </p>
+
+  <p>
+    <strong>Neighborhood:</strong>
+    <%= @service_area.neighborhood %>
+  </p>
+
+  <%= link_to 'Edit', edit_service_area_path(@service_area) %> |
+  <%= link_to 'Back', service_areas_path %>
+</div>

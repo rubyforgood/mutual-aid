@@ -19,9 +19,9 @@
           <td><%= donation.person&.name %></td>
           <td><%= donation.value %></td>
           <td><%= donation.channel %></td>
-          <td><%= donation.thank_you_sent %></td>
+          <td><%= yes_no(donation.thank_you_sent) %></td>
           <td><%= donation.notes %></td>
-          <td><%= link_to 'Edit', edit_donation_path(donation) %></td>
+          <td><%= edit_button(donation) %></td>
         </tr>
       <% end %>
     </tbody>

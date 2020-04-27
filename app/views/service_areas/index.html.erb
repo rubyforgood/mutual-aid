@@ -1,0 +1,27 @@
+<%= render "layouts/view_header", resource: @service_areas.first %>
+
+<div class="section-detail">
+  <table class="table table-hover table-curved table-condensed">
+    <thead>
+    <tr>
+      <th>Parent</th>
+      <th>Name</th>
+      <th>Service area type</th>
+      <th>Organization</th>
+      <th>Edit</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @service_areas.each do |service_area| %>
+      <tr>
+        <td><%= service_area.parent&.name %></td>
+        <td><%= service_area.name %></td>
+        <td><%= service_area.service_area_type %></td>
+        <td><%= service_area.organization&.name %></td>
+        <td><%= edit_button(service_area) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

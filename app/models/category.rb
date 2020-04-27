@@ -12,7 +12,7 @@ class Category < ApplicationRecord
       ['services', 'tech support'],
       ['services', 'translation'],
       ['services', 'accessing unemployment'],
-      ['services', 'accessing healhcare'],
+      ['services', 'accessing healthcare'],
       ['services', 'transportation'],
       ['services', 'housework'],
       ['services', 'yardwork'],

@@ -5,4 +5,8 @@ class Match < ApplicationRecord
   INITIATORS = ["receiver", "provider"]
 
   # belongs_to :coordinator, optional: true #, class_name: "Position" # TODO
+  #
+  def name
+    "#{receiver.name} & #{provider.name}"
+  end
 end

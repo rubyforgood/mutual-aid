@@ -59,14 +59,14 @@ class CommunityResourcesController < ApplicationController
     def community_resource_params
       params.require(:community_resource).permit(
           :description,
-          :publish_until,
-          :publish_from,
           :facebook_url,
-          :organization_id,
-          :system_location_id,
-          :name,
-          :phone,
           :is_approved,
+          :name,
+          :organization_id,
+          :phone,
+          :publish_from,
+          :publish_until,
+          :service_area_id,
           :website_url,
           :youtube_identifier,
           tags: [])

@@ -13,7 +13,6 @@
         <th>Donations module</th>
         <th>Shared accounts module</th>
         <th>Chat module</th>
-        <th>Landing page text</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -22,16 +21,15 @@
       <% @system_settings.each do |system_setting| %>
         <tr>
           <td><%= system_setting.exchange_type %></td>
-          <td><%= system_setting.separate_asks_offers %></td>
-          <td><%= system_setting.allow_sms %></td>
-          <td><%= system_setting.community_resources_module %></td>
-          <td><%= system_setting.announcements_module %></td>
-          <td><%= system_setting.positions_module %></td>
-          <td><%= system_setting.donations_module %></td>
-          <td><%= system_setting.shared_accounts_module %></td>
-          <td><%= system_setting.chat_module %></td>
-          <td><%= system_setting.landing_page_text %></td>
-          <td><%= link_to 'Edit', edit_system_setting_path(system_setting) %></td>
+          <td><%= yes_no(system_setting.separate_asks_offers) %></td>
+          <td><%= yes_no(system_setting.allow_sms) %></td>
+          <td><%= yes_no(system_setting.community_resources_module) %></td>
+          <td><%= yes_no(system_setting.announcements_module) %></td>
+          <td><%= yes_no(system_setting.positions_module) %></td>
+          <td><%= yes_no(system_setting.donations_module) %></td>
+          <td><%= yes_no(system_setting.shared_accounts_module) %></td>
+          <td><%= yes_no(system_setting.chat_module) %></td>
+          <td><%= edit_button(system_setting) %></td>
         </tr>
       <% end %>
     </tbody>

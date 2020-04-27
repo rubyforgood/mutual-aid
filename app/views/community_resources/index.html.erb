@@ -26,16 +26,11 @@
           <%= " | " + community_resource.tags + " | " if community_resource.tags.any? %>
         </td>
         <td>
-          <%= community_resource.phone %> <%= community_resource.system_location&.name %>
+          <%= community_resource.phone %> <%= community_resource.service_area&.name %>
         </td>
         <td class="has-text-centered"><%= yes_no(community_resource.published?) %></td>
         <td class="has-text-centered"><%= yes_no(community_resource.is_approved) %></td>
-        <td>
-          <%= link_to("<span class='fa fa-edit'></span><span></span>".html_safe,
-                      edit_community_resource_path(community_resource) ,
-                      title: "Edit #{community_resource.name}",
-                      class: "button") if current_user %>
-        </td>
+        <td><%= edit_button(community_resource) %></td>
       </tr>
     <% end %>
     </tbody>

@@ -1,7 +1,8 @@
 class CommunityResource < ApplicationRecord
   taggable_array :tags
 
-  belongs_to :system_location
+  belongs_to :service_area
+  belongs_to :location, optional: true
   belongs_to :organization, optional: true # TODO - should this be optional???
 
   has_many :matches, as: :receiver

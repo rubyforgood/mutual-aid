@@ -28,7 +28,7 @@
         <td><%= person.skills %></td>
         <td><%= person.notes %></td>
         <td><%= person.user&.name %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
+        <td><%= edit_button(person) %></td>
       </tr>
     <% end %>
   </tbody>

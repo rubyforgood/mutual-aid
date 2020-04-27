@@ -18,7 +18,7 @@
     <% if ["new", "create"].include?(action_name) %>
       <%= f.hidden_field :is_approved %>
     <% else %>
-      <%= f.input :is_approved %>
+      <%= f.input :is_approved, as: :radio_buttons %>
     <% end %>
 
     <div class="label">Dates to publish this resource</div>
@@ -33,7 +33,8 @@
 
     <div class="field is-grouped">
       <%= f.input :tags %>
-      <%= f.association :system_location, label: "City/neighborhood", label_method: "address" %>
+      <%= f.association :service_area, label: "Service area", label_method: "full_name" %>
+      <%= f.association :location, label: "Address", label_method: "address" %>
       <%= f.association :organization %>
     </div>
 

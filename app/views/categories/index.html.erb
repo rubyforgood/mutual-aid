@@ -25,12 +25,7 @@
             <td><%= yes_no(category.is_created_by_admin) %></td>
             <td><%= yes_no(category.display_to_public) %></td>
             <td><%= category.display_order %></td>
-            <td>
-              <%= link_to("<span class='fa fa-edit'></span><span></span>".html_safe,
-                          edit_category_path(category) ,
-                          title: "Edit #{category.name}",
-                          class: "button") if current_user %>
-            </td>
+            <td><%= edit_button(category) %></td>
           </tr>
         <% end %>
         </tbody>

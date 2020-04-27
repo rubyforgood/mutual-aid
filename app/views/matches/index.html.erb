@@ -20,9 +20,9 @@
         <td><%= match.provider&.name %></td>
         <td><%= match.status %></td>
         <td><%= match.notes %></td>
-        <td><%= match.tentative %></td>
-        <td><%= match.completed %></td>
-        <td><%= link_to 'Edit', edit_match_path(match) %></td>
+        <td><%= yes_no(match.tentative) %></td>
+        <td><%= yes_no(match.completed) %></td>
+        <td><%= edit_button(match) %></td>
       </tr>
     <% end %>
   </tbody>

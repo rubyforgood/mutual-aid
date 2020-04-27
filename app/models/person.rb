@@ -3,4 +3,8 @@ class Person < ApplicationRecord
 
   has_many :matches, as: :receiver
   has_many :matches, as: :provider
+
+  def name
+    "#{first_name} #{last_name} (#{email})"
+  end
 end

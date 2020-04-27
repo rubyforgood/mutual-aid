@@ -5,10 +5,8 @@
     <%= f.input :name %>
     <%= f.input :description %>
 
-    <% if ["new", "create"].include?(action_name) %>
-      <%= f.hidden_field :is_approved %>
-    <% else %>
-      <%= f.input :is_approved %>
+    <% if !["new", "create"].include?(action_name) %>
+      <%= f.input :is_approved, as: :radio_buttons %>
     <% end %>
 
     <%= f.input :publish_from %>

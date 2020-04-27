@@ -17,7 +17,7 @@
         <td><%= user.email %></td>
         <td><%= user.person&.name %></td>
         <td>[PERMISSION LEVEL]</td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= edit_button(user) %></td>
       </tr>
     <% end %>
     </tbody>

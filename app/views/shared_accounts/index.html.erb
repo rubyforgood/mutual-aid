@@ -21,7 +21,7 @@
           <td><%= shared_account.username %></td>
           <td><%= shared_account.password_hint %></td>
           <td><%= shared_account.notes %></td>
-          <td><%= link_to 'Edit', edit_shared_account_path(shared_account) %></td>
+          <td><%= edit_button(shared_account) %></td>
         </tr>
       <% end %>
     </tbody>

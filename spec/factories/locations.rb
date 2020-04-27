@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :location do
-    name { "MyString" }
-    parent { nil }
     location_type { "MyString" }
     description { "MyString" }
     street_address { "MyString" }

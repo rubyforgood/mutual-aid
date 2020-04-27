@@ -37,7 +37,7 @@
                 hint: "(displays below the question)",
                 input_html: { value: f.object.hint_text,
                               rows: 1 } %>
-    <%= f.input :position %>
+    <%= f.input :display_order, as: :integer %>
 
     <%= f.input :option_list,
                 as: :array,

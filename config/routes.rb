@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :feedbacks
   resources :categories
   devise_for :users
 
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
   resources :people
   resources :positions
   resources :shared_accounts
-  resources :system_locations
+  resources :service_areas
   resources :system_settings
   resources :users
 

@@ -3,9 +3,9 @@
 
   <div class="form-inputs">
     <%= f.association :person %>
-    <%= f.input :value %>
+    <%= f.input :value, as: :integer %>
     <%= f.input :channel %>
-    <%= f.input :thank_you_sent %>
+    <%= f.input :thank_you_sent, as: :radio_buttons %>
     <%= f.input :notes %>
   </div>
 

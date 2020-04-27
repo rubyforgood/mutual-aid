@@ -1,4 +1,4 @@
-<%= render "layouts/view_header", resource: @communication_log.first %>
+<%= render "layouts/view_header", resource: @communication_logs.first %>
 
 <div class="section-detail">
   <table class="table table-hover table-curved table-condensed">
@@ -18,8 +18,8 @@
         <td><%= communication_log.person&.name %></td>
         <td><%= communication_log.channel %></td>
         <td><%= communication_log.sent_at %></td>
-        <td><%= communication_log.needs_follow_up %></td>
-        <td><%= link_to 'Edit', edit_communication_log_path(communication_log) %></td>
+        <td><%= yes_no(communication_log.needs_follow_up) %></td>
+        <td><%= edit_button(communication_log) %></td>
       </tr>
     <% end %>
     </tbody>

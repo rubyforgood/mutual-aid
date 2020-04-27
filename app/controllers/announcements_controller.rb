@@ -57,6 +57,12 @@ class AnnouncementsController < ApplicationController
     end
 
     def announcement_params
-      params.require(:announcement).permit(:name, :description, :is_approved, :publish_from, :publish_until)
+      params.require(:announcement).permit(
+          :name,
+          :description,
+          :is_approved,
+          :publish_from,
+          :publish_until
+      )
     end
 end

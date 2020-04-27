@@ -5,6 +5,8 @@ class CreateListings < ActiveRecord::Migration[6.0]
       t.text :description
       t.string :type
 
+      t.integer :state, default: 0
+
       t.timestamps
     end
   end

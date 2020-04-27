@@ -10,7 +10,7 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
-    @parent_locations = Location.order(:name).map{ |t| [t.full_name, t.id] }
+    @service_areas = ServiceArea.order(:name).map{ |t| [t.full_name, t.id] }
   end
 
   def edit
@@ -25,7 +25,7 @@ class LocationsController < ApplicationController
         format.html { redirect_to locations_path, notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
-        @parent_locations = Location.order(:name).map{ |t| [t.full_name, t.id] }
+        @service_areas = ServiceArea.order(:name).map{ |t| [t.full_name, t.id] }
         format.html { render :new }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
@@ -59,14 +59,14 @@ class LocationsController < ApplicationController
 
   def location_params
     params.require(:location).permit(
-        :name,
-        :description,
-        :display_to_public,
-        :display_order,
-        :parent_id,
-        :created_by,
-        :neighborhood,
+        :service_area_id,
+        :location_type,
+        :street_address,
+        :city,
+        :state,
+        :zip,
+        :county,
         :region,
-        locations_attributes: [])
+        :neighborhood)
   end
 end

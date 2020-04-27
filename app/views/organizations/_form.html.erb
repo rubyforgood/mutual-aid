@@ -3,14 +3,14 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :description %>
+    <%= f.input :description, as: :text, input_html: { rows: 2 } %>
     <%= f.input :facebook_url %>
     <%= f.input :website_url %>
     <%= f.input :phone %>
-    <%= f.input :is_instance_owner %>
-    <%= f.input :has_sms_account %>
-    <%= f.input :has_hosting_account %>
-    <%= f.input :has_mailer_account %>
+    <%= f.input :is_instance_owner, as: :radio_buttons %>
+    <%= f.input :has_sms_account, as: :radio_buttons %>
+    <%= f.input :has_hosting_account, as: :radio_buttons %>
+    <%= f.input :has_mailer_account, as: :radio_buttons %>
 
 <!--    # TODO - add ability to list associated positions below -->
   </div>

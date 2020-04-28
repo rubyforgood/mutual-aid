@@ -1,0 +1,19 @@
+$sizes: (0, 1, 2, 3, 4, 5, 6, 7, 8);
+$positions: ('top', 'left', 'bottom', 'right');
+
+@each $size in $sizes {
+  @each $position in $positions {
+    .m#{str-slice($position, 0, 1)}-#{$size} {
+      margin-#{$position}: $size + rem;
+    }
+    .m#{str-slice($position, 0, 1)}-#{$size}5 {
+      margin-#{$position}: ($size + .5) + rem;
+    }
+    .p#{str-slice($position, 0, 1)}-#{$size} {
+      padding-#{$position}: $size + rem;
+    }
+    .p#{str-slice($position, 0, 1)}-#{$size}5 {
+      padding-#{$position}: ($size + .5) + rem;
+    }
+  }
+}

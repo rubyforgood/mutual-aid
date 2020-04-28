@@ -1,45 +1,37 @@
-<div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">System Settings</h1>
-    <br>
-  </div>
-  <div class="column is-2">
-    <%= render "layouts/add_new_button", table_name: "system_settings" %>
-  </div>
-</div>
+<%= render "layouts/view_header", resource: @system_settings.first %>
 
-<table class="table table-hover table-curved table-condensed">
-  <thead>
-  <tr>
-          <th>Exchange type</th>
-          <th>Separate asks offers</th>
-          <th>Allow sms</th>
-          <th>Community resources module</th>
-          <th>Announcements module</th>
-          <th>Positions module</th>
-          <th>Donations module</th>
-          <th>Shared accounts module</th>
-          <th>Chat module</th>
-          <th>Landing page text</th>
+<div class="section-detail">
+  <table class="table table-hover table-curved table-condensed">
+    <thead>
+      <tr>
+        <th>Exchange type</th>
+        <th>Separate asks offers</th>
+        <th>Allow sms</th>
+        <th>Community resources module</th>
+        <th>Announcements module</th>
+        <th>Positions module</th>
+        <th>Donations module</th>
+        <th>Shared accounts module</th>
+        <th>Chat module</th>
         <th>Edit</th>
-  </tr>
-  </thead>
+      </tr>
+    </thead>
 
-  <tbody>
-  <% @system_settings.each do |system_setting| %>
-    <tr>
-              <td><%= system_setting.exchange_type %></td>
-              <td><%= system_setting.separate_asks_offers %></td>
-              <td><%= system_setting.allow_sms %></td>
-              <td><%= system_setting.community_resources_module %></td>
-              <td><%= system_setting.announcements_module %></td>
-              <td><%= system_setting.positions_module %></td>
-              <td><%= system_setting.donations_module %></td>
-              <td><%= system_setting.shared_accounts_module %></td>
-              <td><%= system_setting.chat_module %></td>
-              <td><%= system_setting.landing_page_text %></td>
-            <td><%= link_to 'Edit', edit_system_setting_path(system_setting) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+    <tbody>
+      <% @system_settings.each do |system_setting| %>
+        <tr>
+          <td><%= system_setting.exchange_type %></td>
+          <td><%= yes_no(system_setting.separate_asks_offers) %></td>
+          <td><%= yes_no(system_setting.allow_sms) %></td>
+          <td><%= yes_no(system_setting.community_resources_module) %></td>
+          <td><%= yes_no(system_setting.announcements_module) %></td>
+          <td><%= yes_no(system_setting.positions_module) %></td>
+          <td><%= yes_no(system_setting.donations_module) %></td>
+          <td><%= yes_no(system_setting.shared_accounts_module) %></td>
+          <td><%= yes_no(system_setting.chat_module) %></td>
+          <td><%= edit_button(system_setting) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

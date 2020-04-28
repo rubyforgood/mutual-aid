@@ -5,23 +5,26 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
   </head>
 
-  <body class='has-navbar-fixed-top'>
-  <%= render partial: "layouts/navbar" %>
-    <div class="notices-and-alerts">
-      <%= render partial: "layouts/notices_and_alerts" %>
-    </div>
-    <script>
-      const burger = document.querySelector('.navbar-burger')
-      const menu = document.querySelector('.navbar-menu')
-      burger.addEventListener('click', ()=> {
-        burger.classList.toggle('is-active')
-        menu.classList.toggle('is-active')
-      })
-    </script>
-    <%= yield %>
+  <body>
+    <!-- TODO: implement skip-nav link, eg with vue-a00y/vue-skip-to -->
+
+    <%= render "layouts/navbar" %>
+    <%= render "layouts/notices_and_alerts" %>
+
+    <!--
+      Note: we use a single `.section` around <main> because most of our pages only need one.
+      The intention is to _not_ use `.section` anywhere else on the site. It's not designed
+      to be nested and it will be easier for us to use html <section> elements with some css
+      to give it vertical padding.
+    -->
+    <main class="section container">
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,0 +1,13 @@
+<%= simple_form_for @feedback do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :match, label_method: "name" %>
+    <%= f.input :is_from_receiver, as: :radio_buttons %>
+    <%= f.input :completed, as: :radio_buttons %>
+    <%= f.input :quality, as: :integer %>
+    <%= f.input :description %>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, record: @feedback, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

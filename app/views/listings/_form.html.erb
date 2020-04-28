@@ -1,3 +1,6 @@
+<% resource ||= nil %>
+<% listing ||= resource %>
+
 <div class='section'>
 <%= form_with(model: listing, local: true, class: 'listing-form') do |form| %>
   <% if listing.errors.any? %>

@@ -1,0 +1,18 @@
+<%= simple_form_for @category do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="field is-grouped">
+      <%= f.input :name %>
+      <%= f.association :parent, collection: @parent_categories %>
+    </div>
+    <%= f.input :description, as: :text, input_html: { rows: 2 } %>
+    <div class="field is-horizontal">
+      <%= f.input :display_to_public, as: :radio_buttons %>
+      <%= f.input :display_order, as: :integer %>
+      <%= f.input :is_created_by_admin, as: :radio_buttons %>
+    </div>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, resource: @category, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

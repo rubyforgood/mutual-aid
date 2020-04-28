@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :feedbacks
+  resources :categories
   devise_for :users
 
   get "/admin", to: "admin#landing_page", as: "landing_page_admin"
@@ -16,12 +18,8 @@ Rails.application.routes.draw do
     member do
       get "/match", to: "listings#match", as: "match_listing"
       post "/match", to: "listings#match"
-      get "/match/confirm", to: "listings#confirm_match", as: "confirm_match_listing"
-      post "/match/confirm", to: "listings#confirm_match"
-    end
-    collection do
-      resources :offers
-      resources :asks
+      get "/match/confirm", to: "listings#match_confirm", as: "match_confirm_listing"
+      post "/match/confirm", to: "listings#match_confirm"
     end
   end
 
@@ -29,16 +27,15 @@ Rails.application.routes.draw do
   resources :communication_logs
   resources :custom_form_questions
   resources :donations
-  resources :external_resources
+  resources :community_resources
   resources :locations
   resources :matches
   resources :organizations
   resources :people
   resources :positions
   resources :shared_accounts
-  resources :system_locations
+  resources :service_areas
   resources :system_settings
-  resources :system_tags
   resources :users
 
   authenticated :user do

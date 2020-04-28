@@ -1,18 +1,19 @@
-<%= simple_form_for @organization, wrapper: :default, defaults: { wrapper: false } do |f| %>
+<%= simple_form_for @organization do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :description %>
+    <%= f.input :description, as: :text, input_html: { rows: 2 } %>
     <%= f.input :facebook_url %>
     <%= f.input :website_url %>
     <%= f.input :phone %>
-    <%= f.association :point_of_contact %>
-    <%= f.input :is_instance_owner %>
-    <%= f.input :has_sms_account %>
-    <%= f.input :has_hosting_account %>
-    <%= f.input :has_mailer_account %>
+    <%= f.input :is_instance_owner, as: :radio_buttons %>
+    <%= f.input :has_sms_account, as: :radio_buttons %>
+    <%= f.input :has_hosting_account, as: :radio_buttons %>
+    <%= f.input :has_mailer_account, as: :radio_buttons %>
+
+<!--    # TODO - add ability to list associated positions below -->
   </div>
 
-  <%= render "layouts/view_template_form_buttons", f: f, record: @organization, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+  <%= render "layouts/view_footer_buttons", f: f, resource: @organization, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
 <% end %>

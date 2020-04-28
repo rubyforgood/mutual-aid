@@ -1,33 +1,28 @@
-<div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">Announcements</h1>
-    <br>
-  </div>
-  <div class="column is-2">
-    <%= render "layouts/add_new_button", table_name: "announcements" %>
-  </div>
-</div>
+<%= render "layouts/view_header", resource: @announcements.first %>
 
-<table class="table table-hover table-curved table-condensed">
-  <thead>
-  <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Display date start</th>
-          <th>Display date end</th>
+<div class="section-detail">
+  <table class="table table-hover table-curved table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Published?</th>
         <th>Edit</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @announcements.each do |announcement| %>
-    <tr>
-              <td><%= announcement.name %></td>
-              <td><%= announcement.description %></td>
-              <td><%= announcement.display_date_start %></td>
-              <td><%= announcement.display_date_end %></td>
-            <td><%= link_to 'Edit', edit_announcement_path(announcement) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+      </tr>
+    </thead>
+    <tbody>
+      <% @announcements.each do |announcement| %>
+        <tr>
+          <td>
+            <strong><%= announcement.name %></strong>
+          </td>
+          <td>
+            <strong><%= announcement.description.truncate(20) %></strong>
+          </td>
+          <td class="has-text-centered"><%= yes_no(announcement.published?) %></td>
+          <td><%= edit_button(announcement) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

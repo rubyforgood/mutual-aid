@@ -1,4 +1,5 @@
 class PublicController < ActionController::Base
+  layout 'application'
 
   protect_from_forgery with: :exception
   include ApplicationHelper
@@ -8,13 +9,14 @@ class PublicController < ActionController::Base
 
   def community_resources
     @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin?
-    @external_resources = ExternalResource.all
+    @community_resources = CommunityResource.where(is_approved: true).published
   end
 
   def landing_page
   end
 
   def news_and_announcements
+    @announcements = Announcement.where(is_approved: true).published
   end
 
   def share

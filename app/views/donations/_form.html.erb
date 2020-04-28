@@ -1,13 +1,13 @@
-<%= simple_form_for @donation, wrapper: :default, defaults: { wrapper: false } do |f| %>
+<%= simple_form_for @donation do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.association :person %>
-    <%= f.input :value %>
+    <%= f.input :value, as: :integer %>
     <%= f.input :channel %>
-    <%= f.input :thank_you_sent %>
+    <%= f.input :thank_you_sent, as: :radio_buttons %>
     <%= f.input :notes %>
   </div>
 
-  <%= render "layouts/view_template_form_buttons", f: f, record: @donation, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+  <%= render "layouts/view_footer_buttons", f: f, resource: @donation, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
 <% end %>

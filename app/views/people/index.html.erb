@@ -1,43 +1,35 @@
-<div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">People</h1>
-    <br>
-  </div>
-  <div class="column is-2">
-    <%= render "layouts/add_new_button", table_name: "people" %>
-  </div>
-</div>
+<%= render "layouts/view_header", resource: @people.first %>
 
 <table class="table table-hover table-curved table-condensed">
   <thead>
-  <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th>Phone 2</th>
-          <th>Email 2</th>
-          <th>Skills</th>
-          <th>Notes</th>
-          <th>User</th>
-        <th>Edit</th>
-  </tr>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Phone 2</th>
+      <th>Email 2</th>
+      <th>Skills</th>
+      <th>Notes</th>
+      <th>User</th>
+      <th>Edit</th>
+    </tr>
   </thead>
 
   <tbody>
-  <% @people.each do |person| %>
-    <tr>
-              <td><%= person.first_name %></td>
-              <td><%= person.last_name %></td>
-              <td><%= person.phone %></td>
-              <td><%= person.email %></td>
-              <td><%= person.phone_2 %></td>
-              <td><%= person.email_2 %></td>
-              <td><%= person.skills %></td>
-              <td><%= person.notes %></td>
-              <td><%= person.user_id %></td>
-            <td><%= link_to 'Edit', edit_person_path(person) %></td>
-    </tr>
-  <% end %>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= person.first_name %></td>
+        <td><%= person.last_name %></td>
+        <td><%= person.phone %></td>
+        <td><%= person.email %></td>
+        <td><%= person.phone_2 %></td>
+        <td><%= person.email_2 %></td>
+        <td><%= person.skills %></td>
+        <td><%= person.notes %></td>
+        <td><%= person.user&.name %></td>
+        <td><%= edit_button(person) %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

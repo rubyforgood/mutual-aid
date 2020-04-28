@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Match:</strong>
+  <%= @feedback.match_id %>
+</p>
+
+<p>
+  <strong>Is from receiver:</strong>
+  <%= @feedback.is_from_receiver %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @feedback.completed %>
+</p>
+
+<p>
+  <strong>Quality:</strong>
+  <%= @feedback.quality %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @feedback.description %>
+</p>
+
+<%= link_to 'Edit', edit_feedback_path(@feedback) %> |
+<%= link_to 'Back', feedbacks_path %>

@@ -27,8 +27,6 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'bulma'
-gem 'font-awesome-rails'
 gem 'devise'
 gem 'reform-rails'
 gem 'simple_form'

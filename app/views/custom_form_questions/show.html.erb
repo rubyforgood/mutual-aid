@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/view_header", resource: @custom_form_question %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @custom_form_question.name %>
-</p>
+<div class="section-detail">
+  <p>
+    <strong>Name:</strong>
+    <%= @custom_form_question.name %>
+  </p>
 
-<p>
-  <strong>Input type:</strong>
-  <%= @custom_form_question.input_type %>
-</p>
+  <p>
+    <strong>Input type:</strong>
+    <%= @custom_form_question.input_type %>
+  </p>
 
-<p>
-  <strong>Is required:</strong>
-  <%= @custom_form_question.is_required %>
-</p>
+  <p>
+    <strong>Is required:</strong>
+    <%= @custom_form_question.is_required %>
+  </p>
 
-<p>
-  <strong>Form type:</strong>
-  <%= @custom_form_question.form_type %>
-</p>
+  <p>
+    <strong>Form type:</strong>
+    <%= @custom_form_question.form_type %>
+  </p>
 
-<p>
-  <strong>Option list:</strong>
-  <%= @custom_form_question.option_list %>
-</p>
+  <p>
+    <strong>Option list:</strong>
+    <%= @custom_form_question.option_list %>
+  </p>
 
-<p>
-  <strong>Hint text:</strong>
-  <%= @custom_form_question.hint_text %>
-</p>
+  <p>
+    <strong>Hint text:</strong>
+    <%= @custom_form_question.hint_text %>
+  </p>
 
-<p>
-  <strong>Position:</strong>
-  <%= @custom_form_question.position %>
-</p>
+  <p>
+    <strong>Position:</strong>
+    <%= @custom_form_question.position %>
+  </p>
 
-<%= link_to 'Edit', edit_custom_form_question_path(@custom_form_question) %> |
-<%= link_to 'Back', custom_form_questions_path %>
+  <%= link_to 'Edit', edit_custom_form_question_path(@custom_form_question) %> |
+  <%= link_to 'Back', custom_form_questions_path %>
+</div>

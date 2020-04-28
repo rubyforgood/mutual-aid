@@ -1,22 +1,17 @@
-<%= simple_form_for @location, wrapper: :default, defaults: { wrapper: false } do |f| %>
+<%= simple_form_for @location do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.association :parent %>
+    <%= f.association :service_area, collection: @service_areas %>
     <%= f.input :location_type %>
-    <%= f.input :description %>
     <%= f.input :street_address %>
     <%= f.input :city %>
     <%= f.input :state %>
     <%= f.input :zip %>
+    <%= f.input :county %>
     <%= f.input :region %>
     <%= f.input :neighborhood %>
-    <%= f.input :county %>
-    <%= f.input :facebook_url %>
-    <%= f.input :website_url %>
-    <%= f.input :phone %>
   </div>
 
-  <%= render "layouts/view_template_form_buttons", f: f, record: @location, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+  <%= render "layouts/view_footer_buttons", f: f, resource: @location, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
 <% end %>

@@ -1,43 +1,37 @@
-<div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">Positions</h1>
-    <br>
-  </div>
-  <div class="column is-2">
-    <%= render "layouts/add_new_button", table_name: "positions" %>
-  </div>
-</div>
+<%= render "layouts/view_header", resource: @positions.first %>
 
-<table class="table table-hover table-curved table-condensed">
-  <thead>
-  <tr>
-          <th>Location</th>
-          <th>Person</th>
-          <th>Position type</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Start date</th>
-          <th>End date</th>
-          <th>Is primary</th>
-          <th>Notes</th>
-        <th>Edit</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @positions.each do |position| %>
+<div class="section-detail">
+  <table class="table table-hover table-curved table-condensed">
+    <thead>
     <tr>
-              <td><%= position.location_id %></td>
-              <td><%= position.person_id %></td>
-              <td><%= position.position_type %></td>
-              <td><%= position.name %></td>
-              <td><%= position.description %></td>
-              <td><%= position.start_date %></td>
-              <td><%= position.end_date %></td>
-              <td><%= position.is_primary %></td>
-              <td><%= position.notes %></td>
-            <td><%= link_to 'Edit', edit_position_path(position) %></td>
+      <th>Person</th>
+      <th>Organization</th>
+      <th>Position type</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Is primary</th>
+      <th>Notes</th>
+      <th>Edit</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+    <% @positions.each do |position| %>
+      <tr>
+        <td><%= position.person&.name %></td>
+        <td><%= position.organization&.name %></td>
+        <td><%= position.position_type %></td>
+        <td><%= position.name %></td>
+        <td><%= position.description %></td>
+        <td><%= position.start_date %></td>
+        <td><%= position.end_date %></td>
+        <td><%= yes_no(position.is_primary) %></td>
+        <td><%= position.notes %></td>
+        <td><%= edit_button(position) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

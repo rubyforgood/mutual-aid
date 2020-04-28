@@ -1,18 +1,20 @@
-<%= simple_form_for @system_setting, wrapper: :default, defaults: { wrapper: false } do |f| %>
+<%= simple_form_for @system_setting do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :exchange_type %>
-    <%= f.input :separate_asks_offers %>
-    <%= f.input :allow_sms %>
-    <%= f.input :community_resources_module %>
-    <%= f.input :announcements_module %>
-    <%= f.input :positions_module %>
-    <%= f.input :donations_module %>
-    <%= f.input :shared_accounts_module %>
-    <%= f.input :chat_module %>
-    <%= f.input :landing_page_text %>
+    <%= f.input :separate_asks_offers, as: :radio_buttons %>
+    <%= f.input :allow_sms, as: :radio_buttons %>
+    <%= f.input :community_resources_module, as: :radio_buttons %>
+    <%= f.input :announcements_module, as: :radio_buttons %>
+    <%= f.input :positions_module, as: :radio_buttons %>
+    <%= f.input :donations_module, as: :radio_buttons %>
+    <%= f.input :shared_accounts_module, as: :radio_buttons %>
+    <%= f.input :chat_module, as: :radio_buttons %>
+    <%= f.input :landing_page_text_who %>
+    <%= f.input :landing_page_text_what %>
+    <%= f.input :landing_page_text_how %>
   </div>
 
-  <%= render "layouts/view_template_form_buttons", f: f, record: @system_setting, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+  <%= render "layouts/view_footer_buttons", f: f, resource: @system_setting, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
 <% end %>

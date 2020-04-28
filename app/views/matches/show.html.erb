@@ -1,34 +1,38 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/view_header", resource: @match %>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @match.owner %>
-</p>
+<div class="section-detail">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Asker:</strong>
-  <%= @match.asker %>
-</p>
+  <p>
+    <strong>Offerer:</strong>
+    <%= @match.provider&.name %>
+  </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @match.status %>
-</p>
+  <p>
+    <strong>Asker:</strong>
+    <%= @match.receiver&.name %>
+  </p>
 
-<p>
-  <strong>Notes:</strong>
-  <%= @match.notes %>
-</p>
+  <p>
+    <strong>Status:</strong>
+    <%= @match.status %>
+  </p>
 
-<p>
-  <strong>Tentative:</strong>
-  <%= @match.tentative %>
-</p>
+  <p>
+    <strong>Notes:</strong>
+    <%= @match.notes %>
+  </p>
 
-<p>
-  <strong>Completed:</strong>
-  <%= @match.completed %>
-</p>
+  <p>
+    <strong>Tentative:</strong>
+    <%= @match.tentative %>
+  </p>
 
-<%= link_to 'Edit', edit_match_path(@match) %> |
-<%= link_to 'Back', matches_path %>
+  <p>
+    <strong>Completed:</strong>
+    <%= @match.completed %>
+  </p>
+
+  <%= link_to 'Edit', edit_match_path(@match) %> |
+  <%= link_to 'Back', matches_path %>
+</div>

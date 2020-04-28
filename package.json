@@ -2,15 +2,32 @@
   "name": "mutualaid",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
-    "bulma": "^0.8.1",
+    "babel-loader": "^8.1.0",
+    "buefy": "^0.8.17",
+    "css-loader": "^3.5.2",
+    "file-loader": "^6.0.0",
+    "style-loader": "^1.1.4",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.43.0"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^3.10.3"
+    "@vue/test-utils": "^1.0.0-beta.33",
+    "jsdom": "^16.2.2",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^6",
+    "mocha-junit-reporter": "^1.23.3",
+    "mochapack": "^1.1.15",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "scripts": {
+    "test": "mochapack --webpack-config config/webpack/test.js --require spec/javascript/setup.js --colors 'spec/javascript/**/*.spec.js'"
   }
 }

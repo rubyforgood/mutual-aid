@@ -1,27 +1,21 @@
+# frozen_string_literal: true
+#
+# Uncomment this and change the path if necessary to include your own
+# components.
+# See https://github.com/heartcombo/simple_form#custom-components to know
+# more about custom components.
+# Dir[Rails.root.join('lib/components/**/*.rb')].each { |f| require f }
+#
 # Use this setup block to configure all options available in SimpleForm.
 
-require "#{Rails.root}/app/helpers/application_helper.rb"
-include ApplicationHelper
-
 SimpleForm.setup do |config|
-  config.wrappers :label_only,
-                  class: "label",
-                  hint_class: "field-with-hint" do |b|
-    b.use :label
-    b.use :hint,  wrap_with: { tag: :span, class: "help has-text-grey-light" }
-  end
-
   # Wrappers are used by the form builder to generate a
   # complete input. You can remove any component from the
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
-
-  # config.wrappers :default, class: :input,
-  #                 hint_class: :field_with_hint, error_class: :field_with_errors, valid_class: :field_without_errors do |b|
-  config.wrappers :default, class: "form-inputs",
-                  hint_class: "field-with-hint",
-                  error_class: "field-with-errors" do |b|
+  config.wrappers :default, class: :input,
+                  hint_class: :field_with_hint, error_class: :field_with_errors, valid_class: :field_without_errors do |b|
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
     # given input by passing: `f.input EXTENSION_NAME => false`.
@@ -43,8 +37,8 @@ SimpleForm.setup do |config|
     # extensions by default, you can change `b.optional` to `b.use`.
 
     # Calculates maxlength from length validations for string inputs
+    # and/or database column lengths
     b.optional :maxlength
-
 
     # Calculate minlength from length validations for string inputs
     b.optional :minlength
@@ -59,21 +53,20 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     ## Inputs
+    # b.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
     b.use :label_input
     b.use :hint,  wrap_with: { tag: :span, class: "help has-text-grey-light" }
-    b.use :error, wrap_with: { tag: :span, class: "error" }
+    b.use :error, wrap_with: { tag: :span, class: :error }
 
     ## full_messages_for
     # If you want to display the full error message for the attribute, you can
     # use the component :full_error, like:
     #
-    b.use :full_error, wrap_with: { tag: :span, class: "error" }
+    b.use :full_error, wrap_with: { tag: :span, class: :error }
   end
 
-
-
   # The default wrapper to be used by the FormBuilder.
-  config.default_wrapper = :default
+  config.default_wrapper = :horizontal
 
   # Define the way to render check boxes / radio buttons with labels.
   # Defaults to :nested for bootstrap config.
@@ -82,7 +75,7 @@ SimpleForm.setup do |config|
   config.boolean_style = :nested
 
   # Default class for buttons
-  config.button_class = 'btn button'
+  config.button_class = 'button'
 
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
@@ -112,7 +105,7 @@ SimpleForm.setup do |config|
 
   # You can wrap each item in a collection of radio/check boxes with a tag,
   # defaulting to :span.
-  # config.item_wrapper_tag = :span
+  config.item_wrapper_tag = :span
 
   # You can define a class to use in all item wrappers. Defaulting to none.
   # config.item_wrapper_class = nil

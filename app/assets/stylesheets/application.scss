@@ -1,44 +1,16 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@import './font_awesome';
+@import './bulma_and_buefy';
 
-$input-placeholder-color: hsl(0, 0%, 86%); //has-text-grey-lighter
-@import "bulma/bulma";
-@import "font-awesome";
+@import './custom_spacing_helpers';
+@import './simple_form_customization';
 
+@import './listings';  // TODO: remove this once listings/new is refactored
+
+ // TODO: use has-text-centered instead
 .text-center {
   text-align: center;
 }
-.main-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-}
 
-//# hacks for simple-form + bulma
-.is-inline-flex {
-  display: inline-flex;
-}
-.select {
-  vertical-align: baseline;
-}
-.form-actions {
-  padding-top: 3em;
-}
-.select:not(.is-multiple):not(.is-loading)::after, .navbar-link:not(.is-arrowless)::after {
-  margin-top: 2.5em;
+.section-detail {
+  padding: 0rem 1.5rem 3rem 0rem;
 }

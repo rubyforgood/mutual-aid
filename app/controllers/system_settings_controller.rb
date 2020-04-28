@@ -1,28 +1,20 @@
 class SystemSettingsController < ApplicationController
   before_action :set_system_setting, only: [:show, :edit, :update, :destroy]
 
-  # GET /system_settings
-  # GET /system_settings.json
   def index
     @system_settings = SystemSetting.all
   end
 
-  # GET /system_settings/1
-  # GET /system_settings/1.json
   def show
   end
 
-  # GET /system_settings/new
   def new
     @system_setting = SystemSetting.new
   end
 
-  # GET /system_settings/1/edit
   def edit
   end
 
-  # POST /system_settings
-  # POST /system_settings.json
   def create
     @system_setting = SystemSetting.new(system_setting_params)
 
@@ -37,8 +29,6 @@ class SystemSettingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /system_settings/1
-  # PATCH/PUT /system_settings/1.json
   def update
     respond_to do |format|
       if @system_setting.update(system_setting_params)
@@ -51,8 +41,6 @@ class SystemSettingsController < ApplicationController
     end
   end
 
-  # DELETE /system_settings/1
-  # DELETE /system_settings/1.json
   def destroy
     @system_setting.destroy
     respond_to do |format|
@@ -62,12 +50,10 @@ class SystemSettingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_system_setting
       @system_setting = SystemSetting.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def system_setting_params
       params.require(:system_setting).permit(:exchange_type, :separate_asks_offers, :allow_sms, :community_resources_module, :announcements_module, :positions_module, :donations_module, :shared_accounts_module, :chat_module, :landing_page_text_what, :landing_page_text_who, :landing_page_text_how)
     end

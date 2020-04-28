@@ -1,28 +1,20 @@
 class DonationsController < ApplicationController
   before_action :set_donation, only: [:show, :edit, :update, :destroy]
 
-  # GET /donations
-  # GET /donations.json
   def index
     @donations = Donation.all
   end
 
-  # GET /donations/1
-  # GET /donations/1.json
   def show
   end
 
-  # GET /donations/new
   def new
     @donation = Donation.new
   end
 
-  # GET /donations/1/edit
   def edit
   end
 
-  # POST /donations
-  # POST /donations.json
   def create
     @donation = Donation.new(donation_params)
 
@@ -37,8 +29,6 @@ class DonationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /donations/1
-  # PATCH/PUT /donations/1.json
   def update
     respond_to do |format|
       if @donation.update(donation_params)
@@ -51,8 +41,6 @@ class DonationsController < ApplicationController
     end
   end
 
-  # DELETE /donations/1
-  # DELETE /donations/1.json
   def destroy
     @donation.destroy
     respond_to do |format|
@@ -62,12 +50,10 @@ class DonationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_donation
       @donation = Donation.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def donation_params
       params.require(:donation).permit(:person_id, :value, :channel, :thank_you_sent, :notes)
     end

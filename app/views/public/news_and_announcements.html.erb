@@ -1,3 +1,27 @@
-News/announcements
+<div class="columns is-marginless">
+  <div class="column is-9">
+    <h1 class="title">Announcements/news</h1>
+    <br>
+  </div>
+  <div class="column is-2">
+    <%= link_to "<span class='fa fa-plus-square'></span> <span class='pl-05 has-text-white'>Add announcement</span>".html_safe,
+                new_announcement_path, class: "button is-info" %>
+  </div>
+</div>
 
-(opt-in per system instance)
+<div class="row">
+  <table class="table table-hover table-curved table-condensed">
+    <tbody>
+    <% @announcements.each do |announcement| %>
+      <tr>
+        <td>
+          <strong><%= announcement.name %></strong>
+          <br>
+          <em><%= announcement.description.truncate(100) %> <%= link_to("More", announcement_path(announcement)) if announcement.description.length > 100 %></em>
+          <hr>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

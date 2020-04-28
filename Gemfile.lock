@@ -69,7 +69,6 @@ GEM
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
-    bulma (0.1.0)
     byebug (11.1.1)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
@@ -105,8 +104,6 @@ GEM
     faker (2.11.0)
       i18n (>= 1.6, < 2)
     ffi (1.12.2)
-    font-awesome-rails (4.7.0.5)
-      railties (>= 3.2, < 6.1)
     formatador (0.2.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -292,13 +289,11 @@ DEPENDENCIES
   annotate
   binding_of_caller
   bootsnap (>= 1.4.2)
-  bulma
   byebug
   devise
   dotenv-rails
   factory_bot_rails
   faker
-  font-awesome-rails
   guard-rspec
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)

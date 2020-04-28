@@ -1,6 +1,11 @@
 <template>
-  <!-- note: buefy requires a title to generate a closable message -->
-  <b-message title=" " :type="`is-${type}`" aria-close-label="Close message">
+  <!-- Note: without a title, buefy generates a headless message, which is not closable -->
+  <b-message
+    :type="`is-${type}`"
+    title=" "
+    aria-close-label="Close message"
+    has-icon
+  >
     {{ message }}
   </b-message>
 </template>

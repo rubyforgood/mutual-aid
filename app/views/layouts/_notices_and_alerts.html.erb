@@ -1,48 +1,11 @@
-<div class="col-md-12 text-center">
-  <div class="col-md-8 offset-md-2">
-    <% if notice %>
-      <div class='section' id="notice">
-        <div class="message" role="alert">
-          <div class="message-header">
-          <h1></h1>
-            <button type="button" id="delete-notice" class="delete is-pulled-right" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="message-body">
-            <%= notice.html_safe %>
-          </div>
-        </div>
-      </div>
-      <script>
-        document.getElementById('delete-notice').addEventListener('click', e => {
-          const notice = document.getElementById('notice')
-          console.log("deleting", notice)
-          notice.parentNode.removeChild(notice)
-        })
-      </script>
-    <% end %>
-
-    <% if alert %>
-      <div class="section" id="alert">
-        <div class="message" role="alert">
-          <div class="message-header">
-          <h1></h1>
-            <button type="button" id="delete-alert" class="delete is-pulled-right" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="message-body">
-            <%= alert.html_safe %>
-          </div>
-        </div>
-      </div>
-      <script>
-        document.getElementById('delete-alert').addEventListener('click', e => {
-          const alert = document.getElementById('alert')
-          alert.parentNode.removeChild(alert)
-        })
-      </script>
-    <% end %>
-  </div>
-</div>
+<% if alert || notice %>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      EntryPoints.notice(<%= raw({
+        message: alert ? alert : notice,
+        type: alert ? 'is-danger' : 'is-info',
+        indefinite: alert.present?,
+      }.to_json) %>)
+    })
+  </script>
+<% end %>

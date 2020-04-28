@@ -1,16 +1,15 @@
-import Vue from 'our_vue'
-import Notice from '../components/Notice'
+import {SnackbarProgrammatic as Snackbar} from 'buefy'
 
-export default function(el, {message, type}) {
-  new Vue({
-    el,
-    render(h) {
-      return h(Notice, {
-        props: {
-          message,
-          type,
-        },
-      })
-    }
+export default function({
+  message,
+  type,
+  indefinite = false,
+  position = 'is-top'
+}) {
+  Snackbar.open({
+    message,
+    type,
+    indefinite,
+    position,
   })
 }

@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: Remove this if we decide to use the Snackbar version -->
   <!-- Note: without a title, buefy generates a headless message, which is not closable -->
   <b-message
     :type="`is-${type}`"

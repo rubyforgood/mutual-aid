@@ -1,13 +1,10 @@
 <% if alert || notice %>
-  <div class="container">
-    <div id="notice"></div>
-  </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      EntryPoints.notice('#notice', <%= raw({
+      EntryPoints.notice(<%= raw({
         message: alert ? alert : notice,
-        type: alert ? 'warning' : 'info',
+        type: alert ? 'is-danger' : 'is-info',
+        indefinite: alert.present?,
       }.to_json) %>)
     })
   </script>

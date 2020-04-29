@@ -6,5 +6,6 @@ FactoryBot.define do
     state { "NY" }
     zip { "12345" }
     county { "MyString" }
+    service_area
   end
 end

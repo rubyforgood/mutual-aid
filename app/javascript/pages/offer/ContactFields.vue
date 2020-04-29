@@ -1,69 +1,54 @@
 <template>
   <div>
-    <div class="columns">
-      <b-field class="column is-narrow" label="Best way to contact you" custom-class="required-field">
-        <b-select v-model="preferredKey">
-          <option v-for="type in contactTypes" :key="type.key" :value="type.key">
-            {{ type.key }}
-          </option>
-        </b-select>
-      </b-field>
-      <b-field class="column" :label="preferredType.fieldLabel" v-if="preferredKey" custom-class="required-field">
-        <b-input :value="preferredValue" @input="onPreferredInput" required />
-      </b-field>
-    </div>
+    <b-field
+      label="Best way to contact you"
+      custom-class="required-field"
+    >
+      <b-select v-model="person.preferred_contact_type" required>
+        <option
+          v-for="type in contactTypes"
+          :key="type.key"
+          :value="type.key"
+        >
+          {{ type.key }}
+        </option>
+      </b-select>
+    </b-field>
 
-    <div class="columns">
-      <b-field class="column is-narrow" label="Another way to contact you">
-        <b-select v-model="alternateKey">
-          <option v-for="type in remainingTypes" :key="type.key" :value="type.key">
-            {{ type.key }}
-          </option>
-        </b-select>
-      </b-field>
-      <b-field class="column" :label="alternateType.fieldLabel" v-if="alternateKey">
-        <b-input :value="alternateValue" @input="onAlternateInput" required />
-      </b-field>
-    </div>
+    <b-field
+      v-for="(label, field) in uniqueContactFields"
+      :label="label"
+      :custom-class="isPreferred(field) ? 'required-field' : ''"
+    >
+      <b-input
+        v-model="person[field]"
+        :required="isPreferred(field)"
+      />
+    </b-field>
   </div>
 </template>
 
 <script>
+// TODO: don't mutate data -- need some state management solution here
 export default {
   props: {
     person: Object,
     contactTypes: Array,
   },
-  data() {
-    return {
-      preferredKey: this.person.preferred_contact_type,
-      alternateKey: this.person.alternate_contact_type,
-    }
-  },
   computed: {
-    preferredType() {
-      return this.contactTypes.find(({key}) => key === this.preferredKey) || this.contactTypes[0]
+    preferredContactType() {
+      return this.contactTypes.find(type => type.key === this.person.preferred_contact_type)
     },
-    alternateType() {
-      return this.contactTypes.find(({key}) => key === this.alternateKey) || this.remainingTypes[0]
-    },
-    preferredValue() {
-      return this.person[this.preferredType.fieldName]
-    },
-    alternateValue() {
-      return this.person[this.alternateType.fieldName]
-    },
-    remainingTypes() {
-      return this.contactTypes.filter(({key}) => key !== this.preferredKey)
+    uniqueContactFields() {
+      return this.contactTypes.reduce((uniq, {fieldName, fieldLabel}) => {
+        uniq[fieldName] = fieldLabel
+        return uniq
+      }, {})
     },
   },
   methods: {
-    // TODO: don't mutate data -- need some state management solution here
-    onPreferredInput(value) {
-      this.person[this.preferredType.fieldName] = value
-    },
-    onAlternateInput(value) {
-      this.person[this.alternateType.fieldName] = value
+    isPreferred(fieldName) {
+      return this.preferredContactType && this.preferredContactType.fieldName === fieldName
     },
   },
 }

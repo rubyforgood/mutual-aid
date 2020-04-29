@@ -1,4 +1,8 @@
 class CustomFormQuestion < ApplicationRecord
+  extend Mobility
+  translates :name
+  translates :option_list, type: :string # if this is json, ok to say string here?
+  translates :hint_text
 
   INPUT_TYPES_AND_STORAGE = {
       "date" => "date_response",
@@ -16,5 +20,4 @@ class CustomFormQuestion < ApplicationRecord
       "textarea" => "string_response", # for some reason textarea are being stored as string_response
       "youtube_video_id" => "string_response",
   }
-
 end

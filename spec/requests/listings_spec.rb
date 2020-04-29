@@ -25,6 +25,13 @@ RSpec.describe "/listings", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
+      listing = create(:listing, :with_location)
+      get listing_url(listing)
+      expect(response).to be_successful
+    end
+
+    it "renders a response for a listing without a location" do
+      pending "TODO: this doesn't work yet"
       listing = create(:listing)
       get listing_url(listing)
       expect(response).to be_successful

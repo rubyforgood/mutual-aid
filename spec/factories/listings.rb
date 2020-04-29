@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :listing do
-    location
     type { %w(Offer Ask).sample }
+    trait :with_location do
+      location
+    end
   end
 end

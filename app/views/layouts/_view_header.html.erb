@@ -27,10 +27,22 @@
       <%= page_title %>
     </div>
 
+<<<<<<< HEAD
     <% if ["edit", "new", "update", "create"].include?(view_action_name) %>
+=======
+    <% unless view_action_name == "show" %>
+>>>>>>> ca7c148... WIP: stubbing out Profile page and some other admin pages
       <div class="section-detail">
         <%= render 'form', singular_table_name => resource %>
       </div>
     <% end %>
   <% end %>
 </div>
+
+<style>
+  .field-label-left {
+    padding-top: 2em;
+    text-align: left !important;
+    margin-right: 1rem !important;
+  }
+</style>

@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_05_13_031357) do
+=======
+ActiveRecord::Schema.define(version: 2020_04_30_203728) do
+>>>>>>> ca7c148... WIP: stubbing out Profile page and some other admin pages
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,14 +148,22 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "tags", default: [], array: true
+<<<<<<< HEAD
     t.bigint "person_id", null: false
     t.bigint "service_area_id", null: false
+=======
+    t.bigint "person_id", default: 1, null: false
+    t.bigint "service_area_id", default: 1, null: false
+>>>>>>> ca7c148... WIP: stubbing out Profile page and some other admin pages
     t.bigint "location_id"
     t.bigint "submission_id"
     t.index ["location_id"], name: "index_listings_on_location_id"
     t.index ["person_id"], name: "index_listings_on_person_id"
     t.index ["service_area_id"], name: "index_listings_on_service_area_id"
+<<<<<<< HEAD
     t.index ["submission_id"], name: "index_listings_on_submission_id"
+=======
+>>>>>>> ca7c148... WIP: stubbing out Profile page and some other admin pages
     t.index ["tags"], name: "index_listings_on_tags", using: :gin
   end
 
@@ -199,9 +211,12 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
     t.bigint "translatable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+<<<<<<< HEAD
     t.bigint "created_by_id"
     t.boolean "is_approved", default: true, null: false
     t.index ["created_by_id"], name: "index_mobility_string_translations_on_created_by_id"
+=======
+>>>>>>> ca7c148... WIP: stubbing out Profile page and some other admin pages
     t.index ["translatable_id", "translatable_type", "key"], name: "index_mobility_string_translations_on_translatable_attribute"
     t.index ["translatable_id", "translatable_type", "locale", "key"], name: "index_mobility_string_translations_on_keys", unique: true
     t.index ["translatable_type", "key", "value", "locale"], name: "index_mobility_string_translations_on_query_keys"
@@ -215,9 +230,12 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
     t.bigint "translatable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+<<<<<<< HEAD
     t.bigint "created_by_id"
     t.boolean "is_approved", default: true, null: false
     t.index ["created_by_id"], name: "index_mobility_text_translations_on_created_by_id"
+=======
+>>>>>>> ca7c148... WIP: stubbing out Profile page and some other admin pages
     t.index ["translatable_id", "translatable_type", "key"], name: "index_mobility_text_translations_on_translatable_attribute"
     t.index ["translatable_id", "translatable_type", "locale", "key"], name: "index_mobility_text_translations_on_keys", unique: true
   end
@@ -450,12 +468,16 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "people"
   add_foreign_key "listings", "service_areas"
+<<<<<<< HEAD
   add_foreign_key "listings", "submissions"
   add_foreign_key "locations", "location_types"
   add_foreign_key "organizations", "locations"
   add_foreign_key "organizations", "service_areas"
   add_foreign_key "people", "locations"
   add_foreign_key "people", "service_areas"
+=======
+  add_foreign_key "locations", "service_areas"
+>>>>>>> ca7c148... WIP: stubbing out Profile page and some other admin pages
   add_foreign_key "people", "users"
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"

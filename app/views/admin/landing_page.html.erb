@@ -45,6 +45,7 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
 </div>
 <hr>
 <div class="row columns">
@@ -62,6 +63,39 @@
 
     ] %>
     <%= render "admin_buttons_list", admin_buttons_list: admin_buttons_list_1, include_system_settings_row: false %>
+=======
+  <div class="column is-6">
+    <div class="subtitle is-3">Data</div>
+    <table class="table table-hover table-curved table-condensed">
+      <tbody>
+        <% [
+               ["service_areas", "Locations and pods"],
+               ["people"],
+               ["communication_logs"],
+               ["positions"],
+               ["announcements"],
+               ["custom_form_questions"],
+               ["categories"],
+               ["shared_accounts"],
+               ["organizations"],
+
+           ].sort_by(&:first).each do |table_name, optional_text| %>
+          <tr>
+            <td>
+              <%= render "layouts/view_add_new_button", table_name: table_name, hide_text: true, small_button: true %>
+              <%= link_to "#{optional_text || table_name.classify.pluralize}", table_name %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td>
+            <a class="button is-primary is-small" href="/system_settings/new"><span class="fa fa-cog"></span><span class=" has-text-white"></span></a>
+            <%= link_to "System Settings", new_system_setting_path %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+>>>>>>> ca7c148... WIP: stubbing out Profile page and some other admin pages
   </div>
 
   <div class="column is-4">

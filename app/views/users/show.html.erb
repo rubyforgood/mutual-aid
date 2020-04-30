@@ -2,43 +2,14 @@
 <div class="title is-5"><%= @user.person&.name %></div>
 
 <p>
-  <strong>First name:</strong>
+  <strong>Name:</strong>
   <%= @user.person&.name %>
 </p>
 
 <p>
-  <strong>Phone:</strong>
-  <%= @user.person&.phone %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.person&.email %>
-</p>
-
-<p>
-  <strong>Phone 2:</strong>
-  <%= @user.person&.phone_2 %>
-</p>
-
-<p>
-  <strong>Email 2:</strong>
-  <%= @user.person&.email_2 %>
-</p>
-
-<p>
-  <strong>Skills:</strong>
-  <%= @user.person&.skills %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @user.person&.notes %>
-</p>
-
-<p>
   <strong>Permission level:</strong>
+  <%= "[NOT IMPLEMENTED YET]" %>
 </p>
 
-<%= link_to 'Edit', edit_person_path(@user) %>
-<%= link_to 'Back', users_path(@user) %>
+<%= edit_button(@user.person, @user.person.name) %>
+<%= link_to 'Users index', users_path(@user) %>

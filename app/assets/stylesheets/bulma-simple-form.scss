@@ -1,0 +1,41 @@
+//# hacks for simple-form + bulma
+.is-inline-flex {
+  display: inline-flex;
+}
+.select {
+  vertical-align: baseline;
+}
+.form-actions {
+  padding-top: 3em;
+}
+.select:not(.is-multiple):not(.is-loading)::after, .navbar-link:not(.is-arrowless)::after {
+  margin-top: 2.5em;
+}
+
+.select:not(.is-multiple) {
+  height: inherit !important;
+}
+
+.field {
+  padding-right: 2em;  // spacing between fields
+}
+
+.radio+.radio, .checkbox+.checkbox {
+  margin-left: .75em; // spacing between radio/checkbox items
+}
+
+.checkbox, .radio {
+  &.check_boxes, .radio_buttons { // spacing between radio/checkbox input and label
+    margin-right: .25em;
+  }
+}
+
+.field-label {
+  text-align: left !important;
+  margin-right: 1rem !important;
+}
+
+.field-label-left {
+  text-align: left !important;
+  margin-right: 1rem !important;
+}

@@ -1,13 +1,10 @@
 class Person < ApplicationRecord
   acts_as_taggable_on :tags
 
-  belongs_to :user, optional: true, inverse_of: :person
-  belongs_to :service_area, optional: true
-  belongs_to :location, optional: true
   belongs_to :preferred_contact_method, class_name: 'ContactMethod'
-
-  has_many :communication_logs
-  has_many :donations
+  belongs_to :location, optional: true
+  belongs_to :service_area, optional: true
+  belongs_to :user, optional: true, inverse_of: :person
 
   has_many :asks, inverse_of: :person
   has_many :offers, inverse_of: :person
@@ -15,6 +12,10 @@ class Person < ApplicationRecord
   has_many :matches, through: :listings
   has_many :matches_as_receiver, through: :asks, class_name: "Match", foreign_key: "receiver_id"
   has_many :matches_as_provider, through: :offers, class_name: "Match", foreign_key: "provider_id"
+
+  has_many :communication_logs
+  has_many :donations
+  has_many :submissions
 
   validate :preferred_contact_method_present!
 

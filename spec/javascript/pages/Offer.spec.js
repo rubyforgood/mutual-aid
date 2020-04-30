@@ -25,7 +25,7 @@ describe('Offer', () => {
   }})
 
   describe('contact fields', () => {
-    it('generates a preferredContactType select field', () => {
+    it('generates a preferred_contact_type select field', () => {
       assert.isTrue($wrapper.exists('label[for="preferred_contact_type"]'))
       assert.isTrue($wrapper.exists('select[name="preferred_contact_type"]'))
     })
@@ -45,10 +45,28 @@ describe('Offer', () => {
     })
 
     describe('when a preffered contact type is selected', () => {
-      it('makes the corresponding field required', async () => {
+      beforeEach(async () => {
         $wrapper.get('select[name="preferred_contact_type"]').setValue('Email')
         await $wrapper.vm.$forceUpdate()
+      })
+
+      it('updates the person object state', () => {
+        assert.equal($person.preferred_contact_type, 'Email')
+      })
+
+      it('makes the corresponding field required', () => {
         assert.equal($wrapper.get('input[name="email"]').attributes('required'), 'required')
+      })
+    })
+
+    describe('when a contact field is updated', () => {
+      beforeEach(async () => {
+        $wrapper.get('input[name="phone"]').setValue('202 765 4321')
+        await $wrapper.vm.$nextTick()
+      })
+
+      it('updates the person object state', () => {
+        assert.equal($person.phone, '202 765 4321')
       })
     })
   })

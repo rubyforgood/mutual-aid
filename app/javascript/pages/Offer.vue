@@ -7,7 +7,12 @@
         <b-input v-model="person.name" required />
       </b-field>
 
-      <ContactFields :person="person" :contactTypes="contactTypes" />
+      <ContactFields
+        :contactTypes="contactTypes"
+        :preferredContactTypeKey="person.preferred_contact_type"
+        v-bind:contactFields="person"
+        v-on:updated="(field, value) => person[field] = value"
+      />
     </form>
   </div>
 </template>
@@ -25,6 +30,7 @@ export default {
           name: 'My Name',
           phone: '202 202 1234',
           email: 'me@example.com',
+          preferred_contact_type: null,
         }
       },
     },

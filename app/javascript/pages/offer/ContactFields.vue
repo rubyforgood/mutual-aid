@@ -6,7 +6,8 @@
       custom-class="required-field"
     >
       <b-select
-        v-model="preferred_contact_type"
+        :value="preferredContactTypeKey"
+        @input="$emit('updated', 'preferred_contact_type', $event)"
         name="preferred_contact_type"
         placeholder="Select …"
         required
@@ -22,39 +23,34 @@
     </b-field>
 
     <b-field
-      v-for="(label, field) in uniqueContactFields"
-      :key="field"
-      :label="label"
-      :label-for="field"
-      :custom-class="isPreferred(field) ? 'required-field' : ''"
+      v-for="(fieldLabel, fieldName) in contactTypesByUniqueField"
+      :key="fieldName"
+      :label="fieldLabel"
+      :label-for="fieldName"
+      :custom-class="isPreferred(fieldName) ? 'required-field' : ''"
     >
       <b-input
-        v-model="person[field]"
-        :required="isPreferred(field)"
-        :name="field"
+        :value="contactFields[fieldName]"
+        :required="isPreferred(fieldName)"
+        :name="fieldName"
+        @input="$emit('updated', fieldName, $event)"
       />
     </b-field>
   </div>
 </template>
 
 <script>
-// TODO: don't mutate data -- need some state management solution here
 export default {
   props: {
-    person: Object,
+    preferredContactTypeKey: String,
+    contactFields: Object,
     contactTypes: Array,
-  },
-  data() {
-    return {
-      // TODO: need to propogate this, and other writes into person
-      preferred_contact_type: null,
-    }
   },
   computed: {
     preferredContactType() {
-      return this.contactTypes.find(type => type.key === this.preferred_contact_type)
+      return this.contactTypes.find(type => type.key === this.preferredContactTypeKey)
     },
-    uniqueContactFields() {
+    contactTypesByUniqueField() {
       return this.contactTypes.reduce((uniq, {fieldName, fieldLabel}) => {
         uniq[fieldName] = fieldLabel
         return uniq

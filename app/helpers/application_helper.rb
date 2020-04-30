@@ -29,4 +29,17 @@ module ApplicationHelper
       end
     end
   end
+
+  def view_account_button(record)
+    if record && action_name != "edit"
+      if record.class.superclass != ApplicationRecord
+        record = record.becomes(record.class.superclass)
+      end
+      link_to(edit_polymorphic_path(record),
+              title: action_name + " " + controller_path,
+              class: 'button edit-button') do
+        "<span class='fa fa-user-edit'></span><span style='padding-left: 0.25em'> Edit</span>".html_safe
+      end
+    end
+  end
 end

@@ -137,7 +137,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
     b.wrapper tag: 'div', class: 'field' do |ba|
-     ba.use :label, class: 'label field-label'
+     ba.use :label, class: 'label field-label field-label-left'
      ba.wrapper tag: 'div', class: 'field-body' do |baa|
        baa.wrapper tag: 'div', class: 'control' do |baaa|
          baaa.use :input, class: 'radio', type: 'radio'
@@ -152,7 +152,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
     b.wrapper tag: 'div', class: 'field' do |ba|
-      ba.use :label, class: 'label field-label'
+      ba.use :label, class: 'label field-label-left'
       ba.wrapper tag: 'div', class: 'field-body' do |baa|
         baa.wrapper tag: 'div', class: 'control' do |baaa|
           baaa.use :input, class: 'checkbox', type: 'checkbox'
@@ -197,7 +197,7 @@ SimpleForm.setup do |config|
     #
     #
     config.wrappers :inline_input, tag: "div", class: "field is-horizontal" do |b|
-      b.wrapper :label, tag: "div", class: "field-label is-normal" do |bl|
+      b.wrapper :label, tag: "div", class: "field-label-left is-normal" do |bl|
         bl.optional :label, class: "label"
       end
       b.wrapper :input, tag: "div", class: "field-body" do |bi|

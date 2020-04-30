@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :offers, only: [:new]
+
   resources :announcements
   resources :categories
   resources :communication_logs

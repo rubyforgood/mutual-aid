@@ -37,5 +37,12 @@ module Mutualaid
       g.jbuilder          false
       g.scaffold_stylesheet false
     end
+
+    # Permitted locales available for the application
+    I18n.available_locales = [:ar, :cs, :en, :es, :de, :fr, :pt, :th]
+    config.i18n.enforce_available_locales
+    # Mobility gem will fallbacks to locale set here
+    I18n.default_locale = :en
+    config.i18n.fallbacks = true
   end
 end

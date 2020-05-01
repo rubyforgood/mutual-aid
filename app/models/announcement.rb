@@ -1,4 +1,7 @@
 class Announcement < ApplicationRecord
+  extend Mobility
+  translates :name
+  translates :description
 
   def self.published
     now_strftime = Time.now.strftime("%Y-%m-%d %H:%M")
@@ -14,5 +17,4 @@ class Announcement < ApplicationRecord
         (publish_from.present? ? publish_from <= now : true) &&
         (publish_until == nil || now < publish_until)
   end
-
 end

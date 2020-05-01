@@ -1,22 +1,18 @@
 <template>
   <div>
     <b-field
+      :label-for="withPrefix('preferred_contact_type')"
       label="Best way to contact you"
-      label-for="preferred_contact_type"
       custom-class="required-field"
     >
       <b-select
+        :name="withPrefix('preferred_contact_type')"
         :value="preferredContactTypeKey"
         @input="$emit('updated', 'preferred_contact_type', $event)"
-        name="preferred_contact_type"
         placeholder="Select …"
         required
       >
-        <option
-          v-for="type in contactTypes"
-          :key="type.key"
-          :value="type.key"
-        >
+        <option v-for="type in contactTypes" :key="type.key" :value="type.key" >
           {{ type.key }}
         </option>
       </b-select>
@@ -26,13 +22,13 @@
       v-for="(fieldLabel, fieldName) in contactTypesByUniqueField"
       :key="fieldName"
       :label="fieldLabel"
-      :label-for="fieldName"
+      :label-for="withPrefix(fieldName)"
       :custom-class="isPreferred(fieldName) ? 'required-field' : ''"
     >
       <b-input
+        :name="withPrefix(fieldName)"
         :value="contactFields[fieldName]"
         :required="isPreferred(fieldName)"
-        :name="fieldName"
         @input="$emit('updated', fieldName, $event)"
       />
     </b-field>
@@ -40,11 +36,15 @@
 </template>
 
 <script>
+import {partial} from 'utils/function'
+import {fieldNameWithPrefix} from 'utils/form'
+
 export default {
   props: {
-    preferredContactTypeKey: String,
     contactFields: Object,
     contactTypes: Array,
+    fieldNamePrefix: {type: String, default: ''},
+    preferredContactTypeKey: {String, default: null},
   },
   computed: {
     preferredContactType() {
@@ -61,6 +61,9 @@ export default {
     isPreferred(fieldName) {
       return this.preferredContactType && this.preferredContactType.fieldName === fieldName
     },
+  },
+  created: function() {
+    this.withPrefix = partial(fieldNameWithPrefix, this.fieldNamePrefix)
   },
 }
 </script>

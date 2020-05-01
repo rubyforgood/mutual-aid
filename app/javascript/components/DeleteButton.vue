@@ -1,7 +1,7 @@
 <template>
   <form :action="action" method="post">
+    <AuthTokenInput />
     <input type="hidden" name="_method" value="delete" />
-    <input type="hidden" name="authenticity_token" :value="authenticityToken" />
     <button type="submit" class="button is-outlined">
       <slot />
     </button>
@@ -9,7 +9,10 @@
 </template>
 
 <script>
+import AuthTokenInput from './AuthTokenInput'
+
 export default {
+  components: {AuthTokenInput},
   props: {
     action: String,
   },

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_233606) do
+ActiveRecord::Schema.define(version: 2020_05_01_210535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,8 +123,12 @@ ActiveRecord::Schema.define(version: 2020_04_28_233606) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "tags", default: [], array: true
+    t.bigint "person_id", null: false
+    t.bigint "service_area_id", null: false
     t.bigint "location_id"
     t.index ["location_id"], name: "index_listings_on_location_id"
+    t.index ["person_id"], name: "index_listings_on_person_id"
+    t.index ["service_area_id"], name: "index_listings_on_service_area_id"
     t.index ["tags"], name: "index_listings_on_tags", using: :gin
   end
 
@@ -139,8 +143,6 @@ ActiveRecord::Schema.define(version: 2020_04_28_233606) do
     t.string "neighborhood"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "service_area_id"
-    t.index ["service_area_id"], name: "index_locations_on_service_area_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -194,10 +196,13 @@ ActiveRecord::Schema.define(version: 2020_04_28_233606) do
     t.boolean "has_mailer_account", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "location_id"
+    t.bigint "service_area_id"
+    t.index ["location_id"], name: "index_organizations_on_location_id"
+    t.index ["service_area_id"], name: "index_organizations_on_service_area_id"
   end
 
   create_table "people", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "first_name"
     t.string "last_name"
     t.string "phone"
@@ -210,7 +215,10 @@ ActiveRecord::Schema.define(version: 2020_04_28_233606) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_people_on_user_id"
+    t.bigint "location_id"
+    t.bigint "service_area_id"
+    t.index ["location_id"], name: "index_people_on_location_id"
+    t.index ["service_area_id"], name: "index_people_on_service_area_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -309,8 +317,12 @@ ActiveRecord::Schema.define(version: 2020_04_28_233606) do
   add_foreign_key "donations", "people"
   add_foreign_key "feedbacks", "matches"
   add_foreign_key "listings", "locations"
-  add_foreign_key "locations", "service_areas"
-  add_foreign_key "people", "users"
+  add_foreign_key "listings", "people"
+  add_foreign_key "listings", "service_areas"
+  add_foreign_key "organizations", "locations"
+  add_foreign_key "organizations", "service_areas"
+  add_foreign_key "people", "locations"
+  add_foreign_key "people", "service_areas"
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
   add_foreign_key "service_areas", "organizations"

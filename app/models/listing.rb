@@ -4,8 +4,11 @@ class Listing < ApplicationRecord
   translates :title
   translates :description, type: :text
 
+  belongs_to :person
+  belongs_to :person_as_provider, class_name: "Person", foreign_key: "person_id"
+  belongs_to :person_as_receiver, class_name: "Person", foreign_key: "person_id"
+  belongs_to :service_area
   belongs_to :location, optional: true
-  belongs_to :service_area, optional: true
 
   has_many :matches, as: :receiver
   has_many :matches, as: :provider

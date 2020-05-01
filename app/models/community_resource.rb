@@ -4,12 +4,14 @@ class CommunityResource < ApplicationRecord
   translates :name
   translates :description, type: :text
 
-  belongs_to :service_area
+  belongs_to :service_area, optional: true # TODO - should this be optional???
   belongs_to :location, optional: true
   belongs_to :organization, optional: true # TODO - should this be optional???
 
   has_many :matches, as: :receiver
   has_many :matches, as: :provider
+
+  validates :name, presence: true
 
   def self.published
     now_strftime = Time.now.strftime("%Y-%m-%d %H:%M")

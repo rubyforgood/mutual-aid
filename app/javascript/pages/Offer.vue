@@ -2,26 +2,38 @@
   <div>
     <h1 class="title">Offer support</h1>
 
-    <form>
-      <b-field label="Name" custom-class="required-field">
-        <b-input v-model="person.name" required />
-      </b-field>
+    <div class="columns">
+      <form class="column is-half-tablet">
+        <b-field label="Name" custom-class="required-field">
+          <b-input v-model="person.name" required />
+        </b-field>
 
-      <ContactFields
-        :contactTypes="contactTypes"
-        :preferredContactTypeKey="person.preferred_contact_type"
-        v-bind:contactFields="person"
-        v-on:updated="(field, value) => person[field] = value"
-      />
-    </form>
+        <ContactFields
+          :contactTypes="contactTypes"
+          :preferredContactTypeKey="person.preferred_contact_type"
+          v-bind:contactFields="person"
+          v-on:updated="(field, value) => person[field] = value"
+        />
+        <SpacerField />
+
+        <b-field>
+          <div class="control">
+            <b-button native-type="submit" type="is-primary" size="is-medium">
+              Submit
+            </b-button>
+          </div>
+        </b-field>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import ContactFields from './offer/ContactFields'
+import SpacerField from 'components/SpacerField'
 
 export default {
-  components: {ContactFields},
+  components: {ContactFields, SpacerField},
   props: {
     person: {
       type: Object,

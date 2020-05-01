@@ -3,12 +3,23 @@
     <h1 class="title">Offer support</h1>
 
     <div class="columns">
-      <form class="column is-half-tablet">
-        <b-field label="Name" custom-class="required-field">
-          <b-input v-model="person.name" required />
+      <form action="/listings" method="post" class="column is-half-tablet">
+        <AuthTokenInput />
+
+        <b-field
+          :label-for="withPersonPrefix('name')"
+          label="Name"
+          custom-class="required-field"
+        >
+          <b-input
+            v-model="person.name"
+            :name="withPersonPrefix('name')"
+            required
+          />
         </b-field>
 
         <ContactFields
+          fieldNamePrefix="listing[person]"
           :contactTypes="contactTypes"
           :preferredContactTypeKey="person.preferred_contact_type"
           v-bind:contactFields="person"
@@ -29,11 +40,14 @@
 </template>
 
 <script>
+import {partial} from 'utils/function'
+import {fieldNameWithPrefix} from 'utils/form'
+import AuthTokenInput from 'components/AuthTokenInput'
 import ContactFields from './offer/ContactFields'
 import SpacerField from 'components/SpacerField'
 
 export default {
-  components: {ContactFields, SpacerField},
+  components: {AuthTokenInput, ContactFields, SpacerField},
   props: {
     person: {
       type: Object,
@@ -57,6 +71,9 @@ export default {
         ]
       },
     }
+  },
+  created: function() {
+    this.withPersonPrefix = partial(fieldNameWithPrefix, 'listing[person]')
   },
 }
 </script>

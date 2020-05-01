@@ -26,27 +26,27 @@ describe('Offer', () => {
 
   describe('contact fields', () => {
     it('generates a preferred_contact_type select field', () => {
-      assert.isTrue($wrapper.exists('label[for="preferred_contact_type"]'))
-      assert.isTrue($wrapper.exists('select[name="preferred_contact_type"]'))
+      assert.isTrue($wrapper.exists('label[for*="preferred_contact_type"]'))
+      assert.isTrue($wrapper.exists('select[name*="preferred_contact_type"]'))
     })
 
     it('includes all contact_types as preferred_contact_type options', () => {
-      const options = $wrapper.findAll('select[name="preferred_contact_type"] option').wrappers
+      const options = $wrapper.findAll('select[name*="preferred_contact_type"] option').wrappers
       assert.sameMembers(options.map(opt => opt.attributes('value')), ['', 'Call', 'Text', 'Email'])
     })
 
     it('generates text input fields for all contact fields', () => {
-      assert.isTrue($wrapper.exists('label[for="phone"]+input[name="phone"]'))
-      assert.isTrue($wrapper.exists('label[for="email"]+input[name="email"]'))
+      assert.isTrue($wrapper.exists('label[for*="phone"]+input[name*="phone"]'))
+      assert.isTrue($wrapper.exists('label[for*="email"]+input[name*="email"]'))
     })
 
     it('does not duplicate fields for two contact types with the same field', () => {
-      assert.equal($wrapper.findAll('input[name="phone"]').length, 1)
+      assert.equal($wrapper.findAll('input[name*="phone"]').length, 1)
     })
 
     describe('when a preffered contact type is selected', () => {
       beforeEach(async () => {
-        $wrapper.get('select[name="preferred_contact_type"]').setValue('Email')
+        $wrapper.get('select[name*="preferred_contact_type"]').setValue('Email')
         await $wrapper.vm.$forceUpdate()
       })
 
@@ -55,13 +55,13 @@ describe('Offer', () => {
       })
 
       it('makes the corresponding field required', () => {
-        assert.equal($wrapper.get('input[name="email"]').attributes('required'), 'required')
+        assert.equal($wrapper.get('input[name*="email"]').attributes('required'), 'required')
       })
     })
 
     describe('when a contact field is updated', () => {
       beforeEach(async () => {
-        $wrapper.get('input[name="phone"]').setValue('202 765 4321')
+        $wrapper.get('input[name*="phone"]').setValue('202 765 4321')
         await $wrapper.vm.$nextTick()
       })
 

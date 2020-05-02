@@ -1,5 +1,5 @@
 import Vue from 'our_vue'
-import {Orientation} from '../components'
+import Orientation from 'pages/Orientation'
 
 export default function(el, {organization}='Mutual-aid') {
   new Vue({

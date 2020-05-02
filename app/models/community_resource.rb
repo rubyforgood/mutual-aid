@@ -1,8 +1,8 @@
 class CommunityResource < ApplicationRecord
   taggable_array :tags
-  extend Mobility
-  translates :name
-  translates :description, type: :text
+  # extend Mobility
+  # translates :name
+  # translates :description, type: :text
 
   belongs_to :service_area
   belongs_to :location, optional: true

@@ -1,8 +1,8 @@
 class Listing < ApplicationRecord
   taggable_array :tags
-  extend Mobility
-  translates :title
-  translates :description, type: :text
+  # extend Mobility::MobilityActiveRecord
+  # translates :title
+  # translates :description, type: :text
 
   belongs_to :location, optional: true
   belongs_to :service_area, optional: true

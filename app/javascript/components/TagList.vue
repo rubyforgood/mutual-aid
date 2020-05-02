@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="isTagsValid" class="tagList" :class="listClasses">
+  <ul v-if="isTagsValid" class="tagList tags" :class="listClasses">
     <li v-for="tag in tags" :key="tag.id" class="tagList-tag tag" :class="tagClasses">
       {{ tag.name }}
     </li>

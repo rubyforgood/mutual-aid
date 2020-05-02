@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="isTagsValid" class="tagList tags" :class="listClasses">
+  <ul v-if="isTagsValid" class="tagList tags">
     <li v-for="tag in tags" :key="tag.id" class="tagList-tag tag" :class="tagClasses">
       {{ tag.name }}
     </li>
@@ -9,7 +9,6 @@
 <script>
 export default {
   props: {
-    listClasses: String,
     tagClasses: {type: String, default: 'is-info is-light'},
     tags: Array,
   },

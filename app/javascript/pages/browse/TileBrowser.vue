@@ -1,7 +1,6 @@
 <template>
   <section class="tileBrowser">
     <h2 class="title">Tile view</h2>
-    <div>
       <ul class="columns is-multiline is-centered">
         <TileListItem
           v-for="contribution in contributions"
@@ -10,7 +9,6 @@
           class="column is-one-quarter"
         />
       </ul>
-    </div>
   </section>
 </template>
 

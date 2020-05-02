@@ -9,7 +9,11 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
+    # TODO: these json fixtures are to be replaced with actual generators of data
+    sample_data = File.open('lib/listings.json') do |file|
+      JSON.load(file)
+    end
+    @contributions = sample_data["contributions"]
   end
 
   # GET /listings/1

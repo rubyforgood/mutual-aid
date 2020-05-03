@@ -17,7 +17,7 @@
             <strong><%= announcement.name %></strong>
           </td>
           <td>
-            <strong><%= announcement.description.truncate(20) %></strong>
+            <strong><%= announcement.description&.truncate(20) %></strong>
           </td>
           <td class="has-text-centered"><%= yes_no(announcement.published?) %></td>
           <td><%= edit_button(announcement) %></td>

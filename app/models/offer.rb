@@ -1,4 +1,4 @@
 class Offer < Listing
-  belongs_to :person, inverse_of: :offers_as_provider
+  belongs_to :provider, class_name: "Person", foreign_key: "person_id"
   belongs_to :service_area, inverse_of: :offers
 end

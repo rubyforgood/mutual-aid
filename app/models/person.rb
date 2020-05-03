@@ -3,8 +3,8 @@ class Person < ApplicationRecord
   belongs_to :service_area, optional: true
   belongs_to :location, optional: true
 
-  has_many :asks_as_receiver, class_name: "Listing::Ask", foreign_key: "person_id", inverse_of: :person
-  has_many :offers_as_provider, class_name: "Listing::Offer", foreign_key: "person_id", inverse_of: :person
+  has_many :asks, inverse_of: :person
+  has_many :offers, inverse_of: :person
   has_many :listings
 
   has_many :matches, as: :receiver

@@ -4,6 +4,7 @@ class Listing < ApplicationRecord
   translates :title
   translates :description, type: :text
 
+  belongs_to :person
   belongs_to :service_area
   belongs_to :location, optional: true
 

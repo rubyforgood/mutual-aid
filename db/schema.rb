@@ -217,8 +217,10 @@ ActiveRecord::Schema.define(version: 2020_05_01_210535) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "location_id"
     t.bigint "service_area_id"
+    t.bigint "user_id"
     t.index ["location_id"], name: "index_people_on_location_id"
     t.index ["service_area_id"], name: "index_people_on_service_area_id"
+    t.index ["user_id"], name: "index_people_on_user_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -323,6 +325,7 @@ ActiveRecord::Schema.define(version: 2020_05_01_210535) do
   add_foreign_key "organizations", "service_areas"
   add_foreign_key "people", "locations"
   add_foreign_key "people", "service_areas"
+  add_foreign_key "people", "users"
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
   add_foreign_key "service_areas", "organizations"

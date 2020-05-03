@@ -31,7 +31,7 @@ RSpec.describe "/listings", type: :request do
     end
 
     it "renders a response for a listing without a location" do
-      pending "TODO: this doesn't work yet"
+      # pending "TODO: this doesn't work yet"
       listing = create(:listing)
       get listing_url(listing)
       expect(response).to be_successful
@@ -95,7 +95,7 @@ RSpec.describe "/listings", type: :request do
   end
 
   describe "PATCH /update" do
-    let(:listing) { create(:listing, :with_contact_info) }
+    let(:listing) { create(:listing) }
 
     context "with valid parameters" do
       let(:new_street_address) { Faker::Address.street_address }

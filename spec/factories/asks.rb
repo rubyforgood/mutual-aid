@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :ask do
-    type { %w(Offer).sample }
+    type { "Ask" }
 
-    association :location
+    association :person
+    association :service_area
 
   end
 end

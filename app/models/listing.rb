@@ -10,6 +10,8 @@ class Listing < ApplicationRecord
   has_many :matches, as: :receiver
   has_many :matches, as: :provider
 
+  validates :type, presence: true
+
   enum state: { received: 0, fulfilled: 1 }
 
   def name

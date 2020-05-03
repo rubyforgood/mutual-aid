@@ -25,8 +25,8 @@ FactoryBot.define do
       association :location
     end
 
-    trait :with_location do
-      association :location
+    trait :with_service_area do
+      association :service_area
     end
 
     trait :with_user do

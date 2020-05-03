@@ -10,12 +10,13 @@ services:
     image: postgres:alpine
     environment:
       <<: *x-shared-postgres-environment
+      POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - mutual-aid-database:/var/lib/postgresql/data
   mutual-aid-web-app:
     build:
       context: ../..
-      dockerfile: ./docker/development/Dockerfile-webapp
+      dockerfile: ./docker/development/webapp/Dockerfile
     ports:
       - "3000:3000"
     depends_on:

@@ -5,7 +5,7 @@ FactoryBot.define do
     association :service_area
 
     trait :with_location do
-      location
+      association :location
     end
   end
 end

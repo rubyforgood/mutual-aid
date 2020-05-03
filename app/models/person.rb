@@ -10,16 +10,15 @@ class Person < ApplicationRecord
   has_many :matches, as: :receiver
   has_many :matches, as: :provider
 
-  validate :validate_preferred_contact_method
+  validates :preferred_contact_method, presence: true
+  validate :validate_preferred_contact_method_data
 
   def name
     "#{first_name} #{last_name} (#{email})"
   end
 
-  private def validate_preferred_contact_method
-    if !preferred_contact_method
-      errors.add(:participant, " --  preferred contact method needed")
-    elsif !self.public_send(preferred_contact_method).present?
+  private def validate_preferred_contact_method_data
+    if preferred_contact_method.present? && !self.public_send(preferred_contact_method).present?
       errors.add(:participant, " -- #{preferred_contact_method} needed (preferred contact method)")
     end
   end

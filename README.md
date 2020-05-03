@@ -116,6 +116,43 @@ $ heroku local -f Procfile.dev
 if you run into the following error:
 ```bash: heroku: command not found``` visit https://devcenter.heroku.com/articles/heroku-cli for instructions to install Heroku.
 
+## Development with [Docker](https://www.docker.com/)
+
+The application includes a pre-configured [docker-compose](https://docs.docker.com/compose/) environment. This environment includes two containers, which together deploy the application and a postgres database for it to connect to.
+
+To get started using the application with docker,
+1. Install [docker](https://www.docker.com/get-started)
+2. Install [docker-compose](https://docs.docker.com/compose/install/)
+3. Clone the repository, and open the repository folder in your favorite command line or terminal application.
+4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml`.
+5. Run the `rake secret` command. If the `rake` command is not found, you may need to run `bundle install` from the repository's root folder. Once the `bundle install` command has completed successfully, return to the `docker/development` folder and try `rake secret` again.
+6. Create a new file call `.env` in the `docker/development` folder right next to the `docker-compose.yml` file. The `.env` file should contain
+```bash
+SECRET_KEY_BASE="the output of the rake secret command, which will look like e0517d0887e68ebc518600..."
+```
+7. Now you should be able to run `docker-compose up`. This will take a while to run, but after a few minutes it should stop spewing text, and you should see a block of text that looks something like this:
+  ```
+  mutual-aid-web-app_1   | Puma starting in single mode...
+  mutual-aid-web-app_1   | * Version 4.3.3 (ruby 2.7.0-p0), codename: Mysterious Traveller
+  mutual-aid-web-app_1   | * Min threads: 5, max threads: 5
+  mutual-aid-web-app_1   | * Environment: docker-development
+  mutual-aid-web-app_1   | * Listening on tcp://0.0.0.0:3000
+  mutual-aid-web-app_1   | Use Ctrl-C to stop
+  ```
+8. Navigate to `localhost:3000` in your web browser. You should be able to login as 
+  ```
+  username: mutualaidtesting@example.com
+  password: testing123
+  ```
+
+**NOTE** Do not use this method in production! This is for **testing & development only* the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
+
+Note that if you are developing this application, running `docker-compose up` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes you changes, run `docker-compose up --build` instead. 
+
+Also, if you would like docker-compose to run in daemon mode (which means that it will exit once the images have been set up and the application starts running) you may use `docker-compose up -d`. This will not show you any logging output from the application, however, and you will not be able to exit the application directly. To view logs when docker-compose is running in daemon mode, use `docker-compose logs`. To stop the application and all its services, run `docker-compose down`.
+
+**NOTE** the application will save its state between successively invocations of `docker-compose up --build`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `docker-compose`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `docker-compose down --volumes --remove-orphans`. In particular, you may need to do this if you are making breaking changes to the database structure, or if you have corrupted something somehow. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it. So make sure you back up anything you want to save before running the command.
+
 
 # Viewing the Application
 ## if you chose the local route, then you are good to go on:

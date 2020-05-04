@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_210535) do
+ActiveRecord::Schema.define(version: 2020_05_03_224311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,11 +47,16 @@ ActiveRecord::Schema.define(version: 2020_05_01_210535) do
     t.bigint "match_id"
     t.string "from_type"
     t.string "to_type"
-    t.string "channel"
+    t.string "delivery_channel"
     t.datetime "sent_at"
     t.boolean "needs_follow_up", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "delivery_status"
+    t.string "subject"
+    t.text "body"
+    t.bigint "created_by_id", default: 1, null: false
+    t.index ["created_by_id"], name: "index_communication_logs_on_created_by_id"
     t.index ["match_id"], name: "index_communication_logs_on_match_id"
     t.index ["person_id"], name: "index_communication_logs_on_person_id"
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_210535) do
+ActiveRecord::Schema.define(version: 2020_05_03_224311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -268,6 +268,18 @@ ActiveRecord::Schema.define(version: 2020_05_01_210535) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "submissions", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "service_area_id", null: false
+    t.string "form_name"
+    t.string "privacy_level_requested"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_submissions_on_person_id"
+    t.index ["service_area_id"], name: "index_submissions_on_service_area_id"
+  end
+
   create_table "system_settings", force: :cascade do |t|
     t.string "exchange_type", default: "peer_to_peer", null: false
     t.boolean "separate_asks_offers", default: true, null: false
@@ -329,4 +341,6 @@ ActiveRecord::Schema.define(version: 2020_05_01_210535) do
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
   add_foreign_key "service_areas", "organizations"
+  add_foreign_key "submissions", "people"
+  add_foreign_key "submissions", "service_areas"
 end

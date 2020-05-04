@@ -33,6 +33,8 @@ yarn-debug.log*
 /spec/examples.txt
 
 # Ignore the recommended dontenv ingored files
+# do NOT ignore .env.example, which lists all ENVs expected in files below
 .env.development.local
 .env.test.local
 .env.local
+.env.localsendgrid.env

@@ -42,6 +42,9 @@ gem 'acts-as-taggable-array-on'
 # support translations on more than one model
 gem 'mobility', '~> 0.8.9'
 
+# email and sms
+gem 'sendgrid-ruby'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

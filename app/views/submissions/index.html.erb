@@ -8,6 +8,7 @@
         <th>Service area</th>
         <th>Form name</th>
         <th>Body</th>
+        <th>Autoemail</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -19,6 +20,7 @@
         <td><%= submission.service_area_id %></td>
         <td><%= submission.form_name %></td>
         <td><%= submission.body %></td>
+        <td><%= edit_button(submission.person.communication_logs.last, "View autoemail") if submission.person&.communication_logs&.any? %></td>
         <td><%= edit_button(submission) %></td>
       </tr>
     <% end %>

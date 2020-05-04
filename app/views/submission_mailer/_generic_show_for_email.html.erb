@@ -1,0 +1,24 @@
+<hr><hr>
+<div>
+  <div>
+    <h1 data-object="submission">
+      <%= @person.name %>
+    </h1>
+  </div>
+  <p>Email:
+    <% if @person.email.present? %>
+      <%= mail_to(@person.email) %>
+    <% else %>
+      <%= "No email on record." %>
+    <% end %>
+    Phone: <%= @person.phone %></p>
+  <p><%= "(" + @person.location&.full_name + ")" if @person.location_id %></p>
+
+  <br>
+
+  <div>
+    <hr>
+    <%#= render partial: "submissions/submission_responses", locals: {email_display: true} %>
+    <hr>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+<% if has_internet? && @organization.instance_owner.logo_upload.exists? %>
+  <img src="https:<%= @organization.logo_upload.url %>" alt="Logo" title="Logo" style="display:block" width="200" height="87" />
+<% end %>

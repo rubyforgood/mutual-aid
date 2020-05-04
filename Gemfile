@@ -34,6 +34,9 @@ gem 'sendgrid-ruby'
 gem 'simple_form'
 gem 'webpacker', '~> 4.0'
 
+# email and sms
+gem 'sendgrid-ruby'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'binding_of_caller'

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :position do
-    person
-    organization
+    association :person
+    association :organization
   end
 end

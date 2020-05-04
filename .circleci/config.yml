@@ -75,6 +75,7 @@ jobs:
       - <<: *docker_image
         environment:
           RAILS_ENV: test
+          POSTGRES_HOST: 127.0.0.1
       - image: circleci/postgres:latest
         environment:
           POSTGRES_USER: circleci

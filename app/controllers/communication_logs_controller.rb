@@ -58,11 +58,15 @@ class CommunicationLogsController < ApplicationController
       params.require(:communication_log).permit(
           :person_id,
           :match_id,
-          :channel,
-          :sent_at,
+          :body,
+          :created_by_id,
+          :delivery_channel,
+          :delivery_status,
           :from_type,
+          :needs_follow_up,
           :to_type,
-          :needs_follow_up
+          :sent_at,
+          :subject,
       )
     end
 end

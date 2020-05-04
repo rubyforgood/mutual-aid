@@ -4,8 +4,10 @@
   <table class="table table-hover table-curved table-condensed">
     <thead>
     <tr>
-      <th>Person</th>
       <th>Channel</th>
+      <th>Status</th>
+      <th>Person</th>
+      <th>Subject</th>
       <th>Sent at</th>
       <th>Needs follow up</th>
       <th>Edit</th>
@@ -15,8 +17,10 @@
     <tbody>
     <% @communication_logs.each do |communication_log| %>
       <tr>
+        <td><%= communication_log.delivery_channel %></td>
+        <td><%= communication_log.delivery_status %></td>
         <td><%= communication_log.person&.name %></td>
-        <td><%= communication_log.channel %></td>
+        <td><%= communication_log.subject %></td>
         <td><%= communication_log.sent_at %></td>
         <td><%= yes_no(communication_log.needs_follow_up) %></td>
         <td><%= edit_button(communication_log) %></td>

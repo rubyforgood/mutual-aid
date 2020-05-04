@@ -9,4 +9,12 @@ Category::DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
   end
 end
 
+host_organization = Organization.where(is_instance_owner: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
+
+default_system_settings = SystemSetting.create!
+
+Position.where(position_type: Position::ASK_FORM_CONTACT_TITLE, organization: host_organization).first_or_create!
+Position.where(position_type: Position::OFFER_FORM_CONTACT_TITLE, organization: host_organization).first_or_create!
+Position.where(position_type: Position::COMMUNITY_RESOURCES_CONTACT_TITLE, organization: host_organization).first_or_create!
+
 puts "completed seeds.rb"

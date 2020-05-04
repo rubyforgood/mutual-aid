@@ -4,6 +4,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable# and :omniauthable
 
+  has_many :communication_logs, as: :created_by
   has_one :person
 
   def admin?

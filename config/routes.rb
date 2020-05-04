@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :feedbacks
-  resources :categories
   devise_for :users
 
   get "/admin", to: "admin#landing_page", as: "landing_page_admin"
@@ -24,10 +22,12 @@ Rails.application.routes.draw do
   end
 
   resources :announcements
+  resources :categories
   resources :communication_logs
+  resources :community_resources
   resources :custom_form_questions
   resources :donations
-  resources :community_resources
+  resources :feedbacks
   resources :locations
   resources :matches
   resources :organizations
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :positions
   resources :shared_accounts
   resources :service_areas
+  resources :submissions
   resources :system_settings
   resources :users
 

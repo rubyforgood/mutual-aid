@@ -1,5 +1,5 @@
 user = User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(password: "#{ENV["SYSTEM_PASSWORD"]}")
-user.confirmed_at = Time.now
+user.confirmed_at = Time.now # we currently have Devise :confirmable strategy turned on, so all new users need their email confirmed
 user.save!
 
 Category::DEFAULT_TAGS.each do |tag_name_parent, subtag_name|

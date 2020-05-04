@@ -15,7 +15,9 @@
     <%= f.input :delivery_status, default: CommunicationLog::DEFAULT_DELIVERY_STATUS %>
 
     <%= f.input :subject, as: :text, input_html: { rows: 1 } %>
-    <%= f.input :body, as: :text, input_html: { rows: 4 } %>
+
+    <hr>
+    <%= f.object.body&.html_safe || "-- Empty --" %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, resource: @communication_log, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

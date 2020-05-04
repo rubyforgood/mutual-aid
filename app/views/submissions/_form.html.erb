@@ -10,7 +10,8 @@
     <br><br>
     <%= f.input :form_name %>
     <%= f.input :privacy_level_requested %>
-    <%= f.input :body, readonly: true %>
+    <hr>
+    <%= f.object.body&.html_safe || "-- Empty --" %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, record: @submission, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

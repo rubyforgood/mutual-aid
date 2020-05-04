@@ -1,0 +1,24 @@
+<%= render "layouts/view_header", resource: @submission %>
+
+<p>
+  <strong>Person:</strong>
+  <%= @submission.person_id %>
+</p>
+
+<p>
+  <strong>Service area:</strong>
+  <%= @submission.service_area_id %>
+</p>
+
+<p>
+  <strong>Form name:</strong>
+  <%= @submission.form_name %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @submission.body %>
+</p>
+
+<%= link_to 'Edit', edit_submission_path(@submission) %> |
+<%= link_to 'Back', submissions_path %>

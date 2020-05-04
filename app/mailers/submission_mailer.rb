@@ -11,11 +11,11 @@ class SubmissionMailer < ApplicationMailer
 
     @form_name = @submission.form_name
     if @form_name.downcase.include?("ask")
-      @form_contact = current_organization.ask_form_contact
+      @form_contact = Organization.current_organization.ask_form_contact
     elsif @form_name.downcase.include?("offer")
-      @form_contact = current_organization.offer_form_contact
+      @form_contact = Organization.current_organization.offer_form_contact
     elsif @form_name.downcase.include?("community_resource")
-      @form_contact = current_organization.community_resources_contact
+      @form_contact = Organization.current_organization.community_resources_contact
     end
 
     @person = @submission.person
@@ -41,4 +41,5 @@ class SubmissionMailer < ApplicationMailer
                            template_name: 'new_submission_confirmation_email' }
     end
   end
+
 end

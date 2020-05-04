@@ -23,4 +23,5 @@ class CommunicationLog < ApplicationRecord
   def name
     "#{delivery_channel}: #{subject} #{created_at.strftime("%A, %B %d, %Y at %l:%M %P")}"
   end
+
 end

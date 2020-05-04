@@ -5,15 +5,15 @@
 </p>
 <p>
   <strong>City:</strong>
-  <%= @listing.location.city %>
+  <%= @listing.location&.city %>
 </p>
 <p>
   <strong>Zip:</strong>
-  <%= @listing.location.zip %>
+  <%= @listing.location&.zip %>
 </p>
 <p>
   <strong>Street address:</strong>
-  <%= @listing.location.street_address %>
+  <%= @listing.location&.street_address %>
 </p>
 <p>
   <strong>Offers/asks</strong>

@@ -4,11 +4,14 @@ class Listing < ApplicationRecord
   translates :title
   translates :description, type: :text
 
+  belongs_to :person
+  belongs_to :service_area
   belongs_to :location, optional: true
-  belongs_to :service_area, optional: true
 
   has_many :matches, as: :receiver
   has_many :matches, as: :provider
+
+  validates :type, presence: true
 
   enum state: { received: 0, fulfilled: 1 }
 

@@ -4,11 +4,18 @@
   <div class="form-inputs">
     <%= f.association :person %>
     <%= f.association :match %>
-    <%= f.input :channel %>
     <%= f.input :from_type %>
     <%= f.input :to_type %>
-    <%= f.input :sent_at %>
+
     <%= f.input :needs_follow_up, as: :radio_buttons %>
+
+    <%= f.input :sent_at %>
+
+    <%= f.input :delivery_channel, as: :select, collection: CommunicationLog::DELIVERY_CHANNELS %>
+    <%= f.input :delivery_status, default: CommunicationLog::DEFAULT_DELIVERY_STATUS %>
+
+    <%= f.input :subject, as: :text, input_html: { rows: 1 } %>
+    <%= f.input :body, as: :text, input_html: { rows: 4 } %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, resource: @communication_log, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

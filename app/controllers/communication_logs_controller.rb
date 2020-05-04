@@ -2,7 +2,7 @@ class CommunicationLogsController < ApplicationController
   before_action :set_communication_log, only: [:show, :edit, :update, :destroy]
 
   def index
-    @communication_logs = CommunicationLog.all
+    @communication_logs = CommunicationLog.order(created_at: :desc)
   end
 
   def show

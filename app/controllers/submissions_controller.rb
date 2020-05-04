@@ -2,7 +2,7 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
   def index
-    @submissions = Submission.all
+    @submissions = Submission.order(created_at: :desc)
   end
 
   def show

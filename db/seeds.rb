@@ -1,4 +1,4 @@
-user = User.where(email: "mutualaidtesting@example.com").first_or_create!(password: "testing123")
+user = User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(password: "#{ENV["SYSTEM_PASSWORD"]}")
 user.confirmed_at = Time.now
 user.save!
 

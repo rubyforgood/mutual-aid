@@ -9,6 +9,6 @@ class Position < ApplicationRecord
                          COMMUNITY_RESOURCES_CONTACT_TITLE, "Point of contact", "Member"]
 
   def name
-    "#{person.name + ", " if person.present?}#{position_type} "
+    "#{person.name + ", " if person.present?}#{position_type}"
   end
 end

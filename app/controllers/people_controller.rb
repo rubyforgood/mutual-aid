@@ -64,6 +64,7 @@ class PeopleController < ApplicationController
                                      :skills,
                                      :notes,
                                      :user_id,
+                                     :preferred_locale,
                                      :preferred_contact_timeframe,
                                      :preferred_contact_method)
     end

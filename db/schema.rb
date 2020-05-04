@@ -223,6 +223,7 @@ ActiveRecord::Schema.define(version: 2020_05_03_224311) do
     t.bigint "location_id"
     t.bigint "service_area_id"
     t.bigint "user_id"
+    t.string "preferred_locale", default: "en", null: false
     t.index ["location_id"], name: "index_people_on_location_id"
     t.index ["service_area_id"], name: "index_people_on_service_area_id"
     t.index ["user_id"], name: "index_people_on_user_id"

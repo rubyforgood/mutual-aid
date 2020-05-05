@@ -1,0 +1,25 @@
+<%= simple_form_for @mobility_string_translation do |f| %>
+  <%= f.error_notification %>
+
+  <div class="subtitle is-5">
+    <%= @mobility_string_translation.translatable_type %> #
+    <%= @mobility_string_translation.translatable_id %>
+    <%= @mobility_string_translation.key.titleize %> (English):
+  </div>
+
+  <div class="subtitle is-3"><%= @mobility_string_translation.translatable.public_send(@mobility_string_translation.key).html_safe %></div>
+  <hr>
+
+  <div class="form-inputs">
+    <%= f.input :locale, label: "Locale/language", as: :select, collection: @supported_locales %>
+    <br><br><br>
+
+    <%= f.input :value, label: "Translated value", as: :text, input_html: { rows: 1 } %>
+
+    <%= f.association :created_by %>
+    <br><br><br>
+    <%= f.input :is_approved, as: :check_boxes %>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, record: @mobility_string_translation, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

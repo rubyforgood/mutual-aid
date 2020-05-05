@@ -2,7 +2,7 @@
   <b-navbar fixed-top transparent shadow>
     <template slot="brand">
       <b-navbar-item href="/">
-        <img :src="$options.logo" alt="festi logo" height="300px">
+        <img :src="$options.logo" alt="mutual-aid-app logo" height="300px">
       </b-navbar-item>
     </template>
 

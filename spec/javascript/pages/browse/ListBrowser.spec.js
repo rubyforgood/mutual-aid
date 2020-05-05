@@ -1,10 +1,10 @@
 import {assert} from 'chai'
 import {mount} from '@vue/test-utils'
 import ListBrowser from 'pages/browse/ListBrowser'
+import testData from '../../../../lib/listings.json'
 
 it('works with reasonable data', function () {
-  const testData = require('../../../../lib/listings.json')
-  var wrapper = mount(ListBrowser, {
+  const wrapper = mount(ListBrowser, {
     propsData: {
       contributions: testData.contributions,
     },

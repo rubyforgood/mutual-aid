@@ -5,7 +5,7 @@ import TileBrowser from 'pages/browse/ListBrowser'
 it('works with reasonable data', function () {
   const testData = require('../../../../lib/listings.json')
 
-  var wrapper = mount(TileBrowser, {
+  const wrapper = mount(TileBrowser, {
     propsData: {
       contributions: testData.contributions,
     },

@@ -2,7 +2,7 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
   def index
-    @submissions = Submission.all
+    @submissions = Submission.order(created_at: :desc)
   end
 
   def show
@@ -20,8 +20,19 @@ class SubmissionsController < ApplicationController
 
     respond_to do |format|
       if @submission.save
-        format.html { redirect_to submissions_path, notice: 'Position was successfully created.' }
-        format.json { render :show, status: :created, location: @submission }
+        Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
+        # send the email
+        autoemail = SubmissionMailer.new_submission_confirmation_email(@submission)
+        delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
+
+        # store email that was sent
+        CommunicationLog.log_submission_email(autoemail, delivery_status, @submission, CommunicationLog::AUTO_DELIVERY_CHANNEL, current_user)
+
+        format.html { redirect_to submissions_path,
+                                  notice: 'Submission successfully created.' }
+        format.json { render :new,
+                             status: :created,
+                             location: @submission }
       else
         format.html { render :new }
         format.json { render json: @submission.errors, status: :unprocessable_entity }

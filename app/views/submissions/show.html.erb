@@ -2,12 +2,12 @@
 
 <p>
   <strong>Person:</strong>
-  <%= @submission.person_id %>
+  <%= @submission.person&.name %>
 </p>
 
 <p>
   <strong>Service area:</strong>
-  <%= @submission.service_area_id %>
+  <%= @submission.service_area&.name %>
 </p>
 
 <p>
@@ -16,9 +16,17 @@
 </p>
 
 <p>
-  <strong>Body:</strong>
-  <%= @submission.body %>
+  <strong>Created at:</strong>
+  <%= @submission.created_at %>
 </p>
+
+
+<p>
+  <strong>Body:</strong>
+  <%= @submission.body&.html_safe %>
+</p>
+
+<hr>
 
 <%= link_to 'Edit', edit_submission_path(@submission) %> |
 <%= link_to 'Back', submissions_path %>

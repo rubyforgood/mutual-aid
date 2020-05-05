@@ -6,4 +6,16 @@ class CommunicationLog < ApplicationRecord
   DEFAULT_DELIVERY_STATUS = "completed"
   AUTO_DELIVERY_CHANNEL = "autoemail"
   DELIVERY_CHANNELS = [AUTO_DELIVERY_CHANNEL, "email", "text", "call", "snailmail"]
+
+  def self.log_submission_email(email_object, delivery_status, submission, delivery_channel=nil, current_user=nil)
+    delivery_channel ||= AUTO_DELIVERY_CHANNEL
+    self.create!(delivery_channel: delivery_channel,
+                 delivery_status: delivery_status,
+                 person: submission.person,
+                 sent_at: Time.now,
+                 subject: email_object.subject,
+                 body: email_object.html_part&.body || email_object.body.raw_source,
+                 created_by: current_user
+    )
+  end
 end

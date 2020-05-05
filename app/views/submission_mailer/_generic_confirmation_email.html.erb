@@ -1,0 +1,31 @@
+<div class="col-md-12">
+  <% person_first_name = @person&.first_name.to_s %>
+
+  <div><b>Hello there, <%= person_first_name %></b>,</div>
+  <br>
+  <div>Thank you for your response to <%= @organization_name %>'s <%= @form_name %>!</div>
+
+  <div>
+    <% if @submission.moderation_requested? || @system_settings.dispatch_moderated? %>
+      We’ll contact you within a few days to see if we can be of assistance.
+    <% elsif @system_settings.peer_to_peer? %>
+      We hope you're contacted soon by a neighbor!
+    <% elsif @system_settings.hybrid? %>
+      We hope you're contacted soon by a neighbor or by our group. If your need is urgent and you still haven't been contacted, reach out to us directly.
+    <% end %>
+  </div>
+
+  <br>
+  <div>
+    If you have any questions, please contact <%= @form_contact&.name || "#{ENV["SYSTEM_APP_NAME"]}" %><%= " at " + mail_to(@form_contact.email) if @form_contact&.person_id %>.
+  </div>
+
+
+  <br>
+  <div>Take care,</div>
+  <div><%= @organization_name %></div>
+
+  <br>
+  <hr>
+  <%= sanitize(render "submission_mailer/generic_show_for_email") %>
+</div>

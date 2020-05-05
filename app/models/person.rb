@@ -3,6 +3,8 @@ class Person < ApplicationRecord
   belongs_to :service_area, optional: true
   belongs_to :location, optional: true
 
+  has_many :communication_logs
+
   has_many :asks, inverse_of: :person
   has_many :offers, inverse_of: :person
   has_many :listings

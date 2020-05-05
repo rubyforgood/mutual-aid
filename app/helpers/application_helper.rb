@@ -4,7 +4,7 @@ module ApplicationHelper
     "<span class='#{ boolean ? "fa fa-check-circle has-text-success" : "fa fa-ban" }'></span>".html_safe
   end
 
-  def edit_button(resource)
+  def edit_button(resource, button_text="Edit")
     if resource && action_name != "edit"
       if resource.class.superclass != ApplicationRecord
         resource = resource.becomes(resource.class.superclass)
@@ -12,7 +12,7 @@ module ApplicationHelper
       link_to(edit_polymorphic_path(resource),
               title: action_name + " " + controller_path,
               class: 'button edit-button') do
-        "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Edit</span>".html_safe
+        "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> #{button_text}</span>".html_safe
       end
     end
   end

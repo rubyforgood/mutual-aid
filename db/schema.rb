@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_095309) do
+ActiveRecord::Schema.define(version: 2020_05_05_121258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_095309) do
     t.bigint "location_id"
     t.bigint "service_area_id"
     t.bigint "user_id"
+    t.string "preferred_locale", default: "en", null: false
     t.index ["location_id"], name: "index_people_on_location_id"
     t.index ["service_area_id"], name: "index_people_on_service_area_id"
     t.index ["user_id"], name: "index_people_on_user_id"
@@ -289,6 +290,15 @@ ActiveRecord::Schema.define(version: 2020_05_05_095309) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["person_id"], name: "index_submissions_on_person_id"
     t.index ["service_area_id"], name: "index_submissions_on_service_area_id"
+  end
+
+  create_table "system_locales", force: :cascade do |t|
+    t.string "locale"
+    t.string "locale_name"
+    t.boolean "publish_in_dropdowns"
+    t.boolean "publish_translations"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "system_settings", force: :cascade do |t|

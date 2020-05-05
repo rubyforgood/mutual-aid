@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Locale:</strong>
+  <%= @system_locale.locale %>
+</p>
+
+<p>
+  <strong>Locale name:</strong>
+  <%= @system_locale.locale_name %>
+</p>
+
+<p>
+  <strong>Publish in dropdowns:</strong>
+  <%= @system_locale.publish_in_dropdowns %>
+</p>
+
+<p>
+  <strong>Publish translations:</strong>
+  <%= @system_locale.publish_translations %>
+</p>
+
+<%= link_to 'Edit', edit_system_locale_path(@system_locale) %> |
+<%= link_to 'Back', system_locales_path %>

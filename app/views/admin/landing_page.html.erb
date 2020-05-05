@@ -1,12 +1,12 @@
 <div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">Admin</h1>
+  <div class="column is-12">
+    <div class="title">Admin</div>
     <br>
   </div>
 </div>
 
 <div class="row columns">
-  <div class="column is-6">
+  <div class="column is-3">
     <div class="subtitle is-3">Actions</div>
     <table class="table table-hover table-curved table-condensed">
       <tbody>
@@ -17,28 +17,62 @@
       </tbody>
     </table>
   </div>
-  <div class="column is-6">
+  <div class="column is-3">
     <div class="subtitle is-3">Data</div>
     <table class="table table-hover table-curved table-condensed">
       <tbody>
       <% [
-             ["service_areas", "Locations and pods"],
-             ["people"],
-             ["communication_logs"],
-             ["positions"],
              ["announcements"],
-             ["custom_form_questions"],
+             ["communication_logs", "Communication Logs"],
+             ["community_resources", "Community Resources"],
+             ["donations"],
+             ["feedbacks", "Feedback"],
+             ["listings"],
+             ["matches"],
+             ["people"],
+             ["positions"],
+             ["submissions"],
+
+           ].sort_by(&:first).each do |table_name, optional_text| %>
+          <tr>
+            <td>
+              <%= render "layouts/view_add_new_button", table_name: table_name, hide_text: true, small_button: true %>
+              <%= link_to "#{optional_text || table_name.classify.pluralize}", table_name %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column is-3">
+    <div class="subtitle is-3">Settings</div>
+    <table class="table table-hover table-curved table-condensed">
+      <tbody>
+      <% [
              ["categories"],
-             ["shared_accounts"],
+             ["custom_form_questions", "Custom Form Questions"],
+             ["mobility_string_translations", "Translations"],
+             ["organizations"],
+             ["service_areas", "Locations and pods"],
+             ["shared_accounts", "Shared Accounts"],
+             ["system_locales", "System Locales"],
+             ["users", "User accounts"],
 
          ].sort_by(&:first).each do |table_name, optional_text| %>
         <tr>
           <td>
             <%= render "layouts/view_add_new_button", table_name: table_name, hide_text: true, small_button: true %>
-            <%= link_to "#{optional_text || table_name.classify}", table_name %>
+            <%= link_to "#{optional_text || table_name.classify.pluralize}", table_name %>
           </td>
         </tr>
       <% end %>
+      <tr>
+        <td>
+          <a class="button is-primary is-small" href="/system_settings/new"><span class="fa fa-cog"></span><span class=" has-text-white"></span></a>
+          <%= link_to "System Settings", new_system_setting_path %>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>

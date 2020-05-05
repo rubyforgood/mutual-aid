@@ -4,5 +4,8 @@
 
 <script>
 export default {
+  props: {
+    filterCategories: {type: Array, default: () => []}
+  }
 }
 </script>

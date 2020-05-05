@@ -2,6 +2,7 @@ import {mount, shallowMount} from '@vue/test-utils'
 import Browse from 'pages/Browse.vue'
 import ListBrowser from 'pages/browse/ListBrowser'
 import TileBrowser from 'pages/browse/TileBrowser'
+import Filters from 'pages/browse/Filters'
 
 describe('Browse', () => {
   def('wrapper', () => mount(Browse))
@@ -9,6 +10,10 @@ describe('Browse', () => {
   describe('browser view', () => {
     def('showTilesButton', () => $wrapper.find('button#show-tiles'))
     def('showListButton', () => $wrapper.find('button#show-list'))
+
+    it('loads the Filters', function() {
+      assert.isTrue($wrapper.contains(Filters))
+    })
 
     describe('starts in Tile view', () => {
       it('renders the TileBrowser', () => {

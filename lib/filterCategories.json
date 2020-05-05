@@ -1,14 +1,14 @@
 [
   {
     "name": "Urgency",
-    "filterOptions": [
+    "filters": [
       {"id": "urgency[0]", "name": "Within 1-2 days"},
       {"id": "urgency[1]", "name": "I can wait a week"}
     ]
   },
   {
     "name": "Locations",
-    "filterOptions": [
+    "filters": [
       {"id": "locations[0]", "name": "Acme Township"},
       {"id": "locations[1]", "name": "East Bay"},
       {"id": "locations[2]", "name": "Garfield Township"}
@@ -16,7 +16,7 @@
   },
   {
     "name": "Type",
-    "filterOptions": [
+    "filters": [
       {"id": "type[0]", "name": "Ask"},
       {"id": "type[1]", "name": "Offer"},
       {"id": "type[2]", "name": "Community Resource"}

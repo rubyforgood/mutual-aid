@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.association :organization %>
     <%= f.association :person %>
-    <%= f.input :position_type %>
+    <%= f.input :position_type, as: :select, collection: Position::FORM_CONTACT_TITLES %>
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.input :start_date %>

@@ -1,4 +1,4 @@
-import Vue from 'our_vue'
+import Vue from 'vue_config'
 import NavBar from '../components/NavBar'
 
 export default function(el, {loggedIn = false}) {

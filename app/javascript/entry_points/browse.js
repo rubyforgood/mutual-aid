@@ -1,4 +1,4 @@
-import Vue from 'our_vue'
+import Vue from 'vue_config'
 import Browse from 'pages/Browse'
 
 export default function(el, properties) {

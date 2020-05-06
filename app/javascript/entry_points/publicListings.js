@@ -1,4 +1,4 @@
-import Vue from 'our_vue'
+import Vue from 'vue_config'
 import PublicListings from 'components/PublicListings'
 
 export default function(el) {

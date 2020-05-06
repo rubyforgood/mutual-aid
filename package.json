@@ -5,6 +5,7 @@
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
+    "@vue/composition-api": "^0.5.0",
     "babel-loader": "^8.1.0",
     "buefy": "^0.8.17",
     "bulma": "^0.8.2",

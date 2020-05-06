@@ -1,0 +1,45 @@
+version: "3.4"
+x-shared-postgres-environment: &x-shared-postgres-environment
+  POSTGRES_DB: "${POSTGRES_DB:-mutualaid}"
+  POSTGRES_USER: "${POSTGRES_USER:-postgres}"
+  # this variable should be set in a .env file or passed via the docker-compose cli
+  POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+
+services:
+  email:
+    build:
+      context: .
+      dockerfile: ./email/Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "1080:1080"
+  db:
+    image: postgres:alpine
+    environment:
+      <<: *x-shared-postgres-environment
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - db:/var/lib/postgresql/data
+  app:
+    build:
+      context: ../..
+      dockerfile: ./docker/development/app/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - email
+    environment:
+      <<: *x-shared-postgres-environment
+      RAILS_ENV: docker-development
+      POSTGRES_HOST: db
+      # You can set this by running
+      # rake secret
+      # The resulting key should be placed in a .env file
+      # in this directory, or you can pass it to
+      # docker-compose up --build -e SECRET_KEY_BASE=...
+      # Otherwise the database setup step will fail
+      SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
+volumes:
+  db:

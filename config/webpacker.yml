@@ -49,7 +49,7 @@ default: &default
     - .jpeg
     - .jpg
 
-development:
+development: &development-settings
   <<: *default
   compile: true
 
@@ -57,7 +57,7 @@ development:
   check_yarn_integrity: true
 
   # Reference: https://webpack.js.org/configuration/dev-server/
-  dev_server:
+  dev_server: &development-server
     https: false
     host: localhost
     port: 3035
@@ -72,9 +72,14 @@ development:
     quiet: false
     pretty: false
     headers:
-      'Access-Control-Allow-Origin': '*'
+      "Access-Control-Allow-Origin": "*"
     watch_options:
-      ignored: '**/node_modules/**'
+      ignored: "**/node_modules/**"
+
+docker-development:
+  <<: *default
+  compile: true
+  check_yarn_integrity: true
 
 test:
   <<: *default

@@ -78,7 +78,7 @@ The Rails and webpack processes are launched with Heroku. You can install Heroku
 
 ## Running the App!
 
-First, set up Local Services via Docker or individually installed services. 
+First, set up Local Services via [Docker](#development-with-docker) or individually installed services. 
 
 ### Starting Local Services
 
@@ -116,12 +116,12 @@ $ heroku local -f Procfile.dev
 if you run into the following error:
 ```bash: heroku: command not found``` visit https://devcenter.heroku.com/articles/heroku-cli for instructions to install Heroku.
 
-## Development with [Docker](https://www.docker.com/)
+## Development with Docker
 
 The application includes a pre-configured [docker-compose](https://docs.docker.com/compose/) environment. This environment includes two containers, which together deploy the application and a postgres database for it to connect to.
 
 To get started using the application with docker,
-1. Install [docker](https://www.docker.com/get-started)
+1. Install [Docker](https://www.docker.com/get-started)
 2. Install [docker-compose](https://docs.docker.com/compose/install/)
 3. Clone the repository, and open the repository folder in your favorite command line or terminal application.
 4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml`.
@@ -130,20 +130,9 @@ To get started using the application with docker,
 ```bash
 SECRET_KEY_BASE="the output of the rake secret command, which will look like e0517d0887e68ebc518600..."
 ```
-7. Now you should be able to run `docker-compose up`. This will take a while to run, but after a few minutes it should stop spewing text, and you should see a block of text that looks something like this:
-  ```
-  mutual-aid-web-app_1   | Puma starting in single mode...
-  mutual-aid-web-app_1   | * Version 4.3.3 (ruby 2.7.0-p0), codename: Mysterious Traveller
-  mutual-aid-web-app_1   | * Min threads: 5, max threads: 5
-  mutual-aid-web-app_1   | * Environment: docker-development
-  mutual-aid-web-app_1   | * Listening on tcp://0.0.0.0:3000
-  mutual-aid-web-app_1   | Use Ctrl-C to stop
-  ```
-8. Navigate to `localhost:3000` in your web browser. You should be able to login as 
-  ```
-  username: mutualaidtesting@example.com
-  password: testing123
-  ```
+7. Now you should be able to run `docker-compose up -d`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
+8. To setup the database, you can run `docker-compose run -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" app rails db:prepare db:seed`. This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `docker-compose run app db:prepare` and create the account using the sign up option on the website.
+9. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
 
 **NOTE** Do not use this method in production! This is for **testing & development only* the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
 

@@ -46,8 +46,11 @@ Rails.application.configure do
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 
-  # Required here for CircleCI
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  
+  # Using recommended config from mailcatcher
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_options = { :from => "mutualaid@localhost" }
+  config.action_mailer.default_url_options = { :host => "localhost:3000"  }
+  config.action_mailer.smtp_settings = { :address => "email", :port => 1025 }
+
   config.secret_key_base = ENV['SECRET_KEY_BASE']
 end

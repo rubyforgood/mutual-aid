@@ -25,7 +25,6 @@ export default {
           name: 'My Name',
           phone: '202 202 1234',
           email: 'me@example.com',
-          preferred_contact_type: 'Text',
         }
       },
     },

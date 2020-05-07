@@ -18,4 +18,8 @@ class CommunicationLog < ApplicationRecord
                  created_by: current_user
     )
   end
+
+  def name
+    "#{delivery_channel}: #{subject} #{created_at.strftime("%A, %B %d, %Y at %l:%M %P")}"
+  end
 end

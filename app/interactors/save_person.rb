@@ -1,4 +1,4 @@
-class SavePerson < ActiveInteraction::Base
+class SavePerson < BaseInteractor
   integer :id, default: nil
   string :preferred_contact_method  # todo: string?
   string :email
@@ -8,20 +8,15 @@ class SavePerson < ActiveInteraction::Base
   def execute
     ensure_location_id_provided_if_existing_person!
 
-    Person.transaction do
+    merging_errors(in_transaction: true) do
       location_record = compose SaveLocation, location
       person_params = inputs.merge location: location_record
 
-      person = id? ?
-        Person.update(id, person_params) :
-        Person.create(person_params)
-
-      unless person.valid?
-        errors.merge! person.errors
-        raise ActiveRecord::Rollback
+      if id?
+        Person.update id, person_params
+      else
+        Person.create person_params
       end
-
-      person
     end
   end
 

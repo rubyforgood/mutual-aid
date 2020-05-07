@@ -1,4 +1,4 @@
-class SaveListing < ActiveInteraction::Base
+class SaveListing < BaseInteractor
   record :service_area
   string :type
 
@@ -7,17 +7,9 @@ class SaveListing < ActiveInteraction::Base
   # todo: add other fields here and in nested interactors
 
   def execute
-    Listing.transaction do
+    merging_errors(in_transaction: true) do
       person_record = compose SavePerson, person
-
-      listing = Listing.create inputs.merge person: person_record
-
-      unless listing.valid?
-        errors.merge! listing.errors
-        raise ActiveRecord::Rollback
-      end
-
-      listing
+      Listing.create inputs.merge person: person_record
     end
   end
 end

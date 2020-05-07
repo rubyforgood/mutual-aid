@@ -1,52 +1,105 @@
 <%= render "layouts/view_header", resource: @person %>
 
 <div class="section-detail">
-  <p id="notice"><%= notice %></p>
+  <br><br>
 
-  <p>
+  <div>
     <strong>First name:</strong>
     <%= @person.first_name %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Last name:</strong>
     <%= @person.last_name %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Phone:</strong>
     <%= @person.phone %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Email:</strong>
     <%= @person.email %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Phone 2:</strong>
     <%= @person.phone_2 %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Email 2:</strong>
     <%= @person.email_2 %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Skills:</strong>
     <%= @person.skills %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Notes:</strong>
     <%= @person.notes %>
-  </p>
+  </div>
 
-  <p>
-    <strong>User:</strong>
-    <%= @person.user_id %>
-  </p>
+  <div>
+    <strong>User account:</strong>
+    <%= edit_button(@person.user, "Account", "fa fa-user-edit") if @person.user_id %>
+  </div>
+
+  <br>
+
+  <div class="content ask-tags">
+    <% if current_user&.admin? %>
+      <hr>
+      <h3>Asks:</h3>
+      <!-- # profile-level/recurring ask tags-->
+      <% @person.temporary_ask_tag_list.each do |tag| %>
+        <span class="tag"><%= tag %></span>
+      <% end %>
+      <!-- # listing ask tags-->
+      <%= render "profile_listings_section", listings: @person.asks %>
+    <% end %>
+  </div>
+  <div class="content offer-tags">
+    <hr>
+    <h3>Offers:</h3>
+    <!-- # profile-level/recurring offer tags-->
+    <% @person.temporary_offer_tag_list.each do |tag| %>
+      <span class="tag"><%= tag %></span>
+    <% end %>
+    <!-- # listing ask tags-->
+    <%= render "profile_listings_section", listings: @person.offers %>
+  </div>
+
+  <div class="content">
+    <hr>
+    <h3>Matches:</h3>
+    <em>3/5 for this month...</em>
+    <ul type="1">
+      <% @person.matches_as_provider.each do |match| %>
+        <li><%= link_to match.name, match_path(match) %></li>
+      <% end %>
+    </ul>
+    <hr>
+    <ul type="1">
+      <% @person.matches_as_receiver.each do |match| %>
+        <li><%= link_to match.name, match_path(match) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="content">
+    <hr>
+    <h3>Communication logs:</h3>
+    <ul type="1">
+      <% @person.communication_logs.each do |log| %>
+        <li><%= yes_no(log.needs_follow_up) if log.needs_follow_up %><%= link_to log.name, communication_log_path(log) %></li>
+      <% end %>
+    </ul>
+    <hr>
+  </div>
 
   <%= link_to 'Edit', edit_person_path(@person) %> |
   <%= link_to 'Back', people_path %>

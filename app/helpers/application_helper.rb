@@ -17,4 +17,16 @@ module ApplicationHelper
     end
   end
 
+  def show_button(resource, button_text="Show", icon_class="fa fa-show", margin_class=nil)
+    if resource && action_name != "show"
+      if resource.class.superclass != ApplicationRecord
+        resource = resource.becomes(resource.class.superclass)
+      end
+      link_to(polymorphic_path(resource),
+              title: action_name + " " + controller_path,
+              class: "button show-button #{margin_class}") do
+        "<span class='#{icon_class}'></span><span style='padding-left: 0.25em'> #{button_text}</span>".html_safe
+      end
+    end
+  end
 end

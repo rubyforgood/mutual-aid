@@ -1,6 +1,6 @@
 class Match < ApplicationRecord
-  belongs_to :receiver, polymorphic: true
-  belongs_to :provider, polymorphic: true
+  belongs_to :receiver, polymorphic: true, inverse_of: :matches_as_receiver
+  belongs_to :provider, polymorphic: true, inverse_of: :matches_as_provider
 
   INITIATORS = ["receiver", "provider"]
 

@@ -15,7 +15,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
-        <td><%= user.person&.name %></td>
+        <td><%= user.person&.name %> <%= show_button(user.person, "View Profile", "fa fa-user-circle")  if user.person %></td>
         <td>[PERMISSION LEVEL]</td>
         <td><%= edit_button(user) %></td>
       </tr>

@@ -11,8 +11,9 @@
       <th>Email 2</th>
       <th>Skills</th>
       <th>Notes</th>
-      <th>User</th>
       <th>Edit</th>
+      <th>Profile</th>
+      <th>Account</th>
     </tr>
   </thead>
 
@@ -27,8 +28,9 @@
         <td><%= person.email_2 %></td>
         <td><%= person.skills %></td>
         <td><%= person.notes %></td>
-        <td><%= person.user&.name %></td>
         <td><%= edit_button(person) %></td>
+        <td><%= show_button(person, "Profile", "fa fa-user-circle") %></td>
+        <td><%= edit_button(person.user, "Account", "fa fa-user-edit") if person.user_id %></td>
       </tr>
     <% end %>
   </tbody>

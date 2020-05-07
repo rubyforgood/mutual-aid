@@ -1,44 +1,44 @@
 <div class="title is-3">Profile</div>
-<div class="title is-5"><%= @user.participant&.name %></div>
+<div class="title is-5"><%= @user.person&.name %></div>
 
 <p>
   <strong>First name:</strong>
-  <%= @user.participant&.participant&.first_name %>
+  <%= @user.person&.first_name %>
 </p>
 
 <p>
   <strong>Last name:</strong>
-  <%= @user.participant&.last_name %>
+  <%= @user.person&.last_name %>
 </p>
 
 <p>
   <strong>Phone:</strong>
-  <%= @user.participant&.phone %>
+  <%= @user.person&.phone %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @user.participant&.email %>
+  <%= @user.person&.email %>
 </p>
 
 <p>
   <strong>Phone 2:</strong>
-  <%= @user.participant&.phone_2 %>
+  <%= @user.person&.phone_2 %>
 </p>
 
 <p>
   <strong>Email 2:</strong>
-  <%= @user.participant&.email_2 %>
+  <%= @user.person&.email_2 %>
 </p>
 
 <p>
   <strong>Skills:</strong>
-  <%= @user.participant&.skills %>
+  <%= @user.person&.skills %>
 </p>
 
 <p>
   <strong>Notes:</strong>
-  <%= @user.participant&.notes %>
+  <%= @user.person&.notes %>
 </p>
 
 <p>
@@ -46,3 +46,4 @@
 </p>
 
 <%= link_to 'Edit', edit_person_path(@user) %>
+<%= link_to 'Back', users_path(@user) %>

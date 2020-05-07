@@ -1,0 +1,12 @@
+<%# needs listings %>
+
+<ul type="1">
+  <% listings.each do |listing| %>
+    <li>
+      <%= link_to listing.created_at.strftime("%A, %B %d, %Y at %l:%M %P"), listing_path(listing) %>
+      <% listing.tags.flatten.each do |tag| %>
+        <span class="tag"><%= tag %></span>
+      <% end %>
+  <% end %>
+</ul>
+

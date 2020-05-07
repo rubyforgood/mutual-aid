@@ -16,6 +16,7 @@
         "--webpack-config", "config/webpack/test.js",
         "--require", "spec/javascript/setup.js",
         "--timeout", "999999",
+        "-u", "bdd-lazy-var/global",
         "--colors",
         "${file}"
       ],

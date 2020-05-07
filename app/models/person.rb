@@ -22,6 +22,14 @@ class Person < ApplicationRecord
     "#{first_name} #{last_name} (#{email})"
   end
 
+  def temporary_ask_tag_list # these will be directly on the person once forms are available
+    asks.any? ? asks.map(&:tags).flatten.uniq : temporary_offer_tag_list + ["translation"]
+  end
+
+  def temporary_offer_tag_list # these will be directly on the person once forms are available
+    offers.any? ? offers.map(&:tags).flatten.uniq : ["transportation", "meals"]
+  end
+
   private def validate_preferred_contact_method_data
     if preferred_contact_method.present? && !self.public_send(preferred_contact_method).present?
       errors.add(:participant, " -- #{preferred_contact_method} needed (preferred contact method)")

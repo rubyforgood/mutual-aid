@@ -30,12 +30,14 @@ Rails.application.routes.draw do
   resources :feedbacks
   resources :locations
   resources :matches
+  resources :mobility_string_translations
   resources :organizations
   resources :people
   resources :positions
   resources :shared_accounts
   resources :service_areas
   resources :submissions
+  resources :system_locales
   resources :system_settings
   resources :users
 

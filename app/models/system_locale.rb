@@ -1,0 +1,2 @@
+class SystemLocale < ApplicationRecord
+end

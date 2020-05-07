@@ -2,5 +2,5 @@
 <% hide_text ||= false %>
 <% small_button ||= false %>
 
-<%= link_to "<span class='fa fa-plus-square'></span><span class='#{ 'pl-05' unless small_button } has-text-white'>#{" Add " + table_name.singularize.titleize unless hide_text }</span>".html_safe,
+<%= link_to "<span class='fa fa-plus-square'></span><span class='#{ 'pl-05' unless small_button } has-text-white'>#{" Add " + table_name.to_s.singularize.titleize unless hide_text }</span>".html_safe,
             "/#{table_name}/new", class: "button is-primary #{ 'is-small' if small_button }" %>

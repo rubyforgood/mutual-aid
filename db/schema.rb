@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_224311) do
+ActiveRecord::Schema.define(version: 2020_05_05_121258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,9 @@ ActiveRecord::Schema.define(version: 2020_05_03_224311) do
     t.bigint "translatable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "created_by_id"
+    t.boolean "is_approved", default: true, null: false
+    t.index ["created_by_id"], name: "index_mobility_string_translations_on_created_by_id"
     t.index ["translatable_id", "translatable_type", "key"], name: "index_mobility_string_translations_on_translatable_attribute"
     t.index ["translatable_id", "translatable_type", "locale", "key"], name: "index_mobility_string_translations_on_keys", unique: true
     t.index ["translatable_type", "key", "value", "locale"], name: "index_mobility_string_translations_on_query_keys"
@@ -184,6 +187,9 @@ ActiveRecord::Schema.define(version: 2020_05_03_224311) do
     t.bigint "translatable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "created_by_id"
+    t.boolean "is_approved", default: true, null: false
+    t.index ["created_by_id"], name: "index_mobility_text_translations_on_created_by_id"
     t.index ["translatable_id", "translatable_type", "key"], name: "index_mobility_text_translations_on_translatable_attribute"
     t.index ["translatable_id", "translatable_type", "locale", "key"], name: "index_mobility_text_translations_on_keys", unique: true
   end
@@ -284,6 +290,15 @@ ActiveRecord::Schema.define(version: 2020_05_03_224311) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["person_id"], name: "index_submissions_on_person_id"
     t.index ["service_area_id"], name: "index_submissions_on_service_area_id"
+  end
+
+  create_table "system_locales", force: :cascade do |t|
+    t.string "locale"
+    t.string "locale_name"
+    t.boolean "publish_in_dropdowns"
+    t.boolean "publish_translations"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "system_settings", force: :cascade do |t|

@@ -1,0 +1,472 @@
+vendor:
+  iso:
+    languages:
+      aa: Afar
+      ab: Abkhazian
+      ae: Avestan
+      af: Afrikaans
+      ak: Akan
+      am: Amharic
+      an: Aragonese
+      ar: Arabic
+      as: Assamese
+      av: Avaric
+      ay: Aymara
+      az: Azerbaijani
+      ba: Bashkir
+      be: Belarusian
+      bg: Bulgarian
+      bh: Bihari
+      bi: Bislama
+      bm: Bambara
+      bn: Bengali
+      bo: Tibetan
+      br: Breton
+      bs: Bosnian
+      ca: Catalan
+      ce: Chechen
+      ch: Chamorro
+      co: Corsican
+      cr: Cree
+      cs: Czech
+      cu: Church Slavic
+      cv: Chuvash
+      cy: Welsh
+      da: Danish
+      de: German
+      dv: Divehi
+      dz: Dzongkha
+      ee: Ewe
+      el: Greek
+      en: English
+      eo: Esperanto
+      es: Spanish
+      et: Estonian
+      eu: Basque
+      fa: Persian
+      ff: Fulah
+      fi: Finnish
+      fj: Fijian
+      fo: Faroese
+      fr: French
+      fy: Western Frisian
+      ga: Irish
+      gd: Gaelic
+      gl: Galician
+      gn: Guarani
+      gu: Gujarati
+      gv: Manx
+      ha: Hausa
+      he: Hebrew
+      hi: Hindi
+      ho: Hiri Motu
+      hr: Croatian
+      ht: Haitian
+      hu: Hungarian
+      hy: Armenian
+      hz: Herero
+      ia: Interlingua
+      id: Indonesian
+      ie: Interlingue
+      ig: Igbo
+      ii: Sichuan Yi
+      ik: Inupiaq
+      io: Ido
+      is: Icelandic
+      it: Italian
+      iu: Inuktitut
+      ja: Japanese
+      jv: Javanese
+      ka: Georgian
+      kg: Kongo
+      ki: Kikuyu
+      kj: Kuanyama
+      kk: Kazakh
+      kl: Kalaallisut
+      km: Central Khmer
+      kn: Kannada
+      ko: Korean
+      kr: Kanuri
+      ks: Kashmiri
+      ku: Kurdish
+      kv: Komi
+      kw: Cornish
+      ky: Kirghiz
+      la: Latin
+      lb: Luxembourgish
+      lg: Ganda
+      li: Limburgan
+      ln: Lingala
+      lo: Lao
+      lt: Lithuanian
+      lu: Luba-Katanga
+      lv: Latvian
+      mg: Malagasy
+      mh: Marshallese
+      mi: Maori
+      mk: Macedonian
+      ml: Malayalam
+      mn: Mongolian
+      mr: Marathi
+      ms: Malay
+      mt: Maltese
+      my: Burmese
+      na: Nauru
+      nb: Norwegian Bokmål
+      nd: North Ndebele
+      ne: Nepali
+      ng: Ndonga
+      nl: Dutch
+      nn: Norwegian Nynorsk
+      'no': Norwegian
+      nr: South Ndebele
+      nv: Navajo
+      ny: Chichewa
+      oc: Occitan
+      oj: Ojibwa
+      om: Oromo
+      or: Oriya
+      os: Ossetian
+      pa: Panjabi
+      pi: Pali
+      pl: Polish
+      ps: Pushto
+      pt: Portuguese
+      qu: Quechua
+      rm: Romansh
+      rn: Rundi
+      ro: Romanian
+      ru: Russian
+      rw: Kinyarwanda
+      sa: Sanskrit
+      sc: Sardinian
+      sd: Sindhi
+      se: Northern Sami
+      sg: Sango
+      si: Sinhala
+      sk: Slovak
+      sl: Slovenian
+      sm: Samoan
+      sn: Shona
+      so: Somali
+      sq: Albanian
+      sr: Serbian
+      ss: Swati
+      st: Sotho, Southern
+      su: Sundanese
+      sv: Swedish
+      sw: Swahili
+      ta: Tamil
+      te: Telugu
+      tg: Tajik
+      th: Thai
+      ti: Tigrinya
+      tk: Turkmen
+      tl: Tagalog
+      tn: Tswana
+      to: Tonga
+      tr: Turkish
+      ts: Tsonga
+      tt: Tatar
+      tw: Twi
+      ty: Tahitian
+      ug: Uighur
+      uk: Ukrainian
+      ur: Urdu
+      uz: Uzbek
+      ve: Venda
+      vo: Volapuk
+      vi: Vietnamese
+      wa: Walloon
+      wo: Wolof
+      xh: Xhosa
+      yi: Yiddish
+      yo: Yoruba
+      za: Zhuang
+      zh: Chinese
+      zu: Zulu
+    regions:
+      '002': Africa
+      '005': South America
+      '009': Oceania
+      '011': Western Africa
+      '013': Central America
+      '014': Eastern Africa
+      '015': Northern Africa
+      '017': Middle Africa
+      '018': Southern Africa
+      '019': Americas
+      '021': Northern Americab
+      '029': Caribbean
+      '030': Eastern Asia
+      '034': Southern Asia
+      '035': South-Eastern Asia
+      '039': Southern Europe
+      '053': Australia and New Zealand
+      '054': Melanesia
+      '057': Micronesia
+      '061': Polynesia
+      '142': Asia
+      '143': Central Asia
+      '145': Western Asia
+      '150': Europe
+      '151': Eastern Europe
+      '154': Northern Europe
+      '155': Western Europe
+      '248': Land Islands
+      '344': China, Hong Kong Special Administrative Region
+      '419': Latin America and the Caribbean
+      '446': China, Macao Special Administrative Region
+      '531': Curaçao
+      '535': Bonaire, Saint Eustatius and Saba
+      '638': Runion
+      '680': Sark
+      '830': Channel Islands
+    countries:
+      AF: Afghanistan
+      AX: Aland Islands
+      AL: Albania
+      DZ: Algeria
+      AS: American Samoa
+      AD: Andorra
+      AO: Angola
+      AI: Anguilla
+      AQ: Antarctica
+      AG: Antigua and Barbuda
+      AR: Argentina
+      AM: Armenia
+      AW: Aruba
+      AU: Australia
+      AT: Austria
+      AZ: Azerbaijan
+      BS: Bahamas
+      BH: Bahrain
+      BD: Bangladesh
+      BB: Barbados
+      BY: Belarus
+      BE: Belgium
+      BZ: Belize
+      BJ: Benin
+      BM: Bermuda
+      BT: Bhutan
+      BO: Bolivia
+      BA: Bosnia and Herzegovina
+      BW: Botswana
+      BV: Bouvet Island
+      BR: Brazil
+      IO: British Indian Ocean Territory
+      BN: Brunei Darussalam
+      BG: Bulgaria
+      BF: Burkina Faso
+      BI: Burundi
+      KH: Cambodia
+      CM: Cameroon
+      CA: Canada
+      CV: Cape Verde
+      CW: Curaçao
+      KY: Cayman Islands
+      CF: Central African Republic
+      TD: Chad
+      CL: Chile
+      CN: China
+      CX: Christmas Island
+      CC: Cocos (Keeling) Islands
+      CO: Colombia
+      KM: Comoros
+      CD: Congo, the Democratic Republic of the
+      CG: Congo
+      CK: Cook Islands
+      CR: Costa Rica
+      CI: Cote D'Ivoire
+      HR: Croatia
+      CU: Cuba
+      CY: Cyprus
+      CZ: Czech Republic
+      DK: Denmark
+      DJ: Djibouti
+      DM: Dominica
+      DO: Dominican Republic
+      EC: Ecuador
+      EG: Egypt
+      SV: El Salvador
+      GQ: Equatorial Guinea
+      ER: Eritrea
+      EE: Estonia
+      ET: Ethiopia
+      FK: Falkland Islands (Malvinas)
+      FO: Faroe Islands
+      FJ: Fiji
+      FI: Finland
+      FR: France
+      GF: French Guiana
+      PF: French Polynesia
+      TF: French Southern Territories
+      GA: Gabon
+      GM: Gambia
+      GE: Georgia
+      DE: Germany
+      GH: Ghana
+      GI: Gibraltar
+      GR: Greece
+      GL: Greenland
+      GD: Grenada
+      GP: Guadeloupe
+      GU: Guam
+      GT: Guatemala
+      GG: Guernsey
+      GN: Guinea
+      GW: Guinea-Bissau
+      GY: Guyana
+      HT: Haiti
+      HM: Heard Island and Mcdonald Islands
+      HN: Honduras
+      HK: Hong Kong
+      HU: Hungary
+      IS: Iceland
+      IN: India
+      ID: Indonesia
+      IR: Iran (Islamic Republic of)
+      IQ: Iraq
+      IE: Ireland
+      IM: Isle of Man
+      IL: Israel
+      IT: Italy
+      JM: Jamaica
+      JP: Japan
+      JE: Jersey
+      JO: Jordan
+      KZ: Kazakhstan
+      KE: Kenya
+      KI: Kiribati
+      KP: Korea, Democratic People'S Republic of
+      KR: Korea, Republic of
+      KW: Kuwait
+      KG: Kyrgyzstan
+      LA: Lao People'S Democratic Republic
+      LV: Latvia
+      LB: Lebanon
+      LS: Lesotho
+      LR: Liberia
+      LY: Libyan Arab Jamahiriya
+      LI: Liechtenstein
+      LT: Lithuania
+      LU: Luxembourg
+      MO: Macao
+      MK: Macedonia, the Former Yugoslav Republic of
+      MG: Madagascar
+      MW: Malawi
+      MY: Malaysia
+      MV: Maldives
+      ML: Mali
+      MT: Malta
+      MH: Marshall Islands
+      MQ: Martinique
+      MR: Mauritania
+      MU: Mauritius
+      YT: Mayotte
+      MX: Mexico
+      FM: Micronesia, Federated States of
+      MD: Moldova, Republic of
+      MC: Monaco
+      MN: Mongolia
+      ME: Montenegro
+      MS: Montserrat
+      MA: Morocco
+      MZ: Mozambique
+      MM: Myanmar
+      NA: Namibia
+      NR: Nauru
+      NP: Nepal
+      NL: Netherlands
+      AN: Netherlands Antilles
+      NC: New Caledonia
+      NZ: New Zealand
+      NI: Nicaragua
+      NE: Niger
+      NG: Nigeria
+      NU: Niue
+      NF: Norfolk Island
+      MP: Northern Mariana Islands
+      'NO': Norway
+      OM: Oman
+      PK: Pakistan
+      PW: Palau
+      PS: Palestinian Territory, Occupied
+      PA: Panama
+      PG: Papua New Guinea
+      PY: Paraguay
+      PE: Peru
+      PH: Philippines
+      PN: Pitcairn
+      PL: Poland
+      PT: Portugal
+      PR: Puerto Rico
+      QA: Qatar
+      RE: Reunion
+      RO: Romania
+      RU: Russian Federation
+      RW: Rwanda
+      BL: Saint Barthelemy
+      SH: Saint Helena
+      KN: Saint Kitts and Nevis
+      LC: Saint Lucia
+      MF: Saint Martin (French Part)
+      PM: Saint Pierre and Miquelon
+      VC: Saint Vincent and the Grenadines
+      WS: Samoa
+      SM: San Marino
+      ST: Sao Tome and Principe
+      SA: Saudi Arabia
+      SN: Senegal
+      RS: Serbia
+      SC: Seychelles
+      SL: Sierra Leone
+      SG: Singapore
+      SK: Slovakia
+      SI: Slovenia
+      SB: Solomon Islands
+      SO: Somalia
+      ZA: South Africa
+      GS: South Georgia and the South Sandwich Islands
+      ES: Spain
+      LK: Sri Lanka
+      SD: Sudan
+      SR: Suriname
+      SJ: Svalbard and Jan Mayen
+      SZ: Swaziland
+      SE: Sweden
+      CH: Switzerland
+      SY: Syrian Arab Republic
+      TW: Taiwan
+      TJ: Tajikistan
+      TZ: Tanzania, United Republic of
+      TH: Thailand
+      TL: Timor-Leste
+      TG: Togo
+      TK: Tokelau
+      TO: Tonga
+      TT: Trinidad and Tobago
+      TN: Tunisia
+      TR: Turkey
+      TM: Turkmenistan
+      TC: Turks and Caicos Islands
+      TV: Tuvalu
+      UG: Uganda
+      UA: Ukraine
+      AE: United Arab Emirates
+      GB: United Kingdom
+      US: United States
+      UM: United States Minor Outlying Islands
+      UY: Uruguay
+      UZ: Uzbekistan
+      VU: Vanuatu
+      VA: Vatican City State (Holy See)
+      VE: Venezuela
+      VN: Vietnam
+      VG: Virgin Islands (British)
+      VI: Virgin Islands (U.S.)
+      WF: Wallis and Futuna
+      EH: Western Sahara
+      YE: Yemen
+      ZM: Zambia
+      ZW: Zimbabwe

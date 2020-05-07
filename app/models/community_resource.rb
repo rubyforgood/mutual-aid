@@ -1,7 +1,7 @@
 class CommunityResource < ApplicationRecord
   extend Mobility
   translates :name
-  translates :description, type: :text
+  translates :description
 
   acts_as_taggable_on :tags
 

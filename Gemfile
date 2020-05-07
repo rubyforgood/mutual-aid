@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
-
+gem 'rake'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 
 # This should after rails but before any gems that might require it

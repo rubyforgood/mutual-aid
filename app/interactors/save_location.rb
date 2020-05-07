@@ -1,15 +1,15 @@
-class SaveLocation < ActiveInteraction::Base
+class SaveLocation < BaseInteractor
   integer :id, default: nil
   string :city
   string :state
 
   def execute
-    location = id? ?
-      Location.update(id, inputs) :
-      Location.create(inputs)
-
-    errors.merge! location.errors
-
-    location
+    merging_errors do
+      if id?
+        Location.update(id, inputs)
+      else
+        Location.create(inputs)
+      end
+    end
   end
 end

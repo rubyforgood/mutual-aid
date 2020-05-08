@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_121258) do
+ActiveRecord::Schema.define(version: 2020_05_08_031249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -316,6 +316,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_121258) do
     t.text "landing_page_text_how"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "about_us_text"
   end
 
   create_table "users", force: :cascade do |t|

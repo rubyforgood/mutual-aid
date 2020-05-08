@@ -11,7 +11,10 @@ commands:
             - bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
       - run:
           name: "Bundle Install"
-          command: bin/bundle install --path=.bundle
+          command: |
+            set -euxo pipefail
+            bundle config set frozen 'true'
+            bin/bundle install --path=.bundle
       - save_cache:
           key: bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
           paths:

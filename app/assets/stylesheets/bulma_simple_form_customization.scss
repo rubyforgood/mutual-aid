@@ -33,6 +33,16 @@
     margin-left: .75em; // spacing between radio/checkbox items
   }
 
+  .collection_radio_buttons {
+    padding-right: 1em;
+    margin-left: 0.25em;
+  }
+
+  input.radio {
+    color: red !important;
+    padding-left: 10em;
+  }
+
   .label {
     .select:not(.is-multiple):not(.is-loading)::after {
       border-color: transparent;

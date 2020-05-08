@@ -2,5 +2,5 @@ class Ask < Listing
   belongs_to :receiver, class_name: "Person", foreign_key: "person_id"
   belongs_to :service_area, inverse_of: :asks
 
-  scope :unmatched, ->() { where(provider_id: nil) }
+  scope :unmatched, ->() { includes(:matches_as_receiver).references(:matches_as_receiver).where("matches.provider_id IS NULL") }
 end

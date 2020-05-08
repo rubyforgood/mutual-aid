@@ -7,7 +7,7 @@ class Match < ApplicationRecord
   # belongs_to :coordinator, optional: true #, class_name: "Position" # TODO
   #
 
-  scope :this_month, -> { where("created_at >= ? AND created_at <= ?",
+  scope :this_month, -> { where("matches.created_at >= ? AND matches.created_at <= ?",
                                 Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }
 
   def name

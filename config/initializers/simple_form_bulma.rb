@@ -38,15 +38,15 @@ SimpleForm.setup do |config|
   # Wrappers for forms and inputs
   config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
-      boolean:       :vertical_boolean,
-      check_boxes:   :vertical_checkboxes,
+      boolean:       :horizontal_boolean,
+      check_boxes:   :horizontal_checkboxes,
       collection:    :vertical_collection,
-      date:          :vertical_multi_select,
-      datetime:      :vertical_multi_select,
+      date:          :horizontal_multi_select,
+      datetime:      :horizontal_multi_select,
       file:          :vertical_file,
-      radio_buttons: :vertical_radio,
+      radio_buttons: :horizontal_radio,
       range:         :vertical_range,
-      time:          :vertical_multi_select
+      time:          :horizontal_multi_select
   }
 
   # vertical forms
@@ -83,24 +83,6 @@ SimpleForm.setup do |config|
     b.use :input, wrap_with: { tag: 'div', class: 'select' }
     b.use :full_error, wrap_with: { tag: 'div', class: 'help is-danger' }
     #b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
-  end
-
-  ## bulma vertical multi select
-  config.wrappers :vertical_multi_select, tag: 'div', class: 'field', error_class: 'has-error' do |b|
-    b.use :html5
-    b.optional :readonly
-    b.use :label, class: 'label'
-    b.wrapper tag: 'div', class: 'control' do |ba|
-      ba.use :input, class: 'input', error_class: 'is-danger', valid_class: 'is-success'
-    end
-    # b.wrapper tag: 'div', class: 'control field is-inline-flex' do |ba|
-    #     ba.use :input, class: 'input'
-    #     ba.use :placeholder, class: 'help has-text-grey-light'
-    #     ba.use :error, wrap_with: { tag: 'span', class: 'help has-text-grey-light' }
-    #     ba.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
-    # end
-    b.use :full_error, wrap_with: { tag: 'div', class: 'is-danger' }
-    b.use :hint, wrap_with: { tag: 'small', class: 'help' }
   end
 
   ## bulma vertical file input
@@ -151,7 +133,7 @@ SimpleForm.setup do |config|
     b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
   end
 
-  config.wrappers :vertical_radio, tag: 'div', class: 'this-class-is-ignored', error_class: 'has-error' do |b|
+  config.wrappers :vertical_radio, tag: 'div', class: 'vertical-radio', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
     b.wrapper tag: 'div', class: 'field' do |ba|
@@ -166,7 +148,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
   end
 
-  config.wrappers :vertical_checkboxes, tag: 'div', class: 'this-class-is-ignored', error_class: 'has-error' do |b|
+  config.wrappers :vertical_checkboxes, tag: 'div', class: 'vertical-checkboxes', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
     b.wrapper tag: 'div', class: 'field' do |ba|
@@ -272,6 +254,59 @@ SimpleForm.setup do |config|
     #end
     #end
 
+    # bulma extension vertical input for boolean
+    config.wrappers :horizontal_boolean, tag: 'div', class: 'field horizontal-boolean is-horizontal', error_class: 'has-error' do |b|
+      b.use :html5
+      b.optional :readonly
+      b.use :input, class: 'is-checkradio is-info'
+      b.use :label
+      b.wrapper tag: 'div', class: 'field-body' do |ba|
+        ba.wrapper :form_check_wrapper, tag: 'div', class: 'control field is-horizontal' do |bb|
+          bb.use :input, wrap_with: { tag: 'label field-label field-label-left', class: 'checkbox' }
+          bb.use :label, class: 'checkbox'
+          bb.use :full_error, wrap_with: { tag: 'div', class: 'help is-danger' }
+          bb.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+        end
+      end
+      # b.wrapper tag: 'div', class: 'checkbox' do |ba|
+        #     ba.use :label_input
+        #   end
+        #
+        #   b.use :error, wrap_with: { tag: 'span', class: 'hint' }
+        #   b.use :hint,  wrap_with: { tag: 'p', class: 'hint' }
+      # end
+    end
+
+    config.wrappers :horizontal_radio, tag: 'div', class: 'horizontal-radio is-horizontal', error_class: 'has-error' do |b|
+      b.use :html5
+      b.optional :readonly
+      b.wrapper tag: 'div', class: 'field' do |ba|
+       ba.use :label, class: 'label field-label'
+       ba.wrapper tag: 'div', class: 'field-body' do |baa|
+         baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
+           baaa.use :input, class: 'radio', type: 'radio'
+         end
+       end
+      end
+      b.use :error, wrap_with: { tag: 'span', class: 'help has-text-grey-light' }
+      b.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+    end
+
+    config.wrappers :horizontal_checkboxes, tag: 'div', class: 'horizontal-checkboxes is-horizontal', error_class: 'has-error' do |b|
+      b.use :html5
+      b.optional :readonly
+      b.wrapper tag: 'div', class: 'field' do |ba|
+        ba.use :label, class: 'label field-label'
+        ba.wrapper tag: 'div', class: 'field-body' do |baa|
+          baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
+            baaa.use :input, class: 'checkbox', type: 'checkbox'
+          end
+        end
+      end
+      b.use :error, wrap_with: { tag: 'span', class: 'help has-text-grey-light' }
+      b.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+    end
+
     ## horizontal input for radio buttons and check boxes
     #config.wrappers :horizontal_collection, item_wrapper_class: 'form-check', tag: 'div', class: 'form-group row', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
     #b.use :html5
@@ -311,19 +346,37 @@ SimpleForm.setup do |config|
     #end
     #end
 
+  ## bulma vertical multi select
+  config.wrappers :vertical_multi_select, tag: 'div', class: 'field', error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: 'label'
+    b.wrapper tag: 'div', class: 'control' do |ba|
+      ba.use :input, class: 'input', error_class: 'is-danger', valid_class: 'is-success'
+    end
+    # b.wrapper tag: 'div', class: 'control field is-inline-flex' do |ba|
+    #     ba.use :input, class: 'input'
+    #     ba.use :placeholder, class: 'help has-text-grey-light'
+    #     ba.use :error, wrap_with: { tag: 'span', class: 'help has-text-grey-light' }
+    #     ba.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+    # end
+    b.use :full_error, wrap_with: { tag: 'div', class: 'is-danger' }
+    b.use :hint, wrap_with: { tag: 'small', class: 'help' }
+  end
+
     ## horizontal multi select
-    #config.wrappers :horizontal_multi_select, tag: 'div', class: 'form-group row', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
-    #b.use :html5
-    #b.optional :readonly
-    #b.use :label, class: 'col-sm-3 control-label'
-    #b.wrapper :grid_wrapper, tag: 'div', class: 'col-sm-9' do |ba|
-    #ba.wrapper tag: 'div', class: 'd-flex flex-row justify-content-between align-items-center' do |bb|
-    #bb.use :input, class: 'form-control mx-1', error_class: 'is-invalid', valid_class: 'is-valid'
-    #end
-    #ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback d-block' }
-    #ba.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
-    #end
-    #end
+    config.wrappers :horizontal_multi_select, tag: 'div', class: 'field', error_class: 'has-error' do |b|
+      b.use :html5
+      b.optional :readonly
+      b.use :label, class: 'label'
+      b.wrapper :grid_wrapper, tag: 'div', class: 'control' do |ba|
+        ba.wrapper tag: 'div', class: 'test' do |bb|
+        bb.use :input, class: 'control', error_class: 'is-invalid', valid_class: 'is-valid'
+      end
+        ba.use :full_error, wrap_with: { tag: 'div', class: 'is-invalid' }
+        ba.use :hint, wrap_with: { tag: 'small', class: 'help' }
+      end
+    end
 
     ## horizontal range input
     #config.wrappers :horizontal_range, tag: 'div', class: 'form-group row', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|

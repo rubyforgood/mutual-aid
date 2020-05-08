@@ -1,0 +1,54 @@
+<%= render "layouts/view_header", resource: @software_feedback %>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @software_feedback.created_by_id %>
+</p>
+
+<p>
+  <strong>Feedback type:</strong>
+  <%= @software_feedback.feedback_type %>
+</p>
+
+<p>
+  <strong>Module name:</strong>
+  <%= @software_feedback.module_name %>
+</p>
+
+<p>
+  <strong>Page url:</strong>
+  <%= @software_feedback.page_url %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @software_feedback.name %>
+</p>
+
+<p>
+  <strong>Urgency:</strong>
+  <%= @software_feedback.urgency %>
+</p>
+
+<p>
+  <strong>Urgency order:</strong>
+  <%= @software_feedback.urgency_order %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @software_feedback.notes %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @software_feedback.completed %>
+</p>
+
+<p>
+  <strong>Completed at:</strong>
+  <%= @software_feedback.completed_at %>
+</p>
+
+<%= link_to 'Edit', edit_software_feedback_path(@software_feedback) %> |
+<%= link_to 'Back', software_feedbacks_path %>

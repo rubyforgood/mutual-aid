@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   resources :positions
   resources :shared_accounts
   resources :service_areas
+  resources :software_feedbacks
   resources :submissions
   resources :system_locales
   resources :system_settings

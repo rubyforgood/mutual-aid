@@ -4,28 +4,22 @@ class OffersController < ApplicationController
   skip_before_action :authenticate_user!
 
   def new
+    serialize(Offer.new)
   end
 
   def create
-    @offer = Offer.new(listing_params)
-    if @offer.save
+    outcome = SaveListing.run(params[:listing])
+    if outcome.valid?
       redirect_to root_path, notice: 'Offer was successfully created.'
     else
+      serialize(outcome)
       render :new
     end
   end
 
   private
 
-    def listing_params
-      params.require(:listing).permit(
-        :service_area_id,
-        {
-          person_attributes: [
-            :email,
-            :preferred_contact_method,
-          ]
-        },
-      )
+    def serialize(object)
+      @offer_json = ListingBlueprint.render object, view: :normal
     end
 end

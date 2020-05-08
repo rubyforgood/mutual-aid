@@ -29,6 +29,8 @@
     </div>
 
     <%= f.input :skills %>
+    <%= f.input :monthly_matches_max, as: :integer %>
+    <%= f.input :monthly_donation_amount_max, as: :float %>
     <%= f.input :notes %>
     <%= f.association :user %>
   </div>

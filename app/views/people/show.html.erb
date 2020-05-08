@@ -95,7 +95,7 @@
   <div class="content">
     <hr>
     <h3>Donations:</h3>
-    <em><%= @person.donations.this_month.count %>/<%= @person.monthly_donations_max %> for <%= Date.today.strftime("%B") %></em>
+    <em><%= @person.donations.this_month.count %>/<%= @person.monthly_donation_amount_max %> for <%= Date.today.strftime("%B") %></em>
     <ul type="1">
       <% @person.donations.each do |donation| %>
         <li><%= link_to donation.name, donation_path(donation) %></li>

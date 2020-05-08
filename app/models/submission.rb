@@ -5,4 +5,12 @@ class Submission < ApplicationRecord
   def moderation_requested?
     privacy_level_requested == "moderation_requested"
   end
+
+  def category_list
+    ["transportation", "groceries"]
+  end
+
+  def urgency
+    "I can wait a week"
+  end
 end

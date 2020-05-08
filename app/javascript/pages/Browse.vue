@@ -1,10 +1,12 @@
 <template>
   <div>
-    <section>
-      <Filters :filterCategories="filterCategories" v-model="activeFilters" />
+    <section class="columns">
+      <section class="column is-one-quarter">
+        <BrowserSelector :browser="browser" @clicked="browser = $event" />
 
-      <BrowserSelector :browser="browser" @clicked="browser = $event" />
-      <component :is="browser" :contributions="activeContributions" />
+        <Filters :filterCategories="filterCategories" v-model="activeFilters" />
+      </section>
+      <component :is="browser" :contributions="activeContributions" class="column" />
     </section>
   </div>
 </template>

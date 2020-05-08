@@ -7,7 +7,7 @@ describe('Offer', () => {
     localVue: configure(createLocalVue()),
     propsData: {
       contactTypes: $contactTypes,
-      person: $person,
+      offer: $offer,
     },
   }))
 
@@ -22,6 +22,10 @@ describe('Offer', () => {
     phone: '202 202 1234',
     email: 'me@example.com',
     preferred_contact_type: null,
+  }})
+
+  def('offer', () => { return {
+    person: $person,
   }})
 
   describe('contact fields', () => {
@@ -48,10 +52,6 @@ describe('Offer', () => {
       beforeEach(async () => {
         $wrapper.get('select[name*="preferred_contact_type"]').setValue('Email')
         await $wrapper.vm.$forceUpdate()
-      })
-
-      it('updates the person object state', () => {
-        assert.equal($person.preferred_contact_type, 'Email')
       })
 
       it('makes the corresponding field required', () => {

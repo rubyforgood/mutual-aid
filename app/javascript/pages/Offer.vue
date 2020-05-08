@@ -21,9 +21,10 @@
         <ContactFields
           fieldNamePrefix="listing[person]"
           :contactTypes="contactTypes"
-          :preferredContactTypeKey="person.preferred_contact_type"
+          :preferredContactTypeKey="preferredContactTypeKey"
           v-bind:contactFields="person"
-          v-on:updated="(field, value) => person[field] = value"
+          v-on:preferrence-changed="(value) => preferredContactTypeKey = value"
+          v-on:field-changed="(field, value) => person[field] = value"
         />
         <SpacerField />
 
@@ -49,27 +50,25 @@ import SpacerField from 'components/SpacerField'
 export default {
   components: {AuthTokenInput, ContactFields, SpacerField},
   props: {
-    person: {
-      type: Object,
-      default: () => {
-        return {
-          name: 'My Name',
-          phone: '202 202 1234',
-          email: 'me@example.com',
-          preferred_contact_type: null,
-        }
-      },
-    },
+    offer: Object,
     contactTypes: {
       type: Array,
       default: () => {
         return [
+          // TODO: get these from the server
           {key: 'Call',     fieldName: 'phone',    fieldLabel: 'Phone number'},
           {key: 'Text',     fieldName: 'phone',    fieldLabel: 'Phone number'},
           {key: 'Email',    fieldName: 'email',    fieldLabel: 'Email address'},
           {key: 'WhatsApp', fieldName: 'whatsapp', fieldLabel: 'WhatsApp handle (?)'},
         ]
       },
+    }
+  },
+  data() {
+    const person = this.offer.person || {}
+    return {
+      person,
+      preferredContactTypeKey: person.preferred_contact_type,
     }
   },
   created: function() {

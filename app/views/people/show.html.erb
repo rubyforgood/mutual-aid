@@ -66,7 +66,11 @@
         <span class="tag"><%= tag %></span>
       <% end %>
       <!-- # listing ask tags-->
+<<<<<<< HEAD
       <%= render "profile_listings_section", listings: @person.asks.unmatched %>
+=======
+      <%= render "people/profile_partials/profile_listings_section", listings: @person.asks %>
+>>>>>>> 6c6c642... Quick and dirty lift from another repo re yearbook tiles for Positions
     <% end %>
   </div>
   <div class="content offer-tags">
@@ -77,7 +81,7 @@
       <span class="tag"><%= tag %></span>
     <% end %>
     <!-- # listing ask tags-->
-    <%= render "profile_listings_section", listings: @person.offers.unmatched %>
+    <%= render "people/profile_partials/profile_listings_section", listings: @person.offers.unmatched %>
   </div>
 
   <div class="content">

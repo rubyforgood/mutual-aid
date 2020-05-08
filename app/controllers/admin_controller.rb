@@ -4,4 +4,8 @@ class AdminController < ApplicationController
 
   def landing_page
   end
+
+  def yearbook
+    @positions = Position.all
+  end
 end

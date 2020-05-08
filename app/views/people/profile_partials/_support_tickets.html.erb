@@ -1,0 +1,49 @@
+<%
+  current_person_is_not_person = current_user.person != @person
+  admin = current_user.admin?
+  self_or_admin = current_user.person == @person || admin
+  col_offset = current_person_is_not_person ? "col-md-offset-1" : "col-md-offset-3"
+%>
+
+<% @user_ids.each do |user_id| %>
+  <% user = User.where(id: user_id).last %>
+  <hr class="colorgraph">
+  <% support_tickets_header = "<span class='#{HelpTicket::ICON} #{HelpTicket::ICON_COLOR_CLASS}-icon'></span> Support tickets:".html_safe %>
+  <strong><%= @admin_user ? link_to(support_tickets_header,
+                                    help_tickets_path(created_by_id: @person_id,
+                                                      profile_request: true,
+                                                      person_profile_id: @person_id,
+                                    ),
+                                    class: ""
+  ) : support_tickets_header %></strong>
+
+  <div class="row">
+    <ul>
+      <% if @outstanding_help_tickets.any? %>
+        <% @outstanding_help_tickets.each do |help_ticket| %>
+          <% ticket_name = "<span class='#{status_icon(help_ticket)}' title='#{status_icon(help_ticket)}'></span> #{help_ticket.name.truncate(20)}".html_safe %>
+          <li>
+            <%= @admin_user ? link_to(ticket_name,
+                                      edit_help_ticket_path(help_ticket,
+                                                            profile_request: true,
+                                                            person_profile_id: @person_id,), class: "btn btn-default") : ticket_name %>
+          </li>
+        <% end %>
+      <% end %>
+
+
+      <% if @has_completed_help_tickets && @admin_user %>
+        <li>
+          <%# if @admin_user || user == current_user %>
+          <%= link_to("#{@person&.first_name}'s completed tickets",
+                      help_tickets_path(created_by_id: @person_id,
+                                        profile_request: true,
+                                        person_profile_id: @person_id,
+                                        status: "completed"),
+                      class: "btn btn-default") %>
+          <%# end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

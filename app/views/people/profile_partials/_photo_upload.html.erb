@@ -1,0 +1,25 @@
+<% person ||= @person %>
+<% fest_code ||= @fest_code %>
+<% link ||= nil %>
+<% if person&.profile_photo(fest_code)&.size &&
+    person&.profile_photo(fest_code)&.class != String &&
+    !person&.profile_photo(fest_code)&.url.include?("missing.png") %>
+  <%# person&.photo_upload.inspect %>
+  <% if link %>
+    <%= link_to image_tag(person&.photo_upload.url(:square),
+                  alt: "profile image",
+                  class: "img-circle img-thumbnail"), link %>
+  <% else %>
+    <%= image_tag(person&.photo_upload.url(:square),
+                  alt: "profile image",
+                  class: "img-circle img-thumbnail") %>
+  <% end %>
+<% else %>
+  <% if link %>
+    <%= link_to image_tag("missing.png",
+                          class: "img-circle img-thumbnail img-profile-square"),
+                link %>
+  <% else %>
+    <%= image_tag("missing.png", class: "img-circle img-thumbnail img-profile-square") %>
+  <% end %>
+<% end %>

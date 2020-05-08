@@ -4,6 +4,7 @@
 @import './custom_spacing_helpers';
 @import './bulma_simple_form_customization';
 
+@import './yearbook';  // TODO: remove this once listings/new is refactored
 @import './listings';  // TODO: remove this once listings/new is refactored
 
  // TODO: use has-text-centered instead

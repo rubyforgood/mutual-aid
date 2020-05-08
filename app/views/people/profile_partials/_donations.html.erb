@@ -1,0 +1,50 @@
+<%
+  current_participant_is_not_participant = current_user.participant != @participant
+  admin = current_user.admin?
+  self_or_admin = current_user.participant == @participant || admin
+  col_offset = current_participant_is_not_participant ? "col-md-offset-1" : "col-md-offset-3"
+%>
+
+<% donations_header = "<span class='#{Donation::ICON} #{Donation::ICON_COLOR_CLASS}-icon'></span> Donations:".html_safe %>
+<strong><%= @admin_user ? link_to(donations_header,
+                                  donations_path(fest_code: @joined_fest_codes,
+                                                 profile_request: true,
+                                                 participant_profile_id: @participant_id,
+                                                 participant_id: @participant_id),
+                                  class: "") : donations_header %></strong>
+<div class="row">
+  <%= "<ul>".html_safe if @view_all_fests %>
+  <% @fest_codes.each do |code| %>
+    <strong><%= code + ":" if @view_all_fests %></strong>
+    <ul>
+
+      <% if @participant&.donations&.fest_code(code)&.any? %>
+        <% @participant.donations.fest_code(code).each do |donation| %>
+          <% donation_name = "<span class='#{status_icon(donation)}' title='#{status_icon(donation)}'></span> #{donation.name} #{donation.created_at&.strftime('%m/%d/%y %I:%M %P')}".html_safe %>
+          <li>
+            <%= @admin_user ? link_to(donation_name,
+                                      edit_donation_path(donation,
+                                                         profile_request: true,
+                                                         participant_profile_id: @participant_id,),
+                                      class: "btn btn-default") : order_name %>
+          </li>
+        <% end %>
+      <% elsif @participant && @participant.donations.no_fest&.any?  %>
+        <% @participant.donations.fest_code(code).each do |donation| %>
+          <% donation_name = "<span class='#{status_icon(donation)}' title='#{status_icon(donation)}'></span> #{donation.name} #{donation.created_at&.strftime('%m/%d/%y %I:%M %P')}".html_safe %>
+          <li>
+            <%= @admin_user ? link_to(donation_name,
+                                      edit_donation_path(donation,
+                                                         profile_request: true,
+                                                         participant_profile_id: @participant_id,
+                                      ),
+                                      class: "btn btn-default") : order_name %>
+          </li>
+        <% end %>
+      <% else %>
+        <li>(None)</li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= "</ul>".html_safe if @view_all_fests %>
+</div>

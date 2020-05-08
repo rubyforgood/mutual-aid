@@ -43,6 +43,11 @@
     <%= @person.notes %>
   </div>
 
+  <div>
+    <strong>Edit:</strong>
+    <%= edit_button(@person) %>
+  </div>
+
   <% if @person.user_id %>
     <div>
       <strong>User account:</strong>
@@ -115,6 +120,5 @@
     <hr>
   </div>
 
-  <%= link_to 'Edit', edit_person_path(@person) %> |
-  <%= link_to 'Back', people_path %>
+  <%= link_to 'People index', people_path %>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_031249) do
+ActiveRecord::Schema.define(version: 2020_05_08_194010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,6 +280,22 @@ ActiveRecord::Schema.define(version: 2020_05_08_031249) do
     t.string "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "software_feedbacks", force: :cascade do |t|
+    t.bigint "created_by_id"
+    t.string "feedback_type"
+    t.string "module_name"
+    t.string "page_url"
+    t.string "name", null: false
+    t.string "urgency"
+    t.integer "urgency_order"
+    t.string "notes"
+    t.boolean "completed"
+    t.datetime "completed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_software_feedbacks_on_created_by_id"
   end
 
   create_table "submissions", force: :cascade do |t|

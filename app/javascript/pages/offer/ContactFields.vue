@@ -8,7 +8,7 @@
       <b-select
         :name="withPrefix('preferred_contact_type')"
         :value="preferredContactTypeKey"
-        @input="$emit('updated', 'preferred_contact_type', $event)"
+        @input="$emit('preferrence-changed', $event)"
         placeholder="Select …"
         required
       >
@@ -29,7 +29,7 @@
         :name="withPrefix(fieldName)"
         :value="contactFields[fieldName]"
         :required="isPreferred(fieldName)"
-        @input="$emit('updated', fieldName, $event)"
+        @input="$emit('field-changed', fieldName, $event)"
       />
     </b-field>
   </div>

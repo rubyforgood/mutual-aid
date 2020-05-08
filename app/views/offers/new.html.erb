@@ -2,9 +2,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    EntryPoints.offer('#offer', {
-      offer: <%= raw @offer_json %>,
-    })
+    EntryPoints.offer('#offer', <%= raw @json %>)
   })
 </script>
 

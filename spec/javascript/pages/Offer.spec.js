@@ -7,6 +7,7 @@ describe('Offer', () => {
     localVue: configure(createLocalVue()),
     propsData: {
       contactTypes: $contactTypes,
+      service_areas: $service_areas,
       offer: $offer,
     },
   }))
@@ -15,6 +16,11 @@ describe('Offer', () => {
     {key: 'Call',  fieldName: 'phone', fieldLabel: 'Phone number'},
     {key: 'Text',  fieldName: 'phone', fieldLabel: 'Phone number'},
     {key: 'Email', fieldName: 'email', fieldLabel: 'Email address'},
+  ]})
+
+  def('service_areas', () => { return [
+    {id: '1',  name: 'first service area'},
+    {id: '2',  name: 'another service area'},
   ]})
 
   def('person', () => { return {
@@ -27,6 +33,25 @@ describe('Offer', () => {
   def('offer', () => { return {
     person: $person,
   }})
+
+  describe('service area', () => {
+    describe('when there are multiple service areas', () => {
+      it('renders a select list', () => {
+        const select = $wrapper.find('select[name*="service_area"]')
+        assert.sameMembers(select.findAll('option').wrappers.map(opt => opt.attributes('value')), ['1', '2'])
+      })
+    })
+
+    describe('when there is a single service areas', () => {
+      def('service_areas', () => [{id: '42', name: 'only service area'}])
+
+      it('renders a hidden input with the value fixed', () => {
+        const input = $wrapper.find('input[name*="service_area"]')
+        assert.equal(input.attributes('type'), 'hidden')
+        assert.equal(input.attributes('value'), '42')
+      })
+    })
+  })
 
   describe('contact fields', () => {
     it('generates a preferred_contact_type select field', () => {

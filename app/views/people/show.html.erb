@@ -44,39 +44,46 @@
   </div>
 
   <div>
-    <strong>User account:</strong>
-    <%= edit_button(@person.user, "Account", "fa fa-user-edit") if @person.user_id %>
+    <strong>Edit:</strong>
+    <%= edit_button(@person) %>
   </div>
+
+  <% if @person.user_id %>
+    <div>
+      <strong>User account:</strong>
+      <%= edit_button(@person.user, "Account", "fa fa-user-edit") %>
+    </div>
+  <% end %>
 
   <br>
 
   <div class="content ask-tags">
     <% if current_user&.admin? %>
       <hr>
-      <h3>Asks:</h3>
+      <h3>Outstanding Asks:</h3>
       <!-- # profile-level/recurring ask tags-->
       <% @person.temporary_ask_tag_list.each do |tag| %>
         <span class="tag"><%= tag %></span>
       <% end %>
       <!-- # listing ask tags-->
-      <%= render "profile_listings_section", listings: @person.asks %>
+      <%= render "profile_listings_section", listings: @person.asks.unmatched %>
     <% end %>
   </div>
   <div class="content offer-tags">
     <hr>
-    <h3>Offers:</h3>
+    <h3>Outstanding Offers:</h3>
     <!-- # profile-level/recurring offer tags-->
     <% @person.temporary_offer_tag_list.each do |tag| %>
       <span class="tag"><%= tag %></span>
     <% end %>
     <!-- # listing ask tags-->
-    <%= render "profile_listings_section", listings: @person.offers %>
+    <%= render "profile_listings_section", listings: @person.offers.unmatched %>
   </div>
 
   <div class="content">
     <hr>
     <h3>Matches:</h3>
-    <em>3/5 for this month...</em>
+    <em><%= @person.matches.this_month.count %>/<%= @person.monthly_matches_max %> for <%= Date.today.strftime("%B") %>></em>
     <ul type="1">
       <% @person.matches_as_provider.each do |match| %>
         <li><%= link_to match.name, match_path(match) %></li>
@@ -92,6 +99,18 @@
 
   <div class="content">
     <hr>
+    <h3>Donations:</h3>
+    <em><%= @person.donations.this_month.count %>/<%= @person.monthly_donation_amount_max %> for <%= Date.today.strftime("%B") %></em>
+    <ul type="1">
+      <% @person.donations.each do |donation| %>
+        <li><%= link_to donation.name, donation_path(donation) %></li>
+      <% end %>
+    </ul>
+    <hr>
+  </div>
+
+  <div class="content">
+    <hr>
     <h3>Communication logs:</h3>
     <ul type="1">
       <% @person.communication_logs.each do |log| %>
@@ -101,6 +120,5 @@
     <hr>
   </div>
 
-  <%= link_to 'Edit', edit_person_path(@person) %> |
-  <%= link_to 'Back', people_path %>
+  <%= link_to 'People index', people_path %>
 </div>

@@ -56,17 +56,20 @@ class PeopleController < ApplicationController
     end
 
     def person_params
-      params.require(:person).permit(:first_name,
-                                     :last_name,
-                                     :phone,
-                                     :email,
-                                     :phone_2,
-                                     :email_2,
-                                     :skills,
-                                     :notes,
-                                     :user_id,
-                                     :preferred_locale,
-                                     :preferred_contact_timeframe,
-                                     :preferred_contact_method)
+      params.require(:person).permit(
+          :first_name,
+          :last_name,
+          :phone,
+          :email,
+          :phone_2,
+          :email_2,
+          :skills,
+          :monthly_matches_max,
+          :monthly_donation_amount_max,
+          :notes,
+          :user_id,
+          :preferred_locale,
+          :preferred_contact_timeframe,
+          :preferred_contact_method)
     end
 end

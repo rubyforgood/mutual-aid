@@ -20,17 +20,19 @@
   <div class="column is-3">
     <div class="subtitle is-3">Data</div>
     <% admin_buttons_list_1 = [
-        ["service_areas", "Locations and pods"],
-        ["people"],
-        ["communication_logs"],
-        ["positions"],
         ["announcements"],
-        ["custom_form_questions"],
-        ["categories"],
-        ["shared_accounts"],
+        ["communication_logs", "Communication Logs"],
+        ["community_resources", "Community Resources"],
+        ["donations"],
+        ["feedbacks", "Feedback"],
+        ["listings"],
+        ["matches"],
+        ["people"],
+        ["positions"],
+        ["submissions"],
 
     ] %>
-    <%= render "admin_button_rows", admin_buttons_list: admin_buttons_list_1, include_system_settings_row: true %>
+    <%= render "admin_buttons_list", admin_buttons_list: admin_buttons_list_1, include_system_settings_row: false %>
   </div>
 
   <div class="column is-3">
@@ -45,6 +47,6 @@
         ["system_locales", "System Locales"],
         ["users", "User accounts"],
     ] %>
-    <%= render "admin_button_rows", admin_buttons_list: admin_buttons_list_2, include_system_settings_row: true %>
+    <%= render "admin_buttons_list", admin_buttons_list: admin_buttons_list_2, include_system_settings_row: true %>
   </div>
 </div>

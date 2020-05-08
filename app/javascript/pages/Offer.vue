@@ -3,7 +3,7 @@
     <h1 class="title">Offer support</h1>
 
     <div class="columns">
-      <form action="/listings" method="post" class="column is-half-tablet">
+      <form action="/offers" method="post" class="column is-half-tablet">
         <AuthTokenInput />
 
         <b-field

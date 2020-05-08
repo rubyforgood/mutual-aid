@@ -1,5 +1,7 @@
 class SaveListing < BaseInteractor
   record :service_area
+  string :description
+  string :title
   string :type
 
   hash :person, strip: false
@@ -12,4 +14,6 @@ class SaveListing < BaseInteractor
       Listing.create inputs.merge person: person_record
     end
   end
+
+  def id; nil end # helps serialization
 end

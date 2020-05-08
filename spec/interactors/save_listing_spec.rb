@@ -7,14 +7,22 @@ RSpec.describe SaveListing do
 
   describe 'validation' do
     let(:params) {{
-      type: '',  # only Listing field with validation
+      description: '',
+      title: '',
+      type: '', # this is invalid
       service_area: service_area.id,
       person: {
         preferred_contact_method: contact_method.id,
         email: 'we@together.coop',
+        phone: '',
         location: {
+          street_address: '',
+          neighborhood: '',
           city: 'Lansing',
           state: 'MI',
+          zip: '',
+          county: '',
+          region: '',
         },
       },
     }}

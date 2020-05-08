@@ -1,7 +1,7 @@
 <%# needs resource %>
 
 <% view_action_name ||= action_name || params[:action] || @view_action_name || params[:test_action_name] %>
-<% table_name = resource ? resource.class.table_name : (controller_name || params[:test_controller_name]).classify.constantize.table_name %>
+<% table_name = resource ? resource.class.table_name : (params[:controller_name] || controller_name).classify.constantize.table_name %>
 <% plural_table_name ||= table_name.to_s %>
 <% singular_table_name ||= table_name.to_s.singularize %>
 <% page_title ||= view_action_name == "index" ? plural_table_name.titleize : "#{view_action_name.titleize} #{singular_table_name.titleize}" %>
@@ -25,7 +25,7 @@
       <%= page_title %>
     </div>
 
-    <% if view_action_name == "edit" %>
+    <% if ["edit", "new"].include?(view_action_name) %>
       <div class="section-detail">
         <%= render 'form', singular_table_name => resource %>
       </div>

@@ -18,6 +18,9 @@ class Person < ApplicationRecord
   validates :preferred_contact_method, presence: true
   validate :validate_preferred_contact_method_data
 
+  PHONE_CONTACT_METHODS = ["call", "text"]
+  PREFERRED_CONTACT_METHODS = PHONE_CONTACT_METHODS + ["email"]
+
   def name
     "#{first_name} #{last_name} (#{email})"
   end
@@ -31,8 +34,9 @@ class Person < ApplicationRecord
   end
 
   private def validate_preferred_contact_method_data
-    if preferred_contact_method.present? && !self.public_send(preferred_contact_method).present?
-      errors.add(:participant, " -- #{preferred_contact_method} needed (preferred contact method)")
+    preferred_contact_data = PHONE_CONTACT_METHODS.include?(preferred_contact_method) ? "phone" : preferred_contact_method
+    if preferred_contact_method.present? && !self.public_send(preferred_contact_data).present?
+      errors.add(:person, " -- #{preferred_contact_method} needed (preferred contact method)")
     end
   end
 end

@@ -7,7 +7,10 @@ export default class {
   }
   fetch(filters, fallback = []) {
     return this.injectedFetch(this.path + this.parsedFilters(filters))
-      .then((response) => ({data: response.json()}))
+      .then((response) => response.json())
+      .then((jsonData) => {
+        return {data: jsonData}
+      })
       .catch((error) => ({error: error, data: fallback}))
   }
   parsedFilters(filters = []) {

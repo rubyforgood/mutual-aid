@@ -4,15 +4,23 @@
 <table class="table table-hover table-curved table-condensed">
   <tbody>
     <% admin_buttons_list.sort_by(&:first).each do |table_name, optional_text| %>
-      <% unless @system_setting.methods.include?("#{table_name}_module".to_sym) %>
-        <% if @system_setting.public_send("#{table_name}_module".to_sym) %>
-          <tr>
-            <td>
-              <%= render "layouts/view_add_new_button", table_name: table_name, hide_text: true, small_button: true %>
-              <%= link_to "#{optional_text || table_name.classify.pluralize}", table_name %>
-            </td>
-          </tr>
-        <% end %>
+      <% module_exists = @system_setting.methods.include?("#{table_name}_module".to_sym) %>
+      <!-- if module_exists, check its boolean value before including the link -->
+      <% if module_exists && @system_setting.public_send("#{table_name}_module".to_sym) %>
+        <tr>
+          <td>
+            <%= render "layouts/view_add_new_button", table_name: table_name, hide_text: true, small_button: true %>
+            <%= link_to "#{optional_text || table_name.classify.pluralize}", table_name %>
+          </td>
+        </tr>
+      <!-- otherwise, just display the link -->
+      <% else %>
+        <tr>
+          <td>
+            <%= render "layouts/view_add_new_button", table_name: table_name, hide_text: true, small_button: true %>
+            <%= link_to "#{optional_text || table_name.classify.pluralize}", table_name %>
+          </td>
+        </tr>
       <% end %>
     <% end %>
     <% if include_system_settings_row %>

@@ -10,8 +10,8 @@
     <div class="subtitle is-3">Actions</div>
     <table class="table table-hover table-curved table-condensed">
       <tbody>
-        <tr><td><%= link_to "View unmet Asks", listings_path(contribution_type: "Ask") %></td></tr>
-        <tr><td><%= link_to "View outstanding Offers", listings_path(contribution_type: "Offer") %></td></tr>
+        <tr><td><%= link_to "View unmet Asks", listings_path %></td></tr>
+        <tr><td><%= link_to "View outstanding Offers", listings_path %></td></tr>
         <tr><td><%= link_to "Manage Volunteers", volunteer_admin_path %></td></tr>
         <tr><td><%= link_to "Manage CommunityResources", community_resources_path(is_approved: false) %></td></tr>
       </tbody>

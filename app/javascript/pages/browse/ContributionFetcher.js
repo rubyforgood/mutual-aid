@@ -6,7 +6,6 @@ export default class {
     this.path = path
   }
   fetch(filters, fallback = []) {
-    console.log('fetching for', filters, 'with fallback', fallback)
     return this.injectedFetch(this.path + this.parsedFilters(filters))
       .then((response) => ({data: response.json()}))
       .catch((error) => ({error: error, data: fallback}))

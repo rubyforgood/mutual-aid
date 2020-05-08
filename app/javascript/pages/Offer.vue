@@ -6,6 +6,21 @@
       <form action="/offers" method="post" class="column is-half-tablet">
         <AuthTokenInput />
 
+        <!-- TODO: switch to inline errors instead -->
+        <b-message
+          v-if="hasErrors"
+          title="Please fix the problems below"
+          type="is-danger"
+          class="content"
+          aria-close-label="Close message"
+        >
+          <ul>
+            <li v-for="(value) in errors">
+              {{ value.join(', ') }}
+            </li>
+          </ul>
+        </b-message>
+
         <b-field
           :label-for="withPersonPrefix('name')"
           label="Name"
@@ -69,7 +84,13 @@ export default {
     return {
       person,
       preferredContactTypeKey: person.preferred_contact_type,
+      errors: this.offer.errors,
     }
+  },
+  computed: {
+    hasErrors() {
+      return this.errors && Object.keys(this.errors).length
+    },
   },
   created: function() {
     this.withPersonPrefix = partial(fieldNameWithPrefix, 'listing[person]')

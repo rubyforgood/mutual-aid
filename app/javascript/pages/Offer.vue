@@ -21,6 +21,12 @@
           </ul>
         </b-message>
 
+        <ServiceAreaField
+          v-model="offer.service_area_id"
+          :options="service_areas"
+          name="listing[service_area]"
+        />
+
         <b-field
           :label-for="withPersonPrefix('name')"
           label="Name"
@@ -60,12 +66,14 @@ import {partial} from 'utils/function'
 import {fieldNameWithPrefix} from 'utils/form'
 import AuthTokenInput from 'components/AuthTokenInput'
 import ContactFields from './offer/ContactFields'
+import ServiceAreaField from './offer/ServiceAreaField'
 import SpacerField from 'components/SpacerField'
 
 export default {
-  components: {AuthTokenInput, ContactFields, SpacerField},
+  components: {AuthTokenInput, ContactFields, ServiceAreaField, SpacerField},
   props: {
     offer: Object,
+    service_areas: Array,
     contactTypes: {
       type: Array,
       default: () => {

@@ -2,15 +2,32 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :phone %>
-    <%= f.input :email %>
-    <%= f.input :phone_2 %>
-    <%= f.input :email_2 %>
-    <%= f.input :preferred_locale %>
-    <%= f.input :preferred_contact_method %>
-    <%= f.input :preferred_contact_timeframe %>
+    <div class="field is-grouped">
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :preferred_locale, as: :select, collection: @system_locales %>
+    </div>
+
+    <div class="field is-grouped">
+      <%= f.input :preferred_contact_method %>
+      <%= f.input :preferred_contact_timeframe %>
+    </div>
+
+    <div class="field is-grouped">
+      <%= f.input :phone %>
+      <%= f.input :phone_2 %>
+    </div>
+
+    <div class="field is-grouped">
+      <%= f.input :email %>
+      <%= f.input :email_2 %>
+    </div>
+
+    <div class="field is-grouped">
+      <%= f.input :monthly_matches_max, as: :integer %>
+      <%= f.input :monthly_donation_amount_max, as: :float %>
+    </div>
+
     <%= f.input :skills %>
     <%= f.input :notes %>
     <%= f.association :user %>

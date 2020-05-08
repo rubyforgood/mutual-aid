@@ -13,6 +13,7 @@ class PeopleController < ApplicationController
   end
 
   def edit
+    @system_locales = SystemLocale.where(publish_in_dropdowns: true).pluck(:locale_name, :id)
   end
 
   def create

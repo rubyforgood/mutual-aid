@@ -2,8 +2,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :exchange_type %>
-    <%= f.input :separate_asks_offers, as: :radio_buttons %>
+    <%= f.input :exchange_type, as: :select, collection: @exchange_types %>
+    <%= f.input :separate_asks_offers, as: :radio_buttons, label: "Separate ask and offer forms" %>
     <%= f.input :allow_sms, as: :radio_buttons %>
     <%= f.input :community_resources_module, as: :radio_buttons %>
     <%= f.input :announcements_module, as: :radio_buttons %>
@@ -11,10 +11,13 @@
     <%= f.input :donations_module, as: :radio_buttons %>
     <%= f.input :shared_accounts_module, as: :radio_buttons %>
     <%= f.input :chat_module, as: :radio_buttons %>
-    <%= f.input :landing_page_text_who %>
-    <%= f.input :landing_page_text_what %>
-    <%= f.input :landing_page_text_how %>
+    <%= f.input :about_us_text, label: "About us text (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+    <div class="field is-grouped">
+      <%= f.input :landing_page_text_who, label: "Landing page text: Who (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+      <%= f.input :landing_page_text_what, label: "Landing page text: What (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+      <%= f.input :landing_page_text_how, label: "Landing page text: How (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+    </div>
   </div>
 
-  <%= render "layouts/view_footer_buttons", f: f, resource: @system_setting, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+  <%= render "layouts/view_footer_buttons", f: f, resource: @system_setting, top_divider: true, delete_button: "" %>
 <% end %>

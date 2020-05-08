@@ -11,9 +11,11 @@ class SystemSettingsController < ApplicationController
 
   def new
     @system_setting = SystemSetting.new
+    @exchange_types = SystemSetting::EXCHANGE_TYPES
   end
 
   def edit
+    @exchange_types = SystemSetting::EXCHANGE_TYPES
   end
 
   def create
@@ -60,6 +62,19 @@ class SystemSettingsController < ApplicationController
     end
 
     def system_setting_params
-      params.require(:system_setting).permit(:exchange_type, :separate_asks_offers, :allow_sms, :community_resources_module, :announcements_module, :positions_module, :donations_module, :shared_accounts_module, :chat_module, :landing_page_text_what, :landing_page_text_who, :landing_page_text_how)
+      params.require(:system_setting).permit(
+        :exchange_type,
+        :separate_asks_offers,
+        :allow_sms,
+        :community_resources_module,
+        :announcements_module,
+        :positions_module,
+        :donations_module,
+        :shared_accounts_module,
+        :chat_module,
+        :about_us_text,
+        :landing_page_text_what,
+        :landing_page_text_who,
+        :landing_page_text_how)
     end
 end

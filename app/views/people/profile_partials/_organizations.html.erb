@@ -1,0 +1,52 @@
+<%
+  current_participant_is_not_participant = current_user.participant != @participant
+  admin = current_user.admin?
+  self_or_admin = current_user.participant == @participant || admin
+  col_offset = current_participant_is_not_participant ? "col-md-offset-1" : "col-md-offset-3"
+%>
+
+<% organizations_header = "<span class='#{Group::ICON} #{Group::ICON_COLOR_CLASS}-icon'></span> Groups:".html_safe %>
+<strong>
+  <% if @admin_user || current_user.profiles_colleagues? %>
+    <%= link_to(organizations_header,
+                colleague_profiles_path(@participant,
+                                        fest_code: @joined_fest_codes,
+                # profile_request: true,
+                # participant_profile_id: @participant_id,
+                # participant_id: @participant_id
+                ),
+                title: "Colleague profiles",
+                class: "") %>
+  <% else %>
+    <%= organizations_header %>
+  <% end %>
+</strong>
+<!--) : "organizations (form responses):" %>-->
+<!--</strong>-->
+
+<div class="row">
+  <%= "<ul>".html_safe if @view_all_fests %>
+  <% @fest_codes.each do |code| %>
+    <strong><%= code + ":" if @view_all_fests %></strong>
+    <ul>
+      <% if @participant.organization_ids(code)&.any? %>
+        <% @participant.organization_ids(code).each do |organization_id| %>
+          <% organization_name = Group.where(id: organization_id).last&.name %>
+          <% organization_name_text = "<span class='#{UserProfile::ICON} #{Group::ICON_COLOR_CLASS}-icon'></span><span class='text-black'> #{organization_name}</span>".html_safe %>
+          <li>
+            <%= @admin_user ? link_to(organization_name_text,
+                                      organization_profile_path(organization_id,
+                                                         profile_request: true,
+                                                         participant_profile_id: @participant_id,
+                                      ),
+                                      class: "btn btn-default button #{Group::ICON_COLOR_CLASS}-icon",
+                                      title: "Group profile: #{organization_name} organization") : organization_name_text %>
+          </li>
+        <% end %>
+      <% else %>
+        <li>(None)</li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= "</ul>".html_safe if @view_all_fests %>
+</div>

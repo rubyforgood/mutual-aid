@@ -1,0 +1,68 @@
+<%
+  current_person_is_not_person = current_user.person != @person
+  admin = current_user.admin?
+  self_or_admin = current_user.person == @person || admin
+  col_offset = current_person_is_not_person ? "col-md-offset-1" : "col-md-offset-3"
+%>
+
+<% submissions_header = "<span class='#{Submission::ICON} #{Submission::ICON_COLOR_CLASS}-icon'></span> Submissions (#{SubmissionTemplate.model_name.human} responses):".html_safe %>
+<strong>
+  <%= @admin_user ? link_to(submissions_header,
+                            manage_submissions_abbr_path(fest_code: @joined_fest_codes,
+                                                         role_type_name: @person.roles.join("--"),
+                                                         profile_request: true,
+                                                         person_profile_id: @person_id,
+                                                         person_id: @person_id),
+                            class: ""
+  ) : submissions_header %>
+</strong>
+<!--) : "Submissions (form responses):" %>-->
+<!--</strong>-->
+
+<div class="row">
+  <%= "<ul>".html_safe if @view_all_fests %>
+  <% @fest_codes.each do |code| %>
+    <strong><%= code + ":" if @view_all_fests %></strong>
+    <ul>
+      <% if @person&.submissions&.fest_code(code)&.any? %>
+        <% @person&.submissions.fest_code(code).each do |submission| %>
+          <% submission_name = " #{review_icon_class(submission.status)} #{submission.fest.code unless @params_fest_code} #{submission.submission_template_name} (#{submission.role_type_prefix}) #{
+          submission.created_at&.strftime('%Y-%m-%d')}".html_safe %>
+          <li>
+            <%= @admin_user || submission.submission_template.viewable_by_nonadmins ? link_to(submission_name.html_safe,
+                                                                                              submission_path(submission,
+                                                                                                              profile_request: true,
+                                                                                                              person_profile_id: @person_id,),
+                                                                                              title: "View submission",
+                                                                                              class: "btn btn-default") : submission_name %>
+
+
+            <%= link_to("<span class='#{UserProfile::ICON} #{Group::ICON_COLOR_CLASS}-icon'></span><span class='text-black'> #{ submission.group.name }</span>".html_safe,
+                        group_profile_path(submission.group,
+                                           profile_request: true,
+                                           person_profile_id: @person_id,),
+                        class: "btn btn-default button #{Group::ICON_COLOR_CLASS}-icon",
+                        title: "Group profile: #{submission.group.name} group") if submission.group %>
+            <% submission.submission_fest_groups.each do |submission_fest_group| %>
+              <%= link_to("<span class='#{UserProfile::ICON} #{Group::ICON_COLOR_CLASS}-icon'></span><span class='text-black'> #{ submission_fest_group.fest_group&.inventory_name || submission_fest_group.name }</span>".html_safe,
+                          group_profile_path(submission_fest_group.group,
+                                             profile_request: true,
+                                             person_profile_id: @person_id,),
+                          class: "btn btn-default button #{Group::ICON_COLOR_CLASS}-icon",
+                          title: "Group profile: #{submission_fest_group.group.name} group") %>
+              <% notes_text = "(#{submission_fest_group.notes.present? ? submission_fest_group.notes : '-'})" %>
+              <%= @admin_user ? link_to(notes_text,
+                                        edit_submission_fest_group_path(submission_fest_group,
+                                                                        profile_request: true,
+                                                                        person_profile_id: @person_id,
+                                                                        fest_code: submission.fest_code)) : notes_text %>
+            <% end %>
+          </li>
+        <% end %>
+      <% else %>
+        <li>(None)</li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= "</ul>".html_safe if @view_all_fests %>
+</div>

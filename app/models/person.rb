@@ -22,6 +22,10 @@ class Person < ApplicationRecord
     "#{first_name} #{last_name} (#{email})"
   end
 
+  def profile_photo(fest_code)
+    "missing.png"
+  end
+
   def temporary_ask_tag_list # these will be directly on the person once forms are available
     asks.any? ? asks.map(&:tags).flatten.uniq : temporary_offer_tag_list + ["translation"]
   end

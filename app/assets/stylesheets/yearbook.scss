@@ -1,0 +1,236 @@
+@import "./variables.scss";
+
+body.controller_admin.action_yearbook {
+  .instruction-row {
+    color: black !important;
+    padding-bottom: 1em;
+    min-height: 2em !important;
+    margin-bottom: 0.5em !important;
+  }
+
+  .flex-container {
+    padding: 0em 2em 0em 2em;
+    margin: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row;
+    justify-content: space-around;
+    line-height:30px;
+    &.index-buttons-mini-strip {
+      padding: 0em !important;
+    }
+    &.navbar-right {
+      padding: 0em 0em 0em 2em !important;
+      margin: -1.5em 0em 0em 0em !important;
+    }
+  }
+
+  .flex-container-wrap {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    flex-flow: wrap;
+  }
+
+  .flex-item {
+    //background: $admin;
+    //background: $lightest-gray;
+    margin: 1px;
+    color: white;
+    font-size: 1.2em;
+    text-align: left;
+    vertical-align: middle;
+    flex: 1 0 auto;
+    min-height: 3em;
+    min-width: 250px;
+    /* border: 1px none transparent; */
+    touch-action: manipulation;
+    //cursor: pointer;
+    border: 1px solid white;
+    /* border-color: #ccc; */
+    border-color: white;
+    background-color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    a {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    &.index-buttons-mini {
+      font-size: 35px !important;
+      height: 1.75em !important;
+      min-width: 50px !important;
+      &.chicklet-icon {
+        padding: 0px;
+      }
+    }
+    &:hover {
+      //display: inline-block;
+      margin: 1px;
+      color: #333;
+      font-size: 1.2em;
+      text-align: left;
+      vertical-align: middle;
+      flex: 1 0 auto;
+      min-height: 3em;
+      min-width: 250px;
+      touch-action: manipulation;
+      //cursor: pointer;
+      //background-image: none;
+      border: 1px solid transparent;
+      border-color: #ccc;
+      background-color: #fff;
+      //white-space: nowrap;
+      //padding: 6px 12px;
+      //line-height: 1.428571429;
+      border-radius: 4px;
+      text-decoration: none;
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+
+  //.flex-profile-item {
+  //  background: $lightest-gray !important;
+  //  margin: 1px;
+  //  /* color: white; */
+  //  /* font-size: 1.2em; */
+  //  /* text-align: left; */
+  //  vertical-align: middle;
+  //  /* flex: 1 0 auto; */
+  //  min-height: 3em;
+  //  min-width: 250px;
+  //}
+
+  //.flex-profile-item-photo {
+  //  &img {
+  //    padding-top: 2em;
+  //    min-height: 15em;
+  //  }
+  //
+  //}
+
+  .flex-container-profiles {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  .flex-item-profile {
+    background: #eeeeee;
+    padding: 5px;
+    width: 300px;
+    height: 300px;
+    margin-top: 15px;
+    /*line-height: 150px;*/
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    /*display: inline-flex;*/
+    display: inline-table;
+    flex-flow: wrap;
+    flex-wrap: wrap;
+    border: 1px solid black;
+  }
+
+  .flex-item-profile-detail {
+    /*padding: 5px;*/
+    /*width: 300px;*/
+    /*height: 300px;*/
+    /*margin-top: 15px;*/
+    /*line-height: 150px;*/
+    color: black;
+    /*font-weight: bold;*/
+    /*text-align: center;*/
+    /*flex-flow: wrap;*/
+    /*flex-wrap: wrap;*/
+    padding-bottom: 0.25rem;
+  }
+
+  .profile-photo {
+    padding: 1em 0em 1em 0em;
+  }
+
+  .index-buttons-mini-strip {
+    margin: -1.5em 0em 2em 0em !important;
+  }
+
+  .flex-item:before {
+    content:'';
+    float:left;
+    padding-top: 0em;
+  }
+
+  .flex-item:link, .flex-item:visited {
+    width: 120px;
+    background-color: $light-gray !important;
+  }
+
+  .flex-item:hover, .flex-item:active {
+    background-color: $light-gray !important;
+    //-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    //-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    //box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  .box-text {
+    padding: 1em;
+    font-weight: bold;
+    color: $chicklet-text;
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 18px;
+  }
+
+  .new-record-buttons-navbar {
+    float:right;
+    padding-top: 0.75em;
+  }
+
+  .new-record-buttons-admin-pages {
+    padding-bottom: 1em;
+  }
+
+  .normal-cursor {
+    cursor: default !important;
+  }
+
+  .chicklet-icon {
+    padding: 0.25em 1em 0.5em 0.5em;
+    display: inline;
+    white-space: nowrap;
+
+    &.chicklet-icon-with-plus-button {
+      white-space: normal;
+    }
+
+    &.index-buttons-mini {
+      padding-top: 30px !important;
+
+      &.chicklet-fa-link {
+        top: 1px !important;
+        font-size: 38px !important;
+      }
+
+      &.chicklet-glyphicon-link {
+        top: -2px !important;
+        font-size: 35px !important;
+      }
+    }
+  }
+}

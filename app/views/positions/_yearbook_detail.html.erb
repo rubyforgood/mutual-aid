@@ -1,0 +1,41 @@
+<!--# Requires position-->
+<% position ||= @position %>
+<% person = position.person %>
+
+<% if person %><!--  # don't show unassigned spots-->
+  <li class="flex-item-profile <%= @color_class%>-border">
+  <div class="flex-item-profile-detail profile-data-row-1">
+    <span class="text-bold text-3x <%= @admin_status ? "group-link" : "" %>">
+      <% if @admin_status %>
+        <%= link_to("#{person.first_name} #{person.last_name}", person_path(person)) %>
+      <% else %>
+        <%= person.first_name %>
+      <% end %>
+    </span>
+  </div>
+  <div class="flex-item-profile-detail text-normal text-1x profile-data-row-2">
+    <span class="<%= @admin_status ? "group-link" : "" %>">
+      <% text = person.positions.yearbook_year(@yearbook_year).map{ |p| p.organization.name.truncate(30) }.uniq.sort.reverse.reject{ |i| !i.present? }.to_sentence(two_words_connector: ", ") %>
+      <% if @admin_status %>
+        <%= link_to text, positions_path(position_ids: person.positions.yearbook_year(@yearbook_year).pluck(:id)) %>
+      <% else %>
+        <%= text %>
+      <% end %>
+    </span>
+  </div>
+  <% if @admin_status %>
+    <div class="flex-item-profile-detail text-1-5x profile-data-row-3">
+      <%= person.phone.present? ? person.phone : person.preferred_contact_method == "phone" ? "[pls add phone]" : "" %>
+    </div>
+    <div class="flex-item-profile-detail text-1x group-link profile-data-row-4">
+      <%= mail_to(person.email) %>
+    </div>
+  <% end %>
+  <div class="flex-item-profile-detail profile-data-row-5 profile-photo">
+    <%= render :partial => "people/profile_partials/photo_upload",
+               locals: { person: person,
+                         yearbook_year: @yearbook_year,
+                         link: person_path(person, yearbook_year: @yearbook_year) } %>
+  </div>
+</li>
+<% end %>

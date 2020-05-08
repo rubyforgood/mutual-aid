@@ -1,0 +1,21 @@
+<style>
+  .group-link {
+    color: black;
+    text-decoration: none;
+    line-height: 1em;
+  }
+
+  .group-link a {
+    color: black;
+  }
+
+  .group-link:hover a {
+    color: black;
+  }
+</style>
+<ul class="flex-container-profiles text-center text-black">
+  <% @positions.group_by(&:person_id).each do |person_id, positions| %>
+    <% position = positions.first %>
+    <%= render partial: "positions/yearbook_detail", locals: { position: position } %>
+  <% end %>
+</ul>

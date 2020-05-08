@@ -44,16 +44,9 @@
   </div>
 
   <div>
-    <strong>Edit:</strong>
-    <%= edit_button(@person) %>
+    <%= edit_button(@person, "Edit Person") %>
+    <%= edit_button(@person.user, "Edit Account", "fa fa-user-edit") if @person.user_id %>
   </div>
-
-  <% if @person.user_id %>
-    <div>
-      <strong>User account:</strong>
-      <%= edit_button(@person.user, "Account", "fa fa-user-edit") %>
-    </div>
-  <% end %>
 
   <br>
 
@@ -66,11 +59,7 @@
         <span class="tag"><%= tag %></span>
       <% end %>
       <!-- # listing ask tags-->
-<<<<<<< HEAD
-      <%= render "profile_listings_section", listings: @person.asks.unmatched %>
-=======
       <%= render "people/profile_partials/profile_listings_section", listings: @person.asks %>
->>>>>>> 6c6c642... Quick and dirty lift from another repo re yearbook tiles for Positions
     <% end %>
   </div>
   <div class="content offer-tags">
@@ -87,7 +76,7 @@
   <div class="content">
     <hr>
     <h3>Matches:</h3>
-    <em><%= @person.matches.this_month.count %>/<%= @person.monthly_matches_max %> for <%= Date.today.strftime("%B") %>></em>
+    <em><%= @person.matches_as_provider.this_month.count %>/<%= @person.monthly_matches_max %> provided in <%= Date.today.strftime("%B %Y") %></em>
     <ul type="1">
       <% @person.matches_as_provider.each do |match| %>
         <li><%= link_to match.name, match_path(match) %></li>
@@ -104,7 +93,7 @@
   <div class="content">
     <hr>
     <h3>Donations:</h3>
-    <em><%= @person.donations.this_month.count %>/<%= @person.monthly_donation_amount_max %> for <%= Date.today.strftime("%B") %></em>
+    <em><%= @person.donations.this_month.sum(&:value) %>/<%= @person.monthly_donation_amount_max %> for <%= Date.today.strftime("%B") %></em>
     <ul type="1">
       <% @person.donations.each do |donation| %>
         <li><%= link_to donation.name, donation_path(donation) %></li>

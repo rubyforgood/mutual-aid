@@ -25,7 +25,7 @@
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
-guard :rspec, cmd: "RUBYOPT='-W:no-deprecated' bin/rspec -f doc" do
+guard :rspec, cmd: "RUBYOPT='-W:no-deprecated' bin/spring rspec -f doc --no-profile" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 

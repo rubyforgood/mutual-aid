@@ -3,11 +3,16 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   before_action :authenticate_user!
-  before_action :admin_status
+  before_action :set_admin_status
+  before_action :set_system_setting
   around_action :switch_locale
 
-  def admin_status
+  def set_admin_status
     @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin? # allows admin user to simulate with param=false
+  end
+
+  def set_system_setting
+    @system_setting = SystemSetting.first || SystemSetting.new # should only be one of these records per instance
   end
 
   def switch_locale(&action)

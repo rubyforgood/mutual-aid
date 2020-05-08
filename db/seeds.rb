@@ -1,9 +1,11 @@
 ### Seeds are idempotent, and should be created in dev and prod
 
 # create a base user using ENV vars
-user = User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(password: "#{ENV["SYSTEM_PASSWORD"]}")
-user.confirmed_at = Time.now # we currently have Devise :confirmable strategy turned on, so all new users need their email confirmed
-user.save!
+# we currently have Devise :confirmable strategy turned on, so all new users need their email confirmed
+User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(
+  password: "#{ENV["SYSTEM_PASSWORD"]}",
+  confirmed_at: Time.current,
+)
 
 # create categories from model constant -- these are then editable by admin users
 Category::DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
@@ -13,9 +15,13 @@ Category::DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
   end
 end
 
-# host org and settings set system defaults
+# we need at least one ServiceArea
+ServiceArea.first_or_create! name: 'Default service area (change or delete me)'
+
+# host org and set system defaults
+SystemSetting.first_or_create!
+
 host_organization = Organization.where(is_instance_owner: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
-default_system_settings = SystemSetting.first_or_create!
 
 # these positions are needed for Submission confirmation autoemails
 Position.where(position_type: Position::ASK_FORM_CONTACT_TITLE, organization: host_organization).first_or_create!

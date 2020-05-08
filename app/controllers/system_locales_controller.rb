@@ -20,7 +20,7 @@ class SystemLocalesController < ApplicationController
 
     respond_to do |format|
       if @system_locale.save
-        format.html { redirect_to @system_locale, notice: 'System locale was successfully created.' }
+        format.html { redirect_to system_locales_path, notice: 'System locale was successfully created.' }
         format.json { render :show, status: :created, location: @system_locale }
       else
         format.html { render :new }
@@ -32,7 +32,7 @@ class SystemLocalesController < ApplicationController
   def update
     respond_to do |format|
       if @system_locale.update(system_locale_params)
-        format.html { redirect_to @system_locale, notice: 'System locale was successfully updated.' }
+        format.html { redirect_to system_locales_path, notice: 'System locale was successfully updated.' }
         format.json { render :show, status: :ok, location: @system_locale }
       else
         format.html { render :edit }

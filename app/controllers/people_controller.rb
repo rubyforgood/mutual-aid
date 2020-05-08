@@ -13,7 +13,7 @@ class PeopleController < ApplicationController
   end
 
   def edit
-    @system_locales = SystemLocale.where(publish_in_dropdowns: true).pluck(:locale_name, :id)
+    set_form_dropdowns
   end
 
   def create
@@ -24,6 +24,7 @@ class PeopleController < ApplicationController
         format.html { redirect_to people_path, notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }
       else
+        set_form_dropdowns
         format.html { render :new }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
@@ -36,6 +37,7 @@ class PeopleController < ApplicationController
         format.html { redirect_to people_path, notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
       else
+        set_form_dropdowns
         format.html { render :edit }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
@@ -53,6 +55,11 @@ class PeopleController < ApplicationController
   private
     def set_person
       @person = Person.find(params[:id])
+    end
+
+    def set_form_dropdowns
+      @system_locales = SystemLocale.where(publish_in_dropdowns: true).pluck(:locale_name, :id)
+      @preferred_contact_methods = Person::PREFERRED_CONTACT_METHODS
     end
 
     def person_params

@@ -25,7 +25,7 @@
       <%= page_title %>
     </div>
 
-    <% if ["edit", "new"].include?(view_action_name) %>
+    <% if ["edit", "new", "update", "create"].include?(view_action_name) %>
       <div class="section-detail">
         <%= render 'form', singular_table_name => resource %>
       </div>

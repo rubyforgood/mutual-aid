@@ -4,24 +4,31 @@
   <table class="table table-hover table-curved table-condensed">
     <thead>
       <tr>
-        <th>Person</th>
-        <th>Service area</th>
+        <th>Created at</th>
         <th>Form name</th>
+        <th>Service area</th>
+        <th>Categories</th>
+        <th>Urgency</th>
+        <th>Person</th>
         <th>Body</th>
         <th>Autoemail</th>
-        <th>Edit</th>
       </tr>
     </thead>
 
     <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <td><%= submission.person_id %></td>
-        <td><%= submission.service_area_id %></td>
+        <td><%= submission.created_at.strftime("%A, %B %d, %Y at %l:%M %P") %></td>
         <td><%= submission.form_name %></td>
-        <td><%= submission.body %></td>
-        <td><%= edit_button(submission.person.communication_logs.last, "View autoemail") if submission.person&.communication_logs&.any? %></td>
-        <td><%= edit_button(submission) %></td>
+        <td><%= submission.service_area&.name %></td>
+        <td><% submission.category_list.each do |c| %>
+              <span class='tag'><%= c %></span>
+            <% end %>
+        </td>
+        <td><%= submission.urgency %></td>
+        <td><%= submission.person&.name %></td>
+        <td><%= show_button(submission) %></td>
+        <td><%= show_button(submission.person.communication_logs.last, "View autoemail") if submission.person&.communication_logs&.any? %></td>
       </tr>
     <% end %>
     </tbody>

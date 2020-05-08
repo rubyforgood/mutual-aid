@@ -17,7 +17,7 @@ module ApplicationHelper
     end
   end
 
-  def show_button(resource, button_text="Show", icon_class="fa fa-show", margin_class=nil)
+  def show_button(resource, button_text="View", icon_class="fa fa-eye", margin_class=nil)
     if resource && action_name != "show"
       if resource.class.superclass != ApplicationRecord
         resource = resource.becomes(resource.class.superclass)

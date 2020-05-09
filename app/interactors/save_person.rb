@@ -1,9 +1,8 @@
 class SavePerson < BaseInteractor
   integer :id, default: nil
-  string :preferred_contact_method  # todo: string?
-  string :email
-
-  hash :location, strip: false
+  record  :preferred_contact_method, class: 'ContactMethod'
+  string  :email
+  hash    :location, strip: false
 
   def execute
     ensure_location_id_provided_if_existing_person!

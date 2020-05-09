@@ -9,7 +9,7 @@
     </div>
 
     <div class="field is-grouped">
-      <%= f.input :preferred_contact_method, as: :select, collection: @preferred_contact_methods %>
+      <%= f.input :preferred_contact_method, as: :select, collection: @preferred_contact_methods, label_method: :name, value_method: :id %>
       <%= f.input :preferred_contact_timeframe %>
     </div>
 

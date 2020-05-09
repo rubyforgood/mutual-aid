@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_194010) do
+ActiveRecord::Schema.define(version: 2020_05_09_054235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,14 @@ ActiveRecord::Schema.define(version: 2020_05_08_194010) do
     t.index ["organization_id"], name: "index_community_resources_on_organization_id"
     t.index ["service_area_id"], name: "index_community_resources_on_service_area_id"
     t.index ["tags"], name: "index_community_resources_on_tags", using: :gin
+  end
+
+  create_table "contact_methods", force: :cascade do |t|
+    t.string "name"
+    t.string "field"
+    t.boolean "enabled"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "custom_form_questions", force: :cascade do |t|
@@ -220,7 +228,6 @@ ActiveRecord::Schema.define(version: 2020_05_08_194010) do
     t.string "email"
     t.string "phone_2"
     t.string "email_2"
-    t.string "preferred_contact_method"
     t.string "preferred_contact_timeframe"
     t.text "skills"
     t.text "notes"
@@ -232,6 +239,7 @@ ActiveRecord::Schema.define(version: 2020_05_08_194010) do
     t.string "preferred_locale", default: "en", null: false
     t.integer "monthly_matches_max", default: 0
     t.float "monthly_donation_amount_max", default: 0.0
+    t.integer "preferred_contact_method_id"
     t.index ["location_id"], name: "index_people_on_location_id"
     t.index ["service_area_id"], name: "index_people_on_service_area_id"
     t.index ["user_id"], name: "index_people_on_user_id"

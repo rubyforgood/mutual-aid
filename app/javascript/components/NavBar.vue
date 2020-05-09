@@ -30,7 +30,7 @@
 
 <script>
 import logo from 'images/logo.png'
-import DeleteButton from 'components/DeleteButton'
+import DeleteButton from './DeleteButton'
 
 export default {
   props: {

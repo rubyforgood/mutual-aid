@@ -38,3 +38,14 @@ yarn-debug.log*
 .env.test.local
 .env.local
 .env.localsendgrid.env
+
+# ignore IDEA environment files.
+.idea/.gitignore
+.idea/deployment.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/mutual-aid.iml
+.idea/sonarlint/
+.idea/sshConfigs.xml
+.idea/vcs.xml
+.idea/webServers.xml

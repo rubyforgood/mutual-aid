@@ -7,7 +7,7 @@
   <div class="flex-item-profile-detail profile-data-row-1">
     <span class="text-bold text-3x <%= @admin_status ? "group-link" : "" %>">
       <% if @admin_status %>
-        <%= link_to("#{person.first_name} #{person.last_name}", person_path(person)) %>
+        <%= link_to("#{person.name}", person_path(person)) %>
       <% else %>
         <%= person.first_name %>
       <% end %>

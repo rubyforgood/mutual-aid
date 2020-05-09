@@ -9,9 +9,9 @@ RSpec.describe SavePerson do
     id: current_person&.id,
     preferred_contact_method: contact_method.id,
     email: 'we@together.coop',
+    name: 'Harriet Tubman',
     location: {
       id: current_location&.id,
-      city: '',
       state: 'DC', # statehood now!
     },
   }}
@@ -26,7 +26,8 @@ RSpec.describe SavePerson do
     end
 
     it 'allows for existing fields to be nullified' do
-      expect(person.location.city).to be_empty
+      params[:location][:city] = nil
+      expect(person.location.city).to be_nil
     end
 
     context 'when params include a person.id but no location.id' do

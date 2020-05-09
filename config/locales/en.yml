@@ -34,3 +34,8 @@ en:
     label:
       listing:
         tags: "What types of support can you offer?"
+  models:
+    contact_method:
+      labels:
+        phone: Phone number
+        email: Email address

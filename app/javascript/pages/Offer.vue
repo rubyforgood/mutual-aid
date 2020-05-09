@@ -42,9 +42,9 @@
         <ContactFields
           fieldNamePrefix="listing[person]"
           :contactMethods="contact_methods"
-          :preferredContactMethodKey="preferredContactMethodKey"
+          :preferredContactMethodId="preferredContactMethodId"
           v-bind:contactFields="person"
-          v-on:preference-changed="(value) => preferredContactMethodKey = value"
+          v-on:preference-changed="(value) => preferredContactMethodId = value"
           v-on:field-changed="(field, value) => person[field] = value"
         />
         <SpacerField />
@@ -74,24 +74,13 @@ export default {
   props: {
     offer: Object,
     service_areas: Array,
-    contact_methods: {
-      type: Array,
-      default: () => {
-        return [
-          // TODO: get these from the server
-          {key: 'Call',     fieldName: 'phone',    fieldLabel: 'Phone number'},
-          {key: 'Text',     fieldName: 'phone',    fieldLabel: 'Phone number'},
-          {key: 'Email',    fieldName: 'email',    fieldLabel: 'Email address'},
-          {key: 'WhatsApp', fieldName: 'whatsapp', fieldLabel: 'WhatsApp handle (?)'},
-        ]
-      },
-    }
+    contact_methods: Array,
   },
   data() {
     const person = this.offer.person || {}
     return {
       person,
-      preferredContactMethodKey: person.preferred_contact_method,
+      preferredContactMethodId: person.preferred_contact_method_id,
       errors: this.offer.errors,
     }
   },

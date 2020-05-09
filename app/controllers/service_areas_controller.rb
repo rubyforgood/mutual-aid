@@ -9,12 +9,14 @@ class ServiceAreasController < ApplicationController
   end
 
   def new
+    set_form_dropdowns
     location_data = Location.new
     @service_area = ServiceArea.new
     @service_area.location_data = location_data
   end
 
   def edit
+    set_form_dropdowns
   end
 
   def create
@@ -25,6 +27,7 @@ class ServiceAreasController < ApplicationController
         format.html { redirect_to service_areas_path, notice: 'ServiceArea was successfully created.' }
         format.json { render :show, status: :created, location: @service_area }
       else
+        set_form_dropdowns
         format.html { render :new }
         format.json { render json: @service_area.errors, status: :unprocessable_entity }
       end
@@ -37,6 +40,7 @@ class ServiceAreasController < ApplicationController
         format.html { redirect_to service_areas_path, notice: 'ServiceArea was successfully updated.' }
         format.json { render :show, status: :ok, location: @service_area }
       else
+        set_form_dropdowns
         format.html { render :edit }
         format.json { render json: @service_area.errors, status: :unprocessable_entity }
       end
@@ -55,6 +59,11 @@ class ServiceAreasController < ApplicationController
     def set_service_area
       @service_area = ServiceArea.find(params[:id])
     end
+
+    def set_form_dropdowns
+      @service_area_types = ServiceArea::TYPES.map{ |i| [i,i] }
+    end
+
 
     def service_area_params
       params.require(:service_area).permit(

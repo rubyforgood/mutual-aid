@@ -1,0 +1,13 @@
+<%= simple_form_for @contact_method do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="field is-grouped">
+      <%= f.input :name, required: true %>
+      <%= f.input :field, as: :select, collection: @fields, required: true %>
+      <%= f.input :enabled, as: :radio_buttons %>
+    </div>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, record: @contact_method, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

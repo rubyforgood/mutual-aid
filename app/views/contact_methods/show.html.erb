@@ -1,0 +1,19 @@
+<%= render "layouts/view_header", resource: @contact_method %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @contact_method.name %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @contact_method.field %>
+</p>
+
+<p>
+  <strong>Enabled:</strong>
+  <%= @contact_method.enabled %>
+</p>
+
+<%= link_to 'Edit', edit_contact_method_path(@contact_method) %> |
+<%= link_to 'Back', contact_methods_path %>

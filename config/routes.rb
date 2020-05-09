@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :communication_logs
   resources :community_resources
+  resources :contact_methods
   resources :custom_form_questions
   resources :donations
   resources :feedbacks

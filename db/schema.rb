@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_194010) do
+ActiveRecord::Schema.define(version: 2020_05_09_052637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,14 @@ ActiveRecord::Schema.define(version: 2020_05_08_194010) do
     t.index ["organization_id"], name: "index_community_resources_on_organization_id"
     t.index ["service_area_id"], name: "index_community_resources_on_service_area_id"
     t.index ["tags"], name: "index_community_resources_on_tags", using: :gin
+  end
+
+  create_table "contact_methods", force: :cascade do |t|
+    t.string "name"
+    t.string "field"
+    t.boolean "enabled"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "custom_form_questions", force: :cascade do |t|

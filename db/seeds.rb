@@ -31,4 +31,8 @@ locales.each do |locale, locale_name|
   SystemLocale.where(locale: locale).first_or_create!(locale_name: locale_name)
 end
 
+[['Call', 'phone'], ['Text', 'phone'], ['Email', 'email'], ['WhatsApp', 'phone']].each do |(name, field)|
+  ContactMethod.exists?(name: name) || ContactMethod.create!(name: name, field: field, enabled: true)
+end
+
 puts "completed seeds.rb"

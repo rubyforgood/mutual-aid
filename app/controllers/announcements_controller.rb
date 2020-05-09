@@ -22,7 +22,7 @@ class AnnouncementsController < ApplicationController
 
     respond_to do |format|
       if @announcement.save
-        format.html { redirect_to @admin_status ? announcements_path : news_and_announcements_public_path, notice: "Announcement was successfully submitted.#{ " We'll review." unless @admin_status }" }
+        format.html { redirect_to @admin_status ? announcements_path : announcements_public_path, notice: "Announcement was successfully submitted.#{ " We'll review." unless @admin_status }" }
         format.json { render :show, status: :created, location: @announcement }
       else
         format.html { render :new }

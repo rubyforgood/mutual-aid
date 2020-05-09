@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "/public", to: "public#landing_page", as: "landing_page_public"
   get "/about", to: "public#about", as: "about_public"
   get "/community_resources_list", to: "public#community_resources", as: "community_resources_public"
-  get "/news", to: "public#news_and_announcements", as: "news_and_announcements_public"
+  get "/announcements_list", to: "public#announcements", as: "announcements_public"
   get "/share", to: "public#share", as: "share_public"
 
   resources :listings do

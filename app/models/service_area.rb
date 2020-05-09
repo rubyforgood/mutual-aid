@@ -19,6 +19,8 @@ class ServiceArea < ApplicationRecord
 
   accepts_nested_attributes_for :location
 
+  TYPES = %w[pod neighborhood region county]
+
   scope :order_by_translated_name, -> (locale=:en){
     includes(:mobility_string_translations).references(:mobility_string_translations).
     where("mobility_string_translations.locale = ?", locale.to_s).
@@ -26,7 +28,8 @@ class ServiceArea < ApplicationRecord
     order(MobilityStringTranslation.arel_table["value"].lower.asc)
   }
 
-  TYPES = %w[pod neighborhood region county]
+  scope :as_filter_categories, -> { i18n.select :id, :name }
+>>>>>>> 637ddbc... feed categories in Vue from the database
 
   def full_name
     "#{ parent.name.upcase + ": " if parent}#{name}#{ " (" + service_area_type + ")" if service_area_type}"

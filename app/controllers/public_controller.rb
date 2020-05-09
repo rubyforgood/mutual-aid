@@ -1,8 +1,6 @@
-class PublicController < ActionController::Base
-  layout 'application'
+class PublicController < ApplicationController
 
-  protect_from_forgery with: :exception
-  include ApplicationHelper
+  skip_before_action :authenticate_user!
 
   def about
   end

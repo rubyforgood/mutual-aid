@@ -128,8 +128,7 @@ To get started using the application with docker,
 5. Run 
    ```bash
    docker-compose run app '/usr/local/bin/rake' secret \
-    | tail -n1 \
-    | echo "SECRET_KEY_BASE=$(cat -)" > .env
+    | echo "SECRET_KEY_BASE=$(tail -1 -)" > .env
    ```
    to give rails the information it needs to be able to launch
 6. Now you should be able to run `docker-compose up -d`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.

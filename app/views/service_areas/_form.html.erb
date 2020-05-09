@@ -2,14 +2,15 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.association :parent %>
-    <%= f.input :service_area_type %>
+    <div class="field is-grouped">
+      <%= f.input :name, as: :text, input_html: { rows: 1, style: "height: 2.4em;" } %>
+      <%= f.input :service_area_type, as: :select, collection: @service_area_types %>
+      <%= f.association :parent %>
+      <%= f.association :organization %>
+    </div>
     <%= f.input :description, as: :text, input_html: { rows: 2 } %>
 
-    <%= f.association :organization %>
-
-    <%= simple_fields_for @service_area.location_data, as: :location_data do |ff| %>
+    <%= f.simple_fields_for :location_data, as: :location_data do |ff| %>
       <%= render "location_data_fields", f: ff %>
     <% end %>
   </div>

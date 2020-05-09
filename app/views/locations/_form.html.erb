@@ -2,12 +2,13 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :service_area, collection: @service_areas %>
-    <%= f.input :location_type %>
+    <%= f.input :locationable_type %>
+    <%= f.input :locationable_id %>
+    <%#= f.input :location_type %><!-- TODO - decide if we still want this field-->
     <%= f.input :street_address %>
     <%= f.input :city %>
-    <%= f.input :state %>
-    <%= f.input :zip %>
+    <%= f.input :state, input_html: { maxlength: 2, size: 2, style: "width: 25%;" }, hint: "(e.g. TN, MI, NY)" %>
+    <%= f.input :zip, input_html: { maxlength: 2, size: 2 }, hint: "(e.g. 12345)" %>
     <%= f.input :county %>
     <%= f.input :region %>
     <%= f.input :neighborhood %>

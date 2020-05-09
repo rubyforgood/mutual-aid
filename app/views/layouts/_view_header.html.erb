@@ -1,7 +1,8 @@
 <%# needs resource %>
 
-<% view_action_name ||= action_name || params[:action] || @view_action_name || params[:test_action_name] || request.path_parameters[:action] %>
-<% table_name = resource ? resource.class.table_name : (params[:controller_name] || request.path_parameters[:controller] || controller_name).classify.constantize.table_name %>
+<% view_action_name ||= [nil, "test"].include?(params[:action]) ? request.path_parameters[:action] : action_name || params[:action] %>
+<% coalesced_controller_name = ["public", "admin"].include?(params[:controller_name]) ? view_action_name : [nil, "test"].include?(params[:controller_name]) ? request.path_parameters[:controller] : controller_name %>
+<% table_name = resource ? resource.class.table_name : coalesced_controller_name.classify.constantize.table_name %>
 <% plural_table_name ||= table_name.to_s %>
 <% singular_table_name ||= table_name.to_s.singularize %>
 <% page_title ||= view_action_name == "index" ? plural_table_name.titleize : "#{view_action_name.titleize} #{singular_table_name.titleize}" %>

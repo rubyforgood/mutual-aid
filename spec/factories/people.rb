@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :person do
-    first_name { Faker::Name.name }
-    last_name { Faker::Name.name }
+    name { Faker::Name.name }
     email { Faker::Internet.email }
     preferred_contact_method { association :contact_method_email }
 

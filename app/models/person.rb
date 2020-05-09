@@ -16,8 +16,8 @@ class Person < ApplicationRecord
 
   validate :preferred_contact_method_present!
 
-  def name
-    "#{first_name} #{last_name} (#{email})"
+  def name_and_email
+    "#{name} (#{email})"
   end
 
   def profile_photo(fest_code)

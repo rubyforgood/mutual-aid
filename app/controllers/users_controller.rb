@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @people = Person.pluck(:id, [:last_name, :first_name, :phone])
+    @people = Person.pluck(:id, [:name, :phone, :email])
   end
 
   def create

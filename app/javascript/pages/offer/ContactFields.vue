@@ -7,13 +7,13 @@
     >
       <b-select
         :name="withPrefix('preferred_contact_method')"
-        :value="preferredContactMethodKey"
+        :value="preferredContactMethodId"
         @input="$emit('preference-changed', $event)"
         placeholder="Select …"
         required
       >
-        <option v-for="method in contactMethods" :key="method.key" :value="method.key" >
-          {{ method.key }}
+        <option v-for="method in contactMethods" :key="method.id" :value="method.id" >
+          {{ method.name }}
         </option>
       </b-select>
     </b-field>
@@ -44,22 +44,22 @@ export default {
     contactFields: Object,
     contactMethods: Array,
     fieldNamePrefix: {type: String, default: ''},
-    preferredContactMethodKey: {String, default: null},
+    preferredContactMethodId: {String, default: null},
   },
   computed: {
     preferredContactMethod() {
-      return this.contactMethods.find(method => method.key === this.preferredContactMethodKey)
+      return this.contactMethods.find(method => method.id === this.preferredContactMethodId)
     },
     contactMethodsByUniqueField() {
-      return this.contactMethods.reduce((uniq, {fieldName, fieldLabel}) => {
-        uniq[fieldName] = fieldLabel
+      return this.contactMethods.reduce((uniq, {field_name, field_label}) => {
+        uniq[field_name] = field_label
         return uniq
       }, {})
     },
   },
   methods: {
     isPreferred(fieldName) {
-      return this.preferredContactMethod && this.preferredContactMethod.fieldName === fieldName
+      return this.preferredContactMethod && this.preferredContactMethod.field_name === fieldName
     },
   },
   created: function() {

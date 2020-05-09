@@ -13,9 +13,9 @@ describe('Offer', () => {
   }))
 
   def('contact_methods', () => { return [
-    {key: 'Call',  fieldName: 'phone', fieldLabel: 'Phone number'},
-    {key: 'Text',  fieldName: 'phone', fieldLabel: 'Phone number'},
-    {key: 'Email', fieldName: 'email', fieldLabel: 'Email address'},
+    {id: 'Call',  field_name: 'phone', field_label: 'Phone number'},
+    {id: 'Text',  field_name: 'phone', field_label: 'Phone number'},
+    {id: 'Email', field_name: 'email', field_label: 'Email address'},
   ]})
 
   def('service_areas', () => { return [

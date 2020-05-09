@@ -43,9 +43,5 @@ Rails.application.routes.draw do
   resources :system_settings
   resources :users
 
-  authenticated :user do
-    root :to => 'admin#landing_page', as: :authenticated_root
-  end
-
   root :to => 'public#landing_page'
 end

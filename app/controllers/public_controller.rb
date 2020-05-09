@@ -3,6 +3,7 @@ class PublicController < ApplicationController
   skip_before_action :authenticate_user!
 
   def about
+    @about_us_text = @system_setting.about_us_text
   end
 
   def community_resources

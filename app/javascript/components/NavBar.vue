@@ -11,7 +11,7 @@
       <b-navbar-item href="/about">About</b-navbar-item>
       <b-navbar-item href="/share">Share</b-navbar-item>
       <b-navbar-item href="/community_resources_list">Community Resources</b-navbar-item>
-      <b-navbar-item href="/news">Announcements</b-navbar-item>
+      <b-navbar-item href="/announcements">Announcements</b-navbar-item>
     </template>
 
     <template slot="end" v-if="loggedIn">

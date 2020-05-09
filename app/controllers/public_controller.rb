@@ -13,7 +13,7 @@ class PublicController < ApplicationController
   def landing_page
   end
 
-  def news_and_announcements
+  def announcements
     @announcements = Announcement.where(is_approved: true).published
   end
 

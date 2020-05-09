@@ -7,7 +7,9 @@ class ListingsController < ApplicationController
       JSON.load(file)
     end
     @contributions = sample_data["contributions"]
-    @filter_categories = CategoryBlueprint.render([Category, ServiceArea])
+    @filter_types = FilterTypeBlueprint.render([Category, ServiceArea])
+    # @contributions = ContributionBlueprint.render(contributions_for(filter_params))
+    # binding.pry
   end
 
   def show

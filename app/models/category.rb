@@ -14,7 +14,8 @@ class Category < ApplicationRecord
   scope :roots,   -> { where(parent: nil) }
 
   # Currently only filtering by top-level categories
-  scope :as_filter_categories, -> { where(parent_id: nil).select(:id, :name)}
+  scope :top_level, -> { where(parent_id: nil) }
+  scope :as_filter_types, -> { top_level.select(:id, :name)}
 
   def full_name
     "#{ parent&.name&.upcase + ": " if parent}#{parent.present? ? name : name.upcase }"

@@ -156,6 +156,9 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
     t.string "neighborhood"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "locationable_type", null: false
+    t.bigint "locationable_id", null: false
+    t.index ["locationable_type", "locationable_id"], name: "index_locations_on_locationable_type_and_locationable_id"
   end
 
   create_table "matches", force: :cascade do |t|

@@ -9,7 +9,9 @@ class ServiceAreasController < ApplicationController
   end
 
   def new
+    location_data = Location.new
     @service_area = ServiceArea.new
+    @service_area.location_data = location_data
   end
 
   def edit
@@ -61,6 +63,24 @@ class ServiceAreasController < ApplicationController
           :service_area_type,
           :name,
           :description,
-          service_areas_attributes: [])
+          location_data_attributes: [ :id,
+                                      :locationable_type,
+                                      :locationable_id,
+                                      :street_address,
+                                      :city,
+                                      :state,
+                                      :zip,
+                                      :county,
+                                      :region,
+                                      :neighborhood,
+                                      :_destroy ],
+          service_areas_attributes: [ :id,
+                                      :parent_id,
+                                      :organization_id,
+                                      :service_area_type,
+                                      :name,
+                                      :description,
+                                      :_destroy ]
+      )
     end
 end

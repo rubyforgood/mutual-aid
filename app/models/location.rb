@@ -1,4 +1,5 @@
 class Location < ApplicationRecord
+  belongs_to :locationable, polymorphic: true
 
   has_many :community_resources
   has_many :listings
@@ -6,7 +7,7 @@ class Location < ApplicationRecord
   has_many :organizations
   has_many :people
 
-  validates :location_type, presence: true
+  # validates :location_type, presence: true # TODO - add this back in later?
 
   def address
     "#{street_address}#{", " + city if city}#{" " + state if state}"

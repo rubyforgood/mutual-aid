@@ -1,0 +1,13 @@
+<fieldset>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.hidden_field :location_type, value: "service_area" %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :zip %>
+    <%= f.input :county %>
+    <%= f.input :region %>
+    <%= f.input :neighborhood %>
+  </div>
+</fieldset>

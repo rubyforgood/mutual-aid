@@ -9,6 +9,9 @@
 
     <%= f.association :organization %>
 
+    <%= simple_fields_for @service_area.location_data, as: :location_data do |ff| %>
+      <%= render "location_data_fields", f: ff %>
+    <% end %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, resource: @service_area, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

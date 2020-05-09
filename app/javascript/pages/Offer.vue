@@ -27,6 +27,8 @@
           name="listing[service_area]"
         />
 
+        <!-- TODO: maybe some visual demarcation of logical sections? -->
+
         <b-field
           :label-for="withPersonPrefix('name')"
           label="Name"
@@ -49,6 +51,12 @@
         />
         <SpacerField />
 
+        <LocationFields
+          fieldNamePrefix="listing[person][location]"
+          v-bind="person.location"
+        />
+        <SpacerField />
+
         <b-field>
           <div class="control">
             <b-button native-type="submit" type="is-primary" size="is-medium">
@@ -65,12 +73,19 @@
 import {partial} from 'utils/function'
 import {fieldNameWithPrefix} from 'utils/form'
 import AuthTokenInput from 'components/AuthTokenInput'
-import ContactFields from './offer/ContactFields'
-import ServiceAreaField from './offer/ServiceAreaField'
 import SpacerField from 'components/SpacerField'
+import ContactFields from './offer/ContactFields'
+import LocationFields from './offer/LocationFields'
+import ServiceAreaField from './offer/ServiceAreaField'
 
 export default {
-  components: {AuthTokenInput, ContactFields, ServiceAreaField, SpacerField},
+  components: {
+    AuthTokenInput,
+    ContactFields,
+    LocationFields,
+    ServiceAreaField,
+    SpacerField
+  },
   props: {
     offer: Object,
     service_areas: Array,

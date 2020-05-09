@@ -1,12 +1,12 @@
 <template>
   <section>
     <h2 class="title">Filters</h2>
-    <b-collapse v-for="(category, index) of filterCategories" :key="index" :open="true">
+    <b-collapse v-for="(type, index) of filterTypes" :key="index" :open="true">
       <h4 slot="trigger" slot-scope="props">
-        {{ category.name }} <a>{{ props.open ? '-' : '+' }}</a>
+        {{ type.name }} <a>{{ props.open ? '-' : '+' }}</a>
       </h4>
       <ul>
-        <li v-for="filter of category.filters" :key="filter.id">
+        <li v-for="filter of type.filters" :key="filter.id">
           <b-checkbox
             :native-value="filter.id"
             :value="currentFilters"
@@ -23,7 +23,7 @@
 <script>
 export default {
   props: {
-    filterCategories: {type: Array, default: () => []},
+    filterTypes: {type: Array, default: () => []},
     currentFilters: {type: Array, default: () => []},
   },
   model: {

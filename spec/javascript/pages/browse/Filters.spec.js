@@ -1,6 +1,6 @@
 import {mount} from '@vue/test-utils'
 import Filters from 'pages/browse/Filters'
-import filterCategories from '../../../../lib/filterCategories.json'
+import filterTypes from '../../../../lib/filterCategories.json'
 
 describe('Filters', function () {
   it('generally works', function () {
@@ -9,11 +9,11 @@ describe('Filters', function () {
       result = event
     }
     const wrapper = mount(Filters, {
-      propsData: {filterCategories: filterCategories},
+      propsData: {filterTypes: filterTypes},
       listeners: {change: clickHandler},
     })
     const checkbox = wrapper.find('input[type=checkbox]')
     checkbox.trigger('click')
-    assert.deepEqual(result, [filterCategories[0].filters[0].id])
+    assert.deepEqual(result, [filterTypes[0].filters[0].id])
   })
 })

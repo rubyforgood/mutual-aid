@@ -9,6 +9,6 @@ FactoryBot.define do
     urgency_order { 1 }
     notes { "MyString" }
     completed { false }
-    completed_at { "2020-05-08 15:40:10" }
+    completed_at { Time.now }
   end
 end

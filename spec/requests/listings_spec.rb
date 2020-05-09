@@ -21,6 +21,11 @@ RSpec.describe "/listings", type: :request do
       get listings_url
       expect(response).to be_successful
     end
+
+    it 'parses requests for a filtered list' do
+      create(:listing)
+      get listings_url, params: { 'urgency[0]': true, 'urgency[1]': true, locations:[true,false,true] }
+    end
   end
 
   describe "GET /show" do

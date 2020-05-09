@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SaveListing do
   let(:service_area)    { create :service_area }
+  let(:contact_method)  { create :contact_method_email }
   subject(:interaction) { SaveListing.run params }
 
   describe 'validation' do
@@ -9,7 +10,7 @@ RSpec.describe SaveListing do
       type: '',  # only Listing field with validation
       service_area: service_area.id,
       person: {
-        preferred_contact_method: 'email',
+        preferred_contact_method: contact_method.id,
         email: 'we@together.coop',
         location: {
           city: 'Lansing',

@@ -2,8 +2,8 @@ FactoryBot.define do
   factory :person do
     first_name { Faker::Name.name }
     last_name { Faker::Name.name }
-    preferred_contact_method { "email" }
     email { Faker::Internet.email }
+    preferred_contact_method { association :contact_method_email }
 
     trait :with_email do
       preferred_contact_method { "email" }
@@ -11,7 +11,7 @@ FactoryBot.define do
     end
 
     trait :with_phone do
-      preferred_contact_method { "phone" }
+      preferred_contact_method { association :contact_method_phone }
       phone { Faker::PhoneNumber.phone_number }
     end
 

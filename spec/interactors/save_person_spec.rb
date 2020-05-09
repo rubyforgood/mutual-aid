@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe SavePerson do
+  let(:contact_method)   { create :contact_method_email }
   let(:current_location) { create :location, city: 'flint' }
   let(:current_person)   { create :person, location: current_location }
 
   let(:params) {{
     id: current_person&.id,
-    preferred_contact_method: 'email',
+    preferred_contact_method: contact_method.id,
     email: 'we@together.coop',
     location: {
       id: current_location&.id,

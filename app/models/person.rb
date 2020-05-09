@@ -2,6 +2,7 @@ class Person < ApplicationRecord
   belongs_to :user, optional: true, inverse_of: :person
   belongs_to :service_area, optional: true
   belongs_to :location, optional: true
+  belongs_to :preferred_contact_method, class_name: 'ContactMethod'
 
   has_many :communication_logs
   has_many :donations
@@ -13,11 +14,7 @@ class Person < ApplicationRecord
   has_many :matches_as_receiver, through: :asks, class_name: "Match", foreign_key: "receiver_id"
   has_many :matches_as_provider, through: :offers, class_name: "Match", foreign_key: "provider_id"
 
-  validates :preferred_contact_method, presence: true
-  validate :validate_preferred_contact_method_data
-
-  PHONE_CONTACT_METHODS = ["call", "text"]
-  PREFERRED_CONTACT_METHODS = PHONE_CONTACT_METHODS + ["email"]
+  validate :preferred_contact_method_present!
 
   def name
     "#{first_name} #{last_name} (#{email})"
@@ -35,10 +32,9 @@ class Person < ApplicationRecord
     offers.any? ? offers.map(&:tags).flatten.uniq : ["transportation", "meals"]
   end
 
-  private def validate_preferred_contact_method_data
-    preferred_contact_data = PHONE_CONTACT_METHODS.include?(preferred_contact_method) ? "phone" : preferred_contact_method
-    if preferred_contact_method.present? && !self.public_send(preferred_contact_data).present?
-      errors.add(:person, " -- #{preferred_contact_method} needed (preferred contact method)")
-    end
+  private def preferred_contact_method_present!
+    return unless preferred_contact_method
+    field = preferred_contact_method.field
+    errors.add(field, :blank) if self[field].blank?
   end
 end

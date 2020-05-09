@@ -5,6 +5,7 @@ class PublicController < ActionController::Base
   include ApplicationHelper
 
   def about
+    @about_us_text = @system_setting.about_us_text
   end
 
   def community_resources

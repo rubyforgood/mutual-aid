@@ -6,7 +6,7 @@ class Location < ApplicationRecord
   has_many :organizations
   has_many :people
 
-  validates :state, presence: true
+  validates :location_type, presence: true
 
   def address
     "#{street_address}#{", " + city if city}#{" " + state if state}"

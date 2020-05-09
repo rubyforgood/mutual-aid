@@ -138,7 +138,7 @@ To get started using the application with docker,
     -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" \
     -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" \
     app rails db:prepare db:seed
-  ```` 
+  ```
   This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `docker-compose run app db:prepare` and create the account using the sign up option on the website.
 8. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
 

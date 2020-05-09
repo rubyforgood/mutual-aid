@@ -9,11 +9,11 @@ class Location < ApplicationRecord
 
   # validates :location_type, presence: true # TODO - add this back in later?
 
-  def address
-    "#{street_address}#{", " + city if city}#{" " + state if state}"
+  def name
+    "#{ address }#{ " (" + location_type + ")" if location_type }"
   end
 
-  def full_name
-    "#{ parent.name.upcase + ": " if parent}#{name}#{ " (" + location_type + ")" if location_type}"
+  def address
+    "#{ street_address }#{ ", " + city if city }#{ " " + state if state }"
   end
 end

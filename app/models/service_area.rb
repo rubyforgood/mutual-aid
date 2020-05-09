@@ -18,6 +18,8 @@ class ServiceArea < ApplicationRecord
 
   accepts_nested_attributes_for :location_data
 
+  TYPES = %w[pod neighborhood region county]
+
   def full_name
     "#{ parent.name.upcase + ": " if parent}#{name}#{ " (" + service_area_type + ")" if service_area_type}"
   end

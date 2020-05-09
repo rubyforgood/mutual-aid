@@ -5,27 +5,33 @@ RSpec.describe SaveListing do
   let(:contact_method)  { create :contact_method_email }
   subject(:interaction) { SaveListing.run params }
 
-  describe 'validation' do
-    let(:params) {{
-      description: '',
-      title: '',
-      type: '', # this is invalid
-      service_area: service_area.id,
-      person: {
-        preferred_contact_method: contact_method.id,
-        email: 'we@together.coop',
-        phone: '',
-        location: {
-          street_address: '',
-          neighborhood: '',
-          city: 'Lansing',
-          state: 'MI',
-          zip: '',
-          county: '',
-          region: '',
-        },
+  let(:params) {{
+    service_area: service_area.id,
+    type: 'Offer',
+    person: {
+      email: 'we@together.coop',
+      name: 'Marcus Garvey',
+      preferred_contact_method: contact_method.id,
+      location: {
+        city: 'Lansing',
+        state: 'MI',
       },
-    }}
+    },
+  }}
+
+  context 'with valid params' do
+    it { is_expected.to be_valid }
+
+    it 'create listing and nested records' do
+      expect { interaction }
+        .to  change(Listing,  :count).by(1)
+        .and change(Person,   :count).by(1)
+        .and change(Location, :count).by(1)
+    end
+  end
+
+  context 'with bad listing params' do
+    before { params[:type] = '' }
 
     it { is_expected.to be_invalid }
 

@@ -8,7 +8,7 @@ class OffersController < ApplicationController
   end
 
   def create
-    outcome = SaveListing.run params_with_defaults
+    outcome = SaveListing.run params[:listing].merge(type: 'Offer')
     if outcome.valid?
       redirect_to root_path, notice: 'Offer was successfully created.'
     else
@@ -18,14 +18,6 @@ class OffersController < ApplicationController
   end
 
   private
-
-    def params_with_defaults
-      params[:listing].merge(
-        type: 'Offer',
-        title: '',
-        description: '',
-      )
-    end
 
     def serialize(offer_or_outcome)
       @json = {

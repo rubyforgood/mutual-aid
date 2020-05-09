@@ -16,7 +16,7 @@ RSpec.describe "contact_methods/edit", type: :view do
 
       assert_select "input[name=?]", "contact_method[name]"
 
-      assert_select "input[name=?]", "contact_method[field]"
+      assert_select "select[name=?]", "contact_method[field]"
 
       assert_select "input[name=?]", "contact_method[enabled]"
     end

@@ -6,13 +6,13 @@ describe('Offer', () => {
   def('wrapper', () => mount(Offer, {
     localVue: configure(createLocalVue()),
     propsData: {
-      contactTypes: $contactTypes,
+      contact_methods: $contact_methods,
       service_areas: $service_areas,
       offer: $offer,
     },
   }))
 
-  def('contactTypes', () => { return [
+  def('contact_methods', () => { return [
     {key: 'Call',  fieldName: 'phone', fieldLabel: 'Phone number'},
     {key: 'Text',  fieldName: 'phone', fieldLabel: 'Phone number'},
     {key: 'Email', fieldName: 'email', fieldLabel: 'Email address'},
@@ -27,7 +27,7 @@ describe('Offer', () => {
     name: 'My Name',
     phone: '202 202 1234',
     email: 'me@example.com',
-    preferred_contact_type: null,
+    preferred_contact_method: null,
   }})
 
   def('offer', () => { return {
@@ -54,13 +54,13 @@ describe('Offer', () => {
   })
 
   describe('contact fields', () => {
-    it('generates a preferred_contact_type select field', () => {
-      assert.isTrue($wrapper.exists('label[for*="preferred_contact_type"]'))
-      assert.isTrue($wrapper.exists('select[name*="preferred_contact_type"]'))
+    it('generates a preferred_contact_method select field', () => {
+      assert.isTrue($wrapper.exists('label[for*="preferred_contact_method"]'))
+      assert.isTrue($wrapper.exists('select[name*="preferred_contact_method"]'))
     })
 
-    it('includes all contact_types as preferred_contact_type options', () => {
-      const options = $wrapper.findAll('select[name*="preferred_contact_type"] option').wrappers
+    it('includes all contact_methods as preferred_contact_method options', () => {
+      const options = $wrapper.findAll('select[name*="preferred_contact_method"] option').wrappers
       assert.sameMembers(options.map(opt => opt.attributes('value')), ['', 'Call', 'Text', 'Email'])
     })
 
@@ -69,13 +69,13 @@ describe('Offer', () => {
       assert.isTrue($wrapper.exists('label[for*="email"]+input[name*="email"]'))
     })
 
-    it('does not duplicate fields for two contact types with the same field', () => {
+    it('does not duplicate fields for two contact methods with the same field', () => {
       assert.equal($wrapper.findAll('input[name*="phone"]').length, 1)
     })
 
-    describe('when a preffered contact type is selected', () => {
+    describe('when a preffered contact method is selected', () => {
       beforeEach(async () => {
-        $wrapper.get('select[name*="preferred_contact_type"]').setValue('Email')
+        $wrapper.get('select[name*="preferred_contact_method"]').setValue('Email')
         await $wrapper.vm.$forceUpdate()
       })
 

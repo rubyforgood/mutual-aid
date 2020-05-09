@@ -1,25 +1,25 @@
 <template>
   <div>
     <b-field
-      :label-for="withPrefix('preferred_contact_type')"
+      :label-for="withPrefix('preferred_contact_method')"
       label="Best way to contact you"
       custom-class="required-field"
     >
       <b-select
-        :name="withPrefix('preferred_contact_type')"
-        :value="preferredContactTypeKey"
-        @input="$emit('preferrence-changed', $event)"
+        :name="withPrefix('preferred_contact_method')"
+        :value="preferredContactMethodKey"
+        @input="$emit('preference-changed', $event)"
         placeholder="Select …"
         required
       >
-        <option v-for="type in contactTypes" :key="type.key" :value="type.key" >
-          {{ type.key }}
+        <option v-for="method in contactMethods" :key="method.key" :value="method.key" >
+          {{ method.key }}
         </option>
       </b-select>
     </b-field>
 
     <b-field
-      v-for="(fieldLabel, fieldName) in contactTypesByUniqueField"
+      v-for="(fieldLabel, fieldName) in contactMethodsByUniqueField"
       :key="fieldName"
       :label="fieldLabel"
       :label-for="withPrefix(fieldName)"
@@ -42,16 +42,16 @@ import {fieldNameWithPrefix} from 'utils/form'
 export default {
   props: {
     contactFields: Object,
-    contactTypes: Array,
+    contactMethods: Array,
     fieldNamePrefix: {type: String, default: ''},
-    preferredContactTypeKey: {String, default: null},
+    preferredContactMethodKey: {String, default: null},
   },
   computed: {
-    preferredContactType() {
-      return this.contactTypes.find(type => type.key === this.preferredContactTypeKey)
+    preferredContactMethod() {
+      return this.contactMethods.find(method => method.key === this.preferredContactMethodKey)
     },
-    contactTypesByUniqueField() {
-      return this.contactTypes.reduce((uniq, {fieldName, fieldLabel}) => {
+    contactMethodsByUniqueField() {
+      return this.contactMethods.reduce((uniq, {fieldName, fieldLabel}) => {
         uniq[fieldName] = fieldLabel
         return uniq
       }, {})
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     isPreferred(fieldName) {
-      return this.preferredContactType && this.preferredContactType.fieldName === fieldName
+      return this.preferredContactMethod && this.preferredContactMethod.fieldName === fieldName
     },
   },
   created: function() {

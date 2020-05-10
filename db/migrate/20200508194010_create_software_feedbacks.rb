@@ -9,7 +9,7 @@ class CreateSoftwareFeedbacks < ActiveRecord::Migration[6.0]
       t.string :urgency
       t.integer :urgency_order
       t.string :notes
-      t.boolean :completed
+      t.boolean :completed, null: false, index: true, default: false
       t.datetime :completed_at
 
       t.timestamps

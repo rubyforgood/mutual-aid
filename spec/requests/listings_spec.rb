@@ -52,7 +52,7 @@ RSpec.describe "/listings", type: :request do
       # passing `as: json` to `get` does some surprising things to the request and its params that would break this test
       get listings_url, params: { 'Category[50]': 1, 'Category[70]': 1, "ServiceArea[#{expected_area.id}]": 1 }, headers: {'HTTP_ACCEPT' => 'application/json'}
 
-      expect(response.body).to match(/#{expected_area.name.to_json}/)
+      expect(response.body).to match([/#{expected_area.name.to_json}/])
 
       response_ids = JSON.parse(response.body).map { |hash| hash['id']}
       expect(response_ids).not_to include(both_tags_wrong_area_listing.id)

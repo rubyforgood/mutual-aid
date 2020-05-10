@@ -1,4 +1,6 @@
 class Person < ApplicationRecord
+  acts_as_taggable_on :tags
+
   belongs_to :user, optional: true, inverse_of: :person
   belongs_to :service_area, optional: true
   belongs_to :location, optional: true

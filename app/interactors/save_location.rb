@@ -1,5 +1,5 @@
 class SaveLocation < BaseInteractor
-<<<<<<< HEAD
+  record :location_type
   integer :id,             default: nil
   string  :street_address, default: nil
   string  :neighborhood,   default: nil
@@ -8,12 +8,6 @@ class SaveLocation < BaseInteractor
   string  :zip,            default: nil
   string  :county,         default: nil
   string  :region,         default: nil
-
-  # TODO: add `type` field
-=======
-  integer :id, default: nil
-  record :location_type
->>>>>>> 81f88c4... WIP: Random changes to update assns between LocationType, Location, ServiceArea, Listing
 
   def execute
     merging_errors do

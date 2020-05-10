@@ -2,7 +2,7 @@ class ServiceAreasController < ApplicationController
   before_action :set_service_area, only: [:show, :edit, :update, :destroy]
 
   def index
-    @service_areas = ServiceArea.all
+    @service_areas = ServiceArea.order_by_translated_name(@system_locale&.locale)
   end
 
   def show

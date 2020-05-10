@@ -3,6 +3,10 @@ class OffersController < ApplicationController
   # FIXME: pull this up into PublicController (but it currently has extra actions)
   skip_before_action :authenticate_user!
 
+  def index
+    redirect_to share_public_path
+  end
+
   def new
     serialize(Offer.new)
   end

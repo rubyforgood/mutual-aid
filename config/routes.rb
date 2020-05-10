@@ -12,18 +12,8 @@ Rails.application.routes.draw do
   get "/announcements_list", to: "public#announcements", as: "announcements_public"
   get "/contributions", to: "public#contributions", as: "contributions_public"
 
-  resources :listings do
-    member do
-      get "/match", to: "listings#match", as: "match_listing"
-      post "/match", to: "listings#match"
-      get "/match/confirm", to: "listings#match_confirm", as: "match_confirm_listing"
-      post "/match/confirm", to: "listings#match_confirm"
-    end
-  end
-
-  resources :offers, only: [:new, :create]
-
   resources :announcements
+  resources :asks, only: [:index, :edit, :update]
   resources :categories
   resources :communication_logs
   resources :community_resources
@@ -32,9 +22,18 @@ Rails.application.routes.draw do
   resources :donations
   resources :feedbacks
   resources :location_types
+  resources :listings do
+    member do
+      get "/match", to: "listings#match", as: "match_listing"
+      post "/match", to: "listings#match"
+      get "/match/confirm", to: "listings#match_confirm", as: "match_confirm_listing"
+      post "/match/confirm", to: "listings#match_confirm"
+    end
+  end
   resources :locations
   resources :matches
   resources :mobility_string_translations
+  resources :offers, only: [:index, :new, :create]
   resources :organizations
   resources :people
   resources :positions

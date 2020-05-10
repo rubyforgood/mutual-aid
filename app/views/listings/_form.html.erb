@@ -1,81 +1,16 @@
-<% resource ||= nil %>
-<% listing ||= resource %>
+<%= simple_form_for @listing do |f| %>
+  <%= f.error_notification %>
 
-<div class='section'>
-<%= form_with(model: listing, local: true, class: 'listing-form') do |form| %>
-  <% if listing.errors.any? %>
-    <div id="error_explanation">
-      <h2 class="subtitle"><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
-      <ul>
-        <% listing.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <p class="lead">
-  No private information you enter below will be visible or shared publicly.
-  You can leave blank any fields you prefer not to to fill out, except those
-  marked mith an asterisk (<span style="color: orange">*</span>)
-  </p>
-
-  <div class="field required">
-    <%= form.label :name, :class=>"label" %>
-    <%= form.text_field :name, class: "input" %>
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :type %>
+    <%= f.input :state %>
+    <%= f.input :tags, as: :check_boxes, collection: @available_tags %>
+    <%= f.association :person %>
+    <%= f.association :service_area %>
+    <%= f.association :location %>
   </div>
 
-  <div class="field required">
-    <%= form.label :email, :class=>"label" %>
-    <%= form.email_field :email, class: "input" %>
-  </div>
-
-  <div class="field required">
-    <%= form.label :phone, :class=>"label"%>
-    <%= form.phone_field :phone, class: "input" %>
-  </div>
-
-  <%= form.fields_for :location do |location_form| %>
-    <div class="field">
-      <%= location_form.label :city, :class=>"label"%>
-      <%= location_form.text_field :city, list: "cities", class: "input", placeholder: "Select one of the cities below or type another in..." %>
-      <datalist id="cities">
-        <%= LocationForm::CITIES.each do |city| %>
-          <option value="<%= city %>"></option>
-        <% end %>
-      </datalist>
-    </div>
-    <div class="field">
-      <%= location_form.label :zip, :class=>"label"%>
-      <%= location_form.text_field :zip, class: "input" %>
-    </div>
-    <div class="field">
-      <%= location_form.label :street_address, :class=>"label" %>
-      <%= location_form.text_field :street_address, class: "input" %>
-      <small class="form-text text-muted">You may enter a proximate address, eg "1200 Block, 1st St"</small>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :tags %>
-    <%= form.collection_check_boxes(:tags, Category.all.map(&:name), :itself, :itself) do |b| %>
-      <%# Derived from https://bootsnipp.com/snippets/M2bda %>
-      <div class="field is-grouped mb-0">
-        <%# FIXME: is-hidden class not working? Buttons also need more work %>
-        <%= b.check_box(class: "is-hidden", style: "display: none") %>
-        <%= b.label(class: "button is-small is-outlined") do %>
-          <span>&#10003;</span> <!-- made visible via css when checked -->
-          <span> </span>
-        <% end %>
-        <%= b.label(class: "button is-small is-outlined") do %>
-          <%= b.value.capitalize %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Submit', class: "button button-primary mt-1" %>
-  </div>
+  <%= render "layouts/view_footer_buttons", f: f, record: @listing, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
 <% end %>
-</div>

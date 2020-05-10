@@ -1,13 +1,6 @@
 class ListingsController < ApplicationController
+  before_action :set_listing,    only: [:show, :edit, :update, :destroy, :match, :match_confirm]
 
-  before_action :authenticate_user!, except: [:new, :create]
-
-  before_action :set_listing,    only: [:show, :destroy, :match, :match_confirm]
-  before_action :set_form,       only: [:edit, :update]
-  before_action :set_empty_form, only: [:new, :create]
-
-  # GET /listings
-  # GET /listings.json
   def index
     # TODO: these json fixtures are to be replaced with actual generators of data
     sample_data = File.open('lib/listings.json') do |file|
@@ -20,12 +13,12 @@ class ListingsController < ApplicationController
     @filter_categories = sample_filter_categories
   end
 
-  # GET /listings/1
-  # GET /listings/1.json
   def show
   end
 
   def new
+    @listing = Listing.new
+    set_form_dropdowns
   end
 
   def match
@@ -38,13 +31,15 @@ class ListingsController < ApplicationController
   end
 
   def edit
+    set_form_dropdowns
   end
 
   def create
     if @listing.validate(params[:listing])
       @listing.save
-      redirect_to root_path, notice: 'Listing was successfully created.'
+      redirect_to listings_path, notice: 'Listing was successfully created.'
     else
+      set_form_dropdowns
       render :new
     end
   end
@@ -54,18 +49,14 @@ class ListingsController < ApplicationController
       @listing.save
       redirect_to listings_path, notice: 'Listing was successfully updated.'
     else
+      set_form_dropdowns
       render :edit
     end
   end
 
-  # DELETE /listings/1
-  # DELETE /listings/1.json
   def destroy
     @listing.destroy
-    respond_to do |format|
-      format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to listings_url, notice: 'Listing was successfully destroyed.'
   end
 
   private
@@ -74,11 +65,20 @@ class ListingsController < ApplicationController
       @listing = Listing.find(params[:id])
     end
 
-    def set_form
-      @listing = ListingForm.new(Listing.find(params[:id]))
+    def set_form_dropdowns
+      @available_tags = Category.visible + @listing.tag_list
     end
 
-    def set_empty_form
-      @listing = ListingForm.new(Listing.new(location: Location.new))
+    def listing_params
+      params.require(:listing).permit(
+        :description,
+        :location_id,
+        :person_id,
+        :service_area_id,
+        :state,
+        :tags,
+        :title,
+        :type,
+      )
     end
 end

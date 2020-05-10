@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_system_setting
-    @system_setting = SystemSetting.first || SystemSetting.new # should only be one of these records per instance
+    @system_setting = SystemSetting.first || SystemSetting.create! # should only be one of these records per instance
   end
 
   def switch_locale(&action)

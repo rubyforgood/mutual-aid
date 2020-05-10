@@ -26,8 +26,8 @@
     <% if include_system_settings_row %>
       <tr>
         <td>
-          <a class="button is-primary is-small" href="/system_settings/new"><span class="fa fa-cog"></span><span class=" has-text-white"></span></a>
-          <%= link_to "System Settings", new_system_setting_path %>
+          <%= link_to "<span class='fa fa-cog'></span>".html_safe, edit_system_setting_path(@system_setting), class: "button is-small is-primary" %>
+          <%= link_to "System Settings", system_setting_path(@system_setting) %>
         </td>
       </tr>
     <% end %>

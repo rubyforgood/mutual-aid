@@ -18,8 +18,8 @@
 <p>
   <strong>Offers/asks</strong>
   <ul class="list-group">
-    <% @listing.tags.each do |tag| %>
-      <li class="list-group-item"><%= tag.name.capitalize %></li>
+    <% @listing.all_tags_unique.each do |tag| %>
+      <li class="list-group-item"><%= tag.capitalize %></li>
     <% end %>
   </ul>
 </p>

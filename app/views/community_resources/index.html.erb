@@ -23,7 +23,7 @@
           <strong><%= community_resource.description.truncate(20) %></strong>
         </td>
         <td>
-          <%= " | " + community_resource.tags + " | " if community_resource.tags.any? %>
+          <%= " | " + community_resource.all_tags_unique + " | " if community_resource.all_tags_list.any? %>
         </td>
         <td>
           <%= community_resource.phone %> <%= community_resource.service_area&.name %>

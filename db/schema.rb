@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "delivery_status"
     t.string "subject"
-    t.bigint "created_by_id", default: 1, null: false
     t.json "body", default: []
+    t.bigint "created_by_id", default: 1, null: false
     t.index ["created_by_id"], name: "index_communication_logs_on_created_by_id"
     t.index ["match_id"], name: "index_communication_logs_on_match_id"
     t.index ["person_id"], name: "index_communication_logs_on_person_id"
@@ -148,9 +148,10 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
   create_table "location_types", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.boolean "display_to_public"
+    t.boolean "display_to_public", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["display_to_public"], name: "index_location_types_on_display_to_public"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -329,12 +330,15 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
   end
 
   create_table "system_locales", force: :cascade do |t|
-    t.string "locale"
-    t.string "locale_name"
-    t.boolean "publish_in_dropdowns"
-    t.boolean "publish_translations"
+    t.string "locale", null: false
+    t.string "locale_name", null: false
+    t.boolean "publish_in_dropdowns", default: true, null: false
+    t.boolean "publish_translations", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["locale"], name: "index_system_locales_on_locale"
+    t.index ["publish_in_dropdowns"], name: "index_system_locales_on_publish_in_dropdowns"
+    t.index ["publish_translations"], name: "index_system_locales_on_publish_translations"
   end
 
   create_table "system_settings", force: :cascade do |t|

@@ -1,7 +1,7 @@
 <div class="col-md-12">
-  <% person_first_name = @person&.first_name.to_s %>
+  <% person_name = @person&.name.to_s %>
 
-  <div><b>Hello there, <%= person_first_name %></b>,</div>
+  <div><b>Hello there, <%= person_name %></b>,</div>
   <br>
   <div>Thank you for your response to <%= @organization_name %>'s <%= @form_name %>!</div>
 

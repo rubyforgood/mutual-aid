@@ -9,7 +9,7 @@
       <% if @admin_status %>
         <%= link_to("#{person.name}", person_path(person)) %>
       <% else %>
-        <%= person.first_name %>
+        <%= person.name %>
       <% end %>
     </span>
   </div>

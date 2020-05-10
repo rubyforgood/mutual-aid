@@ -4,10 +4,10 @@
   <div class="subtitle is-5">
     <%= @mobility_string_translation.translatable_type %> #
     <%= @mobility_string_translation.translatable_id %>
-    <%= @mobility_string_translation.key.titleize %> (English):
+    <%= @mobility_string_translation.key&.titleize %> (English):
   </div>
 
-  <div class="subtitle is-3"><%= @mobility_string_translation.translatable.public_send(@mobility_string_translation.key).html_safe %></div>
+  <div class="subtitle is-3"><%= @mobility_string_translation.translatable.public_send(@mobility_string_translation.key).html_safe if @mobility_string_translation.key.present?%></div>
   <hr>
 
   <div class="form-inputs">

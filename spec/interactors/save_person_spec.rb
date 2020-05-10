@@ -53,7 +53,7 @@ RSpec.describe SavePerson do
     end
 
     context 'with invalid location params' do
-      before { params[:location][:state] = '' }
+      before { params[:location][:location_type_id] = '' }
 
       it 'makes the parent interaction invalid' do
         expect(interaction).to be_invalid
@@ -66,7 +66,7 @@ RSpec.describe SavePerson do
       end
 
       it 'promotes nested errors' do
-        expect(interaction.errors.full_messages).to eq ["State can't be blank"]
+        expect(interaction.errors.full_messages).to eq ["Location type is required"]
       end
     end
 

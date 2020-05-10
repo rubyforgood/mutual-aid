@@ -2,14 +2,13 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.hidden_field :locationable_type, value: "ServiceArea" %>
-    <%= f.hidden_field :locationable_id, value: f.object.locationable_id %>
+    <%= f.hidden_field :location_type_id, value: @service_area_location_type.id %>
     <br>
 
     <div class="field is-grouped">
       <%= f.input :city %>
       <%= f.input :state, input_html: { maxlength: 2, size: 2 }, hint: "(e.g. TN, MI, NY)" %>
-      <%= f.input :zip, input_html: { maxlength: 2, size: 2 }, hint: "(e.g. 12345)" %>
+      <%= f.input :zip, input_html: { maxlength: 5, size: 5 }, hint: "(e.g. 12345)" %>
     </div>
 
     <div class="field is-grouped">

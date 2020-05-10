@@ -1,16 +1,15 @@
 class Location < ApplicationRecord
-  belongs_to :locationable, polymorphic: true
+  belongs_to :location_type
 
   has_many :community_resources
   has_many :listings
   has_many :matches
   has_many :organizations
   has_many :people
-
-  # validates :location_type, presence: true # TODO - add this back in later?
+  has_many :service_areas
 
   def name
-    "#{ address }#{ " (" + location_type + ")" if location_type }"
+    "#{ address }#{ " (" + location_type&.name + ")" if location_type }"
   end
 
   def address

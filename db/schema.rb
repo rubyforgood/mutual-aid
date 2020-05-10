@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "delivery_status"
     t.string "subject"
-    t.json "body", default: []
     t.bigint "created_by_id", default: 1, null: false
+    t.json "body", default: []
     t.index ["created_by_id"], name: "index_communication_logs_on_created_by_id"
     t.index ["match_id"], name: "index_communication_logs_on_match_id"
     t.index ["person_id"], name: "index_communication_logs_on_person_id"
@@ -145,8 +145,15 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
     t.index ["tags"], name: "index_listings_on_tags", using: :gin
   end
 
+  create_table "location_types", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.boolean "display_to_public"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "locations", force: :cascade do |t|
-    t.string "location_type"
     t.string "street_address"
     t.string "city"
     t.string "state", limit: 2
@@ -156,9 +163,8 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
     t.string "neighborhood"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "locationable_type", null: false
-    t.bigint "locationable_id", null: false
-    t.index ["locationable_type", "locationable_id"], name: "index_locations_on_locationable_type_and_locationable_id"
+    t.bigint "location_type_id", null: false
+    t.index ["location_type_id"], name: "index_locations_on_location_type_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -274,9 +280,11 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
     t.boolean "is_created_by_admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "location_id", null: false
     t.index ["display_order"], name: "index_service_areas_on_display_order"
     t.index ["display_to_public"], name: "index_service_areas_on_display_to_public"
     t.index ["is_created_by_admin"], name: "index_service_areas_on_is_created_by_admin"
+    t.index ["location_id"], name: "index_service_areas_on_location_id"
     t.index ["name"], name: "index_service_areas_on_name"
     t.index ["organization_id"], name: "index_service_areas_on_organization_id"
     t.index ["parent_id"], name: "index_service_areas_on_parent_id"
@@ -410,6 +418,7 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "people"
   add_foreign_key "listings", "service_areas"
+  add_foreign_key "locations", "location_types"
   add_foreign_key "organizations", "locations"
   add_foreign_key "organizations", "service_areas"
   add_foreign_key "people", "locations"
@@ -417,6 +426,7 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
   add_foreign_key "people", "users"
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
+  add_foreign_key "service_areas", "locations"
   add_foreign_key "service_areas", "organizations"
   add_foreign_key "submissions", "people"
   add_foreign_key "submissions", "service_areas"

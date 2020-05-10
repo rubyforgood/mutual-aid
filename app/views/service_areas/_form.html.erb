@@ -10,8 +10,8 @@
     </div>
     <%= f.input :description, as: :text, input_html: { rows: 2 } %>
 
-    <%= f.simple_fields_for :location_data, as: :location_data do |ff| %>
-      <%= render "location_data_fields", f: ff %>
+    <%= f.simple_fields_for :location, as: :location do |ff| %>
+      <%= render "location_fields", f: ff %>
     <% end %>
   </div>
 

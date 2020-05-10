@@ -10,9 +10,10 @@ class ServiceAreasController < ApplicationController
 
   def new
     set_form_dropdowns
-    location_data = Location.new
+    location_type = LocationType.where(name: LocationType::SERVICE_AREA_TYPE).first_or_create!
+    location = Location.new(location_type: location_type)
     @service_area = ServiceArea.new
-    @service_area.location_data = location_data
+    @service_area.location = location
   end
 
   def edit
@@ -61,6 +62,7 @@ class ServiceAreasController < ApplicationController
     end
 
     def set_form_dropdowns
+      @service_area_location_type = LocationType.where(name: LocationType::SERVICE_AREA_TYPE).first_or_create!
       @service_area_types = ServiceArea::TYPES.map{ |i| [i,i] }
     end
 
@@ -72,9 +74,8 @@ class ServiceAreasController < ApplicationController
           :service_area_type,
           :name,
           :description,
-          location_data_attributes: [ :id,
-                                      :locationable_type,
-                                      :locationable_id,
+          location_attributes: [ :id,
+                                      :location_type_id,
                                       :street_address,
                                       :city,
                                       :state,
@@ -84,6 +85,7 @@ class ServiceAreasController < ApplicationController
                                       :neighborhood,
                                       :_destroy ],
           service_areas_attributes: [ :id,
+                                      :location_id,
                                       :parent_id,
                                       :organization_id,
                                       :service_area_type,

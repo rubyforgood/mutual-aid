@@ -2,16 +2,20 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :locationable_type %>
-    <%= f.input :locationable_id %>
+    <%= f.association :location_type %>
     <%#= f.input :location_type %><!-- TODO - decide if we still want this field-->
-    <%= f.input :street_address %>
-    <%= f.input :city %>
-    <%= f.input :state, input_html: { maxlength: 2, size: 2, style: "width: 25%;" }, hint: "(e.g. TN, MI, NY)" %>
-    <%= f.input :zip, input_html: { maxlength: 2, size: 2 }, hint: "(e.g. 12345)" %>
-    <%= f.input :county %>
-    <%= f.input :region %>
-    <%= f.input :neighborhood %>
+    <div class="field is-grouped">
+      <%= f.input :street_address, hint: "(can be an intersection or crosstreet)" %>
+      <%= f.input :city %>
+      <%= f.input :state, input_html: { maxlength: 2, size: 2 }, hint: "(e.g. TN, MI, NY)" %>
+      <%= f.input :zip, input_html: { maxlength: 5, size: 5 }, hint: "(e.g. 12345)" %>
+    </div>
+
+    <div class="field is-grouped">
+      <%= f.input :county %>
+      <%= f.input :region %>
+      <%= f.input :neighborhood %>
+    </div>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, resource: @location, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

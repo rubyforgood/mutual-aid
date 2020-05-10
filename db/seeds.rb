@@ -41,4 +41,8 @@ end
   ContactMethod.exists?(name: name) || ContactMethod.create!(name: name, field: field)
 end
 
+%w[pod neighborhood region county].each do |location_type_name|
+  LocationType.where(name: location_type_name).first_or_create!
+end
+
 puts "completed seeds.rb"

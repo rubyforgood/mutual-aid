@@ -17,7 +17,7 @@
   <tbody>
   <% @locations.each do |location| %>
     <tr>
-      <td><%= location.location_type %></td>
+      <td><%= location.location_type&.name %></td>
       <td><%= location.street_address %></td>
       <td><%= location.city %><%= ", " + location.state if location.state.present? %></td>
       <td><%= location.zip %></td>

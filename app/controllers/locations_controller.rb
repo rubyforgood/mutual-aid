@@ -64,8 +64,7 @@ class LocationsController < ApplicationController
 
   def location_params
     params.require(:location).permit(
-        :locationable_type,
-        :locationable_id,
+        :location_type_id,
         :street_address,
         :city,
         :state,

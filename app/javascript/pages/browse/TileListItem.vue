@@ -14,13 +14,15 @@
     <div class="body">
       <div class="tags">
         <div v-if="service_area" class="tag is-info is-light">{{ service_area.name }}</div>
-        <ContactIcons :contactTypes="preferred_contact_types" />
+        <ContactIcons :contactTypes="contact_types" />
       </div>
       <div class="text">
         <h5 class="subtitle">{{ short_title }}</h5>
         <p>{{ description }}</p>
         <div>
-          <time :datetime="publish_until"></time>
+          <small>
+            <time :datetime="created_at">{{ created_at }}</time>
+          </small>
         </div>
       </div>
     </div>
@@ -45,9 +47,9 @@ export default {
     service_area: {type: Object, default: null},
     short_title: String,
     description: String,
-    publish_until: String,
+    created_at: String,
     urgency: Object,
-    preferred_contact_types: {type: Array, default: () => []},
+    contact_types: {type: Array, default: () => []},
   },
   components: {
     TagList,
@@ -106,5 +108,9 @@ export default {
 .buttonSpacing {
   display: inline-block;
   margin: 0.1rem;
+}
+small {
+  font-size: small;
+  font-style: italic;
 }
 </style>

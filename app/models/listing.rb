@@ -47,4 +47,20 @@ class Listing < ApplicationRecord
   def all_tags_to_s
     all_tags_unique.join(", ")
   end
+
+  def categories_for_tags
+    Category.where(name: tags)
+  end
+
+  def self.filter_by(conditions, default_scope = nil)
+    scope = default_scope
+    scope ||= all
+    if conditions['category']
+      scope = scope.where(
+        tags: Category.top_level.where(id: conditions['category']).pluck('name')
+      )
+    end
+    scope = scope.where(service_area: conditions['service_area']) if conditions['service_area']
+    scope
+  end
 end

@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "delivery_status"
     t.string "subject"
-    t.json "body", default: []
     t.bigint "created_by_id", default: 1, null: false
+    t.string "body"
     t.index ["created_by_id"], name: "index_communication_logs_on_created_by_id"
     t.index ["match_id"], name: "index_communication_logs_on_match_id"
     t.index ["person_id"], name: "index_communication_logs_on_person_id"

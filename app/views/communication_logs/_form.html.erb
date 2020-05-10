@@ -17,7 +17,12 @@
     <%= f.input :subject, as: :text, input_html: { rows: 1 } %>
 
     <hr>
-    <%= f.object.body&.html_safe || "-- Empty --" %>
+    <% if f.object.persisted? && f.object.delivery_channel == CommunicationLog::AUTO_DELIVERY_CHANNEL %>
+      <%= f.label :body, class: "label" %>
+      <%= f.object.body&.html_safe || "-- Empty --" %>
+    <% else %>
+      <%= f.input :body, as: :text, input_html: { rows: 3 } %>
+    <% end %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, resource: @communication_log, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

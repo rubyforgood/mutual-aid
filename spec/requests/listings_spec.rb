@@ -73,11 +73,6 @@ RSpec.describe "/listings", type: :request do
         post listings_url, params: { listing: valid_attributes }
         expect(response).to redirect_to(listing_url(Listing.last))
       end
-
-      it "does not save a blank tag" do
-        post listings_url, params: { listing: valid_attributes }
-        expect(Listing.all_tags).not_to include("")
-      end
     end
 
     context "with invalid parameters" do

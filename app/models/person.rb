@@ -26,12 +26,20 @@ class Person < ApplicationRecord
     "missing.png"
   end
 
+  def all_tags_unique
+    all_tags_list.flatten.map(&:downcase).uniq
+  end
+
+  def all_tags_to_s
+    all_tags_unique.join(", ")
+  end
+
   def temporary_ask_tag_list # these will be directly on the person once forms are available
-    asks.any? ? asks.map(&:tags).flatten.uniq : temporary_offer_tag_list + ["translation"]
+    asks.any? ? Listing.all_tags_unique(asks) : temporary_offer_tag_list + ["translation"]
   end
 
   def temporary_offer_tag_list # these will be directly on the person once forms are available
-    offers.any? ? offers.map(&:tags).flatten.uniq : ["transportation", "meals"]
+    offers.any? ? Listing.all_tags_unique(offers) : ["transportation", "meals"]
   end
 
   private def preferred_contact_method_present!

@@ -18,7 +18,20 @@ class Listing < ApplicationRecord
 
   enum state: { received: 0, fulfilled: 1 }
 
+  def self.all_tags_unique(collection)
+    collection ||= all
+    collection.map(&:all_tags_unique).flatten.uniq
+  end
+
   def name
-    "#{type}: #{tags}"
+    "#{type}: #{all_tags_to_s}"
+  end
+
+  def all_tags_unique
+    all_tags_list.flatten.map(&:downcase).uniq
+  end
+
+  def all_tags_to_s
+    all_tags_unique.join(", ")
   end
 end

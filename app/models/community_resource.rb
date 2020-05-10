@@ -29,4 +29,7 @@ class CommunityResource < ApplicationRecord
       (publish_until == nil || now < publish_until)
   end
 
+  def all_tags_unique
+    all_tags_list.flatten.map(&:downcase).uniq
+  end
 end

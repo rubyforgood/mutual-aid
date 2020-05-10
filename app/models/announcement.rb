@@ -19,4 +19,8 @@ class Announcement < ApplicationRecord
         (publish_from.present? ? publish_from <= now : true) &&
         (publish_until == nil || now < publish_until)
   end
+
+  def all_tags_unique
+    all_tags_list.flatten.map(&:downcase).uniq
+  end
 end

@@ -20,7 +20,8 @@ gem 'dotenv-rails', require: 'dotenv/rails-now'
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active_interaction'
-gem 'acts-as-taggable-array-on'
+gem 'acts-as-taggable-array-on'  # TODO: remove this
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'jbuilder', '~> 2.7'

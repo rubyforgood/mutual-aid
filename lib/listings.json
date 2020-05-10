@@ -16,9 +16,9 @@
       "created_at": "2020-04-11T02:15:50.499Z",
       "service_area": {"id": 1, "name": "East Bay"},
       "map_location": "44.5,-85.1",
-      "short_title": "Look after my kid",
+      "title": "Look after my kid",
       "description": "Lorem Ipsum is the name of my child. They are a very nice child. You won't have much trouble, but they are young and need the help",
-      "preferred_contact_types": [{"id": 1, "name": "text"}]
+      "contact_types": [{"id": 1, "name": "text"}]
     },
     {
       "id": 2,
@@ -37,7 +37,7 @@
       "service_area": null,
       "map_location": null,
       "contribution_type": {"id": 4, "name": "community resource"},
-      "preferred_contact_types": [
+      "contact_types": [
         {"id": 2, "name": "call"},
         {"id": 3, "name": "email"}
       ]
@@ -51,9 +51,9 @@
       "publish_until": "2021-09-11",
       "service_area": {"id": 1, "name": "East Bay"},
       "contribution_type": {"id": 4, "name": "ask"},
-      "short_title": "bathroom help, like cleaning specifically if that's okay",
+      "title": "bathroom help, like cleaning specifically if that's okay",
       "description": "I'm afraid I'll fall and hurt my hip again. Can someone help me clean?",
-      "preferred_contact_types": [
+      "contact_types": [
         {"id": 2, "name": "call"},
         {"id": 3, "name": "email"}
       ]
@@ -67,9 +67,9 @@
       "publish_until": "2021-09-11",
       "service_area": {"id": 1, "name": "East Bay"},
       "contribution_type": {"id": 4, "name": "ask"},
-      "short_title": "bathroom help, like cleaning specifically if that's okay",
+      "title": "bathroom help, like cleaning specifically if that's okay",
       "description": "I'm afraid I'll fall and hurt my hip again. Can someone help me clean?",
-      "preferred_contact_types": [
+      "contact_types": [
         {"id": 2, "name": "call"},
         {"id": 3, "name": "email"}
       ]
@@ -89,9 +89,9 @@
       "created_at": "2020-04-11T02:15:50.499Z",
       "service_area": {"id": 1, "name": "East Bay"},
       "map_location": "44.5,-85.1",
-      "short_title": "Look after my kid",
+      "title": "Look after my kid",
       "description": "Lorem Ipsum is the name of my child. They are a very nice child. You won't have much trouble, but they are young and need the help",
-      "preferred_contact_types": [{"id": 1, "name": "text"}]
+      "contact_types": [{"id": 1, "name": "text"}]
     }
   ]
 }

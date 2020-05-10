@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
-  CONTRIBUTION_MODELS = { 'Ask' => Ask, 'Offer' => Offer}
+  CONTRIBUTION_MODELS = { 'Ask' => Ask, 'Offer' => Offer }.freeze
 
   def index
     @filter_types = FilterTypeBlueprint.render([Category, ServiceArea])

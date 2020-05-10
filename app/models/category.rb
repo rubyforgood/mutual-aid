@@ -30,5 +30,4 @@ class Category < ApplicationRecord
   def full_name
     "#{ parent&.name&.upcase + ": " if parent}#{parent.present? ? name : name.upcase }"
   end
-
 end

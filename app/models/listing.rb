@@ -1,6 +1,8 @@
 class Listing < ApplicationRecord
-  taggable_array :tags
   extend Mobility
+
+  acts_as_taggable_on :tags
+
   translates :title
   translates :description, type: :text
 

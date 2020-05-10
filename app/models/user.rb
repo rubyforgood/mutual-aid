@@ -19,4 +19,7 @@ class User < ApplicationRecord
     "#{email}"
   end
 
+  def preferred_locale
+    person&.preferred_locale
+  end
 end

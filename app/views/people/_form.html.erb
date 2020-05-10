@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <div class="field is-grouped">
       <%= f.input :name %>
-      <%= f.input :preferred_locale, as: :select, collection: @system_locales %>
+      <%= f.input :preferred_locale, as: :select, collection: @system_locales, selected: @preferred_locale_id %>
     </div>
 
     <div class="field is-grouped">

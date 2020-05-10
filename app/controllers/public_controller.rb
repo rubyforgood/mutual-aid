@@ -18,8 +18,8 @@ class PublicController < ApplicationController
     @announcements = Announcement.where(is_approved: true).published
   end
 
-  def share
-    # TODO - change current /listings endpoint to point to this one
+  def contributions
+    redirect_to listings_path # TODO - change current /listings endpoint to point to this one
   end
 
 end

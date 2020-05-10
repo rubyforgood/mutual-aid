@@ -47,10 +47,10 @@
             </div>
             <div class='control-bar-hint-row columns'>
               <div class='column is-3'>
-                <em><a href='/share'>Switch to Offers</a></em>
+                <em><a href='/contributions'>Switch to Offers</a></em>
               </div>
               <div class='column is-7 is-pull-right has-text-right'>
-                <em><a href='/share'>Expand all</a></em>
+                <em><a href='/contributions'>Expand all</a></em>
               </div>
             </div>
           </div>

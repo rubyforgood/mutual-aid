@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :communication_logs, as: :created_by
   has_one :person
 
+  def sys_admin?
+    true # TODO - connect this to pundit
+  end
+
   def admin?
     true # TODO - connect this to pundit
   end

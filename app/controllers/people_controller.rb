@@ -76,8 +76,10 @@ class PeopleController < ApplicationController
           :monthly_donation_amount_max,
           :notes,
           :user_id,
+          :location_id,
+          :service_area_id,
           :preferred_locale,
           :preferred_contact_timeframe,
-          :preferred_contact_method)
+          :preferred_contact_method_id)
     end
 end

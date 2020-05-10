@@ -27,20 +27,21 @@ RSpec.describe "/listings", type: :request do
         create(:category, id: 50, name: Faker::Lorem.word),
         create(:category, id: 70, name: Faker::Lorem.word)
       ]
-      expected_listing = create(:listing, tag_list: categories.map(&:name))
-      area = expected_listing.service_area
-      area.name = Faker::Address.community
-      area.save!
-      wrong_location_listing = create(:listing)
-      not_enough_tags_listing = create(:listing, service_area: area, tag_list: [categories.sample.name])
-      get listings_url, params: { 'Category[0]': 1, 'Category[1]': 1, "ServiceArea[#{area.id}]": 1 }, headers: {'HTTP_ACCEPT' => 'application/json'}
+      both_tags_listing = create(:listing, tag_list: categories.map(&:name))
+      expected_area = both_tags_listing.service_area
+      expected_area.name = Faker::Address.community
+      expected_area.save!
+      one_tag_listing = create(:listing, service_area: expected_area, tag_list: categories.sample.name)
+      both_tags_wrong_area_listing = create(:listing, tag_list: categories.map(&:name))
+      no_tags_correct_area_listing = create(:listing, service_area: expected_area)
 
       expect(response.body).to match(/#{area.name.to_json}/)
 
       response_ids = JSON.parse(response.body).map { |hash| hash['id']}
-      expect(response_ids).to include(expected_listing.id)
-      expect(response_ids).not_to include(wrong_location_listing.id)
-      expect(response_ids).not_to include(not_enough_tags_listing.id)
+      expect(response_ids).to include(both_tags_listing.id)
+      expect(response_ids).to include(one_tag_listing.id)
+      expect(response_ids).not_to include(both_tags_wrong_area_listing.id)
+      expect(response_ids).not_to include(no_tags_correct_area_listing.id)
     end
   end
 

@@ -56,7 +56,8 @@ class Listing < ApplicationRecord
     scope = starting_scope || all
     if conditions['category']
       scope = scope.tagged_with(
-        Category.roots.where(id: conditions['category']).pluck('name')
+        Category.roots.where(id: conditions['category']).pluck('name'),
+        any: true
       )
     end
     scope = scope.where(service_area: conditions['service_area']) if conditions['service_area']

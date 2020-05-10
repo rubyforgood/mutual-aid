@@ -12,7 +12,7 @@
         <td><TagList :tags="contribution.category_tags" /></td>
         <td><TagList :tags="contribution.availability" tagClasses="is-light is-warning"/></td>
         <td><TagList :tags="[contribution.service_area]" /></td>
-        <td>{{ contribution.short_title }}</td>
+        <td>{{ contribution.title }}</td>
       </tr>
     </table>
   </div>

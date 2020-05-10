@@ -14,7 +14,7 @@ RSpec.describe ContributionBlueprint do
                           "id" => contribution.id,
                           "contribution_type" => "Ask",
                           "category_tags" => [{"id" => expected_category_id, "name" => expected_category}],
-                          # # not yet implemented:
+                          # # TODO: not yet implemented:
                           # "availability" => [{"id" => 1, "name" => "AM"}],
                           # "urgency" => {"id" => 1, "name" => "Within 1-2 days"},
                           # "publish_until" => "2021-10-11",

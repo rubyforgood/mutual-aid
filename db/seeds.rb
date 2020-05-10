@@ -15,8 +15,13 @@ Category::DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
   end
 end
 
+%w[neighborhood pod region county].each do |location_type_name|
+  LocationType.where(name: location_type_name).first_or_create!
+end
+
 # we need at least one ServiceArea
-location = Location.new
+location_type = LocationType.first
+location = Location.new(location_type: location_type)
 ServiceArea.where(name: 'Default service area (change or delete me)').first_or_create!(location: location)
 
 # host org and set system defaults
@@ -40,10 +45,6 @@ end
 
 [['Call', 'phone'], ['Text', 'phone'], ['Email', 'email'], ['WhatsApp', 'phone']].each do |(name, field)|
   ContactMethod.exists?(name: name) || ContactMethod.create!(name: name, field: field)
-end
-
-%w[pod neighborhood region county].each do |location_type_name|
-  LocationType.where(name: location_type_name).first_or_create!
 end
 
 puts "completed seeds.rb"

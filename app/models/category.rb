@@ -1,7 +1,16 @@
 class Category < ApplicationRecord
-  belongs_to :parent, optional: true, class_name: "Category",foreign_key: :parent_id, inverse_of: :categories
-  has_many :categories, as: :parent, class_name: "Category", foreign_key: :parent_id, inverse_of: :parent
+  belongs_to(:parent,
+    class_name: "Category",
+    inverse_of: :categories,
+    optional: true,
+  )
+  has_many(:categories, -> { order :display_order },
+    class_name: "Category",
+    foreign_key: :parent_id,
+    inverse_of: :parent
+  )
 
+  # TODO: i don't think these should live here
   DEFAULT_TAGS = [
       ['meals', 'prepared meals'],
       ['meals', 'groceries'],
@@ -26,6 +35,9 @@ class Category < ApplicationRecord
       ['housing', 'storage'],
       ['cash', ''],
   ]
+
+  scope :visible, -> { where(display_to_public: true) }
+  scope :roots,   -> { where(parent: nil) }
 
   def full_name
     "#{ parent&.name&.upcase + ": " if parent}#{parent.present? ? name : name.upcase }"

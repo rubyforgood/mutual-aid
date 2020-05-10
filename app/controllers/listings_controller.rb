@@ -38,8 +38,8 @@ class ListingsController < ApplicationController
   end
 
   def create
-    if @listing.validate(params[:listing])
-      @listing.save
+    @listing = Listing.new(listing_params)
+    if @listing.save
       redirect_to listings_path, notice: 'Listing was successfully created.'
     else
       set_form_dropdowns
@@ -48,8 +48,7 @@ class ListingsController < ApplicationController
   end
 
   def update
-    if @listing.validate(params[:listing])
-      @listing.save
+    if @listing.save
       redirect_to listings_path, notice: 'Listing was successfully updated.'
     else
       set_form_dropdowns

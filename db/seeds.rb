@@ -8,7 +8,32 @@ User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(
 )
 
 # create categories from model constant -- these are then editable by admin users
-Category::DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
+# TODO: i don't think these should live here
+DEFAULT_TAGS = [
+    ['meals', 'prepared meals'],
+    ['meals', 'groceries'],
+    ['errands', 'and deliveries'],
+    ['care', 'childcare'],
+    ['care', 'animal care'],
+    ['care', 'elder or disability care'],
+    ['services', 'tech support'],
+    ['services', 'translation'],
+    ['services', 'accessing unemployment'],
+    ['services', 'accessing healthcare'],
+    ['services', 'transportation'],
+    ['services', 'housework'],
+    ['services', 'yardwork'],
+    ['services', 'laundry'],
+    ['supplies', 'household'],
+    ['supplies', 'clothing'],
+    ['support', 'emotional'],
+    ['support', 'religious'],
+    ['housing', 'temporary'],
+    ['housing', 'permanent'],
+    ['housing', 'storage'],
+    ['cash', ''],
+]
+DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
   parent = Category.where(name: tag_name_parent).first_or_create!
   if subtag_name.present?
     Category.where(parent: parent, name: subtag_name).first_or_create!

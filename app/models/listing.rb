@@ -18,6 +18,9 @@ class Listing < ApplicationRecord
 
   enum state: { received: 0, fulfilled: 1 }
 
+  scope :asks, ->(){ where(type: Ask.to_s) }
+  scope :offers, ->(){ where(type: Offer.to_s) }
+
   def self.all_tags_unique(collection)
     collection ||= all
     collection.map(&:all_tags_unique).flatten.uniq
@@ -25,6 +28,16 @@ class Listing < ApplicationRecord
 
   def name
     "#{type}: #{all_tags_to_s}"
+  end
+
+  def status
+    status = "unmatched"
+    if matches_as_receiver.any?
+      status = matches_as_receiver.map{|m| m.completed?}.any? ? "completed" : "matched"
+    elsif matches_as_provider.any?
+      status = matches_as_provider.map{|m| m.completed?}.any? ? "completed" : "matched"
+    end
+    status
   end
 
   def all_tags_unique

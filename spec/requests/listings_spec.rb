@@ -24,8 +24,8 @@ RSpec.describe "/listings", type: :request do
 
     it 'parses requests for a filtered list' do
       categories = [
-        create(:category, id: 0, name: Faker::Lorem.word),
-        create(:category, id: 1, name: Faker::Lorem.word)
+        create(:category, id: 50, name: Faker::Lorem.word),
+        create(:category, id: 70, name: Faker::Lorem.word)
       ]
       expected_listing = create(:listing, tag_list: categories.map(&:name))
       area = expected_listing.service_area

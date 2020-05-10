@@ -53,7 +53,7 @@ export default {
       }
       this.fetcher.fetch(this.activeFilters, this.activeContributions).then((result) => {
         this.activeContributions = result.data
-        this.flashIfError(result.error)
+        if(result.error) this.flashIfError(result.error)
       })
     },
     flashIfError(e) {

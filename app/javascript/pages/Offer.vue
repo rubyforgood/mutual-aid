@@ -58,8 +58,9 @@
         <SpacerField />
 
         <CategoryFields
-          fieldNamePrefix="listing[categories][]"
+          fieldNamePrefix="listing[tag_list][]"
           :categories="categories"
+          :tags="tagList"
         />
         <SpacerField />
 
@@ -105,6 +106,7 @@ export default {
     return {
       person,
       preferredContactMethodId: person.preferred_contact_method_id,
+      tagList: this.offer.tag_list,
       errors: this.offer.errors,
     }
   },

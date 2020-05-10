@@ -18,9 +18,6 @@ class Listing < ApplicationRecord
 
   enum state: { received: 0, fulfilled: 1 }
 
-  # TODO: this won't update an existing person
-  accepts_nested_attributes_for :person
-
   def name
     "#{type}: #{tags}"
   end

@@ -3,6 +3,7 @@ class SaveListing < BaseInteractor
   hash   :person, strip: false
 
   string :type
+  array  :tag_list,    default: []
   string :description, default: nil
   string :title,       default: nil
 

@@ -1,6 +1,8 @@
 class SaveLocation < BaseInteractor
-  record :location_type
   integer :id,             default: nil
+
+  record :location_type,   strip: false
+
   string  :street_address, default: nil
   string  :neighborhood,   default: nil
   string  :city,           default: nil

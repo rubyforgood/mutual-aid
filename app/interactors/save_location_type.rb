@@ -1,5 +1,6 @@
 class SaveLocationType < BaseInteractor
   integer :id, default: nil
+
   string :name
 
   def execute

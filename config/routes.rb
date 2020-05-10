@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :offers, only: [:new]
+  resources :offers, only: [:new, :create]
 
   resources :announcements
   resources :categories

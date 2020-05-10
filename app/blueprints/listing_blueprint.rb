@@ -1,9 +1,13 @@
 class ListingBlueprint < Blueprinter::Base
   identifier :id
+  fields(
+    :description,
+    :tag_list,
+    :title,
+    :type
+  )
 
-  fields :title, :description, :type
-
-  field :errors do |listing, _options|
+  field :errors do |listing|
     listing.errors.as_json(full_messages: true)
   end
 

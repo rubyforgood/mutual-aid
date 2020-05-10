@@ -2,9 +2,9 @@
   <div>
     <b-field v-for="{id, name} in categories" :key="id">
       <b-checkbox
-        v-model="selectedCategories"
+        v-model="selectedTags"
         :name="fieldNamePrefix"
-        :native-value="id"
+        :native-value="name"
         size="is-medium"
       >
         {{ name | capitalize }}
@@ -20,11 +20,11 @@ export default {
   props: {
     fieldNamePrefix: String,
     categories: Array,
-    selected_categories: Array,
+    tags: Array,
   },
   data() {
     return {
-      selectedCategories: this.selected_categories || []
+      selectedTags: this.tags || []
     }
   },
   filters: { capitalize },

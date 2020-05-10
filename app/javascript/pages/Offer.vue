@@ -57,6 +57,12 @@
         />
         <SpacerField />
 
+        <CategoryFields
+          fieldNamePrefix="listing[categories][]"
+          :categories="categories"
+        />
+        <SpacerField />
+
         <b-field>
           <div class="control">
             <b-button native-type="submit" type="is-primary" size="is-medium">
@@ -74,6 +80,7 @@ import {partial} from 'utils/function'
 import {fieldNameWithPrefix} from 'utils/form'
 import AuthTokenInput from 'components/AuthTokenInput'
 import SpacerField from 'components/SpacerField'
+import CategoryFields from './offer/CategoryFields'
 import ContactFields from './offer/ContactFields'
 import LocationFields from './offer/LocationFields'
 import ServiceAreaField from './offer/ServiceAreaField'
@@ -81,6 +88,7 @@ import ServiceAreaField from './offer/ServiceAreaField'
 export default {
   components: {
     AuthTokenInput,
+    CategoryFields,
     ContactFields,
     LocationFields,
     ServiceAreaField,
@@ -88,8 +96,9 @@ export default {
   },
   props: {
     offer: Object,
-    service_areas: Array,
+    categories: Array,
     contact_methods: Array,
+    service_areas: Array,
   },
   data() {
     const person = this.offer.person || {}

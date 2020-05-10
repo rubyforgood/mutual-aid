@@ -16,7 +16,8 @@ Category::DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
 end
 
 # we need at least one ServiceArea
-ServiceArea.first_or_create! name: 'Default service area (change or delete me)'
+location = Location.new
+ServiceArea.where(name: 'Default service area (change or delete me)').first_or_create!(location: location)
 
 # host org and set system defaults
 SystemSetting.first_or_create!

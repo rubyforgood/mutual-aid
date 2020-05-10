@@ -58,7 +58,7 @@
 
   <div>
     <%= form.label :tags %>
-    <%= form.collection_check_boxes(:tags, ListingForm.all_tags, :itself, :itself) do |b| %>
+    <%= form.collection_check_boxes(:tags, Category.all.map(&:name), :itself, :itself) do |b| %>
       <%# Derived from https://bootsnipp.com/snippets/M2bda %>
       <div class="field is-grouped mb-0">
         <%# FIXME: is-hidden class not working? Buttons also need more work %>

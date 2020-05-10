@@ -1,8 +1,11 @@
 class SaveListing < BaseInteractor
   record :service_area
-  string :type
+  hash   :person, strip: false
 
-  hash :person, strip: false
+  string :type
+  array  :tag_list,    default: []
+  string :description, default: nil
+  string :title,       default: nil
 
   # todo: add other fields here and in nested interactors
 
@@ -12,4 +15,6 @@ class SaveListing < BaseInteractor
       Listing.create inputs.merge person: person_record
     end
   end
+
+  def id; nil end # helps serialization
 end

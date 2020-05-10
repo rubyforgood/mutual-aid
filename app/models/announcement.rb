@@ -3,6 +3,8 @@ class Announcement < ApplicationRecord
   translates :name
   translates :description
 
+  acts_as_taggable_on :tags
+
   def self.published
     now_strftime = Time.now.strftime("%Y-%m-%d %H:%M")
 

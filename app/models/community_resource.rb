@@ -3,6 +3,8 @@ class CommunityResource < ApplicationRecord
   translates :name
   translates :description, type: :text
 
+  acts_as_taggable_on :tags
+
   belongs_to :service_area, optional: true # TODO - should this be optional???
   belongs_to :location, optional: true
   belongs_to :organization, optional: true # TODO - should this be optional???

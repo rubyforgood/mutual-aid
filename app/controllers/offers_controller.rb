@@ -22,6 +22,7 @@ class OffersController < ApplicationController
     def serialize(offer_or_outcome)
       @json = {
         offer: ListingBlueprint.render_as_hash(offer_or_outcome, view: :normal),
+        categories: CategoryBlueprint.render_as_hash(Category.visible.roots, view: :normal),
         contact_methods: ContactMethodBlueprint.render_as_hash(ContactMethod.enabled),
         service_areas: ServiceAreaBlueprint.render_as_hash(ServiceArea.all),
       }.to_json

@@ -5,8 +5,8 @@ RSpec.describe Listing, type: :model do
 
   describe 'tagging' do
     example 'smoke test' do
-      listing.all_tags_list.add('grocery shopping', 'childcare')
-      listing.all_tags_list.add('cash')
+      listing.tag_list.add('grocery shopping', 'childcare')
+      listing.tag_list.add('cash')
       listing.save!
 
       expect(Listing.tagged_with('cash')).to match_array([listing])

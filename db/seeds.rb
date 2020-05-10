@@ -15,8 +15,14 @@ Category::DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
   end
 end
 
+%w[neighborhood pod region county].each do |location_type_name|
+  LocationType.where(name: location_type_name).first_or_create!
+end
+
 # we need at least one ServiceArea
-ServiceArea.first_or_create! name: 'Default service area (change or delete me)'
+location_type = LocationType.first
+location = Location.new(location_type: location_type)
+ServiceArea.where(name: 'Default service area (change or delete me)').first_or_create!(location: location)
 
 # host org and set system defaults
 SystemSetting.first_or_create!

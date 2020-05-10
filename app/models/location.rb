@@ -1,18 +1,18 @@
 class Location < ApplicationRecord
+  belongs_to :location_type
 
   has_many :community_resources
   has_many :listings
   has_many :matches
   has_many :organizations
   has_many :people
+  has_many :service_areas
 
-  validates :state, presence: true
-
-  def address
-    "#{street_address}#{", " + city if city}#{" " + state if state}"
+  def name
+    "#{ address }#{ " (" + location_type&.name + ")" if location_type }"
   end
 
-  def full_name
-    "#{ parent.name.upcase + ": " if parent}#{name}#{ " (" + location_type + ")" if location_type}"
+  def address
+    "#{ street_address }#{ ", " + city if city }#{ " " + state if state }"
   end
 end

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :custom_form_questions
   resources :donations
   resources :feedbacks
+  resources :location_types
   resources :locations
   resources :matches
   resources :mobility_string_translations

@@ -1,11 +1,5 @@
 FactoryBot.define do
   factory :location do
-    state { "NY" }
-
-    factory :service_area_location_data, class: "Line" do
-      #attributes
-      association :service_area_location_data
-
-    end
+    association :location_type
   end
 end

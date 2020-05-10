@@ -1,5 +1,8 @@
 class SaveLocation < BaseInteractor
   integer :id,             default: nil
+
+  record :location_type,   strip: false
+
   string  :street_address, default: nil
   string  :neighborhood,   default: nil
   string  :city,           default: nil
@@ -8,14 +11,15 @@ class SaveLocation < BaseInteractor
   string  :county,         default: nil
   string  :region,         default: nil
 
-  # TODO: add `type` field
-
   def execute
     merging_errors do
+      location_type_record = compose SaveLocationType, location_type
+      location_params = inputs.merge location_type: location_type_record
+
       if id?
-        Location.update(id, inputs)
+        Location.update(id, location_params)
       else
-        Location.create(inputs)
+        Location.create(location_params)
       end
     end
   end

@@ -1,0 +1,23 @@
+<%= render "layouts/view_header", resource: @location_types.last %>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Display to public</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @location_types.each do |location_type| %>
+      <tr>
+        <td><%= location_type.name %></td>
+        <td><%= location_type.description %></td>
+        <td><%= location_type.display_to_public %></td>
+        <td><%= edit_button(location_type) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

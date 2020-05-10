@@ -10,11 +10,11 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
-    @service_areas = ServiceArea.order(:name).map{ |t| [t.full_name, t.id] }
+    set_form_dropdowns
   end
 
   def edit
-    @parent_locations = Location.order(:name).map{ |t| [t.full_name, t.id] }
+    set_form_dropdowns
   end
 
   def create
@@ -25,7 +25,7 @@ class LocationsController < ApplicationController
         format.html { redirect_to locations_path, notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
-        @service_areas = ServiceArea.order(:name).map{ |t| [t.full_name, t.id] }
+        set_form_dropdowns
         format.html { render :new }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
@@ -38,6 +38,7 @@ class LocationsController < ApplicationController
         format.html { redirect_to locations_path, notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }
       else
+        set_form_dropdowns
         format.html { render :edit }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
@@ -57,10 +58,13 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
   end
 
+  def set_form_dropdowns
+    @service_areas = ServiceArea.all.map{ |t| [t.full_name, t.id] }.sort_by(&:first)
+  end
+
   def location_params
     params.require(:location).permit(
-        :service_area_id,
-        :location_type,
+        :location_type_id,
         :street_address,
         :city,
         :state,

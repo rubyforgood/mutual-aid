@@ -37,6 +37,7 @@
     <div class="subtitle is-3">Internal Tracking</div>
     <% admin_buttons_list_2 = [
         ["communication_logs", "Communication Logs"],
+        ["locations"],
         ["organizations"],
         ["positions"],
         ["shared_accounts", "Shared Accounts"],
@@ -53,8 +54,9 @@
         ["categories"],
         ["contact_methods", "Contact Methods"],
         ["custom_form_questions", "Form Questions"],
+        ["location_types"],
         ["mobility_string_translations", "Translations"],
-        ["service_areas", "Service areas/locations/pods"],
+        ["service_areas", "Service areas"],
         ["system_locales", "System Locales"],
     ] %>
     <%= render "admin_buttons_list", admin_buttons_list: admin_buttons_list_3, include_system_settings_row: true %>

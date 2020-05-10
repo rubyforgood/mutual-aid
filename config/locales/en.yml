@@ -36,13 +36,14 @@ en:
         tags: "What types of support can you offer?"
   activerecord:
     attributes:
-      contact_method:
-        phone: Phone number
-        email: Email address
       person:
         preferred_locale: Preferred language
-    models:
-      system_locale:
-        one: System-supported Language
-        other: System-supported Language
-        zero: System-supported Language
+  models:
+    system_locale:
+      one: System-supported Language
+      other: System-supported Language
+      zero: System-supported Language
+    contact_method:
+      labels:
+        phone: Phone number
+        email: Email address

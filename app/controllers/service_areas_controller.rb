@@ -9,10 +9,15 @@ class ServiceAreasController < ApplicationController
   end
 
   def new
+    set_form_dropdowns
+    location_type = LocationType.where(name: LocationType::SERVICE_AREA_TYPE).first_or_create!
+    location = Location.new(location_type: location_type)
     @service_area = ServiceArea.new
+    @service_area.location = location
   end
 
   def edit
+    set_form_dropdowns
   end
 
   def create
@@ -23,6 +28,7 @@ class ServiceAreasController < ApplicationController
         format.html { redirect_to service_areas_path, notice: 'ServiceArea was successfully created.' }
         format.json { render :show, status: :created, location: @service_area }
       else
+        set_form_dropdowns
         format.html { render :new }
         format.json { render json: @service_area.errors, status: :unprocessable_entity }
       end
@@ -35,6 +41,7 @@ class ServiceAreasController < ApplicationController
         format.html { redirect_to service_areas_path, notice: 'ServiceArea was successfully updated.' }
         format.json { render :show, status: :ok, location: @service_area }
       else
+        set_form_dropdowns
         format.html { render :edit }
         format.json { render json: @service_area.errors, status: :unprocessable_entity }
       end
@@ -54,6 +61,12 @@ class ServiceAreasController < ApplicationController
       @service_area = ServiceArea.find(params[:id])
     end
 
+    def set_form_dropdowns
+      @service_area_location_type = LocationType.where(name: LocationType::SERVICE_AREA_TYPE).first_or_create!
+      @service_area_types = ServiceArea::TYPES.map{ |i| [i,i] }
+    end
+
+
     def service_area_params
       params.require(:service_area).permit(
           :parent_id,
@@ -61,6 +74,24 @@ class ServiceAreasController < ApplicationController
           :service_area_type,
           :name,
           :description,
-          service_areas_attributes: [])
+          location_attributes: [ :id,
+                                      :location_type_id,
+                                      :street_address,
+                                      :city,
+                                      :state,
+                                      :zip,
+                                      :county,
+                                      :region,
+                                      :neighborhood,
+                                      :_destroy ],
+          service_areas_attributes: [ :id,
+                                      :location_id,
+                                      :parent_id,
+                                      :organization_id,
+                                      :service_area_type,
+                                      :name,
+                                      :description,
+                                      :_destroy ]
+      )
     end
 end

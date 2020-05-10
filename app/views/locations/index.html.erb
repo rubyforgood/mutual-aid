@@ -8,7 +8,8 @@
       <th>City, State</th>
       <th>Zip</th>
       <th>County</th>
-      <th>ServiceArea</th>
+      <th>Region</th>
+      <th>Neighborhood</th>
       <th>Edit</th>
     </tr>
   </thead>
@@ -16,12 +17,13 @@
   <tbody>
   <% @locations.each do |location| %>
     <tr>
-      <td><%= location.location_type %></td>
+      <td><%= location.location_type&.name %></td>
       <td><%= location.street_address %></td>
       <td><%= location.city %><%= ", " + location.state if location.state.present? %></td>
       <td><%= location.zip %></td>
       <td><%= location.county %></td>
-      <td><%= location.service_area&.name %></td>
+      <td><%= location.region %></td>
+      <td><%= location.neighborhood %></td>
       <td><%= edit_button(location) %></td>
     </tr>
   <% end %>

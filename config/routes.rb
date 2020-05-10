@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   resources :locations
   resources :matches
   resources :mobility_string_translations
-  resources :offers, only: [:index, :new, :create]
+  resources :offers, only: [:index, :edit, :update, :new, :create]
   resources :organizations
   resources :people
   resources :positions

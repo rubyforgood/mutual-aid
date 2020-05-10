@@ -1,7 +1,20 @@
-<h2>Offer/Ask</h2>
+<div class="title is-3"><%= @listing.type %></div>
+
 <p>
-  <strong>Name:</strong>
-  <%= @listing.name %>
+  <strong>Status:</strong>
+  <%= @listing.status %>
+</p>
+<p>
+  <strong>Created at:</strong>
+  <%= @listing.created_at.strftime("%Y-%m-%d %H:%M %p") %>
+</p>
+<p>
+  <strong>Person:</strong>
+  <%= link_to(@listing.person&.name, edit_person_path(@listing.person)) %>
+</p>
+<p>
+  <strong>Service area:</strong>
+  <%= @listing.service_area&.name %>
 </p>
 <p>
   <strong>City:</strong>
@@ -16,13 +29,29 @@
   <%= @listing.location&.street_address %>
 </p>
 <p>
-  <strong>Offers/asks</strong>
+  <strong>Tags:</strong>
   <ul class="list-group">
-    <% @listing.all_tags_unique.each do |tag| %>
-      <li class="list-group-item"><%= tag.capitalize %></li>
+    <% @listing.all_tags_unique.sort.each do |tag| %>
+      <li class="list-group-item tag"><%= tag.capitalize %></li>
+      <br>
     <% end %>
   </ul>
 </p>
+<p>
+  <strong>Matches:</strong>
+  <ul class="list-group">
+    <% @listing.matches_as_receiver.each do |match| %>
+      <li class="list-group-item"><%= match.created_at.strftime("%Y-%m-%d") %>:  <%= link_to(match.name, edit_match_path(match)) %></li>
+      <br>
+    <% end %>
+    <% @listing.matches_as_provider.each do |match| %>
+      <li class="list-group-item"><%= match.created_at.strftime("%Y-%m-%d") %>: <%= link_to(match.name, edit_match_path(match)) %></li>
+      <br>
+    <% end %>
+  </ul>
+</p>
+
+<hr>
 
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
 <%= link_to 'Back', listings_path %>

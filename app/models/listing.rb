@@ -30,6 +30,16 @@ class Listing < ApplicationRecord
     "#{type}: #{all_tags_to_s}"
   end
 
+  def status
+    status = "unmatched"
+    if matches_as_receiver.any?
+      status = matches_as_receiver.map{|m| m.completed?}.any? ? "completed" : "matched"
+    elsif matches_as_provider.any?
+      status = matches_as_provider.map{|m| m.completed?}.any? ? "completed" : "matched"
+    end
+    status
+  end
+
   def all_tags_unique
     all_tags_list.flatten.map(&:downcase).uniq
   end

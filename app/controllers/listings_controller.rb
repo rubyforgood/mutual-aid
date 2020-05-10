@@ -68,7 +68,7 @@ class ListingsController < ApplicationController
     end
 
     def set_form_dropdowns
-      @available_tags = Category.visible + @listing.tag_list
+      @available_tags = Category.visible.pluck(:name) + @listing&.tag_list || []
     end
 
     def listing_params

@@ -51,16 +51,4 @@ class Listing < ApplicationRecord
   def categories_for_tags
     Category.where(name: tags)
   end
-
-  def self.filter_by(conditions, default_scope = nil)
-    scope = default_scope
-    scope ||= all
-    if conditions['category']
-      scope = scope.tagged_with(
-        Category.top_level.where(id: conditions['category']).pluck('name')
-      )
-    end
-    scope = scope.where(service_area: conditions['service_area']) if conditions['service_area']
-    scope
-  end
 end

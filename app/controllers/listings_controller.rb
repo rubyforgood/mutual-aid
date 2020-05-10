@@ -103,6 +103,6 @@ class ListingsController < ApplicationController
     end
 
     def contributions_for(parameters, models = CONTRIBUTION_MODELS.values)
-      models.map { |model| model.filter_by(parameters) }.flatten
+      models.map { |model| model.tagged_with(parameters) }.flatten
     end
 end

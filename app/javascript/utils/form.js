@@ -1,3 +1,7 @@
 export function fieldNameWithPrefix(prefix, name) {
-  return prefix && prefix.length ? `${prefix}[${name}]` : name
+  if (!prefix || !prefix.length) return name
+
+  return name.endsWith('[]')
+    ? `${prefix}[${name.slice(0, -2)}][]`
+    : `${prefix}[${name}]`
 }

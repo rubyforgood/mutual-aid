@@ -1,15 +1,14 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
+  CONTRIBUTION_MODELS = [Listing]
 
   def index
-    # TODO: these json fixtures are to be replaced with actual generators of data
-    sample_data = File.open('lib/listings.json') do |file|
-      JSON.load(file)
-    end
-    @contributions = sample_data["contributions"]
     @filter_types = FilterTypeBlueprint.render([Category, ServiceArea])
-    # @contributions = ContributionBlueprint.render(contributions_for(filter_params))
-    # binding.pry
+    @contributions = ContributionBlueprint.render(contributions_for(filter_params))
+    respond_to do |format|
+      format.html
+      format.json { render inline: @contributions }
+    end
   end
 
   def show
@@ -81,5 +80,15 @@ class ListingsController < ApplicationController
         :type,
         tags: [],
       )
+    end
+
+    def filter_params
+      params.permit('Category' => {}, 'ServiceArea' => {}).to_h.each_with_object({}) do |(model_name, id_hash), data|
+        data[model_name.underscore] = id_hash.keys
+      end
+    end
+
+    def contributions_for(parameters)
+      CONTRIBUTION_MODELS.map { |model| model.filter_by(parameters) }.flatten
     end
 end

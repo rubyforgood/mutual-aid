@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, except: [:index]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
 
   def index
     # TODO: these json fixtures are to be replaced with actual generators of data

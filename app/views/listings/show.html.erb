@@ -19,7 +19,7 @@
   <strong>Offers/asks</strong>
   <ul class="list-group">
     <% @listing.tags.each do |tag| %>
-      <li class="list-group-item"><%= tag.capitalize %></li>
+      <li class="list-group-item"><%= tag.name.capitalize %></li>
     <% end %>
   </ul>
 </p>

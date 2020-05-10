@@ -7,7 +7,6 @@
     </template>
 
     <template slot="start">
-      <b-navbar-item href="/">Home</b-navbar-item>
       <b-navbar-item href="/about">About</b-navbar-item>
       <b-navbar-item href="/share">Share</b-navbar-item>
       <b-navbar-item href="/community_resources_list">Community Resources</b-navbar-item>

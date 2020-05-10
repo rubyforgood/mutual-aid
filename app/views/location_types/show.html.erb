@@ -1,0 +1,19 @@
+<%= render "layouts/view_header", resource: @location_type %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @location_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @location_type.description %>
+</p>
+
+<p>
+  <strong>Display to public:</strong>
+  <%= @location_type.display_to_public %>
+</p>
+
+<%= link_to 'Edit', edit_location_type_path(@location_type) %> |
+<%= link_to 'Back', location_types_path %>

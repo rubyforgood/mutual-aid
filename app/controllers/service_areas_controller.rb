@@ -10,10 +10,7 @@ class ServiceAreasController < ApplicationController
 
   def new
     set_form_dropdowns
-    location_type = LocationType.where(name: LocationType::SERVICE_AREA_TYPE).first_or_create!
-    location = Location.new(location_type: location_type)
     @service_area = ServiceArea.new
-    @service_area.location = location
   end
 
   def edit

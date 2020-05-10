@@ -3,6 +3,8 @@ class ServiceArea < ApplicationRecord
   translates :name
   translates :description, type: :text
 
+  after_initialize :create_location_if_not_exists
+
   belongs_to :parent, class_name: "ServiceArea", inverse_of: :service_areas, optional: true
   belongs_to :organization, optional: true
   belongs_to :location, class_name: "Location", inverse_of: :service_areas, foreign_key: :location_id
@@ -32,5 +34,14 @@ class ServiceArea < ApplicationRecord
 
   def full_name
     "#{ parent.name.upcase + ": " if parent}#{name}#{ " (" + service_area_type + ")" if service_area_type}"
+  end
+
+  private
+
+  def create_location_if_not_exists
+    unless location_id.present?
+      location_type = LocationType.where(name: LocationType::SERVICE_AREA_TYPE).first_or_create!
+      build_location(location_type: location_type)
+    end
   end
 end

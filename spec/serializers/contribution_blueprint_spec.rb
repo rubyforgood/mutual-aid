@@ -4,7 +4,7 @@ RSpec.describe ContributionBlueprint do
   it 'do' do
     expected_category = Faker::Lorem.word
     expected_category_id = create(:category, name: expected_category).id
-    contribution = create(:ask, tags: [expected_category], title: Faker::Lorem.word, description: Faker::Lorem.sentence)
+    contribution = create(:ask, tag_list: [expected_category], title: Faker::Lorem.word, description: Faker::Lorem.sentence)
     expected_contact_method = contribution.person.preferred_contact_method
     expected_area_name = Faker::Address.community
     contribution.service_area.name = expected_area_name

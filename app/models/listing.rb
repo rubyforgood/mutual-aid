@@ -56,7 +56,7 @@ class Listing < ApplicationRecord
     scope = default_scope
     scope ||= all
     if conditions['category']
-      scope = scope.with_any_tags(
+      scope = scope.tagged_with(
         Category.top_level.where(id: conditions['category']).pluck('name')
       )
     end

@@ -69,6 +69,6 @@ class CommunityResourcesController < ApplicationController
           :service_area_id,
           :website_url,
           :youtube_identifier,
-          tags: [])
+          tag_list: [])
     end
 end

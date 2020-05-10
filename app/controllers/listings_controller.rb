@@ -81,7 +81,7 @@ class ListingsController < ApplicationController
         :state,
         :title,
         :type,
-        tags: [],
+        tag_list: [],
       )
     end
 

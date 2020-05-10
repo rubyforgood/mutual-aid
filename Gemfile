@@ -21,6 +21,7 @@ gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 gem 'active_interaction'
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'blueprinter'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'jbuilder', '~> 2.7'

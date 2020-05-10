@@ -5,7 +5,7 @@
         <TagList :tags="category_tags" class="categoryTags" tagClasses="tag is-info is-light" />
       </div>
       <div class="right-tags tags">
-        <b-tag :class="urgencyColor">
+        <b-tag v-if="urgency" :class="urgencyColor">
           <b-icon v-if="showUrgentIcon" icon="exclamation-triangle" size="is-small" />
           {{ urgency.name }}
         </b-tag>
@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     showUrgentIcon() {
-      return this.urgency.id < 2
+      return !(this.urgency && this.urgency.id > 2)
     },
     urgencyColor() {
       return this.showUrgentIcon ? 'is-warning' : 'is-light is-warning'

@@ -49,6 +49,6 @@ class Listing < ApplicationRecord
   end
 
   def categories_for_tags
-    Category.where(name: tags)
+    Category.where("categories.name = any (array[?])", all_tags_list)
   end
 end

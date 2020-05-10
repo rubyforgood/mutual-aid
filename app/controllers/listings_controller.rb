@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-  before_action :set_listing,    only: [:show, :edit, :update, :destroy, :match, :match_confirm]
+  before_action :set_listing, except: [:index]
 
   def index
     # TODO: these json fixtures are to be replaced with actual generators of data
@@ -22,8 +22,11 @@ class ListingsController < ApplicationController
   end
 
   def match
-    @match = Match.new(asker: @listing)
-    @possible_owners = Listing.all # TODO - get this to be a filtered list -- need to add logic by which to match
+    listing_type = @listing.type
+    match_polymorphic_params = listing_type == Ask ? { receiver: @listing } : { provider: @listing }
+    @match = Match.new
+    @match.update(match_polymorphic_params)
+    @possible_providers = Listing.offers # TODO - get this to be a filtered list -- need to add logic by which to match
   end
 
   def match_confirm

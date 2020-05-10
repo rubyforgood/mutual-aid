@@ -18,6 +18,9 @@ class Listing < ApplicationRecord
 
   enum state: { received: 0, fulfilled: 1 }
 
+  scope :asks, ->(){ where(type: Ask.to_s) }
+  scope :offers, ->(){ where(type: Offer.to_s) }
+
   def self.all_tags_unique(collection)
     collection ||= all
     collection.map(&:all_tags_unique).flatten.uniq

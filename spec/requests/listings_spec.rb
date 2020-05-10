@@ -24,8 +24,8 @@ RSpec.describe "/listings", type: :request do
 
     it 'parses requests for a filtered list' do
       categories = [
-        create(:category, id: 0, name: Faker::Lorem.word),
-        create(:category, id: 1, name: Faker::Lorem.word)
+        create(:category, id: 50, name: Faker::Lorem.word),
+        create(:category, id: 70, name: Faker::Lorem.word)
       ]
       expected_listing = create(:listing, tags: categories.map(&:name))
       area = expected_listing.service_area
@@ -34,7 +34,7 @@ RSpec.describe "/listings", type: :request do
       wrong_location_listing = create(:listing)
       not_enough_tags_listing = create(:listing, service_area: area, tags: [categories.sample.name])
 
-      get listings_url, params: { 'Category[0]': 1, 'Category[1]': 1, "ServiceArea[#{area.id}]": 1 }, headers: {'HTTP_ACCEPT' => 'application/json'}
+      get listings_url, params: { 'Category[50]': 1, 'Category[70]': 1, "ServiceArea[#{area.id}]": 1 }, headers: {'HTTP_ACCEPT' => 'application/json'}
 
       expect(response.body).to match(/#{area.name.to_json}/)
 

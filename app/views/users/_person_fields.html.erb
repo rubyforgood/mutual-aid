@@ -1,0 +1,14 @@
+<fieldset>
+  <%= ff.error_notification %>
+
+  <div class="form-inputs">
+    <div class="field is-grouped">
+      <%= ff.hidden_field :id %>
+      <%= f.association :person, label: "Donor (if already in the database)" %>
+      <%= ff.input :name, label: "Donor's name" %>
+      <%= ff.association :preferred_contact_method, as: :select, collection: ContactMethod.all, label: "Donor's preferred contact method" %>
+      <%= ff.input :email, label: "Donor's email" %>
+      <%= ff.input :phone, label: "Donor's phone" %>
+    </div>
+  </div>
+</fieldset>

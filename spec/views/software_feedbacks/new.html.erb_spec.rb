@@ -20,7 +20,7 @@ RSpec.describe "software_feedbacks/new", type: :view do
 
     # assert_select "form[action=?][method=?]", software_feedbacks_path, "post" do
 
-      assert_select "select[name=?]", "software_feedback[created_by_id]"
+      # assert_select "select[name=?]", "software_feedback[created_by_id]"
 
       assert_select "input[name=?]", "software_feedback[feedback_type]"
 

@@ -27,7 +27,7 @@ class Listing < ApplicationRecord
   end
 
   def name
-    "#{type}: #{all_tags_to_s}"
+    type + ": #{person.name} #{all_tags_to_s}"
   end
 
   def status

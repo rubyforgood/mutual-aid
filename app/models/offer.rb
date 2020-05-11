@@ -3,7 +3,4 @@ class Offer < Listing
 
   scope :unmatched, ->() { includes(:matches_as_provider).references(:matches_as_provider).where("matches.receiver_id IS NULL") }
 
-  def name
-    all_tags_to_s
-  end
 end

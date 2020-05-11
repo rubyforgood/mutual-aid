@@ -18,8 +18,8 @@
     </div>
     <%= f.input :notes, as: :text, input_html: { rows: 2 } %>
     <div class="field is-grouped">
-      <%= f.input :completed, as: :checkboxes if @software_feedback.id.present? %>
-      <%= f.hidden_field :created_by_id, value: current_user.id %>
+      <%= f.input :completed, as: :check_boxes if @software_feedback.id.present? %>
+      <%= f.hidden_field :created_by_id, value: current_user&.id %>
     </div>
   </div>
 

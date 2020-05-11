@@ -20,7 +20,7 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.save
-        format.html { redirect_to share_public_path, notice: 'Match was successfully created.' }
+        format.html { redirect_to contributions_public_path, notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
       else
         format.html { render :new }
@@ -32,7 +32,7 @@ class MatchesController < ApplicationController
   def update
     respond_to do |format|
       if @match.update(match_params)
-        format.html { redirect_to share_public_path, notice: 'Match was successfully updated.' }
+        format.html { redirect_to contributions_public_path, notice: 'Match was successfully updated.' }
         format.json { render :show, status: :ok, location: @match }
       else
         format.html { render :edit }

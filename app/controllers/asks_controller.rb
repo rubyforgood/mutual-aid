@@ -1,10 +1,7 @@
-class AsksController < ApplicationController
-
-  # FIXME: pull this up into PublicController (but it currently has extra actions)
-  skip_before_action :authenticate_user!
+class AsksController < PublicController
 
   def index
-    redirect_to share_public_path
+    redirect_to contributions_public_path
   end
 
   def new

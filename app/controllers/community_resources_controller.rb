@@ -20,35 +20,26 @@ class CommunityResourcesController < ApplicationController
   def create
     @community_resource = CommunityResource.new(community_resource_params)
 
-    respond_to do |format|
-      if @community_resource.save
-        format.html { redirect_to @admin_status ? community_resources_path : community_resources_public_path, notice: "Community resource was successfully submitted.#{ " We'll review." unless @admin_status }" }
-        format.json { render :show, status: :created, location: @community_resource }
-      else
-        format.html { render :new }
-        format.json { render json: @community_resource.errors, status: :unprocessable_entity }
-      end
+    if @community_resource.save
+      redirect_to @admin_status ? community_resources_path : community_resources_public_path, notice: "Community resource was successfully submitted.#{ " We'll review." unless @admin_status }"
+    else
+      set_form_dropdowns
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @community_resource.update(community_resource_params)
-        format.html { redirect_to community_resources_path, notice: 'Community resource was successfully updated.' }
-        format.json { render :index, status: :ok, location: @community_resource }
-      else
-        format.html { render :edit }
-        format.json { render json: @community_resource.errors, status: :unprocessable_entity }
-      end
+    if @community_resource.update(community_resource_params)
+      redirect_to community_resources_path, notice: 'Community resource was successfully updated.'
+    else
+      set_form_dropdowns
+      render :edit
     end
   end
 
   def destroy
     @community_resource.destroy
-    respond_to do |format|
-      format.html { redirect_to community_resources_public_path, notice: 'Community resource was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to community_resources_public_path, notice: 'Community resource was successfully destroyed.'
   end
 
   private
@@ -62,13 +53,14 @@ class CommunityResourcesController < ApplicationController
           :facebook_url,
           :is_approved,
           :name,
-          :organization_id,
           :phone,
           :publish_from,
           :publish_until,
           :service_area_id,
           :website_url,
           :youtube_identifier,
-          tags: [])
+          tag_list: [],
+          organization_attributes: [ :id, :name, :_destroy ]
+          )
     end
 end

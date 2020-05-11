@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "/contributions", to: "public#contributions", as: "contributions_public"
 
   resources :announcements
-  resources :asks, only: [:index, :edit, :update]
+  resources :asks, only: [:index, :edit, :new, :update]
   resources :categories
   resources :communication_logs
   resources :community_resources

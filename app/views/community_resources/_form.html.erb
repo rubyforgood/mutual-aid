@@ -12,7 +12,10 @@
   <% end %>
 
   <div class="form-inputs">
-    <%= f.input :name, required: true, label: "Resource/organization name" %>
+    <%= f.simple_fields_for :organization do |ff| %>
+      <%= render "organization_fields", ff: ff %>
+    <% end %>
+    <%= f.input :name, required: true, label: "Title", hint: "(Short summary of offering, e.g. 'Breakfast and Dinner every Wednesday')" %>
     <%= f.input :description, required: true, as: :text, input_html: { rows: 2 } %>
 
     <% if ["new", "create"].include?(action_name) %>
@@ -24,18 +27,17 @@
     <div class="label">Dates to publish this resource</div>
     <div class="field is-grouped">
       <div class="field">
-        <%= f.input :publish_from, as: :date, include_blank: true %>
+        <%= f.input :publish_from, as: :date, include_blank: true, hint: "(leave blank unless you want to schedule it)" %>
       </div>
       <div class="field">
-        <%= f.input :publish_until, as: :date, include_blank: true %>
+        <%= f.input :publish_until, as: :date, include_blank: true, hint: "(leave blank unless it expires)" %>
       </div>
     </div>
 
     <div class="field is-grouped">
-      <%= f.input :tags %>
+      <%= f.input :tag_list, as: :check_boxes, collection: @available_tags %>
       <%= f.association :service_area, label: "Service area", label_method: "full_name" %>
       <%= f.association :location, label: "Address", label_method: "address" %>
-      <%= f.association :organization %>
     </div>
 
     <div class="label is-expanded">Links</div>

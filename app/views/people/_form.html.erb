@@ -3,12 +3,12 @@
 
   <div class="form-inputs">
     <div class="field is-grouped">
-      <%= f.input :name %>
-      <%= f.input :preferred_locale, as: :select, collection: @system_locales, selected: @preferred_locale_id %>
+      <%= f.input :name, required: true %>
+      <%= f.input :preferred_locale, required: true, as: :select, collection: @system_locales, selected: @preferred_locale_id %>
     </div>
 
     <div class="field is-grouped">
-      <%= f.input :preferred_contact_method, as: :select, collection: @preferred_contact_methods, label_method: :name, value_method: :id %>
+      <%= f.input :preferred_contact_method, required: true, as: :select, collection: @preferred_contact_methods, label_method: :name, value_method: :id %>
       <%= f.input :preferred_contact_timeframe %>
     </div>
 

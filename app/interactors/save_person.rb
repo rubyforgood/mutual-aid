@@ -2,7 +2,7 @@ class SavePerson < BaseInteractor
   integer :id, default: nil
 
   record  :preferred_contact_method, class: 'ContactMethod'
-  record  :location, strip: false
+  hash    :location, strip: false
 
   string  :name
   string  :email, default: nil

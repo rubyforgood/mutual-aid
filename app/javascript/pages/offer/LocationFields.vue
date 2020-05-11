@@ -4,8 +4,8 @@
       <b-input :name="withPrefix('street_address')" :value="street_address" />
     </b-field>
 
-    <!-- TODO: remove this with the DB constraint on state and replace with `type` (maybe in the controller?) -->
-    <b-input :name="withPrefix('state')" type="hidden" value="MI" />
+    <!-- TODO: replace this with a dropdown -->
+    <b-input :name="withPrefix('location_type')" type="hidden" value="1" />
   </div>
 </template>
 

@@ -1,0 +1,20 @@
+<%= render "layouts/view_header", resource: @history_logs.first, new_button: "" %>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Name</th>
+      <th>View</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @history_logs.each do |history_log| %>
+      <tr>
+        <td><%= history_log.topic %></td>
+        <td><%= history_log.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

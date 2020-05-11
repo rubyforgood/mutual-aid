@@ -13,4 +13,14 @@ class Match < ApplicationRecord
   def name
     "#{receiver.name} & #{provider.name}"
   end
+
+  def status
+    status = "matched"
+    if completed?
+      status = "completed"
+    elsif tentative?
+      status = "tentative"
+    end
+    status
+  end
 end

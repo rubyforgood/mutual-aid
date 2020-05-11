@@ -2,15 +2,15 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get "/admin", to: "admin#landing_page", as: "landing_page_admin"
-  get "/admin/volunteers", to: "admin#volunteer_admin", as: "volunteer_admin"
-  get "/yearbook", to: "admin#yearbook", as: "yearbook_admin"
+  get "/admin",                    to: "admin#landing_page",    as: "landing_page_admin"
+  get "/admin/volunteers",         to: "admin#volunteer_admin", as: "volunteer_admin"
+  get "/yearbook",                 to: "admin#yearbook",        as: "yearbook_admin"
 
-  get "/public", to: "public#landing_page", as: "landing_page_public"
-  get "/about", to: "public#about", as: "about_public"
-  get "/community_resources_list", to: "public#community_resources", as: "community_resources_public"
-  get "/announcements_list", to: "public#announcements", as: "announcements_public"
-  get "/contributions", to: "public#contributions", as: "contributions_public"
+  get "/public",                   to: "public_pages#landing_page",        as: "landing_page_public"
+  get "/about",                    to: "public_pages#about",               as: "about_public"
+  get "/community_resources_list", to: "public_pages#community_resources", as: "community_resources_public"
+  get "/announcements_list",       to: "public_pages#announcements",       as: "announcements_public"
+  get "/contributions",            to: "public_pages#contributions",       as: "contributions_public"
 
   resources :announcements
   resources :asks, only: [:index, :edit, :update]

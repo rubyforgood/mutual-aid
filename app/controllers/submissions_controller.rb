@@ -10,9 +10,11 @@ class SubmissionsController < ApplicationController
 
   def new
     @submission = Submission.new
+    set_form_dropdowns
   end
 
   def edit
+    set_form_dropdowns
   end
 
   def create
@@ -34,6 +36,7 @@ class SubmissionsController < ApplicationController
                              status: :created,
                              location: @submission }
       else
+        set_form_dropdowns
         format.html { render :new }
         format.json { render json: @submission.errors, status: :unprocessable_entity }
       end
@@ -46,6 +49,7 @@ class SubmissionsController < ApplicationController
         format.html { redirect_to submissions_path, notice: 'Submission was successfully updated.' }
         format.json { render :show, status: :ok, location: @submission }
       else
+        set_form_dropdowns
         format.html { render :edit }
         format.json { render json: @submission.errors, status: :unprocessable_entity }
       end
@@ -63,6 +67,10 @@ class SubmissionsController < ApplicationController
   private
     def set_submission
       @submission = Submission.find(params[:id])
+    end
+
+    def set_form_dropdowns
+      @form_name = ["ask form", "offer form", "community resources form", "announcements"]
     end
 
     def submission_params

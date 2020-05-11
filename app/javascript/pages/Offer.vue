@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="offer-form">
     <h1 class="title">Offer support</h1>
 
     <div class="columns">

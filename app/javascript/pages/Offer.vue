@@ -106,7 +106,7 @@ export default {
     return {
       person,
       preferredContactMethodId: person.preferred_contact_method_id,
-      tagList: this.offer.all_tags_list,
+      tagList: this.offer.tag_list,
       errors: this.offer.errors,
     }
   },

@@ -2,7 +2,7 @@ class SaveListing < BaseInteractor
   string :type
   string :description, default: nil
   string :title,       default: nil
-  array  :tags,        default: []
+  array  :tag_list,    default: []
 
   hash   :person, strip: false
   record :service_area

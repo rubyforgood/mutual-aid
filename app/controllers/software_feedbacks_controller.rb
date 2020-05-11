@@ -26,28 +26,22 @@ class SoftwareFeedbacksController < ApplicationController
   def create
     @software_feedback = SoftwareFeedback.new(software_feedback_params)
 
-    respond_to do |format|
-      if @software_feedback.save
-        format.html { redirect_to @software_feedback, notice: 'Software feedback was successfully created.' }
-        format.json { render :show, status: :created, location: @software_feedback }
-      else
-        format.html { render :new }
-        format.json { render json: @software_feedback.errors, status: :unprocessable_entity }
-      end
+    if @software_feedback.save
+      redirect_to software_feedbacks_path, notice: 'Software feedback was successfully created.'
+    else
+      set_form_dropdowns
+      render :new
     end
   end
 
   # PATCH/PUT /software_feedbacks/1
   # PATCH/PUT /software_feedbacks/1.json
   def update
-    respond_to do |format|
-      if @software_feedback.update(software_feedback_params)
-        format.html { redirect_to @software_feedback, notice: 'Software feedback was successfully updated.' }
-        format.json { render :show, status: :ok, location: @software_feedback }
-      else
-        format.html { render :edit }
-        format.json { render json: @software_feedback.errors, status: :unprocessable_entity }
-      end
+    if @software_feedback.update(software_feedback_params)
+      redirect_to software_feedbacks_path, notice: 'Software feedback was successfully updated.'
+    else
+      set_form_dropdowns
+      render :edit
     end
   end
 

@@ -19,7 +19,7 @@ class LocationTypesController < ApplicationController
     @location_type = LocationType.new(location_type_params)
 
     if @location_type.save
-      redirect_to @location_type, notice: 'Location type was successfully created.'
+      redirect_to location_types_path, notice: 'Location type was successfully created.'
     else
       render :new
     end
@@ -27,7 +27,7 @@ class LocationTypesController < ApplicationController
 
   def update
     if @location_type.update(location_type_params)
-      redirect_to @location_type, notice: 'Location type was successfully updated.'
+      redirect_to location_types_path, notice: 'Location type was successfully updated.'
     else
       render :edit
     end

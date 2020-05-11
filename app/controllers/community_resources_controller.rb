@@ -12,9 +12,12 @@ class CommunityResourcesController < ApplicationController
 
   def new
     @community_resource = CommunityResource.new
+    @community_resource.build_organization
+    set_form_dropdowns
   end
 
   def edit
+    set_form_dropdowns
   end
 
   def create
@@ -54,6 +57,10 @@ class CommunityResourcesController < ApplicationController
   private
     def set_community_resource
       @community_resource = CommunityResource.find(params[:id])
+    end
+
+    def set_form_dropdowns
+      @available_tags = Category.visible.pluck(:name) + @community_resource&.tag_list || []
     end
 
     def community_resource_params

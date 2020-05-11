@@ -4,9 +4,10 @@
   <table class="table table-hover table-curved table-condensed">
     <thead>
     <tr>
-      <th>Name</th>
+      <th>Title</th>
       <th>Description</th>
       <th>Tags</th>
+      <th>Organization</th>
       <th>Location</th>
       <th>Published?</th>
       <th>Approved</th>
@@ -23,8 +24,9 @@
           <strong><%= community_resource.description.truncate(20) %></strong>
         </td>
         <td>
-          <%= " | " + community_resource.all_tags_unique + " | " if community_resource.all_tags_list.any? %>
+          <%= " | " + community_resource.all_tags_to_s + " | " if community_resource.all_tags_list.any? %>
         </td>
+        <td><%= community_resource.organization&.name %></td>
         <td>
           <%= community_resource.phone %> <%= community_resource.service_area&.name %>
         </td>

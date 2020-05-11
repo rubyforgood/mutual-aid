@@ -1,0 +1,8 @@
+<fieldset>
+  <%= ff.error_notification %>
+
+  <div class="form-inputs">
+    <%= ff.hidden_field :id %>
+    <%= ff.input :name, required: true, label: "Resource/organization name", hint: "(e.g. Lansing Food Pantry)" %>
+  </div>
+</fieldset>

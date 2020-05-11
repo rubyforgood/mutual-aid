@@ -1,5 +1,8 @@
 # to run this file manually run $ rails -r -e development db/seeds_dev.rb 
 
+email_contact_method = ContactMethod.where(ContactMethod.arel_table[:name].matches('email')).first || ContactMethod.create!(name: "Email", field: "email")
+phone_contact_method = ContactMethod.where(ContactMethod.arel_table[:name].matches('phone')).first || ContactMethod.create!(name: "Text", field: "phone")
+
 # people
 person = Person.where(preferred_contact_method: "email", email: "personsemail@example.com(opens in new tab)").first_or_create!
 person_2 = Person.where(preferred_contact_method: "phone", phone: "123-123-1234").first_or_create!

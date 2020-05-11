@@ -69,7 +69,7 @@ locales.each do |locale, locale_name|
 end
 
 [['Call', 'phone'], ['Text', 'phone'], ['Email', 'email'], ['WhatsApp', 'phone']].each do |(name, field)|
-  ContactMethod.exists?(name: name) || ContactMethod.create!(name: name, field: field)
+  ContactMethod.where(ContactMethod.arel_table[:name].matches(name)).first || ContactMethod.create!(name: name, field: field)
 end
 
 puts "completed seeds.rb"

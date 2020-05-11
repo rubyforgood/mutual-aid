@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe SavePerson do
   let(:contact_method)   { create :contact_method_email }
-  let(:current_location) { create :location, city: 'flint' }
+  let(:location_type)    { create :location_type }
+  let(:current_location) { create :location, location_type: location_type }
   let(:current_person)   { create :person, location: current_location }
 
   let(:params) {{
@@ -13,7 +14,7 @@ RSpec.describe SavePerson do
     location: {
       id: current_location&.id,
       state: 'DC', # statehood now!
-      location_type: current_location.location_type.id
+      location_type: location_type.id
     },
   }}
 
@@ -22,14 +23,12 @@ RSpec.describe SavePerson do
 
   describe 'modification' do
     it 'updates the current person and associated location' do
-      skip # TODO fix this
       expect(person).to eq(current_person.reload)
       expect(person.location).to eq current_location.reload
     end
 
     it 'allows for existing fields to be nullified' do
       params[:location][:city] = nil
-      skip # TODO fix this
       expect(person.location.city).to be_nil
     end
 
@@ -37,7 +36,6 @@ RSpec.describe SavePerson do
       let(:current_location) { nil }
 
       it 'fails' do
-        skip # TODO fix this
         expect { interaction }.to raise_error(/Missing location.id/)
       end
     end
@@ -48,18 +46,16 @@ RSpec.describe SavePerson do
     let(:current_location) { nil }
 
     it 'creates a person' do
-      skip # TODO fix this
       expect(person).to be_persisted
     end
 
     it 'creates a nested location' do
-      skip # TODO fix this
       expect(person.location).to be_persisted
       expect(person.location.state).to eq 'DC'
     end
 
     context 'with invalid location params' do
-      before { params[:location][:location_type_id] = '' }
+      before { params[:location][:location_type] = '' }
 
       it 'makes the parent interaction invalid' do
         expect(interaction).to be_invalid
@@ -72,7 +68,7 @@ RSpec.describe SavePerson do
       end
 
       it 'promotes nested errors' do
-        expect(interaction.errors.full_messages).to eq ["Location type is required"]
+        expect(interaction.errors.full_messages).to eq ["Location type is not a valid record"]
       end
     end
 
@@ -80,7 +76,6 @@ RSpec.describe SavePerson do
       before { params[:email] = '' }
 
       it 'does not create either record' do
-        skip # TODO fix this
         expect { interaction }
           .to  change(Person, :count).by(0)
           .and change(Location, :count).by(0)

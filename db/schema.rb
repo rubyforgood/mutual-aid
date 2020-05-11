@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_043917) do
+ActiveRecord::Schema.define(version: 2020_05_11_014005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
     t.bigint "service_area_id"
     t.bigint "location_id"
     t.bigint "organization_id"
-    t.string "name", null: false
+    t.string "name"
     t.string "website_url"
     t.string "facebook_url"
     t.string "phone"
@@ -281,11 +281,10 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
     t.boolean "is_created_by_admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "location_id", null: false
+    t.integer "location_id"
     t.index ["display_order"], name: "index_service_areas_on_display_order"
     t.index ["display_to_public"], name: "index_service_areas_on_display_to_public"
     t.index ["is_created_by_admin"], name: "index_service_areas_on_is_created_by_admin"
-    t.index ["location_id"], name: "index_service_areas_on_location_id"
     t.index ["name"], name: "index_service_areas_on_name"
     t.index ["organization_id"], name: "index_service_areas_on_organization_id"
     t.index ["parent_id"], name: "index_service_areas_on_parent_id"
@@ -430,7 +429,6 @@ ActiveRecord::Schema.define(version: 2020_05_10_043917) do
   add_foreign_key "people", "users"
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
-  add_foreign_key "service_areas", "locations"
   add_foreign_key "service_areas", "organizations"
   add_foreign_key "submissions", "people"
   add_foreign_key "submissions", "service_areas"

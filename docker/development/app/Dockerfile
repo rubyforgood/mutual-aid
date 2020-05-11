@@ -8,16 +8,16 @@ WORKDIR /usr/src/app
 
 RUN apk add --update-cache postgresql-dev zlib build-base tzdata nodejs yarn
 
-ENV RAILS_ENV= \
-    POSTGRES_HOST= \
-    POSTGRES_PASSWORD= \
-    POSTGRES_USER=postgres \
-    POSTGRES_DB= \
-    SECRET_KEY_BASE= \
-    EMAIL_PORT= \
-    EMAIL_HOST= \
-    EMAIL_FROM_ADDR= \
-    EMAIL_DEFAULT_URL_HOST= 
+ENV RAILS_ENV='' \
+    POSTGRES_HOST='' \
+    POSTGRES_PASSWORD='' \
+    POSTGRES_USER='postgres' \
+    POSTGRES_DB='' \
+    SECRET_KEY_BASE='' \
+    EMAIL_PORT='' \
+    EMAIL_HOST='' \
+    EMAIL_FROM_ADDR='' \
+    EMAIL_DEFAULT_URL_HOST=''
 
 COPY Gemfile Gemfile.lock ./
 COPY package.json yarn.lock ./
@@ -26,6 +26,6 @@ RUN yarn install
 
 COPY . ./
 
-EXPOSE ${PORT}
+EXPOSE ${APP_PORT}
 
-CMD ["bundle", "exec", "rails", "server", "-p", ${APP_PORT}, "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "server", "-p", "${APP_PORT}", "-b", "0.0.0.0"]

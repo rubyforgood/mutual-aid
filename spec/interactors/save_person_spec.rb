@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# TODO: better word than `current`
 RSpec.describe SavePerson do
   let(:contact_method)   { create :contact_method_email }
   let(:location_type)    { create :location_type }

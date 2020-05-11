@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SaveListing do
   let(:service_area)    { create :service_area }
+  let(:location_type)   { create :location_type, name: 'home' }
   let(:contact_method)  { create :contact_method_email }
   subject(:interaction) { SaveListing.run params }
 
@@ -15,15 +16,16 @@ RSpec.describe SaveListing do
       location: {
         city: 'Lansing',
         state: 'MI',
+        location_type: location_type.id,
       },
     },
   }}
 
   context 'with valid params' do
-    # it { is_expected.to be_valid } # TODO fix this
+    it { is_expected.to be_valid }
 
     it 'create listing and nested records' do
-      skip # TODO fix this
+      params # trigger factories to run as a tare for record counts
       expect { interaction }
         .to  change(Listing,  :count).by(1)
         .and change(Person,   :count).by(1)
@@ -37,6 +39,7 @@ RSpec.describe SaveListing do
     it { is_expected.to be_invalid }
 
     it 'does not create any records' do
+      # TODO: why don't we need tare for records here?
       expect { interaction }
         .to  change(Listing,  :count).by(0)
         .and change(Person,   :count).by(0)
@@ -44,7 +47,6 @@ RSpec.describe SaveListing do
     end
 
     it 'gathers errors from nested objects' do
-      skip # TODO fix this
       expect(interaction.errors.full_messages).to eq ["Type can't be blank"]
     end
   end

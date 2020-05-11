@@ -1,10 +1,12 @@
 <%= simple_form_for @donation do |f| %>
-  <%= f.error_notification %>
-
   <div class="form-inputs">
-    <%= f.association :person %>
-    <%= f.input :value, as: :integer %>
-    <%= f.input :channel %>
+    <%= f.simple_fields_for :person do |ff| %>
+      <%= render "person_fields", ff: ff, f: f %>
+    <% end %>
+    <div class="field is-grouped">
+      <%= f.input :value, as: :integer, label: "Amount of donation" %>
+      <%= f.input :channel, hint: "(e.g. campaign, webinar, direct mail)" %>
+    </div>
     <%= f.input :thank_you_sent, as: :radio_buttons %>
     <%= f.input :notes %>
   </div>

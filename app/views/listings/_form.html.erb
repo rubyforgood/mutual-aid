@@ -6,7 +6,7 @@
     <%= f.input :description %>
     <%= f.input :type %>
     <%= f.input :state %>
-    <%= f.input :tags, as: :check_boxes, collection: @available_tags %>
+    <%= f.input :tag_list, as: :check_boxes, collection: @available_tags %>
     <%= f.association :person %>
     <%= f.association :service_area %>
     <%= f.association :location %>

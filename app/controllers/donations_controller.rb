@@ -10,6 +10,7 @@ class DonationsController < ApplicationController
 
   def new
     @donation = Donation.new
+    @donation.build_person
   end
 
   def edit
@@ -55,6 +56,12 @@ class DonationsController < ApplicationController
     end
 
     def donation_params
-      params.require(:donation).permit(:person_id, :value, :channel, :thank_you_sent, :notes)
+      params.require(:donation).permit(
+          :value,
+          :channel,
+          :thank_you_sent,
+          :notes,
+          person_attributes: [ :id, :preferred_contact_method_id, :name, :email, :phone, :_destroy]
+      )
     end
 end

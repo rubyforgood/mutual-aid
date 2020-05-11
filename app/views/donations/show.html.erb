@@ -5,12 +5,12 @@
 <div class="section-detail">
   <p>
     <strong>Person:</strong>
-    <%= @donation.person_id %>
+    <%= @donation.person&.name %>
   </p>
 
   <p>
     <strong>Value:</strong>
-    <%= @donation.value %>
+    <%= number_to_currency(@donation.value) %>
   </p>
 
   <p>
@@ -20,7 +20,7 @@
 
   <p>
     <strong>Thank you sent:</strong>
-    <%= @donation.thank_you_sent %>
+    <%= yes_no(@donation.thank_you_sent) %>
   </p>
 
   <p>

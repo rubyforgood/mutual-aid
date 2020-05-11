@@ -4,8 +4,8 @@ email_contact_method = ContactMethod.where(ContactMethod.arel_table[:name].match
 phone_contact_method = ContactMethod.where(ContactMethod.arel_table[:name].matches('phone')).first || ContactMethod.create!(name: "Text", field: "phone")
 
 # people
-person = Person.where(preferred_contact_method: "email", email: "personsemail@example.com(opens in new tab)").first_or_create!
-person_2 = Person.where(preferred_contact_method: "phone", phone: "123-123-1234").first_or_create!
+person = Person.where(preferred_contact_method: email_contact_method, email: "personsemail@example.com(opens in new tab)").first_or_create!
+person_2 = Person.where(preferred_contact_method: phone_contact_method, phone: "123-123-1234").first_or_create!
 # asks for person
 Category.all.pluck(:name).sample(4).each do |tag|
   ask = Ask.where(person: person, service_area: ServiceArea.take).create! # TODO - make this idempotent

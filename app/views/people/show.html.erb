@@ -40,8 +40,8 @@
   </div>
 
   <div>
-    <%= edit_button(@person, "Edit Person") %>
-    <%= edit_button(@person.user, "Edit Account", "fa fa-user-edit") if @person.user_id %>
+    <%= edit_button(@person, "Edit #{viewing_self ? 'My Record' : 'Person'}") %>
+    <%= edit_button(@person.user, "Edit #{'My ' if viewing_self} Account") if @person.user_id %>
   </div>
 
   <br>

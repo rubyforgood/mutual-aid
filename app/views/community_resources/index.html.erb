@@ -21,7 +21,7 @@
           <strong><%= community_resource.name %></strong>
         </td>
         <td>
-          <strong><%= community_resource.description.truncate(20) %></strong>
+          <strong><%= community_resource.description&.truncate(20) %></strong>
         </td>
         <td>
           <%= " | " + community_resource.all_tags_to_s + " | " if community_resource.all_tags_list.any? %>

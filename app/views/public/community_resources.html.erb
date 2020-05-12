@@ -17,7 +17,7 @@
             <strong><%= community_resource.name %></strong>
             <br>
             <%= " | " + community_resource.all_tags_to_s + " | " if community_resource.all_tags_list.any? %>
-            <em><%= community_resource.description.truncate(100) %> <%= link_to("More", community_resource_path(community_resource)) if community_resource.description.length > 100 %></em>
+            <em><%= community_resource.description&.truncate(100) %> <%= link_to("More", community_resource_path(community_resource)) if community_resource.description&.length.to_i > 100 %></em>
             <br>
             <%= link_to("<span class='fa fa-globe button'></span><span></span>".html_safe,
                         community_resource.website_url,

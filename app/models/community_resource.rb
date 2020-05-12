@@ -16,6 +16,8 @@ class CommunityResource < ApplicationRecord
 
   accepts_nested_attributes_for :organization
 
+  scope :pending_review, -> (){ where(is_approved: false) }
+
   def self.published
     now_strftime = Time.now.strftime("%Y-%m-%d %H:%M")
 

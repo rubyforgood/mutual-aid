@@ -2,16 +2,24 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :receiver_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "CommunityResource"]] %>
-    <%= f.input :receiver_id %>
-
-    <%= f.input :provider_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "CommunityResource"]] %>
-    <%= f.input :provider_id %>
-
-    <%= f.input :status %>
-    <%= f.input :notes %>
-    <%= f.input :tentative, as: :radio_buttons %>
-    <%= f.input :completed, as: :radio_buttons %>
+    <div class="field is-grouped">
+      <%= f.input :receiver_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "CommunityResource"]] %>
+      <%= f.input :receiver_id, label: "Receiver ID" %>
+    </div>
+    <div class="field is-grouped">
+      <%= f.input :provider_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "CommunityResource"]] %>
+      <%= f.input :provider_id, label: "Provider ID" %>
+    </div>
+    <div class="field is-grouped">
+      <%= f.input :notes, as: :text, input_html: { rows: 1, style: "width: 100%" } %>
+    </div>
+    <div class="field is-grouped">
+      <%= f.input :tentative, as: :radio_buttons %>
+      <%= f.input :completed, as: :radio_buttons %>
+      <% if @match.id.present? %>
+        <%= f.input :status, readonly: true %>
+      <% end %>
+    </div>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

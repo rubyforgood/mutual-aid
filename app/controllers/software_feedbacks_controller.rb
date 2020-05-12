@@ -49,7 +49,15 @@ class SoftwareFeedbacksController < ApplicationController
 
     def set_form_dropdowns
       @feedback_types = ["new feature", "change", "bug"]
-      @module_name = ["ask form", "offer form", "contributions page", "admin", "system settings"]
+      @module_name = [ "ask form", "offer form", "contributions page" ] + [
+          "admin",
+          "system settings",
+          "community resources module",
+          "announcements module",
+          "donations module",
+          "positions module",
+          "shared accounts module", "yearbook"
+      ].sort
       @urgencies = ["critical", "anytime", "blue sky"]
     end
 

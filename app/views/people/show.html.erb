@@ -1,4 +1,5 @@
-<%= render "layouts/view_header", resource: @person %>
+<% viewing_self = current_user == @person.user %>
+<%= render "layouts/view_header", resource: @person, page_title: viewing_self ? "My Profile" : "Profile" %>
 
 <div class="section-detail">
   <br><br>

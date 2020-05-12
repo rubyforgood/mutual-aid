@@ -47,3 +47,7 @@ en:
       labels:
         phone: Phone number
         email: Email address
+    feedback:
+      one: Match Feedback
+      other: Match Feedback
+      zero: Match Feedback

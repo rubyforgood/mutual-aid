@@ -1,1 +1,2 @@
-<%= render "layouts/view_header", resource: @person %>
+<% page_title = current_user == @person.user ? "Edit my record" : "Edit Person" %>
+<%= render "layouts/view_header", resource: @person, page_title: page_title %>

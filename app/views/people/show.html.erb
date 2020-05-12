@@ -1,4 +1,5 @@
-<%= render "layouts/view_header", resource: @person %>
+<% viewing_self = current_user == @person.user %>
+<%= render "layouts/view_header", resource: @person, page_title: viewing_self ? "My Profile" : "Profile" %>
 
 <div class="section-detail">
   <br><br>
@@ -39,8 +40,8 @@
   </div>
 
   <div>
-    <%= edit_button(@person, "Edit Person") %>
-    <%= edit_button(@person.user, "Edit Account", "fa fa-user-edit") if @person.user_id %>
+    <%= edit_button(@person, "Edit #{viewing_self ? 'My Record' : 'Person'}") %>
+    <%= edit_button(@person.user, "Edit #{'My ' if viewing_self} Account") if @person.user_id %>
   </div>
 
   <br>

@@ -59,9 +59,10 @@ class PeopleController < ApplicationController
     end
 
     def set_form_dropdowns
-      @system_locales = SystemLocale.where(publish_in_dropdowns: true).pluck(:locale_name, :id)
       @preferred_contact_methods = ContactMethod.enabled
-      @preferred_locale_id = SystemLocale.where(locale: @person.preferred_locale).first&.id
+      enabled_locales = SystemLocale.where(publish_in_dropdowns: true)
+      @system_locales = enabled_locales.pluck(:locale_name, :locale)
+      @preferred_locale = enabled_locales.where(locale: @person.preferred_locale).first&.locale
     end
 
     def person_params

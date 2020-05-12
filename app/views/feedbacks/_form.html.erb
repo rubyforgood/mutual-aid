@@ -2,11 +2,20 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :match, label_method: "name" %>
-    <%= f.input :is_from_receiver, as: :radio_buttons %>
-    <%= f.input :completed, as: :radio_buttons %>
-    <%= f.input :quality, as: :integer %>
-    <%= f.input :description %>
+    <div class="field is-grouped">
+      <%= f.association :match, label_method: "full_name" %>
+      <%= f.input :is_from_receiver, as: :radio_buttons, label: "Is this feedback from the receiver?" %>
+    </div>
+    <div class="field is-grouped">
+      <%= f.input :completed, as: :radio_buttons, label: "Was this match completed?" %>
+      <%= f.input :quality,
+                  as: :select,
+                  collection: (1..10).to_a.reverse,
+                  requried: true,
+                  label: "How helpful was this experience<br>on a scale of 1 to 10?".html_safe,
+                  hint: "(10 being the best experience)" %>
+    </div>
+    <%= f.input :description, as: :text, label: "Comments", input_html: { rows: 2 } %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, record: @feedback, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

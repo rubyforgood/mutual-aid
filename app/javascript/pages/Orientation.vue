@@ -7,7 +7,7 @@
     </div>
     <div class='columns'>
       <div class='column'>
-        <AboutSection title='What is Mutual-Aid?' description="Mutual-aid is a movement. It's about connecting people with each other in a time of need. It's people helping people, because we can."/>
+        <AboutSection title='What is Mutual Aid?' description="Mutual aid is a movement. It's about connecting people with each other in a time of need. It's people helping people, because we can."/>
         <AboutSection title='Who are we?' description="We're your regional mutual aid group. Learn more"/>
         <AboutSection title="Where do you fit in?" description="Good neighbors share. Asking is a gift to the giver. Whatever your individual case may be, we're here to help you make connections." />
       </div>

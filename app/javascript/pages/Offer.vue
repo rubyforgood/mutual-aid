@@ -121,7 +121,7 @@ export default {
     const person = this.offer.person || {}
     return {
       person,
-      preferredContactMethodId: person.preferred_contact_method_id,
+      preferredContactMethodId: person.preferred_contact_method,
       tagList: this.offer.tag_list,
       errors: this.offer.errors,
     }

@@ -1,7 +1,7 @@
 class PersonBlueprint < Blueprinter::Base
   identifier :id
 
-  fields :name, :email, :phone
+  fields :name, :email, :phone, :skills
   fields :preferred_contact_method_id, :phone, :email # TODO - am i merging this correctly?
 
   view :normal do

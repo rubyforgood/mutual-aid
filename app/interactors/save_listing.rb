@@ -1,11 +1,11 @@
 class SaveListing < BaseInteractor
+  hash   :person, strip: false
+  record :service_area
+
   string :type
   string :description, default: nil
   string :title,       default: nil
   array  :tag_list,    default: []
-
-  hash   :person, strip: false
-  record :service_area
 
   def execute
     merging_errors(in_transaction: true) do

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <b-field :label-for="withPrefix('street_address')" label="Street address">
+    <b-field
+      :label-for="withPrefix('street_address')"
+      label="Street address"
+      custom-class="is-medium"
+    >
       <b-input :name="withPrefix('street_address')" :value="street_address" />
     </b-field>
 

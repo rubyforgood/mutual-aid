@@ -3,7 +3,7 @@
     <b-field
       :label-for="withPrefix('preferred_contact_method')"
       label="Best way to contact you"
-      custom-class="required-field"
+      custom-class="required-field is-medium"
     >
       <b-select
         :name="withPrefix('preferred_contact_method')"
@@ -23,7 +23,7 @@
       :key="fieldName"
       :label="fieldLabel"
       :label-for="withPrefix(fieldName)"
-      :custom-class="isPreferred(fieldName) ? 'required-field' : ''"
+      :custom-class="fieldCustomClasses(fieldName)"
     >
       <b-input
         :name="withPrefix(fieldName)"
@@ -61,6 +61,11 @@ export default {
     isPreferred(fieldName) {
       return this.preferredContactMethod && this.preferredContactMethod.field_name === fieldName
     },
+    fieldCustomClasses(fieldName) {
+      const classes = ['is-medium']
+      if (this.isPreferred(fieldName)) classes.push('required-field')
+      return classes.join(' ')
+    }
   },
   created: function() {
     this.withPrefix = partial(fieldNameWithPrefix, this.fieldNamePrefix)

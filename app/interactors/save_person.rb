@@ -5,8 +5,9 @@ class SavePerson < BaseInteractor
   hash    :location, strip: false
 
   string  :name
-  string  :email, default: nil
-  string  :phone, default: nil
+  string  :email,  default: nil
+  string  :phone,  default: nil
+  string  :skills, default: nil
 
   def execute
     ensure_location_id_provided_if_existing_person!

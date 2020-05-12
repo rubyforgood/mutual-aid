@@ -4,11 +4,11 @@
   <div class="form-inputs">
     <div class="field is-grouped">
       <%= f.input :name, required: true %>
-      <%= f.input :preferred_locale, required: true, as: :select, collection: @system_locales, selected: @preferred_locale_id %>
+      <%= f.input :preferred_locale, required: true, as: :select, selected: f.object.preferred_locale || @preferred_locale, collection: @system_locales %>
     </div>
 
     <div class="field is-grouped">
-      <%= f.input :preferred_contact_method, required: true, as: :select, collection: @preferred_contact_methods, label_method: :name, value_method: :id %>
+      <%= f.association :preferred_contact_method, required: true, as: :select, selected: f.object.preferred_contact_method_id, label_method: :name, value_method: :id %>
       <%= f.input :preferred_contact_timeframe %>
     </div>
 

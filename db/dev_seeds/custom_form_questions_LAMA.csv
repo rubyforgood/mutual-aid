@@ -1,0 +1,44 @@
+form_type,question_name,required,display_order,input_type,locale,hint,options
+offer_form,"If you would like to volunteer with or donate resources to Lansing Area Mutual Aid (LAMA), please fill out this offer form. Your contact information is required, kept private with our core organizers, and only shared with your consent. 
+
+If you need food, cleaning supplies, or other essential items, fill out a request form: https://docs.google.com/forms/d/13GlyPG8gzXnI3Ksm_MpKJ4B2dz44zs2kqgTZlGqEVck 
+
+If you only wish to make a monetary donation, you may donate here:
+https://donorbox.org/lansing-mutual-aid-covid-19-response-donations",FALSE,0,info-text,en,,
+offer_form,Timestamp,TRUE,10,datetime,en,,
+offer_form,Name,TRUE,20,string,en,"If you would like, please indicate pronouns.",
+offer_form,Email,TRUE,30,string,en,,
+offer_form,,TRUE,40,string,en,,
+offer_form,Do you wish to be contacted about donations needed to support mutual aid work around COVID-19?,TRUE,50,radio,en,,"Yes, I can probably donate;Yes, I might not be able to donate, but I will amplify the ask;I will not be able to help at this time."
+offer_form,"How would you like to volunteer?<br><br>(Note: Risks and best practices will be discussed before any work is done. People over 50 and people with vulnerable conditions should be especially cautious in these times, so this option will not be right for everyone. Your safety is community safety. Do what is best.)",TRUE,60,multiselect-checkboxes,en,,"Deliver food and other essential items to families.;Provide emotional or spiritual support to people in the community.;Make in-kind donations: clothing, pet food, food, etc.;Dispatch and organize volunteers to deliver food and other essential items.;Raise funds for LAMA.;Help at a higher level as a LAMA organizer.;I do not want to volunteer or I cannot volunteer.;sdf"
+offer_form,"If you would like to make an in-kind donation, what resources can you offer? Check all applicable.",TRUE,70,multiselect-checkboxes,en,,"Housing;Food;Transportation for essential travel;Pet care - food, litter;Clothing;Laundry access;I do not have resources to share;sdf"""
+offer_form,"Do you have any special skills or particular resources you would like us to be aware of?<br><br>Current or expired medical licences. Military medic training. Carpentry, electrical, plumbing, mechanical. MSW. Examples: ""I have 2 gallons of hand sanitizer."" or ""I have a gas container for filling up cars if you can't go to a gas station"" or ""I have literally a thousand plastic bags"" or ""I dropped 400$ on TP."" Whatever you can think of. For instance, if you have room to spare, tell us how many people could be housed with you short term. Or anything else that doesn't quite fit in the above spaces.",TRUE,80,string,en,,
+offer_form,"This is an open slot to leave any questions, comments, clarifications, or criticisms.",TRUE,90,string,en,,
+offer_form,"Thank you!<br><br>Many thanks to Chicago organizer Kelly Hayes, as well as Mutual Aid Medford and Somerville for sharing resources and best practices. Inspiration has also been taken from resources listed in Cindy Milstein and Kitty Stryker's Medium article. Any additional revisions, comments, or questions may be emailed to LansingMutualAid@outlook.com. 
+
+Please give what you can and take what you need, while remembering best practices for consent, your own capacity, and safe ways to interact with others. Remember that items can carry germs/pathogens, so please be mindful when making donations. ",FALSE,100,info-text,en,,
+ask_form,"Do you need something? Please tell us what we can bring or do by filling out this form, and we'll get it done. All information is strictly confidentially, and will not be used for another purpose. 
+
+In the event that we must make decisions on resources and aid, priority will defer to children and to those with systemic barriers for more traditional resources, for instance undocumented peoples. 
+
+If you would like to volunteer or offer resources, fill out an offer form: https://docs.google.com/forms/d/1cKU3iddU-dxToDqexl6tRBZX8QG1k2Cg-XC5LFi3a24/edit
+
+If you wish to make a monetary donation, you may donate here:
+https://donorbox.org/lansing-mutual-aid-covid-19-response-donations
+
+If you would like to be an Lansing Mutual Aid Organizer, please fill out this form:
+https://forms.gle/MZBy2Ax726NfuquS6",FALSE,0,info-text,en,,
+ask_form,Timestamp,TRUE,10,datetime,en,,
+ask_form,Name,TRUE,20,string,en,"If you would like, please indicate pronouns.",
+ask_form,Address,TRUE,30,string,en,,
+ask_form,Email,TRUE,40,string,en,,
+ask_form,Telephone,TRUE,50,string,en,,
+ask_form,Do you wish to be contacted about donations needed to support mutual aid work around COVID-19?,TRUE,60,radio,en,,"Yes, I can probably donate;Yes, I might not be able to donate, but I will amplify the ask;I will not be able to help at this time."
+ask_form,"Does your request need to remain anonymous?<br><br>If you can, please select no. This gives more flexible options for how and when to get a volunteer to assist you with whatever you need. If you have a safety reason or need additional security (such as being undocumented, avoiding an abuser in the area/mutual aid community, etc) please inform us. LAMA will ensure that the people who see your name and interact with you are stringently vetted. If there are people you cannot interact with, please inform us at the bottom of this page.",TRUE,70,boolean,en,,
+ask_form,Number of people in the household,TRUE,80,integer,en,,
+ask_form,Is a member in your household over the age of 50?,TRUE,90,boolean,en,,
+ask_form,What do you need? Check all that apply:,TRUE,100,multiselect-checkboxes,en,,"Housing;Food;Transportation for essential travel;Pet care - food, litter;Clothing;Laundry access;I do not have resources to share;sdf"""
+ask_form,Is your need: Please use best judgement in gauging urgency. Many residents are dealing with issues of unemployment and uncertainty. We are only able to prioritize a certain percentage of requests based on urgency for necessary medical supples and imminent food need.,TRUE,110,radio,en,,"Urgent! I need this within 24 hours;Non urgent, I can wait a day or two;It would be great if available, but could survive without"
+ask_form,Add any details about your request:,TRUE,120,info-text,en,,
+ask_form,Is your need recurring?,TRUE,130,radio,en,,"Yes, I would need this weekly.;Yes, I would need it occasionally.;One time need."
+ask_form,"Thank you!<br><br>This resource is influenced by many other mutual aid efforts across the country — notably Chicago organizer Kelly Hayes, as well as Mutual Aid Medford and Somerville. Any additional revisions, comments, or questions may be emailed to LansingMutualAid@outlook.com. ",FALSE,140,info-text,en,,

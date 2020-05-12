@@ -3,7 +3,7 @@ class ServiceAreaBlueprint < Blueprinter::Base
 
   fields :name, :description
 
-  view :normal do
+  view :with_location do
     association :location, blueprint: LocationBlueprint
   end
 end

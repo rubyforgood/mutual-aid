@@ -85,12 +85,14 @@
 <script>
 import {partial} from 'utils/function'
 import {fieldNameWithPrefix} from 'utils/form'
-import AuthTokenInput from 'components/AuthTokenInput'
-import SpacerField from 'components/SpacerField'
-import CategoryFields from './offer/CategoryFields'
-import ContactFields from './offer/ContactFields'
-import LocationFields from './offer/LocationFields'
-import ServiceAreaField from './offer/ServiceAreaField'
+import {
+  AuthTokenInput,
+  CategoryFields,
+  ContactFields,
+  LocationFields,
+  ServiceAreaField,
+  SpacerField
+} from 'components/forms'
 
 const skillsMessage = `
   Current or expired medical licences. Military medic training. Carpentry, electrical,

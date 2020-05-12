@@ -1,5 +1,9 @@
-import AboutSection from './AboutSection'
+import NavBar         from './NavBar'
+import Notice         from './Notice'
+import TagList        from './TagList'
 
 export {
-  AboutSection,
+  NavBar,
+  Notice,
+  TagList,
 }

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :custom_form_questions
   resources :donations
   resources :feedbacks
+  resources :history_logs, only: [:index]
   resources :location_types
   resources :listings do
     member do

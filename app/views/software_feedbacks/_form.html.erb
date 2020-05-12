@@ -14,11 +14,13 @@
       <%= f.input :feedback_type, as: :select, collection: @feedback_types, selected: "change" %>
       <%= f.input :module_name, as: :select, collection: @module_name, selected: "contributions page" %>
       <%= f.input :urgency, as: :select, collection: @urgencies, selected: "anytime" %>
-      <%= f.input :urgency_order, as: :integer, input_html: { value: f.object.urgency_order || 10 } %>
+      <%= f.input :urgency_order, as: :integer,
+                  hint: "(defaults to 10)",
+                  input_html: { value: f.object.urgency_order || 10 } %>
     </div>
     <%= f.input :notes, as: :text, input_html: { rows: 2 } %>
     <div class="field is-grouped">
-      <%= f.input :completed, as: :check_boxes if @software_feedback.id.present? %>
+      <%= f.input :completed, as: :radio_buttons if @software_feedback.id.present? %>
       <%= f.hidden_field :created_by_id, value: current_user&.id %>
     </div>
   </div>

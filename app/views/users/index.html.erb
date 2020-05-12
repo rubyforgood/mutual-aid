@@ -16,7 +16,7 @@
       <tr>
         <td><%= user.email %></td>
         <td><%= user.person&.name %> <%= show_button(user.person, "View Profile", "fa fa-user-circle")  if user.person %></td>
-        <td>[PERMISSION LEVEL]</td>
+        <td>[PERMISSION LEVELS NOT IMPLEMENTED]</td>
         <td><%= edit_button(user) %></td>
       </tr>
     <% end %>

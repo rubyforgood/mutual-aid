@@ -3,22 +3,36 @@
 
   <div class="subtitle is-5">
     <%= @mobility_string_translation.translatable_type %> #
-    <%= @mobility_string_translation.translatable_id %>
-    <%= @mobility_string_translation.key&.titleize %> (English):
+    <%= @mobility_string_translation.translatable_id %>:
+    <span class="subtitle is-2"><%= @mobility_string_translation.key&.titleize %></span>
   </div>
-
-  <div class="subtitle is-3"><%= @mobility_string_translation.translatable.public_send(@mobility_string_translation.key).html_safe if @mobility_string_translation.key.present?%></div>
   <hr>
 
   <div class="form-inputs">
-    <%= f.input :locale, label: "Locale/language", as: :select, collection: @supported_locales %>
-    <br><br><br>
-
-    <%= f.input :value, label: "Translated value", as: :text, input_html: { rows: 1 } %>
-
-    <%= f.association :created_by %>
-    <br><br><br>
-    <%= f.input :is_approved, as: :check_boxes %>
+    <div class="field is-grouped">
+      <div class="field">
+        <%= f.label :current_language, class: "label readonly" %>
+        <%= f.label :english, class: "input is-valid text readonly light-invert", style: "background-color: lightgrey" %>
+      </div>
+      <div class="field">
+        <label class="label">
+          <label class="label text" for="mobility_string_translation_current_value">Current value</label>
+        </label>
+        <textarea class="input is-valid text readonly textarea light-invert" rows="1" readonly="readonly"
+                  required="required" aria-required="true" style="background-color: lightgrey;"
+                  name="mobility_string_translation[current_value]" id="mobility_string_translation_current_value">
+          <%= @mobility_string_translation.translatable.public_send(@mobility_string_translation.key).html_safe if @mobility_string_translation.key.present? %>
+        </textarea>
+      </div>
+    </div>
+    <div class="field is-grouped">
+      <%= f.input :locale, label: "Locale/language to translate to", as: :select, collection: @system_locales, input_html: { rows: 2 }, class: "is-wide" %>
+      <%= f.input :value, label: "Translated value", as: :text, input_html: { rows: 1 }, class: "is-wide" %>
+    </div>
+    <div class="field is-grouped">
+      <%= f.association :created_by %>
+      <%= f.input :is_approved, as: :radio_buttons %>
+    </div>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, record: @mobility_string_translation, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

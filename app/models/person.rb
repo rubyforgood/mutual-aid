@@ -6,15 +6,16 @@ class Person < ApplicationRecord
   belongs_to :location, optional: true
   belongs_to :preferred_contact_method, class_name: 'ContactMethod'
 
-  has_many :communication_logs
-  has_many :donations
-
   has_many :asks, inverse_of: :person
   has_many :offers, inverse_of: :person
   has_many :listings
   has_many :matches, through: :listings
   has_many :matches_as_receiver, through: :asks, class_name: "Match", foreign_key: "receiver_id"
   has_many :matches_as_provider, through: :offers, class_name: "Match", foreign_key: "provider_id"
+
+  has_many :communication_logs
+  has_many :donations
+  has_many :submissions
 
   validate :preferred_contact_method_present!
 

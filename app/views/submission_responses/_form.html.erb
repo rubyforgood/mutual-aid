@@ -5,8 +5,8 @@
     <%= f.association :submission %>
     <%= f.association :custom_form_question %>
     <%= f.input :boolean_response, as: :radio_buttons %>
-    <%= f.input :date_response %>
-    <%= f.input :datetime_response %>
+    <%= f.input :date_response, include_blank: true %>
+    <%= f.input :datetime_response, include_blank: true %>
     <%= f.input :integer_response, as: :integer %>
     <%= f.input :text_response, as: :text, input_html: { rows: 1 } %>
     <%= f.input :string_response %>

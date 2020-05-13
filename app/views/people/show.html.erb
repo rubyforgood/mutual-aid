@@ -109,5 +109,16 @@
     <hr>
   </div>
 
+  <div class="content">
+    <hr>
+    <h3>Submissions:</h3>
+    <ul type="1">
+      <% @person.submissions.order(created_at: :desc).each do |submission| %>
+        <li><%= show_button(submission, submission.name) %></li>
+      <% end %>
+    </ul>
+    <hr>
+  </div>
+
   <%= link_to 'People index', people_path %>
 </div>

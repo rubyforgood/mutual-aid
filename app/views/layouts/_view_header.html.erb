@@ -5,8 +5,8 @@
 <% klass_name ||= coalesced_controller_name.classify.constantize %>
 <% table_name ||= resource ? resource.class.table_name : klass_name.table_name %>
 <% human_name ||= klass_name.model_name.human if klass_name %>
-<% singular_table_name ||= table_name.to_s.singularize %>
-<% page_title ||= view_action_name == "index" ? (human_name || table_name.to_s).titleize : "#{view_action_name.titleize} #{singular_table_name.titleize}" %>
+<% singular_table_name ||= human_name || table_name.to_s.singularize %>
+<% page_title ||= view_action_name == "index" ? (human_name || singular_table_name).pluralize.titleize : "#{view_action_name.titleize} #{singular_table_name.titleize}" %>
 <% new_button ||= render "layouts/view_add_new_button", table_name: table_name %>
 
 <div class="view-header">

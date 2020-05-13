@@ -1,13 +1,18 @@
 <%= render "layouts/view_header", resource: @submission_response %>
 
 <p>
+  <strong>Name:</strong>
+  <%= @submission_response.name %>
+</p>
+
+<p>
   <strong>Submission:</strong>
-  <%= @submission_response.submission_id %>
+  <%= show_button(@submission_response.submission, @submission_response.submission&.name) %>
 </p>
 
 <p>
   <strong>Custom form question:</strong>
-  <%= @submission_response.custom_form_question_id %>
+  <%= show_button(@submission_response.custom_form_question, @submission_response.custom_form_question&.name) %>
 </p>
 
 <p>

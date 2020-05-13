@@ -1,25 +1,19 @@
 <% submission ||= nil %>
 <% email_display ||= false %>
 <% @submission = submission || @submission %>
-<% def display_response(r, stq, email_display) %>
-  <% position_override = stq.position_override %>
-  <%# @submission.responses.includes(question: :form_custom_form_questions).
-               references(question: :form_custom_form_questions).
-                order("COALESCE(form_custom_form_questions.position_override, questions.position)").each do |r| %>
-
-  <%# position_override = r.question.form_custom_form_questions.where(formid: @submission.formid).last.position_override %>
-
-  <% question = stq.question %>
+<% def display_response(response, email_display) %>
+  <% r = response %>
+  <% question = r.custom_form_question %>
 
   <% if params && YAML.load(params[:admin].to_s) %>
     <% if r %>
-      <% response_link = link_to(r.id, edit_response_path(r.id)) %>
+      <% response_link = link_to(r.id, edit_submission_response_path(r.id)) %>
       Q<%= link_to(question.id,
-                   edit_question_path(question.id)) %>.
+                   edit_custom_form_question_path(question.id)) %>.
     <% end %>
     <% response_link = nil %>
-    <%= link_to("(position: #{position_override}/#{question.position})",
-                form_custom_form_questions_path(formid: @submission.formid)) %>
+    <%= link_to("(display_order: #{display_order})",
+                custom_form_questions_path(form_type: @submission.form_name)) %>
     <br>
   <% else %>
     <% response_link = nil %>
@@ -37,7 +31,7 @@
       <% elsif ["boolean", "radio"].include?(input_type) %>
         <% unedited_response = r.send(question_field_name(input_type)).to_s.html_safe %>
         <li><em><%= question.name.html_safe %><br/></em></li>
-        <%# puts "RESPONSE_id=#{r.id}...unedited: #{unedited_response}...boolean: #{r.send("boolean_response").andand.to_s.andand.html_safe}(#{yes_no(YAML.load(response.to_s))})...#{r.inspect}" %>
+        <%# puts "RESPONSE_id=#{r.id}...unedited: #{unedited_response}...boolean: #{r.send("boolean_response")&.to_s&.html_safe}(#{yes_no(YAML.load(response.to_s))})...#{r.inspect}" %>
         <% if input_type == "radio" &&
             question.option_list != ["Yes", "No"] &&
             question.option_list != ["yes", "no"] &&
@@ -120,25 +114,13 @@
   <tbody>
     <tr>
       <td>
-        <% form_custom_form_questions =
-               FormQuestion.includes(question: :form_custom_form_questions).
-                                     references(question: :form_custom_form_questions).
-                                     where(formid: @submission.formid).
-                                     order("COALESCE(form_custom_form_questions.position_override, questions.position)")
-          form_custom_form_questions.each do |stq| %>
-          <% responses = stq.custom_form_question.responses.where(submission_id: @submission.id) %>
+        <% custom_form_questions = CustomFormQuestion.where(form_type: @submission.form_name).order(:display_order)
+          custom_form_questions.each do |cfq| %>
+          <% binding.pry %>
+          <% responses = cfq.submission_responses.where(submission_id: @submission.id) %>
           <% responses.each do |r| %>
-              <% display_response(r, stq, email_display) %>
+              <% display_response(r, email_display) %>
           <% end %>
-
-          <!--&lt;!&ndash;### display ALL connected responses, even if they weren't from the original template (e.g. submissions were deduped/combined)&ndash;&gt;-->
-          <!--<%# loose_response_ids_due_to_dedupe = @submission.responses.map{|r| r.id if r.question.form_custom_form_questions.where.not(formid: @submission.formid).any? }.compact %>-->
-          <!--&lt;!&ndash;## find connections to any other form and iterate&ndash;&gt;-->
-          <!--<%# Response.where(id: loose_response_ids_due_to_dedupe).each do |r| %>-->
-            <!--<%# r.question.form_custom_form_questions.where.not(formid: @submission.formid).each do |stq| %>-->
-              <!--<%# display_response(r, stq, email_display) %>-->
-            <!--<%# end %>-->
-          <!--<%# end %>-->
         <% end %>
       </td>
     </tr>

@@ -96,6 +96,10 @@ class Importers::BaseImporter
     ### define at child class level
   end
 
+  def process_headers_as_data(rows)
+    # define at child class level
+  end
+
   def process_row(row)
     ### define at child class level
   end
@@ -105,6 +109,8 @@ class Importers::BaseImporter
     # records_report("initial")  # TODO
 
     rows = CSV.read(path, headers: true)
+
+    process_headers_as_data(rows)
 
     ActiveRecord::Base.transaction do
       puts "START------------#{Time.now}"
@@ -239,4 +245,30 @@ class Importers::BaseImporter
       end
     end
   end
+end
+
+def parse_date(date_string)
+  date = nil
+  if date_string&.include?("/")
+    m, d, y = date_string.split("/")
+    y, t = y.to_s.split(/\s+/)
+
+    y = "20#{y}" if y.length == 2
+    if Date.valid_date?(y.to_i, m.to_i, d.to_i)
+      date = Date.new(y.to_i, m.to_i, d.to_i)
+    else
+      begin
+        date = date_string.to_date  # TODO - add exception?
+      rescue => e
+        binding.pry ### USE FOR TESTING IMPORTERS
+      end
+    end
+  elsif date_string&.include?("-")
+    begin
+      date = date_string.to_date  # TODO - add exception?
+    rescue => e
+      binding.pry ### USE FOR TESTING IMPORTERS
+    end
+  end
+  date
 end

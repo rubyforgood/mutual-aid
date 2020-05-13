@@ -64,11 +64,6 @@ class SubmissionsController < ApplicationController
     end
   end
 
-  def to_json
-    set_submission
-    render json: @submission.body
-  end
-
   private
     def set_submission
       @submission = Submission.find(params[:id])

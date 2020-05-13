@@ -10,22 +10,21 @@ class MobilityStringTranslationsController < ApplicationController
 
   def new
     @mobility_string_translation = MobilityStringTranslation.new
+    set_form_dropdowns
   end
 
   def edit
+    set_form_dropdowns
   end
 
   def create
     @mobility_string_translation = MobilityStringTranslation.new(mobility_string_translation_params)
 
-    respond_to do |format|
-      if @mobility_string_translation.save
-        format.html { redirect_to mobility_string_translations_path, notice: 'Mobility string translation was successfully created.' }
-        format.json { render :show, status: :created, location: @mobility_string_translation }
-      else
-        format.html { render :new }
-        format.json { render json: @mobility_string_translation.errors, status: :unprocessable_entity }
-      end
+    if @mobility_string_translation.save
+      redirect_to mobility_string_translations_path, notice: 'Mobility string translation was successfully created.'
+    else
+      set_form_dropdowns
+      render :new
     end
   end
 
@@ -52,6 +51,10 @@ class MobilityStringTranslationsController < ApplicationController
   private
     def set_mobility_string_translation
       @mobility_string_translation = MobilityStringTranslation.find(params[:id])
+    end
+
+    def set_form_dropdowns
+      @system_locales = SystemLocale.where(publish_in_dropdowns: true).pluck(:locale_name, :locale)
     end
 
     def mobility_string_translation_params

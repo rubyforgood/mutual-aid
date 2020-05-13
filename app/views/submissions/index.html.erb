@@ -26,7 +26,7 @@
             <% end %>
         </td>
         <td><%= submission.urgency %></td>
-        <td><%= submission.person&.name %></td>
+        <td><%= show_button(submission.person, submission.person&.name.to_s + "'s Profile") if submission.person %></td>
         <td><%= show_button(submission) %></td>
         <td><%= show_button(submission.person.communication_logs.last, "View autoemail") if submission.person&.communication_logs&.any? %></td>
       </tr>

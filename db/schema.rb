@@ -89,9 +89,10 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
   create_table "contact_methods", force: :cascade do |t|
     t.string "name"
     t.string "field"
-    t.boolean "enabled"
+    t.boolean "enabled", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["enabled"], name: "index_contact_methods_on_enabled"
   end
 
   create_table "custom_form_questions", force: :cascade do |t|
@@ -146,9 +147,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
     t.bigint "person_id", null: false
     t.bigint "service_area_id", null: false
     t.bigint "location_id"
+    t.bigint "submission_id"
     t.index ["location_id"], name: "index_listings_on_location_id"
     t.index ["person_id"], name: "index_listings_on_person_id"
     t.index ["service_area_id"], name: "index_listings_on_service_area_id"
+    t.index ["submission_id"], name: "index_listings_on_submission_id"
     t.index ["tags"], name: "index_listings_on_tags", using: :gin
   end
 
@@ -288,10 +291,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
     t.boolean "is_created_by_admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "location_id"
+    t.bigint "location_id", null: false
     t.index ["display_order"], name: "index_service_areas_on_display_order"
     t.index ["display_to_public"], name: "index_service_areas_on_display_to_public"
     t.index ["is_created_by_admin"], name: "index_service_areas_on_is_created_by_admin"
+    t.index ["location_id"], name: "index_service_areas_on_location_id"
     t.index ["name"], name: "index_service_areas_on_name"
     t.index ["organization_id"], name: "index_service_areas_on_organization_id"
     t.index ["parent_id"], name: "index_service_areas_on_parent_id"
@@ -316,10 +320,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
     t.string "urgency"
     t.integer "urgency_order"
     t.string "notes"
-    t.boolean "completed"
+    t.boolean "completed", default: false, null: false
     t.datetime "completed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["completed"], name: "index_software_feedbacks_on_completed"
     t.index ["created_by_id"], name: "index_software_feedbacks_on_created_by_id"
   end
 
@@ -445,6 +450,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "people"
   add_foreign_key "listings", "service_areas"
+  add_foreign_key "listings", "submissions"
   add_foreign_key "locations", "location_types"
   add_foreign_key "organizations", "locations"
   add_foreign_key "organizations", "service_areas"
@@ -453,6 +459,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
   add_foreign_key "people", "users"
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
+  add_foreign_key "service_areas", "locations"
   add_foreign_key "service_areas", "organizations"
   add_foreign_key "submission_responses", "custom_form_questions"
   add_foreign_key "submission_responses", "submissions"

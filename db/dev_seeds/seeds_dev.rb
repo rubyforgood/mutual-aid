@@ -1,4 +1,4 @@
-# to run this file manually run $ rails r -e development db/seeds_dev.rb
+# to run this file manually run $ rails runner -e development db/seeds_dev.rb
 
 require 'faker'
 
@@ -28,7 +28,7 @@ Category.all.pluck(:name).sample(4).each do |tag|
 end
 # matches
 match_1 = Match.where(receiver: person, provider: person_2.offers.last).first_or_create!
-# organization 
+# organization
 org = Organization.where(name: "Diaper Bank").first_or_create!
 # community_resources
 CommunityResource.where(name: "this is diapers for you", description: "first come first serve", organization: org).first_or_create!
@@ -36,18 +36,18 @@ CommunityResource.where(name: "this is diapers for you", description: "first com
 Announcement.where(name: "Lansing urgent care are sharing free face masks", description: "Announcement announcement urgent care! Free masks!").first_or_create!
 # communication_logs
 log_1 = CommunicationLog.where(
-  subject: "hello from LAMA", 
-  body: "we'd love to talk with you!", 
-  person: person, 
-  delivery_channel: "email", 
-  delivery_status: "completed"
+    subject: "hello from LAMA",
+    body: "we'd love to talk with you!",
+    person: person,
+    delivery_channel: "email",
+    delivery_status: "completed"
 ).first_or_create!(sent_at: Time.now - 3.days) # wow!!!
 
 log_2 = CommunicationLog.where(
-  subject: "we'd like your feedback!", 
-  body: "how was your experience?", 
-  delivery_channel: "autoemail", 
-  delivery_status: "completed"
+    subject: "we'd like your feedback!",
+    body: "how was your experience?",
+    delivery_channel: "autoemail",
+    delivery_status: "completed"
 ).first_or_create!(sent_at: Time.now - 1.day)
 
 

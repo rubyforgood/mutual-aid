@@ -89,9 +89,10 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
   create_table "contact_methods", force: :cascade do |t|
     t.string "name"
     t.string "field"
-    t.boolean "enabled"
+    t.boolean "enabled", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["enabled"], name: "index_contact_methods_on_enabled"
   end
 
   create_table "custom_form_questions", force: :cascade do |t|
@@ -316,10 +317,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
     t.string "urgency"
     t.integer "urgency_order"
     t.string "notes"
-    t.boolean "completed"
+    t.boolean "completed", default: false, null: false
     t.datetime "completed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["completed"], name: "index_software_feedbacks_on_completed"
     t.index ["created_by_id"], name: "index_software_feedbacks_on_created_by_id"
   end
 

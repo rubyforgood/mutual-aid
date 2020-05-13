@@ -125,14 +125,22 @@ To get started using the application with docker,
 2. Install [docker-compose](https://docs.docker.com/compose/install/)
 3. Clone the repository, and open the repository folder in your favorite command line or terminal application.
 4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml`.
-5. Run the `rake secret` command. If the `rake` command is not found, you may need to run `bundle install` from the repository's root folder. Once the `bundle install` command has completed successfully, return to the `docker/development` folder and try `rake secret` again.
-6. Create a new file call `.env` in the `docker/development` folder right next to the `docker-compose.yml` file. The `.env` file should contain
-```bash
-SECRET_KEY_BASE="the output of the rake secret command, which will look like e0517d0887e68ebc518600..."
-```
-7. Now you should be able to run `docker-compose up -d`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
-8. To setup the database, you can run `docker-compose run -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" app rails db:prepare db:seed`. This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `docker-compose run app db:prepare` and create the account using the sign up option on the website.
-9. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
+5. Run 
+   ```bash
+   docker-compose run app '/usr/local/bin/rake' secret \
+    | echo "SECRET_KEY_BASE=$(tail -1 -)" > .env
+   ```
+   to give rails the information it needs to be able to launch
+6. Now you should be able to run `docker-compose up -d`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
+7. To setup the database, you can run 
+  ```bash
+  docker-compose run \
+    -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" \
+    -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" \
+    app rails db:prepare db:seed
+  ```
+  This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `docker-compose run app db:prepare` and create the account using the sign up option on the website.
+8. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
 
 **NOTE** Do not use this method in production! This is for **testing & development only* the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
 

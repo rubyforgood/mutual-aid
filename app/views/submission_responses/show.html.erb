@@ -1,0 +1,49 @@
+<%= render "layouts/view_header", resource: @submission_response %>
+
+<p>
+  <strong>Submission:</strong>
+  <%= @submission_response.submission_id %>
+</p>
+
+<p>
+  <strong>Custom form question:</strong>
+  <%= @submission_response.custom_form_question_id %>
+</p>
+
+<p>
+  <strong>Boolean response:</strong>
+  <%= @submission_response.boolean_response %>
+</p>
+
+<p>
+  <strong>Date response:</strong>
+  <%= @submission_response.date_response %>
+</p>
+
+<p>
+  <strong>Datetime response:</strong>
+  <%= @submission_response.datetime_response %>
+</p>
+
+<p>
+  <strong>Integer response:</strong>
+  <%= @submission_response.integer_response %>
+</p>
+
+<p>
+  <strong>Text response:</strong>
+  <%= @submission_response.text_response %>
+</p>
+
+<p>
+  <strong>String response:</strong>
+  <%= @submission_response.string_response %>
+</p>
+
+<p>
+  <strong>Array response:</strong>
+  <%= @submission_response.array_response %>
+</p>
+
+<%= link_to 'Edit', edit_submission_response_path(@submission_response) %> |
+<%= link_to 'Back', submission_responses_path %>

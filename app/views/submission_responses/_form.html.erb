@@ -1,0 +1,17 @@
+<%= simple_form_for @submission_response do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :submission %>
+    <%= f.association :custom_form_question %>
+    <%= f.input :boolean_response, as: :radio_buttons %>
+    <%= f.input :date_response %>
+    <%= f.input :datetime_response %>
+    <%= f.input :integer_response, as: :integer %>
+    <%= f.input :text_response, as: :text, input_html: { rows: 1 } %>
+    <%= f.input :string_response %>
+    <%= f.input :array_response %>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, record: @submission_response, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

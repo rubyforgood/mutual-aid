@@ -20,15 +20,7 @@ class SubmissionsController < ApplicationController
   def create
     @submission = Submission.new(submission_params)
 
-    if @submission.save
-      Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
-      # send the email
-      autoemail = SubmissionMailer.new_submission_confirmation_email(@submission)
-      delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
-
-      # store email that was sent
-      CommunicationLog.log_submission_email(autoemail, delivery_status, @submission, nil, current_user)
-
+    if @submission.save && email_confirmation_and_log(@submission, current_user)
       redirect_to submissions_path, notice: 'Submission successfully created.'
     else
       set_form_dropdowns
@@ -48,6 +40,16 @@ class SubmissionsController < ApplicationController
   def destroy
     @submission.destroy
     redirect_to submissions_url, notice: 'Submission was successfully destroyed.'
+  end
+
+  def email_confirmation_and_log(submission, current_user)
+    Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
+    # send the email
+    autoemail = SubmissionMailer.new_submission_confirmation_email(submission, @system_setting)
+    delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
+
+    # store email that was sent
+    CommunicationLog.log_submission_email(autoemail, delivery_status, submission, CommunicationLog::AUTO_DELIVERY_CHANNEL, current_user)
   end
 
   private

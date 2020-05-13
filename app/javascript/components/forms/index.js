@@ -8,6 +8,7 @@ import LocationFields   from './LocationFields'
 import NameField        from './NameField'
 import ServiceAreaField from './ServiceAreaField'
 import SpacerField      from './SpacerField'
+import SubmitButton     from './SubmitButton'
 
 export {
   AuthTokenInput,
@@ -20,5 +21,6 @@ export {
   NameField,
   ServiceAreaField,
   SpacerField,
+  SubmitButton,
 }
 

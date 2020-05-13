@@ -49,13 +49,7 @@
       :value="offer.description"
     />
 
-    <b-field>
-      <div class="control">
-        <b-button native-type="submit" type="is-primary" size="is-medium">
-          Submit
-        </b-button>
-      </div>
-    </b-field>
+    <SubmitButton />
   </form>
 </template>
 
@@ -71,7 +65,8 @@ import {
   LocationFields,
   NameField,
   ServiceAreaField,
-  SpacerField
+  SpacerField,
+  SubmitButton,
 } from 'components/forms'
 
 const skillsMessage = `
@@ -94,7 +89,8 @@ export default {
     LocationFields,
     NameField,
     ServiceAreaField,
-    SpacerField
+    SpacerField,
+    SubmitButton,
   },
   props: {
     offer: Object,

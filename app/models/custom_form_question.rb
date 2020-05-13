@@ -4,6 +4,8 @@ class CustomFormQuestion < ApplicationRecord
   translates :option_list, type: :string # if this is json, ok to say string here?
   translates :hint_text
 
+  has_many :submission_responses
+
   INPUT_TYPES_AND_STORAGE = {
       "date" => "date_response",
       "datetime" => "datetime_response",

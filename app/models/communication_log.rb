@@ -4,6 +4,7 @@ class CommunicationLog < ApplicationRecord
   belongs_to :created_by, optional: true, class_name: "User", foreign_key: "created_by_id"
 
   DEFAULT_DELIVERY_STATUS = "completed"
+
   AUTO_DELIVERY_CHANNEL = "autoemail"
   DELIVERY_CHANNELS = [AUTO_DELIVERY_CHANNEL, "email", "text", "call", "snailmail"]
 
@@ -22,4 +23,5 @@ class CommunicationLog < ApplicationRecord
   def name
     "#{delivery_channel}: #{subject} #{created_at.strftime("%A, %B %d, %Y at %l:%M %P")}"
   end
+
 end

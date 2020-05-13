@@ -1,0 +1,128 @@
+<% submission ||= nil %>
+<% email_display ||= false %>
+<% @submission = submission || @submission %>
+<% def display_response(response, email_display) %>
+  <% r = response %>
+  <% question = r.custom_form_question %>
+
+  <% if params && YAML.load(params[:admin].to_s) %>
+    <% if r %>
+      <% response_link = link_to(r.id, edit_submission_response_path(r.id)) %>
+      Q<%= link_to(question.id,
+                   edit_custom_form_question_path(question.id)) %>.
+    <% end %>
+    <% response_link = nil %>
+    <%= link_to("(display_order: #{display_order})",
+                custom_form_questions_path(form_type: @submission.form_name)) %>
+    <br>
+  <% else %>
+    <% response_link = nil %>
+  <% end %>
+
+  <ul>
+    <% if r && question %>
+      <% input_type = question.input_type %>
+      <% if input_type.include?("multiselect") %>
+        <li><em><%= (question.name + " (multiselect)").html_safe %><br/></em></li>
+        <ul>
+          <li style="list-style-type:none;"><%= response_link %><strong><%= r.cleaned_array_response.to_sentence %></strong></li>
+        </ul>
+        <!--<br>-->
+      <% elsif ["boolean", "radio"].include?(input_type) %>
+        <% unedited_response = r.send(question_field_name(input_type)).to_s.html_safe %>
+        <li><em><%= question.name.html_safe %><br/></em></li>
+        <%# puts "RESPONSE_id=#{r.id}...unedited: #{unedited_response}...boolean: #{r.send("boolean_response")&.to_s&.html_safe}(#{yes_no(YAML.load(response.to_s))})...#{r.inspect}" %>
+        <% if input_type == "radio" &&
+            question.option_list != ["Yes", "No"] &&
+            question.option_list != ["yes", "no"] &&
+            question.option_list != ["true", "false"] &&
+            question.option_list != ["True", "False"] %>
+          <%# puts "RADIO 1: #{response}" %>
+          <% response = unedited_response %>
+          <ul>
+            <li style="list-style-type:none;"><%= response_link %><strong><%= response %></strong></li>
+          </ul>
+        <% elsif input_type == "radio" &&
+            [nil, ""].include?(r.boolean_response) &&
+            (question.option_list == ["Yes", "No"] ||
+                question.option_list == ["yes", "no"] ||
+                question.option_list == ["true", "false"] ||
+                question.option_list == ["True", "False"]) %>
+          <%# puts "RADIO 2: #{yes_no(YAML.load(response.to_s))}" %>
+          <% response = unedited_response %>
+          <ul>
+            <li style="list-style-type:none;"><%= response_link %><strong><%= yes_no(YAML.load(response)) %></strong></li> (<%#= unedited_response %>)
+          </ul>
+        <% else %>
+          <%# puts "ELSE: #{yes_no(YAML.load(response.to_s))}" %>
+          <% response = r.send("boolean_response").to_s.html_safe %>
+          <ul>
+            <li style="list-style-type:none;"><%= response_link %><strong><%= yes_no(YAML.load(response.to_s)) %></strong></li>
+          </ul>
+        <% end %>
+        <!--<br>-->
+      <% elsif input_type == "file" && email_display == false %>
+        <li><em><%= question.name.html_safe %><br/></em></li>
+        <ul>
+          <li style="list-style-type:none;">
+            <strong>
+              <%= response_link %>
+              <a target="_blank" href="http:<%= r.file_upload.url if r.file_upload_file_name %>">
+                <%= image_tag r.file_upload(:thumb) if r.file_upload_file_name %>
+              </a>
+            </strong>
+          </li>
+        </ul>
+      <% elsif input_type == "file" && email_display == true %>
+        <li><em><%= question.name.html_safe %><br/></em></li>
+        <ul>
+          <li style="list-style-type:none;">
+            <%= response_link %>
+            <strong><%= r.file_upload_file_name %></a></strong>
+          </li>
+        </ul>
+      <% elsif input_type == "info_text" %>
+        <li><%= stq.question.name.html_safe %></li>
+        <ul>
+          <li style="list-style-type:none;"><strong><%= "---" %></strong><!--#info text only &#45;&#45; no response--></li>
+        </ul>
+      <% else %>
+        <li><em><%= question.name.html_safe %><br/></em></li>
+        <ul>
+          <li style="list-style-type:none;">
+            <strong>
+              <%= response_link %>
+              <%= r.send(question_field_name(input_type)).to_s.html_safe %>
+            </strong>
+          </li>
+        </ul>
+        <!--<br>-->
+      <% end %>
+      <!--<br>-->
+    <% else %>
+      <li><%= stq.question.name.html_safe %></li>
+      <ul>
+        <li style="list-style-type:none;"><%= "[n/a]" %><!--#info text only &#45;&#45; no response--></li>
+      </ul>
+    <% end %>
+  </ul>
+<% end %>
+
+<table class="table table-hover table-curved <%= @color_class %>-border
+                    table-condensed table-responsive">
+  <caption class="text-left">Submission responses</caption>
+  <tbody>
+    <tr>
+      <td>
+        <% custom_form_questions = CustomFormQuestion.where(form_type: @submission.form_name).order(:display_order)
+          custom_form_questions.each do |cfq| %>
+          <% binding.pry %>
+          <% responses = cfq.submission_responses.where(submission_id: @submission.id) %>
+          <% responses.each do |r| %>
+              <% display_response(r, email_display) %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>

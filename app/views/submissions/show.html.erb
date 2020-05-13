@@ -9,7 +9,7 @@
 </style>
 <p>
   <strong>Person:</strong>
-  <%= @submission.person&.name %>
+  <%= show_button(@submission.person, @submission.person.name, "fa fa-user-circle") %>
 </p>
 
 <p>
@@ -26,15 +26,26 @@
   <strong>Created at:</strong>
   <%= @submission.created_at %>
 </p>
-
+<hr>
 <div>
-  <span class="label">Current listings <span class="tag"><%= @submission.listings.length %></span>:</span>
+  <span class="label">Submission Responses:</span>
+  <% @submission.submission_responses.each do |response| %>
+    <span class="label"><%= response.custom_form_question.name %></span>
+    <div class="field is-grouped">
+      <span class="input"><%= response.name %></span>
+      <%= edit_button(response) if current_user.sys_admin? %>
+    </div>
+  <% end %>
+</div>
+<hr>
+<div>
+  <span class="label">Currently connected Listings <span class="tag"><%= @submission.listings.length %></span>:</span>
   <% @submission.listings.each do |listing| %>
     <%= show_button(listing, "View " + listing.name) %>
     <br>
   <% end %>
 </div>
-
+<hr>
 <div>
   <strong>Listings snapshot</strong> when created (<%= @submission.created_at %>):
   <pre>

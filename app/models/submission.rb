@@ -22,4 +22,9 @@ class Submission < ApplicationRecord
   def urgency
     "I can wait a week"
   end
+
+  def name
+    "#{form_name} (#{created_at.strftime("%m-%d-%Y")}) #{service_area.name}: #{person.name}"
+  end
+
 end

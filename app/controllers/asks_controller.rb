@@ -18,6 +18,16 @@ class AsksController < PublicController
     end
   end
 
+  def update # for rails-side edits
+    @listing = Listing.find(params[:id])
+    if @listing.save
+      redirect_to listings_path, notice: 'Listing was successfully updated.'
+    else
+      set_form_dropdowns
+      render :edit
+    end
+  end
+
   private
 
     def serialize(ask_or_outcome)

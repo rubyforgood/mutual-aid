@@ -3,19 +3,7 @@
     <AuthTokenInput />
 
     <!-- TODO: switch to inline errors instead -->
-    <b-message
-      v-if="hasErrors"
-      title="Please fix the problems below"
-      type="is-danger"
-      class="content"
-      aria-close-label="Close message"
-    >
-      <ul>
-        <li v-for="(value) in errors">
-          {{ value.join(', ') }}
-        </li>
-      </ul>
-    </b-message>
+    <ErrorMessages :errors="offer.errors" />
 
     <ServiceAreaField
       v-model="offer.service_area_id"
@@ -23,24 +11,15 @@
       name="listing[service_area]"
     />
 
-    <!-- TODO: maybe some visual demarcation of logical sections? -->
-
-    <b-field
-      label-for="listing[person][name]"
-      label="Name"
-      custom-class="required-field is-medium"
-      message="If you would like, please indicate pronouns"
-    >
-      <b-input v-model="person.name" name="listing[person][name]" required />
-    </b-field>
+    <NameField
+      fieldName="listing[person][name]"
+      :value="person.name"
+    />
 
     <ContactFields
       fieldNamePrefix="listing[person]"
       :contactMethods="contact_methods"
-      :preferredContactMethodId="preferredContactMethodId"
-      v-bind:contactFields="person"
-      v-on:preference-changed="(value) => preferredContactMethodId = value"
-      v-on:field-changed="(field, value) => person[field] = value"
+      :person="person"
     /><SpacerField />
 
     <LocationFields
@@ -51,7 +30,7 @@
     <CategoryFields
       fieldNamePrefix="listing[tag_list][]"
       :categories="categories"
-      :tags="tagList"
+      :tags="offer.tag_list"
     /><SpacerField />
 
     <b-field
@@ -85,12 +64,16 @@
 <script>
 import {partial} from 'utils/function'
 import {fieldNameWithPrefix} from 'utils/form'
-import AuthTokenInput from 'components/AuthTokenInput'
-import SpacerField from 'components/SpacerField'
-import CategoryFields from './offer/CategoryFields'
-import ContactFields from './offer/ContactFields'
-import LocationFields from './offer/LocationFields'
-import ServiceAreaField from './offer/ServiceAreaField'
+import {
+  AuthTokenInput,
+  CategoryFields,
+  ContactFields,
+  ErrorMessages,
+  LocationFields,
+  NameField,
+  ServiceAreaField,
+  SpacerField
+} from 'components/forms'
 
 const skillsMessage = `
   Current or expired medical licences. Military medic training. Carpentry, electrical,
@@ -107,7 +90,9 @@ export default {
     AuthTokenInput,
     CategoryFields,
     ContactFields,
+    ErrorMessages,
     LocationFields,
+    NameField,
     ServiceAreaField,
     SpacerField
   },
@@ -118,18 +103,9 @@ export default {
     service_areas: Array,
   },
   data() {
-    const person = this.offer.person || {}
     return {
-      person,
-      preferredContactMethodId: person.preferred_contact_method,
-      tagList: this.offer.tag_list,
-      errors: this.offer.errors,
+      person: this.offer.person || {},
     }
-  },
-  computed: {
-    hasErrors() {
-      return this.errors && Object.keys(this.errors).length
-    },
   },
   created: function() {
     this.withPersonPrefix = partial(fieldNameWithPrefix, 'listing[person]')

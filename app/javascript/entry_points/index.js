@@ -3,7 +3,6 @@ import navBar from './navBar'
 import notice from './notice'
 import browse from './browse'
 import orientation from './orientation'
-import publicListings from './publicListings'
 
 export {
   offer,
@@ -11,5 +10,4 @@ export {
   notice,
   browse,
   orientation,
-  publicListings,
 }

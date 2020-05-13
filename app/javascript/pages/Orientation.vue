@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import AboutSection from "components/AboutSection";
+import AboutSection from "./orientation/AboutSection";
 
 export default {
   components:{

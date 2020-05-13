@@ -291,10 +291,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
     t.boolean "is_created_by_admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "location_id"
+    t.bigint "location_id", null: false
     t.index ["display_order"], name: "index_service_areas_on_display_order"
     t.index ["display_to_public"], name: "index_service_areas_on_display_to_public"
     t.index ["is_created_by_admin"], name: "index_service_areas_on_is_created_by_admin"
+    t.index ["location_id"], name: "index_service_areas_on_location_id"
     t.index ["name"], name: "index_service_areas_on_name"
     t.index ["organization_id"], name: "index_service_areas_on_organization_id"
     t.index ["parent_id"], name: "index_service_areas_on_parent_id"
@@ -458,6 +459,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
   add_foreign_key "people", "users"
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
+  add_foreign_key "service_areas", "locations"
   add_foreign_key "service_areas", "organizations"
   add_foreign_key "submission_responses", "custom_form_questions"
   add_foreign_key "submission_responses", "submissions"

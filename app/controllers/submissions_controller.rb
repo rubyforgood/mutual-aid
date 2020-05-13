@@ -64,13 +64,18 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def to_json
+    set_submission
+    render json: @submission.body
+  end
+
   private
     def set_submission
       @submission = Submission.find(params[:id])
     end
 
     def set_form_dropdowns
-      @form_name = ["ask form", "offer form", "community resources form", "announcements"]
+      @form_names = ["ask_form", "offer_form", "community_resources_form", "announcements_form"]
     end
 
     def submission_params

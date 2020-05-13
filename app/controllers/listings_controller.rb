@@ -78,9 +78,10 @@ class ListingsController < ApplicationController
         :person_id,
         :service_area_id,
         :state,
+        :submission_id,
         :title,
         :type,
-        tags: [],
+        tag_list: [],
       )
     end
 

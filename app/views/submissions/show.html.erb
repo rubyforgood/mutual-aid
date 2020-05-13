@@ -1,5 +1,12 @@
 <%= render "layouts/view_header", resource: @submission %>
-
+<style>
+  pre {
+    display: flex;
+    white-space: normal;
+    word-break: break-word;
+    width: 50em;
+  }
+</style>
 <p>
   <strong>Person:</strong>
   <%= @submission.person&.name %>
@@ -35,7 +42,38 @@
   <% end %>
 </div>
 
+<div>
+  <span class="label">Current listings <span class="tag"><%= @submission.listings.length %></span>:</span>
+  <% @submission.listings.each do |listing| %>
+    <%= show_button(listing, "View " + listing.name) %>
+    <br>
+  <% end %>
+</div>
+
+<div>
+  <strong>Listings snapshot</strong> when created (<%= @submission.created_at %>):
+  <pre>
+    <ul>
+      <% @submission.body.delete('\\"').split(", ").each do |param| %>
+        <li>
+          <% value = nil %>
+          <% param.gsub("=>", ": ").split(": ").each_with_index do |param_part, idx| %>
+            <%# value = idx.even? && param_part.include?("_id") ? @submission.public_send(param_part.to_s.gsub("_id"))&.name : param_part %>
+            <% if idx == 0 %>
+              <span class="label"><%= param_part.titleize %></span>
+            <% else %>
+              <span class="<%= 'label' if idx == 0 %>"><%= value || param_part %></span>
+            <% end %>
+          <% end %>
+        </li>
+        <br>
+      <% end if @submission.body %>
+    </ul>
+  </pre>
+</div>
+
 <hr>
 
 <%= link_to 'Edit', edit_submission_path(@submission) %> |
 <%= link_to 'Back', submissions_path %>
+

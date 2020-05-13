@@ -9,6 +9,7 @@ class Listing < ApplicationRecord
   belongs_to :person
   belongs_to :service_area
   belongs_to :location, optional: true
+  belongs_to :submission, optional: true
 
   has_many :matches
   has_many :matches_as_receiver, class_name: "Match", foreign_key: "receiver_id"

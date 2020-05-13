@@ -28,6 +28,8 @@ class ServiceArea < ApplicationRecord
 
   TYPES = %w[pod neighborhood region county]
 
+  scope :as_filter_types, -> { i18n.select :id, :name }
+
   def full_name
     "#{ parent.name.upcase + ": " if parent}#{name}#{ " (" + service_area_type + ")" if service_area_type}"
   end

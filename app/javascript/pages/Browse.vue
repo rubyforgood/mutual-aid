@@ -4,7 +4,7 @@
       <section class="column is-one-quarter">
         <BrowserSelector :browser="browser" @clicked="browser = $event" />
 
-        <Filters :filterCategories="filterCategories" v-model="activeFilters" />
+        <Filters :filterTypes="filterTypes" v-model="activeFilters" />
       </section>
       <component :is="browser" :contributions="activeContributions" class="column" />
     </section>
@@ -27,7 +27,7 @@ export default {
   },
   props: {
     contributions: {type: Array},
-    filterCategories: {type: Array},
+    filterTypes: {type: Array},
     initialFilters: {type: Array, default: () => []},
     fetcher: {
       type: Object,
@@ -53,7 +53,7 @@ export default {
       }
       this.fetcher.fetch(this.activeFilters, this.activeContributions).then((result) => {
         this.activeContributions = result.data
-        this.flashIfError(result.error)
+        if(result.error) this.flashIfError(result.error)
       })
     },
     flashIfError(e) {

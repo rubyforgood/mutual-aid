@@ -13,6 +13,9 @@ class Category < ApplicationRecord
   scope :visible, -> { where(display_to_public: true) }
   scope :roots,   -> { where(parent: nil) }
 
+  # Currently only filtering by top-level categories
+  scope :as_filter_types, -> { roots.select(:id, :name)}
+
   def full_name
     "#{ parent&.name&.upcase + ": " if parent}#{parent.present? ? name : name.upcase }"
   end

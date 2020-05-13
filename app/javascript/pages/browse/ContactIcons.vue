@@ -12,7 +12,7 @@ import TagList from 'components/TagList'
 const iconNameMapping = {
   email: 'envelope',
   text: 'mobile-alt',
-  call: 'phone',
+  phone: 'phone'
 }
 
 export default {

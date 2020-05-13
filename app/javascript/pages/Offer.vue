@@ -11,14 +11,10 @@
       name="listing[service_area]"
     />
 
-    <b-field
-      label-for="listing[person][name]"
-      label="Name"
-      custom-class="required-field is-medium"
-      message="If you would like, please indicate pronouns"
-    >
-      <b-input v-model="person.name" name="listing[person][name]" required />
-    </b-field>
+    <NameField
+      fieldName="listing[person][name]"
+      :value="person.name"
+    />
 
     <ContactFields
       fieldNamePrefix="listing[person]"
@@ -74,6 +70,7 @@ import {
   ContactFields,
   ErrorMessages,
   LocationFields,
+  NameField,
   ServiceAreaField,
   SpacerField
 } from 'components/forms'
@@ -95,6 +92,7 @@ export default {
     ContactFields,
     ErrorMessages,
     LocationFields,
+    NameField,
     ServiceAreaField,
     SpacerField
   },

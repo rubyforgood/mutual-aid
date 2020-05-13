@@ -1,0 +1,39 @@
+<%= render "layouts/view_header", resource: @submission_responses.last %>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+    <tr>
+      <th>Submission</th>
+      <th>Custom form question</th>
+      <th>Boolean response</th>
+      <th>Date response</th>
+      <th>Datetime response</th>
+      <th>Integer response</th>
+      <th>Text response</th>
+      <th>String response</th>
+      <th>Array response</th>
+      <th>Edit</th>
+      <th>Submission</th>
+      <th>Profile</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @submission_responses.each do |submission_response| %>
+      <tr>
+        <td><%= submission_response.submission_id %></td>
+        <td><%= submission_response.custom_form_question&.name %></td>
+        <td><%= submission_response.boolean_response %></td>
+        <td><%= submission_response.date_response %></td>
+        <td><%= submission_response.datetime_response %></td>
+        <td><%= submission_response.integer_response %></td>
+        <td><%= submission_response.text_response %></td>
+        <td><%= submission_response.string_response %></td>
+        <td><%= submission_response.array_response %></td>
+        <td><%= show_button(submission_response) %></td>
+        <td><%= show_button(submission_response.submission, "View Submission") %></td>
+        <td><%= show_button(submission_response.submission.person, "View Profile") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

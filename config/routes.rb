@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :service_areas
   resources :software_feedbacks
   resources :submissions
+  resources :submission_responses
   resources :system_locales
   resources :system_settings
   resources :users

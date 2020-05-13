@@ -2,6 +2,8 @@ class Submission < ApplicationRecord
   belongs_to :person
   belongs_to :service_area
 
+  has_many :submission_responses
+
   def moderation_requested?
     privacy_level_requested == "moderation_requested"
   end

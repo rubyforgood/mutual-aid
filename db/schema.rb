@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_213733) do
+ActiveRecord::Schema.define(version: 2020_05_13_031357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -323,6 +323,23 @@ ActiveRecord::Schema.define(version: 2020_05_11_213733) do
     t.index ["created_by_id"], name: "index_software_feedbacks_on_created_by_id"
   end
 
+  create_table "submission_responses", force: :cascade do |t|
+    t.bigint "submission_id", null: false
+    t.bigint "custom_form_question_id", null: false
+    t.boolean "boolean_response"
+    t.date "date_response"
+    t.datetime "datetime_response"
+    t.integer "integer_response"
+    t.text "text_response"
+    t.string "string_response"
+    t.text "array_response", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["custom_form_question_id"], name: "index_submission_responses_on_custom_form_question_id"
+    t.index ["string_response"], name: "index_submission_responses_on_string_response"
+    t.index ["submission_id"], name: "index_submission_responses_on_submission_id"
+  end
+
   create_table "submissions", force: :cascade do |t|
     t.bigint "person_id", null: false
     t.bigint "service_area_id", null: false
@@ -437,6 +454,8 @@ ActiveRecord::Schema.define(version: 2020_05_11_213733) do
   add_foreign_key "positions", "organizations"
   add_foreign_key "positions", "people"
   add_foreign_key "service_areas", "organizations"
+  add_foreign_key "submission_responses", "custom_form_questions"
+  add_foreign_key "submission_responses", "submissions"
   add_foreign_key "submissions", "people"
   add_foreign_key "submissions", "service_areas"
   add_foreign_key "taggings", "tags"

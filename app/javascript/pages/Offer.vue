@@ -3,19 +3,7 @@
     <AuthTokenInput />
 
     <!-- TODO: switch to inline errors instead -->
-    <b-message
-      v-if="hasErrors"
-      title="Please fix the problems below"
-      type="is-danger"
-      class="content"
-      aria-close-label="Close message"
-    >
-      <ul>
-        <li v-for="(value) in errors">
-          {{ value.join(', ') }}
-        </li>
-      </ul>
-    </b-message>
+    <ErrorMessages :errors="offer.errors" />
 
     <ServiceAreaField
       v-model="offer.service_area_id"
@@ -46,7 +34,7 @@
     <CategoryFields
       fieldNamePrefix="listing[tag_list][]"
       :categories="categories"
-      :tags="tagList"
+      :tags="offer.tag_list"
     /><SpacerField />
 
     <b-field
@@ -84,6 +72,7 @@ import {
   AuthTokenInput,
   CategoryFields,
   ContactFields,
+  ErrorMessages,
   LocationFields,
   ServiceAreaField,
   SpacerField
@@ -104,6 +93,7 @@ export default {
     AuthTokenInput,
     CategoryFields,
     ContactFields,
+    ErrorMessages,
     LocationFields,
     ServiceAreaField,
     SpacerField
@@ -115,17 +105,9 @@ export default {
     service_areas: Array,
   },
   data() {
-    const person = this.offer.person || {}
     return {
-      person,
-      tagList: this.offer.tag_list,
-      errors: this.offer.errors,
+      person: this.offer.person || {},
     }
-  },
-  computed: {
-    hasErrors() {
-      return this.errors && Object.keys(this.errors).length
-    },
   },
   created: function() {
     this.withPersonPrefix = partial(fieldNameWithPrefix, 'listing[person]')

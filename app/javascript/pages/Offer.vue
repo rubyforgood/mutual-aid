@@ -31,7 +31,20 @@
       fieldNamePrefix="listing[tag_list][]"
       :categories="categories"
       :tags="offer.tag_list"
-    /><SpacerField />
+    >
+      <p class="title is-4">
+        What are you able to offer?
+      </p>
+      <p>
+      Note: Risks and best practices will be discussed before any work is done.
+      People over 50 and people with vulnerable conditions should be especially cautious in these times,
+      so this option will not be right for everyone.
+      </p>
+      <p class="mt-1 mb-1">
+      Your safety is community safety. Do what is best.
+      </p>
+    </CategoryFields>
+    <SpacerField />
 
     <b-field
       label-for="listing[person][skills]"

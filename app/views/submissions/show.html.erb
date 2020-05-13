@@ -28,21 +28,6 @@
 </p>
 
 <div>
-  <span class="label">Submission Responses:</span>
-  <% @submission.submission_responses.each do |response| %>
-    <% question = response.custom_form_question %>
-    <% if question.input_type.present? && question.methods.include?(question.input_type + "_response") %>
-      <%= response.public_send(question.input_type) %>
-    <% else %>
-      <%= response.string_response %>
-      <br>
-      <%= response.inspect %>
-    <% end %>
-    <br><br>
-  <% end %>
-</div>
-
-<div>
   <span class="label">Current listings <span class="tag"><%= @submission.listings.length %></span>:</span>
   <% @submission.listings.each do |listing| %>
     <%= show_button(listing, "View " + listing.name) %>

@@ -31,7 +31,20 @@
       fieldNamePrefix="listing[tag_list][]"
       :categories="categories"
       :tags="offer.tag_list"
-    /><SpacerField />
+    >
+      <p class="title is-4">
+        What are you able to offer?
+      </p>
+      <p>
+      Note: Risks and best practices will be discussed before any work is done.
+      People over 50 and people with vulnerable conditions should be especially cautious in these times,
+      so this option will not be right for everyone.
+      </p>
+      <p class="mt-1 mb-1">
+      Your safety is community safety. Do what is best.
+      </p>
+    </CategoryFields>
+    <SpacerField />
 
     <b-field
       label-for="listing[person][skills]"
@@ -42,22 +55,14 @@
       <b-input :value="person.skills" name="listing[person][skills]" type="textarea" rows="2" />
     </b-field>
 
-    <!-- TODO: probably needs a different field, not `description` -->
-    <b-field
-      label-for="listing[description]"
-      label="This is an open slot to leave any questions, comments, clarifications, or criticisms."
-      custom-class="is-medium"
-    >
-      <b-input :value="offer.description" name="listing[description]" type="textarea" rows="2" />
-    </b-field>
 
-    <b-field>
-      <div class="control">
-        <b-button native-type="submit" type="is-primary" size="is-medium">
-          Submit
-        </b-button>
-      </div>
-    </b-field>
+    <!-- TODO: probably needs a different field, not `description` -->
+    <CommentsField
+      fieldName="listing[description]"
+      :value="offer.description"
+    />
+
+    <SubmitButton />
   </form>
 </template>
 
@@ -68,11 +73,13 @@ import {
   AuthTokenInput,
   CategoryFields,
   ContactFields,
+  CommentsField,
   ErrorMessages,
   LocationFields,
   NameField,
   ServiceAreaField,
-  SpacerField
+  SpacerField,
+  SubmitButton,
 } from 'components/forms'
 
 const skillsMessage = `
@@ -90,11 +97,13 @@ export default {
     AuthTokenInput,
     CategoryFields,
     ContactFields,
+    CommentsField,
     ErrorMessages,
     LocationFields,
     NameField,
     ServiceAreaField,
-    SpacerField
+    SpacerField,
+    SubmitButton,
   },
   props: {
     offer: Object,

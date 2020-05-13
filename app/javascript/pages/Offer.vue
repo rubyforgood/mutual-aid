@@ -42,14 +42,12 @@
       <b-input :value="person.skills" name="listing[person][skills]" type="textarea" rows="2" />
     </b-field>
 
+
     <!-- TODO: probably needs a different field, not `description` -->
-    <b-field
-      label-for="listing[description]"
-      label="This is an open slot to leave any questions, comments, clarifications, or criticisms."
-      custom-class="is-medium"
-    >
-      <b-input :value="offer.description" name="listing[description]" type="textarea" rows="2" />
-    </b-field>
+    <CommentsField
+      fieldName="listing[description]"
+      :value="offer.description"
+    />
 
     <b-field>
       <div class="control">
@@ -68,6 +66,7 @@ import {
   AuthTokenInput,
   CategoryFields,
   ContactFields,
+  CommentsField,
   ErrorMessages,
   LocationFields,
   NameField,
@@ -90,6 +89,7 @@ export default {
     AuthTokenInput,
     CategoryFields,
     ContactFields,
+    CommentsField,
     ErrorMessages,
     LocationFields,
     NameField,

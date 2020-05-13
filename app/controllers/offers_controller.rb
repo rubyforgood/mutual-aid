@@ -1,4 +1,4 @@
-class OffersController <PublicController
+class OffersController < PublicController
 
   def index
     redirect_to contributions_public_path

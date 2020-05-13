@@ -7,8 +7,7 @@
     >
       <b-select
         :name="withPrefix('preferred_contact_method')"
-        :value="preferredContactMethodId"
-        @input="$emit('preference-changed', $event)"
+        v-model="preferredContactMethodId"
         placeholder="Select …"
         required
       >
@@ -27,9 +26,8 @@
     >
       <b-input
         :name="withPrefix(fieldName)"
-        :value="contactFields[fieldName]"
+        :value="person[fieldName]"
         :required="isPreferred(fieldName)"
-        @input="$emit('field-changed', fieldName, $event)"
       />
     </b-field>
   </div>
@@ -41,10 +39,14 @@ import {fieldNameWithPrefix} from 'utils/form'
 
 export default {
   props: {
-    contactFields: Object,
+    person: Object,
     contactMethods: Array,
     fieldNamePrefix: {type: String, default: ''},
-    preferredContactMethodId: {String, default: null},
+  },
+  data() {
+    return {
+      preferredContactMethodId: this.person.preferred_contact_method,
+    }
   },
   computed: {
     preferredContactMethod() {

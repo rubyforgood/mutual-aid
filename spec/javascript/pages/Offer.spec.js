@@ -2,6 +2,7 @@ import {createLocalVue, mount} from '@vue/test-utils'
 import {configure} from 'vue_config'
 import Offer from 'pages/Offer'
 
+// TODO: extract specs for individual form_field components and fill any missing gaps
 describe('Offer', () => {
   def('wrapper', () => mount(Offer, {
     localVue: configure(createLocalVue()),
@@ -42,7 +43,7 @@ describe('Offer', () => {
       })
     })
 
-    describe('when there is a single service areas', () => {
+    describe('when there is a single service area', () => {
       def('service_areas', () => [{id: '42', name: 'only service area'}])
 
       it('renders a hidden input with the value fixed', () => {
@@ -81,17 +82,6 @@ describe('Offer', () => {
 
       it('makes the corresponding field required', () => {
         assert.equal($wrapper.get('input[name*="email"]').attributes('required'), 'required')
-      })
-    })
-
-    describe('when a contact field is updated', () => {
-      beforeEach(async () => {
-        $wrapper.get('input[name*="phone"]').setValue('202 765 4321')
-        await $wrapper.vm.$nextTick()
-      })
-
-      it('updates the person object state', () => {
-        assert.equal($person.phone, '202 765 4321')
       })
     })
   })

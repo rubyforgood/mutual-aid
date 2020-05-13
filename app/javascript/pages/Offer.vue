@@ -23,8 +23,6 @@
       name="listing[service_area]"
     />
 
-    <!-- TODO: maybe some visual demarcation of logical sections? -->
-
     <b-field
       label-for="listing[person][name]"
       label="Name"
@@ -37,10 +35,7 @@
     <ContactFields
       fieldNamePrefix="listing[person]"
       :contactMethods="contact_methods"
-      :preferredContactMethodId="preferredContactMethodId"
-      v-bind:contactFields="person"
-      v-on:preference-changed="(value) => preferredContactMethodId = value"
-      v-on:field-changed="(field, value) => person[field] = value"
+      :person="person"
     /><SpacerField />
 
     <LocationFields
@@ -123,7 +118,6 @@ export default {
     const person = this.offer.person || {}
     return {
       person,
-      preferredContactMethodId: person.preferred_contact_method,
       tagList: this.offer.tag_list,
       errors: this.offer.errors,
     }

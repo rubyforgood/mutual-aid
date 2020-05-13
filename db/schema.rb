@@ -147,9 +147,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
     t.bigint "person_id", null: false
     t.bigint "service_area_id", null: false
     t.bigint "location_id"
+    t.bigint "submission_id"
     t.index ["location_id"], name: "index_listings_on_location_id"
     t.index ["person_id"], name: "index_listings_on_person_id"
     t.index ["service_area_id"], name: "index_listings_on_service_area_id"
+    t.index ["submission_id"], name: "index_listings_on_submission_id"
     t.index ["tags"], name: "index_listings_on_tags", using: :gin
   end
 
@@ -447,6 +449,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_031357) do
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "people"
   add_foreign_key "listings", "service_areas"
+  add_foreign_key "listings", "submissions"
   add_foreign_key "locations", "location_types"
   add_foreign_key "organizations", "locations"
   add_foreign_key "organizations", "service_areas"

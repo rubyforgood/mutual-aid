@@ -2,7 +2,7 @@
   .pie {
     width: 100px; height: 100px;
     border-radius: 50%;
-    background: conic-gradient(#655 <%= @percent_asks_fulfilled.to_i %>%, #00d1b2 0);
+    background: conic-gradient(#00d1b2 <%= @percent_asks_fulfilled.to_i %>%, #655 0);
   }
 </style>
 
@@ -27,13 +27,22 @@
       <br>
       <%= link_to "View unmatched Offers", listings_path(contribution_type: "Offer") %> <span class="tag"><%= @offers_unmatched_count %></span>
       <br>
+      <%= link_to "All Submissions", submissions_path %> <span class="tag"><%= @submission_count %></span>
+      <br>
       <%= link_to "Create new Ask", new_offer_path %><!-- # TODO change this to new_ask_path once available-->
       <br>
       <%= link_to "Create new Offer", new_offer_path %>
+
     </div>
-    <div class="column is-4">
-      <div class="pie"></div>
-      <%= @percent_asks_fulfilled %>% (<%= @match_count %>/<%= @ask_count %>) Asks matched
+    <div class="column columns is-4">
+      <div class="column">
+        <div class="pie"></div>
+        <%= @percent_asks_fulfilled %>% (<%= @match_count %>/<%= @ask_count %>) Asks matched
+      </div>
+      <div class="column">
+        <div class="pie"></div>
+        <%= @percent_offers_fulfilled %>% (<%= @match_count %>/<%= @offer_count %>) Offers matched
+      </div>
     </div>
   </div>
 </div>

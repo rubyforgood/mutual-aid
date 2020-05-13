@@ -42,3 +42,16 @@ yarn-debug.log*
 # Ignore local seed files
 /db/dev_seeds/csvs/*
 
+# ignore IDEA environment files.
+.idea/.gitignore
+.idea/deployment.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/mutual-aid.iml
+.idea/sonarlint/
+.idea/sshConfigs.xml
+.idea/vcs.xml
+.idea/webServers.xml
+
+# Ignore VSCode files
+.vscode*

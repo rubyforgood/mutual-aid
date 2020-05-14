@@ -20,15 +20,11 @@ Rails.application.routes.draw do
   resources :communication_logs
   resources :community_resources
   resources :contact_methods
-<<<<<<< HEAD
   resources :contributions, only: [:index] do
     member do
       get "/respond", to: "contributions#respond", as: "respond"
     end
   end
-=======
-  resources :contributions, only: [:index, :respond]
->>>>>>> add-contributions-controller
   resources :custom_form_questions
   resources :donations
   resources :feedbacks

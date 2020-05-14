@@ -41,7 +41,8 @@ RSpec.describe "/teams", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_team_url
+      get new_team_url(resource: Team.new)
+      # skip # TODO
       expect(response).to be_successful
     end
   end

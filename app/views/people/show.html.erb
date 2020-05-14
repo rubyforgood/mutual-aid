@@ -52,7 +52,7 @@
   <br>
 
   <div class="content ask-tags">
-    <% if current_user&.admin? %>
+    <% if @admin_status %>
       <hr>
       <h3>Outstanding Asks:</h3>
       <!-- # profile-level/recurring ask tags-->

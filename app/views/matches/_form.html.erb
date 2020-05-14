@@ -2,20 +2,32 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <div class="field is-grouped">
-      <%= f.input :receiver_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "CommunityResource"]] %>
-      <%= f.input :receiver_id, label: "Receiver ID" %>
-    </div>
-    <div class="field is-grouped">
-      <%= f.input :provider_type, as: :select, collection: [["Listing", "Listing"],["Profile", "Person"],["Community Resource", "CommunityResource"]] %>
-      <%= f.input :provider_id, label: "Provider ID" %>
-    </div>
+    <% if @receiver.present? %>
+      <div>for: </div><span class="title"><%= @receiver.name %></span></div>
+      <%= f.hidden_field :receiver_id, value: @receiver.id %>
+      <%= f.hidden_field :receiver_type, value: @receiver.type %>
+      <hr>
+    <% end %>
+
+    <% if @provider.present? %>
+      <div>for: </div><span class="title"><%= @provider.name %></span></div>
+      <%= f.hidden_field :provider_id, value: @provider.id %>
+      <%= f.hidden_field :provider_type, value: @provider.type %>
+      <hr>
+      <%= f.input :receiver_id, as: :select, collection: Ask.unmatched %>
+      <%= f.hidden_field :receiver_type, value: "Ask" %>
+    <% else %>
+      <%= f.input :provider_id, as: :select, collection: Offer.unmatched %>
+      <%= f.hidden_field :provider_type, value: "Offer" %>
+    <% end %>
+
+
     <div class="field is-grouped">
       <%= f.input :notes, as: :text, input_html: { rows: 1, style: "width: 100%" } %>
     </div>
     <div class="field is-grouped">
-      <%= f.input :tentative, as: :radio_buttons %>
-      <%= f.input :completed, as: :radio_buttons %>
+      <%= f.input :tentative, as: :radio_buttons, checked: false %>
+      <%= f.input :completed, as: :radio_buttons, checked: true %>
       <% if @match.id.present? %>
         <%= f.input :status, readonly: true %>
       <% end %>

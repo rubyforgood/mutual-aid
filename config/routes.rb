@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get "/announcements_list",       to: "public_pages#announcements",       as: "announcements_public"
   get "/community_resources_list", to: "public_pages#community_resources", as: "community_resources_public"
   get "/combined_form",            to: "public_pages#combined_form",       as: "combined_form_public"
-  get "/contributions",            to: "public_pages#contributions",       as: "contributions_public"
+  get "/contributions",            to: "public_pages#contributions",       as: "contributions_public" # TODO remove this
 
   resources :announcements
   resources :asks, only: [:index, :edit, :update, :new, :create]
@@ -20,11 +20,17 @@ Rails.application.routes.draw do
   resources :communication_logs
   resources :community_resources
   resources :contact_methods
+  resources :contributions, only: [:index] do
+    member do
+      get "/respond", to: "contributions#respond", as: "respond"
+    end
+  end
   resources :custom_form_questions
   resources :donations
   resources :feedbacks
   resources :history_logs, only: [:index]
   resources :location_types
+  get "/listings_index", to: "listings#listings_index", as: "listings_index_list"
   resources :listings do
     member do
       get "/match", to: "listings#match", as: "match_listing"

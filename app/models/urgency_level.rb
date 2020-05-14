@@ -9,6 +9,11 @@ class UrgencyLevel
     TYPES
   end
 
+  def self.find(id)
+    return unless id
+    TYPES[id-1]
+  end
+
   def self.where(id: [])
     ids = [id].flatten
     ids.map {|i| TYPES.select {|t| t.id == i }}

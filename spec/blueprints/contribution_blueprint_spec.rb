@@ -4,7 +4,13 @@ RSpec.describe ContributionBlueprint do
   it 'do' do
     expected_category = Faker::Lorem.word
     expected_category_id = create(:category, name: expected_category).id
-    contribution = create(:ask, tag_list: [expected_category], title: Faker::Lorem.word, description: Faker::Lorem.sentence)
+    contribution = create(
+      :ask,
+      tag_list: [expected_category],
+      title: Faker::Lorem.word,
+      description: Faker::Lorem.sentence,
+      urgency_level_id: 1
+    )
     expected_contact_method = contribution.person.preferred_contact_method
     expected_area_name = Faker::Address.community
     contribution.service_area.name = expected_area_name
@@ -14,9 +20,9 @@ RSpec.describe ContributionBlueprint do
                           "id" => contribution.id,
                           "contribution_type" => "Ask",
                           "category_tags" => [{"id" => expected_category_id, "name" => expected_category}],
+                          "urgency" => {"id" => 1, "name" => "Within 1-2 days"},
                           # # TODO: not yet implemented:
                           # "availability" => [{"id" => 1, "name" => "AM"}],
-                          # "urgency" => {"id" => 1, "name" => "Within 1-2 days"},
                           # "publish_until" => "2021-10-11",
                           # "publish_until_humanized" => "this year",
                           "created_at" => contribution.created_at.to_formatted_s(:iso8601),

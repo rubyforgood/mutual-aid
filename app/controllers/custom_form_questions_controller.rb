@@ -64,6 +64,7 @@ class CustomFormQuestionsController < ApplicationController
           :hint_text,
           :name,
           :display_order,
+          :form_hook,
           option_list: [],
           )
     end

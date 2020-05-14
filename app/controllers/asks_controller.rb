@@ -11,7 +11,7 @@ class AsksController < PublicController
   def create
     outcome = SaveListing.run params[:listing].merge(type: 'Ask')
     if outcome.valid?
-      redirect_to root_path, notice: 'Ask was successfully created.'
+      redirect_to submission_thank_you_path, notice: 'Ask was successfully created.'
     else
       serialize(outcome)
       render :new

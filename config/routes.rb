@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :communication_logs
   resources :community_resources
   resources :contact_methods
+  get "/thank_you", to: "contributions#submission_thank_you", as: "submission_thank_you"
   resources :contributions, only: [:index] do
     member do
       get "/respond", to: "contributions#respond", as: "respond"

@@ -16,6 +16,9 @@ class ContributionsController < ApplicationController
     @contribution = Listing.find(params[:id])
   end
 
+  def submissions_thank_you
+  end
+
   def allowed_params
     @allowed_params ||= params.permit('contribution_type', 'format', 'Category' => {}, 'ServiceArea' => {})
   end

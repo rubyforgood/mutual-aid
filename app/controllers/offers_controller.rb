@@ -12,7 +12,7 @@ class OffersController < PublicController
     outcome = SaveListing.run params[:listing].merge(type: 'Offer')
 
     if outcome.valid?
-      redirect_to root_path, notice: 'Offer was successfully created.'
+      redirect_to submission_thank_you_path, notice: 'Offer was successfully created.'
     else
       serialize(outcome)
       render :new

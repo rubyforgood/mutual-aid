@@ -15,7 +15,7 @@
         <div>
           <h2 class='subtitle is-3'>Need some help?</h2>
           <div class='action-buttons'>
-            <a href="/offers/new" class="button is-primary">Submit an Ask</a>
+            <a href="/asks/new" class="button is-primary">Submit an Ask</a>
             <br><br>
             <span class=''><a href='/contributions'>View offers and resources</a></span>
           </div>

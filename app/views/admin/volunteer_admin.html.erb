@@ -1,8 +1,11 @@
 <div class="title is-3">Volunteer admin</div>
 
-<%= link_to "Manage system permissions", users_path(position_type: "Volunteer") %>
+<%= link_to "Manage User Account permissions", users_path(position_type: "Volunteer") %>
 <br>
 <%= link_to "View training status (NOT IMPLEMENTED)", people_path(position_type: "Volunteer")  %>
 <br>
 <%= link_to "Filter by workload (NOT IMPLEMENTED)", people_path(position_type: "Volunteer")  %>
 <br>
+
+<br>
+<%= link_to "Admin home", landing_page_admin_path %>

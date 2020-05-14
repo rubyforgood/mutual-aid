@@ -27,9 +27,9 @@
       <br>
       <%= link_to "View unmatched Offers", listings_path(contribution_type: "Offer") %> <span class="tag"><%= @offers_unmatched_count %></span>
       <br>
-      <%= link_to "All Submissions", submissions_path %> <span class="tag"><%= @submission_count %></span>
+      <%= link_to "View all Submissions", submissions_path %> <span class="tag"><%= @submission_count %></span>
       <br>
-      <%= link_to "Create new Ask", new_offer_path %><!-- # TODO change this to new_ask_path once available-->
+      <%= link_to "Create new Ask", new_ask_path %>
       <br>
       <%= link_to "Create new Offer", new_offer_path %>
 
@@ -49,7 +49,7 @@
 <hr>
 <div class="row columns">
   <div class="column is-4">
-    <div class="subtitle is-5">Contributions</div>
+    <div class="subtitle is-5">Contribution Data</div>
     <% admin_buttons_list_1 = [
         ["announcements"],
         ["community_resources", "Community Resources"],
@@ -65,7 +65,7 @@
   </div>
 
   <div class="column is-4">
-    <div class="subtitle is-5">Internal Tracking</div>
+    <div class="subtitle is-5">Admin Data</div>
     <% admin_buttons_list_2 = [
         ["communication_logs", "Communication Logs"],
         ["locations"],

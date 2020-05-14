@@ -4,11 +4,13 @@
       <%= render "person_fields", ff: ff, f: f %>
     <% end %>
     <div class="field is-grouped">
-      <%= f.input :value, as: :integer, label: "Amount of donation" %>
-      <%= f.input :channel, hint: "(e.g. campaign, webinar, direct mail)" %>
+      <%= f.input :value, as: :float, label: "Amount of donation" %>
+      <%= f.input :notes, as: :string, label: "Description" %>
+      <%= f.input :channel, label: "How did #{ @admin_status ? "they" : "you"} hear about us?", hint: "(e.g. campaign, webinar, direct mail)" %>
     </div>
-    <%= f.input :thank_you_sent, as: :radio_buttons %>
-    <%= f.input :notes %>
+    <% if @admin_status %>
+      <%= f.input :thank_you_sent, as: :radio_buttons %>
+    <% end %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, resource: @donation, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

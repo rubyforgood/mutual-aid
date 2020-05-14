@@ -40,7 +40,7 @@ DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
   end
 end
 
-%w[neighborhood pod region county].each do |location_type_name|
+%w[business home cross_street service_area park].each do |location_type_name|
   LocationType.where(name: location_type_name).first_or_create!
 end
 

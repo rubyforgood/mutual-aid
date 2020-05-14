@@ -26,7 +26,7 @@ class ServiceArea < ApplicationRecord
     order(MobilityStringTranslation.arel_table["value"].lower.asc)
   }
 
-  TYPES = %w[pod neighborhood region county]
+  TYPES = %w[pod neighborhood region county city other]
 
   scope :as_filter_types, -> { i18n.select :id, :name }
 

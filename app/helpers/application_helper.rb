@@ -20,7 +20,7 @@ module ApplicationHelper
 
   def show_button(resource, button_text="View", icon_class="fa fa-eye", margin_class=nil)
     resource_class = resource.class
-    if resource_class.superclass != ApplicationRecord
+    if resource_class != Person && (resource_class.superclass != ApplicationRecord)
       resource = resource.becomes(resource.class.superclass)
     end
     link_to(polymorphic_path(resource),

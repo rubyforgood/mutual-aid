@@ -1,12 +1,9 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
-  CONTRIBUTION_MODELS = { 'Ask' => Ask, 'Offer' => Offer }.freeze
 
   def index
-    @filter_types = FilterTypeBlueprint.render([Category, ServiceArea])
-    contribution_types = contribution_type_params
-    contribution_types ||= CONTRIBUTION_MODELS.values
-    @contributions = ContributionBlueprint.render(contributions_for(filter_params, contribution_types))
+    @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, ContactMethod])
+    @contributions = ContributionBlueprint.render(BrowseFilter.contributions_for(filter_params))
     respond_to do |format|
       format.html
       format.json { render inline: @contributions }
@@ -86,23 +83,13 @@ class ListingsController < ApplicationController
     end
 
     def allowed_params
-      @allowed_params ||= params.permit('contribution_type', 'format', 'Category' => {}, 'ServiceArea' => {})
+      @allowed_params ||= params.permit(:format, **BrowseFilter::ALLOWED_PARAMS)
     end
 
     def filter_params
       return Hash.new unless allowed_params && allowed_params.to_h.any?
-      allowed_params.keys.intersection(['Category', 'ServiceArea']).each_with_object({}) do |model_name, data|
-        data[model_name.underscore] = allowed_params[model_name].keys
+      allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key}.tap do |hash|
+        hash.keys.each { |key| hash[key] = hash[key].keys}
       end
-    end
-
-    def contribution_type_params
-      type_list = allowed_params && allowed_params['contribution_type']
-      return unless type_list
-      type_list.split(',').map {|name| CONTRIBUTION_MODELS[name]}.compact
-    end
-
-    def contributions_for(parameters, models = CONTRIBUTION_MODELS.values)
-      models.map { |model| model.filter_by(parameters) }.flatten
     end
 end

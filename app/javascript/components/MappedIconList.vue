@@ -8,14 +8,17 @@
 
 <script>
 import TagList from 'components/TagList'
-
 const iconNameMapping = {
-  email: 'envelope',
-  text: 'mobile-alt',
-  phone: 'phone'
+  Email: 'envelope',
+  Text: 'mobile-alt',
+  Phone: 'phone',
+  Call: 'phone',
+  Ask: 'hand-sparkles',
+  Offer: 'hand-holding-heart'
 }
 
 export default {
+  iconNameMapping: iconNameMapping,
   components: {TagList},
   props: {
     contactTypes: {type: Array, default: () => []},

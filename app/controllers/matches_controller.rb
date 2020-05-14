@@ -10,6 +10,7 @@ class MatchesController < ApplicationController
 
   def new
     @match = Match.new
+    set_form_dropdowns
   end
 
   def edit
@@ -52,6 +53,15 @@ class MatchesController < ApplicationController
   private
     def set_match
       @match = Match.find(params[:id])
+    end
+
+    def set_form_dropdowns
+      type = params["receiver_id"].present? ? "Ask" : "Offer" # TODO change w resources
+      if type == "Ask"
+        @receiver = Listing.where(type: type, id: params[:receiver_id]).first
+      elsif type == "Offer"
+        @provider = Listing.where(type: type, id: params[:provider_id]).first
+      end
     end
 
     def match_params

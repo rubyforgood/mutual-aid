@@ -13,6 +13,10 @@ class ListingsController < ApplicationController
     end
   end
 
+  def listings_index
+    @listings = Listing.all
+  end
+
   def show
   end
 

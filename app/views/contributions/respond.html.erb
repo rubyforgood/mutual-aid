@@ -1,0 +1,11 @@
+<div class="title"><%= @contribution.name %></div>
+
+This page is TBD, depending on how we define P2P workflows.
+<hr>
+<%= link_to("Add Communication Log", new_communication_log_path(person: @contribution.person)) %>
+<br>
+<% if @contribution.type == "Ask" %>
+  <%= link_to("Create Match", new_match_path(receiver_id: @contribution.id, receiver_type: "Ask")) %>
+<% elsif @contribution.type == "Offer" %>
+  <%= link_to("Create Match", new_match_path(provider: @contribution.id, provider_type: "Offer")) %>
+<% end %>

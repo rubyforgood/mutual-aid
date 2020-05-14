@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
 
   def index
-    @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, ContactMethod])
+    @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
     @contributions = ContributionBlueprint.render(BrowseFilter.contributions_for(filter_params))
     respond_to do |format|
       format.html

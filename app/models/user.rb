@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :communication_logs, as: :created_by
   has_one :person
 
+  accepts_nested_attributes_for :person
+
   def sys_admin?
     true # TODO - connect this to pundit
   end

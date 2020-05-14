@@ -149,13 +149,11 @@ ActiveRecord::Schema.define(version: 2020_05_14_101411) do
     t.bigint "service_area_id", null: false
     t.bigint "location_id"
     t.bigint "submission_id"
-    t.bigint "urgency_level_id"
     t.index ["location_id"], name: "index_listings_on_location_id"
     t.index ["person_id"], name: "index_listings_on_person_id"
     t.index ["service_area_id"], name: "index_listings_on_service_area_id"
     t.index ["submission_id"], name: "index_listings_on_submission_id"
     t.index ["tags"], name: "index_listings_on_tags", using: :gin
-    t.index ["urgency_level_id"], name: "index_listings_on_urgency_level_id"
   end
 
   create_table "location_types", force: :cascade do |t|

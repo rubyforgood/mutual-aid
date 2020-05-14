@@ -16,25 +16,25 @@
           <h2 class='subtitle is-3'>Need some help?</h2>
           <div class='action-buttons'>
             <a href="/asks/new" class="button is-primary">Submit an Ask</a>
+            <a href="/contributions?contribution_type=offer" class="button is-primary is-outlined">View Offers [ADMIN/P2P]</a>
             <br><br>
-            <span class=''><a href='/contributions'>View offers and resources</a></span>
+            <span class=''><a href='/contributions'>View offers and resources [ADMIN/P2P]</a></span>
           </div>
         </div>
         <div>
           <br><br>
           <h2 class='subtitle is-3'>Want to help?</h2>
           <div class='action-buttons'>
-            <a href="/contributions" class="button is-primary">View Asks</a>
+            <a href="/offers/new" class="button is-primary">Submit an Offer</a>
+            <a href="/contributions?contribution_type=ask" class="button is-primary is-outlined">View Asks [ADMIN/P2P]</a>
             <br><br>
-            <span class=''><a href='/offers/new'>Submit an offer</a></span>
-            <br>
             <span class=''><a href='/community_resources/new'>Submit a community resource</a></span>
             <br>
             <span class=''><a href='/announcements/new'>Submit an announcement</a></span>
             <br>
-            <span class=''><a href='/donations/new'>Donate money or goods</a></span>
+            <span class=''><a href='/donations/new'>Donate money or goods [TBD]</a></span>
             <br>
-            <span class=''><a href='/offers/new?page_title=Volunteer Request'>Volunteer</a></span>
+            <span class=''><a href='/offers/new?page_title=Volunteer Request'>Volunteer [TBD]</a></span>
           </div>
         </div>
 
@@ -42,7 +42,7 @@
           <br><br>
           <h2 class='subtitle is-3'>Both, maybe?</h2>
           <div class='action-buttons'>
-            <a href="/offers/new" class="button is-primary">Create a Profile</a>
+            <a href="/offers/new" class="button is-primary">Create a Profile [TBD]</a>
           </div>
         </div>
       </div>

@@ -6,9 +6,9 @@
     <% if current_user %>
       <h2>You are already logged in</h2>
       <% if @admin_status %>
-        <%= link_to("<span class='fa fa-menu #{ENV['NAVBAR_ICON_COLOR_CLASS']}'></span><span class='has-text-black text-bold'> Go back to admin</span>".html_safe,
+        <%= link_to("<span class='fa fa-menu'></span><span class='has-text-black text-bold'> Go back to admin</span>".html_safe,
                     admin_path,
-                    class: "button button-#{ENV['NAVBAR_ICON_COLOR_CLASS']}",
+                    class: "button",
                     title: "Logout") %>
       <% end %>
     <% else %>

@@ -5,7 +5,8 @@
   <tr>
     <th>Name</th>
     <th>Respond</th>
-    <th>Match</th>
+    <th>Find Match</th>
+    <th>Create Match</th>
     <th>Edit</th>
   </tr>
   </thead>
@@ -14,13 +15,18 @@
   <% @listings.each do |listing| %>
     <tr>
       <td><%= listing.name %></td>
-      <td><%= link_to("Respond", respond_contribution_path(listing, contribution_type: listing.type)) %></td>
+      <td><%= link_to("Respond", respond_contribution_path(listing, contribution_type: listing.type),
+                      class: "button") %>
+      </td>
+      <td><%= link_to("Find Match [TBD]", match_listing_path(listing), class: "button") %></td>
       <td>
         <% type = listing.type %>
-        <% if type == "Ask" %>
-          <%= link_to("Match", match_listing_path(listing, receiver_id: listing.id, receiver_type: "Ask")) %>
+        <% if type == "Offer" %>
+          <%= link_to("Create Match", new_match_path(provider_id: listing.id, provider_type: "Offer"),
+                      class: "button") %>
         <% else %>
-          <%= link_to("Match", match_listing_path(listing, provider_id: listing.id, provider_type: "Offer")) %>
+          <%= link_to("Create Match", new_match_path(receiver_id: listing.id, receiver_type: "Ask"),
+                      class: "button") %>
         <% end %>
       </td>
       <td><%= edit_button(listing) %></td>

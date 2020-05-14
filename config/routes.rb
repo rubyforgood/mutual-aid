@@ -30,10 +30,8 @@ Rails.application.routes.draw do
   resources :feedbacks
   resources :history_logs, only: [:index]
   resources :location_types
+  get "/listings_index", to: "listings#listings_index", as: "listings_index_list"
   resources :listings do
-    collection do
-      get "/listings_index", to: "listings#listings_index", as: "listings_index_list"
-    end
     member do
       get "/match", to: "listings#match", as: "match_listing"
       post "/match", to: "listings#match"

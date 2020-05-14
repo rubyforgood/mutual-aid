@@ -12,6 +12,8 @@
         <th>Person</th>
         <th>Body</th>
         <th>Autoemail</th>
+        <th>Respond</th>
+        <th>Match</th>
       </tr>
     </thead>
 
@@ -29,6 +31,21 @@
         <td><%= show_button(submission.person, submission.person&.name.to_s + "'s Profile") if submission.person %></td>
         <td><%= show_button(submission) %></td>
         <td><%= show_button(submission.person.communication_logs.last, "View autoemail") if submission.person&.communication_logs&.any? %></td>
+        <td>
+          <% submission.listings.each do |listing| %>
+            <%= link_to("Respond", respond_contribution_path(listing, contribution_type: listing.type)) %>
+          <% end %>
+        </td>
+        <td>
+          <% submission.listings.each do |listing| %>
+            <% type = listing.type %>
+            <% if type == "Ask" %>
+              <%= link_to("Match", match_listing_path(listing, receiver_id: listing.id, receiver_type: "Ask")) %>
+            <% else %>
+              <%= link_to("Match", match_listing_path(listing, provider_id: listing.id, provider_type: "Offer")) %>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
     </tbody>

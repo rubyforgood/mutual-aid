@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2 class="title">Filters</h2>
-    <b-collapse v-for="(type, index) of filterTypes" :key="index" :open="true">
+    <b-collapse v-for="(type, index) of filterTypes" :key="index" :open="initialOpenStatus(index)">
       <h4 slot="trigger" slot-scope="props">
         {{ type.name }} <a>{{ props.open ? '-' : '+' }}</a>
       </h4>
@@ -13,6 +13,7 @@
             @input="$emit('change', $event)"
           >
             {{ filter.name }}
+            <MappedIconList :contactTypes="[{id: filter.name, name: filter.name}]" v-if="showIconsForFilter(filter.name)"  class="is-inline"/>
           </b-checkbox>
         </li>
       </ul>
@@ -21,7 +22,10 @@
 </template>
 
 <script>
+import MappedIconList from 'components/MappedIconList'
+
 export default {
+  components: {MappedIconList},
   props: {
     filterTypes: {type: Array, default: () => []},
     currentFilters: {type: Array, default: () => []},
@@ -29,6 +33,26 @@ export default {
   model: {
     prop: 'currentFilters',
     event: 'change',
+  },
+  methods: {
+    initialOpenStatus(index) {
+      return index === 0
+    },
+    showIconsForFilter(filterName) {
+      return !!this.hasFilterIcons[filterName]
+    },
+  },
+  data() {
+    return {
+      hasFilterIcons: this.filterTypes
+        .map((type) => type.filters)
+        .reduce(function (memo, filters) {
+          filters.map(function (filter) {
+            memo[filter.name] = MappedIconList.iconNameMapping[filter.name]
+          })
+          return memo
+        }, {}),
+    }
   },
 }
 </script>

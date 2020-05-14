@@ -9,15 +9,16 @@
           <b-icon v-if="showUrgentIcon" icon="exclamation-triangle" size="is-small" />
           {{ urgency.name }}
         </b-tag>
+        <MappedIconList :contactTypes="[{id: contribution_type, name: contribution_type}]" />
       </div>
     </div>
     <div class="body">
       <div class="tags">
         <div v-if="service_area" class="tag is-info is-light">{{ service_area.name }}</div>
-        <ContactIcons :contactTypes="contact_types" />
+        <MappedIconList :contactTypes="contact_types" />
       </div>
       <div class="text">
-        <h5 class="subtitle">{{ short_title }}</h5>
+        <h5 class="subtitle">{{ title }}</h5>
         <p>{{ description }}</p>
         <div>
           <small>
@@ -39,13 +40,14 @@
 
 <script>
 import TagList from 'components/TagList'
-import ContactIcons from './ContactIcons'
+import MappedIconList from 'components/MappedIconList'
 
 export default {
   props: {
+    contribution_type: String,
     category_tags: {type: Array, default: () => []},
     service_area: {type: Object, default: null},
-    short_title: String,
+    title: String,
     description: String,
     created_at: String,
     urgency: Object,
@@ -53,7 +55,7 @@ export default {
   },
   components: {
     TagList,
-    ContactIcons,
+    MappedIconList,
   },
   computed: {
     showUrgentIcon() {

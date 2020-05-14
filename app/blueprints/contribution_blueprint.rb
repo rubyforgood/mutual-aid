@@ -16,7 +16,7 @@ class ContributionBlueprint < Blueprinter::Base
   field :profile_path do |contribution, options|
     options[:profile_path]&.call(contribution.person_id)
   end
-  field :match_path do |contribution, options|
-    options[:match_path]&.call(contribution.id)
+  field :respond_path do |contribution, options|
+    options[:respond_path]&.call(contribution.id)
   end
 end

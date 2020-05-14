@@ -31,8 +31,8 @@
       <div class="buttonSpacing" v-if="profile_path">
         <a :href="profile_path" class="button icon-list is-primary is-outlined">View Profile</a>
       </div>
-      <div class="buttonSpacing" v-if="match_path">
-        <a :href="match_path" class="button icon-list is-primary is-outlined">Match</a>
+      <div class="buttonSpacing" v-if="respond_path">
+        <a :href="respond_path" class="button icon-list is-primary is-outlined">Respond</a>
       </div>
     </div>
   </li>
@@ -53,7 +53,7 @@ export default {
     urgency: Object,
     contact_types: {type: Array, default: () => []},
     profile_path: String,
-    match_path: String
+    respond_path: String
   },
   components: {
     TagList,

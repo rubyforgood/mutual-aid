@@ -28,7 +28,7 @@ RSpec.describe ContributionBlueprint do
                           # "publish_until" => "2021-10-11",
                           # "publish_until_humanized" => "this year",
                           "created_at" => contribution.created_at.to_formatted_s(:iso8601),
-                          'match_path' => nil,
+                          'respond_path' => nil,
                           'profile_path' => nil,
                           "service_area" => {"id" => contribution.service_area.id, "name" => expected_area_name},
                           # "map_location" => "44.5,-85.1",
@@ -41,10 +41,10 @@ RSpec.describe ContributionBlueprint do
     expect(JSON.parse(result)).to match(expected_data)
   end
 
-  it 'allows injecting a url formatter for the match_path' do
+  it 'allows injecting a url formatter for the respond_path' do
     expected_path = "/testing_#{contribution.id}"
-    result = ContributionBlueprint.render(contribution, match_path: ->(p_id) { "/testing_#{p_id}"})
-    expect(JSON.parse(result)['match_path']).to eq(expected_path)
+    result = ContributionBlueprint.render(contribution, respond_path: ->(p_id) { "/testing_#{p_id}"})
+    expect(JSON.parse(result)['respond_path']).to eq(expected_path)
   end
 
   it 'allows injecting a url formatter for the profile_path' do

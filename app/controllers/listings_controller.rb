@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
     @contributions = ContributionBlueprint.render(
       BrowseFilter.contributions_for(filter_params),
       profile_path: ->(id) { person_path(id) },
-      match_path: ->(id) { match_listing_listing_path(id)}
+      respond_path: ->(id) { respond_contribution_path(id)}
     )
     respond_to do |format|
       format.html

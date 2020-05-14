@@ -15,6 +15,9 @@ class AdminController < ApplicationController
     @community_resources_pending_count = CommunityResource.pending_review.length
   end
 
+  def glossary
+  end
+
   def yearbook
     @positions = Position.all
   end

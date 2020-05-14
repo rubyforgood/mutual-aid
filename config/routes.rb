@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get "/admin",                    to: "admin#landing_page",    as: "landing_page_admin"
   get "/admin/volunteers",         to: "admin#volunteer_admin", as: "volunteer_admin"
+  get "/glossary",                 to: "admin#glossary",        as: "glossary_admin"
   get "/yearbook",                 to: "admin#yearbook",        as: "yearbook_admin"
 
   get "/public",                   to: "public_pages#landing_page",        as: "landing_page_public"

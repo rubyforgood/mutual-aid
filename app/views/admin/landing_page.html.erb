@@ -16,6 +16,8 @@
 <div class="row columns">
   <div class="columns column is-12">
     <div class="column is-4">
+      <%= link_to "Glossary!", glossary_admin_path %>
+      <br>
       <%= link_to "Review pending Community Resources", community_resources_path(is_approved: false) %> <span class="tag"><%= @announcements_pending_count %></span>
       <br>
       <%= link_to "Review pending Announcements", announcements_path(is_approved: false) %> <span class="tag"><%= @community_resources_pending_count %></span>

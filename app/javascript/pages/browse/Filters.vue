@@ -13,7 +13,7 @@
             @input="$emit('change', $event)"
           >
             {{ filter.name }}
-            <MappedIconList :contactTypes="[{id: filter.name, name: filter.name}]" v-if="showIconsForFilter(filter.name)"  class="is-inline"/>
+            <MappedIconList :iconTypes="[{id: filter.name, name: filter.name}]" v-if="showIconsForFilter(filter.name)"  class="is-inline"/>
           </b-checkbox>
         </li>
       </ul>

@@ -21,11 +21,11 @@ export default {
   iconNameMapping: iconNameMapping,
   components: {TagList},
   props: {
-    contactTypes: {type: Array, default: () => []},
+    iconTypes: {type: Array, default: () => []},
   },
   computed: {
     iconData() {
-      return this.contactTypes.map(function (type) {
+      return this.iconTypes.map(function (type) {
         return {name: type.name, image: iconNameMapping[type.name]}
       })
     },

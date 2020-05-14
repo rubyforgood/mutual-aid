@@ -9,13 +9,13 @@
           <b-icon v-if="showUrgentIcon" icon="exclamation-triangle" size="is-small" />
           {{ urgency.name }}
         </b-tag>
-        <MappedIconList :contactTypes="[{id: contribution_type, name: contribution_type}]" />
+        <MappedIconList :iconTypes="[{id: contribution_type, name: contribution_type}]" />
       </div>
     </div>
     <div class="body">
       <div class="tags">
         <div v-if="service_area" class="tag is-info is-light">{{ service_area.name }}</div>
-        <MappedIconList :contactTypes="contact_types" />
+        <MappedIconList :iconTypes="contact_types" />
       </div>
       <div class="text">
         <h5 class="subtitle">{{ title }}</h5>

@@ -42,7 +42,7 @@
           <br><br>
           <h2 class='subtitle is-3'>Both, maybe?</h2>
           <div class='action-buttons'>
-            <a href="/offers/new" class="button is-primary">Create a Profile [TBD]</a>
+            <a href="/combined_form" class="button is-primary">Create a Profile [TBD]</a>
           </div>
         </div>
       </div>

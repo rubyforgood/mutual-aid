@@ -4,7 +4,7 @@ class Person < ApplicationRecord
   belongs_to :user, optional: true, inverse_of: :person
   belongs_to :service_area, optional: true
   belongs_to :location, optional: true
-  belongs_to :preferred_contact_method, class_name: 'ContactMethod'
+  belongs_to :preferred_contact_method, class_name: 'ContactMethod', foreign_key: :preferred_contact_method_id, inverse_of: :people
 
   has_many :asks, inverse_of: :person
   has_many :offers, inverse_of: :person

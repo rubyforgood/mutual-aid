@@ -5,7 +5,7 @@
     <thead>
     <tr>
       <th>Person</th>
-      <th>Organization</th>
+      <th>Organization/Team</th>
       <th>Position type</th>
       <th>Name</th>
       <th>Description</th>
@@ -21,7 +21,7 @@
     <% @positions.each do |position| %>
       <tr>
         <td><%= position.person&.name %></td>
-        <td><%= position.organization&.name %></td>
+        <td><%= position.organization&.name %><%= "/" + position.team&.name if position.team_id %></td>
         <td><%= position.position_type %></td>
         <td><%= position.name %></td>
         <td><%= position.description %></td>

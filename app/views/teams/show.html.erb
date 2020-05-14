@@ -1,0 +1,19 @@
+<%= render "layouts/view_header", resource: @team %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @team.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @team.description %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @team.organization_id %>
+</p>
+
+<%= edit_button(@team) %>
+<%= link_to 'Back', teams_path %>

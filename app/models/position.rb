@@ -1,6 +1,7 @@
 class Position < ApplicationRecord
   belongs_to :organization
   belongs_to :person, optional: true
+  belongs_to :team, optional: true
 
   ASK_FORM_CONTACT_TITLE = "ASK_FORM_CONTACT"
   OFFER_FORM_CONTACT_TITLE = "OFFER_FORM_CONTACT"

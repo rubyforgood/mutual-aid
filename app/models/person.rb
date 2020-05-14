@@ -15,6 +15,7 @@ class Person < ApplicationRecord
 
   has_many :communication_logs
   has_many :donations
+  has_many :positions
   has_many :submissions
 
   validate :preferred_contact_method_present!

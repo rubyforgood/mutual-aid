@@ -11,6 +11,7 @@
       <b-navbar-item href="/contributions">Contribute [ADMIN/P2P]</b-navbar-item>
       <b-navbar-item href="/community_resources_list">Community Resources</b-navbar-item>
       <b-navbar-item href="/announcements_list">Announcements</b-navbar-item>
+      <b-navbar-item href="/donations/new">Donate</b-navbar-item>
     </template>
 
     <template slot="end" v-if="loggedIn">

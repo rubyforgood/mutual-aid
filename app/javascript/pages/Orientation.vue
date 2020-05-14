@@ -32,7 +32,7 @@
             <br>
             <span class=''><a href='/announcements/new'>Submit an announcement</a></span>
             <br>
-            <span class=''><a href='/donations/new'>Donate money or goods [TBD]</a></span>
+            <span class=''><a href='/donations/new'>Donate money or goods</a></span>
             <br>
             <span class=''><a href='/offers/new?page_title=Volunteer Request'>Volunteer [TBD]</a></span>
           </div>

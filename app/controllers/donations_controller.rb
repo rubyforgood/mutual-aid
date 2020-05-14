@@ -1,4 +1,5 @@
 class DonationsController < ApplicationController
+  before_action :authenticate_user!, except: [:new, :create]
   before_action :set_donation, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -21,7 +22,7 @@ class DonationsController < ApplicationController
 
     respond_to do |format|
       if @donation.save
-        format.html { redirect_to donations_path, notice: 'Donation was successfully created.' }
+        format.html { redirect_to @admin_status ? donations_path : root_path, notice: 'Donation was successfully created.' }
         format.json { render :show, status: :created, location: @donation }
       else
         format.html { render :new }

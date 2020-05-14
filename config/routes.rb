@@ -8,8 +8,9 @@ Rails.application.routes.draw do
 
   get "/public",                   to: "public_pages#landing_page",        as: "landing_page_public"
   get "/about",                    to: "public_pages#about",               as: "about_public"
-  get "/community_resources_list", to: "public_pages#community_resources", as: "community_resources_public"
   get "/announcements_list",       to: "public_pages#announcements",       as: "announcements_public"
+  get "/community_resources_list", to: "public_pages#community_resources", as: "community_resources_public"
+  get "/combined_form",            to: "public_pages#combined_form",       as: "combined_form_public"
   get "/contributions",            to: "public_pages#contributions",       as: "contributions_public"
 
   resources :announcements

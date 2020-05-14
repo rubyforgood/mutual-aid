@@ -3,7 +3,11 @@ class ListingsController < ApplicationController
 
   def index
     @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
-    @contributions = ContributionBlueprint.render(BrowseFilter.contributions_for(filter_params))
+    @contributions = ContributionBlueprint.render(
+      BrowseFilter.contributions_for(filter_params),
+      profile_path: ->(id) { person_path(id) },
+      match_path: ->(id) { match_listing_listing_path(id)}
+    )
     respond_to do |format|
       format.html
       format.json { render inline: @contributions }

@@ -1,17 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe ContributionBlueprint do
-  it 'do' do
-    expected_category = Faker::Lorem.word
-    expected_category_id = create(:category, name: expected_category).id
-    contribution = create(
+  let(:expected_category) { Faker::Lorem.word }
+  let(:expected_category_id) { create(:category, name: expected_category).id }
+  let(:contribution) do
+    create(
       :ask,
       tag_list: [expected_category],
       title: Faker::Lorem.word,
       description: Faker::Lorem.sentence,
       urgency_level_id: 1
     )
-    expected_contact_method = contribution.person.preferred_contact_method
+  end
+  let(:expected_contact_method) { contribution.person.preferred_contact_method }
+  it 'returns reasonable data by default' do
     expected_area_name = Faker::Address.community
     contribution.service_area.name = expected_area_name
     contribution.service_area.save!
@@ -26,6 +28,8 @@ RSpec.describe ContributionBlueprint do
                           # "publish_until" => "2021-10-11",
                           # "publish_until_humanized" => "this year",
                           "created_at" => contribution.created_at.to_formatted_s(:iso8601),
+                          'match_path' => nil,
+                          'profile_path' => nil,
                           "service_area" => {"id" => contribution.service_area.id, "name" => expected_area_name},
                           # "map_location" => "44.5,-85.1",
                           "title" => contribution.title,
@@ -35,5 +39,17 @@ RSpec.describe ContributionBlueprint do
                     }
     result = ContributionBlueprint.render([contribution], root: 'contributions')
     expect(JSON.parse(result)).to match(expected_data)
+  end
+
+  it 'allows injecting a url formatter for the match_path' do
+    expected_path = "/testing_#{contribution.id}"
+    result = ContributionBlueprint.render(contribution, match_path: ->(p_id) { "/testing_#{p_id}"})
+    expect(JSON.parse(result)['match_path']).to eq(expected_path)
+  end
+
+  it 'allows injecting a url formatter for the profile_path' do
+    expected_path = "/testing_#{contribution.person.id}"
+    result = ContributionBlueprint.render(contribution, profile_path: ->(p_id) { "/testing_#{p_id}"})
+    expect(JSON.parse(result)['profile_path']).to eq(expected_path)
   end
 end

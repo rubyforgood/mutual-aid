@@ -28,11 +28,11 @@
       </div>
     </div>
     <div class="actions">
-      <div class="buttonSpacing">
-        <button class="button icon-list is-primary is-outlined">View Profile</button>
+      <div class="buttonSpacing" v-if="profile_path">
+        <a :href="profile_path" class="button icon-list is-primary is-outlined">View Profile</a>
       </div>
-      <div class="buttonSpacing">
-        <button class="button icon-list is-primary is-outlined">Contact</button>
+      <div class="buttonSpacing" v-if="match_path">
+        <a :href="match_path" class="button icon-list is-primary is-outlined">Match</a>
       </div>
     </div>
   </li>
@@ -52,6 +52,8 @@ export default {
     created_at: String,
     urgency: Object,
     contact_types: {type: Array, default: () => []},
+    profile_path: String,
+    match_path: String
   },
   components: {
     TagList,

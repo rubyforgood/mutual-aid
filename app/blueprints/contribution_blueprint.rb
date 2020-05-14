@@ -13,4 +13,10 @@ class ContributionBlueprint < Blueprinter::Base
     contribution.created_at.to_formatted_s(:iso8601)
   end
   field :type, name: :contribution_type
+  field :profile_path do |contribution, options|
+    options[:profile_path]&.call(contribution.person_id)
+  end
+  field :match_path do |contribution, options|
+    options[:match_path]&.call(contribution.id)
+  end
 end

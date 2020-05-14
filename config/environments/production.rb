@@ -68,13 +68,13 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: "#{ENV['SYSTEM_HOST_NAME']}" }
+  config.action_mailer.default_url_options = { host: ENV['SYSTEM_HOST_NAME'] }
   config.action_mailer.smtp_settings = {
-      address:              'smtp.sendgrid.net',
-      port:                 587,
-      domain:               "#{ENV['SYSTEM_HOST_NAME']}",
-      user_name:            ENV['SENDGRID_USERNAME'],
-      password:             ENV['SENDGRID_PASSWORD'],
+      address:              ENV['SMTP_ADDRESS'],
+      port:                 "#{ENV['SMTP_PORT'] || 587}".to_i,
+      domain:               ENV['SYSTEM_HOST_NAME'],
+      user_name:            ENV['SMTP_USERNAME'],
+      password:             ENV['SMTP_PASSWORD'],
       authentication:       'plain',
       enable_starttls_auto: true
   }

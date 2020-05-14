@@ -2,14 +2,22 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :organization %>
-    <%= f.association :person %>
-    <%= f.input :position_type, as: :select, collection: Position::FORM_CONTACT_TITLES %>
-    <%= f.input :name %>
+    <div class="field is-grouped">
+      <%= f.association :person %>
+      <%= f.association :team %>
+      <%= f.association :organization %>
+    </div>
+    <div class="field is-grouped">
+      <%= f.input :position_type, as: :select, collection: Position::FORM_CONTACT_TITLES %>
+      <%= f.input :name %>
+    </div>
     <%= f.input :description %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
-    <%= f.input :is_primary, as: :radio_buttons %>
+    <div class="field is-grouped">
+      <%= f.input :start_date %>
+      <%= f.input :end_date %>
+    </div>
+    <%= f.input :is_primary, as: :radio_buttons, label: "Primary point of contact for this Organization" %>
+    <br>
     <%= f.input :notes %>
   </div>
 

@@ -1,0 +1,25 @@
+<div class="title is-3">
+  <%= @current_organization&.name %>
+</div>
+
+<div class="subtitle is-3">
+  Thank you for your submission!
+</div>
+
+<div class="subtitle is-4">
+<!-- # TODO extract this text to exchange_type model data -->
+  <% if @system_setting.exchange_type == "peer_to_peer" %>
+    Check out our <%= link_to "contributions page", contributions_public_path %> to see Asks, Offers, and Community Resources.
+  <% elsif @system_setting.exchange_type == "fully_moderated" %>
+    We'll be in touch if we're able to find a match.
+  <% else %>
+    We'll assist as best we can!
+  <% end %>
+  <hr>
+</div>
+
+<div>
+  These resources might be of interest:
+  <br>
+  <%= link_to "Community Resources", community_resources_public_path %> | <%= link_to "Announcements", announcements_public_path %>
+</div>

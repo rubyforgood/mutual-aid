@@ -41,7 +41,8 @@ class ListingsController < ApplicationController
   def create
     @listing = Listing.new(listing_params)
     if @listing.save
-      redirect_to listings_path, notice: 'Listing was successfully created.'
+      create_submission_notification_and_log!(@listing)
+      redirect_to submission_thank_you_path, notice: 'Listing was successfully created.'
     else
       set_form_dropdowns
       render :new
@@ -70,6 +71,23 @@ class ListingsController < ApplicationController
 
     def set_form_dropdowns
       @available_tags = Category.visible.pluck(:name) + @listing&.tag_list || []
+    end
+
+    def create_submission_notification_and_log!(listing)
+      where_params = {
+          person: listing.person,
+          service_area: listing.service_area,
+          form_name: "#{listing.type.downcase}_form",
+          # privacy_level_requested: ?, # TODO - implement privacy_level_options
+          created_at: listing.created_at
+      }
+      create_params = { body: listing.attributes.merge(current_user_id: current_user&.id) }
+      submission = Submission.where(where_params).first
+      unless submission
+        submission = Submission.create!(where_params.merge create_params)
+      end
+      SubmissionsController.new.email_confirmation_and_log(submission, current_user)
+      submission
     end
 
     def listing_params

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/community_resources_list", to: "public_pages#community_resources", as: "community_resources_public"
   get "/combined_form",            to: "public_pages#combined_form",       as: "combined_form_public"
   get "/contributions",            to: "public_pages#contributions",       as: "contributions_public" # TODO remove this
+  get "/thank_you",                to: "public_pages#submission_thank_you", as: "submission_thank_you"
 
   resources :announcements
   resources :asks, only: [:index, :edit, :update, :new, :create]

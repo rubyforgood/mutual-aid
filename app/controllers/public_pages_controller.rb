@@ -22,4 +22,8 @@ class PublicPagesController < PublicController
 
   def landing_page
   end
+
+  def submission_thank_you
+  end
+
 end

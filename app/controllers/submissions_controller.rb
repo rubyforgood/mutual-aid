@@ -21,15 +21,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
 
     respond_to do |format|
-      if @submission.save
-        Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
-        # send the email
-        autoemail = SubmissionMailer.new_submission_confirmation_email(@submission)
-        delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
-
-        # store email that was sent
-        CommunicationLog.log_submission_email(autoemail, delivery_status, @submission, CommunicationLog::AUTO_DELIVERY_CHANNEL, current_user)
-
+      if @submission.save && email_confirmation_and_log(@submission, current_user)
         format.html { redirect_to submissions_path,
                                   notice: 'Submission successfully created.' }
         format.json { render :new,
@@ -62,6 +54,16 @@ class SubmissionsController < ApplicationController
       format.html { redirect_to submissions_url, notice: 'Submission was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def email_confirmation_and_log(submission, current_user)
+    Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
+    # send the email
+    autoemail = SubmissionMailer.new_submission_confirmation_email(submission, @system_setting)
+    delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
+
+    # store email that was sent
+    CommunicationLog.log_submission_email(autoemail, delivery_status, submission, CommunicationLog::AUTO_DELIVERY_CHANNEL, current_user)
   end
 
   private

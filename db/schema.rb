@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_122030) do
     t.boolean "enabled", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "icon_class"
     t.index ["enabled"], name: "index_contact_methods_on_enabled"
   end
 
@@ -105,6 +106,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_122030) do
     t.string "display_order"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "form_hook"
   end
 
   create_table "donations", force: :cascade do |t|

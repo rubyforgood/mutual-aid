@@ -27,8 +27,15 @@ export default {
   },
   props: {
     contributions: {type: Array},
-    filterTypes: {type: Array},
-    initialFilters: {type: Array, default: () => []},
+    filterTypes: {type: Array, default: ()=>[]},
+    initialFilters: {
+      type: Array,
+      default: function () {
+        return [].concat(
+          ...this.filterTypes.map((fType) => fType.filters.map((filter) => filter.id))
+        )
+      },
+    },
     fetcher: {
       type: Object,
       default: () => {
@@ -53,7 +60,7 @@ export default {
       }
       this.fetcher.fetch(this.activeFilters, this.activeContributions).then((result) => {
         this.activeContributions = result.data
-        if(result.error) this.flashIfError(result.error)
+        if (result.error) this.flashIfError(result.error)
       })
     },
     flashIfError(e) {

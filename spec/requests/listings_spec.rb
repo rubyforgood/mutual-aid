@@ -25,13 +25,13 @@ RSpec.describe "/listings", type: :request do
     it 'allows asking for a specific subtype of listing' do
       ask = create(:ask, title: 'this is the ask title')
       offer = create(:offer, title: 'this is the offer title')
-      get listings_url, params: {contribution_type: 'Ask'}
+      get listings_url, params: {ContributionType: {'Ask' => 1}}
       expect(response.body).to match(ask.title)
       expect(response.body).not_to match(offer.title)
-      get listings_url, params: {contribution_type: 'Offer'}
+      get listings_url, params: {ContributionType: {'Offer' => 1}}
       expect(response.body).not_to match(ask.title)
       expect(response.body).to match(offer.title)
-      get listings_url, params: {contribution_type: 'Offer,Ask'}
+      get listings_url, params: {ContributionType: {'Ask' => 1, 'Offer' => 1}}
       expect(response.body).to match(ask.title)
       expect(response.body).to match(offer.title)
     end

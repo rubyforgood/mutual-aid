@@ -1,4 +1,4 @@
-form_type,question_name,required,display_order,input_type,locale,hint,options
+form_type,question_name,required,display_order,input_type,locale,hint,options,form_hook
 offer_form,"If you would like to volunteer with or donate resources to Lansing Area Mutual Aid (LAMA), please fill out this offer form. Your contact information is required, kept private with our core organizers, and only shared with your consent. 
 
 If you need food, cleaning supplies, or other essential items, fill out a request form: https://docs.google.com/forms/d/13GlyPG8gzXnI3Ksm_MpKJ4B2dz44zs2kqgTZlGqEVck 

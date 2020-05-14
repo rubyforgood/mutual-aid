@@ -29,6 +29,7 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
     hint_text = row["hint_text"]
     option_list = row["option_list"].present? ? row["option_list"].split(";") : []
     name = row["question_name"]
+    form_hook = row["form_hook"]
 
     dupes_query = find_dupes_through_translations(name)
     if dupes_query.any?
@@ -42,7 +43,9 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
                                                         is_required: is_required,
                                                         display_order: display_order,
                                                         hint_text: hint_text,
-                                                        option_list: option_list,)
+                                                        option_list: option_list,
+                                                        form_hook: form_hook,
+                                                        )
       @new_records_count += 1
     end
   end

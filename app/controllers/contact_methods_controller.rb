@@ -63,6 +63,6 @@ class ContactMethodsController < ApplicationController
     end
 
     def contact_method_params
-      params.require(:contact_method).permit(:name, :field, :enabled)
+      params.require(:contact_method).permit(:name, :field, :enabled, :icon_class)
     end
 end

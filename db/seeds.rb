@@ -68,7 +68,7 @@ locales.each do |locale, locale_name|
   SystemLocale.where(locale: locale).first_or_create!(locale_name: locale_name)
 end
 
-[['Call', 'phone'], ['Text', 'phone'], ['Email', 'email'], ['WhatsApp', 'phone']].each do |(name, field)|
+[['Call', 'phone', 'fa fa-phone'], ['Text', 'phone', 'fa fa-comment'], ['Email', 'email', 'fa fa-envelope'], ['WhatsApp', 'phone', 'fa fa-whatsapp']].each do |(name, field)|
   ContactMethod.where(ContactMethod.arel_table[:name].matches(name)).first || ContactMethod.create!(name: name, field: field, enabled: true)
 end
 

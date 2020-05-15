@@ -1,5 +1,5 @@
 class ContactMethod < ApplicationRecord
-  has_many :people, dependent: :restrict_with_error
+  has_many :people, inverse_of: :preferred_contact_method, foreign_key: :preferred_contact_method_id, dependent: :restrict_with_error
 
   scope :enabled, -> { where enabled: true }
   scope :as_filter_types, -> { enabled.distinct(:name) }

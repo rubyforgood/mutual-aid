@@ -6,6 +6,7 @@
       <%= f.input :name, required: true %>
       <%= f.input :field, as: :select, collection: @fields, required: true %>
       <%= f.input :enabled, as: :radio_buttons %>
+      <%= f.input :icon_class %> <span class="<%= f.object.icon_class %>"></span>
     </div>
   </div>
 

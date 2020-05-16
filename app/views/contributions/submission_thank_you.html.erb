@@ -6,6 +6,12 @@
   Thank you for your submission!
 </div>
 
+<div>
+  We've sent you a confirmation email (if you provided an email).
+</div>
+
+<hr>
+
 <div class="subtitle is-4">
   <!-- # TODO extract this text to exchange_type model data -->
   <% if @system_setting.exchange_type == "peer_to_peer" %>
@@ -18,8 +24,14 @@
   <hr>
 </div>
 
-<div>
-  These resources might be of interest:
-  <br>
-  <%= link_to "Community Resources", community_resources_public_path %> | <%= link_to "Announcements", announcements_public_path %>
+<div class="links-header">
+  <%= "Check these out:" if @system_setting.community_resources_module? || @system_setting.announcements_module? %>
+</div>
+
+<div class="community-resources-link">
+  <%= link_to "Community Resources", community_resources_public_path if @system_setting.community_resources_module? %>
+</div>
+
+<div class="announcements-link">
+  <%= link_to "Announcements", announcements_public_path if @system_setting.announcements_module? %>
 </div>

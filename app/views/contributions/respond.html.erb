@@ -1,23 +1,32 @@
 <div class="title"><%= @contribution.name %></div>
 
-This page is TBD, depending on how we define P2P workflows.
+[This page is TBD, depending on how we define P2P workflows.]
 <hr>
-<%= link_to("Add Communication Log", new_communication_log_path(person: @contribution.person)) %>
+<%= show_button(@contribution.person, @contribution.person.name, "fa fa-user-circle") %>
+<%= show_button(@contribution, @contribution.name, @contribution.icon_class) %>
+<%= render "layouts/view_add_new_button", table_name: "communication_logs", new_params: "person_id=#{@contribution.person_id}" %>
+<hr>
+Current matches:
 <br>
+<% if @contribution.matches_as_receiver.any? %>
+  <% @contribution.matches_as_receiver.each do |match| %>
+    <%= show_button(match, match.name) %>
+  <% end %>
+<% end %>
+<% if @contribution.matches_as_provider.any? %>
+  <% @contribution.matches_as_provider.each do |match| %>
+    <%= show_button(match, match.name) %>
+  <% end %>
+<% end %>
+<hr>
 <% if @contribution.type == "Ask" %>
   <%= link_to("Find Match [TBD]",
               match_listing_path(@contribution, receiver_id: @contribution.id, receiver_type: "Ask"),
               class: "button") %>
-  <br>
-  <%= link_to("Create Match",
-              new_match_path(receiver_id: @contribution.id, receiver_type: "Ask"),
-              class: "button") %>
+  <%= render "layouts/view_add_new_button", table_name: "matches", new_params: "receiver_id=#{@contribution.id}&receiver_type=Offer" %>
 <% elsif @contribution.type == "Offer" %>
   <%= link_to("Find Match [TBD]",
               match_listing_path(@contribution, provider_id: @contribution.id, provider_type: "Offer"),
               class: "button") %>
-  <br>
-  <%= link_to("Create Match",
-              new_match_path(provider_id: @contribution.id, provider_type: "Offer"),
-              class: "button") %>
+  <%= render "layouts/view_add_new_button", table_name: "matches", new_params: "provider_id=#{@contribution.id}&provider_type=Offer" %>
 <% end %>

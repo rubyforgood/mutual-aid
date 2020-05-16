@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :matches
   resources :mobility_string_translations
   resources :offers, only: [:index, :edit, :update, :new, :create]
+  get "/org_chart", to: "organizations#org_chart", as: "org_chart"
   resources :organizations
   resources :people
   resources :positions

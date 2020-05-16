@@ -49,12 +49,18 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def org_chart
+    @organizations = Organization.org_chart
+  end
+
   private
     def set_organization
       @organization = Organization.find(params[:id])
     end
 
     def organization_params
-      params.require(:organization).permit(:name, :description, :facebook_url, :website_url, :phone, :is_instance_owner, :has_sms_account, :has_hosting_account, :has_mailer_account)
+      params.require(:organization).permit(
+          :name, :description, :display_on_org_chart, :facebook_url, :website_url, :phone, :is_instance_owner,
+          :has_sms_account, :has_hosting_account, :has_mailer_account)
     end
 end

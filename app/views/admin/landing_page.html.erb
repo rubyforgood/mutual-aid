@@ -24,7 +24,7 @@
       <br>
       <%= link_to "Manage Volunteers", volunteer_admin_path %>
       <br>
-      <%= link_to "Yearbook", yearbook_admin_path %>
+      <%= link_to "Yearbook", yearbook_admin_path %> | <%= link_to "Org chart", org_chart_path %>
     </div>
     <div class="column is-4">
       <%= link_to "View unmatched Asks", listings_path(contribution_type: "Ask") %> <span class="tag"><%= @asks_unmatched_count %></span>

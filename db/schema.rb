@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2020_05_14_122030) do
-
+ActiveRecord::Schema.define(version: 2020_05_16_190206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,6 +241,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_122030) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "location_id"
     t.bigint "service_area_id"
+    t.boolean "display_on_org_chart", default: true, null: false
     t.index ["location_id"], name: "index_organizations_on_location_id"
     t.index ["service_area_id"], name: "index_organizations_on_service_area_id"
   end
@@ -283,6 +282,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_122030) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "team_id"
+    t.boolean "display_on_org_chart", default: true, null: false
     t.index ["organization_id"], name: "index_positions_on_organization_id"
     t.index ["person_id"], name: "index_positions_on_person_id"
     t.index ["team_id"], name: "index_positions_on_team_id"
@@ -428,6 +428,8 @@ ActiveRecord::Schema.define(version: 2020_05_14_122030) do
     t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "standing_meeting_schedule"
+    t.boolean "display_on_org_chart", default: true, null: false
     t.index ["organization_id"], name: "index_teams_on_organization_id"
   end
 

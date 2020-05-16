@@ -7,9 +7,9 @@ User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(
   confirmed_at: Time.current,
 )
 
-# create categories from model constant -- these are then editable by admin users
+# create categories -- these are then editable by admin users
 # TODO: i don't think these should live here
-DEFAULT_TAGS = [
+default_tags = [
     ['meals', 'prepared meals'],
     ['meals', 'groceries'],
     ['errands', 'and deliveries'],
@@ -33,7 +33,7 @@ DEFAULT_TAGS = [
     ['housing', 'storage'],
     ['cash', ''],
 ]
-DEFAULT_TAGS.each do |tag_name_parent, subtag_name|
+default_tags.each do |tag_name_parent, subtag_name|
   parent = Category.where(name: tag_name_parent).first_or_create!
   if subtag_name.present?
     Category.where(parent: parent, name: subtag_name).first_or_create!
@@ -44,15 +44,15 @@ end
   LocationType.where(name: location_type_name).first_or_create!
 end
 
-# we need at least one ServiceArea
-location_type = LocationType.first
-location = Location.new(location_type: location_type)
-ServiceArea.where(name: 'Default service area (change or delete me)').first_or_create!(location: location)
-
 # host org and set system defaults
 SystemSetting.first_or_create!
 
 host_organization = Organization.where(is_instance_owner: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
+
+# we need at least one ServiceArea, and every service_area gets its own location
+location_type = LocationType.first
+location = Location.new(location_type: location_type)
+ServiceArea.where(name: 'Default service area (change or delete me)', organization: host_organization, service_area_type: ServiceArea::TYPES.sample).first_or_create!(location: location)
 
 # these positions are needed for Submission confirmation autoemails
 Position.where(position_type: Position::ASK_FORM_CONTACT_TITLE, organization: host_organization).first_or_create!
@@ -68,8 +68,15 @@ locales.each do |locale, locale_name|
   SystemLocale.where(locale: locale).first_or_create!(locale_name: locale_name)
 end
 
-[['Call', 'phone', 'fa fa-phone'], ['Text', 'phone', 'fa fa-comment'], ['Email', 'email', 'fa fa-envelope'], ['WhatsApp', 'phone', 'fa fa-whatsapp']].each do |(name, field)|
-  ContactMethod.where(ContactMethod.arel_table[:name].matches(name)).first || ContactMethod.create!(name: name, field: field, enabled: true)
+[['Call', 'phone', 'fa fa-phone'], ['Text', 'phone', 'fa fa-comment'],
+ ['Email', 'email', 'fa fa-envelope'], ['WhatsApp', 'phone', 'fa fa-whatsapp'],
+ ['Autoemail', 'autoemail', 'fa fa-envelope-open-text']].each do |(name, field, icon_class)|
+  existing_method = ContactMethod.where(ContactMethod.arel_table[:name].lower.eq(name)).first
+  if existing_method
+    existing_method.update_attributes(icon_class: icon_class)
+  else
+    ContactMethod.create!(name: name, field: field, enabled: true, icon_class: icon_class)
+  end
 end
 
 puts "completed seeds.rb"

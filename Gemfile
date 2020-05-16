@@ -34,21 +34,17 @@ gem 'sendgrid-ruby'
 gem 'simple_form'
 gem 'webpacker', '~> 4.0'
 
-# email and sms
-gem 'sendgrid-ruby'
-
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'binding_of_caller'
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rspec-rails'
 end
 
 group :test do
-  gem 'faker'
-
   # an XML formatter is required for fancier CircleCI results
   gem 'rspec_junit_formatter'
 end

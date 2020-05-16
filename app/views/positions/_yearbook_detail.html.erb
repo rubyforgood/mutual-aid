@@ -24,7 +24,7 @@
     </span>
   </div>
   <% if @admin_status %>
-    <div class="flex-item-profile-detail text-1-5x profile-data-row-3">
+    <div class="flex-item-profile-detail text-1-5x profile-data-row-3 has-text-black">
       <%= person.phone.present? ? person.phone : person.preferred_contact_method == "phone" ? "[pls add phone]" : "" %>
     </div>
     <div class="flex-item-profile-detail text-1x group-link profile-data-row-4">

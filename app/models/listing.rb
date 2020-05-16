@@ -41,6 +41,16 @@ class Listing < ApplicationRecord
     status
   end
 
+  def icon_class
+    if type == "Ask"
+      "fa fa-hand-holding-heart"
+    elsif type == "Offer"
+      "fa fa-hand-sparkles"
+    else
+      "fa fa-question-circle"
+    end
+  end
+
   def all_tags_unique
     all_tags_list.flatten.map(&:downcase).uniq
   end

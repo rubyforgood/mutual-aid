@@ -4,6 +4,7 @@
   <thead>
   <tr>
     <th>Name</th>
+    <th>Type</th>
     <th>Respond</th>
     <th>Find Match</th>
     <th>Create Match</th>
@@ -15,6 +16,7 @@
   <% @listings.each do |listing| %>
     <tr>
       <td><%= listing.name %></td>
+      <td><span class="<%= listing.icon_class %>"></span></td>
       <td><%= link_to("Respond", respond_contribution_path(listing, contribution_type: listing.type),
                       class: "button") %>
       </td>

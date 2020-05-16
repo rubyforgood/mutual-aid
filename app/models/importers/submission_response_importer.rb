@@ -1,7 +1,7 @@
 class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
   def initialize(current_user, form_type, categories_question_name=nil)
-    # require "#{Rails.root}/db/stats_check.rb" # TODO
+    # require "#{Rails.root}/db/scripts/tuple_counts.rb" # TODO
     # audit_info(current_user) # TODO
     set_klasses
     establish_counts
@@ -38,8 +38,17 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   end
 
   def create_contact_method_from_row(row)
-    preferred_contact_method_name = row["email"].present? ? "email" : row["phone"].present? ? "call" : "IDK"
-    ContactMethod.where("LOWER(name) = ?", preferred_contact_method_name).first_or_create!(name: "IDK")
+    if row["email"].present?
+      preferred_contact_method_name = "Email"
+      field_name = "email"
+    elsif row["phone"].present?
+      preferred_contact_method_name = "Call"
+      field_name = "phone"
+    else
+      preferred_contact_method_name = "Unknown"
+      field_name = nil
+    end
+    ContactMethod.where("LOWER(name) = ?", preferred_contact_method_name.downcase).first_or_create!(name: preferred_contact_method_name, field_name: field_name)
   end
 
   def create_person_from_row(row)
@@ -47,11 +56,11 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     preferred_contact_method = create_contact_method_from_row(row)
     phone = nil
     email = nil
-    if preferred_contact_method&.name == "IDK"
+    if preferred_contact_method&.name.downcase == "IDK".downcase
       phone = row["telephone"] || "UNKNOWN PHONE"
-    elsif preferred_contact_method&.name == "email"
+    elsif preferred_contact_method&.name.downcase == "email"
       email = row["email"] || "ImportedWithNoEmail@example.com"
-    elsif preferred_contact_method&.name == "call"
+    elsif preferred_contact_method&.name.downcase == "call"
       phone = row["telephone"] || "[imported with no phone]"
     end
     Person.where(name: row["Name"], email: email, phone: phone, location: location).first_or_create!(preferred_contact_method: preferred_contact_method)

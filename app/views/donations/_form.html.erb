@@ -6,7 +6,9 @@
     <div class="field is-grouped">
       <%= f.input :value, as: :float, label: "Amount of donation" %>
       <%= f.input :notes, as: :string, label: "Description" %>
-      <%= f.input :channel, label: "How did #{ @admin_status ? "they" : "you"} hear about us?", hint: "(e.g. campaign, webinar, direct mail)" %>
+      <%= f.input :channel, as: :select, collection: Donation::CHANNELS,
+                  label: "How did #{ @admin_status ? "they" : "you"} hear about us?",
+                  hint: "(e.g. campaign, webinar, direct mail)" %>
     </div>
     <% if @admin_status %>
       <%= f.input :thank_you_sent, as: :radio_buttons %>

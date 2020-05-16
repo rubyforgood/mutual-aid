@@ -17,9 +17,9 @@
       <% @donations.each do |donation| %>
         <tr>
           <td><%= donation.person&.name %></td>
-          <td><%= donation.value %></td>
+          <td class="has-text-right"><%= number_to_currency(donation.value) %></td>
           <td><%= donation.channel %></td>
-          <td><%= yes_no(donation.thank_you_sent) %></td>
+          <td class="has-text-centered"><%= yes_no(donation.thank_you_sent) %></td>
           <td><%= donation.notes %></td>
           <td><%= edit_button(donation) %></td>
         </tr>

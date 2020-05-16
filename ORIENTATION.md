@@ -1,17 +1,17 @@
 # Our history
-We saw mutual aid groups for communities we are connected to -- and those across the US -- creating/sharing publicly-accessible spreadsheets of people asking for support that included lots of personally-identifying information including ways in which they’re vulnerable, identities, contact info, etc.
+We saw mutual aid groups for communities we are connected to -- and those across the US/world -- creating/sharing publicly-accessible spreadsheets of people asking for support that included lots of personally-identifying information including ways in which they’re vulnerable, identities, contact info, etc.
 
-Also saw some of the more tech-savvy groups trying to use tabs within spreadsheets to organize the firehose of data.
+Also saw some of the more tech-savvy groups trying to use lots of tabs within spreadsheets to organize the firehose and complexity of data.
 
-Initial groups: Antrim County & Grand Traverse Co. Michigan mutual aid groups. Also connecting to groups in Ithaca NY, Durham NC, and Washington DC.
+Initial groups: Antrim County & Grand Traverse Co. Michigan mutual aid groups. Also connecting to groups in Ithaca NY, Durham NC, and Washington DC, and beyond.
 
-Antrim County & Grand Traverse, along with some other area groups would like to use a shared platform.
+Antrim County & Grand Traverse, along with some other area groups are interested in a shared, multitenancy platform.
 
 Initial workflow / UI concerns were started and shared with the groups on April 1, 2020 (wish this were all a joke). The demo, using Bootstrap, went over well. Next steps have included removing that demo code and flushing it out in VUE.js. 
 
-The [Miro board](https://miro.com/app/board/o9J_kuKI5h8=/) is being used for planning. (Contact us for access.)
+We started off using a [Miro board](https://miro.com/app/board/o9J_kuKI5h8=/) for planning. (Contact us for access.). At this point we're trying to get better about using the Projects feature on Github, along w Github issues so contributors can see everything within the repo.
 
-Community norm: timing is difficult for all of us right now given the current uncertainties of our world, so we should communicate clearly that any of us might, at any time, have to back out from things we were hoping to accomplish. As a community, we prefer open and early communication about such things, and we want to make sure nobody feels pressured because circumstances have changed in a way they did not anticipate.
+Our team community norm: timing is difficult for everyone given the current uncertainties of our world, so we should communicate clearly that any of us might, at any time, have to back out from things we were hoping to accomplish. As a community, we prefer open and early communication about such things, and we want to make sure nobody feels pressured because circumstances have changed in a way they did not anticipate.
 
 
 # Priorities
@@ -20,13 +20,13 @@ Community norm: timing is difficult for all of us right now given the current un
 * The groups we’re working with are "people first," and believe strongly in not referring to users as "offerers" or "askers," but instead the idea of seeing the whole person and their membership in the community as priority.
 
 ## Holisitc approach
-* Existing platforms (e.g. sharetribe, freelygiving, etc) seem to focus on the listings feature exclusively, whereas we want to offer integration with mutual aid group operations (pod mapping, resource sharing, fewer logins, central point of access granted/denied, etc)
+* Existing platforms (e.g. marketplaces and even mutual aid specific ones) seem to focus on the listings feature exclusively, whereas we want to offer integration with mutual aid group operations (administration, pod mapping, resource sharing, fewer logins, central point of access granted/denied, etc)
 
 ## Features
 * Most critical: creating, and/or viewing and filtering (and then a claiming mechanism) existing offers and asks
     * Nice to have would be an SMS text option (maybe with a chatbot?) for ppl without internet to still make requests
     * Option for multiple languages
-* Site should ideally be whitelabelable so the mutual aid group is forefront, rather than a "user" themselves of a branded platform
+* Site should ideally be whitelabelable so the mutual aid group is forefront, rather than a "user" themselves of a branded platform/product
 * Tags
     * Categorization, which should match listing and community_resource categorization
     * Examples include: transportation, errands, money, housing, translation, etc
@@ -39,7 +39,7 @@ Community norm: timing is difficult for all of us right now given the current un
     * Some feature for feedback, vouching, and accountability
     * People can make clear their boundaries wrt what they can offer and limits
     * Option to participate without a profile (maybe everyone gets a "profile" even if it's not visible -- or visible only to admins?)
-    * Option to participate without a password/login (maybe use basic contact ID (email, phone number)?) (maybe everyone gets an "User" ?)
+    * Option to participate without a password/login (maybe use basic contact ID (email, phone number)?) (maybe everyone gets a "User" ?)
 * Asks
     * Should be simple, humane, dignified
     * Option to request a dispatcher or some sort of facilitation
@@ -87,7 +87,7 @@ Community norm: timing is difficult for all of us right now given the current un
 * Outreach, dev team building, partnership with other groups
     * Code for America, Code for DC, Ruby for Good, Title Track, AHA
         * Concern: we don’t want to build the team into a mythical man month problem
-    * Further research other platforms: sharetribe, freelygiving
+    * Further research other platforms: sharetribe, freelygiving, mutualaidworld
 * Waiting on more feedback from groups
     * Videos from dispatchers discussing their current workflow and timesinks
     * Workflow diagrams
@@ -102,7 +102,7 @@ Community norm: timing is difficult for all of us right now given the current un
     * Multiple language support
     * Document different pathways for implementation of peer-to-peer vs fully(or hybridly)-moderated submissions
 * Import and export options
-* A way for stakeholders to create issues and bug reports
+* A way for stakeholders to create issues and bug reports for their tech team to address and/or share with source code maintainers
 * Some mapping features?
     * Tags and geographical flagging (neighborhoods) should be things that organizers can administrate
 * ADA/accessibility review

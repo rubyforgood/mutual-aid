@@ -28,7 +28,7 @@ class SubmissionsController < ApplicationController
         delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
 
         # store email that was sent
-        CommunicationLog.log_submission_email(autoemail, delivery_status, @submission, CommunicationLog::AUTO_DELIVERY_CHANNEL, current_user)
+        CommunicationLog.log_submission_email(autoemail, delivery_status, @submission, nil, current_user)
 
         format.html { redirect_to submissions_path,
                                   notice: 'Submission successfully created.' }

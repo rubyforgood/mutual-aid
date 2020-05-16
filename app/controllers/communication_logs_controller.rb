@@ -2,7 +2,8 @@ class CommunicationLogsController < ApplicationController
   before_action :set_communication_log, only: [:show, :edit, :update, :destroy]
 
   def index
-    @communication_logs = CommunicationLog.order(created_at: :desc)
+    @communication_logs = CommunicationLog.includes(:delivery_method, :person).
+        references(:delivery_method, :person).order(created_at: :desc)
   end
 
   def show

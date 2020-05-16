@@ -180,9 +180,12 @@ You use `FactoryBot.create(:user)` before the `login_as` method and pass it in a
 BE SURE to include the line ```after { Warden.test_reset! } ``` after the `before do` block with the `login_as` method
 within it. This allows for any unexpected state data of the user from hanging around and causing errors.
 
-
 # Deploying the app
 ## If you decide to deploy to Heroku:
 * [Heroku Command Line Interface](https://devcenter.heroku.com/categories/command-line)
 ## If you decide to use Docker:
 * [Docker Desktop](https://www.docker.com/products/docker-desktop) to use the docker-compose steps listed above
+
+# Diagrams!
+We've got a rudimentary ERD diagram, and some workflow diagrams all in one `db_diagram_yEd.graphml` file in the db dir
+(yEd is desktop software for creating diagrams)

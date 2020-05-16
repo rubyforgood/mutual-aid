@@ -1,8 +1,15 @@
 <style>
-  .pie {
+  .asks-pie {
     width: 100px; height: 100px;
     border-radius: 50%;
     background: conic-gradient(#00d1b2 <%= @percent_asks_fulfilled.to_i %>%, #655 0);
+  }
+</style>
+<style>
+  .offers-pie {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(#00d1b2 <%= @percent_offers_fulfilled.to_i %>%, #655 0);
   }
 </style>
 
@@ -40,12 +47,12 @@
     </div>
     <div class="column columns is-4">
       <div class="column">
-        <div class="pie"></div>
-        <%= @percent_asks_fulfilled %>% (<%= @match_count %>/<%= @ask_count %>) Asks matched
+        <div class="asks-pie"></div>
+        <%= @percent_asks_fulfilled %>% Asks matched (<%= @match_count %>/<%= @ask_count %>)
       </div>
       <div class="column">
-        <div class="pie"></div>
-        <%= @percent_offers_fulfilled %>% (<%= @match_count %>/<%= @offer_count %>) Offers matched
+        <div class="offers-pie"></div>
+        <%= @percent_offers_fulfilled %>% Offers matched (<%= @match_count %>/<%= @offer_count %>)
       </div>
     </div>
   </div>

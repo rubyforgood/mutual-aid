@@ -3,9 +3,9 @@ class ServiceArea < ApplicationRecord
   translates :name
   translates :description, type: :text
 
-  belongs_to :parent, class_name: "ServiceArea", inverse_of: :service_areas, optional: true
-  belongs_to :organization, optional: true
   belongs_to :location, class_name: "Location", inverse_of: :service_areas, foreign_key: :location_id
+  belongs_to :organization
+  belongs_to :parent, class_name: "ServiceArea", inverse_of: :service_areas, optional: true
 
   has_many :mobility_string_translations, inverse_of: :translatable, class_name: "MobilityStringTranslation", foreign_key: :translatable_id
 
@@ -15,7 +15,10 @@ class ServiceArea < ApplicationRecord
   has_many :people
   has_many :service_areas, inverse_of: :parent
 
+  TYPES = %w[pod neighborhood region county city other]
+
   validates :name, presence: true
+  validates :service_area_type, presence: true
 
   accepts_nested_attributes_for :location
 
@@ -25,8 +28,6 @@ class ServiceArea < ApplicationRecord
     where("mobility_string_translations.key = ?", 'name').
     order(MobilityStringTranslation.arel_table["value"].lower.asc)
   }
-
-  TYPES = %w[pod neighborhood region county city other]
 
   scope :as_filter_types, -> { i18n.select :id, :name }
 

@@ -4,8 +4,10 @@
   <div class="form-inputs">
     <div class="field is-grouped">
       <%= f.input :name, as: :text, input_html: { rows: 1, style: "height: 2.4em;" } %>
-      <%= f.input :service_area_type, as: :select, collection: @service_area_types %>
       <%= f.association :parent %>
+    </div>
+    <div class="field is-grouped">
+      <%= f.input :service_area_type, as: :select, collection: @service_area_types %>
       <%= f.association :organization %>
     </div>
     <%= f.input :description, as: :text, input_html: { rows: 2 } %>

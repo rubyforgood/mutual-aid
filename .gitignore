@@ -40,7 +40,7 @@ yarn-debug.log*
 .env.localsendgrid.env
 
 # Ignore local seed files
-/db/dev_seeds/csvs/*
+/db/seeds/gitignored_csvs/*
 
 # ignore IDEA environment files.
 .idea/.gitignore

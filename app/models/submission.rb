@@ -7,6 +7,8 @@ class Submission < ApplicationRecord
   has_many :listings
   has_many :submission_responses
 
+  PRIVACY_LEVELS = ["anyone", "users", "volunteers", "dispatchers only"]
+
   def moderation_requested?
     privacy_level_requested == "moderation_requested"
   end

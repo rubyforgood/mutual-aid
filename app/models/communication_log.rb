@@ -4,7 +4,8 @@ class CommunicationLog < ApplicationRecord
   belongs_to :match, optional: true
   belongs_to :created_by, optional: true, class_name: "User", foreign_key: "created_by_id"
 
-  DEFAULT_DELIVERY_STATUS = "completed"
+  DEFAULT_DELIVERY_STATUS = "autoemail completed"
+  DELIVERY_STATUSES = [DEFAULT_DELIVERY_STATUS, "left voicemail", "no answer", "busy signal", "sent"]
 
   def self.log_submission_email(email_object, delivery_status, submission, delivery_method=nil, current_user=nil)
     delivery_method ||= ContactMethod.autoemail(true).last

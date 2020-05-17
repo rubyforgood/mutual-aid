@@ -21,7 +21,7 @@
         <td><%= software_feedback.page_url %></td>
         <td><%= software_feedback.name %></td>
         <td><%= software_feedback.urgency %></td>
-        <td><%= software_feedback.completed %></td>
+        <td><%= yes_no(software_feedback.completed) %></td>
         <td><%= edit_button(software_feedback) %></td>
       </tr>
     <% end %>

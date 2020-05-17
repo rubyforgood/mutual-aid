@@ -17,7 +17,7 @@
         <td><span class="<%= contact_method.icon_class %>"></span></td>
         <td><%= contact_method.name %></td>
         <td><%= contact_method.field %></td>
-        <td><%= contact_method.enabled %></td>
+        <td><%= yes_no(contact_method.enabled) %></td>
         <td><%= edit_button(contact_method) %></td>
       </tr>
     <% end %>

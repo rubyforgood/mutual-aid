@@ -1,12 +1,36 @@
-<section class="section">
-  <div id="entry-point" />
-</section>
+<%= render "layouts/view_header", resource: @listings.first %>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  EntryPoints.browse('#entry-point', {
-    contributions: <%= raw json_escape(@contributions) %>,
-    filterTypes: <%= raw json_escape(@filter_types) %>
-  });
-});
-</script>
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+  <tr>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Respond</th>
+    <th>Find Match</th>
+    <th>Create Match</th>
+    <th>Edit</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @listings.each do |listing| %>
+    <tr>
+      <td><span class="<%= listing.icon_class %>"></span></td>
+      <td><%= listing.name %></td>
+      <td><%= link_to("Respond", respond_contribution_path(listing, contribution_type: listing.type),
+                      class: "button") %>
+      </td>
+      <td><%= link_to("Find Match [TBD]", match_listing_path(listing), class: "button") %></td>
+      <td>
+        <% type = listing.type %>
+        <% if type == "Offer" %>
+          <%= render "layouts/view_add_new_button", table_name: "matches", new_params: "provider_id=#{listing.id}&provider=Offer" %>
+        <% else %>
+          <%= render "layouts/view_add_new_button", table_name: "matches", new_params: "receiver_id=#{listing.id}&receiver_type=Ask" %>
+        <% end %>
+      </td>
+      <td><%= edit_button(listing) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

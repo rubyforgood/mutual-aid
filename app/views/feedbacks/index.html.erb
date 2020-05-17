@@ -5,8 +5,8 @@
     <tr>
       <th>Match</th>
       <th>Is from receiver</th>
-      <th>Completed</th>
-      <th>Quality</th>
+      <th>Match reported as Complete?</th>
+      <th>Quality (1-5)</th>
       <th>Description</th>
       <th>Edit</th>
     </tr>
@@ -15,11 +15,11 @@
   <tbody>
     <% @feedbacks.each do |feedback| %>
       <tr>
-        <td><%= feedback.match_id %></td>
+        <td><%= feedback.match&.name %></td>
         <td><%= yes_no(feedback.is_from_receiver) %></td>
         <td><%= yes_no(feedback.completed) %></td>
         <td><%= feedback.quality %></td>
-        <td><%= feedback.description %></td>
+        <td><%= feedback.description.truncate(30) %></td>
         <td><%= edit_button(feedback) %></td>
       </tr>
     <% end %>

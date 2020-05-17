@@ -3,7 +3,7 @@
 
 require 'faker'
 
-non_autoemail_contact_methods = ContactMethod.public
+non_autoemail_contact_methods = ContactMethod.enabled_public
 
 host_organization = Organization.where(is_instance_owner: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
 

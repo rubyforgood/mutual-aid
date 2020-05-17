@@ -12,7 +12,7 @@
 
 <p>
   <strong>Enabled:</strong>
-  <%= @contact_method.enabled %>
+  <%= yes_no(@contact_method.enabled) %>
 </p>
 
 <%= link_to 'Edit', edit_contact_method_path(@contact_method) %> |

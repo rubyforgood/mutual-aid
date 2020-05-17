@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   end
 
   def set_form_dropdowns
-    @contact_methods = ContactMethod.public # for nested Person
+    @contact_methods = ContactMethod.enabled_public # for nested Person
   end
 
   def user_params

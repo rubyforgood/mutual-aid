@@ -6,22 +6,23 @@ We aim to support people in working smarter, not harder.
 
 This is not intended to be strictly a "product" -- we will be in partnership with specific mutual aid groups to solicit feedback and support their operations, with a nod to all mutual aid groups and administrative best practices.
 
-The idea is that each group -- or cluster of groups -- would own their database and "instance" of this software, rather than there becoming one large/shared database (as is the case with products).
+The idea is that each group -- or cluster of groups -- would own their database and "instance" of this software, rather than there becoming one large/shared database (as is the case with products). This is to protect privacy, and to prioritize locality.
 
 Ideally mutual aid networks will have their own tech teams, but we will provide initial support as capacity permits.
 
 
 # Contributing
 
-Visit our [CONTRIBUTING.md](https://github.com/maebeale/mutual-aid-app/blob/develop/CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
+Visit our [CONTRIBUTING.md](https://github.com/maebeale/mutual-aid-app/blob/master/CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
 
 
 # Background
 Mutual aid is not new. If it is new to you, please check out the history of mutual aid in your neighborhood or region, as likely you will find mentors and partners ready to accept your help. There are most likely leaders of color in your area. Please see if there are ways to support them before creating your own new network.
 
-There is plenty of research to be done, and national and regional networks to connect in to. Here's one offering of a [mutual aid course](https://app.organizetogether.network/courses/2128977/content).
+There is plenty of research to be done, and national and regional networks to connect in to.
 
-If you have any questions, please feel free to reach out in the #mutualaid channel in Ruby for Good Slack or on Github.
+If you have any question of us source code maintainers, please feel free to reach out in the #mutualaid channel in Ruby for Good Slack (we're affiliated) or connect with us through Github.
+
 
 # Setting Up Development
 
@@ -30,35 +31,40 @@ This is a Ruby on Rails 6.0 application with Vue + Webpack included.
 To get started developing on your machine, you'll need the following tools installed:
 
 * ruby 2.7
+* bundler 2+ (ruby package manager)
 * node 10+
-* yarn 1.16+
-* bundler 2+
-* vue (v?)
-* bulma (v?)
+* yarn 1.16+ (node package manager)
 
+This project uses webpacker to bundle front end assets, including:
+* vue 0.8.2+
+* bulma css 2.6.11+
+
+## Setting up services
 Some choices for how to run services in your development environment:
-* [Heroku Command Line Interface](https://devcenter.heroku.com/categories/command-line)
-* [Docker Desktop](https://www.docker.com/products/docker-desktop) to use the docker-compose steps or you will need to install these services individually on your development host:
+* If you decide to use Docker:
+    * [Docker](#development-with-docker) 
+* If you want to install local services on your development host:
     * Redis 4+
     * PostgreSQL 9.5+
     * Mailcatcher 0.7.1
 
-## Setting up Ruby
+## Setting up Ruby and Bundler
 
-The easiest way to manage different installations of Ruby is with [rbenv](https://github.com/rbenv/rbenv). After following the installation instructions on the rbenv repo and restarting your terminal, you'll be able to run `rbenv install` in the root directory of the repository. rbenv will handle installing Ruby and switching to it for you when you enter the repo (so no need to worry about your other Ruby installs!) After that, run `gem install bundler` and you'll be all set to run `bundle install`.
+The easiest way to manage different installations of Ruby (we think) is with [rbenv](https://github.com/rbenv/rbenv). After following the installation instructions on the rbenv repo and restarting your terminal, you'll be able to run `rbenv install` in the root directory of the repository. rbenv will handle installing Ruby and switching to it for you when you enter the repo (so no need to worry about your other Ruby installs!) After that, run `gem install bundler` and you'll be all set to run `bundle install`.
 
-If you run into a problem where your bundle install says you're on an older version of bundler than what's in the lockfile, run `gem update --system` to update RubyGems, then `gem install bundler:1.17.3`
+If you run into a problem where your bundle install says you're on an older version of bundler than what's in the lockfile, run `gem update --system` to update RubyGems, then `gem install bundler:[latest-version-you-want], e.g. gem install bundler:2.1.2]`
 
 Depending on your system, you might have trouble building the `pg` gem, probably due to a missing `libpq-fe.h`. To get the necessary libraries installed:
+* For Mac (Homebrew): `brew install postgresql`
 * Debian/Ubuntu: `sudo apt-get install libpq-dev`
 * On Enterprise Linux (CentOS/RHEL/Fedora/Amazon Linux/Sci Linux): `yum install postgresql-devel`
-* For Mac (Homebrew): `brew install postgresql`
 
-## Setting up Node
+## Setting up Node with Yarn
 
 The easiest way to manage different installations with node.js is with [nvm](https://github.com/nvm-sh/nvm). After following the installation instructions, type `nvm install` to install and run the right version of node.js.
 
 You'll also need Yarn, a package manager for node.js. To install that:
+* For Mac (Homebrew): `brew install yarn`
 * Debian/Ubuntu: 
 ```
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -70,15 +76,18 @@ sudo apt update && sudo apt install yarn
 curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
 sudo yum install yarn
 ```
-* For Mac (Homebrew): `brew install yarn`
 
 ## Setting up Heroku
 
-The Rails and webpack processes are launched with Heroku. You can install Heroku Local using [these instructions](https://devcenter.heroku.com/articles/heroku-cli).
+The Rails and webpack processes can be launched with Heroku, if you choose to go that route. You can install Heroku Local using [these instructions](https://devcenter.heroku.com/articles/heroku-cli).
+
+## Setting up other hosting
+(If you've done this, please submit a PR so we can include instructions here!)
+
 
 ## Running the App!
 
-First, set up Local Services via [Docker](#development-with-docker) or individually installed services. 
+First, make sure local services are running
 
 ### Starting Local Services
 
@@ -100,7 +109,7 @@ Go to http://localhost:1080/
 Send mail through smtp://localhost:1025
 ```
 
-You only need this if you're interested in working on emails in the development environment.
+Note: You only need mailcatcher if you're interested doing a lot of work on emails in the development environment. (They'll still be visible in the server log, but this makes mailer work SO much easier.)
 
 ### Run the App Locally
 
@@ -110,11 +119,8 @@ Then, to run the app locally,
 $ bundle install
 $ yarn install
 $ rake dev:setup
-$ heroku local -f Procfile.dev
+$ rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
 ```
-
-if you run into the following error:
-```bash: heroku: command not found``` visit https://devcenter.heroku.com/articles/heroku-cli for instructions to install Heroku.
 
 ## Development with Docker
 
@@ -154,61 +160,32 @@ Also, if you would like docker-compose to run in daemon mode (which means that i
 # Viewing the Application
 ## if you chose the local route, then you are good to go on:
   http://localhost:3000
-  $ rspec (to run the test suite) or bundle exec rspec (if the first does not work)
-  
+  $ `rspec` (to run the test suite), or, `bundle exec rspec` (if the `rspec` does not work)
+
+
 # Other Tips to Get Started
 
-## Loggin In
+## Logging In
 A username and password to log in and test the app are in `seeds.rb`
 
 ## Testing
-When writing tests for rspec tests within the spec/request directory, you can use Warden::Test:Helpers
+* Running `bin/test` will run ruby tests (rspec) and then the js tests (mocha) if all the rspec tests pass
+* To run front end tests and back end tests individually:
+    * Vue.js front end tests: `yarn test` or `yarn test -w` (mocha and chai are included in the `package.json` )
+    * Rails front end and back end tests: `rspec` (rspec is included in the Gemfile)
+
+When writing rspec tests within the spec/request directory, you can use `Warden::Test:Helpers`
 which give you access to the ```login_as(user, :scope => :user)``` method, as well as the ```logout``` method.
-You use FactoryBot.create(:user) before the login_as method and pass it in as the required resource variable.
-BE SURE to include the line ```after { Warden.test_reset! } ``` after the before do block with the login_as method
+You use `FactoryBot.create(:user)` before the `login_as` method and pass it in as the required resource variable.
+BE SURE to include the line ```after { Warden.test_reset! } ``` after the `before do` block with the `login_as` method
 within it. This allows for any unexpected state data of the user from hanging around and causing errors.
 
-Additional testing for front_end specs should make use of Capybara ```sign_in/sign_out``` Capybara methods.
+# Deploying the app
+## If you decide to deploy to Heroku:
+* [Heroku Command Line Interface](https://devcenter.heroku.com/categories/command-line)
+## If you decide to use Docker:
+* [Docker Desktop](https://www.docker.com/products/docker-desktop) to use the docker-compose steps listed above
 
-## App Startup Troubleshooting
-If you Receive an error when trying to run
-
-```
-$ heroku local -f Procfile.dev
-```
-
-that looks like this ...
-
-```
-joe-shmo:~/projects/mutual-aid-app(develop)$ heroku local -f Procfile.dev
- ›   Warning: heroku update available from 7.26.2 to 7.33.3.
-[OKAY] Loaded ENV .env File as KEY=VALUE Format
-12:02:46 PM web.1    |  => Booting Puma
-12:02:46 PM web.1    |  => Rails 5.2.3 application starting in development
-12:02:46 PM web.1    |  => Run `rails server -h` for more startup options
-12:02:46 PM webpack.1 |  events.js:167
-12:02:46 PM webpack.1 |        throw er; // Unhandled 'error' event
-12:02:46 PM webpack.1 |        ^
-12:02:46 PM webpack.1 |  Error: listen EADDRINUSE: address already in use 127.0.0.1:3035
-12:02:46 PM webpack.1 |      at Server.setupListenHandle [as _listen2] (net.js:1290:14)
-12:02:46 PM webpack.1 |      at listenInCluster (net.js:1338:12)
-12:02:46 PM webpack.1 |      at GetAddrInfoReqWrap.doListen [as callback] (net.js:1471:7)
-12:02:46 PM webpack.1 |      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:62:10)
-12:02:46 PM webpack.1 |  Emitted 'error' event at:
-12:02:46 PM webpack.1 |      at emitErrorNT (net.js:1317:8)
-12:02:46 PM webpack.1 |      at process._tickCallback (internal/process/next_tick.js:63:19)
-[DONE] Killing all processes with signal  SIGINT
-```
-
-Run -
-``` $ ps aux | grep node ```
-and then use the following command on any PIDs that have mutual aid in the path, or mentions node/procfiles
-
-```
-kill -9 <PID #>
-```
-Then Re-run -
-
-```
-$ heroku local -f Procfile.dev
-```
+# Diagrams!
+We've got a rudimentary ERD diagram, and some workflow diagrams all in one `db_diagram_yEd.graphml` file in the db dir
+(yEd is desktop software for creating diagrams)

@@ -13,7 +13,7 @@ class Match < ApplicationRecord
                                 Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }
 
   def name
-    "#{receiver.name} & #{provider.name}"
+    "#{"[#{status}] "}#{receiver.name} & #{provider.name}"
   end
 
   def full_name

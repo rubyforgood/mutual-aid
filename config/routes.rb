@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :community_resources
   resources :contact_methods
   get "/combined_form", to: "contributions#combined_form", as: "combined_form_public"
-  get "/thank_you", to: "contributions#submission_thank_you", as: "submission_thank_you"
+  get "/thank_you", to: "contributions#thank_you", as: "contribution_thank_you"
   resources :contributions, only: [:index] do
     member do
       get "/respond", to: "contributions#respond", as: "respond"

@@ -4,8 +4,10 @@
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :description %>
-    <%= f.input :type %>
-    <%= f.input :state %>
+    <div class="field is-grouped">
+      <%= f.input :type, as: :select, collection: ["Ask", "Offer"] %>
+      <%= f.input :state, as: :string, label: "Status" %>
+    </div>
     <%= f.input :tag_list, as: :check_boxes, collection: @available_tags %>
     <%= f.association :person %>
     <%= f.association :service_area %>

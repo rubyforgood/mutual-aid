@@ -35,7 +35,7 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
     if dupes_query.any?
       @log = "GOT DUPE"
       @dupe_records_count += 1
-      custom_form_question = dupes_query
+      custom_form_question = dupes_query.last
     else
       @log = "CREATED"
       custom_form_question = CustomFormQuestion.create!(form_type: form_type,
@@ -48,6 +48,7 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
                                                         )
       @new_records_count += 1
     end
+    custom_form_question
   end
 
   def process_row(row)
@@ -56,7 +57,7 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
 
     if valid_row
       custom_form_question = find_or_create_custom_form_question(row)
-      puts "#{@log} CFQ --------#{custom_form_question}-------------"
+      puts "#{@log} CFQ --------#{custom_form_question&.name}-------------"
     end
   end
 

@@ -5,8 +5,8 @@ class Importers::BaseImporter
                 :row_success_count, :row_error_count
 
   def initialize(current_user)
-    # require "#{Rails.root}/db/stats_check.rb"  # TODO
-    # audit_info(current_user)  # TODO
+    require "#{Rails.root}/db/scripts/tuple_counts.rb"
+    audit_info(current_user)
     set_klasses
     establish_counts
 
@@ -16,7 +16,7 @@ class Importers::BaseImporter
 
   def audit_info(current_user)
     # @current_organization = current_user&.organization  # TODO
-    # @current_user = current_user || User.guest_user(@current_organization)  # TODO
+    @current_user = current_user # || User.guest_user(@current_organization)  # TODO
     puts "========"
     puts @current_user&.name
     # puts @current_organization&.name  # TODO
@@ -24,7 +24,6 @@ class Importers::BaseImporter
   end
 
   def establish_counts
-    # establish counts # TODO
     @row_count = 0
     @row_success_count = 0
     @row_error_count = 0
@@ -36,6 +35,7 @@ class Importers::BaseImporter
                     new_records_count: @new_records_count,
                     dupe_records_count: @dupe_records_count,
                     row_error_count: @row_error_count}
+    @initial_model_logs = ""
     @initial_model_counts = {}
     @final_diff_model_counts = {}
   end
@@ -106,7 +106,7 @@ class Importers::BaseImporter
 
   def import(path)
     Rails.logger.info("START IMPORT------------#{Time.now}")
-    # records_report("initial")  # TODO
+    records_report("initial")
 
     rows = CSV.read(path, headers: true)
 
@@ -137,7 +137,7 @@ class Importers::BaseImporter
           @row_count += 1
         end
       end
-      # records_report("final") # TODO
+      records_report("final")
     end
   end
 
@@ -147,13 +147,13 @@ class Importers::BaseImporter
 
   def records_report(status)
     if status == "initial"
-      # initial_model_counts # TODO
+      initial_model_counts
     end
     Rails.logger.info("---------")
     Rails.logger.info(@initial_model_counts)
     Rails.logger.info("---")
     if status == "final"
-      # final_diff_model_counts # TODO
+      final_diff_model_counts
     end
     Rails.logger.info(@final_diff_model_counts)
     Rails.logger.info("---")
@@ -168,12 +168,12 @@ class Importers::BaseImporter
     @klasses_array.compact.each do |klass|
       klass_name = klass.model_name.human
       count = klass.count
-      log = "INIT: #{klass_name} count: #{count}"
-      # puts init_statement # TODO
+      log = "INITL: #{klass_name} count: #{count}"
       logs << log
       initial_counts_hash[klass_name] = count
     end
     Rails.logger.info(pp logs)
+    @initial_model_logs = logs
     @counts_hash["INITIAL COUNTS"] = initial_counts_hash
     @initial_model_counts = initial_counts_hash
   end
@@ -184,22 +184,28 @@ class Importers::BaseImporter
     final_counts_hash = {}
     diff_counts_hash = {}
     @initial_model_counts.each do |klass_name, initial_count|
-      downcase_name = klass_name.downcase
+      begin
+        klass = klass_name.parameterize.underscore.classify.constantize
+        current_count = klass.count
+      rescue => e
+        puts "#{klass_name} is not a class"
+        binding.pry
+      end
 
-      current_count = klass.count
       diff = current_count - initial_count
       final_counts_hash[klass_name] = current_count
       diff_counts_hash[klass_name] = diff
-      final_log = "FINAL: #{klass_name} diff: #{current_count}"
-      diff_log = "DIFF: #{klass_name} diff: #{diff}"
+      final_log = "FINAL: #{klass_name} count: #{current_count}"
+      diff_log = "+DIFF: #{klass_name} +diff: #{diff}"
       final_logs << final_log
       diff_logs << diff_log
     end
+    Rails.logger.info(pp @initial_model_logs)
     Rails.logger.info(pp final_logs)
     Rails.logger.info(pp diff_logs)
 
     @counts_hash["FINAL COUNTS"] = final_counts_hash
-    @counts_hash["DIFF COUNTS"] = diff_counts_hash
+    @counts_hash["+DIFF COUNTS"] = diff_counts_hash
 
     @new_records_count = diff_counts_hash[@primary_klass_name]
     @final_diff_model_counts = final_counts_hash

@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get "/about",                    to: "public_pages#about",               as: "about_public"
   get "/announcements_list",       to: "public_pages#announcements",       as: "announcements_public"
   get "/community_resources_list", to: "public_pages#community_resources", as: "community_resources_public"
-  get "/combined_form",            to: "public_pages#combined_form",       as: "combined_form_public"
   get "/contributions",            to: "public_pages#contributions",       as: "contributions_public" # TODO remove this
 
   resources :announcements
@@ -21,6 +20,7 @@ Rails.application.routes.draw do
   resources :communication_logs
   resources :community_resources
   resources :contact_methods
+  get "/combined_form", to: "contributions#combined_form", as: "combined_form_public"
   get "/thank_you", to: "contributions#submission_thank_you", as: "submission_thank_you"
   resources :contributions, only: [:index] do
     member do

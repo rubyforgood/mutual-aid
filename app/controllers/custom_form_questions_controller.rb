@@ -20,35 +20,24 @@ class CustomFormQuestionsController < ApplicationController
   def create
     @custom_form_question = CustomFormQuestion.new(custom_form_question_params)
 
-    respond_to do |format|
-      if @custom_form_question.save
-        format.html { redirect_to custom_form_questions_path, notice: 'Custom form question was successfully created.' }
-        format.json { render :show, status: :created, location: @custom_form_question }
-      else
-        format.html { render :new }
-        format.json { render json: @custom_form_question.errors, status: :unprocessable_entity }
-      end
+    if @custom_form_question.save
+      redirect_to custom_form_questions_path, notice: 'Custom form question was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @custom_form_question.update(custom_form_question_params)
-        format.html { redirect_to custom_form_questions_path, notice: 'Custom form question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @custom_form_question }
-      else
-        format.html { render :edit }
-        format.json { render json: @custom_form_question.errors, status: :unprocessable_entity }
-      end
+    if @custom_form_question.update(custom_form_question_params)
+      redirect_to custom_form_questions_path, notice: 'Custom form question was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @custom_form_question.destroy
-    respond_to do |format|
-      format.html { redirect_to custom_form_questions_url, notice: 'Custom form question was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to custom_form_questions_url, notice: 'Custom form question was successfully destroyed.'
   end
 
   private

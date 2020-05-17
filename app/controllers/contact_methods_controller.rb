@@ -20,37 +20,26 @@ class ContactMethodsController < ApplicationController
   def create
     @contact_method = ContactMethod.new(contact_method_params)
 
-    respond_to do |format|
-      if @contact_method.save
-        format.html { redirect_to contact_methods_path, notice: 'Contact method was successfully created.' }
-        format.json { render :show, status: :created, location: @contact_method }
-      else
-        set_form_dropdowns
-        format.html { render :new }
-        format.json { render json: @contact_method.errors, status: :unprocessable_entity }
-      end
+    if @contact_method.save
+      redirect_to contact_methods_path, notice: 'Contact method was successfully created.'
+    else
+      set_form_dropdowns
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @contact_method.update(contact_method_params)
-        format.html { redirect_to contact_methods_path, notice: 'Contact method was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact_method }
-      else
-        set_form_dropdowns
-        format.html { render :edit }
-        format.json { render json: @contact_method.errors, status: :unprocessable_entity }
-      end
+    if @contact_method.update(contact_method_params)
+      redirect_to contact_methods_path, notice: 'Contact method was successfully updated.'
+    else
+      set_form_dropdowns
+      render :edit
     end
   end
 
   def destroy
     @contact_method.destroy
-    respond_to do |format|
-      format.html { redirect_to contact_methods_url, notice: 'Contact method was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to contact_methods_url, notice: 'Contact method was successfully destroyed.'
   end
 
   private

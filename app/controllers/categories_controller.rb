@@ -10,46 +10,36 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    @parent_categories = Category.order(:name).map{ |t| [t.name.titleize, t.id] }
+    set_form_dropdowns
   end
 
   def edit
-    @parent_categories = Category.where.not(id: @category.id).order(:name).map{ |t| [t.name.titleize, t.id] }
+    set_form_dropdowns
   end
 
   def create
     @category = Category.new(category_params)
 
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
-        format.json { render :show, status: :created, location: @category }
-      else
-        @parent_categories = Category.order(:name).map{ |t| [t.name.titleize, t.id] }
-        format.html { render :new }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    if @category.save
+      redirect_to categories_path, notice: 'Category was successfully created.'
+    else
+      set_form_dropdowns
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    if @category.update(category_params)
+      redirect_to categories_path, notice: 'Category was successfully updated.'
+    else
+      set_form_dropdowns
+      render :edit
     end
   end
 
   def destroy
     @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to categories_url, notice: 'Category was successfully destroyed.'
   end
 
   private
@@ -57,14 +47,18 @@ class CategoriesController < ApplicationController
       @category = Category.find(params[:id])
     end
 
+    def set_form_dropdowns
+      @parent_categories = Category.where.not(id: @category.id).order(:name).map{ |t| [t.name.titleize, t.id] }
+    end
+
     def category_params
       params.require(:category).permit(
           :name,
           :description,
-          :parent_id,
-          :display_to_public,
           :display_order,
+          :display_to_public,
           :is_created_by_admin,
+          :parent_id,
           categories_attributes: [])
     end
 end

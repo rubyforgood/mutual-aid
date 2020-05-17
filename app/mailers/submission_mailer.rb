@@ -3,12 +3,11 @@ include ApplicationHelper
 
 class SubmissionMailer < ApplicationMailer
 
-  def new_submission_confirmation_email(submission, system_setting=nil)
+  def new_submission_confirmation_email(submission)
     @submission = submission
 
     current_organization = Organization.current_organization
     @organization_name = current_organization.name
-    @system_setting = system_setting || SystemSetting.first
 
     @form_name = @submission.form_name
     if @form_name.downcase.include?("ask")

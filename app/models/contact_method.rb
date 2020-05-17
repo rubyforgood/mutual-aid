@@ -3,7 +3,8 @@ class ContactMethod < ApplicationRecord
 
   scope :autoemail, -> (boolean){ where( boolean ? arel_table[:name].lower.eq("autoemail") : arel_table[:name].lower.not_eq("autoemail") ) }
   scope :enabled, -> { where enabled: true }
-  scope :name, -> (name){ where arel_table[:name].lower.eq(name) }
+  scope :field_name, -> (field_name){ where arel_table[:field].lower.eq(field_name) }
+  scope :method_name, -> (method_name){ where arel_table[:name].lower.eq(method_name) }
   scope :public, ->{ autoemail(false).enabled }
 
   scope :as_filter_types, -> { public.distinct(:name) }

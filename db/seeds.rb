@@ -71,7 +71,7 @@ end
 [['Call', 'phone', 'fa fa-phone'], ['Text', 'phone', 'fa fa-comment'],
  ['Email', 'email', 'fa fa-envelope'], ['WhatsApp', 'phone', 'fa fa-whatsapp'],
  ['Autoemail', 'autoemail', 'fa fa-envelope-open-text', false]].each do |(name, field, icon_class, enabled)|
-  existing_method = ContactMethod.where(ContactMethod.arel_table[:name].lower.eq(name)).first
+  existing_method = ContactMethod.method_name(name).first
   if existing_method
     existing_method.update_attributes(icon_class: icon_class, enabled: enabled || true)
   else

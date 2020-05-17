@@ -45,9 +45,6 @@ ActiveRecord::Schema.define(version: 2020_05_16_190206) do
   create_table "communication_logs", force: :cascade do |t|
     t.bigint "person_id"
     t.bigint "match_id"
-    t.string "from_type"
-    t.string "to_type"
-    t.string "delivery_channel"
     t.datetime "sent_at"
     t.boolean "needs_follow_up", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -56,7 +53,10 @@ ActiveRecord::Schema.define(version: 2020_05_16_190206) do
     t.string "subject"
     t.bigint "created_by_id", default: 1, null: false
     t.string "body"
+    t.boolean "outbound", default: true, null: false
+    t.bigint "delivery_method_id", null: false
     t.index ["created_by_id"], name: "index_communication_logs_on_created_by_id"
+    t.index ["delivery_method_id"], name: "index_communication_logs_on_delivery_method_id"
     t.index ["match_id"], name: "index_communication_logs_on_match_id"
     t.index ["person_id"], name: "index_communication_logs_on_person_id"
   end

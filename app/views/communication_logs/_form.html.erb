@@ -3,21 +3,23 @@
 
   <div class="form-inputs">
     <%= f.association :person %>
-    <%= f.association :match %>
-    <%= f.input :from_type %>
-    <%= f.input :to_type %>
+    <%= f.association :match, label: "Re: Match" %>
 
-    <%= f.input :needs_follow_up, as: :radio_buttons %>
+    <div class="field is-grouped">
+      <%= f.input :sent_at, label: "Time sent/received", default: Time.now, required: true %>
+      <%= f.input :outbound, as: :radio_buttons, checked: true %>
+    </div>
 
-    <%= f.input :sent_at %>
-
-    <%= f.input :delivery_channel, as: :select, collection: CommunicationLog::DELIVERY_CHANNELS %>
-    <%= f.input :delivery_status, default: CommunicationLog::DEFAULT_DELIVERY_STATUS %>
+    <div class="field is-grouped">
+      <%= f.association :delivery_method, required: true, collection: ContactMethod.all %>
+      <%= f.input :delivery_status, as: :select, required: true, collection: CommunicationLog::DELIVERY_STATUSES %>
+      <%= f.input :needs_follow_up, as: :radio_buttons %>
+    </div>
 
     <%= f.input :subject, as: :text, input_html: { rows: 1 } %>
 
     <hr>
-    <% if f.object.persisted? && f.object.delivery_channel == CommunicationLog::AUTO_DELIVERY_CHANNEL %>
+    <% if f.object.persisted? && f.object.delivery_method&.name == ContactMethod.autoemail(true).last.name %>
       <%= f.label :body, class: "label" %>
       <%= f.object.body&.html_safe || "-- Empty --" %>
     <% else %>

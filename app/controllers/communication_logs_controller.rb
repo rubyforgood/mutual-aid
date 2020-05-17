@@ -60,11 +60,10 @@ class CommunicationLogsController < ApplicationController
           :match_id,
           :body,
           :created_by_id,
-          :delivery_channel,
+          :delivery_method_id,
           :delivery_status,
-          :from_type,
           :needs_follow_up,
-          :to_type,
+          :outbound,
           :sent_at,
           :subject,
       )

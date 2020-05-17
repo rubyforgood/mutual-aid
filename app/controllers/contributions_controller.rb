@@ -1,4 +1,5 @@
 class ContributionsController < ApplicationController
+  skip_before_action :authenticate_user!, except: [:submissions_thank_you, :respond]
   before_action :set_contribution, only: [:respond]
 
   def index

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :communication_logs
   resources :community_resources
   resources :contact_methods
-  get "/combined_form", to: "contributions#combined_form", as: "combined_form_public"
+  get "/combined_form", to: "contributions#combined_form", as: "combined_form"
   get "/thank_you", to: "contributions#thank_you", as: "contribution_thank_you"
   resources :contributions, only: [:index] do
     member do

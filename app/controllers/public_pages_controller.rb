@@ -8,9 +8,6 @@ class PublicPagesController < PublicController
     @announcements = Announcement.where(is_approved: true).published
   end
 
-  def combined_form
-  end
-
   def community_resources
     @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin?
     @community_resources = CommunityResource.where(is_approved: true).published

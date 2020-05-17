@@ -48,7 +48,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       preferred_contact_method_name = "Unknown"
       field_name = nil
     end
-    ContactMethod.where("LOWER(name) = ?", preferred_contact_method_name.downcase).first_or_create!(name: preferred_contact_method_name, field_name: field_name)
+    ContactMethod.method_name(preferred_contact_method_name.downcase).first_or_create!(name: preferred_contact_method_name, field_name: field_name)
   end
 
   def create_person_from_row(row)

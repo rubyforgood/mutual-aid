@@ -15,8 +15,9 @@ namespace :db do
                             'db:import_all_seeds',
                             'db:stats_check']
 
-  task :setup_seeds => ['db_setup',
-                        'db:import_all_seeds']
+  task :setup_seeds => ['db:setup',
+                        'db:import_all_seeds',
+                        'db:stats_check']
 
   task :import_all_seeds => ['db:import_dev_seeds',
                              'db:import_submission_response_seeds',

@@ -12,6 +12,7 @@ class DonationsController < ApplicationController
   def new
     @donation = Donation.new
     @donation.build_person
+    set_form_dropdowns
   end
 
   def edit
@@ -22,6 +23,7 @@ class DonationsController < ApplicationController
 
     respond_to do |format|
       if @donation.save
+        set_form_dropdowns
         format.html { redirect_to @admin_status ? donations_path : root_path, notice: 'Donation was successfully created.' }
         format.json { render :show, status: :created, location: @donation }
       else
@@ -54,6 +56,10 @@ class DonationsController < ApplicationController
   private
     def set_donation
       @donation = Donation.find(params[:id])
+    end
+
+    def set_form_dropdowns
+      @contact_methods = ContactMethod.enabled_public
     end
 
     def donation_params

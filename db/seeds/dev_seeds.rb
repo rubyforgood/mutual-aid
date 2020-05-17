@@ -3,7 +3,7 @@
 
 require 'faker'
 
-non_autoemail_contact_methods = ContactMethod.autoemail(false)
+non_autoemail_contact_methods = ContactMethod.enabled_public
 
 host_organization = Organization.where(is_instance_owner: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
 
@@ -18,8 +18,8 @@ location_type = LocationType.all.sample
   ServiceArea.create!(name: Faker::Address.community, location: location, organization: host_organization, service_area_type: ServiceArea::TYPES)
 end
 
-email_contact_method = ContactMethod.where(ContactMethod.arel_table[:field].lower.eq('email')).first || ContactMethod.create!(name: "Email", field: "email")
-phone_contact_method = ContactMethod.where(ContactMethod.arel_table[:field].lower.eq('phone')).first || ContactMethod.create!(name: "Call", field: "phone")
+email_contact_method = ContactMethod.field_name('email').first || ContactMethod.create!(name: "Email", field: "email")
+phone_contact_method = ContactMethod.field_name('phone').first || ContactMethod.create!(name: "Call", field: "phone")
 
 # people
 person = Person.where(name: Faker::Name.name, preferred_contact_method: email_contact_method, email: Faker::Internet.email).first_or_create!
@@ -92,13 +92,19 @@ org = Organization.where(name: "Diaper Bank").first_or_create!
 CommunityResource.where(name: "this is diapers for you", description: "first come first serve", organization: org).first_or_create!
 5.times do
   org = Organization.create!(name: Faker::Company.name)
-  CommunityResource.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "), description: Faker::Lorem.sentences(number: (1..5).to_a.sample).join(" "), organization: org)
+  CommunityResource.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
+                            is_approved: [true,false].sample,
+                            publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now),
+                            description: Faker::Lorem.sentences(number: (1..5).to_a.sample).join(" "), organization: org)
 end
 
 # announcements
 Announcement.where(name: "Lansing urgent care are sharing free face masks", description: "Announcement announcement urgent care! Free masks!").first_or_create!
 5.times do
-  Announcement.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "), description: Faker::Lorem.sentences(number: (1..6).to_a.sample).join(" "))
+  Announcement.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
+                       is_approved: [true,false].sample,
+                       publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now),
+                       description: Faker::Lorem.sentences(number: (1..6).to_a.sample).join(" "))
 end
 
 # communication_logs
@@ -113,7 +119,7 @@ log_1 = CommunicationLog.where(
 log_2 = CommunicationLog.where(
     subject: "we'd like your feedback!",
     body: "how was your experience?",
-    delivery_method: ContactMethod.autoemail(true).last,
+    delivery_method: ContactMethod.autoemail(true).sample,
     delivery_status: "completed"
 ).first_or_create!(sent_at: Time.now - 1.day)
 

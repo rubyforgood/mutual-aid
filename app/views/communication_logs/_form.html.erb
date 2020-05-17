@@ -19,7 +19,7 @@
     <%= f.input :subject, as: :text, input_html: { rows: 1 } %>
 
     <hr>
-    <% if f.object.persisted? && f.object.delivery_method&.name == ContactMethod.autoemail(true).last.name %>
+    <% if f.object.persisted? && f.object.delivery_method&.name == ContactMethod.autoemail(true).sample.name %>
       <%= f.label :body, class: "label" %>
       <%= f.object.body&.html_safe || "-- Empty --" %>
     <% else %>

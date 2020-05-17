@@ -2,23 +2,30 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <% if @receiver.present? %>
-      <div>for: </div><span class="title"><%= @receiver.name %></span></div>
-      <%= f.hidden_field :receiver_id, value: @receiver.id %>
-      <%= f.hidden_field :receiver_type, value: @receiver.type %>
-      <hr>
-    <% end %>
-
-    <% if @provider.present? %>
-      <div>for: </div><span class="title"><%= @provider.name %></span></div>
-      <%= f.hidden_field :provider_id, value: @provider.id %>
-      <%= f.hidden_field :provider_type, value: @provider.type %>
-      <hr>
-      <%= f.input :receiver_id, as: :select, collection: Ask.unmatched %>
+    <% if @match.receiver_id && @match.provider_id %>
+      <%= f.input :receiver_id, as: :select, collection: Ask.unmatched, selected: @match.receiver_id %>
       <%= f.hidden_field :receiver_type, value: "Ask" %>
-    <% else %>
-      <%= f.input :provider_id, as: :select, collection: Offer.unmatched %>
+      <%= f.input :provider_id, as: :select, collection: Offer.unmatched, selected: @match.provider_id %>
       <%= f.hidden_field :provider_type, value: "Offer" %>
+    <% else %>
+      <% if @receiver.present? || @match.receiver_id %>
+        <div>for: </div><span class="title"><%= @receiver&.name || @match.receiver&.name %></span></div>
+        <%= f.hidden_field :receiver_id, value: @receiver&.id || @match.receiver&.id %>
+        <%= f.hidden_field :receiver_type, value: @receiver&.type || @match.receiver&.type %>
+        <hr>
+      <% end %>
+
+      <% if @provider.present? || @match.provider_id %>
+        <div>for: </div><span class="title"><%= @provider&.name || @match.provider&.name %></span></div>
+        <%= f.hidden_field :provider_id, value: @provider&.id || @match.provider&.id %>
+        <%= f.hidden_field :provider_type, value: @provider&.type || @match.provider&.type %>
+        <hr>
+        <%= f.input :receiver_id, as: :select, collection: Ask.unmatched, selected: @receiver&.id || @match.receiver_id %>
+        <%= f.hidden_field :receiver_type, value: "Ask" %>
+      <% else %>
+        <%= f.input :provider_id, as: :select, collection: Offer.unmatched, selected: @provider&.id || @match.provider_id %>
+        <%= f.hidden_field :provider_type, value: "Offer" %>
+      <% end %>
     <% end %>
 
 
@@ -32,7 +39,7 @@
         <%= f.input :status, readonly: true %>
       <% end %>
     </div>
-  </div>
+    </div>
 
-  <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+    <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
 <% end %>

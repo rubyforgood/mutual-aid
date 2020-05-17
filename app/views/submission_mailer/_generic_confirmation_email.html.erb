@@ -6,11 +6,11 @@
   <div>Thank you for your response to <%= @organization_name %>'s <%= @form_name %>!</div>
 
   <div>
-    <% if @submission.moderation_requested? || @system_setting.dispatch_moderated? %>
+    <% if @submission.moderation_requested? || @system_settings.dispatch_moderated? %>
       We’ll contact you within a few days to see if we can be of assistance.
-    <% elsif @system_setting.peer_to_peer? %>
+    <% elsif @system_settings.peer_to_peer? %>
       We hope you're contacted soon by a neighbor!
-    <% elsif @system_setting.hybrid? %>
+    <% elsif @system_settings.hybrid? %>
       We hope you're contacted soon by a neighbor or by our group. If your need is urgent and you still haven't been contacted, reach out to us directly.
     <% end %>
   </div>

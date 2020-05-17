@@ -2,6 +2,19 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
 
   def index
+    @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
+    @contributions = ContributionBlueprint.render(
+        BrowseFilter.contributions_for(filter_params),
+        profile_path: ->(id) { person_path(id) },
+        respond_path: ->(id) { respond_contribution_path(id)}
+    )
+    respond_to do |format|
+      format.html
+      format.json { render inline: @contributions }
+    end
+  end
+
+  def listings_index
     @listings = Listing.all
   end
 

@@ -13,12 +13,16 @@ class Submission < ApplicationRecord
     privacy_level_requested == "moderation_requested"
   end
 
+  def name
+    "#{created_at.strftime("%m-%d-%Y")}: #{person.name}. [#{all_tags_list}] (#{service_area.name})"
+  end
+
   def category_list
     all_tags_list #["transportation", "groceries"]
   end
 
   def urgency
-    "I can wait a week [TBD]" # TODO hard-coded
+    "I can wait a week"
   end
 
   def name

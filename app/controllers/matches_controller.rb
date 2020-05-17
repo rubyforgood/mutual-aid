@@ -14,6 +14,7 @@ class MatchesController < ApplicationController
   end
 
   def edit
+    set_form_dropdowns
   end
 
   def create
@@ -22,6 +23,7 @@ class MatchesController < ApplicationController
     if @match.save
       redirect_to matches_path, notice: 'Match was successfully created.'
     else
+      set_form_dropdowns
       render :new
     end
   end
@@ -30,6 +32,7 @@ class MatchesController < ApplicationController
     if @match.update(match_params)
       redirect_to matches_path, notice: 'Match was successfully updated.'
     else
+      set_form_dropdowns
       render :edit
     end
   end

@@ -32,6 +32,7 @@ class MobilityStringTranslationsController < ApplicationController
     if @mobility_string_translation.update(mobility_string_translation_params)
       redirect_to mobility_string_translations_path, notice: 'Mobility string translation was successfully updated.'
     else
+      set_form_dropdowns
       render :edit
     end
   end
@@ -52,12 +53,12 @@ class MobilityStringTranslationsController < ApplicationController
 
     def mobility_string_translation_params
       params.require(:mobility_string_translation).permit(
-          :translatable_type,
-          :translatable_id,
-          :locale,
-          :key,
-          :value,
-          :created_by_id,
-          :is_approved)
+        :translatable_type,
+        :translatable_id,
+        :locale,
+        :key,
+        :value,
+        :created_by_id,
+        :is_approved)
     end
 end

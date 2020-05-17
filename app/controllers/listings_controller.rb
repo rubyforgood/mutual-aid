@@ -18,14 +18,6 @@ class ListingsController < ApplicationController
     @listings = Listing.all
   end
 
-  def show
-  end
-
-  def new
-    @listing = Listing.new
-    set_form_dropdowns
-  end
-
   def match
     listing_type = @listing.type
     match_polymorphic_params = listing_type == Ask ? { receiver: @listing } : { provider: @listing }
@@ -36,6 +28,14 @@ class ListingsController < ApplicationController
 
   def match_confirm
     @match = Match.first # TODO - implement match id here
+  end
+
+  def show
+  end
+
+  def new
+    @listing = Listing.new
+    set_form_dropdowns
   end
 
   def edit

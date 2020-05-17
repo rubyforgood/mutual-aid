@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-
+    set_form_dropdowns
   end
 
   def create

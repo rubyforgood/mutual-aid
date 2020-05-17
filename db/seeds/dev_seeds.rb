@@ -119,7 +119,7 @@ log_1 = CommunicationLog.where(
 log_2 = CommunicationLog.where(
     subject: "we'd like your feedback!",
     body: "how was your experience?",
-    delivery_method: ContactMethod.autoemail(true).last,
+    delivery_method: ContactMethod.autoemail(true).sample,
     delivery_status: "completed"
 ).first_or_create!(sent_at: Time.now - 1.day)
 

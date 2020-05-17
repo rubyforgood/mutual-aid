@@ -3,10 +3,12 @@ class ContributionsController < ApplicationController
   before_action :set_contribution, only: [:respond]
 
   def index
-    @filter_types = FilterTypeBlueprint.render([Category, ServiceArea])
-    contribution_types = contribution_type_params
-    contribution_types ||= CONTRIBUTION_MODELS.values
-    @contributions = ContributionBlueprint.render(contributions_for(filter_params, contribution_types))
+    @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
+    @contributions = ContributionBlueprint.render(
+        BrowseFilter.contributions_for(filter_params),
+        profile_path: ->(id) { person_path(id) },
+        respond_path: ->(id) { respond_contribution_path(id)}
+    )
     respond_to do |format|
       format.html
       format.json { render inline: @contributions }

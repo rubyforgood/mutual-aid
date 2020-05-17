@@ -21,7 +21,7 @@
   <tbody>
     <% @submission_responses.each do |submission_response| %>
       <tr>
-        <td><%= submission_response.submission_id %></td>
+        <td><%= submission_response.submission&.name %></td>
         <td><%= submission_response.custom_form_question&.name %></td>
         <td><%= submission_response.boolean_response %></td>
         <td><%= submission_response.date_response %></td>

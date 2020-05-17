@@ -92,13 +92,19 @@ org = Organization.where(name: "Diaper Bank").first_or_create!
 CommunityResource.where(name: "this is diapers for you", description: "first come first serve", organization: org).first_or_create!
 5.times do
   org = Organization.create!(name: Faker::Company.name)
-  CommunityResource.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "), description: Faker::Lorem.sentences(number: (1..5).to_a.sample).join(" "), organization: org)
+  CommunityResource.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
+                            is_approved: [true,false].sample,
+                            publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now),
+                            description: Faker::Lorem.sentences(number: (1..5).to_a.sample).join(" "), organization: org)
 end
 
 # announcements
 Announcement.where(name: "Lansing urgent care are sharing free face masks", description: "Announcement announcement urgent care! Free masks!").first_or_create!
 5.times do
-  Announcement.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "), description: Faker::Lorem.sentences(number: (1..6).to_a.sample).join(" "))
+  Announcement.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
+                       is_approved: [true,false].sample,
+                       publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now),
+                       description: Faker::Lorem.sentences(number: (1..6).to_a.sample).join(" "))
 end
 
 # communication_logs

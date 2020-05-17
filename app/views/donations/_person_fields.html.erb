@@ -9,7 +9,7 @@
       <% end %>
       <%= ff.input :name, label: "Donor name", required: true, hint: "(can be 'anonymous')" %>
       <%= ff.association :preferred_contact_method, as: :select,
-                         collection: ContactMethod.all, label: "Donor contact method", hint: "(their preferred method)" %>
+                         collection: @contact_methods, label: "Donor contact method", hint: "(their preferred method)" %>
       <%= ff.input :email, label: "Donor email" %>
       <%= ff.input :phone, label: "Donor phone" %>
     </div>

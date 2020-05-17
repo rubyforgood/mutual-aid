@@ -58,6 +58,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def set_form_dropdowns
+    @contact_methods = ContactMethod.public # for nested Person
+  end
+
   def user_params
     params.require(:user).permit(:email, person_attributes: [ :id, :name, :email, :phone, :preferred_contact_method_id, :_destroy ] )
   end

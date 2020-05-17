@@ -1,5 +1,5 @@
 class ContributionsController < ApplicationController
-  skip_before_action :authenticate_user!, except: [:submissions_thank_you, :respond]
+  before_action :authenticate_user!, except: [:combined_form, :respond, :submissions_thank_you]
   before_action :set_contribution, only: [:respond]
 
   def index
@@ -11,6 +11,9 @@ class ContributionsController < ApplicationController
       format.html
       format.json { render inline: @contributions }
     end
+  end
+
+  def combined_form
   end
 
   def respond

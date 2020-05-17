@@ -17,9 +17,6 @@ class PublicPagesController < PublicController
     redirect_to listings_path # TODO - change current /listings endpoint to point to this one
   end
 
-  def combined_form
-  end
-
   def landing_page
   end
 end

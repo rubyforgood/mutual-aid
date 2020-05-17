@@ -10,6 +10,7 @@
       <th>Phone</th>
       <th>Primary contact</th>
       <th>Is instance owner</th>
+      <th>Display on org chart</th>
       <th>Has sms account</th>
       <th>Has hosting account</th>
       <th>Has mailer account</th>
@@ -27,6 +28,7 @@
         <td><%= organization.phone %></td>
         <td><%= organization.primary_contact&.name %></td>
         <td><%= yes_no(organization.is_instance_owner) %></td>
+        <td><%= yes_no(organization.display_on_org_chart) %></td>
         <td><%= yes_no(organization.has_sms_account) %></td>
         <td><%= yes_no(organization.has_hosting_account) %></td>
         <td><%= yes_no(organization.has_mailer_account) %></td>

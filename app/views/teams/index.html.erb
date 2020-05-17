@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Description</th>
       <th>Organization</th>
+      <th>Display on org chart</th>
       <th>Edit</th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
         <td><%= team.name %></td>
         <td><%= team.description %></td>
         <td><%= team.organization&.name %></td>
+        <td><%= yes_no(team.display_on_org_chart) %></td>
         <td><%= edit_button(team) %></td>
       </tr>
     <% end %>

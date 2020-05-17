@@ -19,35 +19,24 @@ class CommunicationLogsController < ApplicationController
   def create
     @communication_log = CommunicationLog.new(communication_log_params)
 
-    respond_to do |format|
-      if @communication_log.save
-        format.html { redirect_to communication_logs_path, notice: 'Communication log was successfully created.' }
-        format.json { render :show, status: :created, location: @communication_log }
-      else
-        format.html { render :new }
-        format.json { render json: @communication_log.errors, status: :unprocessable_entity }
-      end
+    if @communication_log.save
+      redirect_to communication_logs_path, notice: 'Communication log was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @communication_log.update(communication_log_params)
-        format.html { redirect_to communication_logs_path, notice: 'Communication log was successfully updated.' }
-        format.json { render :show, status: :ok, location: @communication_log }
-      else
-        format.html { render :edit }
-        format.json { render json: @communication_log.errors, status: :unprocessable_entity }
-      end
+    if @communication_log.update(communication_log_params)
+      redirect_to communication_logs_path, notice: 'Communication log was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @communication_log.destroy
-    respond_to do |format|
-      format.html { redirect_to communication_logs_url, notice: 'Communication log was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to communication_logs_url, notice: 'Communication log was successfully destroyed.'
   end
 
   private

@@ -23,37 +23,26 @@ class ServiceAreasController < ApplicationController
   def create
     @service_area = ServiceArea.new(service_area_params)
 
-    respond_to do |format|
-      if @service_area.save
-        format.html { redirect_to service_areas_path, notice: 'ServiceArea was successfully created.' }
-        format.json { render :show, status: :created, location: @service_area }
-      else
-        set_form_dropdowns
-        format.html { render :new }
-        format.json { render json: @service_area.errors, status: :unprocessable_entity }
-      end
+    if @service_area.save
+      redirect_to service_areas_path, notice: 'ServiceArea was successfully created.'
+    else
+      set_form_dropdowns
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @service_area.update(service_area_params)
-        format.html { redirect_to service_areas_path, notice: 'ServiceArea was successfully updated.' }
-        format.json { render :show, status: :ok, location: @service_area }
-      else
-        set_form_dropdowns
-        format.html { render :edit }
-        format.json { render json: @service_area.errors, status: :unprocessable_entity }
-      end
+    if @service_area.update(service_area_params)
+      redirect_to service_areas_path, notice: 'ServiceArea was successfully updated.'
+    else
+      set_form_dropdowns
+      render :edit
     end
   end
 
   def destroy
     @service_area.destroy
-    respond_to do |format|
-      format.html { redirect_to service_areas_url, notice: 'ServiceArea was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to service_areas_url, notice: 'ServiceArea was successfully destroyed.'
   end
 
   private

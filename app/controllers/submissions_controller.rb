@@ -20,48 +20,34 @@ class SubmissionsController < ApplicationController
   def create
     @submission = Submission.new(submission_params)
 
-    respond_to do |format|
-      if @submission.save
-        Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
-        # send the email
-        autoemail = SubmissionMailer.new_submission_confirmation_email(@submission)
-        delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
+    if @submission.save
+      Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
+      # send the email
+      autoemail = SubmissionMailer.new_submission_confirmation_email(@submission)
+      delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
 
-        # store email that was sent
-        CommunicationLog.log_submission_email(autoemail, delivery_status, @submission, nil, current_user)
+      # store email that was sent
+      CommunicationLog.log_submission_email(autoemail, delivery_status, @submission, nil, current_user)
 
-        format.html { redirect_to submissions_path,
-                                  notice: 'Submission successfully created.' }
-        format.json { render :new,
-                             status: :created,
-                             location: @submission }
-      else
-        set_form_dropdowns
-        format.html { render :new }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
+      redirect_to submissions_path, notice: 'Submission successfully created.'
+    else
+      set_form_dropdowns
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @submission.update(submission_params)
-        format.html { redirect_to submissions_path, notice: 'Submission was successfully updated.' }
-        format.json { render :show, status: :ok, location: @submission }
-      else
-        set_form_dropdowns
-        format.html { render :edit }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
+    if @submission.update(submission_params)
+      redirect_to submissions_path, notice: 'Submission was successfully updated.'
+    else
+      set_form_dropdowns
+      render :edit
     end
   end
 
   def destroy
     @submission.destroy
-    respond_to do |format|
-      format.html { redirect_to submissions_url, notice: 'Submission was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to submissions_url, notice: 'Submission was successfully destroyed.'
   end
 
   private

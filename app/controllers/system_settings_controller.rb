@@ -21,35 +21,24 @@ class SystemSettingsController < ApplicationController
   def create
     @system_setting = SystemSetting.new(system_setting_params)
 
-    respond_to do |format|
-      if @system_setting.save
-        format.html { redirect_to system_settings_path, notice: 'System setting was successfully created.' }
-        format.json { render :show, status: :created, location: @system_setting }
-      else
-        format.html { render :new }
-        format.json { render json: @system_setting.errors, status: :unprocessable_entity }
-      end
+    if @system_setting.save
+      redirect_to system_settings_path, notice: 'System setting was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @system_setting.update(system_setting_params)
-        format.html { redirect_to system_settings_path, notice: 'System setting was successfully updated.' }
-        format.json { render :show, status: :ok, location: @system_setting }
-      else
-        format.html { render :edit }
-        format.json { render json: @system_setting.errors, status: :unprocessable_entity }
-      end
+    if @system_setting.update(system_setting_params)
+      redirect_to system_settings_path, notice: 'System setting was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @system_setting.destroy
-    respond_to do |format|
-      format.html { redirect_to system_settings_url, notice: 'System setting was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to system_settings_url, notice: 'System setting was successfully destroyed.'
   end
 
   private

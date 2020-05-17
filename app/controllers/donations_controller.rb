@@ -10,9 +10,9 @@ class DonationsController < ApplicationController
   end
 
   def new
+    set_form_dropdowns
     @donation = Donation.new
     @donation.build_person
-    set_form_dropdowns
   end
 
   def edit
@@ -21,36 +21,26 @@ class DonationsController < ApplicationController
   def create
     @donation = Donation.new(donation_params)
 
-    respond_to do |format|
-      if @donation.save
-        set_form_dropdowns
-        format.html { redirect_to @admin_status ? donations_path : root_path, notice: 'Donation was successfully created.' }
-        format.json { render :show, status: :created, location: @donation }
-      else
-        format.html { render :new }
-        format.json { render json: @donation.errors, status: :unprocessable_entity }
-      end
+    if @donation.save
+      redirect_to @admin_status ? donations_path : root_path, notice: 'Donation was successfully created.'
+    else
+      set_form_dropdowns
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @donation.update(donation_params)
-        format.html { redirect_to donations_path, notice: 'Donation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @donation }
-      else
-        format.html { render :edit }
-        format.json { render json: @donation.errors, status: :unprocessable_entity }
-      end
+    if @donation.update(donation_params)
+      redirect_to donations_path, notice: 'Donation was successfully updated.'
+    else
+      set_form_dropdowns
+      render :edit
     end
   end
 
   def destroy
     @donation.destroy
-    respond_to do |format|
-      format.html { redirect_to donations_url, notice: 'Donation was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to donations_url, notice: 'Donation was successfully destroyed.'
   end
 
   private
@@ -68,7 +58,7 @@ class DonationsController < ApplicationController
           :channel,
           :thank_you_sent,
           :notes,
-          person_attributes: [ :id, :preferred_contact_method_id, :name, :email, :phone, :_destroy]
+          person_attributes: [ :id, :preferred_contact_method_id, :name, :email, :phone, :_destroy ]
       )
     end
 end

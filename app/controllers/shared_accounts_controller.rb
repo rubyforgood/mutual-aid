@@ -18,35 +18,24 @@ class SharedAccountsController < ApplicationController
   def create
     @shared_account = SharedAccount.new(shared_account_params)
 
-    respond_to do |format|
-      if @shared_account.save
-        format.html { redirect_to shared_accounts_path, notice: 'Shared account was successfully created.' }
-        format.json { render :show, status: :created, location: @shared_account }
-      else
-        format.html { render :new }
-        format.json { render json: @shared_account.errors, status: :unprocessable_entity }
-      end
+    if @shared_account.save
+      redirect_to shared_accounts_path, notice: 'Shared account was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @shared_account.update(shared_account_params)
-        format.html { redirect_to shared_accounts_path, notice: 'Shared account was successfully updated.' }
-        format.json { render :show, status: :ok, location: @shared_account }
-      else
-        format.html { render :edit }
-        format.json { render json: @shared_account.errors, status: :unprocessable_entity }
-      end
+    if @shared_account.update(shared_account_params)
+      redirect_to shared_accounts_path, notice: 'Shared account was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @shared_account.destroy
-    respond_to do |format|
-      format.html { redirect_to shared_accounts_url, notice: 'Shared account was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to shared_accounts_url, notice: 'Shared account was successfully destroyed.'
   end
 
   private

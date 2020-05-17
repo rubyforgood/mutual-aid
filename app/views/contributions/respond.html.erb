@@ -23,7 +23,7 @@ Current matches:
   <%= link_to("Find Match [TBD]",
               match_listing_path(@contribution, receiver_id: @contribution.id, receiver_type: "Ask"),
               class: "button") %>
-  <%= render "layouts/view_add_new_button", table_name: "matches", new_params: "receiver_id=#{@contribution.id}&receiver_type=Offer" %>
+  <%= render "layouts/view_add_new_button", table_name: "matches", new_params: "receiver_id=#{@contribution.id}&receiver_type=Ask" %>
 <% elsif @contribution.type == "Offer" %>
   <%= link_to("Find Match [TBD]",
               match_listing_path(@contribution, provider_id: @contribution.id, provider_type: "Offer"),

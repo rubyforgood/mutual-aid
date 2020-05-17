@@ -1,5 +1,5 @@
 export default class {
-  constructor(path = '/listing.json?', injectedFetch) {
+  constructor(path = '/contribution.json?', injectedFetch) {
     !!injectedFetch
       ? (this.injectedFetch = injectedFetch)
       : (this.injectedFetch = this.defaultFetch())

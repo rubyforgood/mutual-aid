@@ -12,6 +12,7 @@
       <th>Start date</th>
       <th>End date</th>
       <th>Is primary</th>
+      <th>Display on org chart</th>
       <th>Notes</th>
       <th>Edit</th>
     </tr>
@@ -28,6 +29,7 @@
         <td><%= position.start_date %></td>
         <td><%= position.end_date %></td>
         <td><%= yes_no(position.is_primary) %></td>
+        <td><%= yes_no(position.display_on_org_chart) %></td>
         <td><%= position.notes %></td>
         <td><%= edit_button(position) %></td>
       </tr>

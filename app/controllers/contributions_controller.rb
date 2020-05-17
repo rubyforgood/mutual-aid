@@ -7,6 +7,10 @@ class ContributionsController < ApplicationController
     contribution_types = contribution_type_params
     contribution_types ||= CONTRIBUTION_MODELS.values
     @contributions = ContributionBlueprint.render(contributions_for(filter_params, contribution_types))
+    respond_to do |format|
+      format.html
+      format.json { render inline: @contributions }
+    end
   end
 
   def combined_form

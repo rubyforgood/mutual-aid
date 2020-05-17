@@ -20,7 +20,7 @@ class ContributionsController < ApplicationController
     @contribution = Listing.find(params[:id])
   end
 
-  def submissions_thank_you
+  def thank_you
   end
 
   def allowed_params

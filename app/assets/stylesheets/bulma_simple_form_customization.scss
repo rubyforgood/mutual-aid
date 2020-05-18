@@ -9,6 +9,12 @@
     padding-top: 3em;
   }
 
+  .is-grouped {
+    &.field {
+      inline-size: max-content;
+    }
+  }
+
   .field {
     padding: 0em 2em 1em 0em;  // spacing between fields
   }

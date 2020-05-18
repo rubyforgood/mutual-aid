@@ -1,5 +1,5 @@
 class ContributionsController < ApplicationController
-  before_action :authenticate_user!, except: [:combined_form, :respond, :submissions_thank_you]
+  before_action :authenticate_user!, except: [:combined_form, :respond, :thank_you]
   before_action :set_contribution, only: [:respond]
 
   def index

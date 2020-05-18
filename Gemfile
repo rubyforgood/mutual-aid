@@ -24,6 +24,7 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'blueprinter'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
+gem 'faker' # need this in prod for demo seeds to work
 gem 'jbuilder', '~> 2.7'
 gem 'mobility', '~> 0.8.9'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -38,7 +39,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'binding_of_caller'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rspec-rails'

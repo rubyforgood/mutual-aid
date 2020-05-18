@@ -29,10 +29,13 @@
     </div>
     <div class="actions">
       <div class="buttonSpacing" v-if="profile_path">
-        <a :href="profile_path" class="button icon-list is-primary is-outlined">View Profile</a>
+        <a :href="profile_path" class="button icon-list is-primary is-outlined"><span class="fa fa-user-circle"></span></a>
       </div>
       <div class="buttonSpacing" v-if="respond_path">
         <a :href="respond_path" class="button icon-list is-primary is-outlined">Respond</a>
+      </div>
+      <div class="buttonSpacing" v-if="match_path">
+        <a :href="match_path" class="button icon-list is-primary is-outlined">Match</a>
       </div>
     </div>
   </li>
@@ -41,6 +44,7 @@
 <script>
 import TagList from 'components/TagList'
 import MappedIconList from 'components/MappedIconList'
+import SingleIcon from 'components/SingleIcon'
 
 export default {
   props: {
@@ -53,10 +57,12 @@ export default {
     urgency: Object,
     contact_types: {type: Array, default: () => []},
     profile_path: String,
-    respond_path: String
+    respond_path: String,
+    match_path: String
   },
   components: {
     TagList,
+    SingleIcon,
     MappedIconList,
   },
   computed: {

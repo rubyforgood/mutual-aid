@@ -15,6 +15,9 @@
     </template>
 
     <template slot="end" v-if="loggedIn">
+      <b-navbar-item tag="div">
+        <FeedbackButton action="software_feedbacks/new">Feedback</FeedbackButton>
+      </b-navbar-item>
       <b-navbar-item href="/users/edit">Account</b-navbar-item>
       <b-navbar-item href="/admin">Admin</b-navbar-item>
       <b-navbar-item tag="div">
@@ -32,6 +35,7 @@
 <script>
 import logo from 'images/logo.png'
 import {DeleteButton} from 'components/forms'
+import {FeedbackButton} from 'components/forms'
 
 export default {
   props: {
@@ -39,8 +43,13 @@ export default {
   },
   components: {
     DeleteButton,
+    FeedbackButton
   },
   logo: logo,
+
+  pageUrl() {
+    return window.location.href
+  }
 }
 </script>
 

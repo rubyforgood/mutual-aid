@@ -7,7 +7,7 @@
         <%= f.input :name, label: "Topic/name", as: :text, input_html: { rows: 1 } %>
       </div>
       <div class="column is-6">
-        <%= f.input :page_url, as: :text, hint: "(e.g. https://www.google.com)", input_html: { rows: 1 } %>
+        <%= f.input :page_url, as: :text, hint: "(e.g. https://www.google.com)", input_html: { rows: 1, value: f.object.page_url || params[:page_url] } %>
       </div>
     </div>
     <div class="field is-grouped">

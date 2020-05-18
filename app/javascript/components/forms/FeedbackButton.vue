@@ -1,23 +1,15 @@
 <template>
-  <form :action="action" method="get">
-    <input type="hidden" :name="123"/><!-- # TODO get this to capture page_url window.location.href page_url=123-->
-    <button class="button is-outlined">
-      <slot />
-    </button>
-  </form>
+  <a :href="url" class="button is-outlined">
+    Feedback
+  </a>
 </template>
 
 <script>
-import AuthTokenInput from './AuthTokenInput'
-
 export default {
-  components: {AuthTokenInput},
-  props: {
-    action: String,
-  },
   computed: {
-    authenticityToken() {
-      return document.querySelector('meta[name="csrf-token"]').content
+    url() {
+      const pathname = window.location.pathname
+      return `/software_feedbacks/new?page_url=${pathname}`
     },
   },
 }

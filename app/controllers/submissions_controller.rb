@@ -20,8 +20,10 @@ class SubmissionsController < ApplicationController
   def create
     @submission = Submission.new(submission_params)
 
-    if @submission.save && email_confirmation_and_log(@submission, current_user)
-      redirect_to submissions_path, notice: 'Submission successfully created.'
+    outcome = SaveSubmission.run params[:submission] # saving a Submission based on Listing properties bc
+    # creating Listing first rn, but prob need to reverse that since listing belongs_to :submission now
+    if outcome.valid?
+      redirect_to contribution_thank_you_path, notice: 'Submission was successfully created.'
     else
       set_form_dropdowns
       render :new
@@ -40,16 +42,6 @@ class SubmissionsController < ApplicationController
   def destroy
     @submission.destroy
     redirect_to submissions_url, notice: 'Submission was successfully destroyed.'
-  end
-
-  def email_confirmation_and_log(submission, current_user)
-    Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
-    # send the email
-    autoemail = SubmissionMailer.new_submission_confirmation_email(submission, @system_setting)
-    delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
-
-    # store email that was sent
-    CommunicationLog.log_submission_email(autoemail, delivery_status, submission, CommunicationLog::AUTO_DELIVERY_CHANNEL, current_user)
   end
 
   private

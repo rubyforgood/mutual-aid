@@ -8,7 +8,7 @@
       <%= f.association :organization %>
     </div>
     <div class="field is-grouped">
-      <%= f.input :position_type, as: :select, required: true, collection: Position::FORM_CONTACT_TITLES %>
+      <%= f.input :position_type, as: :select, collection: Position::FORM_CONTACT_TITLES %>
       <%= f.input :name %>
     </div>
     <%= f.input :description %>

@@ -30,7 +30,6 @@ RSpec.describe ContributionBlueprint do
                                "created_at" => contribution.created_at.to_formatted_s(:iso8601),
                                'respond_path' => nil,
                                'profile_path' => nil,
-                               'match_path' => nil,
                                "service_area" => {"id" => contribution.service_area.id, "name" => expected_area_name},
                                # "map_location" => "44.5,-85.1",
                                "title" => contribution.title,

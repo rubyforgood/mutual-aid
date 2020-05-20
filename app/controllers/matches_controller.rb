@@ -54,12 +54,21 @@ class MatchesController < ApplicationController
       elsif type == "Offer"
         @provider = Listing.where(type: type, id: params[:provider_id]).first
       end
+
+      if @match.receiver_id && @match.provider_id
+        @matched_asks = Ask.matched.map{ |a| [ a.name_and_contact_info.html_safe, a.id ] }.sort_by(&:first)
+        @matched_offers = Offer.matched.map{ |o| [ o.name_and_contact_info.html_safe, o.id] }.sort_by(&:first)
+      else
+        @unmatched_asks = Ask.unmatched.map{ |a| [ a.name_and_contact_info.html_safe, a.id ] }.sort_by(&:first)
+        @unmatched_offers = Offer.unmatched.map{ |o| [ o.name_and_contact_info.html_safe, o.id] }.sort_by(&:first)
+      end
     end
 
     def match_params
       params.require(:match).permit(
           :receiver_id,
           :provider_id,
+          :shift_id,
           :receiver_type,
           :provider_type,
           :status,

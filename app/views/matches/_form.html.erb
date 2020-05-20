@@ -3,27 +3,62 @@
 
   <div class="form-inputs">
     <% if @match.receiver_id && @match.provider_id %>
-      <%= f.input :receiver_id, as: :select, collection: Ask.unmatched, selected: @match.receiver_id %>
-      <%= f.hidden_field :receiver_type, value: "Ask" %>
-      <%= f.input :provider_id, as: :select, collection: Offer.unmatched, selected: @match.provider_id %>
-      <%= f.hidden_field :provider_type, value: "Offer" %>
+      <div class="is-grouped is-inline-flex">
+        <div class="field">
+          <%= f.label :profile, class: "label" %>
+          <div class="">
+            <%= show_button(@match.receiver, @match.receiver.person.name, "fa fa-user-circle") if @match.receiver %>
+          </div>
+        </div>
+        <%= f.input :receiver_id, as: :select, include_blank: true, collection: @matched_asks, selected: @match.receiver_id %>
+        <%= f.hidden_field :receiver_type, value: "Ask" %>
+      </div>
+
+      <div class="is-grouped is-inline-flex">
+        <div class="field">
+          <%= f.label :profile, class: "label" %>
+          <div class="">
+            <%= show_button(@match.provider, @match.provider.person.name, "fa fa-user-circle") if @match.provider%>
+          </div>
+        </div>
+        <%= f.input :provider_id, as: :select, include_blank: true, collection: @matched_offers, selected: @match.provider_id %>
+        <%= f.hidden_field :provider_type, value: "Offer" %>
+      </div>
     <% else %>
       <% if @receiver.present? || @match.receiver_id %>
-        <div>for: </div><span class="title"><%= @receiver&.name || @match.receiver&.name %></span></div>
-        <%= f.hidden_field :receiver_id, value: @receiver&.id || @match.receiver&.id %>
-        <%= f.hidden_field :receiver_type, value: @receiver&.type || @match.receiver&.type %>
+        <% receiver = @receiver || @match.receiver %>
+        <div>for: </div><span class="title"><%= receiver&.name %></span></div>
+        <%= f.hidden_field :receiver_id, value:receiver&.id %>
+        <%= f.hidden_field :receiver_type, value: receiver&.type %>
+        <% if receiver %>
+          <div class="contact-info">
+            <%= show_button(receiver, receiver.person&.name, "fa fa-user-circle") %>
+            <br>
+            <span class="<%= receiver.person.preferred_contact_method.icon_class %>"></span>
+            <span><%= receiver.person.preferred_contact_info %></span>
+          </div>
+        <% end %>
         <hr>
       <% end %>
 
       <% if @provider.present? || @match.provider_id %>
-        <div>for: </div><span class="title"><%= @provider&.name || @match.provider&.name %></span></div>
-        <%= f.hidden_field :provider_id, value: @provider&.id || @match.provider&.id %>
-        <%= f.hidden_field :provider_type, value: @provider&.type || @match.provider&.type %>
+        <% provider = @provider || @match.provider %>
+        <div>for: </div><span class="title"><%= provider&.name %></span></div>
+        <%= f.hidden_field :provider_id, value: provider&.id %>
+        <%= f.hidden_field :provider_type, value: provider&.type %>
+        <% if provider %>
+          <div class="contact-info">
+            <%= show_button(provider, provider.person&.name, "fa fa-user-circle") %>
+            <br>
+            <span class="<%= provider.person.preferred_contact_method.icon_class %>"></span>
+            <span><%= provider.person.preferred_contact_info %></span>
+          </div>
+        <% end %>
         <hr>
-        <%= f.input :receiver_id, as: :select, collection: Ask.unmatched, selected: @receiver&.id || @match.receiver_id %>
+        <%= f.input :receiver_id, as: :select, include_blank: true, collection: @unmatched_asks, selected: receiver&.id %>
         <%= f.hidden_field :receiver_type, value: "Ask" %>
       <% else %>
-        <%= f.input :provider_id, as: :select, collection: Offer.unmatched, selected: @provider&.id || @match.provider_id %>
+        <%= f.input :provider_id, as: :select, include_blank: true, collection: @unmatched_offers, selected: provider&.id %>
         <%= f.hidden_field :provider_type, value: "Offer" %>
       <% end %>
     <% end %>
@@ -33,12 +68,11 @@
       <%= f.input :notes, as: :text, input_html: { rows: 1, style: "width: 100%" } %>
     </div>
     <div class="field is-grouped">
-      <%= f.input :tentative, as: :radio_buttons, checked: false %>
-      <%= f.input :completed, as: :radio_buttons, checked: true %>
+      <%= f.input :tentative, as: :radio_buttons, checked: true %>
+      <%= f.input :completed, as: :radio_buttons, checked: false %>
       <% if @match.id.present? %>
-        <%= f.input :status, readonly: true %>
+        <%= f.input :status, readonly: true, hint: "(not editable -- system will compute this)" %>
       <% end %>
-    </div>
     </div>
 
     <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

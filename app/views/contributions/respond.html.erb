@@ -1,10 +1,10 @@
-<div class="title"><%= @contribution.name %></div>
+<h1 class="title">Respond to:</h1>
 
+<div class="subtitle is-5 has-text-weight-bold">
+  <%= show_button(@contribution, @contribution.name, @contribution.icon_class) %>
+  <%= show_button(@contribution.person, "", "fa fa-user-circle") %>
+</div>
 [This page is TBD, depending on how we define P2P workflows.]
-<hr>
-<%= show_button(@contribution.person, @contribution.person.name, "fa fa-user-circle") %>
-<%= show_button(@contribution, @contribution.name, @contribution.icon_class) %>
-<%= render "layouts/view_add_new_button", table_name: "communication_logs", new_params: "person_id=#{@contribution.person_id}" %>
 <hr>
 Current matches:
 <br>
@@ -30,3 +30,6 @@ Current matches:
               class: "button") %>
   <%= render "layouts/view_add_new_button", table_name: "matches", new_params: "provider_id=#{@contribution.id}&provider_type=Offer" %>
 <% end %>
+<hr>
+<%= render "layouts/view_add_new_button", table_name: "communication_logs", new_params: "person_id=#{@contribution.person_id}" %>
+<hr>

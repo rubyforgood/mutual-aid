@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Shift:</strong>
+  <%= @shift_match.shift_id %>
+</p>
+
+<p>
+  <strong>Match:</strong>
+  <%= @shift_match.match_id %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @shift_match.notes %>
+</p>
+
+<%= link_to 'Edit', edit_shift_match_path(@shift_match) %> |
+<%= link_to 'Back', shift_matches_path %>

@@ -1,0 +1,13 @@
+<%= simple_form_for @shift do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :person %>
+    <%= f.association :team %>
+    <%= f.input :started_at, as: :datetime, include_blank: true %>
+    <%= f.input :ended_at, as: :datetime, include_blank: true %>
+    <%= f.input :notes %>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, record: @shift, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

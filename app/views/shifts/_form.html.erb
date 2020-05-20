@@ -1,0 +1,32 @@
+<%= simple_form_for @shift do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="columns">
+      <div class="column">
+        <div class="is-grouped">
+          <%= f.association :person %>
+          <%= f.association :team %>
+        </div>
+        <div class="is-grouped">
+          <%= f.input :started_at, required: true %>
+          <%= f.input :ended_at, required: true %>
+        </div>
+        <%= f.input :notes %>
+      </div>
+      <div class="column">
+        Connected Matches:
+        <br>
+        <% @shift.matches.each do |match| %>
+          <%= edit_button(match, match.person_names, "") %>
+          <br>
+        <% end %>
+        <br>
+        <%= render "layouts/view_add_new_button", button_text: "Connect a Match", button_color_class: "is-primary is-outlined", table_name: "shift_matches", new_params: "person_id=#{@shift.person&.id}" %>
+      </div>
+    </div>
+
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, record: @shift, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

@@ -1,0 +1,32 @@
+<%= render "layouts/view_header", resource: @shifts.first %>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>Person</th>
+      <th>Times</th>
+      <th>Matches</th>
+      <th>Notes</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shifts.each do |shift| %>
+      <tr>
+        <td><%= shift.team.name %></td>
+        <td><%= shift.person&.name %></td>
+        <td><%= shift.times %></td>
+        <td>
+          <% shift.matches.each do |match| %>
+            <%= edit_button(match, match.short_name, "") %>
+            <%= ("<br>notes: " + match.notes).html_safe if match.notes %>
+          <% end %>
+        </td>
+        <td><%= shift.notes %></td>
+        <td><%= edit_button(shift) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

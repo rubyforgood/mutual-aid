@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :teams
   devise_for :users
 
   get "/admin",                    to: "admin#landing_page",    as: "landing_page_admin"
@@ -49,13 +48,16 @@ Rails.application.routes.draw do
   resources :organizations
   resources :people
   resources :positions
-  resources :shared_accounts
   resources :service_areas
+  resources :shared_accounts
+  resources :shifts
+  resources :shift_matches
   resources :software_feedbacks
   resources :submissions
   resources :submission_responses
   resources :system_locales
   resources :system_settings
+  resources :teams
   resources :users
 
   root :to => 'public#landing_page'

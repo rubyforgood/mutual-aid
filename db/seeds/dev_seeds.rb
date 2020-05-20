@@ -41,19 +41,19 @@ end
 
 # asks for person
 Category.all.pluck(:name).sample(4).each do |tag|
-  ask = Ask.where(person: person, service_area: ServiceArea.all.sample).create!
+  ask = Ask.where(person: person, service_area: ServiceArea.all.sample, urgency_level_id: (1..4).to_a.sample).create!
   ask.tag_list << tag
   ask.save!
 end
 # offers for person
 Category.all.pluck(:name).sample(2).each do |tag|
-  offer = Offer.where(person: person, service_area: ServiceArea.all.sample).create!
+  offer = Offer.where(person: person, service_area: ServiceArea.all.sample, urgency_level_id: (1..4).to_a.sample).create!
   offer.tag_list << tag
   offer.save!
 end
 # offers for person_2
 Category.all.pluck(:name).sample(4).each do |tag|
-  offer = Offer.where(person: person_2, service_area: ServiceArea.all.sample).create!
+  offer = Offer.where(person: person_2, service_area: ServiceArea.all.sample, urgency_level_id: (1..4).to_a.sample).create!
   offer.tag_list << tag
   offer.save!
 end
@@ -61,17 +61,17 @@ end
 # listings
 5.times do
   Category.all.pluck(:name).sample(4).each do |tag|
-    ask = Ask.where(person: Person.all.sample, service_area: ServiceArea.all.sample, created_at: Faker::Time.between(from: DateTime.now - 20.days, to: DateTime.now - 1.hour)).create!
+    ask = Ask.where(person: Person.all.sample, service_area: ServiceArea.all.sample, urgency_level_id: (1..4).to_a.sample, created_at: Faker::Time.between(from: DateTime.now - 20.days, to: DateTime.now - 1.hour)).create!
     ask.tag_list << tag
     ask.save!
 
     # complimentary offer
-    offer = Offer.where(person: Person.all.sample, service_area: ServiceArea.all.sample, created_at: Faker::Time.between(from: DateTime.now - 20.days, to: DateTime.now - 1.hour)).create!
+    offer = Offer.where(person: Person.all.sample, service_area: ServiceArea.all.sample, urgency_level_id: (1..4).to_a.sample, created_at: Faker::Time.between(from: DateTime.now - 20.days, to: DateTime.now - 1.hour)).create!
     offer.tag_list << tag
     offer.save!
   end
   Category.all.pluck(:name).sample(4).each do |tag|
-    offer = Offer.where(person: Person.all.sample, service_area: ServiceArea.all.sample, created_at: Faker::Time.between(from: DateTime.now - 20.days, to: DateTime.now - 1.hour)).create!
+    offer = Offer.where(person: Person.all.sample, service_area: ServiceArea.all.sample, urgency_level_id: (1..4).to_a.sample, created_at: Faker::Time.between(from: DateTime.now - 20.days, to: DateTime.now - 1.hour)).create!
     offer.tag_list << tag
     offer.save!
   end
@@ -125,7 +125,7 @@ log_2 = CommunicationLog.where(
 
 # offers for person
 Category.all.pluck(:name).sample(1).each do |tag|
-  offer = Offer.where(person: person, service_area: ServiceArea.all.sample).create!
+  offer = Offer.where(person: person, service_area: ServiceArea.all.sample, urgency_level_id: (1..4).to_a.sample).create!
   offer.tag_list << tag
   offer.save!
 end

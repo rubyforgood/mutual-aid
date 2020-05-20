@@ -1,13 +1,6 @@
 <template>
   <div>
-    <div class="intro">
-      <h1 class="title">Community Contributions</h1>
-      <p class="subtitle is-5">Below are contributions (asks, offers, and community resources) that are available.
-        <br>You can filter through them by choosing filter options on the side.
-      </p>
-    </div>
-
-    <section class="section columns">
+    <section class="columns">
       <section class="column is-one-quarter">
         <BrowserSelector :browser="browser" @clicked="browser = $event" />
 

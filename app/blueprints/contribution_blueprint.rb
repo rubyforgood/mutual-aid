@@ -20,6 +20,6 @@ class ContributionBlueprint < Blueprinter::Base
     options[:respond_path]&.call(contribution.id)
   end
   field :match_path do |contribution, options|
-      options[:match_path]&.call(contribution.id)
-    end
+    options[:match_path]&.call(contribution.id)
+  end
 end

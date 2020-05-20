@@ -31,6 +31,10 @@ class Listing < ApplicationRecord
     type + ": #{person.name} #{all_tags_to_s}"
   end
 
+  def name_and_contact_info
+    "(#{type} #{all_tags_to_s.upcase})</strong> #{person.name}: #{person.preferred_contact_info}"
+  end
+
   def status
     status = "unmatched"
     if matches_as_receiver.any?

@@ -287,9 +287,9 @@ SimpleForm.setup do |config|
            baaa.use :input, class: 'radio', type: 'radio'
          end
        end
+       ba.use :error, wrap_with: { tag: 'span', class: 'help has-text-grey-light' }
+       ba.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
       end
-      b.use :error, wrap_with: { tag: 'span', class: 'help has-text-grey-light' }
-      b.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
     end
 
     config.wrappers :horizontal_checkboxes, tag: 'div', class: 'horizontal-checkboxes is-horizontal', error_class: 'has-error' do |b|

@@ -24,6 +24,10 @@ class Person < ApplicationRecord
     "#{name} (#{email})"
   end
 
+  def preferred_contact_info
+    public_send(preferred_contact_method.field)
+  end
+
   def profile_photo(fest_code)
     "missing.png"
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_190206) do
+ActiveRecord::Schema.define(version: 2020_05_18_191004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -319,6 +319,28 @@ ActiveRecord::Schema.define(version: 2020_05_16_190206) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "shift_matches", force: :cascade do |t|
+    t.bigint "shift_id", null: false
+    t.bigint "match_id", null: false
+    t.string "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_id"], name: "index_shift_matches_on_match_id"
+    t.index ["shift_id"], name: "index_shift_matches_on_shift_id"
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_shifts_on_person_id"
+    t.index ["team_id"], name: "index_shifts_on_team_id"
+  end
+
   create_table "software_feedbacks", force: :cascade do |t|
     t.bigint "created_by_id"
     t.string "feedback_type"
@@ -481,6 +503,10 @@ ActiveRecord::Schema.define(version: 2020_05_16_190206) do
   add_foreign_key "positions", "teams"
   add_foreign_key "service_areas", "locations"
   add_foreign_key "service_areas", "organizations"
+  add_foreign_key "shift_matches", "matches"
+  add_foreign_key "shift_matches", "shifts"
+  add_foreign_key "shifts", "people"
+  add_foreign_key "shifts", "teams"
   add_foreign_key "submission_responses", "custom_form_questions"
   add_foreign_key "submission_responses", "submissions"
   add_foreign_key "submissions", "people"

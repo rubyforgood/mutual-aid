@@ -1,0 +1,19 @@
+<%= render "layouts/view_header", resource: @shift_match %>
+
+<p>
+  <strong>Shift:</strong>
+  <%= @shift_match.shift&.name %>
+</p>
+
+<p>
+  <strong>Match:</strong>
+  <%= @shift_match.match&.name %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @shift_match.notes %>
+</p>
+
+<%= link_to 'Edit', edit_shift_match_path(@shift_match) %> |
+<%= link_to 'Back', shift_matches_path %>

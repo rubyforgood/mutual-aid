@@ -1,24 +1,40 @@
 <template>
   <div class="listBrowser">
-    <h2 class="title">List view</h2>
     <table class="table table-hover table-curved table-condensed is-hoverable">
       <tr>
         <th>Type</th>
         <th>Categories</th>
+        <th>Urgency</th>
         <th>Service Area</th>
         <th>Connect</th>
-        <th>Details</th>
+        <th>Profile</th>
+        <th>Respond</th>
+        <th>Match</th>
+<!--        <th>Details</th>-->
       </tr>
       <tr v-for="contribution in contributions" :key="contribution.id">
-        <td><MappedIconList :iconTypes="[{id: id, name: contribution.contribution_type}]" /></td>
+        <td><MappedIconList :iconTypes="[{name: contribution.contribution_type}]" /></td>
         <td><TagList :tags="contribution.category_tags" /></td>
-        <td><TagList :tags="[contribution.service_area]" /></td>
         <td>
-          <MappedIconList :iconTypes="contribution.contact_types" />
-          <a :href="contribution.profile_path" class="button icon-list is-primary is-outlined">View Profile</a>
-          <a :href="contribution.respond_path" class="button icon-list is-primary is-outlined">Respond</a>
+          <b-tag v-if="contribution.urgency" :class="!(contribution.urgency && contribution.urgency.id > 1) ? 'is-light is-warning' : ''" size="is-small" >
+            <b-icon v-if="!(contribution.urgency && contribution.urgency.id > 1)" icon="exclamation-triangle" />
+            {{ contribution.urgency.name }}
+          </b-tag>
         </td>
-        <td>{{ contribution.title }}</td>
+        <td>{{ contribution.service_area.name }}</td>
+        <td style="text: nowrap;">
+          <SingleIcon :iconType="contribution.contact_types[0].name" />
+        </td>
+        <td>
+          <a :href="contribution.profile_path" class="button icon-list is-primary is-outlined"><span class="fa fa-user-circle"></span></a>
+        </td>
+        <td>
+          <a :href="contribution.respond_path" class="button icon-list is-primary is-outlined"><span class="fa fa-reply"></span></a>
+        </td>
+        <td>
+          <a :href="contribution.match_path" class="button icon-list is-primary">Match</a>
+        </td>
+<!--        <td>{{ contribution.title }}</td>-->
       </tr>
     </table>
   </div>
@@ -27,6 +43,7 @@
 <script>
 import TagList from 'components/TagList'
 import MappedIconList from 'components/MappedIconList'
+import SingleIcon from 'components/SingleIcon'
 
 export default {
   props: {
@@ -35,7 +52,16 @@ export default {
   },
   components: {
     TagList,
+    SingleIcon,
     MappedIconList,
+  },
+  computed: {
+    showUrgentIcon() {
+      return !(this.urgency && this.urgency.id > 1)
+    },
+    urgencyColor() {
+      return this.showUrgentIcon ? 'is-warning' : 'is-light is-warning'
+    },
   },
 }
 </script>

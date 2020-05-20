@@ -4,7 +4,7 @@ class CommunityResourcesController < ApplicationController
   before_action :set_community_resource, only: [:show, :edit, :update, :destroy]
 
   def index
-    @community_resources = CommunityResource.all
+    @community_resources = CommunityResource.includes(:organization).references(:organization).order(created_at: :desc)
   end
 
   def show

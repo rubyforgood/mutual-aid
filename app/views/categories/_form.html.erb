@@ -3,14 +3,14 @@
 
   <div class="form-inputs">
     <div class="field is-grouped">
-      <%= f.input :name %>
-      <%= f.association :parent, collection: @parent_categories %>
+      <%= f.input :name, hint: "(Max of 16 letters so it'll display nicely!)", input_html: { maxlength: 20 } %>
+      <%= f.association :parent, hint: "(Use this if you want to nest this category under another one)", collection: @parent_categories %>
     </div>
     <%= f.input :description, as: :text, input_html: { rows: 2 } %>
-    <div class="field is-horizontal">
-      <%= f.input :display_to_public, as: :radio_buttons %>
-      <%= f.input :display_order, as: :integer %>
-      <%= f.input :is_created_by_admin, as: :radio_buttons %>
+    <div class="field is-grouped">
+      <%= f.input :display_to_public, as: :radio_buttons, hint: "(include in the form dropdowns)" %>
+      <%= f.input :display_order, as: :integer, hint: "(use this to change the order on the forms)" %>
+      <%= f.input :is_created_by_admin, as: :radio_buttons, hint: "(some of these will come from the community)" %>
     </div>
   </div>
 

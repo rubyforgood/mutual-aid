@@ -10,6 +10,8 @@ class Category < ApplicationRecord
     inverse_of: :parent
   )
 
+  validates :name, presence: true
+
   scope :visible, -> { where(display_to_public: true) }
   scope :roots,   -> { where(parent: nil) }
 

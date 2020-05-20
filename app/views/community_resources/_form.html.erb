@@ -27,7 +27,7 @@
     <div class="label">Dates to publish this resource</div>
     <div class="field is-grouped">
       <div class="field">
-        <%= f.input :publish_from, as: :date, include_blank: true, hint: "(leave blank unless you want to schedule it)" %>
+        <%= f.input :publish_from, hint: "(leave blank unless you want to schedule it)" %>
       </div>
       <div class="field">
         <%= f.input :publish_until, as: :date, include_blank: true, hint: "(leave blank unless it expires)" %>

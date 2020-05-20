@@ -109,7 +109,7 @@ Go to http://localhost:1080/
 Send mail through smtp://localhost:1025
 ```
 
-Note: You only need mailcatcher if you're interested doing a lot of work on emails in the development environment. (They'll still be visible in the server log, but this makes mailer work SO much easier.)
+Note: You only need mailcatcher if you're interested doing a lot of work on emails in the development environment. (They'll still be visible in the server log, but mailcatcher makes mailer work SO much easier.)
 
 ### Run the App Locally
 
@@ -120,6 +120,11 @@ $ bundle install
 $ yarn install
 $ rake dev:setup
 $ rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
+```
+
+While working on the Forms or Contributions pages (or any Vue code), open a front end server in another tab to autocompile changes.
+```
+$ bin/webpacker-dev-server
 ```
 
 ## Development with Docker
@@ -165,8 +170,15 @@ Also, if you would like docker-compose to run in daemon mode (which means that i
 
 # Other Tips to Get Started
 
+## Environment variables
+* Copy the `.env.ci.example` file to two new files and set the values as needed/desired. Other than localhost and port 587, you can set the values to whatever you'd like.
+  - `.env.development.local`
+  - `.env.test.local`
+
+
+
 ## Logging In
-A username and password to log in and test the app are in `seeds.rb`
+A username and password to log in and test the app are in `seeds.rb` (which then references your environment variables)
 
 ## Testing
 * Running `bin/test` will run ruby tests (rspec) and then the js tests (mocha) if all the rspec tests pass
@@ -180,12 +192,31 @@ You use `FactoryBot.create(:user)` before the `login_as` method and pass it in a
 BE SURE to include the line ```after { Warden.test_reset! } ``` after the `before do` block with the `login_as` method
 within it. This allows for any unexpected state data of the user from hanging around and causing errors.
 
+## Data
+* Running `db:seed` will create basic types, etc, for test and production environments.
+* We also added some fake data seed files for you to use that are callable via rake tasks (these are in `lib/tasks/db.rake`) 
+  - If you want to start fresh: `rake db:reset_seeded` (drop, create, migrate, seed, stats_check)
+  - If you want to add some seeds: `rake db:import_all_seeds` (import_dev_seeds, import_submission_response_seeds, import_user_seeds, import_custom_form_question_seeds, stats_check)
+  - Other options: 
+    - `rake db:reset_seed_data` (delete_all_data, seed, import_all_seeds, stats_check)
+    - `rake db:setup_seeds` (setup, import_all_seeds, stats_check)
+    - `rake db:stats_check` (outputs record totals)
+    - `rake db:delete_all_data` (runs truncate on all tables)
+    - `rake db:import_dev_seeds` (runs the db/seeds/dev_seeds.rb file)
+    - `rake db:import_submission_response_seeds` (runs the db/scripts/submission_response_seeds.rb file -- you could edit this to pull from the db/seeds/gitignored_csvs path if you have a file you want to import)
+    - `rake db:import_user_seeds` (runs the db/scripts/user_seeds.rb file)
+    - `rake db:import_custom_form_question_seeds` (runs the db/scripts/custom_form_question_seeds.rb file)
+
 # Deploying the app
 ## If you decide to deploy to Heroku:
 * [Heroku Command Line Interface](https://devcenter.heroku.com/categories/command-line)
 ## If you decide to use Docker:
 * [Docker Desktop](https://www.docker.com/products/docker-desktop) to use the docker-compose steps listed above
+## Make sure to run `rake db:seed`
 
 # Diagrams!
 We've got a rudimentary ERD diagram, and some workflow diagrams all in one `db_diagram_yEd.graphml` file in the db dir
 (yEd is desktop software for creating diagrams)
+
+# Customization
+## How to change colors (TBD)...

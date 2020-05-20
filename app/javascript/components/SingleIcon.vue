@@ -1,5 +1,5 @@
 <template>
-  <span class="tag">
+  <span :class="klass">
     <b-icon :icon="iconNameMapping[iconType]" :aria-label="iconType"/>
   </span>
 </template>
@@ -13,13 +13,15 @@ const iconNameMapping = {
   WhatsApp: 'whatsapp',
   Call: 'phone',
   Ask: 'hand-sparkles',
-  Offer: 'hand-holding-heart'
+  Offer: 'hand-holding-heart',
+  Reply: 'reply',
 }
 
 export default {
   components: {TagList},
   props: {
     iconType: {type: String},
+    klass: {type: String, default: 'tag'},
   },
   data(){ return { iconNameMapping, } }
 }

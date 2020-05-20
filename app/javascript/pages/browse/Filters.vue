@@ -1,6 +1,7 @@
 <template>
   <section>
-    <h2 class="title">Filters</h2>
+    <h5 class="subtitle is-5">Filters</h5>
+
     <b-collapse v-for="(type, index) of filterTypes" :key="index" :open="initialOpenStatus(index)">
       <h4 slot="trigger" slot-scope="props">
         {{ type.name }} <a>{{ props.open ? '-' : '+' }}</a>

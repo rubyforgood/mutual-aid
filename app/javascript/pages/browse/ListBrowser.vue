@@ -1,6 +1,5 @@
 <template>
   <div class="listBrowser">
-    <h2 class="title">List view</h2>
     <table class="table table-hover table-curved table-condensed is-hoverable">
       <tr>
         <th>Type</th>

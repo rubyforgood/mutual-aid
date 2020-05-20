@@ -37,8 +37,7 @@ export default {
   },
   methods: {
     initialOpenStatus(index) {
-      // return index < 2
-      return true
+      return index === 0
     },
     showIconsForFilter(filterName) {
       return !!this.hasFilterIcons[filterName]

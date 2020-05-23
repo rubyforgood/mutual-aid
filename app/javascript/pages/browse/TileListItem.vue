@@ -29,7 +29,7 @@
           <small>Service area:</small> {{ service_area.name }}
         </div>
         <div class="has-text-grey-lighter">
-          <small>Submitted: <time :datetime="created_at">{{ created_at }}</time></small>
+          <small>Submitted: <time :datetime="createdAtDate.toISOString()">{{ createdAtDate.toLocaleDateString() }} {{ createdAtDate.toLocaleTimeString() }}</time></small>
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@ export default {
     service_area: {type: Object, default: null},
     title: String,
     description: String,
-    created_at: String,
+    created_at: Number,
     urgency: Object,
     contact_types: {type: Array, default: () => []},
     profile_path: String,
@@ -78,6 +78,9 @@ export default {
     urgencyColor() {
       return this.showUrgentIcon ? 'is-light is-warning' : ''
     },
+    createdAtDate() {
+      return new Date(this.created_at)
+    }
   },
 }
 </script>

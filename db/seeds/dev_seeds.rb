@@ -108,7 +108,7 @@ Announcement.where(name: "Lansing urgent care are sharing free face masks", desc
 end
 
 # communication_logs
-log_1 = CommunicationLog.where(
+CommunicationLog.where(
     subject: "hello from LAMA",
     body: "we'd love to talk with you!",
     person: person,
@@ -116,11 +116,12 @@ log_1 = CommunicationLog.where(
     delivery_status: "completed"
 ).first_or_create!(sent_at: Time.now - 3.days) # wow!!!
 
-log_2 = CommunicationLog.where(
+CommunicationLog.where(
     subject: "we'd like your feedback!",
     body: "how was your experience?",
     delivery_method: ContactMethod.autoemail(true).sample,
-    delivery_status: "completed"
+    delivery_status: "completed",
+    auto_generated: true,
 ).first_or_create!(sent_at: Time.now - 1.day)
 
 # offers for person
@@ -189,7 +190,9 @@ Listing.all.each do |listing|
                            needs_follow_up: [true, false].sample,
                            delivery_status: CommunicationLog::DELIVERY_STATUSES.sample,
                            subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "))
+                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
+                           auto_generated: true,
+                          )
 end
 # 70% get random manual logs
 Listing.all.sample((Listing.count * 70)/100) do |listing|
@@ -204,7 +207,9 @@ Listing.all.sample((Listing.count * 70)/100) do |listing|
                            needs_follow_up: [true, false].sample,
                            delivery_status: delivery_status,
                            subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "))
+                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
+                           auto_generated: false,
+                          )
 end
 
 # submissions

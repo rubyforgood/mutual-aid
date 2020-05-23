@@ -9,6 +9,7 @@
   <p>
     <strong>Delivery method:</strong>
     <%= @communication_log.delivery_method&.name %>
+    <%= @communication_log.auto_generated? ? '(Auto-generated)' : '' %>
   </p>
 
   <p>

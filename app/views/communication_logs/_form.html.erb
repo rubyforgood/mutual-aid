@@ -14,12 +14,13 @@
       <%= f.association :delivery_method, required: true, collection: ContactMethod.all %>
       <%= f.input :delivery_status, as: :select, required: true, collection: CommunicationLog::DELIVERY_STATUSES %>
       <%= f.input :needs_follow_up, as: :radio_buttons %>
+      <%= f.input :auto_generated, as: :radio_buttons %> <!-- FIXME: block editing auto_generated logs? -->
     </div>
 
     <%= f.input :subject, as: :text, input_html: { rows: 1 } %>
 
     <hr>
-    <% if f.object.persisted? && f.object.delivery_method&.name == ContactMethod.autoemail(true).sample.name %>
+    <% if f.object.auto_generated? %>
       <%= f.label :body, class: "label" %>
       <%= f.object.body&.html_safe || "-- Empty --" %>
     <% else %>

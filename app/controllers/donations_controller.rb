@@ -50,7 +50,7 @@ class DonationsController < ApplicationController
     end
 
     def set_form_dropdowns
-      @contact_methods = ContactMethod.enabled_public
+      @contact_methods = ContactMethod.enabled
     end
 
     def donation_params

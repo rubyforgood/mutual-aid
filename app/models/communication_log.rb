@@ -8,8 +8,7 @@ class CommunicationLog < ApplicationRecord
   DELIVERY_STATUSES = [DEFAULT_DELIVERY_STATUS, "left voicemail", "no answer", "busy signal", "sent"]
 
   def self.log_submission_email(email_object, delivery_status, submission, delivery_method=nil, current_user=nil)
-    delivery_method ||= ContactMethod.autoemail(true).sample # TODO: switch to email
-    self.create!(delivery_method: delivery_method,
+    self.create!(delivery_method: delivery_method || ContactMethod.email,
                  delivery_status: delivery_status,
                  person: submission.person,
                  sent_at: Time.current,

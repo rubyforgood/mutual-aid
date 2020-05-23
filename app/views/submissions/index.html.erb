@@ -29,6 +29,7 @@
         </td>
         <td><%= submission.urgency %></td>
         <td><%= show_button(submission.person, submission.person&.name.to_s, "fa fa-user-circle") if submission.person %></td>
+        <!-- FIXME: is the logic below correct -->
         <td><%= show_button(submission.person.communication_logs.last, "Autoemail", "fa fa-envelope") if submission.person&.communication_logs&.any? %></td>
         <td>
           <% submission.listings.each do |listing| %>

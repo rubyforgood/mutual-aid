@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "/about",                    to: "public_pages#about",               as: "about_public"
   get "/announcements_list",       to: "public_pages#announcements",       as: "announcements_public"
   get "/community_resources_list", to: "public_pages#community_resources", as: "community_resources_public"
-  get "/contributions",            to: "public_pages#contributions",       as: "contributions_public" # TODO remove this
+  # get "/contributions",            to: "public_pages#contributions",       as: "contributions_public" # TODO remove this
 
   resources :announcements
   resources :asks, only: [:index, :edit, :update, :new, :create]

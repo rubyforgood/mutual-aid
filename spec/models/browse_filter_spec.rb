@@ -9,7 +9,7 @@ RSpec.describe BrowseFilter do
     end
     expect(unmodified_scope).not_to receive(:where)
     all_urgency_level_ids = UrgencyLevel::TYPES.map(&:id)
-    BrowseFilter.contributions_for('UrgencyLevel' => all_urgency_level_ids)
+    BrowseFilter.new('UrgencyLevel' => all_urgency_level_ids).contributions
   end
 
   it 'will query for urgnecy levels if only one urgency level is checked' do
@@ -19,6 +19,6 @@ RSpec.describe BrowseFilter do
     end
     one_urgency_level_id = [UrgencyLevel::TYPES.sample.id]
     expect(used_scope).to receive(:where).with(urgency_level_id: one_urgency_level_id).exactly(ContributionType::TYPES.length).times
-    BrowseFilter.contributions_for('UrgencyLevel' => one_urgency_level_id)
+    BrowseFilter.new('UrgencyLevel' => one_urgency_level_id).contributions
   end
 end

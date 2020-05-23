@@ -10,7 +10,7 @@ class ContributionBlueprint < Blueprinter::Base
   end
   fields :title, :description
   field :created_at do |contribution, _options|
-    contribution.created_at.to_formatted_s(:iso8601)
+    contribution.created_at.to_f * 1000 # Javascript wants miliseconds, not seconds
   end
   field :type, name: :contribution_type
   field :profile_path do |contribution, options|

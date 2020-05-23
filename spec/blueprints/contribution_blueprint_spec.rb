@@ -27,7 +27,7 @@ RSpec.describe ContributionBlueprint do
                                # "availability" => [{"id" => 1, "name" => "AM"}],
                                # "publish_until" => "2021-10-11",
                                # "publish_until_humanized" => "this year",
-                               "created_at" => contribution.created_at.to_formatted_s(:iso8601),
+                               "created_at" => (contribution.created_at.to_f * 1000), # Javascript wants miliseconds, not seconds
                                'respond_path' => nil,
                                'profile_path' => nil,
                                'match_path' => nil,

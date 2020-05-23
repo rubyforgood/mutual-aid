@@ -16,8 +16,8 @@ location_type = LocationType.all.sample
   ServiceArea.create!(name: Faker::Address.community, location: location, organization: host_organization, service_area_type: ServiceArea::TYPES)
 end
 
-email_contact_method = ContactMethod.field_name('email').first || ContactMethod.create!(name: "Email", field: "email")
-phone_contact_method = ContactMethod.field_name('phone').first || ContactMethod.create!(name: "Call", field: "phone")
+email_contact_method = ContactMethod.field_name('email').first || ContactMethod.create!(name: "Email", field: "email", enabled: true)
+phone_contact_method = ContactMethod.field_name('phone').first || ContactMethod.create!(name: "Call", field: "phone", enabled: true)
 
 # people
 person = Person.where(name: Faker::Name.name, preferred_contact_method: email_contact_method, email: Faker::Internet.email).first_or_create!

@@ -2,7 +2,7 @@
   <div>
     <slot />
 
-    <b-field v-for="{id, name} in categories" :key="id">
+    <div v-for="{id, name, description, subcategories} in categories" :key="id">
       <b-checkbox
         v-model="selectedTags"
         :name="fieldNamePrefix"
@@ -11,7 +11,20 @@
       >
         {{ name | capitalize }}
       </b-checkbox>
-    </b-field>
+
+      <div
+        v-if="isSelected(name)"
+        style="margin-left: 36px"
+      >
+        <p v-if="description" class="help mb-1"> {{ description }} </p>
+
+        <CategoryFields
+          :fieldNamePrefix="fieldNamePrefix"
+          :categories="subcategories"
+          :tags="selectedTags"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -19,6 +32,7 @@
 import {capitalize} from 'utils/string'
 
 export default {
+  name: 'CategoryFields',
   props: {
     fieldNamePrefix: String,
     categories: Array,
@@ -28,6 +42,11 @@ export default {
     return {
       selectedTags: this.tags || []
     }
+  },
+  methods: {
+    isSelected(tag) {
+      return this.selectedTags.indexOf(tag) >= 0
+    },
   },
   filters: { capitalize },
 }

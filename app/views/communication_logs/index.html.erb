@@ -17,7 +17,13 @@
     <tbody>
     <% @communication_logs.each do |communication_log| %>
       <tr>
-        <td><span class="<%= communication_log.delivery_method&.icon_class %>"></span></td>
+        <td>
+          <% if communication_log.auto_generated? %>
+            <span class="fa fa-envelope-open-text"></span>
+          <% else %>
+            <span class="<%= communication_log.delivery_method&.icon_class %>"></span>
+          <% end %>
+        </td>
         <td><%= communication_log.delivery_status %></td>
         <td><%= communication_log.person&.name %></td>
         <td><%= communication_log.subject %></td>

@@ -3,8 +3,6 @@
 
 require 'faker'
 
-non_autoemail_contact_methods = ContactMethod.enabled_public
-
 host_organization = Organization.where(is_instance_owner: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
 
 # rename default service_area
@@ -28,7 +26,7 @@ city = Faker::Address.city
 state = ["NY", "MI", "DC", "NC"].sample
 10.times do
   location = Location.create!(street_address: Faker::Address.street_address, city: city, state: state, location_type: LocationType.all.sample)
-  contact_method = non_autoemail_contact_methods.sample
+  contact_method = ContactMethod.sample_one
   email = Faker::Internet.email
   phone = Faker::PhoneNumber.phone_number
   Person.where(location: location,
@@ -108,19 +106,20 @@ Announcement.where(name: "Lansing urgent care are sharing free face masks", desc
 end
 
 # communication_logs
-log_1 = CommunicationLog.where(
+CommunicationLog.where(
     subject: "hello from LAMA",
     body: "we'd love to talk with you!",
     person: person,
-    delivery_method: non_autoemail_contact_methods.sample,
+    delivery_method: ContactMethod.sample_one,
     delivery_status: "completed"
 ).first_or_create!(sent_at: Time.now - 3.days) # wow!!!
 
-log_2 = CommunicationLog.where(
+CommunicationLog.where(
     subject: "we'd like your feedback!",
     body: "how was your experience?",
-    delivery_method: ContactMethod.autoemail(true).sample,
-    delivery_status: "completed"
+    delivery_method: ContactMethod.email,
+    delivery_status: "completed",
+    auto_generated: true,
 ).first_or_create!(sent_at: Time.now - 1.day)
 
 # offers for person
@@ -173,7 +172,6 @@ end
 
 # autoemail logs per Listing
 Listing.all.each do |listing|
-  delivery_method = ContactMethod.autoemail(true).sample
   listing_type = listing.type
   if listing_type == "Ask"
     match = listing.matches_as_receiver.first
@@ -182,29 +180,32 @@ Listing.all.each do |listing|
   end
   CommunicationLog.create!(person: listing.person,
                            match: match,
-                           created_by: delivery_method&.name.include?("autoemail") ? User.first : User.all.sample,
+                           created_by: User.first,
                            outbound: [true, false].sample,
                            sent_at: listing.created_at,
-                           delivery_method: delivery_method,
+                           delivery_method: ContactMethod.email,
                            needs_follow_up: [true, false].sample,
                            delivery_status: CommunicationLog::DELIVERY_STATUSES.sample,
                            subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "))
+                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
+                           auto_generated: true,
+                          )
 end
 # 70% get random manual logs
 Listing.all.sample((Listing.count * 70)/100) do |listing|
-  delivery_method = non_autoemail_contact_methods.sample
   delivery_status = (CommunicationLog::DELIVERY_STATUSES - [CommunicationLog::DEFAULT_DELIVERY_STATUS]).sample
   CommunicationLog.create!(person: listing.person,
                            match: listing.matches.first,
                            created_by: User.all.sample,
                            outbound: [true, false].sample,
                            sent_at: Faker::Time.between(from: listing.created_at, to: DateTime.now),
-                           delivery_method: delivery_method,
+                           delivery_method: ContactMethod.sample_one,
                            needs_follow_up: [true, false].sample,
                            delivery_status: delivery_status,
                            subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "))
+                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
+                           auto_generated: false,
+                          )
 end
 
 # submissions

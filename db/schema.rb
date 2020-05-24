@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_18_191004) do
+ActiveRecord::Schema.define(version: 2020_05_23_184552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_05_18_191004) do
     t.string "body"
     t.boolean "outbound", default: true, null: false
     t.bigint "delivery_method_id", null: false
+    t.boolean "auto_generated", default: false
     t.index ["created_by_id"], name: "index_communication_logs_on_created_by_id"
     t.index ["delivery_method_id"], name: "index_communication_logs_on_delivery_method_id"
     t.index ["match_id"], name: "index_communication_logs_on_match_id"

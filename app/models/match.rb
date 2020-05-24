@@ -3,13 +3,16 @@ class Match < ApplicationRecord
   belongs_to :provider, polymorphic: true, inverse_of: :matches_as_provider
   belongs_to :shift, optional: true
 
+  has_many :communication_logs
   has_many :feedbacks
 
   INITIATORS = ["receiver", "provider"]
+  STATUSES = ["needs_follow_up", "matched_tentatively", "matched", "match_completed", "feedback_needed", "feedback_received", "feedback_completed"]
 
   # belongs_to :coordinator, optional: true #, class_name: "Position" # TODO
   #
 
+  scope :status, ->(status) { where(status == "all" || status == nil ? "id IS NOT NULL" : "status = '#{status.downcase}'") }
   scope :this_month, -> { where("matches.created_at >= ? AND matches.created_at <= ?",
                                 Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }
 
@@ -29,17 +32,5 @@ class Match < ApplicationRecord
 
   def full_name
     "Connected on #{created_at.strftime('%m-%-d-%Y')}: #{name} #{receiver.all_tags_to_s}"
-  end
-
-  def status
-    status = "matched"
-    if completed?
-      status = "completed"
-    elsif tentative?
-      status = "tentative"
-    elsif feedbacks.any?
-      status = "feedback received"
-    end
-    status
   end
 end

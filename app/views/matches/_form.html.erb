@@ -7,7 +7,7 @@
         <div class="field">
           <%= f.label :profile, class: "label" %>
           <div class="">
-            <%= show_button(@match.receiver, @match.receiver.person.name, "fa fa-user-circle") if @match.receiver %>
+            <%= show_button(@match.receiver, @match.receiver.person.name, "fa fa-user-circle") %>
           </div>
         </div>
         <%= f.input :receiver_id, as: :select, include_blank: true, collection: @matched_asks, selected: @match.receiver_id %>
@@ -39,6 +39,9 @@
           </div>
         <% end %>
         <hr>
+      <% else %>
+        <%= f.input :receiver_id, as: :select, include_blank: true, collection: @unmatched_asks, selected: params[:receiver_id] %>
+        <%= f.hidden_field :receiver_type, value: "Ask" %>
       <% end %>
 
       <% if @provider.present? || @match.provider_id %>
@@ -55,25 +58,24 @@
           </div>
         <% end %>
         <hr>
-        <%= f.input :receiver_id, as: :select, include_blank: true, collection: @unmatched_asks, selected: receiver&.id %>
+        <%= f.input :receiver_id, as: :select, include_blank: true, collection: @unmatched_asks, selected: params[:receiver_id] %>
         <%= f.hidden_field :receiver_type, value: "Ask" %>
       <% else %>
-        <%= f.input :provider_id, as: :select, include_blank: true, collection: @unmatched_offers, selected: provider&.id %>
+        <%= f.input :provider_id, as: :select, include_blank: true, collection: @unmatched_offers, selected: params[:provider_id] %>
         <%= f.hidden_field :provider_type, value: "Offer" %>
       <% end %>
     <% end %>
 
 
     <div class="field is-grouped">
-      <%= f.input :notes, as: :text, input_html: { rows: 1, style: "width: 100%" } %>
+      <%= f.input :notes, as: :text, label: "Match notes", input_html: { rows: 2, style: "width: 45em" } %>
     </div>
     <div class="field is-grouped">
-      <%= f.input :tentative, as: :radio_buttons, checked: true %>
-      <%= f.input :completed, as: :radio_buttons, checked: false %>
-      <% if @match.id.present? %>
-        <%= f.input :status, readonly: true, hint: "(not editable -- system will compute this)" %>
-      <% end %>
+      <%#= f.input :tentative, as: :radio_buttons, checked: true %>
+      <%#= f.input :completed, as: :radio_buttons, checked: false %>
+      <%= f.input :status, as: :select, required: true, collection: @statuses || [], selected: f.object.status || params[:status] || "matched_tentatively" %>
     </div>
 
-    <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+    <% save_and_show_button = f.submit "Save and View Match", class: "button mt-1 is-primary" %>
+    <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, button_class: "is-primary is-outlined", extra_form_button_2: save_and_show_button %>
 <% end %>

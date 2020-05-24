@@ -5,7 +5,7 @@
     <div class="is-grouped">
       <%= f.association :person %>
       <%= f.association :service_area %>
-      <%= f.input :form_name, as: :select, collection: @form_names %>
+      <%= f.input :form_name, as: :select, collection: @form_names, selected: f.object.form_name %>
       <%= f.input :privacy_level_requested %>
     </div>
     <hr>

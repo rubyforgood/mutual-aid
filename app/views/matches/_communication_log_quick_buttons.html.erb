@@ -1,0 +1,9 @@
+<% person ||= nil %>
+<% @match ||= nil %>
+
+<%= log_connection_button(person, match: @match, created_by: current_user) %>
+<%= log_voicemail_button(person, match: @match, created_by: current_user) %>
+<%= log_text_button(person, match: @match, created_by: current_user) %>
+<%= log_email_button(person, match: @match, created_by: current_user) %>
+<%= log_no_connection_button(person, match: @match, created_by: current_user) %>
+<%= new_communication_log_button(person, match: @match, created_by: current_user) %>

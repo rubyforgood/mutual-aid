@@ -213,7 +213,28 @@ Listing.all.each do |listing|
   submission = Submission.where(person: listing.person, service_area: listing.service_area, form_name: "#{listing.type}_form", privacy_level_requested: Submission::PRIVACY_LEVELS.sample,
                    body: listing.to_json).create!
   listing.submission = submission
+
+  listing.status = update_status(listing) # set dropdown value for status/state string
+
   listing.save!
+end
+
+def update_status(listing)
+  status = "matched"
+  if listing.communication_logs.where(needs_follow_up: true).any?
+    status = "needs_follow_up"
+  elsif listing.completed && listing.feedbacks.any? && listing.feedbacks.where(is_from_receiver: true).any?
+    status = "feedback_completed"
+  elsif listing.completed && listing.feedbacks.any?
+    status = "feedback_received"
+  elsif listing.completed? && listing.feedbacks.none?
+    status = "feedback_needed"
+  elsif listing.completed?
+    status = "match_completed"
+  elsif listing.tentative?
+    status = "matched_tentatively"
+  end
+  status
 end
 
 # custom_form_questions (separate importer)

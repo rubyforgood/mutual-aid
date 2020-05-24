@@ -1,0 +1,26 @@
+<%= simple_form_for :matches,
+                    html: { class: 'is-horizontal'},
+                    url: matches_path,
+                    method: :get do |f| %>
+
+  <%= hidden_field_tag :sort, value=(params[:sort] || "id") %>
+  <%= hidden_field_tag :direction, value=(params[:direction] == "asc" ? "desc": "desc") %>
+  <%= hidden_field_tag :table, value=(params[:table] || params[:controller]) %>
+
+  <div id="search-boxes" class="text-center search-boxes">
+    <div class="">
+      <div>
+        <%= select_tag :status,
+                       options_for_select(@statuses || [], selected: params[:status]),
+                       include_blank: "-- Status --",
+                       class: 'form-control' %>
+        <%= text_field_tag :connected_to_me,
+                           params[:connected_to_me],
+                           placeholder: "Connected to me",
+                           class: "form-control" %>
+        <%= f.button :submit, "Search", class: "form-group button is-primary", name: nil %>
+        <%= clear_search_button %>
+      </div>
+    </div>
+  </div>
+<% end %>

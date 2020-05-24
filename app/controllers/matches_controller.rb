@@ -1,11 +1,13 @@
 class MatchesController < ApplicationController
-  before_action :set_match, only: [:show, :edit, :update, :destroy]
+  before_action :set_match, only: [:edit, :update, :destroy]
 
   def index
-    @matches = Match.order(updated_at: :desc)
+    @matches = Match.status(params[:status] || "all").order(updated_at: :desc)
+    @statuses = ["all"] + Match::STATUSES
   end
 
   def show
+    @match = Match.includes(:communication_logs).references(:communication_logs).where(id: params[:id]).last
   end
 
   def new
@@ -21,7 +23,13 @@ class MatchesController < ApplicationController
     @match = Match.new(match_params)
 
     if @match.save
-      redirect_to matches_path, notice: 'Match was successfully created.'
+      if params[:commit]&.include?('Save and View Match')
+        redirect_to match_path(@match),
+                    notice: 'Match was successfully created.'
+      else
+        redirect_to matches_path,
+                    notice: 'Match was successfully created.'
+      end
     else
       set_form_dropdowns
       render :new
@@ -30,7 +38,13 @@ class MatchesController < ApplicationController
 
   def update
     if @match.update(match_params)
-      redirect_to matches_path, notice: 'Match was successfully updated.'
+      if params[:commit]&.include?('Save and View Match')
+        redirect_to match_path(@match),
+                    notice: 'Match was successfully updated.'
+      else
+        redirect_to matches_path,
+                    notice: 'Match was successfully updated.'
+      end
     else
       set_form_dropdowns
       render :edit
@@ -62,6 +76,7 @@ class MatchesController < ApplicationController
         @unmatched_asks = Ask.unmatched.map{ |a| [ a.name_and_contact_info.html_safe, a.id ] }.sort_by(&:first)
         @unmatched_offers = Offer.unmatched.map{ |o| [ o.name_and_contact_info.html_safe, o.id] }.sort_by(&:first)
       end
+      @statuses = Match::STATUSES
     end
 
     def match_params

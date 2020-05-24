@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   resources :announcements
   resources :asks, only: [:index, :edit, :update, :new, :create]
   resources :categories
-  resources :communication_logs
+  resources :communication_logs do
+    collection do
+      post "/create_remote", to: "communication_logs#create_remote", as: "create_remote"
+    end
+  end
   resources :community_resources
   resources :contact_methods
   get "/combined_form", to: "contributions#combined_form", as: "combined_form"

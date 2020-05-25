@@ -7,14 +7,14 @@
 
     <div class="field is-grouped">
       <%= f.input :sent_at, label: "Time sent/received", default: Time.now, required: true %>
-      <%= f.input :outbound, as: :radio_buttons, checked: true %>
+      <%= f.input :outbound, as: :radio_buttons, checked: true, label: "Outbound message?", hint: "(Sent by you, or, received by you?)" %>
     </div>
 
     <div class="field is-grouped">
-      <%= f.association :delivery_method, required: true, collection: ContactMethod.enabled, selected: f.object.delivery_method_id || @delivery_method_id %>
+      <%= f.input :delivery_method, as: :select, required: true, collection: ContactMethod.enabled.pluck(:name, :id), selected: f.object.delivery_method_id || params[:delivery_method_id] || @delivery_method_id %>
       <%= f.input :delivery_status, as: :select, required: true, collection: CommunicationLog::DELIVERY_STATUSES, selected: f.object.delivery_status || params[:delivery_status] %>
-      <%= f.input :needs_follow_up, as: :radio_buttons, selected: f.object.needs_follow_up || params[:needs_follow_up] %>
-      <%= f.input :auto_generated, as: :radio_buttons, selected: f.object.auto_generated || params[:auto_generated] %> <!-- FIXME: block editing auto_generated logs? -->
+      <%= f.input :needs_follow_up, as: :radio_buttons, checked: f.object.needs_follow_up || params[:needs_follow_up] || true %>
+      <%= f.hidden_field :auto_generated, value: false %> <!-- FIXME: block editing auto_generated logs? -->
     </div>
 
     <%= f.input :subject, as: :text, label: "Topic/subject", input_html: { rows: 1 } %>
@@ -28,6 +28,6 @@
     <% end %>
   </div>
 
-  <% save_and_show_button = f.submit "Save and View Match", class: "button mt-1 is-primary" %>
-  <%= render "layouts/view_footer_buttons", f: f, resource: @communication_log, top_divider: true, button_class: "is-primary is-outlined", extra_form_button_1: nil, extra_form_button_2: save_and_show_button %>
+  <% save_and_edit_button = f.submit "Save and go to Match", class: "button mt-1 is-primary" %>
+  <%= render "layouts/view_footer_buttons", f: f, resource: @communication_log, top_divider: true, button_class: "is-primary is-outlined", extra_form_button_1: nil, extra_form_button_2: save_and_edit_button %>
 <% end %>

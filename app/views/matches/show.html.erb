@@ -1,81 +1,38 @@
-<%= render "layouts/view_header", resource: @match, page_title: "Match: " + @match.person_names + " (#{@match.updated_at.strftime("%b %d, %Y")})" %>
-
-<hr>
-
-<% provider_person = @match.provider&.person %>
-<% receiver_person = @match.receiver&.person %>
+<%= render "layouts/view_header", resource: @match %>
 
 <div class="section-detail">
+  <p id="notice"><%= notice %></p>
+
   <p>
-    <strong>Status:</strong> <span class="has-text-weight-bold subtitle is-5"><%= @match.status %></span>
+    <strong>Offerer:</strong>
+    <%= @match.provider&.name %>
   </p>
 
-  <hr>
+  <p>
+    <strong>Asker:</strong>
+    <%= @match.receiver&.name %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= @match.status %>
+  </p>
 
   <p>
     <strong>Notes:</strong>
-    <br>
     <%= @match.notes %>
   </p>
 
-  <hr>
+  <p>
+    <strong>Tentative:</strong>
+    <%= @match.tentative %>
+  </p>
 
-  <div class="columns">
-    <div class="column">
-      <p>
-        <div class="contact-info">
-          <strong>Provider:</strong>
-          <br>
-          <%= show_button(@match.provider, provider_person&.name, "fa fa-user-circle", "title is-3") %>
-          <br>
-          <span class="<%= provider_person.preferred_contact_method.icon_class %>"></span>
-          <span class="subtitle is-5"><%= provider_person.preferred_contact_info %></span>
-        </div>
-        <br>
-        <hr>
-        Click one of these quick-buttons to document your communication with <%= provider_person&.name %>, or, select "Add a detailed log" to add more info:
-        <br>
-        <%= render "communication_log_quick_buttons", person: provider_person %>
-        <hr>
-        Communication history with <%= provider_person&.name %> re this match:
-        <br>
-        <ul>
-          <% provider_person.communication_logs.order(sent_at: :desc).where(match: @match).each do |log| %>
-            <li><%= show_button(log, log.name, log.delivery_method.icon_class || "fa fa-telegram") %></li>
-          <% end %>
-        </ul>
-      </p>
-    </div>
-    <div class="column">
-      <p>
-        <div class="contact-info">
-          <strong>Receiver:</strong>
-          <br>
-          <%= show_button(@match.receiver, receiver_person&.name, "fa fa-user-circle", "title is-3") %>
-          <br>
-          <span class="<%= receiver_person.preferred_contact_method.icon_class %>"></span>
-          <span class="subtitle is-5"><%= receiver_person.preferred_contact_info %></span>
-          <br>
-        </div>
-        <br>
-        <hr>
-        Click one of these quick-buttons to document your communication with <%= receiver_person&.name %>, or, select "Add a detailed log" to add more info:
-        <br>
-        <%= render "communication_log_quick_buttons", person: receiver_person %>
-        <hr>
-        Communication history with <%= receiver_person&.name %> re this match:
-        <br>
-        <ul>
-          <% receiver_person.communication_logs.order(sent_at: :desc).where(match: @match).each do |log| %>
-            <li><%= show_button(log, log.name, log.delivery_method.icon_class || "fa fa-telegram") %></li>
-          <% end %>
-        </ul>
-      </p>
-    </div>
-  </div>
+  <p>
+    <strong>Completed:</strong>
+    <%= @match.completed %>
+  </p>
 
-  <hr>
-  <%= edit_button(@match, "Edit Match") %>
-  <br><br>
-  <%= link_to 'View all Matches', matches_path %> |   <%= link_to 'Contributions page', contributions_public_path %>
+  <%= link_to 'Edit', edit_match_path(@match) %> |
+  <%= link_to 'Back', matches_path %>
 </div>

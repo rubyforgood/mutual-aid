@@ -23,4 +23,8 @@ class CommunicationLog < ApplicationRecord
     "#{delivery_method&.name}: #{subject} #{created_at.strftime("%A, %B %d, %Y at %l:%M %P")}"
   end
 
+  def short_name
+    "#{delivery_method&.name}: #{subject} #{created_at.strftime("%m-%d-%y, %a @ %l:%M %P")}"
+  end
+
 end

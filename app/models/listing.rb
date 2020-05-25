@@ -32,8 +32,8 @@ class Listing < ApplicationRecord
     type + ": #{person.name} #{all_tags_to_s}"
   end
 
-  def name_and_contact_info
-    "(#{type} #{all_tags_to_s.upcase})</strong> #{person.name}: #{person.preferred_contact_info}"
+  def name_and_match_history
+    "(#{all_tags_to_s.upcase}-#{type})</strong>#{person.name}: #{person.match_history}"
   end
 
   def status

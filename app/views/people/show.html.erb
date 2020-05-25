@@ -4,15 +4,9 @@
 <div class="section-detail">
   <br><br>
 
-  <div>
-    <strong>Name:</strong>
-    <%= @person.name %>
-  </div>
+  <div class="title is-1"><%= @person.name %></div>
 
-  <div>
-    <strong>User Account:</strong>
-    <%= edit_button(@person.user, "Account", "fa fa-user-edit") %>
-  </div>
+  <hr>
 
   <div>
     <strong>Phone:</strong>
@@ -45,6 +39,8 @@
   </div>
 
   <div>
+    <strong>Links:</strong>
+    <br>
     <%= edit_button(@person, "Edit #{viewing_self ? 'My Record' : 'Person'}") %>
     <%= edit_button(@person.user, "Edit #{'My ' if viewing_self} Account") if @person.user_id %>
   </div>
@@ -56,7 +52,7 @@
       <hr>
       <h3>Outstanding Asks:</h3>
       <!-- # profile-level/recurring ask tags-->
-      <% @person.temporary_ask_tag_list.each do |tag| %>
+      <% @person.all_tags_unique.each do |tag| %>
         <span class="tag"><%= tag %></span>
       <% end %>
       <!-- # listing ask tags-->
@@ -67,7 +63,7 @@
     <hr>
     <h3>Outstanding Offers:</h3>
     <!-- # profile-level/recurring offer tags-->
-    <% @person.temporary_offer_tag_list.each do |tag| %>
+    <% @person.all_tags_unique.each do |tag| %>
       <span class="tag"><%= tag %></span>
     <% end %>
     <!-- # listing ask tags-->

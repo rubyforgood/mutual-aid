@@ -22,8 +22,8 @@ class CommunicationLogsController < ApplicationController
     @communication_log = CommunicationLog.new(communication_log_params)
 
     if @communication_log.save
-      if params[:commit]&.include?('Save and View Match')
-        redirect_to match_path(@communication_log.match), notice: 'Communication log was successfully created.'
+      if params[:commit]&.include?('Save and go to Match')
+        redirect_to edit_match_path(@communication_log.match), notice: 'Communication log was successfully created.'
       else
         redirect_to communication_logs_path, notice: 'Communication log was successfully created.'
       end
@@ -45,8 +45,8 @@ class CommunicationLogsController < ApplicationController
 
   def update
     if @communication_log.update(communication_log_params)
-      if params[:commit]&.include?('Save and View Match')
-        redirect_to match_path(@communication_log.match), notice: 'Communication log was successfully updated.'
+      if params[:commit]&.include?('Save and go to Match')
+        redirect_to edit_match_path(@communication_log.match), notice: 'Communication log was successfully updated.'
       else
         redirect_to communication_logs_path, notice: 'Communication log was successfully updated.'
       end
@@ -67,7 +67,7 @@ class CommunicationLogsController < ApplicationController
     end
 
     def set_form_dropdowns
-      @delivery_method_id = ContactMethod.where(ContactMethod.arel_table[:name].lower.eq(params[:delivery_method_name].downcase)).last&.id if params[:delivery_method_name].present?
+      @delivery_method_id = ContactMethod.where("LOWER(name) = ?", params[:delivery_method_name].downcase).last&.id if params[:delivery_method_name].present?
     end
 
     def communication_log_params

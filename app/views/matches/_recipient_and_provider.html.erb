@@ -1,0 +1,74 @@
+<div class="form-inputs">
+  <% if @match.receiver_id && @match.provider_id %>
+    <!-- # display selected receiver & profile button -->
+    <div class="is-grouped is-inline-flex">
+      <div class="field">
+        <%= f.label :profile, class: "label" %>
+        <div class="">
+          <%= show_button(@match.receiver, @match.receiver.person.name, "fa fa-user-circle") %>
+        </div>
+      </div>
+      <%= f.input :receiver_id, as: :select, include_blank: true, collection: @matched_asks, selected: @match.receiver_id %>
+      <%= f.hidden_field :receiver_type, value: "Ask" %>
+    </div>
+
+    <!-- # display selected provider & profile button -->
+    <div class="is-grouped is-inline-flex">
+      <div class="field">
+        <%= f.label :profile, class: "label" %>
+        <div class="">
+          <%= show_button(@match.provider, @match.provider.person.name, "fa fa-user-circle") if @match.provider%>
+        </div>
+      </div>
+      <%= f.input :provider_id, as: :select, include_blank: true, collection: @matched_offers, selected: @match.provider_id %>
+      <%= f.hidden_field :provider_type, value: "Offer" %>
+    </div>
+  <% else %>
+    <% if @receiver.present? || @match.receiver_id %>
+      <!-- # display selected receiver -->
+      <% receiver = @receiver || @match.receiver %>
+      <div>for: </div><span class="title"><%= receiver&.name %></span></div>
+      <%= f.hidden_field :receiver_id, value:receiver&.id %>
+      <%= f.hidden_field :receiver_type, value: receiver&.type %>
+      <hr>
+      <div class="section instructional-text is-italic">
+        <ol>
+          <li>Select a tentative receiver</li>
+          <li>Click "Save and View Match"</li>
+          <li>One next page you'll see their contact info and log communications with provider and receiver</li>
+        </ol>
+      </div>
+      <br>
+    <% end %>
+
+    <% if @provider.present? || @match.provider_id %>
+      <!-- # display selected provider -->
+      <% provider = @provider || @match.provider %>
+      <div>for: </div><span class="title"><%= provider&.name %></span></div>
+      <%= f.hidden_field :provider_id, value: provider&.id %>
+      <%= f.hidden_field :provider_type, value: provider&.type %>
+      <hr>
+      <div class="section instructional-text is-italic">
+        <ol>
+          <li>Select a tentative receiver</li>
+          <li>Click "Save and View Match"</li>
+          <li>One next page you'll see their contact info and log communications with provider and receiver</li>
+        </ol>
+      </div>
+      <br>
+      <!-- # display receiver select -->
+      <%= f.input :receiver_id, as: :select, include_blank: true, collection: @unmatched_asks, selected: params[:receiver_id] %>
+      <%= f.hidden_field :receiver_type, value: "Ask" %>
+    <% else %>
+      <!-- # display provider select -->
+      <%= f.input :provider_id, as: :select, include_blank: true, collection: @unmatched_offers, selected: params[:provider_id] %>
+      <%= f.hidden_field :provider_type, value: "Offer" %>
+
+      <% unless @receiver.present? || @match.receiver_id %>
+        <!-- # display receiver select -->
+        <%= f.input :receiver_id, as: :select, include_blank: true, collection: @unmatched_asks, selected: params[:receiver_id] %>
+        <%= f.hidden_field :receiver_type, value: "Ask" %>
+      <% end %>
+    <% end %>
+<% end %>
+</div>

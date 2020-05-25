@@ -23,27 +23,38 @@
 <div class="row columns">
   <div class="columns column is-12">
     <div class="column is-4">
+      <%= link_to "View unmatched Asks", listings_path(contribution_type: "Ask") %> <span class="tag"><%= @asks_unmatched_count %></span>
+      <br>
+      <%= link_to "View unmatched Offers", listings_path(contribution_type: "Offer") %> <span class="tag"><%= @offers_unmatched_count %></span>
+    </div>
+    <div class="column is-4">
+      <%= link_to "View all Matches", matches_path %> <span class="tag"><%= @match_count %></span>
+    </div>
+    <div class="column is-4">
+      <%= link_to "Create new Ask", new_ask_path %>
+      <br>
+      <%= link_to "Create new Offer", new_offer_path %>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row columns">
+  <div class="columns column is-12">
+    <div class="column is-4">
       <%= link_to "Glossary!", glossary_admin_path %>
       <br>
+      <%= link_to "Yearbook", yearbook_admin_path %>
+      <br>
+      <%= link_to "Org chart", org_chart_path %>
+    </div>
+    <div class="column is-4">
       <%= link_to "Review pending Community Resources", community_resources_path(is_approved: false) %> <span class="tag"><%= @announcements_pending_count %></span>
       <br>
       <%= link_to "Review pending Announcements", announcements_path(is_approved: false) %> <span class="tag"><%= @community_resources_pending_count %></span>
       <br>
       <%= link_to "Manage Volunteers", volunteer_admin_path %>
-      <br>
-      <%= link_to "Yearbook", yearbook_admin_path %> | <%= link_to "Org chart", org_chart_path %>
-    </div>
-    <div class="column is-4">
-      <%= link_to "View unmatched Asks", listings_path(contribution_type: "Ask") %> <span class="tag"><%= @asks_unmatched_count %></span>
-      <br>
-      <%= link_to "View unmatched Offers", listings_path(contribution_type: "Offer") %> <span class="tag"><%= @offers_unmatched_count %></span>
-      <br>
-      <%= link_to "View all Submissions", submissions_path %> <span class="tag"><%= @submission_count %></span>
-      <br>
-      <%= link_to "Create new Ask", new_ask_path %>
-      <br>
-      <%= link_to "Create new Offer", new_offer_path %>
-
     </div>
     <div class="column columns is-4">
       <div class="column">

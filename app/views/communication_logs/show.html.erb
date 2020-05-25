@@ -7,6 +7,11 @@
   </p>
 
   <p>
+    <strong>Match:</strong>
+    <%= @communication_log.match&.name %>
+  </p>
+
+  <p>
     <strong>Delivery method:</strong>
     <%= @communication_log.delivery_method&.name %>
     <%= @communication_log.auto_generated? ? '(Auto-generated)' : '' %>
@@ -40,5 +45,7 @@
   <hr>
 
   <%= edit_button(@communication_log) %>
+  <%= show_button(@communication_log.person, @communication_log.person.name, "fa fa-user-circle") if @communication_log.person %>
+  <%= show_button(@communication_log.match, "View Match") if @communication_log.match %>
 </div>
 

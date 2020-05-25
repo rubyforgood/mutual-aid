@@ -32,6 +32,10 @@ class Person < ApplicationRecord
     "missing.png"
   end
 
+  def match_history
+    "Match history: #{asks.length}/#{asks.matched.length} asks, #{offers.length}/#{offers.matched.length} offers."
+  end
+
   def all_tags_unique
     all_tags_list.flatten.map(&:downcase).uniq
   end
@@ -40,12 +44,12 @@ class Person < ApplicationRecord
     all_tags_unique.join(", ")
   end
 
-  def temporary_ask_tag_list # these will be directly on the person once forms are available
-    asks.any? ? Listing.all_tags_unique(asks) : temporary_offer_tag_list + ["translation"]
+  def ask_tag_list
+    asks.any? ? asks&.map(&:all_tags_unique) : []
   end
 
-  def temporary_offer_tag_list # these will be directly on the person once forms are available
-    offers.any? ? Listing.all_tags_unique(offers) : ["transportation", "meals"]
+  def offer_tag_list
+    offers.any? ? offers&.map(&:all_tags_unique) : []
   end
 
   private def preferred_contact_method_present!

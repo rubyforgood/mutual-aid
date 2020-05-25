@@ -1,0 +1,7 @@
+<strong>Communication history with <%= person&.name %> re this match:</strong>
+<br><br>
+<ul>
+  <% @communication_logs.where(person: person).order(sent_at: :desc).where(match: @match).each do |log| %>
+    <li><%= edit_button(log, log.short_name, log.delivery_method.icon_class || "fa fa-telegram") %></li>
+  <% end %>
+</ul>

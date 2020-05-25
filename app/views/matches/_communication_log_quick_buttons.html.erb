@@ -1,0 +1,20 @@
+<% person ||= nil %>
+<% @match ||= nil %>
+<% hide_quick_buttons ||= false %>
+
+<% unless hide_quick_buttons %>
+  <strong>Quick buttons:</strong>
+  <br>
+  Click one of these quick-buttons to document
+  <br>your communication with <strong><%= person&.name %></strong>, or,
+  <br>select "Add a detailed log" to add more info:
+  <br><br>
+  <%#= log_connection_button(person, match: @match, created_by: current_user) %>
+  <%= new_communication_log_button(person, match: @match, created_by: current_user) %>
+  <br><br>
+  <%= log_voicemail_button(person, match: @match, created_by: current_user) %>
+  <%= log_email_button(person, match: @match, created_by: current_user) %>
+  <%= log_text_button(person, match: @match, created_by: current_user) %>
+  <br>
+  <%= log_no_connection_button(person, match: @match, created_by: current_user) %>
+<% end %>

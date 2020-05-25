@@ -3,7 +3,7 @@
 <ul type="1">
   <% listings.each do |listing| %>
     <li>
-      <%= link_to listing.created_at.strftime("%A, %B %d, %Y at %l:%M %P"), listing_path(listing) %>
+      <%= link_to listing.created_at.strftime("%a, %b %d, %Y @ %l:%M %P"), listing_path(listing) %>
       <% listing.all_tags_unique.each do |tag| %>
         <span class="tag"><%= tag %></span>
       <% end %>

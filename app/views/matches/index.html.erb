@@ -1,5 +1,7 @@
 <%= render "layouts/view_header", resource: @matches.first %>
 
+<%= render "search_boxes" %>
+
 <table class="table table-hover table-curved table-condensed">
   <thead>
     <tr>
@@ -7,8 +9,6 @@
       <th>Provider</th>
       <th>Status</th>
       <th>Notes</th>
-      <th>Tentative</th>
-      <th>Completed</th>
       <th>Connect to shift</th>
       <th>Edit</th>
     </tr>
@@ -21,8 +21,6 @@
         <td><%= match.provider&.name %></td>
         <td><%= match.status %></td>
         <td><%= match.notes %></td>
-        <td><%= yes_no(match.tentative) %></td>
-        <td><%= yes_no(match.completed) %></td>
         <td><%= render "layouts/view_add_new_button", button_text: "", table_name: "shift_matches", new_params: "match_id=#{match.id}&person_id=#{current_user.person&.id}" %></td>
         <td><%= edit_button(match) %></td>
       </tr>

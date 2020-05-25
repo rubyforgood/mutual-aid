@@ -6,6 +6,11 @@ class PeopleController < ApplicationController
   end
 
   def show
+    @receiver_matches = @person.matches_as_receiver
+    @provider_matches = @person.matches_as_provider
+    receiver_match_ids = @receiver_matches.pluck("matches.id")
+    provider_match_ids = @provider_matches.pluck("matches.id")
+    @match_ids = receiver_match_ids + provider_match_ids
   end
 
   def new

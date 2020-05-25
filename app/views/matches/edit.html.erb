@@ -1,1 +1,124 @@
-<%= render "layouts/view_header", resource: @match %>
+
+<% provider_person = @match.provider&.person %>
+<% receiver_person = @match.receiver&.person %>
+
+
+<div class="match-edit">
+  <div class="title is-1">
+    <%= "Match: " + @match.person_names %>
+  </div>
+  <div class="subtitle is-3">
+    status: <span class="has-text-weight-bold"><%= @match.status&.titleize %></span>
+  </div>
+  <div class="subtitle is-6 is-italic">
+    <%= "(Last edited: #{@match.updated_at.strftime("%b %d, %Y")})" %>
+  </div>
+
+  <div class="section-detail">
+    <%= simple_form_for @match do |f| %>
+      <%= f.error_notification %>
+
+      <% if @edit_connection_mode %>
+        <div class="edit-match-connections-detail">
+          <hr>
+          <%= render "recipient_and_provider", f: f %>
+          <% save_and_show_button = f.submit "Save and View Match", class: "button mt-1 is-primary" %>
+          <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, button_class: "is-primary is-outlined", extra_form_button_2: save_and_show_button %>
+        </div>
+      <% else %>
+        <div class="edit-match-detail">
+          <div class="section instructional-text is-italic">
+            <ol>
+              <li>Contact the people connected to this Match (by calling, emailing, etc)</li>
+              <li>Log your communications by clicking the "quick buttons"</li>
+              <li>REFRESH this page after clicking the button! (sorry, this is temporary)</li>
+              <li>Edit Match status and save</li>
+              <li>(Click "Save and edit match connections" if you want to change who is being connected)</li>
+            </ol>
+          </div>
+          <hr>
+          <div class="match-connections columns">
+            <div class="column">
+              <div class="contact-info">
+                <%= @match.receiver&.type %> #<%= @match.id %>: <%= @match.receiver&.all_tags_to_s&.upcase %>
+                <br><br>
+                <strong>Receiver:</strong>
+                <br>
+                <%= show_button(receiver_person, receiver_person&.name, "fa fa-user-circle", "title is-3", nil, match_id: @match.id) %>
+                <br>
+                <strong>Preferred contact info:</strong>
+                <br>
+                <span class="<%= receiver_person.preferred_contact_method.icon_class %>"></span>
+                <span class="subtitle is-5"><%= receiver_person.preferred_contact_info %></span>
+                <br><br>
+                <strong>Match history:</strong>
+                <br>
+                <span class="<%= receiver_person.match_history %>"></span>
+                <br>
+              </div>
+              <br>
+              <hr>
+              <%= render "communication_log_quick_buttons", person: receiver_person %>
+              <hr>
+              <%= render "communication_history", person: receiver_person %>
+            </div>
+
+            <div class="column">
+              <p>
+              <div class="contact-info">
+                <%= @match.provider&.type %> #<%= @match.id %>: <%= @match.provider&.all_tags_to_s&.upcase %>
+                <br><br>
+                <strong>Provider:</strong>
+                <br>
+                <%= show_button(provider_person, provider_person&.name, "fa fa-user-circle", "title is-3", nil, match_id: @match.id) %>
+                <br>
+                <strong>Preferred contact info:</strong>
+                <br>
+                <span class="<%= provider_person.preferred_contact_method.icon_class %>"></span>
+                <span class="subtitle is-5"><%= provider_person.preferred_contact_info %></span>
+                <br><br>
+                <strong>Match history:</strong>
+                <br>
+                <span class="<%= receiver_person.match_history %>"></span>
+                <br>
+              </div>
+              <br>
+              <hr>
+              <%= render "communication_log_quick_buttons", person: receiver_person %>
+              <hr>
+              <%= render "communication_history", person: provider_person %>
+            </div>
+          </div>
+
+          <!--communications with person who is NOT currently associated-->
+          <% prior_connection_communication_logs = @communication_logs.where.not(person: [provider_person, receiver_person]) %>
+          <% if prior_connection_communication_logs.any? %>
+            <div class="has-text-weight-bold">Communication history with other people previously connected to this match:</div>
+            <br>
+            <ul>
+              <% prior_connection_communication_logs.order(sent_at: :desc).where(match: @match).each do |log| %>
+                <li><%= edit_button(log, "(#{log.person&.name}) " + log.name, log.delivery_method.icon_class || "fa fa-telegram") %></li>
+              <% end %>
+            </ul>
+          <% end %>
+
+          <hr>
+
+          <div class="field is-grouped">
+            <%= f.input :notes, as: :text, label: "Match notes", input_html: { rows: 2, style: "width: 45em" } %>
+          </div>
+          <div class="field is-grouped">
+            <%#= f.input :tentative, as: :radio_buttons, checked: true %>
+            <%#= f.input :completed, as: :radio_buttons, checked: false %>
+            <%= f.input :status, as: :select, required: true, collection: @statuses || [], selected: f.object.status || params[:status] || "matched_tentatively" %>
+          </div>
+
+          <% save_and_edit_connections_button = f.submit "Save and edit match connections", class: "button mt-1 is-primary is-outlined" %>
+          <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, button_class: "is-primary", extra_form_button_2: save_and_edit_connections_button %>
+          <br><br>
+          <%= link_to 'View all Matches', matches_path %> |   <%= link_to 'Contributions page', contributions_public_path %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

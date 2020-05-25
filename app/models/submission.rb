@@ -26,7 +26,7 @@ class Submission < ApplicationRecord
   end
 
   def name
-    "#{form_name} (#{created_at.strftime("%m-%d-%Y")}) #{service_area.name}: #{person.name}"
+    "(#{created_at.strftime("%m-%d-%Y")}) #{form_name.titleize} - #{service_area.name}"
   end
 
 end

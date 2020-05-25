@@ -33,7 +33,7 @@ class Listing < ApplicationRecord
   end
 
   def name_and_match_history
-    "(#{all_tags_to_s.upcase}-#{type})</strong>#{person.name}: #{person.match_history}"
+    "(#{type}-#{all_tags_to_s.upcase})</strong> #{person.match_history} (#{person.name})"
   end
 
   def status

@@ -12,6 +12,7 @@ class Match < ApplicationRecord
   # belongs_to :coordinator, optional: true #, class_name: "Position" # TODO
   #
 
+  scope :id, ->(id) { where(id: id) }
   scope :status, ->(status) { where(status == "all" || status == nil ? "id IS NOT NULL" : "status = '#{status.downcase}'") }
   scope :this_month, -> { where("matches.created_at >= ? AND matches.created_at <= ?",
                                 Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }

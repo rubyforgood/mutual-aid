@@ -39,7 +39,7 @@
           <div class="match-connections columns">
             <div class="column">
               <div class="contact-info">
-                <%= @match.type %> #<%= @match.ud %>: <%= @match.receiver&.all_tags_to_s&.upcase %>
+                <%= @match.receiver&.type %> #<%= @match.id %>: <%= @match.receiver&.all_tags_to_s&.upcase %>
                 <br><br>
                 <strong>Receiver:</strong>
                 <br>
@@ -49,6 +49,10 @@
                 <br>
                 <span class="<%= receiver_person.preferred_contact_method.icon_class %>"></span>
                 <span class="subtitle is-5"><%= receiver_person.preferred_contact_info %></span>
+                <br><br>
+                <strong>Match history:</strong>
+                <br>
+                <span class="<%= receiver_person.match_history %>"></span>
                 <br>
               </div>
               <br>
@@ -61,7 +65,7 @@
             <div class="column">
               <p>
               <div class="contact-info">
-                <%= @match.type %> #<%= @match.ud %>: <%= @match.provider&.all_tags_to_s&.upcase %>
+                <%= @match.provider&.type %> #<%= @match.id %>: <%= @match.provider&.all_tags_to_s&.upcase %>
                 <br><br>
                 <strong>Provider:</strong>
                 <br>
@@ -71,6 +75,11 @@
                 <br>
                 <span class="<%= provider_person.preferred_contact_method.icon_class %>"></span>
                 <span class="subtitle is-5"><%= provider_person.preferred_contact_info %></span>
+                <br><br>
+                <strong>Match history:</strong>
+                <br>
+                <span class="<%= receiver_person.match_history %>"></span>
+                <br>
               </div>
               <br>
               <hr>

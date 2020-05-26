@@ -11,7 +11,7 @@
     </div>
 
     <div class="field is-grouped">
-      <%= f.input :delivery_method, as: :select, required: true, collection: ContactMethod.enabled.pluck(:name, :id), selected: f.object.delivery_method_id || params[:delivery_method_id] || @delivery_method_id %>
+      <%= f.input :delivery_method_id, as: :select, required: true, collection: ContactMethod.enabled.pluck(:name, :id), selected: f.object.delivery_method_id || params[:delivery_method_id] || @delivery_method_id %>
       <%= f.input :delivery_status, as: :select, required: true, collection: CommunicationLog::DELIVERY_STATUSES, selected: f.object.delivery_status || params[:delivery_status] %>
       <%= f.input :needs_follow_up, as: :radio_buttons, checked: f.object.needs_follow_up || params[:needs_follow_up] || true %>
       <%= f.hidden_field :auto_generated, value: false %> <!-- FIXME: block editing auto_generated logs? -->

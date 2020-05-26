@@ -117,6 +117,7 @@ CommunicationLog.where(
 CommunicationLog.where(
     subject: "we'd like your feedback!",
     body: "how was your experience?",
+    person: person,
     delivery_method: ContactMethod.email,
     delivery_status: "completed",
     auto_generated: true,

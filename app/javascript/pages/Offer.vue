@@ -7,7 +7,7 @@
 
     <ServiceAreaField
       :service_area="submission.service_area"
-      :options="service_areas"
+      :options="configuration.service_areas"
       name="submission[service_area]"
     />
 
@@ -18,7 +18,7 @@
 
     <ContactFields
       fieldNamePrefix="submission[person_attributes]"
-      :contactMethods="contact_methods"
+      :contactMethods="configuration.contact_methods"
       :person="person"
     /><SpacerField />
 
@@ -29,7 +29,7 @@
 
     <CategoryFields
       :fieldNamePrefix="withListingPrefix('tag_list[]')"
-      :categories="categories"
+      :categories="configuration.categories"
       :tags="listing.tag_list"
     >
       <p class="title is-4">
@@ -107,9 +107,7 @@ export default {
   },
   props: {
     submission: Object,
-    categories: Array,
-    contact_methods: Array,
-    service_areas: Array,
+    configuration: Object,
   },
   data() {
     return {

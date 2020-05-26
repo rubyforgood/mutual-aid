@@ -31,9 +31,7 @@ class OffersController < PublicController
     def serialize(submission)
       @json = {
         submission: SubmissionBlueprint.render_as_hash(submission),
-        categories: CategoryBlueprint.render_as_hash(Category.visible.roots, view: :normal),
-        contact_methods: ContactMethodBlueprint.render_as_hash(ContactMethod.enabled),
-        service_areas: ServiceAreaBlueprint.render_as_hash(ServiceArea.all),
+        configuration: ConfigurationBlueprint.render_as_hash(nil),
       }.to_json
     end
 end

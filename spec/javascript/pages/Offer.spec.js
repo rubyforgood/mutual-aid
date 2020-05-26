@@ -7,9 +7,11 @@ describe('Offer', () => {
   def('wrapper', () => mount(Offer, {
     localVue: configure(createLocalVue()),
     propsData: {
-      contact_methods: $contact_methods,
-      service_areas: $service_areas,
       submission: $submission,
+      configuration: {
+        contact_methods: $contact_methods,
+        service_areas: $service_areas,
+      },
     },
   }))
 

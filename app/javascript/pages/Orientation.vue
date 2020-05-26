@@ -16,9 +16,9 @@
           <h2 class='subtitle is-3'>Need some help?</h2>
           <div class='action-buttons'>
             <a href="/asks/new" class="button is-primary">Submit an Ask</a>
-            <a href="/contributions?contribution_type=offer" class="button is-primary is-outlined">View Offers [ADMIN/P2P]</a>
+            <a href="/contributions?contribution_type=offer" class="button is-primary is-outlined">View Offers [*]</a>
             <br><br>
-            <span class=''><a href='/contributions'>View offers and resources [ADMIN/P2P]</a></span>
+            <span class=''><a href='/contributions'>View offers and resources [*]</a></span>
           </div>
         </div>
         <div>
@@ -26,7 +26,7 @@
           <h2 class='subtitle is-3'>Want to help?</h2>
           <div class='action-buttons'>
             <a href="/offers/new" class="button is-primary">Submit an Offer</a>
-            <a href="/contributions?contribution_type=ask" class="button is-primary is-outlined">View Asks [ADMIN/P2P]</a>
+            <a href="/contributions?contribution_type=ask" class="button is-primary is-outlined">View Asks [*]</a>
             <br><br>
             <span class=''><a href='/community_resources/new'>Submit a community resource</a></span>
             <br>

@@ -195,13 +195,15 @@ within it. This allows for any unexpected state data of the user from hanging ar
 ## Data
 * Running `db:seed` will create basic types, etc, for test and production environments.
 * We also added some fake data seed files for you to use that are callable via rake tasks (these are in `lib/tasks/db.rake`) 
-  - If you want to start fresh: `rake db:reset_seeded` (drop, create, migrate, seed, stats_check)
-  - If you want to add some seeds: `rake db:import_all_seeds` (import_dev_seeds, import_submission_response_seeds, import_user_seeds, import_custom_form_question_seeds, stats_check)
-  - Other options: 
-    - `rake db:reset_seed_data` (delete_all_data, seed, import_all_seeds, stats_check)
-    - `rake db:setup_seeds` (setup, import_all_seeds, stats_check)
+  - To start fresh with prod seeds only: `rake db:rebuild_and_seed`
+  - To add some dev seeds: `rake db:import_all_seeds` 
+  - All options: 
+    - `rake db:rebuild_and_seed` (drop, create, migrate, seed, stats_check)
+    - `rake db:rebuild_and_seed_dev` (drop, create, migrate, seed, import_all_seeds, stats_check)
     - `rake db:stats_check` (outputs record totals)
-    - `rake db:delete_all_data` (runs truncate on all tables)
+    - `rake db:truncate_tables` (runs truncate on all tables)
+    - `rake db:recreate_all_seeds` (delete_all_data, seed, import_all_seeds, stats_check)   
+    - `rake db:import_all_seeds` (import_dev_seeds, import_submission_response_seeds, import_user_seeds, import_custom_form_question_seeds, stats_check)
     - `rake db:import_dev_seeds` (runs the db/seeds/dev_seeds.rb file)
     - `rake db:import_submission_response_seeds` (runs the db/scripts/submission_response_seeds.rb file -- you could edit this to pull from the db/seeds/gitignored_csvs path if you have a file you want to import)
     - `rake db:import_user_seeds` (runs the db/scripts/user_seeds.rb file)

@@ -4,20 +4,23 @@ desc "Extra db functions: stats_check, reset db with seeds, import csv and seed 
 
 namespace :db do
 
-  task :reset_seeded => ['db:drop',
-                         'db:create',
-                         'db:migrate',
-                         'db:seed',
-                         'db:stats_check']
+  task :rebuild_and_seed_dev => ['db:drop',
+                                 'db:create',
+                                 'db:migrate',
+                                 'db:seed',
+                                 'db:import_all_seeds',
+                                 'db:stats_check']
 
-  task :reset_seed_data => ['db:delete_all_data',
-                            'db:seed',
-                            'db:import_all_seeds',
-                            'db:stats_check']
+  task :rebuild_and_seed => ['db:drop',
+                             'db:create',
+                             'db:migrate',
+                             'db:seed',
+                             'db:stats_check']
 
-  task :setup_seeds => ['db:setup',
-                        'db:import_all_seeds',
-                        'db:stats_check']
+  task :recreate_all_seeds => ['db:truncate_tables',
+                               'db:seed',
+                               'db:import_all_seeds',
+                               'db:stats_check']
 
   task :import_all_seeds => ['db:import_dev_seeds',
                              'db:import_submission_response_seeds',
@@ -29,7 +32,7 @@ namespace :db do
     require "#{Rails.root}/db/scripts/tuple_counts.rb"
   end
 
-  task :delete_all_data => :environment do
+  task :truncate_tables => :environment do
     require "#{Rails.root}/db/scripts/truncate_tables.rb"
   end
 

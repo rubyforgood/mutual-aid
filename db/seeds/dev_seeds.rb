@@ -79,7 +79,7 @@ end
 # matches
 #
 
-match_1 = Match.where(receiver: person, provider: person_2.offers.last).first_or_create!
+match_1 = Match.where(receiver: person.asks.last, provider: person_2.offers.last).first_or_create!
 5.times do
   Match.where(receiver: Ask.all.sample, provider: Offer.all.sample).first_or_create!
 end

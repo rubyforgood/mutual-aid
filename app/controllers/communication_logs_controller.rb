@@ -82,6 +82,7 @@ class CommunicationLogsController < ApplicationController
           :outbound,
           :sent_at,
           :subject,
+          :auto_generated
       )
     end
 end

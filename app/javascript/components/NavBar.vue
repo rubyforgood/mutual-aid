@@ -18,7 +18,7 @@
       <b-navbar-item tag="div">
         <FeedbackButton action="software_feedbacks/new">Feedback</FeedbackButton>
       </b-navbar-item>
-      <b-navbar-item href="/users/edit">Account</b-navbar-item>
+      <b-navbar-item href="/matches">Matches</b-navbar-item>
       <b-navbar-item href="/admin">Admin</b-navbar-item>
       <b-navbar-item tag="div">
         <DeleteButton action="users/sign_out">Logout</DeleteButton>

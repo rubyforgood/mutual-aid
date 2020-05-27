@@ -13,7 +13,7 @@ location_type = LocationType.all.sample
 5.times do
   # every service_area gets its own location
   location = Location.new(location_type: location_type)
-  ServiceArea.create!(name: Faker::Address.community, location: location, organization: host_organization, service_area_type: ServiceArea::TYPES)
+  ServiceArea.create!(name: Faker::Address.community, location: location, organization: host_organization, service_area_type: ServiceArea::TYPES.sample)
 end
 
 email_contact_method = ContactMethod.field_name('email').first || ContactMethod.create!(name: "Email", field: "email", enabled: true)
@@ -79,7 +79,7 @@ end
 # matches
 #
 
-match_1 = Match.where(receiver: person, provider: person_2.offers.last).first_or_create!
+match_1 = Match.where(receiver: person.asks.last, provider: person_2.offers.last).first_or_create!
 5.times do
   Match.where(receiver: Ask.all.sample, provider: Offer.all.sample).first_or_create!
 end
@@ -117,6 +117,7 @@ CommunicationLog.where(
 CommunicationLog.where(
     subject: "we'd like your feedback!",
     body: "how was your experience?",
+    person: person,
     delivery_method: ContactMethod.email,
     delivery_status: "completed",
     auto_generated: true,
@@ -208,33 +209,35 @@ Listing.all.sample((Listing.count * 70)/100) do |listing|
                           )
 end
 
+def update_status(match)
+  status = "match_confirmed"
+  if match.completed && match.feedbacks.where(is_from_receiver: true).any?
+    status = "receiver_feedback_received"
+  elsif match.completed && match.feedbacks.any?
+    status = "provider_feedback_received"
+  elsif match.completed? && match.feedbacks.none?
+    status = "match_completed"
+  elsif !match.completed? && !match.tentative?
+    status = "match_confirmed"
+  elsif match.tentative?
+    status = "matched_tentatively"
+  end
+  match.update_attributes(status: status)
+end
+
+# update match statuses
+Match.all.each do |match|
+  update_status(match)
+end
+
 # submissions
 Listing.all.each do |listing|
   submission = Submission.where(person: listing.person, service_area: listing.service_area, form_name: "#{listing.type}_form", privacy_level_requested: Submission::PRIVACY_LEVELS.sample,
                    body: listing.to_json).create!
   listing.submission = submission
-
-  listing.status = update_status(listing) # set dropdown value for status/state string
-
+  matches = listing.type == "Ask" ? listing.matches_as_receiver : listing.matches_as_provider
+  listing.state = matches.any? ? "fulfilled" : "received"
   listing.save!
-end
-
-def update_status(listing)
-  status = "matched"
-  if listing.communication_logs.where(needs_follow_up: true).any?
-    status = "needs_follow_up"
-  elsif listing.completed && listing.feedbacks.any? && listing.feedbacks.where(is_from_receiver: true).any?
-    status = "feedback_completed"
-  elsif listing.completed && listing.feedbacks.any?
-    status = "feedback_received"
-  elsif listing.completed? && listing.feedbacks.none?
-    status = "feedback_needed"
-  elsif listing.completed?
-    status = "match_completed"
-  elsif listing.tentative?
-    status = "matched_tentatively"
-  end
-  status
 end
 
 # custom_form_questions (separate importer)

@@ -72,6 +72,9 @@ end
   ['Text', 'phone', 'fa fa-comment'],
   ['Email', 'email', 'fa fa-envelope'],
   ['WhatsApp', 'phone', 'fa fa-whatsapp'],
+  # ['Instagram', 'notes', 'fa fa-instagram'], # TODO - enable social media options
+  # ['Facebook', 'notes', 'fa fa-facebook'],
+  # ['Twitter', 'notes', 'fa fa-twitter'],
 ].
   each do |(name, field, icon_class)|
     ContactMethod.find_or_create_by!(name: name, field: field, enabled: true, icon_class: icon_class)

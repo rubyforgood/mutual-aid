@@ -51,7 +51,7 @@ class MatchesController < ApplicationController
 
   def update
     save_and_continue = params[:commit]&.downcase&.include?('save and view match')
-    update_connections = params[:commit]&.downcase&.include?('edit match connections')
+    update_connections = params[:commit]&.downcase&.include?('edit who this match connects')
     if @match.update(match_params)
       if save_and_continue || update_connections
         redirect_to edit_match_path(@match, edit_connection_mode: update_connections ? true : false),

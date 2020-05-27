@@ -1,0 +1,23 @@
+<% contribution_person = contribution.person %>
+<div class="contact-info">
+  <div class="has-text-weight-bold"><%= contribution&.type %>:</div>
+  <div>
+    <%=
+      link_to(respond_contribution_path(contribution),
+              title: "Respond",
+              class: "button show-button title is-3") do
+        "<span class='#{contribution.icon_class}'></span><span class='' style='padding-left: 0.25em'> #{contribution&.all_tags_to_s&.upcase}</span>".html_safe
+      end
+    %>
+  </div>
+  <hr>
+  <div class="has-text-weight-bold"><%= contribution.ask? ? "Reciever" : "Provider" %>:</div>
+  <%= show_button(contribution_person, contribution_person&.name, "fa fa-user-circle", "title is-5", nil, match_id: @match.id) %>
+  <br>
+  <div class="has-text-weight-bold">Preferred contact info:</div>
+  <span class="<%= contribution_person.preferred_contact_method.icon_class %>"></span>
+  <span class="subtitle is-5"><%= contribution_person.preferred_contact_info %></span>
+  <hr>
+  <div class="has-text-weight-bold"><%= contribution_person.name + "'s " if contribution_person %>Match history:</div>
+  <span><%= contribution_person.match_history %></span>
+</div>

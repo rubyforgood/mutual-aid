@@ -2,7 +2,7 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:edit, :update, :destroy]
 
   def index
-    @statuses = Match::STATUSES
+    @statuses = Match::STATUSES.map{|s| [s.titleize, s]}
     @matches = Match.status(params[:status] || "all").order(updated_at: :desc)
 
     # follow_up_status filter
@@ -93,7 +93,7 @@ class MatchesController < ApplicationController
       else
 
       end
-      @statuses = Match::STATUSES
+      @statuses = Match::STATUSES.map{|s| [s.titleize, s]}
 
       @communication_logs = CommunicationLog.where(match: @match)
 

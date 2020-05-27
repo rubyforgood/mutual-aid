@@ -8,7 +8,7 @@ class Match < ApplicationRecord
   has_many :shift_matches
 
   INITIATORS = ["receiver", "provider"]
-  STATUSES = ["matched_tentatively", "match_confirmed", "match_completed", "provider_feedback_received", "receiver_feedback_received"]
+  STATUSES = ["matched_tentatively", "match_confirmed", "match_completed", "provider_gave_feedback", "receiver_gave_feedback"]
 
   # belongs_to :coordinator, optional: true #, class_name: "Position" # TODO
   #

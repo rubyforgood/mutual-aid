@@ -16,8 +16,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @people = Person.pluck(:id, [:name, :phone, :email])
-    set_form_dropdowns
+    if @user == current_user
+      redirect_to edit_user_registration_path
+    else
+      set_form_dropdowns
+    end
   end
 
   def create

@@ -22,12 +22,13 @@
       </td>
       <td><%= link_to("Find Match [TBD]", match_listing_path(listing), class: "button") %></td>
       <td>
-        <% type = listing.type %>
-        <% if type == "Offer" %>
-          <%= link_to("Create Match", new_match_path(provider_id: listing.id, provider_type: "Offer"),
+        <% if listing.offer? %>
+          <%= link_to("Create Match",
+                      new_match_path(provider_id: listing.id, provider_type: listing.type),
                       class: "button") %>
         <% else %>
-          <%= link_to("Create Match", new_match_path(receiver_id: listing.id, receiver_type: "Ask"),
+          <%= link_to("Create Match",
+                      new_match_path(receiver_id: listing.id, receiver_type: listing.type),
                       class: "button") %>
         <% end %>
       </td>

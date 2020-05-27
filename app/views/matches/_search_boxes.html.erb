@@ -11,17 +11,17 @@
   <div id="search-boxes" class="has-text-left search-boxes">
     <div class="">
       <div class="is-grouped is-inline-flex">
-        <%= select_tag :status,
-                       options_for_select(@statuses || [], selected: params[:status]),
-                       include_blank: "-- Any match status --",
+        <%= select_tag :connected_to_person_id,
+                       options_for_select(@people || [], selected: params[:connected_to_person_id]),
+                       include_blank: "-- Connected to --",
                        class: 'input select optional' %>
         <%= select_tag :follow_up_status,
                        options_for_select([["Needs follow up", true], ["No follow up needed", false]], selected: params[:follow_up_status]),
                        include_blank: "-- Any follow up status --",
                        class: 'input select optional' %>
-        <%= select_tag :connected_to_person_id,
-                       options_for_select(@people || [], selected: params[:connected_to_person_id]),
-                       include_blank: "-- Connected to --",
+        <%= select_tag :status,
+                       options_for_select(@statuses || [], selected: params[:status]),
+                       include_blank: "-- Any match status --",
                        class: 'input select optional' %>
         <%= f.button :submit, "Search", class: "form-group button is-primary", name: nil %>
         <%= clear_search_button %>

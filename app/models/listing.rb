@@ -60,9 +60,9 @@ class Listing < ApplicationRecord
 
   def icon_class
     if ask?
-      "fa fa-hand-holding-heart"
-    elsif offer?
       "fa fa-hand-sparkles"
+    elsif offer?
+      "fa fa-hand-holding-heart"
     else
       "fa fa-question-circle"
     end

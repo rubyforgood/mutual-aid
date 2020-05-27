@@ -38,10 +38,7 @@
         <a :href="profile_path" class="button icon-list is-primary is-outlined"><span class="fa fa-user-circle"></span></a>
       </div>
       <div class="buttonSpacing" v-if="respond_path">
-        <a :href="respond_path" class="button icon-list is-primary is-outlined"><SingleIcon iconType="Reply" klass="" /></a>
-      </div>
-      <div class="buttonSpacing" v-if="match_path">
-        <a :href="match_path" class="button icon-list is-primary"><span>Match</span></a>
+        <a :href="respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
       </div>
     </div>
   </li>

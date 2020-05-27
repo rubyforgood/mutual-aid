@@ -1,11 +1,11 @@
-
 <% provider_person = @match.provider&.person %>
 <% receiver_person = @match.receiver&.person %>
 
+<div class="title is-5">Manage Match:</div>
 
 <div class="match-edit">
   <div class="title is-1">
-    <%= "Manage Match: " + @match.person_names %>
+    <%= @match.person_names %>
   </div>
   <div class="subtitle is-6 is-italic">
     <%= "(Last edited: #{@match.updated_at.strftime("%b %d, %Y")}; created: #{@match.created_at.strftime("%b %d, %Y")})" %>
@@ -41,31 +41,7 @@
 <!--          <hr>-->
           <div class="match-connections columns">
             <div class="column">
-              <div class="contact-info">
-                <strong>Receiver:</strong>
-                <br>
-                <%= show_button(receiver_person, receiver_person&.name, "fa fa-user-circle", "title is-3", nil, match_id: @match.id) %>
-                <br>
-                <strong>Preferred contact info:</strong>
-                <br>
-                <span class="<%= receiver_person.preferred_contact_method.icon_class %>"></span>
-                <span class="subtitle is-5"><%= receiver_person.preferred_contact_info %></span>
-                <br><br>
-                <div class="has-text-weight-bold"><%= @match.receiver&.type %>:</div>
-                <div>
-                  <%=
-                    link_to(respond_contribution_path(@match.receiver),
-                            title: "Respond",
-                            class: "button show-button title is-5") do
-                      "<span class='#{@match.receiver.icon_class}'></span><span class='' style='padding-left: 0.25em'> #{@match.provider&.all_tags_to_s&.upcase}</span>".html_safe
-                    end
-                  %>
-                </div>
-                <hr>
-                <strong><%= receiver_person.name + "'s " if receiver_person %>Match history:</strong>
-                <br>
-                <span><%= receiver_person.match_history %></span>
-              </div>
+              <%= render "contribution_data", contribution: @match.receiver %>
               <hr>
               <%= render "communication_log_quick_buttons", person: receiver_person %>
               <hr>
@@ -73,32 +49,7 @@
             </div>
 
             <div class="column">
-              <p>
-              <div class="contact-info">
-                <strong>Provider:</strong>
-                <br>
-                <%= show_button(provider_person, provider_person&.name, "fa fa-user-circle", "title is-3", nil, match_id: @match.id) %>
-                <br>
-                <strong>Preferred contact info:</strong>
-                <br>
-                <span class="<%= provider_person.preferred_contact_method.icon_class %>"></span>
-                <span class="subtitle is-5"><%= provider_person.preferred_contact_info %></span>
-                <br><br>
-                <div class="has-text-weight-bold"><%= @match.provider&.type %>:</div>
-                <div>
-                  <%=
-                    link_to(respond_contribution_path(@match.provider),
-                            title: "Respond",
-                            class: "button show-button title is-5") do
-                      "<span class='#{@match.provider.icon_class}'></span><span class='' style='padding-left: 0.25em'> #{@match.provider&.all_tags_to_s&.upcase}</span>".html_safe
-                    end
-                  %>
-                </div>
-                <hr>
-                <strong><%= provider_person.name + "'s " if provider_person %>Match history:</strong>
-                <br>
-                <span><%= provider_person.match_history %></span>
-              </div>
+              <%= render "contribution_data", contribution: @match.provider %>
               <hr>
               <%= render "communication_log_quick_buttons", person: provider_person %>
               <hr>

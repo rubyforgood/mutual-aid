@@ -5,10 +5,10 @@
     <div class="field is-grouped">
       <%= ff.hidden_field :id %>
       <%= ff.input :name, label: "Person's name" %>
-      <%= ff.input :preferred_contact_method, as: :select, collection: @contact_methods, label: "Preferred contact method" %>
+      <%= ff.input :preferred_contact_method_id, as: :select, collection: @contact_methods, label: "Preferred contact method" %>
       <%= ff.input :email, label: "Email" %>
       <%= ff.input :phone, label: "Phone" %>
-      <%= f.input :person, as: :select, label: "Person", collection: @people.transpose %>
+      <%= f.input :person_id, as: :select, label: "Person", collection: @people.transpose %>
     </div>
   </div>
 </fieldset>

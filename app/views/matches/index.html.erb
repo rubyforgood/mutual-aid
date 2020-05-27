@@ -15,6 +15,7 @@
       <th>Last communicated</th>
       <th>Needs followup?</th>
       <th>Match Notes</th>
+      <th>Exchange(d)</th>
       <th>Connect to dispatcher</th>
       <th>Edit Match</th>
     </tr>
@@ -40,6 +41,7 @@
         </td>
         <td><span class="<%= "fa fa-exclamation-circle has-text-warning" if match.needs_follow_up? %>" title="<%= match.communication_logs.needs_follow_up.map{ |log| "#{log.subject }#{": " + log.body if log&.body }" } %>"></span></td>
         <td><span class="<%= "fa fa-sticky-note" if match.notes.present? %>" title="<%= match.notes %>"></span></td></td>
+        <td><%= shorthand_display(match.exchanged_at) if match.exchanged_at.present? %></td>
         <td>
           <% match.shift_matches.order(created_at: :desc).each do |shift_match| %>
             <%= link_to("#{shorthand_display(shift_match.created_at)} (#{shift_match.shift.person.name})", edit_shift_match_path(shift_match)) %>

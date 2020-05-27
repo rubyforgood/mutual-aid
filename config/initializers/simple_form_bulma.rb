@@ -370,11 +370,11 @@ SimpleForm.setup do |config|
       b.optional :readonly
       b.use :label, class: 'label'
       b.wrapper :grid_wrapper, tag: 'div', class: 'control' do |ba|
-        ba.wrapper tag: 'div', class: 'test' do |bb|
-        bb.use :input, class: 'control', error_class: 'is-invalid', valid_class: 'is-valid'
-      end
+        ba.wrapper tag: 'div', class: 'field is-grouped' do |bb|
+          bb.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
+          ba.use :hint, wrap_with: { tag: 'small', class: 'help' } # adds hint above select
+        end
         ba.use :full_error, wrap_with: { tag: 'div', class: 'help is-invalid invalid-feedback is-danger' }
-        ba.use :hint, wrap_with: { tag: 'small', class: 'help' }
       end
     end
 

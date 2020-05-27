@@ -2,17 +2,24 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :description %>
+    <%= f.input :title, label: "Summary/title (45 chars)", input_html: { maxlength: 45 } %>
+    <%= f.input :description,
+                label: "Notes (for THIS CATEGORY only! create a new <a href='/asks/new?person_id=#{@person&.id}'> Ask
+                  </a> or <a href='/offers/new?person_id=#{@person&.id}'> Offer
+                  </a>, as needed, but save this form first!)".html_safe %>
     <div class="field is-grouped">
       <%= f.input :type, as: :select, collection: ["Ask", "Offer"] %>
-      <%= f.input :state, as: :string, label: "Status" %>
+      <% if action_name == 'new' %>
+        <%= f.hidden_field :state, value: f.object.state || "received" %>
+      <% else %>
+        <%= f.input :state, as: :string, label: "Status", input_html: { value: f.object.state || "received" } %>
+      <% end %>
     </div>
     <%= f.input :tag_list, as: :check_boxes, collection: @available_tags %>
-    <%= f.association :person %>
-    <%= f.association :service_area %>
-    <%= f.association :location %>
-    <%= f.association :submission if current_user.sys_admin? %>
+    <%= f.association :person, include_blank: true %>
+    <%= f.association :service_area, include_blank: true %>
+    <%= f.association :location, include_blank: true %>
+    <%= (f.association :submission, include_blank: true) if current_user.sys_admin? %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, record: @listing, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

@@ -5,20 +5,46 @@ class Match < ApplicationRecord
 
   has_many :communication_logs
   has_many :feedbacks
+  has_many :shift_matches
 
   INITIATORS = ["receiver", "provider"]
-  STATUSES = ["needs_follow_up", "matched_tentatively", "matched", "match_completed", "feedback_needed", "feedback_received", "feedback_completed"]
+  STATUSES = ["matched_tentatively", "match_confirmed", "match_completed", "provider_feedback_received", "receiver_feedback_received"]
 
   # belongs_to :coordinator, optional: true #, class_name: "Position" # TODO
   #
 
   scope :id, ->(id) { where(id: id) }
-  scope :status, ->(status) { where(status == "all" || status == nil ? "id IS NOT NULL" : "status = '#{status.downcase}'") }
+  scope :needs_follow_up, ->() { joins(:communication_logs).where("communication_logs.needs_follow_up = ?", true) }
+  scope :status, ->(status) { where(status == "all" || !status.present? ? "matches.id IS NOT NULL" : "matches.status = '#{status.downcase}'") }
   scope :this_month, -> { where("matches.created_at >= ? AND matches.created_at <= ?",
                                 Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }
 
+  def self.connected_to_person_id(person)
+    communication_match_ids = []
+    shift_match_ids = []
+    if person
+      communication_match_ids = CommunicationLog.where(person: person).pluck(:match_id)
+      shift_match_ids = ShiftMatch.includes(:shift).references(:shift).where("shifts.person_id = ?", person.id).pluck(:match_id)
+    end
+    where(id: communication_match_ids + shift_match_ids)
+  end
+
+  def self.follow_up_status(follow_up_status)
+    needs_follow_up = self.needs_follow_up
+    if YAML.load(follow_up_status) == false
+      result = self.where.not(id: needs_follow_up)
+    else
+      result = needs_follow_up
+    end
+    result
+  end
+
   def name
-    "#{"[#{status}] "}#{receiver.name} & #{provider.name}"
+    "#{"[#{status}] "}#{receiver.name} & #{provider.name} (#{created_at.strftime("%m-%d-%Y")})"
+  end
+
+  def needs_follow_up?
+    communication_logs.needs_follow_up.any?
   end
 
   def person_names # TODO move this to presenter

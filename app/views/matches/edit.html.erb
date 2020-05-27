@@ -5,14 +5,17 @@
 
 <div class="match-edit">
   <div class="title is-1">
-    <%= "Match: " + @match.person_names %>
-  </div>
-  <div class="subtitle is-3">
-    status: <span class="has-text-weight-bold"><%= @match.status&.titleize %></span>
+    <%= "Manage Match: " + @match.person_names %>
   </div>
   <div class="subtitle is-6 is-italic">
-    <%= "(Last edited: #{@match.updated_at.strftime("%b %d, %Y")})" %>
+    <%= "(Last edited: #{@match.updated_at.strftime("%b %d, %Y")}; created: #{@match.created_at.strftime("%b %d, %Y")})" %>
   </div>
+  <div class="subtitle is-3">
+    Status: <span class="has-text-weight-bold"><%= @match.status&.titleize %></span>
+    <br>
+  </div>
+
+  <hr>
 
   <div class="section-detail">
     <%= simple_form_for @match do |f| %>
@@ -20,28 +23,25 @@
 
       <% if @edit_connection_mode %>
         <div class="edit-match-connections-detail">
-          <hr>
           <%= render "recipient_and_provider", f: f %>
           <% save_and_show_button = f.submit "Save and View Match", class: "button mt-1 is-primary" %>
           <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, button_class: "is-primary is-outlined", extra_form_button_2: save_and_show_button %>
         </div>
       <% else %>
         <div class="edit-match-detail">
-          <div class="section instructional-text is-italic">
-            <ol>
-              <li>Contact the people connected to this Match (by calling, emailing, etc)</li>
-              <li>Log your communications by clicking the "quick buttons"</li>
-              <li>REFRESH this page after clicking the button! (sorry, this is temporary)</li>
-              <li>Edit Match status and save</li>
-              <li>(Click "Save and edit match connections" if you want to change who is being connected)</li>
-            </ol>
-          </div>
-          <hr>
+<!--          <div class="instructional-text is-italic" style="padding-left: 3rem;">-->
+<!--            <ol>-->
+<!--              <li>Contact the people connected to this Match (by calling, emailing, etc)</li>-->
+<!--              <li>Log your communications by clicking the "quick buttons"</li>-->
+<!--              <li>REFRESH this page after clicking the button! (sorry, this is temporary)</li>-->
+<!--              <li>Edit Match status and save</li>-->
+<!--              <li>(Click "Save and edit match connections" if you want to change who is being connected)</li>-->
+<!--            </ol>-->
+<!--          </div>-->
+<!--          <hr>-->
           <div class="match-connections columns">
             <div class="column">
               <div class="contact-info">
-                <%= @match.receiver&.type %> #<%= @match.id %>: <%= @match.receiver&.all_tags_to_s&.upcase %>
-                <br><br>
                 <strong>Receiver:</strong>
                 <br>
                 <%= show_button(receiver_person, receiver_person&.name, "fa fa-user-circle", "title is-3", nil, match_id: @match.id) %>
@@ -51,12 +51,21 @@
                 <span class="<%= receiver_person.preferred_contact_method.icon_class %>"></span>
                 <span class="subtitle is-5"><%= receiver_person.preferred_contact_info %></span>
                 <br><br>
-                <strong>Match history:</strong>
+                <div class="has-text-weight-bold"><%= @match.receiver&.type %>:</div>
+                <div>
+                  <%=
+                    link_to(respond_contribution_path(@match.receiver),
+                            title: "Respond",
+                            class: "button show-button title is-5") do
+                      "<span class='#{@match.receiver.icon_class}'></span><span class='' style='padding-left: 0.25em'> #{@match.provider&.all_tags_to_s&.upcase}</span>".html_safe
+                    end
+                  %>
+                </div>
+                <hr>
+                <strong><%= receiver_person.name + "'s " if receiver_person %>Match history:</strong>
                 <br>
-                <span class="<%= receiver_person.match_history %>"></span>
-                <br>
+                <span><%= receiver_person.match_history %></span>
               </div>
-              <br>
               <hr>
               <%= render "communication_log_quick_buttons", person: receiver_person %>
               <hr>
@@ -66,8 +75,6 @@
             <div class="column">
               <p>
               <div class="contact-info">
-                <%= @match.provider&.type %> #<%= @match.id %>: <%= @match.provider&.all_tags_to_s&.upcase %>
-                <br><br>
                 <strong>Provider:</strong>
                 <br>
                 <%= show_button(provider_person, provider_person&.name, "fa fa-user-circle", "title is-3", nil, match_id: @match.id) %>
@@ -77,14 +84,23 @@
                 <span class="<%= provider_person.preferred_contact_method.icon_class %>"></span>
                 <span class="subtitle is-5"><%= provider_person.preferred_contact_info %></span>
                 <br><br>
-                <strong>Match history:</strong>
+                <div class="has-text-weight-bold"><%= @match.provider&.type %>:</div>
+                <div>
+                  <%=
+                    link_to(respond_contribution_path(@match.provider),
+                            title: "Respond",
+                            class: "button show-button title is-5") do
+                      "<span class='#{@match.provider.icon_class}'></span><span class='' style='padding-left: 0.25em'> #{@match.provider&.all_tags_to_s&.upcase}</span>".html_safe
+                    end
+                  %>
+                </div>
+                <hr>
+                <strong><%= provider_person.name + "'s " if provider_person %>Match history:</strong>
                 <br>
-                <span class="<%= receiver_person.match_history %>"></span>
-                <br>
+                <span><%= provider_person.match_history %></span>
               </div>
-              <br>
               <hr>
-              <%= render "communication_log_quick_buttons", person: receiver_person %>
+              <%= render "communication_log_quick_buttons", person: provider_person %>
               <hr>
               <%= render "communication_history", person: provider_person %>
             </div>
@@ -111,6 +127,16 @@
             <%#= f.input :tentative, as: :radio_buttons, checked: true %>
             <%#= f.input :completed, as: :radio_buttons, checked: false %>
             <%= f.input :status, as: :select, required: true, collection: @statuses || [], selected: f.object.status || params[:status] || "matched_tentatively" %>
+            <div class="field">
+              <%= f.label "Needs follow up?", class: "label" %>
+              <% logs_needing_follow_up = @match.communication_logs.needs_follow_up %>
+              <% if logs_needing_follow_up.any? %>
+                <%= "<span class='fa fa-exclamation-circle has-text-warning'></span> #{logs_needing_follow_up.length} logs above need follow up".html_safe %>
+                <%= f.hint "(click on each log to edit its follow up status)" %>
+              <% else %>
+                <%= f.text_field :needs_follow_up, label: "Needs follow up?", value: "(add a log above if you want to add a followup flag)", readonly: true, style: "width: 30rem;", class: "input has-background-light" %>
+              <% end %>
+            </div>
           </div>
 
           <% save_and_edit_connections_button = f.submit "Save and edit match connections", class: "button mt-1 is-primary is-outlined" %>

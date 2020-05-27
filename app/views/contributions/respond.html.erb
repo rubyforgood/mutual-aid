@@ -1,35 +1,86 @@
-<h1 class="title">Respond to:</h1>
+<% person = @contribution.person %>
 
-<div class="subtitle is-5 has-text-weight-bold">
-  <%= show_button(@contribution, @contribution.name, @contribution.icon_class) %>
-  <%= show_button(@contribution.person, "", "fa fa-user-circle") %>
+<div class="title is-5">Respond to contribution:    <%= link_to "go to Contributions page", contributions_public_path %></div>
+
+<div class="contribution">
+  <div class="summary">
+      <span class="title is-1"><span class="<%= @contribution.icon_class %>"></span> <%= @contribution&.type %>: <%= @contribution&.all_tags_to_s&.upcase %>
+        </span> <%#= edit_button(@contribution, "Edit") %><!-- # TODO - add update action back in once we have moved controllers-->
+  </div>
+  <%= "<br>".html_safe if @contribution.title.present? || @contribution.description.present? %>
+  <div class="subtitle is-5"><%= @contribution.title %></div>
+  <div class="description"><%= @contribution.description %></div>
 </div>
-[This page is TBD, depending on how we define P2P workflows.]
-<hr>
-Current matches:
-<br>
-<% if @contribution.matches_as_receiver.any? %>
-  <% @contribution.matches_as_receiver.each do |match| %>
-    <%= show_button(match, match.name) %>
-  <% end %>
-<% end %>
-<% if @contribution.matches_as_provider.any? %>
-  <% @contribution.matches_as_provider.each do |match| %>
-    <%= show_button(match, match.name) %>
-  <% end %>
-<% end %>
-<hr>
-<% if @contribution.type == "Ask" %>
-  <%= link_to("Find Match [TBD]",
-              match_listing_path(@contribution, receiver_id: @contribution.id, receiver_type: "Ask"),
-              class: "button") %>
-  <%= render "layouts/view_add_new_button", table_name: "matches", new_params: "receiver_id=#{@contribution.id}&receiver_type=Ask" %>
-<% elsif @contribution.type == "Offer" %>
-  <%= link_to("Find Match [TBD]",
-              match_listing_path(@contribution, provider_id: @contribution.id, provider_type: "Offer"),
-              class: "button") %>
-  <%= render "layouts/view_add_new_button", table_name: "matches", new_params: "provider_id=#{@contribution.id}&provider_type=Offer" %>
-<% end %>
-<hr>
-<%= render "layouts/view_add_new_button", table_name: "communication_logs", new_params: "person_id=#{@contribution.person_id}" %>
-<hr>
+
+<div class="columns">
+  <div class="column">
+    <hr>
+    <div class="contact-info">
+      <strong>Created by:</strong>
+      <br>
+      <%= show_button(person, person&.name, "fa fa-user-circle", "title is-5", nil, contribution_id: @contribution.id) %>
+      <br>
+      <strong>Preferred contact info:</strong>
+      <br>
+      <span class="<%= person.preferred_contact_method.icon_class %>"></span>
+      <span class="subtitle is-5"><%= person.preferred_contact_info %></span>
+    </div>
+    <hr>
+    <% if @contribution.type == "Ask" %>
+      <%= link_to("Find Match [TBD]",
+                  match_listing_path(@contribution, receiver_id: @contribution.id, receiver_type: "Ask"),
+                  class: "button") %>
+      <%= render "layouts/view_add_new_button", button_text: "Add tentative Match", table_name: "matches", new_params: "receiver_id=#{@contribution.id}&receiver_type=Ask" %>
+    <% elsif @contribution.type == "Offer" %>
+      <%= link_to("Find Match [TBD]",
+                  match_listing_path(@contribution, provider_id: @contribution.id, provider_type: "Offer"),
+                  class: "button") %>
+      <%= render "layouts/view_add_new_button", button_text: "Add tentative Match", table_name: "matches", new_params: "provider_id=#{@contribution.id}&provider_type=Offer" %>
+    <% end %>
+    <hr>
+    <strong><%= person.name + "'s " %>Match totals:</strong>
+    <br>
+    <span><%= person.match_history %></span>
+    <hr>
+    <strong><%= person.name + "'s " %> unmatched asks:</strong>
+    <br>
+    <% if @contribution.person.asks.unmatched.where.not("listings.id = ?", @contribution.id).any? %>
+      <% @contribution.person.asks.unmatched.where.not("listings.id = ?", @contribution.id).order(:created_at).each do |ask| %>
+        <%= show_button(ask, "(#{ask.created_at.strftime("%a, %b %d %Y")}) #{ask.all_tags_to_s.upcase}", ask.icon_class) %>
+        <br>
+      <% end %>
+    <% end %>
+    <br>
+    <strong><%= person.name + "'s " %> unmatched offers:</strong>
+    <br>
+    <% if @contribution.person.offers.unmatched.where.not("listings.id = ?", @contribution.id).any? %>
+      <% @contribution.person.offers.unmatched.where.not("listings.id = ?", @contribution.id).order(:created_at).each do |offer| %>
+        <%= show_button(offer, "(#{offer.created_at.strftime("%a, %b %d, %Y")}) #{offer.all_tags_to_s.upcase}", offer.icon_class) %>
+        <br>
+      <% end %>
+    <% end %>
+
+    <hr>
+    <strong><%= person.name + "'s " %> Match history:</strong>
+    <br>
+    <% if @contribution.matches_as_receiver.any? %>
+      <% @contribution.matches_as_receiver.order(created_at: :desc).each do |match| %>
+        <%= show_button(match, "(#{match.created_at.strftime("%a, %b %d, %Y")}) #{match.short_name}") %>
+        <br>
+      <% end %>
+    <% end %>
+    <% if @contribution.matches_as_provider.any? %>
+      <% @contribution.matches_as_provider.order(created_at: :desc).each do |match| %>
+        <%= show_button(match, "(#{match.created_at.strftime("%a, %b %d, %Y")}) #{match.short_name}") %>
+        <br>
+      <% end %>
+    <% end %>
+
+  </div>
+  <div class="column">
+    <hr>
+    <%= render "matches/communication_log_quick_buttons", person: person %>
+    <hr>
+    <%= render "matches/communication_history", person: person %>
+  </div>
+</div>

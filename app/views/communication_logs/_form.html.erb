@@ -2,32 +2,75 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :person, include_blank: true, selected: f.object.person_id || params[:person_id] %>
-    <%= f.association :match, include_blank: true, selected: f.object.match_id || params[:match_id], label: "Re: Match" %>
-
     <div class="field is-grouped">
-      <%= f.input :sent_at, label: "Time sent/received", default: Time.now, required: true %>
-      <%= f.input :outbound, as: :radio_buttons, checked: true, label: "Outbound message?", hint: "(Sent by you, or, received by you?)" %>
-    </div>
+      <% if @person.present? %>
+        <%= "<div>To:<br><span class='subtitle is-3'>#{@person.name}</span></div>".html_safe %>
+        <%= f.hidden_field :person_id, value: @communication_log.person_id || params[:person_id] %>
+      <% else %>
+        <%= f.association(:person,
+                          include_blank: true,
+                          selected: f.object.person_id || params[:person_id]) %>
+      <% end %>
 
-    <div class="field is-grouped">
-      <%= f.input :delivery_method, as: :select, required: true, collection: ContactMethod.enabled.pluck(:name, :id), selected: f.object.delivery_method_id || params[:delivery_method_id] || @delivery_method_id %>
-      <%= f.input :delivery_status, as: :select, required: true, collection: CommunicationLog::DELIVERY_STATUSES, selected: f.object.delivery_status || params[:delivery_status] %>
-      <%= f.input :needs_follow_up, as: :radio_buttons, checked: f.object.needs_follow_up || params[:needs_follow_up] || true %>
-      <%= f.hidden_field :auto_generated, value: false %> <!-- FIXME: block editing auto_generated logs? -->
+      <% if @match.present? %>
+        <%= "<div>Re:<br>#{edit_button(@match, @match.short_name)}</div>".html_safe %>
+        <%= f.hidden_field :match_id, value: @communication_log.match_id || params[:match_id] %>
+      <% else %>
+        <%= f.association(:match,
+                          include_blank: true,
+                          selected: f.object.match_id || params[:match_id],
+                          label: "Re: Match (if already set up)") %>
+      <% end %>
     </div>
-
-    <%= f.input :subject, as: :text, label: "Topic/subject", input_html: { rows: 1 } %>
 
     <hr>
+
     <% if f.object.auto_generated? %>
       <%= f.label :body, class: "label" %>
       <%= f.object.body&.html_safe || "-- Empty --" %>
     <% else %>
-      <%= f.input :body, as: :text, label: "Message/notes", input_html: { rows: 3 } %>
+      <%= f.input :body, as: :text,
+                  label: "Notes (if re a match, use this for notes re ONE CATEGORY only! create a new <a href='/asks/new?person_id=#{@person&.id}'> Ask
+                    </a> or <a href='/offers/new?person_id=#{@person&.id}'> Offer
+                    </a>, as needed, but save this form first!)".html_safe,
+                  hint: "(extra detail re contacting them)",
+                  input_html: { rows: 3 } %>
     <% end %>
+
+    <hr>
+
+    <div class="field is-grouped">
+      <%= f.input :delivery_method_id, as: :select, required: true,
+                  label: "How was this message sent?",
+                  collection: ContactMethod.enabled.pluck(:name, :id),
+                  selected: f.object.delivery_method_id || params[:delivery_method_id] || @delivery_method_id %>
+      <%= f.input :delivery_status, as: :select, required: true,
+                  label: "What was the result?",
+                  collection: CommunicationLog::DELIVERY_STATUSES,
+                  selected: f.object.delivery_status || params[:delivery_status] || CommunicationLog::DEFAULT_DELIVERY_STATUS %>
+    </div>
+
+    <div class="field is-grouped">
+      <%= f.input :sent_at, label: "When was the message sent?", default: Time.now, required: true %>
+      <%= f.input :outbound, as: :radio_buttons, checked: f.object.outbound.present? ? f.object.outbound : true, label: "Did you send this message?",
+                  hint: "(select No if you are logging an incoming message #{" from #{@person.name}" if @person.present?})" %>
+    </div>
+
+    <hr>
+
+    <div class="field is-grouped">
+      <%= f.input :needs_follow_up, as: :radio_buttons,
+                  checked: f.object.needs_follow_up || params[:needs_follow_up],
+                  hint: "(if re a match, this will determine if the Match needs follow up)" %>
+      <%= f.hidden_field :auto_generated, value: false %> <!-- FIXME: block editing auto_generated logs? -->
+    </div>
   </div>
 
-  <% save_and_edit_button = f.submit "Save and go to Match", class: "button mt-1 is-primary" %>
-  <%= render "layouts/view_footer_buttons", f: f, resource: @communication_log, top_divider: true, button_class: "is-primary is-outlined", extra_form_button_1: nil, extra_form_button_2: save_and_edit_button %>
+  <%= f.hidden_field :contribution_id, value: @contribution&.id %>
+
+  <% save_and_view_button = f.submit "Save and go to Match", class: "button mt-1 is-primary" if @match.present? %>
+  <% save_and_view_button = f.submit "Save and go to Respond", class: "button mt-1 is-primary" if @contribution.present? %>
+  <%= render "layouts/view_footer_buttons", f: f, resource: @communication_log,
+             top_divider: true, button_class: "is-primary #{"is-outlined" if save_and_view_button }",
+             extra_form_button_1: nil, extra_form_button_2: save_and_view_button %>
 <% end %>

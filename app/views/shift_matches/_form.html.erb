@@ -3,8 +3,8 @@
 
   <div class="form-inputs">
     <div class="is-grouped">
-      <%= f.association :shift, include_blank: true, collections: @shifts, selected: @shift_id %>
-      <%= f.association :match, selected: params[:match_id] %>
+      <%= f.association :shift, include_blank: true, collections: @shifts, selected: f.object.shift_id || @shift_id %>
+      <%= f.association :match, selected: f.object.match_id || params[:match_id] %>
     </div>
     <%= f.input :notes, hint: "(notes specific to this match AND this shift)" %>
   </div>

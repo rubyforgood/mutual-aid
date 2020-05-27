@@ -7,6 +7,8 @@ class CommunicationLog < ApplicationRecord
   DEFAULT_DELIVERY_STATUS = "sent"
   DELIVERY_STATUSES = [DEFAULT_DELIVERY_STATUS, "connected", "undeliverable"]
 
+  scope :needs_follow_up, ->(boolean=nil){ where(needs_follow_up: boolean || true) }
+
   def self.log_submission_email(email_object, delivery_status, submission, delivery_method=nil, current_user=nil)
     self.create!(delivery_method: delivery_method || ContactMethod.email,
                  delivery_status: delivery_status,
@@ -21,10 +23,6 @@ class CommunicationLog < ApplicationRecord
 
   def name
     "#{delivery_method&.name}: #{subject} #{created_at.strftime("%A, %B %d, %Y at %l:%M %P")}"
-  end
-
-  def short_name
-    "#{delivery_method&.name}: #{subject} #{created_at.strftime("%m-%d-%y, %a @ %l:%M %P")}"
   end
 
 end

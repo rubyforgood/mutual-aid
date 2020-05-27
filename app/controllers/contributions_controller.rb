@@ -18,6 +18,7 @@ class ContributionsController < ApplicationController
 
   def respond
     @contribution = Listing.find(params[:id])
+    @communication_logs = CommunicationLog.where(person: @contribution.person).order(sent_at: :desc)
   end
 
   def thank_you

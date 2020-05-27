@@ -44,5 +44,7 @@ module Mutualaid
     # Mobility gem will fallbacks to locale set here
     I18n.default_locale = :en
     config.i18n.fallbacks = true
+
+    config.time_zone = 'UTC'
   end
 end

@@ -6,7 +6,7 @@ class Shift < ApplicationRecord
   has_many :matches, through: :shift_matches
 
   scope :active, ->() { where("started_at >= ?", Time.now) }
-  scope :today, ->() { where("started_at::date = ?", Date.today.strftime("%Y-%m-%d")) }
+  scope :today, ->() { where("started_at::date = ?", Time.zone.today.strftime("%Y-%m-%d")) }
 
   def name
     "#{team&.name}: #{times} #{"(" + person.name + ")" if person_id}"

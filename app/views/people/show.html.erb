@@ -105,7 +105,7 @@
 
   <div class="content">
     <h3>Donations:</h3>
-    <em><%= @person.donations.this_month.sum(&:value) %>/<%= @person.monthly_donation_amount_max %> for <%= Date.today.strftime("%B") %></em>
+    <em><%= @person.donations.this_month.sum(&:value) %>/<%= @person.monthly_donation_amount_max %> for <%= Time.zone.today.strftime("%B") %></em>
     <ul type="1">
       <% @person.donations.each do |donation| %>
         <li><%= link_to donation.name, donation_path(donation) %></li>

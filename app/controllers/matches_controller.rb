@@ -2,8 +2,20 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:edit, :update, :destroy]
 
   def index
+    @statuses = Match::STATUSES
     @matches = Match.status(params[:status] || "all").order(updated_at: :desc)
-    @statuses = ["all"] + Match::STATUSES
+
+    # follow_up_status filter
+    if params[:follow_up_status].present?
+      @matches = @matches.follow_up_status(params[:follow_up_status])
+    end
+
+    @people = Person.all.map{ |p| [p.name, p.id] }.sort_by(&:first)
+    # connected_to_person_id filter
+    if params[:connected_to_person_id].present?
+      person = Person.find(params[:connected_to_person_id])
+      @matches = @matches.connected_to_person_id(person)
+    end
   end
 
   def show
@@ -38,7 +50,6 @@ class MatchesController < ApplicationController
   end
 
   def update
-    binding.pry
     save_and_continue = params[:commit]&.downcase&.include?('save and view match')
     update_connections = params[:commit]&.downcase&.include?('edit match connections')
     if @match.update(match_params)

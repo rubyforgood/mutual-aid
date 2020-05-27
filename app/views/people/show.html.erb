@@ -1,12 +1,17 @@
 <% viewing_self = current_user == @person.user %>
-<%= render "layouts/view_header", resource: @person, page_title: viewing_self ? "My Profile" : "Profile" %>
 
 <div class="section-detail">
-  <br><br>
-
+  <div class="title is-5">Profile:</div>
   <div class="title is-1"><%= @person.name %></div>
-
   <hr>
+
+  <div>
+    <strong>Preferred contact info: </strong>
+    <span class="<%= @person.preferred_contact_method.icon_class %>"></span>
+    <span class="subtitle is-5"><%= @person.preferred_contact_info %></span>
+  </div>
+
+  <br>
 
   <div>
     <strong>Phone:</strong>
@@ -65,17 +70,32 @@
   <div class="content">
     <hr>
     <h3>Matches:</h3>
-    <em>Provider in <span class="has-text-weight-bold"><%= @person.matches_as_provider.this_month.count %>/<%= @person.monthly_matches_max %></span> matches in <%= Date.today.strftime("%B %Y") %></em>
+    <em>Provider in <span class="has-text-weight-bold"><%= @person.matches_as_provider.this_month.count %></span> (of <%= @person.monthly_matches_max %> max) <%= "match".pluralize(@person.monthly_matches_max) %> in <%= Time.zone.today.strftime("%B %Y") %></em>
     <ul type="1">
       <% @provider_matches.each do |match| %>
-        <li><%= edit_button(match, "#{match.created_at.strftime("%a, %b %d, %Y @ %l:%M %P")} " + match.name) %><%= edit_button(match, "Return to this match", "fa fa-reply", nil, "is-primary ") if params[:match_id].to_i == match.id %></li>
+        <li><%= edit_button(match, "#{match.created_at.strftime("%a, %b %d, %Y @ %l:%M %P")} " + match.name) %>
+          <% if params[:match_id].to_i == match.id %>
+            <%= edit_button(match, "Return to this match", "fa fa-reply", nil, "is-primary ")%>
+          <% elsif params[:contribution_id].to_i == match.provider_id %>
+            <%= edit_button(match, "Respond to this Contribution", "fa fa-reply", nil, "is-primary ")%>
+          <% end %>
+        </li>
       <% end %>
     </ul>
     <hr>
-    <em>Receiver in <span class="has-text-weight-bold"><%= @person.matches_as_receiver.this_month.count %></span> matches in <%= Date.today.strftime("%B %Y") %></em>
+    <% matches_as_receiver_count = @person.matches_as_receiver.this_month.count %>
+    <em>Receiver in <span class="has-text-weight-bold"><%= matches_as_receiver_count %></span> <%= "match".pluralize(matches_as_receiver_count) %> in <%= Time.zone.today.strftime("%B %Y") %></em>
     <ul type="1">
       <% @receiver_matches.each do |match| %>
-        <li><%= edit_button(match, "#{match.created_at.strftime("%a, %b %d, %Y @ %l:%M %P")} " + match.name) %><%= edit_button(match, "Return to this match", "fa fa-reply", nil, "is-primary ") if params[:match_id].to_i == match.id %></li>
+        <li><%= edit_button(match, "#{match.created_at.strftime("%a, %b %d, %Y @ %l:%M %P")} " + match.name) %>
+          <% if params[:match_id].to_i == match.id %>
+            <%= edit_button(match, "Return to this match", "fa fa-reply", nil, "is-primary ") %>
+          <% elsif params[:contribution_id].to_i == match.provider_id %>
+            <%= edit_button(match, "Respond to this Contribution", "fa fa-reply", nil, "is-primary ")%>
+          <% end %>
+
+
+        </li>
       <% end %>
     </ul>
     <%= link_to "View all #{@person.name}'s matches", matches_path(id: @match_ids) %>
@@ -96,7 +116,7 @@
   <hr>
 
   <div class="content">
-    <h3>Communication logs:</h3>
+    <h3>Communication logs: <%= render "layouts/view_add_new_button", table_name: "communication_logs", new_params: "person_id=#{@person.id}" %></h3>
     <ul type="1">
       <% @person.communication_logs.each do |log| %>
         <li><%= log.needs_follow_up ? "<span class='fa fa-check-circle has-text-grey'></span>".html_safe : "<span class='fa fa-exclamation-circle has-text-warning'></span>".html_safe %> <%= link_to "#{log.created_at.strftime("%a, %b %d, %Y @ %l:%M %P")} - #{log.delivery_method&.name}: #{log.subject}", edit_communication_log_path(log) %></li>

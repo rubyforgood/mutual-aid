@@ -28,12 +28,16 @@ class Listing < ApplicationRecord
     collection.map(&:all_tags_unique).flatten.uniq
   end
 
+  def communication_logs
+    person.communication_logs.where(match: self)
+  end
+
   def name
-    type + ": #{person.name} #{all_tags_to_s}"
+    type + ": #{all_tags_to_s} (#{person.name})"
   end
 
   def name_and_match_history
-    "(#{type}-#{all_tags_to_s.upcase})</strong> #{person.match_history} (#{person.name})"
+    "(#{type}-#{all_tags_to_s.upcase})</strong> #{person.match_history}. (#{person.name})"
   end
 
   def status

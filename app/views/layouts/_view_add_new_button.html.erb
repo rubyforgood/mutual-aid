@@ -5,5 +5,5 @@
 <% button_color_class ||= nil %>
 <% new_params ||= nil %>
 
-<%= link_to "<span class='fa fa-plus-square'></span><span class='#{ 'pl-05' unless small_button } #{'has-text-white' unless button_color_class&.include?("outlined")}'>#{ (button_text || " Add " + table_name.to_s.singularize.titleize) unless hide_text }</span>".html_safe,
+<%= link_to "<span class='fa fa-plus-square'></span><span class='#{ 'pl-05' unless small_button || hide_text } #{'has-text-white' unless button_color_class&.include?("outlined")}'>#{ (button_text || " Add " + table_name.to_s.singularize.titleize) unless hide_text }</span>".html_safe,
             "/#{table_name}/new?#{new_params}", class: "button #{button_color_class || 'is-primary '} #{ 'is-small' if small_button }" %>

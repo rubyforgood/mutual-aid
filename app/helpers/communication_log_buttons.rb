@@ -112,23 +112,24 @@ module CommunicationLogButtons
                                     created_by: created_by)
   end
 
-  def new_communication_log_button(person, match: nil, subject: nil, body: nil, created_by: nil, needs_follow_up: true)
+  def new_communication_log_button(person, match: nil, subject: nil, body: nil, created_by: nil, needs_follow_up: true, contribution: nil)
     delivery_method = ContactMethod.where(name: "Text").first_or_create!(field: "phone", enabled: false)
     link_to(new_communication_log_path(
-        person_id: person&.id,
-        match_id: match&.id,
-        created_by: created_by,
-        needs_follow_up: needs_follow_up,
-        outbound: true,
-        delivery_method_id: delivery_method&.id,
-        delivery_status: "connected",
-        subject: subject,
-        body: body,
-        created_by_id: created_by&.id,
-        sent_at: Time.now),
-            title: "New communication log",
-            class: "button add-button is-primary is-outlined") do
-      "<span class='fa fa-plus}'></span><span style='padding-left: 0.25em'> Add a detailed log</span>".html_safe
+              contribution_id: contribution&.id,
+              person_id: person&.id,
+              match_id: match&.id,
+              created_by: created_by,
+              needs_follow_up: needs_follow_up,
+              outbound: true,
+              delivery_method_id: delivery_method&.id,
+              delivery_status: "connected",
+              subject: subject,
+              body: body,
+              created_by_id: created_by&.id,
+              sent_at: Time.now),
+                  title: "New communication log",
+                  class: "button add-button is-primary is-outlined") do
+            "<span class='fa fa-plus}'></span><span style='padding-left: 0.25em'> Add a detailed log</span>".html_safe
     end
   end
 end

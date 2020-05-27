@@ -8,10 +8,9 @@
 <% extra_form_button_2 ||= nil %>
 
 <% submit_button_prefix ||= (["new","create"].include?(action_name) ? "Create and " : "Update and ") %>
-<% submit_button_name = submit_button_name || "go to #{klass_name}" %>
-<% submit_button_suffix ||= " index" %>
+<% submit_button_name = submit_button_name || "view all #{klass_name}" %>
 
-<% cancel_button ||= link_to("Cancel and go to index", "/" + controller_name,
+<% cancel_button ||= link_to("Cancel", "/" + controller_name,
                              class: "button mt-1 is-outlined") %>
 
 <% delete_button ||= link_to("Delete",
@@ -27,8 +26,7 @@
   <%= cancel_button %>
   <%= f.button :submit,
                "#{submit_button_prefix.to_s +
-                  submit_button_name.to_s +
-                  submit_button_suffix.to_s}",
+                  submit_button_name.to_s}",
                class: "button mt-1 #{button_class}" %>
   <%= extra_form_button_2 %>
   <br><hr>

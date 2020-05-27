@@ -123,19 +123,32 @@
           <div class="field is-grouped">
             <%= f.input :notes, as: :text, label: "Match notes", input_html: { rows: 2, style: "width: 45em" } %>
           </div>
-          <div class="field is-grouped">
+          <div class="columns">
             <%#= f.input :tentative, as: :radio_buttons, checked: true %>
             <%#= f.input :completed, as: :radio_buttons, checked: false %>
-            <%= f.input :status, as: :select, required: true, collection: @statuses || [], selected: f.object.status || params[:status] || "matched_tentatively" %>
-            <div class="field">
-              <%= f.label "Needs follow up?", class: "label" %>
-              <% logs_needing_follow_up = @match.communication_logs.needs_follow_up %>
-              <% if logs_needing_follow_up.any? %>
-                <%= "<span class='fa fa-exclamation-circle has-text-warning'></span> #{logs_needing_follow_up.length} logs above need follow up".html_safe %>
-                <%= f.hint "(click on each log to edit its follow up status)" %>
-              <% else %>
-                <%= f.text_field :needs_follow_up, label: "Needs follow up?", value: "(add a log above if you want to add a followup flag)", readonly: true, style: "width: 30rem;", class: "input has-background-light" %>
-              <% end %>
+            <div class="column is-3">
+              <%= f.input :status, as: :select, required: true, collection: @statuses || [], selected: f.object.status || params[:status] || "matched_tentatively" %>
+            </div>
+            <div class="column is-5">
+              <div class="field">
+                <%= f.label "Needs follow up?", class: "label" %>
+                <% logs_needing_follow_up = @match.communication_logs.needs_follow_up %>
+                <% if logs_needing_follow_up.any? %>
+                  <%= "<span class='fa fa-exclamation-circle has-text-warning'></span> #{logs_needing_follow_up.length} logs above need follow up".html_safe %>
+                  <%= f.hint "(click on each log to edit its follow up status)" %>
+                <% else %>
+                  <%= f.text_field :needs_follow_up, label: "Needs follow up?", value: "(add a log above if you want to add a followup flag)", readonly: true, style: "width: 30rem;", class: "input has-background-light" %>
+                <% end %>
+              </div>
+            </div>
+            <div class="column is-4">
+              <%= f.input :exchanged_at, as: :datetime,
+                          include_blank: true,
+                          label: "Exchange scheduled for",
+                          hint: "(Pls use military time, for now.
+                            <a href='#{edit_match_path(f.object, exchanged_at: Time.current)
+                            }'>Refresh page and set to Today</a>)".html_safe,
+                          selected: f.object.exchanged_at || params[:exchanged_at]&.to_datetime %>
             </div>
           </div>
 

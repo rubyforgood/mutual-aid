@@ -7,11 +7,30 @@
     <div class="field is-grouped">
       <%= f.input :notes, as: :text, label: "Match notes", input_html: { rows: 2, style: "width: 45em" } %>
     </div>
-    <div class="field is-grouped">
-      <%= f.input :status, as: :select, required: true, collection: @statuses || [], selected: f.object.status || params[:status] || "matched_tentatively" %>
+
+    <div class="columns">
+      <div class="column">
+        <%= f.input :status, as: :select,
+                    required: true,
+                    collection: @statuses || [],
+                    selected: f.object.status || params[:status] || "matched_tentatively" %>
+      </div>
+      <div class="column">
+        <%= f.input :exchanged_at, as: :datetime,
+                    include_blank: true,
+                    label: "Exchange scheduled for",
+                    hint: "(Pls use military time, for now.
+                            <a href='#{new_match_path(f.object, exchanged_at: Time.current)
+                            }'>Refresh page and set to Today</a>)".html_safe,
+                    selected: f.object.exchanged_at || params[:exchanged_at]&.to_datetime %>
+        <%= link_to "Set date to today", new_match_path(f.object, exchanged_at: Time.current) %>
+      </div>
     </div>
 
+
     <% save_and_show_button = f.submit "Save and View Match", class: "button mt-1 is-primary" %>
-    <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, button_class: "is-primary is-outlined", extra_form_button_2: save_and_show_button %>
+    <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true,
+               extra_form_button_1: nil, button_class: "is-primary is-outlined",
+               extra_form_button_2: save_and_show_button %>
   </div>
 <% end %>

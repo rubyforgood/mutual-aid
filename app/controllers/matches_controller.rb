@@ -107,6 +107,7 @@ class MatchesController < ApplicationController
           :shift_id,
           :receiver_type,
           :provider_type,
+          :exchanged_at,
           :status,
           :notes,
           :tentative,

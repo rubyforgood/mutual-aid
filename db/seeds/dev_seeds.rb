@@ -211,9 +211,9 @@ end
 def update_status(match)
   status = "match_confirmed"
   if match.completed && match.feedbacks.where(is_from_receiver: true).any?
-    status = "receiver_feedback_received"
+    status = "receiver_gave_feedback"
   elsif match.completed && match.feedbacks.any?
-    status = "provider_feedback_received"
+    status = "provider_gave_feedback"
   elsif match.completed? && match.feedbacks.none?
     status = "match_completed"
   elsif !match.completed? && !match.tentative?

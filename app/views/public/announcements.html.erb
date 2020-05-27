@@ -8,7 +8,7 @@
         <td>
           <strong><%= announcement.name %></strong>
           <br>
-          <em><%= announcement.description.truncate(100) %> <%= link_to("More", announcement_path(announcement)) if announcement.description.length > 100 %></em>
+          <em><%= announcement.description.truncate(100) %> <%= link_to("More [*]", announcement_path(announcement)) if announcement.description.length > 100 %></em>
           <hr>
         </td>
       </tr>

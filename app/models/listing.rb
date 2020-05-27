@@ -50,10 +50,18 @@ class Listing < ApplicationRecord
     status
   end
 
+  def ask?
+    type == "Ask"
+  end
+
+  def offer?
+    type == "Offer"
+  end
+
   def icon_class
-    if type == "Ask"
+    if ask?
       "fa fa-hand-holding-heart"
-    elsif type == "Offer"
+    elsif offer?
       "fa fa-hand-sparkles"
     else
       "fa fa-question-circle"

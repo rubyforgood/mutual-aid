@@ -7,7 +7,7 @@ class ListingsController < ApplicationController
       BrowseFilter.contributions_for(filter_params),
       profile_path: ->(id) { person_path(id) },
       respond_path: ->(id) { respond_contribution_path(id)},
-      match_path: ->(id) { Listing.find(id).type == "Ask" ? new_match_path(receiver_id: id) : new_match_path(provider_id: id)}
+      match_path: ->(id) { Listing.find(id).ask? ? new_match_path(receiver_id: id) : new_match_path(provider_id: id)}
     )
     respond_to do |format|
       format.html

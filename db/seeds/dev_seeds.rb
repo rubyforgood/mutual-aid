@@ -173,10 +173,9 @@ end
 
 # autoemail logs per Listing
 Listing.all.each do |listing|
-  listing_type = listing.type
-  if listing_type == "Ask"
+  if listing.ask?
     match = listing.matches_as_receiver.first
-  elsif listing_type == "Offer"
+  elsif listing.offer?
     match = listing.matches_as_provider.first
   end
   CommunicationLog.create!(person: listing.person,
@@ -235,7 +234,7 @@ Listing.all.each do |listing|
   submission = Submission.where(person: listing.person, service_area: listing.service_area, form_name: "#{listing.type}_form", privacy_level_requested: Submission::PRIVACY_LEVELS.sample,
                    body: listing.to_json).create!
   listing.submission = submission
-  matches = listing.type == "Ask" ? listing.matches_as_receiver : listing.matches_as_provider
+  matches = listing.ask? ? listing.matches_as_receiver : listing.matches_as_provider
   listing.state = matches.any? ? "fulfilled" : "received"
   listing.save!
 end

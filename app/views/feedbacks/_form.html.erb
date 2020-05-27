@@ -10,7 +10,7 @@
       <%= f.input :completed, as: :radio_buttons, label: "Was this match completed?" %>
       <%= f.input :quality,
                   as: :select,
-                  collection: (1..10).to_a.reverse,
+                  collection: (1..5).to_a.reverse,
                   requried: true,
                   label: "How helpful was this experience<br>on a scale of 1 to 10?".html_safe,
                   hint: "(10 being the best experience)" %>

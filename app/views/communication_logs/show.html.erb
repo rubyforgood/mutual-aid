@@ -46,6 +46,7 @@
 
   <%= edit_button(@communication_log) %>
   <%= show_button(@communication_log.person, @communication_log.person.name, "fa fa-user-circle") if @communication_log.person %>
-  <%= show_button(@communication_log.match, "View Match") if @communication_log.match %>
+  <%= edit_button(@communication_log.match, "Edit Match") if @communication_log.match %>
+  <%= link_to "View all Communication Logs", communication_logs_path, class: "button" %>
 </div>
 

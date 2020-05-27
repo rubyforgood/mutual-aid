@@ -6,7 +6,11 @@
 
     <div class="field is-grouped">
       <%= f.input :notes, as: :text, label: "Match notes", input_html: { rows: 2, style: "width: 45em" } %>
+      <% if params[:schedule_mode] %>
+        <%= f.input :exchanged_at, as: :datetime, label: "Exchange scheduled for" %>
+      <% end %>
     </div>
+
     <div class="field is-grouped">
       <%= f.input :status, as: :select, required: true, collection: @statuses || [], selected: f.object.status || params[:status] || "matched_tentatively" %>
     </div>

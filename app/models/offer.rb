@@ -5,6 +5,6 @@ class Offer < Listing
   scope :unmatched, ->() { includes(:matches_as_provider).references(:matches_as_provider).where("matches.receiver_id IS NULL") }
 
   def icon_class
-    "fa fa-hand-sparkles"
+    "fa fa-hand-holding-heart"
   end
 end

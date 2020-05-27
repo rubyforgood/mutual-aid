@@ -10,7 +10,7 @@
       <th>Subject</th>
       <th>Sent at</th>
       <th>Needs follow up</th>
-      <th>View</th>
+      <th>Action</th>
     </tr>
     </thead>
 
@@ -29,7 +29,7 @@
         <td><%= communication_log.subject %></td>
         <td><%= communication_log.sent_at %></td>
         <td><%= yes_no(communication_log.needs_follow_up) %></td>
-        <td><%= show_button(communication_log) %></td>
+        <td><%= communication_log.auto_generated? ? show_button(communication_log) : edit_button(communication_log) %></td>
       </tr>
     <% end %>
     </tbody>

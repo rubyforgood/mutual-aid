@@ -23,6 +23,16 @@
                        options_for_select(@people || [], selected: params[:connected_to_person_id]),
                        include_blank: "-- Connected to --",
                        class: 'input select optional' %>
+        <%= text_field_tag :updated_at_start,
+                           params[:updated_at_start],
+                           placeholder: "Updated at beginning",
+                           include_blank: "-- updated_at_start --",
+                           class: 'input optional' %>
+        <%= text_field_tag :updated_at_end,
+                           params[:updated_at_end],
+                           placeholder: "Updated at ending",
+                           include_blank: "-- updated_at_end --",
+                           class: 'input optional' %>
         <%= f.button :submit, "Search", class: "form-group button is-primary", name: nil %>
         <%= clear_search_button %>
       </div>

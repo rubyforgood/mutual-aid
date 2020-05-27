@@ -5,12 +5,17 @@
     <%= f.input :email %>
   </div>
 
-  <%= f.simple_fields_for :person,  method: :patch do |ff| %>
-    <%= render "person_fields", ff: ff, f: f %>
+  <%= f.simple_fields_for :person, as: :person, method: :patch do |ff| %>
+    <%#= render "person_fields", ff: ff, f: f %><!-- # TODO - improve user creation workflow-->
   <% end %>
 
   <% admin_and_self = current_user.admin? && current_user == @user %>
+  <% change_password_button = link_to "Change password", edit_user_registration_path, class: "button mt-1" %>
+  <% cancel_my_account_button =  link_to "Cancel my account",
+                                         registration_path(@user),
+                                         data: { confirm: "Are you sure?" }, method: :delete,
+                                         class: "button mt-1 is-danger is-outlined" %>
   <% extra_form_button_1 = nil %><!--  #show_button(@user.person, "View #{ 'my ' if admin_and_self }Profile", "fa fa-user-circle", "mt-1") if @user.person %>-->
-  <% delete_button = admin_and_self ? "" : nil %><!-- nil will display the default delete button-->
-  <%= render "layouts/view_footer_buttons", f: f, resource: @user, top_divider: true, extra_form_button_1: extra_form_button_1, delete_button: delete_button %>
+  <% delete_button = admin_and_self ? cancel_my_account_button : nil %><!-- nil will display the default delete button-->
+  <%= render "layouts/view_footer_buttons", f: f, resource: @user, top_divider: true, extra_form_button_1: extra_form_button_1, extra_form_button_2: change_password_button, delete_button: delete_button %>
 <% end %>

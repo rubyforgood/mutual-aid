@@ -3,10 +3,9 @@
 <ul type="1">
   <% listings.order(:created_at).each do |listing| %>
     <li>
-      <%= link_to listing.created_at.strftime("%a, %b %d, %Y @ %l:%M %P"), respond_contribution_path(listing) %>
-      <% listing.all_tags_unique.each do |tag| %>
-        <span class="tag"><%= tag %></span>
-      <% end %>
+      <%= link_to ("(#{shorthand_display(listing.created_at)}) #{listing.all_tags_to_s.upcase}"),
+                  respond_contribution_path(listing), class: "button" %>
+    </li>
   <% end %>
 </ul>
 

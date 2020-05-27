@@ -45,7 +45,7 @@ end
 end
 
 # host org and set system defaults
-SystemSetting.first_or_create!
+SystemSetting.first_or_create!(exchange_type: "fully_moderated")
 
 host_organization = Organization.where(is_instance_owner: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
 

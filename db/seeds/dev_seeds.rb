@@ -13,7 +13,7 @@ location_type = LocationType.all.sample
 5.times do
   # every service_area gets its own location
   location = Location.new(location_type: location_type)
-  ServiceArea.create!(name: Faker::Address.community, location: location, organization: host_organization, service_area_type: ServiceArea::TYPES)
+  ServiceArea.create!(name: Faker::Address.community, location: location, organization: host_organization, service_area_type: ServiceArea::TYPES.sample)
 end
 
 email_contact_method = ContactMethod.field_name('email').first || ContactMethod.create!(name: "Email", field: "email", enabled: true)

@@ -26,17 +26,17 @@
         <td><%= shorthand_display(match.created_at) %></td>
         <td><%= shorthand_display(match.updated_at) %></td>
         <td>
-          <span class="has-text-weight-bold"><%= match.receiver&.all_tags_to_s %></span>
+          <span class="has-text-weight-bold"><%= match.receiver&.all_tags_to_s.upcase %></span>
           <br>
           <%= match.receiver&.person&.name %></td>
         <td>
-          <span class="has-text-weight-bold"><%= match.provider&.all_tags_to_s %></span>
+          <span class="has-text-weight-bold"><%= match.provider&.all_tags_to_s.upcase %></span>
           <br>
           <%= match.provider&.person&.name %></td>
-        <td><%= match.status %></td>
+        <td><%= match.status.titleize %></td>
         <td>
           <% log = match.communication_logs.last %>
-          <%= link_to shorthand_display(log.created_at), edit_communication_log_path(log) if log %>
+          <%= link_to shorthand_display(log.created_at), edit_communication_log_path(log), title: "#{log.subject }#{": " + log.body if log&.body }" if log %>
         </td>
         <td><span class="<%= "fa fa-exclamation-circle has-text-warning" if match.needs_follow_up? %>" title="<%= match.communication_logs.needs_follow_up.map{ |log| "#{log.subject }#{": " + log.body if log&.body }" } %>"></span></td>
         <td><span class="<%= "fa fa-sticky-note" if match.notes.present? %>" title="<%= match.notes %>"></span></td></td>

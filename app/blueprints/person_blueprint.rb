@@ -5,6 +5,6 @@ class PersonBlueprint < Blueprinter::Base
   field  :preferred_contact_method
 
   view :normal do
-    association :location, blueprint: LocationBlueprint
+    association :location, blueprint: LocationBlueprint, view: :with_location_type
   end
 end

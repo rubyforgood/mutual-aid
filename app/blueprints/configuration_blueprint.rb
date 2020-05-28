@@ -7,6 +7,10 @@ class ConfigurationBlueprint < Blueprinter::Base
     ContactMethod.enabled
   end
 
+  association :location_types, blueprint: LocationTypeBlueprint do
+    LocationType.all  # FIXME: fix seeds so we can change this to `.visible`
+  end
+
   association(:service_areas, blueprint: ServiceAreaBlueprint) do
     ServiceArea.all.eager_load(:string_translations, :text_translations)
   end

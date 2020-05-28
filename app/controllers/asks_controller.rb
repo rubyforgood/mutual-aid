@@ -22,7 +22,6 @@ class AsksController < PublicController
       params[:submission].tap do |p|
         p[:form_name] = 'Ask_form'
         p[:listing_attributes][:type] = 'Ask'
-        p[:location_attributes][:location_type] = LocationType.first  # FIXME: add field on form instead
       end
     end
 

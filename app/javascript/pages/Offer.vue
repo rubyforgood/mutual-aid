@@ -24,7 +24,8 @@
 
     <LocationFields
       fieldNamePrefix="submission[location_attributes]"
-      v-bind="person.location"
+      :location_types="configuration.location_types"
+      v-bind="location"
     /><SpacerField />
 
     <CategoryFields
@@ -111,6 +112,7 @@ export default {
   },
   data() {
     return {
+      location: this.submission.location || {},
       listing: this.submission.listing || {},
       person: this.submission.person || {},
     }

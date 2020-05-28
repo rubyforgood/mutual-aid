@@ -8,6 +8,6 @@ class ListingBlueprint < Blueprinter::Base
   )
 
   view :with_person do
-    association :person, blueprint: PersonBlueprint, view: :normal
+    association :person, blueprint: PersonBlueprint
   end
 end

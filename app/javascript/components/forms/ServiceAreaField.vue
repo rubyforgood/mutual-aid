@@ -1,14 +1,13 @@
 <template>
   <b-field
     v-if="options.length > 1"
-    label-for="service_area_id"
+    :label-for="name"
     label="Service area"
     custom-class="required-field"
   >
     <b-select
-      :value="value"
-      @input="$emit('input', $event)"
-      name="listing[service_area]"
+      :name="name"
+      :value="service_area_id"
       required
     >
       <option
@@ -34,6 +33,11 @@ export default {
   props: {
     options: Array,
     name: String,
-    value: String,
+    service_area: Object,
+  },
+  data() {
+    return {
+      service_area_id: this.service_area ? this.service_area.id : null,
+    }
   },
 }</script>

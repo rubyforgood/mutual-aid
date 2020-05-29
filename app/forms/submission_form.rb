@@ -6,7 +6,7 @@ class SubmissionForm < BaseForm
     hash    :location_attributes, strip: false
     hash    :person_attributes,   strip: false
     string  :form_name
-    string  :privacy_level_requested
+    string  :privacy_level_requested  # fixme: not submitted as yet
   end
 
   def execute
@@ -45,8 +45,15 @@ class SubmissionForm < BaseForm
           :service_area,
         )
         .merge(
+          body: body_json,
           person: person,
           listings: [listing],
         )
+    end
+
+    def body_json
+      given_inputs
+        .merge(service_area: service_area.id)
+        .to_json
     end
 end

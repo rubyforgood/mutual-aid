@@ -44,9 +44,9 @@ export default {
     fieldNamePrefix: {type: String, default: ''},
   },
   data() {
-    const preferrence = this.person.preferred_contact_method
+    const preference = this.person.preferred_contact_method
     return {
-      preferredContactMethodId: preferrence ? preferrence.id : null,
+      preferredContactMethodId: preference ? preference.id : null,
       withPrefix: partial(fieldNameWithPrefix, this.fieldNamePrefix),
     }
   },

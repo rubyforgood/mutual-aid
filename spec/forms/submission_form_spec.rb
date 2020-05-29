@@ -45,12 +45,6 @@ RSpec.describe SubmissionForm do
       expect(submission.service_area).to eq service_area
     end
 
-    it 'captures whole submission json' do
-      pending
-      json = JSON.parse(submission.body)
-      expect(json.keys).to include(:some_keys)
-    end
-
     describe 'has_one person' do
       subject(:person) { submission.person }
 
@@ -107,6 +101,30 @@ RSpec.describe SubmissionForm do
 
       it 'points both person and listings to the same Location instance' do
         expect(listing.location).to be submission.person.location
+      end
+    end
+
+    describe 'submission capture' do
+      let(:json) { JSON.parse(submission.body) }
+
+      it 'captures all inputs given' do
+        expect(json.keys).to contain_exactly(
+          'form_name', 'listing_attributes', 'location_attributes',
+          'person_attributes', 'privacy_level_requested', 'service_area'
+        )
+      end
+
+      it 'includes nested attributes' do
+        expect(json['listing_attributes'].keys).to contain_exactly('description', 'tag_list', 'type')
+      end
+
+      it 'includes values provided' do
+        expect(json['location_attributes']['city']).to eq 'Anakwashtank'
+      end
+
+      it 'does not serialze whole configuration objects' do
+        expect(json['service_area']).to eq service_area.id
+        expect(json['location_attributes']['location_type']).to eq location_type.id
       end
     end
 

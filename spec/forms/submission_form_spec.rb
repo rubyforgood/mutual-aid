@@ -45,7 +45,11 @@ RSpec.describe SubmissionForm do
       expect(submission.service_area).to eq service_area
     end
 
-    it 'captures whole submission json'
+    it 'captures whole submission json' do
+      pending
+      json = JSON.parse(submission.body)
+      expect(json.keys).to include(:some_keys)
+    end
 
     describe 'has_one person' do
       subject(:person) { submission.person }
@@ -136,9 +140,8 @@ RSpec.describe SubmissionForm do
         end
 
         it 'propogates nested errors up to the submission' do
-          pending 'not propogating nested errors :('
           submission.save
-          expect(submission.errors.messages).to eq 'person.email' => ["can't be blank"]
+          expect(submission.errors.messages).to eq 'person.email': ["can't be blank"]
         end
       end
     end

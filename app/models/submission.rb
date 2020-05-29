@@ -1,11 +1,13 @@
 class Submission < ApplicationRecord
   acts_as_taggable_on :tags
 
-  belongs_to :person, validate: true
+  belongs_to :person
   belongs_to :service_area
 
   has_many :listings
   has_many :submission_responses
+
+  accepts_nested_attributes_for :listings, :person
 
   PRIVACY_LEVELS = ["anyone", "users", "volunteers", "dispatchers only"]
 

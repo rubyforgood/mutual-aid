@@ -10,9 +10,7 @@ class SubmissionForm < BaseForm
   end
 
   def execute
-    (id? ? Submission.find(id) : Submission.new).tap do |submission|
-      submission.attributes = submission_attributes
-    end
+    build_submission
   end
 
   private
@@ -31,6 +29,12 @@ class SubmissionForm < BaseForm
         location: location,
         service_area: service_area
       )
+    end
+
+    def build_submission
+      (id? ? Submission.find(id) : Submission.new).tap do |submission|
+        submission.attributes = submission_attributes
+      end
     end
 
     def submission_attributes

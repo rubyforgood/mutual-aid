@@ -1,7 +1,7 @@
 class Submission < ApplicationRecord
   acts_as_taggable_on :tags
 
-  belongs_to :person
+  belongs_to :person, validate: true
   belongs_to :service_area
 
   has_many :listings

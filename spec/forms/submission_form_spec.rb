@@ -107,13 +107,39 @@ RSpec.describe SubmissionForm do
     end
 
     describe 'on save' do
-      before { submission } # do this first to get accurate tare of record counts
+      context 'with valid params' do
+        before { submission } # do this first to get accurate tare of record counts
 
-      it 'creates new records for itself and all nested objects' do
-        expect { submission.save }
-          .to  change(Submission, :count).by(1)
-          .and change(Location, :count).by(1)
-          .and change(Person, :count).by(1)
+        it 'creates new records for itself and all nested objects' do
+          expect { submission.save }
+            .to  change(Location,   :count).by(1)
+            .and change(Listing,    :count).by(1)
+            .and change(Person,     :count).by(1)
+            .and change(Submission, :count).by(1)
+        end
+      end
+
+      context 'with invalid params' do
+        before do
+          Rails.logger.level = :debug
+          params[:person_attributes][:email] = ''
+          submission
+        end
+
+        it 'does not create any new records' do
+          Rails.logger.warn '=' * 80
+          expect { submission.save }
+            .to  change(Location,   :count).by(0)
+            .and change(Listing,    :count).by(0)
+            .and change(Person,     :count).by(0)
+            .and change(Submission, :count).by(0)
+        end
+
+        it 'propogates nested errors up to the submission' do
+          pending 'not propogating nested errors :('
+          submission.save
+          expect(submission.errors.messages).to eq 'person.email' => ["can't be blank"]
+        end
       end
     end
   end

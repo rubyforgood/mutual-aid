@@ -1,26 +1,19 @@
-class LocationForm < Reform::Form
-  CITIES = [
-    'Acme Township',
-    'Blair Township',
-    'East Bay Township',
-    'Fife Lake / Fife Lake Township',
-    'Garfield Township',
-    'Grant Township',
-    'Green Lake Township',
-    'Kingsley / Paradise Township',
-    'Long Lake Township',
-    'Mayfield Township',
-    'Peninsula Township',
-    'Traverse City',
-    'Union Township',
-    'Whitewater Township',
-  ]
+class LocationForm < BaseForm
+  with_options default: nil do
+    integer :id
+    record  :location_type
+    string  :street_address
+    string  :neighborhood
+    string  :city
+    string  :state
+    string  :zip
+    string  :county
+    string  :region
+  end
 
-  property :street_address
-  property :city
-  property :state
-  property :zip
-
-  validates :zip, numericality: {only_integer: true, allow_blank: true, allow_nil: true},
-                  length: {is: 5, allow_blank: true, allow_nil: true}
+  def execute
+    (id? ? Location.find(id) : Location.new).tap do |location|
+      location.attributes = given_inputs
+    end
+  end
 end

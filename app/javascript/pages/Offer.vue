@@ -3,34 +3,34 @@
     <AuthTokenInput />
 
     <!-- TODO: switch to inline errors instead -->
-    <ErrorMessages :errors="offer.errors" />
+    <ErrorMessages :errors="submission.errors" />
 
     <ServiceAreaField
-      v-model="offer.service_area_id"
+      :service_area="submission.service_area"
       :options="service_areas"
-      name="listing[service_area]"
+      name="submission[service_area]"
     />
 
     <NameField
-      fieldName="listing[person][name]"
+      :fieldName="withPersonPrefix('name')"
       :value="person.name"
     />
 
     <ContactFields
-      fieldNamePrefix="listing[person]"
+      fieldNamePrefix="submission[person_attributes]"
       :contactMethods="contact_methods"
       :person="person"
     /><SpacerField />
 
     <LocationFields
-      fieldNamePrefix="listing[person][location]"
+      fieldNamePrefix="submission[location_attributes]"
       v-bind="person.location"
     /><SpacerField />
 
     <CategoryFields
-      fieldNamePrefix="listing[tag_list][]"
+      :fieldNamePrefix="withListingPrefix('tag_list[]')"
       :categories="categories"
-      :tags="offer.tag_list"
+      :tags="listing.tag_list"
     >
       <p class="title is-4">
         What are you able to offer?
@@ -47,19 +47,19 @@
     <SpacerField />
 
     <b-field
-      label-for="listing[person][skills]"
       label="Do you have any special skills or particular resources you would like us to be aware of?"
+      :label-for="withPersonPrefix('skills')"
       :message="$options.skillsMessage"
       custom-class="is-medium"
     >
-      <b-input :value="person.skills" name="listing[person][skills]" type="textarea" rows="2" />
+      <b-input :value="person.skills" :name="withPersonPrefix('skills')" type="textarea" rows="2" />
     </b-field>
 
 
     <!-- TODO: probably needs a different field, not `description` -->
     <CommentsField
-      fieldName="listing[description]"
-      :value="offer.description"
+      :fieldName="withListingPrefix('description')"
+      :value="listing.description"
     />
 
     <SubmitButton />
@@ -106,18 +106,20 @@ export default {
     SubmitButton,
   },
   props: {
-    offer: Object,
+    submission: Object,
     categories: Array,
     contact_methods: Array,
     service_areas: Array,
   },
   data() {
     return {
-      person: this.offer.person || {},
+      listing: this.submission.listing || {},
+      person: this.submission.person || {},
     }
   },
   created: function() {
-    this.withPersonPrefix = partial(fieldNameWithPrefix, 'listing[person]')
+    this.withListingPrefix = partial(fieldNameWithPrefix, 'submission[listing_attributes]')
+    this.withPersonPrefix  = partial(fieldNameWithPrefix, 'submission[person_attributes]')
   },
   skillsMessage,
 }

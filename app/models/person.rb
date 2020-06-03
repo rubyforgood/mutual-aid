@@ -18,6 +18,8 @@ class Person < ApplicationRecord
   has_many :positions
   has_many :submissions
 
+  accepts_nested_attributes_for :location
+
   validate :preferred_contact_method_present!
 
   def name_and_email

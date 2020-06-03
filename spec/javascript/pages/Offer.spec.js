@@ -9,7 +9,7 @@ describe('Offer', () => {
     propsData: {
       contact_methods: $contact_methods,
       service_areas: $service_areas,
-      offer: $offer,
+      submission: $submission,
     },
   }))
 
@@ -33,6 +33,10 @@ describe('Offer', () => {
 
   def('offer', () => { return {
     person: $person,
+  }})
+
+  def('submission', () => { return {
+    listing: $offer,
   }})
 
   describe('service area', () => {

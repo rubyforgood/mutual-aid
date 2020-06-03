@@ -16,6 +16,8 @@ class Listing < ApplicationRecord
   has_many :matches_as_receiver, class_name: "Match", foreign_key: "receiver_id"
   has_many :matches_as_provider, class_name: "Match", foreign_key: "provider_id"
 
+  accepts_nested_attributes_for :location
+
   validates :type, presence: true
 
   enum state: { received: 0, fulfilled: 1 }

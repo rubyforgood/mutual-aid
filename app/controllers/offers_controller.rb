@@ -1,29 +1,36 @@
 class OffersController < PublicController
-
   def index
     redirect_to contributions_public_path
   end
 
   def new
-    serialize(Offer.new)
+    serialize(Submission.new)
   end
 
   def create
-    outcome = SaveListing.run params[:listing].merge(type: 'Offer')
+    submission = SubmissionForm.build submission_params
 
-    if outcome.valid?
+    if submission.save
       redirect_to contribution_thank_you_path, notice: 'Offer was successfully created.'
     else
-      serialize(outcome)
+      serialize(submission)
       render :new
     end
   end
 
   private
 
-    def serialize(offer_or_outcome)
+    def submission_params
+      params[:submission].tap do |p|
+        p[:form_name] = 'Offer_form'
+        p[:listing_attributes][:type] = 'Offer'
+        p[:location_attributes][:location_type] = LocationType.first  # FIXME: add field on form instead
+      end
+    end
+
+    def serialize(submission)
       @json = {
-        offer: ListingBlueprint.render_as_hash(offer_or_outcome, view: :normal),
+        submission: SubmissionBlueprint.render_as_hash(submission),
         categories: CategoryBlueprint.render_as_hash(Category.visible.roots, view: :normal),
         contact_methods: ContactMethodBlueprint.render_as_hash(ContactMethod.enabled),
         service_areas: ServiceAreaBlueprint.render_as_hash(ServiceArea.all),

@@ -7,6 +7,8 @@ class Submission < ApplicationRecord
   has_many :listings
   has_many :submission_responses
 
+  accepts_nested_attributes_for :listings, :person
+
   PRIVACY_LEVELS = ["anyone", "users", "volunteers", "dispatchers only"]
 
   def moderation_requested?

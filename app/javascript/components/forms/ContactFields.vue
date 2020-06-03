@@ -44,8 +44,10 @@ export default {
     fieldNamePrefix: {type: String, default: ''},
   },
   data() {
+    const preference = this.person.preferred_contact_method
     return {
-      preferredContactMethodId: this.person.preferred_contact_method,
+      preferredContactMethodId: preference ? preference.id : null,
+      withPrefix: partial(fieldNameWithPrefix, this.fieldNamePrefix),
     }
   },
   computed: {
@@ -68,9 +70,6 @@ export default {
       if (this.isPreferred(fieldName)) classes.push('required-field')
       return classes.join(' ')
     }
-  },
-  created: function() {
-    this.withPrefix = partial(fieldNameWithPrefix, this.fieldNamePrefix)
   },
 }
 </script>

@@ -12,6 +12,6 @@ class ConfigurationBlueprint < Blueprinter::Base
   end
 
   association(:service_areas, blueprint: ServiceAreaBlueprint) do
-    ServiceArea.all.eager_load(:string_translations, :text_translations)
+    ServiceArea.publicly_visible.eager_load(:string_translations, :text_translations)
   end
 end

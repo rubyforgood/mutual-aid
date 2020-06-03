@@ -30,6 +30,7 @@ class ServiceArea < ApplicationRecord
   }
 
   scope :as_filter_types, -> { i18n.select :id, :name }
+  scope :publicly_visible, -> { where(display_to_public: true) }
 
   def full_name
     "#{ parent.name.upcase + ": " if parent}#{name}#{ " (" + service_area_type + ")" if service_area_type}"

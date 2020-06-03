@@ -11,7 +11,7 @@ class ListingForm < BaseForm
   end
 
   def execute
-    (id? ? Listing.find(id) : Listing.new).tap do |listing|
+    Listing.find_or_new(id).tap do |listing|
       listing.attributes = given_inputs
     end
   end

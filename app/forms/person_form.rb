@@ -10,7 +10,7 @@ class PersonForm < BaseForm
   end
 
   def execute
-    (id? ? Person.find(id) : Person.new).tap do |person|
+    Person.find_or_new(id).tap do |person|
       person.attributes = given_inputs
     end
   end

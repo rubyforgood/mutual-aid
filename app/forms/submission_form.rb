@@ -10,23 +10,26 @@ class SubmissionForm < BaseForm
   end
 
   def execute
+    build_location
+    build_person
+    build_listing
     build_submission
   end
 
   private
 
-    def location
+    def build_location
       @location ||= LocationForm.build location_attributes
     end
 
-    def person
-      @person ||= PersonForm.build person_attributes.merge location: location
+    def build_person
+      @person ||= PersonForm.build person_attributes.merge location: @location
     end
 
-    def listing
+    def build_listing
       @listing ||= ListingForm.build listing_attributes.merge(
-        person: person,
-        location: location,
+        person: @person,
+        location: @location,
         service_area: service_area
       )
     end
@@ -46,8 +49,8 @@ class SubmissionForm < BaseForm
         )
         .merge(
           body: body_json,
-          person: person,
-          listings: [listing],
+          person: @person,
+          listings: [@listing],
         )
     end
 

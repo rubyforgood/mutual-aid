@@ -76,6 +76,19 @@ RSpec.describe SubmissionForm do
         it 'set the specified location_type' do
           expect(location.location_type).to eq location_type
         end
+
+        context 'which is optional' do
+          before do
+            params[:location_attributes] = {
+              street_address: '',
+            }
+          end
+
+          it 'allows for the rest of submission to be valid' do
+            expect(submission).to be_valid
+            expect(submission.person.location).to be_nil
+          end
+        end
       end
     end
 

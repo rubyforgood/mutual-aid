@@ -235,7 +235,7 @@ class Importers::BaseImporter
           Person.where.not("email ILIKE 'admin%' OR email ILIKE 'mutual%'").destroy_all
         else
           if today_only
-            records = model.where("created_at::text ILIKE '#{Date.today.strftime('%Y-%m-%d')}%'")
+            records = model.where("created_at::text ILIKE '#{Time.zone.today.strftime('%Y-%m-%d')}%'")
           else
             records = model.all
           end

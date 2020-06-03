@@ -7,7 +7,7 @@ class ListingBlueprint < Blueprinter::Base
     :type
   )
 
-  view :normal do
-    association :person, blueprint: PersonBlueprint, view: :normal
+  view :with_person do
+    association :person, blueprint: PersonBlueprint
   end
 end

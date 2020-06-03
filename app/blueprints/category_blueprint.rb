@@ -4,8 +4,8 @@ class CategoryBlueprint < Blueprinter::Base
   field :name
   field :description
 
-  view :normal do
-    # Note we are _not_ propogating the :normal view to children.
+  view :with_subcategories do
+    # Note we are _not_ propogating the :with_subcategories view to children.
     # This is intentional because we don't currently have multiply
     # nested categories so we don't need to dig any deeper.
     association :categories, name: :subcategories, blueprint: CategoryBlueprint

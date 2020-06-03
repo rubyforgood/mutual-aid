@@ -12,7 +12,9 @@ class LocationForm < BaseForm
   end
 
   def execute
-    (id? ? Location.find(id) : Location.new).tap do |location|
+    return nil if inputs.values.all?(&:blank?)
+
+    Location.find_or_new(id).tap do |location|
       location.attributes = given_inputs
     end
   end

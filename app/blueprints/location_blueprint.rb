@@ -3,7 +3,7 @@ class LocationBlueprint < Blueprinter::Base
 
   fields :street_address, :neighborhood, :city, :state, :zip, :county, :region
 
-  view :normal do
+  view :with_location_type do
     association :location_type, blueprint: LocationTypeBlueprint
   end
 end

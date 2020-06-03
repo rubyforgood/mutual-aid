@@ -5,26 +5,53 @@
       label="Street address"
       custom-class="is-medium"
     >
-      <b-input :name="withPrefix('street_address')" :value="street_address" />
+      <b-input :name="withPrefix('street_address')" v-model="streetAddress" />
     </b-field>
 
-    <!-- TODO: replace this with a dropdown -->
-    <b-input :name="withPrefix('location_type')" type="hidden" value="1" />
+    <b-field
+      v-if="streetAddress.length"
+      :label-for="withPrefix('location_type')"
+      label="Address type"
+      custom-class="required-field is-medium"
+    >
+      <b-select
+        :name="withPrefix('location_type')"
+        :value="location_type.id"
+        placeholder="Type"
+        required
+      >
+        <option v-for="{id, name} in location_types" :key="id" :value="id" >
+          {{ name | replace('_', ' ') | capitalize }}
+        </option>
+      </b-select>
+    </b-field>
   </div>
 </template>
 
 <script>
 import {partial} from 'utils/function'
+import {capitalize, replace} from 'utils/string'
 import {fieldNameWithPrefix} from 'utils/form'
 
 export default {
   props: {
     fieldNamePrefix: String,
-    street_address: String,
+    location_types:  Array,
+    location_type:   {type: Object, default: () => { return {} }},
+    street_address:  {type: String, default: ''},
+  },
+  data() {
+    return {
+      streetAddress: this.street_address,
+    }
   },
   created: function() {
     // TODO: tiny bit of duplication with partial+fieldNameWithPrefix
     this.withPrefix = partial(fieldNameWithPrefix, this.fieldNamePrefix)
+  },
+  filters: {
+    capitalize,
+    replace
   },
 }
 </script>

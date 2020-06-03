@@ -24,16 +24,13 @@ class OffersController < PublicController
       params[:submission].tap do |p|
         p[:form_name] = 'Offer_form'
         p[:listing_attributes][:type] = 'Offer'
-        p[:location_attributes][:location_type] = LocationType.first  # FIXME: add field on form instead
       end
     end
 
     def serialize(submission)
       @json = {
         submission: SubmissionBlueprint.render_as_hash(submission),
-        categories: CategoryBlueprint.render_as_hash(Category.visible.roots, view: :normal),
-        contact_methods: ContactMethodBlueprint.render_as_hash(ContactMethod.enabled),
-        service_areas: ServiceAreaBlueprint.render_as_hash(ServiceArea.all),
+        configuration: ConfigurationBlueprint.render_as_hash(nil),
       }.to_json
     end
 end

@@ -3,7 +3,7 @@
     v-if="options.length > 1"
     :label-for="name"
     label="Service area"
-    custom-class="required-field"
+    custom-class="required-field is-medium"
   >
     <b-select
       :name="name"

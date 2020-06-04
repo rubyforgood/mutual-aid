@@ -7,18 +7,18 @@
     </div>
     <div class='columns'>
       <div class='column'>
-        <AboutSection title='What is Mutual Aid?' description="Mutual aid is a movement. It's about connecting people with each other in a time of need. It's people helping people, because we can."/>
-        <AboutSection title='Who are we?' description="We're your regional mutual aid group. Learn more"/>
-        <AboutSection title="Where do you fit in?" description="Good neighbors share. Asking is a gift to the giver. Whatever your individual case may be, we're here to help you make connections." />
+        <AboutSection title='What is Mutual Aid?' description="Mutual Aid is people helping people. When we take responsibility for our communities. caring for each-other, in good times and bad, we can thrive together."/>
+        <AboutSection title='Who are we?' description="While Lansing Area Mutual Aid started in response to COVID, we're a growing organization making sure Neighbors are getting their needs met, in this crisis and beyond."/>
+        <AboutSection title="Where do you fit in?" description="If you are in the Lansing area, you are a Neighbor, and we've got your back. Got something you need? Ask. Got something to give? Offer. Everybody needs help, and everyone has something to give. We'll help connect you." />
       </div>
       <div class='column'>
         <div>
           <h2 class='subtitle is-3'>Need some help?</h2>
           <div class='action-buttons'>
             <a href="/asks/new" class="button is-primary">Submit an Ask</a>
-            <a href="/contributions?contribution_type=offer" class="button is-primary is-outlined">View Offers [*]</a>
-            <br><br>
-            <span class=''><a href='/contributions'>View offers and resources [*]</a></span>
+<!--            <a href="/contributions?contribution_type=offer" class="button is-primary is-outlined">View Offers [*]</a>-->
+<!--            <br><br>-->
+<!--            <span class=''><a href='/contributions'>View offers and resources [*]</a></span>-->
           </div>
         </div>
         <div>
@@ -26,25 +26,25 @@
           <h2 class='subtitle is-3'>Want to help?</h2>
           <div class='action-buttons'>
             <a href="/offers/new" class="button is-primary">Submit an Offer</a>
-            <a href="/contributions?contribution_type=ask" class="button is-primary is-outlined">View Asks [*]</a>
+<!--            <a href="/contributions?contribution_type=ask" class="button is-primary is-outlined">View Asks [*]</a>-->
             <br><br>
             <span class=''><a href='/community_resources/new'>Submit a community resource</a></span>
             <br>
             <span class=''><a href='/announcements/new'>Submit an announcement</a></span>
-            <br>
-            <span class=''><a href='/donations/new'>Donate money or goods</a></span>
-            <br>
-            <span class=''><a href='/offers/new?page_title=Volunteer Request'>Volunteer [TBD]</a></span>
+<!--            <br>-->
+<!--            <span class=''><a href='/donations/new'>Donate money or goods</a></span>-->
+<!--            <br>-->
+<!--            <span class=''><a href='/offers/new?page_title=Volunteer Request'>Volunteer [TBD]</a></span>-->
           </div>
         </div>
 
-        <div>
-          <br><br>
-          <h2 class='subtitle is-3'>Both, maybe?</h2>
-          <div class='action-buttons'>
-            <a href="/combined_form" class="button is-primary">Create a Profile [TBD]</a>
-          </div>
-        </div>
+<!--        <div>-->
+<!--          <br><br>-->
+<!--          <h2 class='subtitle is-3'>Both, maybe?</h2>-->
+<!--          <div class='action-buttons'>-->
+<!--            <a href="/combined_form" class="button is-primary">Create a Profile [TBD]</a>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
   </div>

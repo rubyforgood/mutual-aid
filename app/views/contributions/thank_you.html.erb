@@ -11,7 +11,7 @@
 <div class="body">
   <!-- # TODO extract this text to exchange_type model data -->
   <% if @system_setting.exchange_type == "peer_to_peer" %>
-    Check out our <%= link_to "contributions page", contributions_public_path %> to see Asks, Offers, and Community Resources.
+    Check out our <%= link_to "contributions page", contributions_path %> to see Asks, Offers, and Community Resources.
   <% elsif @system_setting.exchange_type == "fully_moderated" %>
     <%= @system_setting.confirmation_page_text_body&.html_safe %><!-- # TODO change system text handling so each exchange_type has text -->
   <% else %>

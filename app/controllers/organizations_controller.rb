@@ -49,7 +49,18 @@ class OrganizationsController < ApplicationController
 
     def organization_params
       params.require(:organization).permit(
-          :name, :description, :display_on_org_chart, :facebook_url, :website_url, :phone, :is_instance_owner,
-          :has_sms_account, :has_hosting_account, :has_mailer_account)
+          :description,
+          :display_on_org_chart,
+          :facebook_url,
+          :favicon_url,
+          :has_hosting_account,
+          :has_mailer_account,
+          :has_sms_account,
+          :is_instance_owner,
+          :logo_url,
+          :name,
+          :phone,
+          :website_url,
+          )
     end
 end

@@ -3,7 +3,7 @@
 </div>
 
 <div class="header">
-  <%= @system_setting.confirmation_page_text_header.html_safe %>
+  <%= @system_setting.confirmation_page_text_header&.html_safe %>
 </div>
 
 <hr>
@@ -13,7 +13,7 @@
   <% if @system_setting.exchange_type == "peer_to_peer" %>
     Check out our <%= link_to "contributions page", contributions_public_path %> to see Asks, Offers, and Community Resources.
   <% elsif @system_setting.exchange_type == "fully_moderated" %>
-    <%= @system_setting.confirmation_page_text_body.html_safe %><!-- # TODO change system text handling so each exchange_type has text -->
+    <%= @system_setting.confirmation_page_text_body&.html_safe %><!-- # TODO change system text handling so each exchange_type has text -->
   <% else %>
     We'll assist as best we can!
   <% end %>
@@ -22,7 +22,7 @@
 
 <div class="links">
   <div class="links-header">
-    <%= @system_setting.confirmation_page_text_link_header.html_safe if @system_setting.community_resources_module? || @system_setting.announcements_module? %>
+    <%= @system_setting.confirmation_page_text_link_header&.html_safe if @system_setting.community_resources_module? || @system_setting.announcements_module? %>
   </div>
 
   <div class="community-resources-link">
@@ -35,6 +35,6 @@
 </div>
 
 <div class="footer">
-  <%= @system_setting.confirmation_page_text_footer.html_safe %>
+  <%= @system_setting.confirmation_page_text_footer&.html_safe %>
 </div>
 

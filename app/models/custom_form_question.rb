@@ -6,6 +6,7 @@ class CustomFormQuestion < ApplicationRecord
 
   has_many :submission_responses
   has_many :form_questions
+  has_many :mobility_string_translations, inverse_of: :translatable, class_name: "MobilityStringTranslation", foreign_key: :translatable_id
 
   INPUT_TYPES_AND_STORAGE = {
       "date" => "date_response",
@@ -23,4 +24,7 @@ class CustomFormQuestion < ApplicationRecord
       "textarea" => "string_response", # for some reason textarea are being stored as string_response
       "youtube_video_id" => "string_response",
   }
+
+  scope :name, ->(name) { joins(:mobility_string_translations).
+      where("LOWER(mobility_string_translations.name) = ?", name) }
 end

@@ -3,8 +3,8 @@ class Listing < ApplicationRecord
 
   acts_as_taggable_on :tags
 
-  translates :title
-  translates :description, type: :text
+  translates :title, type: :string
+  translates :description, type: :string
 
   belongs_to :person
   belongs_to :service_area

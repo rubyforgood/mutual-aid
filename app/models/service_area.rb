@@ -1,7 +1,7 @@
 class ServiceArea < ApplicationRecord
   extend Mobility
-  translates :name
-  translates :description, type: :text
+  translates :name, type: :string
+  translates :description, type: :string
 
   belongs_to :location, class_name: "Location", inverse_of: :service_areas, foreign_key: :location_id
   belongs_to :organization

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_195031) do
+ActiveRecord::Schema.define(version: 2020_06_04_102243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -417,6 +417,10 @@ ActiveRecord::Schema.define(version: 2020_05_26_195031) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "about_us_text"
+    t.string "confirmation_page_text_header"
+    t.string "confirmation_page_text_body"
+    t.string "confirmation_page_text_link_header"
+    t.string "confirmation_page_text_footer"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|

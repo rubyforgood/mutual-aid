@@ -11,17 +11,17 @@ The idea is that each group -- or cluster of groups -- would own their database 
 Ideally mutual aid networks will have their own tech teams, but we will provide initial support as capacity permits.
 
 
-# Contributing
-
-Visit our [CONTRIBUTING.md](https://github.com/maebeale/mutual-aid-app/blob/master/CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
-
-
 # Background
 Mutual aid is not new. If it is new to you, please check out the history of mutual aid in your neighborhood or region, as likely you will find mentors and partners ready to accept your help. There are most likely leaders of color in your area. Please see if there are ways to support them before creating your own new network.
 
 There is plenty of research to be done, and national and regional networks to connect in to.
 
 If you have any question of us source code maintainers, please feel free to reach out in the #mutualaid channel in Ruby for Good Slack (we're affiliated) or connect with us through Github.
+
+
+# Contributing
+
+Visit our [CONTRIBUTING.md](https://github.com/maebeale/mutual-aid-app/blob/master/CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
 
 
 # Setting Up Development

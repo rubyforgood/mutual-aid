@@ -1,6 +1,6 @@
 class AsksController < PublicController
   def index
-    redirect_to contributions_public_path
+    redirect_to contributions_path
   end
 
   def new

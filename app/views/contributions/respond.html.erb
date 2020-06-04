@@ -1,6 +1,6 @@
 <% person = @contribution.person %>
 
-<div class="title is-5">Respond to contribution:    <%= link_to "go to Contributions page", contributions_public_path %></div>
+<div class="title is-5">Respond to contribution:    <%= link_to "go to Contributions page", contributions_path %></div>
 
 <div class="contribution">
   <div class="summary">
@@ -38,7 +38,7 @@
       <%= render "layouts/view_add_new_button", button_text: "Add tentative Match", table_name: "matches", new_params: "provider_id=#{@contribution.id}&provider_type=Offer" %>
     <% end %>
     <hr>
-    <strong><%= person.name + "'s " %> all-time Match totals:</strong>
+    <strong><%= "#{person.name}'s " %> all-time Match totals:</strong>
     <br>
     <span><%= person.match_history %></span>
     <hr>
@@ -58,7 +58,7 @@
     <% Contribution::TYPES.each do |type| %>
       <% contribution_assn = type.to_s.pluralize.downcase %>
       <hr>
-      <strong><%= person.name + "'s " %> other unmatched <%= contribution_assn %>:</strong>
+      <strong><%= "#{person.name}'s " %> other unmatched <%= contribution_assn %>:</strong>
       <br>
       <% if @contribution.person.public_send(contribution_assn).unmatched.
           where.not("listings.id = ?", @contribution.id).any? %>
@@ -76,7 +76,7 @@
 
     <hr>
 
-    <strong><%= person.name + "'s " %> Match history:</strong>
+    <strong><%= "#{person.name}'s " %> Match history:</strong>
     <br>
     <% no_matches_comments = [] %>
     <% @contribution.person.listings.where.not(id: @contribution).order(:type).each do |listing| %>

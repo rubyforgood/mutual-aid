@@ -106,7 +106,7 @@
           <% save_and_edit_connections_button = f.submit "Edit who this match connects", class: "button mt-1 is-primary is-outlined" %>
           <%= render "layouts/view_footer_buttons", f: f, resource: @match, top_divider: true, extra_form_button_1: nil, button_class: "is-primary", extra_form_button_2: save_and_edit_connections_button %>
           <br><br>
-          <%= link_to 'View all Matches', matches_path %> |   <%= link_to 'Contributions page', contributions_public_path %>
+          <%= link_to 'View all Matches', matches_path %> |   <%= link_to 'Contributions page', contributions_path %>
         </div>
       <% end %>
     <% end %>

@@ -15,6 +15,6 @@ class Position < ApplicationRecord
                                                   yearbook_year || Time.zone.now.end_of_year) }
 
   def name
-    "#{person.name + ", " if person.present?}#{position_type}"
+    (person.present? ? "#{person.name}, " : '') + position_type.to_s
   end
 end

@@ -2,36 +2,39 @@
   <%= @current_organization&.name %>
 </div>
 
-<div class="subtitle is-3">
-  Thank you for your submission!
-</div>
-
-<div>
-  We've sent you a confirmation email (if you provided an email).
+<div class="header">
+  <%= @system_setting.confirmation_page_text_header.html_safe %>
 </div>
 
 <hr>
 
-<div class="subtitle is-4">
+<div class="body">
   <!-- # TODO extract this text to exchange_type model data -->
   <% if @system_setting.exchange_type == "peer_to_peer" %>
     Check out our <%= link_to "contributions page", contributions_public_path %> to see Asks, Offers, and Community Resources.
   <% elsif @system_setting.exchange_type == "fully_moderated" %>
-    We'll be in touch if we're able to find a match.
+    <%= @system_setting.confirmation_page_text_body.html_safe %><!-- # TODO change system text handling so each exchange_type has text -->
   <% else %>
     We'll assist as best we can!
   <% end %>
   <hr>
 </div>
 
-<div class="links-header">
-  <%= "Check these out:" if @system_setting.community_resources_module? || @system_setting.announcements_module? %>
+<div class="links">
+  <div class="links-header">
+    <%= @system_setting.confirmation_page_text_link_header.html_safe if @system_setting.community_resources_module? || @system_setting.announcements_module? %>
+  </div>
+
+  <div class="community-resources-link">
+    <%= link_to "Community Resources", community_resources_public_path if @system_setting.community_resources_module? %>
+  </div>
+
+  <div class="announcements-link">
+    <%= link_to "Announcements", announcements_public_path if @system_setting.announcements_module? %>
+  </div>
 </div>
 
-<div class="community-resources-link">
-  <%= link_to "Community Resources", community_resources_public_path if @system_setting.community_resources_module? %>
+<div class="footer">
+  <%= @system_setting.confirmation_page_text_footer.html_safe %>
 </div>
 
-<div class="announcements-link">
-  <%= link_to "Announcements", announcements_public_path if @system_setting.announcements_module? %>
-</div>

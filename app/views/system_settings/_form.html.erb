@@ -12,10 +12,45 @@
     <%= f.input :shared_accounts_module, as: :radio_buttons %>
     <%= f.input :chat_module, as: :radio_buttons %>
     <%= f.input :about_us_text, label: "About us text (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
-    <div class="field is-grouped">
-      <%= f.input :landing_page_text_who, label: "Landing page text: Who (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
-      <%= f.input :landing_page_text_what, label: "Landing page text: What (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
-      <%= f.input :landing_page_text_how, label: "Landing page text: How (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+    <div class="is-inline-flex">
+      <%= f.input :landing_page_text_who,
+                  label: "Landing page text: Who (
+                           <a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+      <%= f.input :landing_page_text_what,
+                  label: "Landing page text: What (
+                           <a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+      <%= f.input :landing_page_text_how,
+                  label: "Landing page text: How (
+                           <a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+    </div>
+    <div class="is-inline-flex">
+      <%= f.input :confirmation_page_text_header,
+                  as: :text,
+                  label: "Submission confirmation (thank you) page text: Header
+                  (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe,
+                  input_html: { value: f.object.confirmation_page_text_header ||
+                      "<div class='subtitle is-3'>Thank you for your submission!</div>
+                      <div>We've sent you a confirmation email (if you provided an email).</div>" } %>
+      <%= f.input :confirmation_page_text_body,
+                  as: :text,
+                  label: "Submission confirmation (thank you) page text: Body
+                  (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe,
+                  input_html: { value: f.object.confirmation_page_text_body ||
+                      "<div class='subtitle is-5'>We'll be in touch if we're able to find a match.</div>" }
+      %>
+      <%= f.input :confirmation_page_text_link_header,
+                  as: :text,
+                  label: "Submission confirmation (thank you) page text: Links
+                  (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe,
+                  input_html: { value: f.object.confirmation_page_text_link_header ||
+                      "Check these out:" }
+      %>
+      <%= f.input :confirmation_page_text_footer,
+                  as: :text,
+                  label: "Submission confirmation (thank you)  page text: Footer
+                  (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe,
+                  input_html: { value: f.object.confirmation_page_text_footer }
+      %>
     </div>
   </div>
 

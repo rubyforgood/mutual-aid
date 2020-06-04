@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import logo from 'images/logo.png'
+import logo from 'images/logo_lama.png'
 import {DeleteButton} from 'components/forms'
 import {FeedbackButton} from 'components/forms'
 

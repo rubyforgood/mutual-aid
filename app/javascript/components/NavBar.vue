@@ -8,16 +8,15 @@
 
     <template slot="start">
       <b-navbar-item href="/about">About</b-navbar-item>
-      <b-navbar-item href="/contributions">Contributions [*]</b-navbar-item>
       <b-navbar-item href="/community_resources_list">Community Resources</b-navbar-item>
       <b-navbar-item href="/announcements_list">Announcements</b-navbar-item>
-      <b-navbar-item href="/donations/new">Donate</b-navbar-item>
     </template>
 
     <template slot="end" v-if="loggedIn">
       <b-navbar-item tag="div">
         <FeedbackButton action="software_feedbacks/new">Feedback</FeedbackButton>
       </b-navbar-item>
+      <b-navbar-item href="/contributions">Contributions</b-navbar-item>
       <b-navbar-item href="/matches">Matches</b-navbar-item>
       <b-navbar-item href="/admin">Admin</b-navbar-item>
       <b-navbar-item tag="div">

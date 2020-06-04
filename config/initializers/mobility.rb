@@ -103,8 +103,8 @@ end
 # examples below for translations on a Post model:
 # class Post
 #   extend Mobility
-#   translates :title
-#   translates :content, type: :text
+#   translates :title, type: :string
+#   translates :content, type: :string
 # end
 #
 # Post.find_by(title_en: "Mobility")

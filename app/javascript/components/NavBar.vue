@@ -21,7 +21,7 @@
       <b-navbar-item href="/matches">Matches</b-navbar-item>
       <b-navbar-item href="/admin">Admin</b-navbar-item>
       <b-navbar-item tag="div">
-        <DeleteButton action="users/sign_out">Logout</DeleteButton>
+        <DeleteButton action="/users/sign_out">Logout</DeleteButton>
       </b-navbar-item>
     </template>
     <template slot="end" v-else>

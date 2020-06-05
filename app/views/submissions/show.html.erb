@@ -33,7 +33,7 @@
     <span class="label"><%= response.custom_form_question.name %></span>
     <div class="field is-grouped">
       <span class="input"><%= response.name %></span>
-      <%= edit_button(response) if current_user.sys_admin? %>
+      <%= edit_button(response) if current_user.sys_admin_role? %>
     </div>
   <% end %>
 </div>

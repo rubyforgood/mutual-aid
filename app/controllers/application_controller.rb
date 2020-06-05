@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def set_admin_status
-    @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin? # allows admin user to simulate with param=false
+    @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role? # allows admin user to simulate with param=false
   end
 
   def set_system_setting

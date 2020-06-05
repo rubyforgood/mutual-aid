@@ -19,7 +19,7 @@
     <%= f.association :person, include_blank: true %>
     <%= f.association :service_area, include_blank: true %>
     <%= f.association :location, include_blank: true %>
-    <%= (f.association :submission, include_blank: true) if current_user.sys_admin? %>
+    <%= (f.association :submission, include_blank: true) if current_user.sys_admin_role? %>
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, record: @listing, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

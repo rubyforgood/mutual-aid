@@ -1,14 +1,11 @@
 class ApplicationController < ActionController::Base
   include DeliverNowWithErrorHandling
-  include Pundit
 
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :set_admin_status
   before_action :set_system_setting
   around_action :switch_locale
-
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def set_admin_status
     @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role? # allows admin user to simulate with param=false

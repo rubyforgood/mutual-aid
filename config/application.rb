@@ -46,5 +46,9 @@ module Mutualaid
     config.i18n.fallbacks = true
 
     config.time_zone = 'UTC'
+
+    # This allows the schema to handle the creation of the PG role
+    # Ref: https://pekalicious.github.io/mcc-workflow/2019/01/14/01-could-not-dump-table.html
+    config.active_record.schema_format = :sql
   end
 end

@@ -9,12 +9,10 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :person
 
-  def sys_admin?
-    true # TODO - connect this to pundit
-  end
+  enum role: UserRole.roles_as_hash, _suffix: true
 
-  def admin?
-    true # TODO - connect this to pundit
+  def role
+    @role ||= UserRole.new(read_attribute(:role))
   end
 
   def name

@@ -14,6 +14,7 @@ SET row_security = off;
 --
 
 CREATE TYPE public.user_role AS ENUM (
+    'unset',
     'neighbor',
     'volunteer',
     'dispatcher',
@@ -1198,7 +1199,7 @@ CREATE TABLE public.users (
     locked_at timestamp without time zone,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    role public.user_role
+    role public.user_role DEFAULT 'unset'::public.user_role
 );
 
 

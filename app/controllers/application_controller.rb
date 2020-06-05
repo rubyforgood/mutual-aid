@@ -1,11 +1,14 @@
 class ApplicationController < ActionController::Base
   include DeliverNowWithErrorHandling
+  include Pundit
 
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :set_admin_status
   before_action :set_system_setting
   around_action :switch_locale
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def set_admin_status
     @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin? # allows admin user to simulate with param=false
@@ -23,5 +26,12 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     { locale: I18n.locale }
+  end
+
+  private
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
   end
 end

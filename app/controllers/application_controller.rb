@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include DeliverNowWithErrorHandling
+  include Pundit
 
   protect_from_forgery with: :exception
   before_action :authenticate_user!
@@ -23,12 +24,5 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     { locale: I18n.locale }
-  end
-
-  private
-
-  def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
-    redirect_to(request.referrer || root_path)
   end
 end

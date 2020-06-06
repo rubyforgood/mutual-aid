@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    authorize @user
     if @user == current_user
       redirect_to edit_user_registration_path
     else
@@ -23,9 +24,9 @@ class UsersController < ApplicationController
     end
   end
 
+  # NOTE: I'm not entirely sure this is used at all.
   def create
     @user = User.new(user_params)
-
     if @user.save
       redirect_to users_path, notice: "User was successfully submitted."
     else
@@ -35,6 +36,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    authorize @user
     if @user.update(user_params)
       redirect_to users_path, notice: 'User was successfully updated.'
     else

@@ -6,6 +6,18 @@ class UserPolicy < ApplicationPolicy
     @record = record
   end
 
+  def edit?
+    update?
+  end
+
+  def update?
+    user == record || user.sys_admin_role? || user.admin_role?
+  end
+
+  def create?
+    true
+  end
+
   def destroy?
     user.sys_admin_role?
   end

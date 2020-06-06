@@ -46,8 +46,5 @@ module Mutualaid
     config.i18n.fallbacks = true
 
     config.time_zone = 'UTC'
-
-    # Automatically treats Pundit unauthorized responses as normal 403s
-    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
   end
 end

@@ -9,7 +9,7 @@
     <%#= render "person_fields", ff: ff, f: f %><!-- # TODO - improve user creation workflow-->
   <% end %>
 
-  <% admin_and_self = current_user.admin? && current_user == @user %>
+  <% admin_and_self = current_user.admin_role? && current_user == @user %>
   <% change_password_button = link_to "Change password", edit_user_registration_path, class: "button mt-1" %>
   <% cancel_my_account_button =  link_to "Cancel my account",
                                          registration_path(@user),

@@ -9,7 +9,7 @@ class PublicPagesController < PublicController
   end
 
   def community_resources
-    @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin?
+    @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role?
     @community_resources = CommunityResource.where(is_approved: true).published
   end
 

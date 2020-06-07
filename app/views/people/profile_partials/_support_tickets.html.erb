@@ -1,6 +1,6 @@
 <%
   current_person_is_not_person = current_user.person != @person
-  admin = current_user.admin?
+  admin = current_user.admin_role?
   self_or_admin = current_user.person == @person || admin
   col_offset = current_person_is_not_person ? "col-md-offset-1" : "col-md-offset-3"
 %>

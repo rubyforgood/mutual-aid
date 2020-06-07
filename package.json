@@ -39,3 +39,4 @@
     "test": "mochapack --webpack-config config/webpack/test.js --require spec/javascript/setup.js --colors -u bdd-lazy-var/global 'spec/javascript/**/*.spec.js'"
   }
 }
+

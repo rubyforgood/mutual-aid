@@ -30,7 +30,6 @@
     "mocha-junit-reporter": "^1.23.3",
     "mochapack": "^1.1.15",
     "prettier": "2.0.5",
-    "sass-loader": "8.0.2",
     "sinon": "9.0.2",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",

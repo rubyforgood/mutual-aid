@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_154820) do
+ActiveRecord::Schema.define(version: 2020_06_08_161554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,15 @@ ActiveRecord::Schema.define(version: 2020_06_08_154820) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["match_id"], name: "index_feedbacks_on_match_id"
+  end
+
+  create_table "form_questions", force: :cascade do |t|
+    t.bigint "form_id", null: false
+    t.bigint "custom_form_question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["custom_form_question_id"], name: "index_form_questions_on_custom_form_question_id"
+    t.index ["form_id"], name: "index_form_questions_on_form_id"
   end
 
   create_table "forms", force: :cascade do |t|
@@ -510,6 +519,8 @@ ActiveRecord::Schema.define(version: 2020_06_08_154820) do
   add_foreign_key "community_resources", "service_areas"
   add_foreign_key "donations", "people"
   add_foreign_key "feedbacks", "matches"
+  add_foreign_key "form_questions", "custom_form_questions"
+  add_foreign_key "form_questions", "forms"
   add_foreign_key "forms", "organizations"
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "people"

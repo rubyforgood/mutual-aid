@@ -1,0 +1,10 @@
+<%= simple_form_for @form_question do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :form %>
+    <%= f.association :custom_form_question %>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, record: @form_question, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

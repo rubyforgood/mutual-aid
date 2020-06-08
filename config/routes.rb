@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :forms
   devise_for :users
 
   get "/admin",                    to: "admin#landing_page",    as: "landing_page_admin"
@@ -34,6 +33,8 @@ Rails.application.routes.draw do
   resources :custom_form_questions
   resources :donations
   resources :feedbacks
+  resources :forms
+  resources :form_questions
   resources :history_logs, only: [:index]
   resources :location_types
   get "/listings_index", to: "listings#listings_index", as: "listings_index_list"

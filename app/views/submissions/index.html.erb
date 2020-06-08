@@ -38,8 +38,7 @@
         </td>
         <td>
           <% submission.listings.each do |listing| %>
-            <% type = listing.type %>
-            <% if ask? %>
+            <% if listing.ask? %>
               <%= link_to("Match", match_listing_path(listing, receiver_id: listing.id, receiver_type: "Ask"), class: "button") %>
             <% else %>
               <%= link_to("Match", match_listing_path(listing, provider_id: listing.id, provider_type: "Offer"), class: "button") %>

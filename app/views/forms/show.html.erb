@@ -1,0 +1,34 @@
+<%= render "layouts/view_header", resource: @form %>
+
+<p>
+  <strong>Contribution type name:</strong>
+  <%= @form.contribution_type_name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @form.name %>
+</p>
+
+<p>
+  <strong>Header html:</strong>
+  <%= @form.header_html %>
+</p>
+
+<p>
+  <strong>Footer html:</strong>
+  <%= @form.footer_html %>
+</p>
+
+<p>
+  <strong>Display categories:</strong>
+  <%= @form.display_categories %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @form.organization&.name %>
+</p>
+
+<%= edit_button(@form) %>
+<%= link_to 'Back', forms_path %>

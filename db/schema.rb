@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_030804) do
+ActiveRecord::Schema.define(version: 2020_06_08_154820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,18 @@ ActiveRecord::Schema.define(version: 2020_06_05_030804) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["match_id"], name: "index_feedbacks_on_match_id"
+  end
+
+  create_table "forms", force: :cascade do |t|
+    t.string "contribution_type_name"
+    t.string "name"
+    t.string "header_html"
+    t.string "footer_html"
+    t.boolean "display_categories"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_forms_on_organization_id"
   end
 
   create_table "history_logs", force: :cascade do |t|
@@ -498,6 +510,7 @@ ActiveRecord::Schema.define(version: 2020_06_05_030804) do
   add_foreign_key "community_resources", "service_areas"
   add_foreign_key "donations", "people"
   add_foreign_key "feedbacks", "matches"
+  add_foreign_key "forms", "organizations"
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "people"
   add_foreign_key "listings", "service_areas"

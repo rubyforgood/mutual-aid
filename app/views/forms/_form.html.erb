@@ -1,0 +1,14 @@
+<%= simple_form_for @form do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :contribution_type_name, as: :select, collection: @contribution_types %>
+    <%= f.input :name %>
+    <%= f.input :header_html, as: :text %>
+    <%= f.input :footer_html, as: :text %>
+    <%= f.input :display_categories, as: :radio_buttons %>
+    <%= f.association :organization %>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, record: @form, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

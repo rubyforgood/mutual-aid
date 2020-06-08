@@ -8,7 +8,7 @@ class ConfigurationBlueprint < Blueprinter::Base
   end
 
   association :location_types, blueprint: LocationTypeBlueprint do
-    LocationType.all  # FIXME: fix seeds so we can change this to `.visible`
+    LocationType.visible
   end
 
   association(:service_areas, blueprint: ServiceAreaBlueprint) do

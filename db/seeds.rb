@@ -41,7 +41,10 @@ default_tags.each do |tag_name_parent, subtag_name|
 end
 
 %w[business home cross_street service_area park].each do |location_type_name|
-  LocationType.where(name: location_type_name).first_or_create!
+  location_type = LocationType.where(name: location_type_name).first_or_create!
+  unless location_type_name == "service_area"
+    location_type.update_attributes(display_to_public: true)
+  end
 end
 
 # host org and set system defaults

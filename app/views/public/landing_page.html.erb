@@ -3,7 +3,10 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     EntryPoints.orientation('#orientation', {
-      organization: 'Mutual-Aid'
+      organization: '<%= @organization_name %>',
+      landingPageTextWhat: '<%= @landing_page_text_what %>',
+      landingPageTextWho: '<%= @landing_page_text_who %>',
+      landingPageTextHow: '<%= @landing_page_text_how %>'
     })
   })
 </script>

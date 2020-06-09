@@ -65,5 +65,5 @@ Rails.application.routes.draw do
   resources :teams
   resources :users
 
-  root :to => 'public#landing_page'
+  root :to => 'public_pages#landing_page'
 end

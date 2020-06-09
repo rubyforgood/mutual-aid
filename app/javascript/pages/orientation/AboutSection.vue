@@ -1,7 +1,7 @@
 <template>
   <div class='section'>
     <h2 class='subtitle'>{{title}}</h2>
-    <p>{{description}}</p>
+    <p class='description'>{{description}}</p>
   </div>
 </template>
 

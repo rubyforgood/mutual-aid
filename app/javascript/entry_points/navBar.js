@@ -6,7 +6,7 @@ export default function(el, {loggedIn = false}) {
     el,
     render(h) {
       return h(NavBar, {
-        props: {loggedIn},
+        props: props,
       })
     }
   })

@@ -32,19 +32,18 @@
 </template>
 
 <script>
-import logo from 'images/logo_lama.png'
 import {DeleteButton} from 'components/forms'
 import {FeedbackButton} from 'components/forms'
 
 export default {
   props: {
     loggedIn: Boolean,
+    logo: logoUrl,
   },
   components: {
     DeleteButton,
     FeedbackButton
   },
-  logo: logo,
 
   pageUrl() {
     return window.location.href

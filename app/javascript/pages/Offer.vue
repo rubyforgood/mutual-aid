@@ -33,7 +33,7 @@
       :categories="configuration.categories"
       :tags="listing.tag_list"
     >
-      <p class="title is-4">
+      <p class="label is-medium">
         What are you able to offer?
       </p>
       <p>
@@ -45,13 +45,12 @@
       Your safety is community safety. Do what is best.
       </p>
     </CategoryFields>
-    <SpacerField />
 
     <b-field
       label="Do you have any special skills or particular resources you would like us to be aware of?"
       :label-for="withPersonPrefix('skills')"
       :message="$options.skillsMessage"
-      custom-class="is-medium"
+      custom-class="mt-2 is-medium"
     >
       <b-input :value="person.skills" :name="withPersonPrefix('skills')" type="textarea" rows="2" />
     </b-field>

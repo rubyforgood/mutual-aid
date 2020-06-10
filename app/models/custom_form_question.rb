@@ -5,6 +5,7 @@ class CustomFormQuestion < ApplicationRecord
   translates :hint_text
 
   has_many :submission_responses
+  has_many :form_questions
 
   INPUT_TYPES_AND_STORAGE = {
       "date" => "date_response",

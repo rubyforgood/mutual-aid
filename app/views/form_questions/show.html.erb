@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Form:</strong>
+  <%= @form_question.form_id %>
+</p>
+
+<p>
+  <strong>Custom form question:</strong>
+  <%= @form_question.custom_form_question_id %>
+</p>
+
+<%= link_to 'Edit', edit_form_question_path(@form_question) %> |
+<%= link_to 'Back', form_questions_path %>

@@ -1,7 +1,15 @@
-export function fieldNameWithPrefix(prefix, name) {
-  if (!prefix || !prefix.length) return name
+export function composeFieldName(preceding, current, ...subsequent) {
+  if (!current) return preceding
 
-  return name.endsWith('[]')
-    ? `${prefix}[${name.slice(0, -2)}][]`
-    : `${prefix}[${name}]`
+  if (preceding && preceding.length) {
+    const combined =
+      current === '[]' ?
+      `${preceding}[]` :
+      `${preceding}[${current}]`
+
+    return composeFieldName(combined, ...subsequent)
+  }
+  else {
+    return composeFieldName(current, ...subsequent)
+  }
 }

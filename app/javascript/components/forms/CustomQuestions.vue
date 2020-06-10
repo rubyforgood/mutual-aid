@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {fieldNameWithPrefix} from 'utils/form'
+import {composeFieldName} from 'utils/form'
 
 export default {
   props: {
@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     fieldName(id) {
-      return fieldNameWithPrefix(this.fieldNamePrefix, id.toString())
+      return composeFieldName(this.fieldNamePrefix, id.toString())
     },
   },
 }

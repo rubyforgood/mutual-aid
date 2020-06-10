@@ -31,7 +31,7 @@
 <script>
 import {partial} from 'utils/function'
 import {capitalize, replace} from 'utils/string'
-import {fieldNameWithPrefix} from 'utils/form'
+import {composeFieldName} from 'utils/form'
 
 export default {
   props: {
@@ -46,8 +46,7 @@ export default {
     }
   },
   created: function() {
-    // TODO: tiny bit of duplication with partial+fieldNameWithPrefix
-    this.withPrefix = partial(fieldNameWithPrefix, this.fieldNamePrefix)
+    this.withPrefix = partial(composeFieldName, this.fieldNamePrefix)
   },
   filters: {
     capitalize,

@@ -7,7 +7,7 @@ describe('Orientation', () => {
         const wrapper = mount(Orientation, {
             localVue: configure(createLocalVue()),
             propsData: {
-                landing_page_text_what: "hello123",
+                landingPageTextWhat: "hello123",
             },
         })
         const what_section_description = wrapper.find('#landing_page_text_what .description');
@@ -19,7 +19,7 @@ describe('Orientation', () => {
         const wrapper = mount(Orientation, {
             localVue: configure(createLocalVue()),
             propsData: {
-                landing_page_text_who: "hello1234",
+                landingPageTextWho: "hello1234",
             },
         })
         const who_section_description = wrapper.find('#landing_page_text_who .description');
@@ -31,7 +31,7 @@ describe('Orientation', () => {
         const wrapper = mount(Orientation, {
             localVue: configure(createLocalVue()),
             propsData: {
-                landing_page_text_how: "hello12345",
+                landingPageTextHow: "hello12345",
             },
         })
         const how_section_description = wrapper.find('#landing_page_text_how .description');

@@ -49,7 +49,7 @@ class BrowseFilter
   private
 
   def filter(model)
-    parameters.keys.reduce(model.all) do |scope, key|
+    parameters.keys.reduce(model.unmatched) do |scope, key|
       filter = FILTERS.fetch(key, ->(_condition, s) {s})
       filter.call(parameters[key], scope)
     end

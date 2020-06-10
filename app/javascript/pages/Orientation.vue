@@ -7,9 +7,9 @@
     </div>
     <div class='columns'>
       <div class='column'>
-        <AboutSection title='What is Mutual Aid?' description="Mutual Aid is people helping people. When we take responsibility for our communities. caring for each-other, in good times and bad, we can thrive together."/>
-        <AboutSection title='Who are we?' description="While Lansing Area Mutual Aid started in response to COVID, we're a growing organization making sure Neighbors are getting their needs met, in this crisis and beyond."/>
-        <AboutSection title="Where do you fit in?" description="If you are in the Lansing area, you are a Neighbor, and we've got your back. Got something you need? Ask. Got something to give? Offer. Everybody needs help, and everyone has something to give. We'll help connect you." />
+        <AboutSection id='landing_page_text_what' title='What is Mutual Aid?' :description="landingPageTextWhat"/>
+        <AboutSection id='landing_page_text_who' title='Who are we?' :description="landingPageTextWho"/>
+        <AboutSection id='landing_page_text_how' title="Where do you fit in?" :description="landingPageTextHow" />
       </div>
       <div class='column'>
         <div>
@@ -58,7 +58,18 @@ export default {
     AboutSection
   },
   props:{
-    organization: String
+    organization: String,
+    landingPageTextWhat: { type: String,
+      default: "Mutual Aid is people helping people. When we take responsibility for our communities, " +
+              "caring for each-other, in good times and bad, we can thrive together." },
+    landingPageTextWho: { type: String,
+      default: "While Lansing Area Mutual Aid started in response to COVID, " +
+              "we're a growing organization making sure Neighbors are getting their needs met, " +
+              "in this crisis and beyond." },
+    landingPageTextHow: { type: String,
+      default: "If you are in the Lansing area, you are a Neighbor, and we've got your back. Got something you need? " +
+              "Ask. Got something to give? Offer. Everybody needs help, and everyone has something to give. " +
+              "We'll help connect you." }
   }
 }
 </script>

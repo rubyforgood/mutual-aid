@@ -18,7 +18,7 @@
               <li>Create tentative Match</li>
               <li>Log Communications w pair</li>
               <li>Edit Match status</li>
-              <li>Save Contribution</li>
+              <li>Save</li>
             </ul>
           </ul>
         </li>
@@ -27,7 +27,7 @@
           View <%= link_to "Matches", matches_path %> index
           <ul style="padding-left: 2em;">
             <ul style="list-style-type: circle !important">
-              <li>Filter to find Matches that "Need followup"</li>
+              <li>Filter to find Matches that <%= link_to "Need followup", matches_path(follow_up_status: true) %></li>
               <li>Edit/log Communications</li>
               <li>Connect/claim, if desired</li>
             </ul>

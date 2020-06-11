@@ -7,6 +7,7 @@ class Match < ApplicationRecord
   has_many :feedbacks
   has_many :shift_matches
 
+  ICON = "fa fa-handshake"
   INITIATORS = ["receiver", "provider"]
   STATUSES = ["matched_tentatively", "match_confirmed", "match_completed", "provider_gave_feedback", "receiver_gave_feedback"]
 
@@ -37,6 +38,10 @@ class Match < ApplicationRecord
       result = needs_follow_up
     end
     result
+  end
+
+  def category
+    receiver.all_tags_to_s
   end
 
   def name

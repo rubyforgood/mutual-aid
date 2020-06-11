@@ -24,7 +24,19 @@
     <br><br>
     <%= triage_button(@contribution) %>
     <br><br>
-    <% if @contribution.ask? %>
+
+    <% match_assn_name = @contribution.ask? ? "matches_as_receiver" : "matches_as_provider" %>
+    <% matches_for_this_contribution = @contribution.public_send(match_assn_name) %>
+
+    <% if matches_for_this_contribution.any? %>
+      <strong>This <%= @contribution.type %> has been Matched:</strong>
+      <br>
+      <% matches_for_this_contribution.order(created_at: :desc).each do |match| %>
+        <%= edit_button(match, "#{shorthand_display(match.created_at)} #{match.category.upcase}: #{match.short_name}", nil, nil, nil, {}, "View Match") %>
+        <br>
+      <% end %>
+      <br><br>
+    <% elsif @contribution.ask? %>
       <%= render "layouts/view_add_new_button", button_text: "Add tentative Match", table_name: "matches", new_params: "receiver_id=#{@contribution.id}&receiver_type=Ask" %>
       <%= link_to("Find Match [TBD]",
                   match_listing_path(@contribution, receiver_id: @contribution.id, receiver_type: "Ask"),
@@ -35,6 +47,7 @@
                   match_listing_path(@contribution, provider_id: @contribution.id, provider_type: "Offer"),
                   class: "button") if params[:admin] %>
     <% end %>
+    <br><br>
   </div>
   <div class="person column">
     <div class="contact-info">
@@ -53,19 +66,6 @@
       <strong>Participation summary:</strong>
       <br>
       <span><%= person.match_history %></span>
-
-      <br><br>
-      <% match_assn_name = @contribution.ask? ? "matches_as_receiver" : "matches_as_provider" %>
-      <% matches_for_this_contribution = @contribution.public_send(match_assn_name) %>
-      <% if matches_for_this_contribution.any? %>
-        <strong>Match history for <%= @contribution.type %> (<%= @contribution.all_tags_to_s.upcase %>, <%= shorthand_display(@contribution.created_at) %>):</strong>
-        <br>
-        <% matches_for_this_contribution.order(created_at: :desc).each do |match| %>
-          <%= edit_button(match, "#{shorthand_display(match.created_at)} #{match.short_name}", nil, nil, {}, "View Match") %>
-          <br>
-        <% end %>
-        <br><br>
-      <% end %>
     </div>
   </div>
 </div>
@@ -114,7 +114,7 @@
       <% other_matches = listing.public_send(match_assn_name) %>
       <% if other_matches.any? %>
         <% listing.public_send(match_assn_name).order(created_at: :desc).each do |match| %>
-          <%= edit_button(match, "#{shorthand_display(match.created_at)} #{match.short_name}", listing.icon_class, nil, nil, {}, "View Match") %>
+          <%= edit_button(match, "#{shorthand_display(match.created_at)} #{match.category.upcase}: #{match.short_name}", nil, nil, nil, {}, "View Match") %>
           <br>
         <% end %>
         <% no_matches_comments << "has_matches" %>

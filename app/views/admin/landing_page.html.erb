@@ -23,12 +23,14 @@
 <div class="row columns">
   <div class="columns column is-12">
     <div class="column is-4">
-      <%= link_to "View unmatched Asks", listings_path(contribution_type: "Ask") %> <span class="tag"><%= @asks_unmatched_count %></span>
+      <%= link_to "View unmatched Asks", contributions_path(contribution_type: "Ask") %> <span class="tag"><%= @asks_unmatched_count %></span>
       <br>
-      <%= link_to "View unmatched Offers", listings_path(contribution_type: "Offer") %> <span class="tag"><%= @offers_unmatched_count %></span>
+      <%= link_to "View unmatched Offers", contributions_path(contribution_type: "Offer") %> <span class="tag"><%= @offers_unmatched_count %></span>
     </div>
     <div class="column is-4">
       <%= link_to "View all Matches", matches_path %> <span class="tag"><%= @match_count %></span>
+      <br>
+      <%= link_to "View all Listings", listings_path %> <span class="tag"><%= @match_count %></span>
     </div>
     <div class="column is-4">
       <%= link_to "Create new Ask", new_ask_path %>

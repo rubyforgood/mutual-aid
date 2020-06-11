@@ -1,12 +1,53 @@
-<section>
-  <div id="entry-point" />
-</section>
+<%= render "layouts/view_header", resource: @listings.first %>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  EntryPoints.browse('#entry-point', {
-    contributions: <%= raw json_escape(@contributions) %>,
-    filterTypes: <%= raw json_escape(@filter_types) %>
-  });
-});
-</script>
+<%= render "search_boxes" %>
+
+<br><hr><br>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Title</th>
+      <th>Person</th>
+      <th>Created at</th>
+      <th>Match Status</th>
+      <th>Respond</th>
+      <!-- <th>Find Match</th>-->
+      <th>Create Match</th>
+      <th>Triage/edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @listings.each do |listing| %>
+      <tr>
+        <td><span class="<%= listing.icon_class %>"></span> <%= listing.type %></td>
+        <td><%= listing.title %></td>
+        <td><%= listing.person&.name %></td>
+        <td><%= shorthand_display(listing.created_at) %></td>
+        <td>
+          <span class="tag <%= listing.status == "unmatched" ? "is-warning" : "is-primary" %>">
+            <%= listing.status %><%= " (#{listing.matches.count})" if listing.matches.count > 1 %>
+          </span>
+        </td>
+        <td><%= link_to("Respond", respond_contribution_path(listing, contribution_type: listing.type),
+                        class: "button #{listing.status == "unmatched" ? "is-primary" : "is-primary is-outlined"}") %>
+        </td>
+        <!-- # TODO - add find match functionality <td><%##= link_to("Find Match [TBD]", match_listing_path(listing), class: "button") %></td>-->
+        <td>
+          <% if listing.offer? %>
+            <%= link_to("Create Match",
+                        new_match_path(provider_id: listing.id, provider_type: listing.type),
+                        class: "button") %>
+          <% else %>
+            <%= link_to("Create Match",
+                        new_match_path(receiver_id: listing.id, receiver_type: listing.type),
+                        class: "button") %>
+          <% end %>
+        </td>
+        <td><%= triage_button(listing) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

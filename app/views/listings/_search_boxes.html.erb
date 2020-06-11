@@ -1,0 +1,35 @@
+<%= simple_form_for :listings,
+                    html: { class: 'is-horizontal'},
+                    url: listings_path,
+                    method: :get do |f| %>
+
+  <%= hidden_field_tag :sort, value=(params[:sort] || "id") %>
+  <%= hidden_field_tag :direction, value=(params[:direction] == "asc" ? "desc": "desc") %>
+  <%= hidden_field_tag :table, value=(params[:table] || params[:controller]) %>
+
+  <div class="has-text-left label">Search:</div>
+  <div id="search-boxes" class="has-text-left search-boxes">
+    <div class="">
+      <div class="is-grouped is-inline-flex">
+        <%= select_tag :contribution_type,
+                       options_for_select(@contribution_types || [], selected: params[:contribution_type]),
+                       include_blank: "-- Type --",
+                       class: 'input select optional' %>
+        <%= select_tag :person_id,
+                       options_for_select(@people || [], selected: params[:person_id]),
+                       include_blank: "-- Created by --",
+                       class: 'input select optional' %>
+        <%= select_tag :created_on,
+                       options_for_select(@dates || [], selected: params[:created_on]),
+                       include_blank: "-- Created on --",
+                       class: 'input select optional' %>
+        <%= select_tag :match_status,
+                       options_for_select(@match_statuses || [], selected: params[:match_status]),
+                       include_blank: "-- Any match status --",
+                       class: 'input select optional', style: 'min-width: 12rem;' %>
+        <%= f.button :submit, "Search", class: "form-group button is-primary", name: nil %>
+        <%= clear_search_button %>
+      </div>
+    </div>
+  </div>
+<% end %>

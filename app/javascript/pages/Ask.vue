@@ -33,16 +33,16 @@
       :categories="configuration.categories"
       :tags="listing.tag_list"
     >
-      <p class="title is-4">
+      <p class="label is-medium">
         What are you requesting?
       </p>
     </CategoryFields>
-    <SpacerField />
 
     <!-- TODO: probably needs a different field, not `description` -->
     <CommentsField
       :fieldName="withListingPrefix('description')"
       :value="listing.description"
+      class="mt-2"
     />
 
     <SubmitButton />

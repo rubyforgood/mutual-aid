@@ -9,6 +9,7 @@ describe('Offer', () => {
     propsData: {
       submission: $submission,
       configuration: {
+        categories: [],
         contact_methods: $contact_methods,
         service_areas: $service_areas,
       },

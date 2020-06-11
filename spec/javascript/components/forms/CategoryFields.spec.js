@@ -18,50 +18,53 @@ describe('CategoryFields', () => {
     }
   })
 
-  function isChecked(value) {
-    return $wrapper.find(`input[value="${value}"]`).element.checked
-  }
-
-  describe('top-level categories', () => {
-    def('categories', () => {
-      return [
-        {name: 'meals',   description: 'on wheels'},
-        {name: 'housing', description: 'is a human right'},
+  def('categories', () => {
+    return [{
+      id: 'meals',   // ids should be integers; using strings to make spec selectors more obvious
+      name: 'meals',
+      description: 'on wheels',
+      subcategories: [
+        {id: 'prepare', name: 'prepare'},
+        {id: 'deliver', name: 'deliver'}
       ]
-    })
-
-    def('tags', () => ['meals'])
-
-    it('renders checkboxes with selected tags checked', () => {
-      assert.isTrue(isChecked('meals'))
-      assert.isFalse(isChecked('housing'))
-    })
-
-    it('shows descriptions for checked categories', () => {
-      assert.include($wrapper.text(), 'on wheels')
-      assert.notInclude($wrapper.text(), 'is a human right')
-    })
+    }, {
+      id: 'housing',
+      name: 'housing',
+      description: 'is a human right',
+      subcategories: [],
+    }]
   })
 
-  describe('with subcategories', () => {
-    def('categories', () => {
-      return [{
-        name: 'meals',
-        subcategories: [
-          {name: 'prepare'},
-          {name: 'deliver'},
-        ],
-      }]
-    })
+  def('tags', () => {
+    return [
+      'meals',
+      'prepare',
+    ]
+  })
 
-    def('tags', () => ['meals', 'prepare'])
+  it('renders accordions for each parent category', () => {
+    assert($wrapper.contains('.collapse#collapse-housing'))
+    assert($wrapper.contains('.collapse#collapse-meals'))
+  })
 
-    it('renders checkboxes for selected subcategories', () => {
-      assert.isTrue(isChecked('meals'))
-      assert.isTrue(isChecked('prepare'))
-      assert.isFalse(isChecked('deliver'))
+  it('opens accordions containing selected subcategories', () => {
+    assert.equal($wrapper.get('#collapse-content-meals').attributes('aria-expanded'), 'true')
+    assert.equal($wrapper.get('#collapse-content-housing').attributes('aria-expanded'), undefined)
+  })
+
+  it('sets a hidden input field for each parent category based on whether any subcategories are selected', () => {
+    assert.isTrue($wrapper.contains('input[type="hidden"][value="meals"]'))
+    assert.isFalse($wrapper.contains('input[type="hidden"][value="housing"]'))
+  })
+
+  it('renders checkboxes for each subcategory, with selected ones checked', () => {
+    assert.isTrue($wrapper.get(`input[value="prepare"]`).element.checked)
+    assert.isFalse($wrapper.get(`input[value="deliver"]`).element.checked)
+  })
+
+  describe('when a parent category has no subcategories', () => {
+    it('renders a checkbox with the same name as the parent', () => {
+      assert($wrapper.contains('input[value="housing"]'))
     })
   })
 })
-
-

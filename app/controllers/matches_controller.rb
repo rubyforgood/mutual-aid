@@ -2,16 +2,16 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:edit, :update, :destroy]
 
   def index
-    @statuses = Match::STATUSES.map{|s| [s.titleize, s]}
     @matches = Match.status(params[:status] || "all").order(updated_at: :desc)
 
     # follow_up_status filter
+    @statuses = Match::STATUSES.map{|s| [s.titleize, s]}
     if params[:follow_up_status].present?
       @matches = @matches.follow_up_status(params[:follow_up_status])
     end
 
-    @people = Person.all.map{ |p| [p.name, p.id] }.sort_by(&:first)
     # connected_to_person_id filter
+    @people = Person.all.map{ |p| [p.name, p.id] }.sort_by(&:first)
     if params[:connected_to_person_id].present?
       person = Person.find(params[:connected_to_person_id])
       @matches = @matches.connected_to_person_id(person)

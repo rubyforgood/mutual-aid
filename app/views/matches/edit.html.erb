@@ -57,10 +57,11 @@
             </div>
           </div>
 
-          <!--communications with person who is NOT currently associated-->
+          <!--communications with anyone who is NOT currently associated-->
           <% prior_connection_communication_logs = @communication_logs.where.not(person: [provider_person, receiver_person]) %>
           <% if prior_connection_communication_logs.any? %>
-            <div class="has-text-weight-bold">Communication history with other people previously connected to this match:</div>
+            <hr>
+            <div class="has-text-weight-bold">Communication with others previously connected to this Match:</div>
             <br>
             <ul>
               <% prior_connection_communication_logs.order(sent_at: :desc).where(match: @match).each do |log| %>

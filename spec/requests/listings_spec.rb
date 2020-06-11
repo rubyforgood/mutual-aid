@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "/listings", type: :request do
-  # TODO - get these working again once ListingsController#index -> ContributionsController#index
   let(:valid_attributes) {{
     location_attributes: {zip: "12345"},
     tag_list: ["", "cash"],
@@ -18,7 +17,7 @@ RSpec.describe "/listings", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      create(:listing)
+      Listing.create! valid_attributes
       get listings_url
       expect(response).to be_successful
     end
@@ -82,6 +81,8 @@ RSpec.describe "/listings", type: :request do
     before { get new_listing_url }
 
     it "renders a successful response" do
+      @listing = Listing.new valid_attributes
+      get new_listing_url
       expect(response).to be_successful
     end
 
@@ -93,7 +94,7 @@ RSpec.describe "/listings", type: :request do
 
   describe "GET /edit" do
     it "render a successful response" do
-      listing = create(:listing)
+      listing = Listing.create! valid_attributes
       get edit_listing_url(listing)
       expect(response).to be_successful
     end
@@ -102,15 +103,13 @@ RSpec.describe "/listings", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Listing and Location" do
-        pending "relationship between contribution form and addresses is tbd"
         expect {
           post listings_url, params: { listing: valid_attributes }
         }.to  change(Listing, :count).by(1)
-         .and change(Location, :count).by(1)
+                  .and change(Location, :count).by(1)
       end
 
       it "redirects to the created listing" do
-        pending "relationship between contribution form and addresses is tbd"
         post listings_url, params: { listing: valid_attributes }
         expect(response).to redirect_to(listing_url(Listing.last))
       end
@@ -136,34 +135,37 @@ RSpec.describe "/listings", type: :request do
     context "with valid parameters" do
       let(:new_street_address) { Faker::Address.street_address }
       let(:new_attributes) {{
-        location_attributes: {street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI')},
+          location_attributes: {street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI')},
       }}
 
       before do
         #patch listing_url(listing), params: { listing: new_attributes }
       end
-
       it "updates the requested listing" do
-        pending "relationship between contribution form and addresses is tbd"
-        expect(listing.reload.location.street_address).to eq(new_street_address)
+        listing = Listing.create! valid_attributes
+        patch listing_url(listing), params: { listing: new_attributes }
+        listing.reload
+        skip("Add assertions for updated state")
       end
 
       it "redirects to the listing" do
-        pending "relationship between contribution form and addresses is tbd"
+        listing = Listing.create! valid_attributes
+        patch listing_url(listing), params: { listing: new_attributes }
+        listing.reload
         expect(response).to redirect_to(listing_url(listing))
       end
     end
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        pending "relationship between contribution form and addresses is tbd"
+        listing = Listing.create! valid_attributes
         patch listing_url(listing), params: { listing: invalid_attributes }
         expect(response).to be_successful
       end
     end
   end
 
-  pending "DELETE /destroy" do
+  describe "DELETE /destroy" do
     it "destroys the requested listing" do
       listing = Listing.create! valid_attributes
       expect {

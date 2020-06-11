@@ -179,7 +179,7 @@ RSpec.describe SubmissionForm do
   end
 
   describe 'updating an existing submission' do
-    let(:existing_listing)  { create :offer, state: :received, description: 'keep' }
+    let(:existing_listing)  { create :offer, state: :unmatched, description: 'keep' }
     let(:existing_location) { create :location, city: 'Chicago', zip: '10101' }
     let(:existing_person)   { create :person, location: existing_location, name: 'old name', email: 'keep@me.org' }
 
@@ -196,7 +196,7 @@ RSpec.describe SubmissionForm do
       service_area: existing_listing.service_area.id,
       listing_attributes: {
         id: existing_listing.id,
-        state: 'fulfilled',
+        state: 'matched',
       },
       location_attributes: {
         id: existing_location.id,
@@ -225,7 +225,7 @@ RSpec.describe SubmissionForm do
     end
 
     it 'applies new values to submission and nested objects' do
-      expect(submission.listings.first.state).to eq 'fulfilled'
+      expect(submission.listings.first.state).to eq 'matched'
       expect(submission.person.location.city).to eq 'Shikaakwa'
       expect(submission.person.name).to eq 'new name'
       expect(submission.form_name).to eq 'Ask_form'

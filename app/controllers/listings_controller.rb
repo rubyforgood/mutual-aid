@@ -2,17 +2,32 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
 
   def index
-    @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
-    filter = BrowseFilter.new(filter_params, self)
-    @contributions = ContributionBlueprint.render(filter.contributions, **filter.options)
-    respond_to do |format|
-      format.html
-      format.json { render inline: @contributions }
-    end
-  end
-
-  def listings_index
     @listings = Listing.all
+
+    # contribution_type filter
+    @contribution_types = Contribution::TYPES.map(&:to_s)
+    if params[:contribution_type].present? && @contribution_types.include?(params[:contribution_type])
+      @listings = @listings.public_send(params[:contribution_type].downcase.pluralize)
+    end
+
+    # follow_up_status filter
+    @match_statuses = Listing::MATCH_STATUSES.map{|s| [s.titleize, s]}
+    if params[:match_status].present?
+      @listings = @listings.match_status(params[:match_status])
+    end
+
+    # connected_to_person_id filter
+    @people = Person.all.map{ |p| [p.name, p.id] }.sort_by(&:first)
+    if params[:person_id].present?
+      person_id = Person.find(params[:person_id])&.id # verify the person is in the db
+      @listings = @listings.person_id(person_id)
+    end
+
+    # created_on filter
+    @dates = Listing.order(created_at: :desc).pluck(:created_at).map(&:to_date).uniq
+    if params[:created_on].present?
+      @listings = @listings.created_on(params[:created_on])
+    end
   end
 
   def match

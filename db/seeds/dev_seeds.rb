@@ -231,7 +231,7 @@ Listing.all.each do |listing|
                    body: listing.to_json).create!
   listing.submission = submission
   matches = listing.ask? ? listing.matches_as_receiver : listing.matches_as_provider
-  listing.state = matches.any? ? "fulfilled" : "received"
+  listing.state = matches.any? ? "matched" : "unmatched"
   listing.save!
 end
 

@@ -1,0 +1,39 @@
+<div class="columns">
+  <div class="column is-12">
+    <div class="title">Dispatch Steps</div>
+    <hr>
+  </div>
+</div>
+
+<div class="row columns">
+  <div class="columns column is-12">
+    <div class="column is-12">
+      <ol>
+        <li>
+          View unmatched <%= link_to "Contributions", contributions_path %>
+          <ul style="padding-left: 2em;">
+            <ul style="list-style-type: circle !important">
+              <li>Select a Contribution (Ask or Offer) and click <%= link_to "Respond", respond_contribution_path(Ask.last) %></li>
+              <li>Triage (edit details), if needed</li>
+              <li>Create tentative Match</li>
+              <li>Log Communications w pair</li>
+              <li>Edit Match status</li>
+              <li>Save Contribution</li>
+            </ul>
+          </ul>
+        </li>
+
+        <li>
+          View <%= link_to "Matches", matches_path %> index
+          <ul style="padding-left: 2em;">
+            <ul style="list-style-type: circle !important">
+              <li>Filter to find Matches that "Need followup"</li>
+              <li>Edit/log Communications</li>
+              <li>Connect/claim, if desired</li>
+            </ul>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

@@ -15,6 +15,9 @@ class AdminController < ApplicationController
     @community_resources_pending_count = CommunityResource.pending_review.length
   end
 
+  def dispatch_steps
+  end
+
   def glossary
   end
 

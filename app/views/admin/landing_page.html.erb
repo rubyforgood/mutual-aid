@@ -52,9 +52,9 @@
       <%= link_to "Org chart", org_chart_path %>
     </div>
     <div class="column is-4">
-      <%= link_to "Review pending Community Resources", community_resources_path(is_approved: false) %> <span class="tag"><%= @announcements_pending_count %></span>
+      <%= link_to "Manage Community Resources", community_resources_path(is_approved: false) %> <span class="tag"><%= @announcements_pending_count %></span>
       <br>
-      <%= link_to "Review pending Announcements", announcements_path(is_approved: false) %> <span class="tag"><%= @community_resources_pending_count %></span>
+      <%= link_to "Manage Announcements", announcements_path(is_approved: false) %> <span class="tag"><%= @community_resources_pending_count %></span>
       <br>
       <%= link_to "Manage Volunteers", volunteer_admin_path %>
     </div>

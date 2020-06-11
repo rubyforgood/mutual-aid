@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   get "/admin",                    to: "admin#landing_page",    as: "landing_page_admin"
   get "/admin/volunteers",         to: "admin#volunteer_admin", as: "volunteer_admin"
-  get "/glossary",                 to: "admin#glossary",        as: "glossary_admin"
-  get "/yearbook",                 to: "admin#yearbook",        as: "yearbook_admin"
+  get "/admin/dispatch",           to: "admin#dispatch_steps",  as: "dispatch_steps_admin"
+  get "/admin/glossary",           to: "admin#glossary",        as: "glossary_admin"
+  get "/admin/yearbook",           to: "admin#yearbook",        as: "yearbook_admin"
 
   get "/public",                   to: "public_pages#landing_page",        as: "landing_page_public"
   get "/about",                    to: "public_pages#about",               as: "about_public"
@@ -28,6 +29,9 @@ Rails.application.routes.draw do
   resources :contributions, only: [:index] do
     member do
       get "/respond", to: "contributions#respond", as: "respond"
+      get "/triage", to: "contributions#triage", as: "triage"
+      patch "/triage", to: "contributions#triage_update"
+      post "/triage", to: "contributions#triage_update"
     end
   end
   resources :custom_form_questions

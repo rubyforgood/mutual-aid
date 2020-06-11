@@ -29,6 +29,7 @@
       <%= f.label :body, class: "label" %>
       <%= f.object.body&.html_safe || "-- Empty --" %>
     <% else %>
+      <%= f.input :subject, label: "Summary/title (45 chars)", input_html: { maxlength: 45 } %>
       <%= f.input :body, as: :text,
                   label: "Notes (if re a match, use this for notes re ONE CATEGORY only! create a new <a href='/asks/new?person_id=#{@person&.id}'> Ask
                     </a> or <a href='/offers/new?person_id=#{@person&.id}'> Offer

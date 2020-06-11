@@ -8,14 +8,15 @@ module ApplicationHelper
     "<span class='#{ boolean ? "fa fa-check-circle has-text-success" : "fa fa-ban" }'></span>".html_safe
   end
 
-  def edit_button(resource, button_text="Edit", icon_class="fa fa-edit", button_text_class=nil, button_class=nil, params={})
+  def edit_button(resource, button_text="Edit", icon_class="fa fa-edit",
+                  button_text_class=nil, button_class=nil, params={}, button_title=nil, path=nil)
     if resource
       resource_class = resource.class
       if resource_class.superclass != ApplicationRecord
         resource = resource.becomes(resource.class.superclass)
       end
-      link_to(edit_polymorphic_path(resource, params),
-              title: action_name || button_text + " " + controller_path || resource_class.to_s,
+      link_to(path.present? ? "#{path}?#{params}" : edit_polymorphic_path(resource, params),
+              title: button_title || (action_name || button_text + " " + controller_path || resource_class.to_s),
               class: "button edit-button #{button_class}") do
         "<span class='#{icon_class}'></span><span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
       end
@@ -31,6 +32,18 @@ module ApplicationHelper
             title: action_name || button_text + " " + controller_path || resource_class.to_s,
             class: "button show-button #{margin_class}") do
       "<span class='#{icon_class}'></span><span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
+    end
+  end
+
+  def triage_button(resource)
+    resource_class = resource.class
+    if resource_class != Person && (resource_class.superclass != ApplicationRecord)
+      resource = resource.becomes(resource.class.superclass)
+    end
+    link_to(triage_contribution_path(resource),
+            title: "Triage/edit",
+            class: "button triage-button is-primary") do
+      "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage/edit</span>".html_safe
     end
   end
 

@@ -35,7 +35,7 @@ class Person < ApplicationRecord
   end
 
   def match_history
-    "#{asks.matched.length}/#{asks.length} asks matched, #{offers.matched.length}/#{offers.length} offers matched"
+    "#{asks.matched.length} out of #{asks.length} Asks matched, and, #{offers.matched.length} out of #{offers.length} Offers matched"
   end
 
   def all_tags_unique

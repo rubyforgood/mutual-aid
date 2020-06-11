@@ -1,15 +1,30 @@
-<strong>Communication history with <%= person&.name %><%= " re this match" if @match.present? %>:</strong>
-<br><br>
 <ul>
-  <% communication_logs = @communication_logs.where(person: person) %>
-  <% if communication_logs.any? %>
-    <% communication_logs.order(sent_at: :desc).each do |log| %>
+  <strong>Communications with <%= person&.name %><%= " re this Match" if @match.present? %>:</strong>
+  <br><br>
+  <% match_communication_logs = @communication_logs.where(person: person) %>
+  <% pre_match_communication_logs = person.communication_logs.where(match_id: nil) %>
+
+  <% if match_communication_logs.any? %>
+    <% match_communication_logs.order(sent_at: :desc).each do |log| %>
       <% delivery_status = " [#{log.delivery_status}] " %>
       <% icon = "<span class='#{log.needs_follow_up? ? 'fa fa-exclamation-circle has-text-warning' : 'fa fa-circle has-text-white'}'></span>" %>
       <% short_name = "#{icon} #{shorthand_display(log.sent_at)}#{delivery_status} - #{log.subject}" %>
-      <li><%= edit_button(log, short_name, log.delivery_method.icon_class || "fa fa-telegram") %></li>
+      <li><%= edit_button(log, short_name, log.delivery_method.icon_class || "fa fa-telegram", nil, nil, contribution_id: @contribution&.id) %></li>
     <% end %>
-  <% else %>
+  <% elsif pre_match_communication_logs.none? %>
     (No communications are logged)
+  <% end %>
+
+  <% if @match.present? %>
+    <strong>Other Communications with <%= person&.name %>:</strong>
+    <br><br>
+    <% if match_communication_logs.any? %>
+      <% pre_match_communication_logs.order(sent_at: :desc).each do |log| %>
+        <% delivery_status = " [#{log.delivery_status}] " %>
+        <% icon = "<span class='#{log.needs_follow_up? ? 'fa fa-exclamation-circle has-text-warning' : 'fa fa-circle has-text-white'}'></span>" %>
+        <% short_name = "#{icon} #{shorthand_display(log.sent_at)}#{delivery_status} - #{log.subject}" %>
+        <li><%= edit_button(log, short_name, log.delivery_method.icon_class || "fa fa-telegram", nil, nil, contribution_id: @contribution&.id) %></li>
+      <% end %>
+    <% end %>
   <% end %>
 </ul>

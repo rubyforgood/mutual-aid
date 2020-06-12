@@ -1,4 +1,10 @@
-<div id="navBar"></div>
+<% no_navbar = action_name == "new" && (Contribution::TYPES.map{|i| i.to_s.pluralize.downcase} + ["community_resources", "announcements"]).include?(controller_name) %>
+<% no_navbar = no_navbar || (action_name == "thank_you" && controller_name == "contributions") %>
+
+<% unless no_navbar %>
+  <div id="navBar"></div>
+<% end %>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     EntryPoints.navBar('#navBar', {

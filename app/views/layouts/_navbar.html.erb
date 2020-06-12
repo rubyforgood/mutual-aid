@@ -1,7 +1,17 @@
-<% no_navbar = action_name == "new" && (Contribution::TYPES.map{|i| i.to_s.pluralize.downcase} + ["community_resources", "announcements"]).include?(controller_name) %>
-<% no_navbar = no_navbar || (action_name == "thank_you" && controller_name == "contributions") %>
+<% if (["asks", "offers", "community_resources", "announcements"].include?(controller_name) && action_name == "new") ||
+     (action_name == "thank_you" && controller_name == "contributions") ||
+    (controller_name == "public_pages" && ["announcements", "community_resources"].include?(action_name))
+%>
+  <% hide_navbar = true %>
+<% else %>
+  <% hide_navbar = false %>
+<% end %>
 
-<% unless no_navbar %>
+<% if hide_navbar && current_user %>
+  <div class="has-text-centered">
+    <%= link_to "Return to admin", landing_page_admin_path, class: "button is-primary is-outlined" %>
+  </div>
+<% else %>
   <div id="navBar"></div>
 <% end %>
 

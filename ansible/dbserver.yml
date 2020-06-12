@@ -1,0 +1,12 @@
+---
+- hosts: database
+  become: yes
+  vars_files:
+      - vars/main.yml
+  pre_tasks:
+  - name: install pg dependencies
+    apt:
+      pkg:
+        - python-psycopg2
+  roles:
+        - geerlingguy.postgresql

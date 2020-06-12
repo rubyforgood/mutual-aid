@@ -1,0 +1,5 @@
+---
+# this is the top level playbook
+# to deploy the whole mutualaid infrastructure. 
+- import_playbook: dbserver.yml
+- import_playbook: appserver.yml

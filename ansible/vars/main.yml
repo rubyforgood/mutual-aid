@@ -1,0 +1,24 @@
+postgresql_databases:
+  - name: mutualaid
+    owner: "{{ ansible_ssh_user }}"
+  - name: mutualaid_development
+    owner: "{{ ansible_ssh_user }}"
+  - name: mutualaid_test
+    owner: "{{ ansible_ssh_user }}"
+postgresql_users:
+  - name: "{{ ansible_ssh_user }}"
+    password: change_this_asap
+postgresql_hba_entries:
+  - { type: local, database: all, user: postgres, auth_method: peer }
+  - {type: host, database: all,  user: "{{ ansible_ssh_user }}", address: '127.0.0.1/32', auth_method: md5}
+  - {type: host, database: all,  user: "{{ ansible_ssh_user }}", address: '::1/128', auth_method: md5}
+  - {type: local, database: all, user: "{{ ansible_ssh_user }}", auth_method: md5}
+postgresql_service_state: started
+postgresql_service_enabled: true
+postgres_users_no_log: false
+ruby_install_from_source: true
+ruby_download_url: https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0.tar.bz2
+ruby_version: 2.7.0
+nodejs_npm_global_packages:
+  - name: yarn
+npm_config_prefix: "/home/{{ ansible_ssh_user}}/npm"

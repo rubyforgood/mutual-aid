@@ -46,7 +46,7 @@ export default {
     fetcher: {
       type: Object,
       default: () => {
-        return new ContributionFetcher('/listings.json?')
+        return new ContributionFetcher('/contributions.json?')
       },
     },
   },

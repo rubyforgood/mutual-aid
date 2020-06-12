@@ -1,7 +1,7 @@
 import {assert} from 'chai'
 import {mount} from '@vue/test-utils'
 import ListBrowser from 'pages/browse/ListBrowser'
-import testData from '../../../../lib/listings.json'
+import testData from '../../../../lib/contributions.json'
 
 describe('ListBrowser', () => {
   it('works with reasonable data', function () {

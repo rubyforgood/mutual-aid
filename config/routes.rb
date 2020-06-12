@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get "/admin",                    to: "admin#landing_page",    as: "landing_page_admin"
+  get "/admin/forms",              to: "admin#form_admin",      as: "form_admin"
   get "/admin/volunteers",         to: "admin#volunteer_admin", as: "volunteer_admin"
   get "/admin/dispatch",           to: "admin#dispatch_steps",  as: "dispatch_steps_admin"
   get "/admin/glossary",           to: "admin#glossary",        as: "glossary_admin"

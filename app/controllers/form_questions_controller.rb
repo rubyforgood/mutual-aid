@@ -51,7 +51,7 @@ class FormQuestionsController < ApplicationController
   end
 
   def set_form_dropdowns
-    @custom_form_question_questions = CustomFormQuestionQuestion.all
+    @custom_form_question_questions = CustomFormQuestion.all
     @form_questions = FormQuestion.all
   end
 

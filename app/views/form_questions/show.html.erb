@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/view_header", resource: @form_question %>
 
 <p>
   <strong>Form:</strong>
-  <%= @form_question.form_id %>
+  <%= @form_question.form.name %>
 </p>
 
 <p>
   <strong>Custom form question:</strong>
-  <%= @form_question.custom_form_question_id %>
+  <%= @form_question.custom_form_question.name %>
 </p>
 
-<%= link_to 'Edit', edit_form_question_path(@form_question) %> |
+<%= edit_button(@form_question) %>
 <%= link_to 'Back', form_questions_path %>

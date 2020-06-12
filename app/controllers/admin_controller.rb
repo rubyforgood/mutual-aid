@@ -18,6 +18,9 @@ class AdminController < ApplicationController
   def dispatch_steps
   end
 
+  def form_admin
+  end
+
   def glossary
   end
 

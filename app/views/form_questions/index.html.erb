@@ -1,29 +1,21 @@
-<div class="columns is-marginless">
-  <div class="column is-9">
-    <h1 class="title">Form Questions</h1>
-    <br>
-  </div>
-  <div class="column is-2">
-    <%= render "layouts/view_add_new_button", table_name: form_questions %>
-  </div>
-</div>
+<%= render "layouts/view_header", resource: @form_questions.first %>
 
 <table class="table table-hover table-curved table-condensed">
   <thead>
-  <tr>
-          <th>Form</th>
-          <th>Custom form question</th>
-        <th>Edit</th>
-  </tr>
+    <tr>
+      <th>Form</th>
+      <th>Custom form question</th>
+      <th>Edit</th>
+    </tr>
   </thead>
 
   <tbody>
-  <% @form_questions.each do |form_question| %>
-    <tr>
-              <td><%= form_question.form_id %></td>
-              <td><%= form_question.custom_form_question_id %></td>
-            <td><%= link_to 'Edit', edit_form_question_path(form_question) %></td>
-    </tr>
-  <% end %>
+    <% @form_questions.each do |form_question| %>
+      <tr>
+        <td><%= form_question.form.name %></td>
+        <td><%= form_question.custom_form_question.name %></td>
+        <td><%= edit_button(form_question) %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

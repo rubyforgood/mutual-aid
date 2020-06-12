@@ -26,8 +26,13 @@ class Listing < ApplicationRecord
   scope :asks, ->(){ where(type: Ask.to_s) }
   scope :offers, ->(){ where(type: Offer.to_s) }
   scope :created_on, ->(created_on){ where("created_at::date = ?", created_on) }
+  scope :location_id, ->(location_id){ where(location_id: location_id.to_i) }
   scope :match_status, ->(match_status){ where(state: match_status.to_s) }
   scope :person_id, ->(person_id){ where(person_id: person_id.to_i) }
+  scope :service_area_name, ->(service_area_name){ includes(service_area: :mobility_string_translations).
+      references(:mobility_string_translations).
+      where("mobility_string_translations.value = ?", service_area_name.to_s)
+  }
 
   def self.all_tags_unique(collection)
     collection ||= all

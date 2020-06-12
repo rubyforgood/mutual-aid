@@ -11,7 +11,7 @@
   <div class="has-text-centered">
     <%= link_to "Return to admin", landing_page_admin_path, class: "button is-primary is-outlined" %>
   </div>
-<% else %>
+<% elsif !hide_navbar %>
   <div id="navBar"></div>
 <% end %>
 

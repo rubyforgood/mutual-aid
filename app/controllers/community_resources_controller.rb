@@ -3,6 +3,8 @@ class CommunityResourcesController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_community_resource, only: [:show, :edit, :update, :destroy]
 
+  layout "without_navbar", only: [:new, :create, :show]
+
   def index
     @community_resources = CommunityResource.includes(:organization).references(:organization).order(created_at: :desc)
   end

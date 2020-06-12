@@ -3,6 +3,8 @@ class AnnouncementsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 
+  layout "without_navbar", only: [:new, :create, :show]
+
   def index
     @announcements = Announcement.order(created_at: :desc)
   end

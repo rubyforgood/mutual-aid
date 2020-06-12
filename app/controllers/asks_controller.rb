@@ -1,4 +1,6 @@
 class AsksController < PublicController
+  layout "without_navbar", only: [:new]
+
   def index
     redirect_to contributions_path
   end

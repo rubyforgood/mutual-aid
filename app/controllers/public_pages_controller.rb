@@ -1,4 +1,5 @@
 class PublicPagesController < PublicController
+  layout "without_navbar", only: [:announcements, :community_resources]
 
   def about
     @about_us_text = @system_setting.about_us_text

@@ -1,20 +1,4 @@
-<% if (["asks", "offers", "community_resources", "announcements"].include?(controller_name) && action_name == "new") ||
-     (action_name == "thank_you" && controller_name == "contributions") ||
-    (controller_name == "public_pages" && ["announcements", "community_resources"].include?(action_name))
-%>
-  <% hide_navbar = true %>
-<% else %>
-  <% hide_navbar = false %>
-<% end %>
-
-<% if hide_navbar && current_user %>
-  <div class="has-text-centered">
-    <%= link_to "Return to admin", landing_page_admin_path, class: "button is-primary is-outlined" %>
-  </div>
-<% elsif !hide_navbar %>
-  <div id="navBar"></div>
-<% end %>
-
+<div id="navBar"></div>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     EntryPoints.navBar('#navBar', {

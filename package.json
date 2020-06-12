@@ -1,6 +1,7 @@
 {
   "name": "mutualaid",
   "private": true,
+  "version": "0.1.0",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@rails/ujs": "^6.0.0",
@@ -18,7 +19,6 @@
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.43.0"
   },
-  "version": "0.1.0",
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.33",
     "bdd-lazy-var": "^2.5.4",
@@ -29,13 +29,14 @@
     "mocha-junit-reporter": "^1.23.3",
     "mochapack": "^1.1.15",
     "prettier": "2.0.5",
+    "release-it": "^13.6.2",
     "sinon": "9.0.2",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
+    "release": "release-it",
     "test": "mochapack --webpack-config config/webpack/test.js --require spec/javascript/setup.js --colors -u bdd-lazy-var/global 'spec/javascript/**/*.spec.js'"
   }
 }
-

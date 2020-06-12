@@ -10,6 +10,7 @@
       <th>Type</th>
       <th>Title</th>
       <th>Person</th>
+      <th>Service Area</th>
       <th>Created at</th>
       <th>Match Status</th>
       <th>Respond</th>
@@ -25,6 +26,7 @@
         <td><span class="<%= listing.icon_class %>"></span> <%= listing.type %></td>
         <td><%= listing.title %></td>
         <td><%= listing.person&.name %></td>
+        <td><%= listing.service_area&.name %></td>
         <td><%= shorthand_display(listing.created_at) %></td>
         <td>
           <span class="tag <%= listing.status == "unmatched" ? "is-warning" : "is-primary" %>">

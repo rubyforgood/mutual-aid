@@ -16,7 +16,7 @@ class ListingsController < ApplicationController
       @listings = @listings.match_status(params[:match_status])
     end
 
-    # connected_to_person_id filter
+    # person_id filter
     @people = Person.all.map{ |p| [p.name, p.id] }.sort_by(&:first)
     if params[:person_id].present?
       person_id = Person.find(params[:person_id])&.id # verify the person is in the db
@@ -27,6 +27,17 @@ class ListingsController < ApplicationController
     @dates = Listing.order(created_at: :desc).pluck(:created_at).map(&:to_date).uniq
     if params[:created_on].present?
       @listings = @listings.created_on(params[:created_on])
+    end
+
+    # location_id filter
+    if params[:location_id].present?
+      @listings = @listings.location_id(params[:location_id])
+    end
+
+    # service_area filter
+    @service_area_names = ServiceArea.order(:name).map(&:name)
+    if params[:service_area_name].present?
+      @listings = @listings.service_area_name(params[:service_area_name])
     end
   end
 

@@ -15,6 +15,10 @@
                        options_for_select(@contribution_types || [], selected: params[:contribution_type]),
                        include_blank: "-- Type --",
                        class: 'input select optional' %>
+        <%= select_tag :service_area_name,
+                       options_for_select(@service_area_names || [], selected: params[:service_area_name]),
+                       include_blank: "-- Service area --",
+                       class: 'input select optional' %>
         <%= select_tag :person_id,
                        options_for_select(@people || [], selected: params[:person_id]),
                        include_blank: "-- Created by --",

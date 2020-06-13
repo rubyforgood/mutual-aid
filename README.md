@@ -209,6 +209,17 @@ within it. This allows for any unexpected state data of the user from hanging ar
     - `rake db:import_user_seeds` (runs the db/scripts/user_seeds.rb file)
     - `rake db:import_custom_form_question_seeds` (runs the db/scripts/custom_form_question_seeds.rb file)
 
+* To load your data
+  - Use the templates provided in `db/seeds/public_template_csvs` to get your data formatted
+  - Save copies in `db/seeds/gitignored_csvs` (or keep them in your local dir)
+  - Edit `db/scripts/submission_response_seeds_gitignored_csvs` script to call your files
+  - Run `rails runner -e development db/scripts/submission_response_seeds_gitignored_csvs.rb`
+    - If you get this error:
+      - ```Running via Spring preloader in process 13613
+         Please specify a valid ruby command or the path of a script to run.
+         Run 'rails runner -h' for help.```
+      - Run `spring stop` and try again
+
 # Deploying the app
 ## If you decide to deploy to Heroku:
 * [Heroku Command Line Interface](https://devcenter.heroku.com/categories/command-line)

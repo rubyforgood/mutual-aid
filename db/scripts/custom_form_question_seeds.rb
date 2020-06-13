@@ -1,3 +1,5 @@
+# run from the command line with:  rails runner  -e development db/scripts/custom_form_question_seeds.rb
+
 require 'csv'
 
 csv = 'custom_form_questions.csv' # TODO remove this explicit name

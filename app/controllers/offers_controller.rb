@@ -1,5 +1,5 @@
 class OffersController < PublicController
-  layout "without_navbar", only: [:new]
+  layout "without_navbar", only: [:new, :create]
 
   def index
     redirect_to contributions_path

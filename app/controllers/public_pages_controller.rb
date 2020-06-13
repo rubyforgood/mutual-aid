@@ -22,6 +22,5 @@ class PublicPagesController < PublicController
     @landing_page_text_who = @system_setting.landing_page_text_who
     @landing_page_text_how = @system_setting.landing_page_text_how
     @organization_name = Organization.current_organization.name
-    # @logo_url = @current_organization.logo_url
   end
 end

@@ -38,7 +38,6 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   end
 
   def process_headers_as_data(rows)
-    binding.pry
     rows.headers.each_with_index do |header_name, idx|
       if header_name # skip blank headers!
         puts header_name

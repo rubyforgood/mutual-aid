@@ -1,0 +1,9 @@
+<!--
+  Note: we use a single `.section` around <main> because most of our pages only need one.
+  The intention is to _not_ use `.section` anywhere else on the site. It's not designed
+  to be nested and it will be easier for us to use html <section> elements with some css
+  to give it vertical padding.
+-->
+<main class="section container">
+  <%= yield %>
+</main>

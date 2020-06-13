@@ -2,7 +2,7 @@
   <b-navbar fixed-top transparent shadow>
     <template slot="brand">
       <b-navbar-item href="/">
-        <img :src="$options.logo" alt="mutual-aid-app logo" height="300px">
+        <img :src="logoUrl || $options.defaultLogo" alt="mutual-aid-app logo" height="300px">
       </b-navbar-item>
     </template>
 
@@ -32,13 +32,14 @@
 </template>
 
 <script>
+import logo from 'images/logo.png'
 import {DeleteButton} from 'components/forms'
 import {FeedbackButton} from 'components/forms'
 
 export default {
   props: {
-    loggedIn: Boolean,
-    logo: logoUrl,
+    loggedIn: { type: Boolean, default: false },
+    logoUrl: { type: String },
   },
   components: {
     DeleteButton,
@@ -47,7 +48,9 @@ export default {
 
   pageUrl() {
     return window.location.href
-  }
+  },
+
+  defaultLogo: logo
 }
 </script>
 

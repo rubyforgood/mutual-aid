@@ -25,6 +25,6 @@ class CustomFormQuestion < ApplicationRecord
       "youtube_video_id" => "string_response",
   }
 
-  scope :name, ->(name) { joins(:mobility_string_translations).
+  scope :translated_name, ->(name) { joins(:mobility_string_translations).
       where("LOWER(mobility_string_translations.name) = ?", name) }
 end

@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -20,6 +21,7 @@ class PeopleController < ApplicationController
   end
 
   def edit
+    authorize @person
     unless @person.location
       @person.location = Location.new
     end
@@ -28,6 +30,8 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(person_params)
+    @person.user ||= current_user
+    authorize @person
 
     if @person.save
       redirect_to people_path, notice: 'Person was successfully created.'
@@ -38,6 +42,7 @@ class PeopleController < ApplicationController
   end
 
   def update
+    authorize @person
     if @person.update(person_params)
       redirect_to people_path, notice: 'Person was successfully updated.'
     else
@@ -47,6 +52,7 @@ class PeopleController < ApplicationController
   end
 
   def destroy
+    authorize @person
     @person.destroy
     redirect_to people_url, notice: 'Person was successfully destroyed.'
   end

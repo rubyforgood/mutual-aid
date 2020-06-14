@@ -30,10 +30,24 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def user_not_authorized(exception)
-   policy_name = exception.policy.class.to_s.underscore
+  
+  def user_not_authenticated(exception)
+    flash[:error] = "This requires authentication, please sign-in first."
+    respond_to do |format|
+      format.html { render 'devise/sessions/new.html.erb', :layout => "application", :status => 401 }
+      format.xml  { head 401 }
+      format.any  { head 401 }
+  end
 
-   flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
-   redirect_to(request.referrer || root_path)
+  def user_not_authorized(exception)
+    policy_name = exception.policy.class.to_s.underscore
+
+    flash[:error] = "Sorry, you're not authorized to do that."
+    Rails.logger.error "[UNAUTHORIZED] #{exception}. (#{policy_name}.#{exception.query})"
+    respond_to do |format|
+      format.html { render 'errors/403.html.erb', :layout => "application", :status => 403 }
+      format.xml  { head 403 }
+      format.any  { head 403 }
+    end
   end
 end

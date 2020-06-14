@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/maebeale/mutual-aid.svg?style=svg)](https://circleci.com/gh/maebeale/mutual-aid)
+
 # Who we are:
 
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.

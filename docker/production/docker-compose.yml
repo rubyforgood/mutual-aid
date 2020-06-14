@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.4'
 
 volumes:
   db:
@@ -11,13 +11,13 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: mat
+      POSTGRES_DB: mutualaidtompkins
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
   app:
     build:
       context: ../..
-      dockerfile: ./docker/development/app/Dockerfile
-      args:
-        APP_PORT: 3000
+      dockerfile: ./docker/production/app/Dockerfile
     ports:
       - target: 3000
         published: 3000
@@ -26,6 +26,9 @@ services:
     environment:
       RAILS_ENV: production
       POSTGRES_HOST: db
+      POSTGRES_USER: mat
+      POSTGRES_DB: mutualaidtompkins
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       # You can set this by running
       # rake secret
       # The resulting key should be placed in a .env file
@@ -33,12 +36,17 @@ services:
       # docker-compose up --build -e SECRET_KEY_BASE=...
       # Otherwise the database setup step will fail
       SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
+    volumes:
+      - "../../:/usr/src/app"
   caddy:
     image: caddy
     volumes:
-      - "/etc/Caddyfile:/etc/caddy/Caddyfile"
+      - "/root/.config/Caddyfile:/etc/caddy/Caddyfile"
       - "caddy_data:/data"
+      - "../../public:/config/public"
     ports:
       - 80:80
       - 443:443
     restart: always
+    depends_on:
+      - app

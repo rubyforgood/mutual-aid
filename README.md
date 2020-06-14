@@ -120,7 +120,8 @@ Then, to run the app locally,
 ```
 $ bundle install
 $ yarn install
-$ SYSTEM_EMAIL=example@example.com SYSTEM_PASSWORD=12345678 rake db:setup
+$ # in .env, add SYSTEM_EMAIL and SYSTEM_PASSWORD, or:
+$ SYSTEM_EMAIL=example@example.com SYSTEM_PASSWORD=12345678 rake db:rebuild_and_seed_dev
 $ rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
 ```
 

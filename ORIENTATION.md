@@ -19,7 +19,7 @@ Our team community norm: timing is difficult for everyone given the current unce
 
 * The groups we’re working with are "people first," and believe strongly in not referring to users as "offerers" or "askers," but instead the idea of seeing the whole person and their membership in the community as priority.
 
-## Holisitc approach
+## Holistic approach
 * Existing platforms (e.g. marketplaces and even mutual aid specific ones) seem to focus on the listings feature exclusively, whereas we want to offer integration with mutual aid group operations (administration, pod mapping, resource sharing, fewer logins, central point of access granted/denied, etc)
 
 ## Features

@@ -234,27 +234,27 @@ IP address of your server.
 2. After you've generated your deploy key and added it to your project, clone the project.
 3. Create a Caddyfile. It can live anywhere (Mutual Aid Tompkins has ours at `~/.config/Caddyfile`), and it should look like this, replacing `your.domain.name` with your organization's desired domain name:
 
-```
-your.domain.name {
-  header {
-    Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
-  }
+   ```
+   your.domain.name {
+     header {
+       Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
+     }
 
-  root * /config/public
+     root * /config/public
 
-  # Serve static files (like assets and packs) with the file_server
-  @static_files {
-    file
-  }
-  file_server @static_files
+     # Serve static files (like assets and packs) with the file_server
+     @static_files {
+       file
+     }
+     file_server @static_files
 
-  # Anything that's not a static file, proxy to puma/rails
-  @backend {
-    not file
-  }
-  reverse_proxy @backend http://app:3000
-}
-```
+     # Anything that's not a static file, proxy to puma/rails
+     @backend {
+       not file
+     }
+     reverse_proxy @backend http://app:3000
+   }
+   ```
 
 4. Navigate to the `docker/production` directory within your clone of the repo. You should see a file named `docker-compose.yml`.
 5. Run
@@ -265,19 +265,19 @@ your.domain.name {
    This will generate a secret token and add it to a file named `.env`, which will be available when
    `docker-compose` starts.
 6. Generate (using a password manager) a password for the Postgres database, and append it to the `.env` file. Your `.env` file should look something like:
-```bash
-SECRET_KEY_BASE=<A fairly long string of numbers>
-POSTGRES_PASSWORD=<your postgres password>
-```
+   ```bash
+   SECRET_KEY_BASE=<A fairly long string of numbers>
+   POSTGRES_PASSWORD=<your postgres password>
+   ```
 7. Start the server, database, and reverse proxy by running `docker-compose --build -d`
 8. Initialize the database with
-  ```bash
-  docker-compose run \
-    -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" \
-    -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" \
-    app rails db:prepare db:seed
-  ```
-  This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `docker-compose run app db:prepare` and create the account using the sign up option on the website. **Only run this command the first time you set up your instance**
+   ```bash
+   docker-compose run \
+     -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" \
+     -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" \
+     app rails db:prepare db:seed
+   ```
+   This will setup the database and create a default admin user with the email and password as  specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to  `docker-compose` with the `-e` option. If you don't want to create the default user, you can just  run `docker-compose run app db:prepare` and create the account using the sign up option on the  website. **Only run this command the first time you set up your instance**
 
 You should be good to go! Visit your domain name to get started.
 

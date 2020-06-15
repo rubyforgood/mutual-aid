@@ -85,10 +85,10 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV['POSTGRES_DB'] %>
-  username: <%= ENV['POSTGRES_USER'] %>
+  database: <%= ENV['POSTGRES_DB'] || mutualaid_production %>
+  username: <%= ENV['POSTGRES_USER'] || mutualaid%>
   password: <%= ENV['POSTGRES_PASSWORD'] %>
-  host: <%= ENV['POSTGRES_HOST'] %>
+  host: <%= ENV['POSTGRES_HOST'] || localhost %>
 
 docker-development:
   <<: *default

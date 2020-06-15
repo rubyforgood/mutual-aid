@@ -1,6 +1,7 @@
 version: '3.4'
 
 volumes:
+  public:
   db:
   caddy_data:
 
@@ -37,13 +38,13 @@ services:
       # Otherwise the database setup step will fail
       SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
     volumes:
-      - "../../:/usr/src/app"
+      - "public:/usr/src/app/public"
   caddy:
     image: caddy
     volumes:
       - "/root/.config/Caddyfile:/etc/caddy/Caddyfile"
       - "caddy_data:/data"
-      - "../../public:/config/public"
+      - "public:/config/public"
     ports:
       - 80:80
       - 443:443

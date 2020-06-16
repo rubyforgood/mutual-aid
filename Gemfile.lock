@@ -170,6 +170,7 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    rack-timeout (0.6.0)
     rails (6.0.2.2)
       actioncable (= 6.0.2.2)
       actionmailbox (= 6.0.2.2)
@@ -314,6 +315,7 @@ DEPENDENCIES
   pry
   pry-byebug
   puma (~> 4.3)
+  rack-timeout
   rails (~> 6.0.2, >= 6.0.2.2)
   reform-rails
   rspec-rails

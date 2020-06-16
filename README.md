@@ -223,6 +223,8 @@ within it. This allows for any unexpected state data of the user from hanging ar
 # Deploying the app
 ## If you decide to deploy to Heroku:
 * [Heroku Command Line Interface](https://devcenter.heroku.com/categories/command-line)
+* If you have HTTPS enabled (requires a paid dyno), be sure to enable `config.force_ssl = true` on line 47 of `config/environments/production.rb`
+
 ## If you decide to use Docker:
 
 _Note_: These instructions assume you are working with shell access to a system with Docker and docker-compose available (such as a Digital Ocean Docker image).

@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/maebeale/mutual-aid.svg?style=svg)](https://circleci.com/gh/maebeale/mutual-aid)
+
 # Who we are:
 
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
@@ -118,7 +120,8 @@ Then, to run the app locally,
 ```
 $ bundle install
 $ yarn install
-$ rake dev:setup
+$ # in .env, add SYSTEM_EMAIL and SYSTEM_PASSWORD, or:
+$ SYSTEM_EMAIL=example@example.com SYSTEM_PASSWORD=12345678 rake db:rebuild_and_seed_dev
 $ rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
 ```
 

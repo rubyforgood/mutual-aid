@@ -8,7 +8,7 @@
       <th>Email</th>
       <th>Phone</th>
       <th>Contact timeframe</th>
-      <th>Skills</th>
+<!--      <th>Skills</th>-->
       <th>Edit</th>
       <th>Profile</th>
       <th>Account</th>
@@ -18,16 +18,16 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
-        <td class="title is-5"><%= person.name %></td>
+        <td class="title is-5" style="white-space: nowrap"><%= person.name %></td>
         <td class="has-text-centered"><span class="<%= person.preferred_contact_method.icon_class %>"></span></td>
         <td><%= mail_to(person.email) %></td>
         <td><%= person.phone %></td>
         <td><%= person.preferred_contact_timeframe %></td>
-        <td>
-          <% person.skills && person.skills.split(/,\s*/).each do |skill| %>
-            <span class="tag"><%= skill %></span>
-          <% end %>
-        </td>
+<!--        <td>-->
+          <%# person.skills && person.skills.split(/,\s*/).each do |skill| %>
+<!--            <span class="tag"><%#= skill %></span>-->
+          <%# end %>
+<!--        </td>-->
         <td><%= edit_button(person, "") %></td>
         <td><%= show_button(person, "", "fa fa-user-circle") %></td>
         <td><%= edit_button(person.user, "", "fa fa-user-edit") if person.user_id %></td>

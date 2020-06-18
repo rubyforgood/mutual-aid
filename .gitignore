@@ -52,6 +52,11 @@ yarn-debug.log*
 .idea/sshConfigs.xml
 .idea/vcs.xml
 .idea/webServers.xml
+.idea/*
+*.iml
 
 # Ignore VSCode files
 .vscode*
+
+# Ignore vim swapfiles
+# .*.swp

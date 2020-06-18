@@ -57,3 +57,6 @@ yarn-debug.log*
 
 # Ignore VSCode files
 .vscode*
+
+# Ignore vim swapfiles
+# .*.swp

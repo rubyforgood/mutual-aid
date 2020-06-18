@@ -1,0 +1,65 @@
+---
+# once this playbook is run, 
+# you just need to make sure
+# your env vars, and config/database.yml are squared away
+# then you can start the rails app by
+# bundle exec rails server -p 3000 -b 0.0.0.0
+- hosts: app
+  become: yes
+  vars_files:
+  - vars/main.yml
+  # quick pre tasks the roles depend on. 
+  pre_tasks:
+  - name: install pg dependencies
+    apt:
+      pkg:
+        - libpq-dev
+  - name: add user group for node install
+    group:
+      name: '{{ ansible_ssh_user }}'
+      state: present
+  - name: add user to user group for node install
+    user:
+      name: '{{ ansible_ssh_user }}'
+      append: yes
+      groups: [ '{{ ansible_ssh_user }}' ]
+
+  # roles handle installation of ruby and node/yarn
+  roles:
+  - geerlingguy.ruby
+  - geerlingguy.nodejs
+
+
+  # tasks handle installation of the app
+  tasks:
+  - name: fetch mutualaid repo
+    git:
+      repo: 'https://github.com/maebeale/mutual-aid.git'
+      dest: /home/{{ ansible_ssh_user }}/mutual-aid
+  - name: adjust mutualaid repo permissions
+    file:
+      path: /home/{{ ansible_ssh_user }}/mutual-aid
+      recurse: yes
+      owner: '{{ ansible_ssh_user }}'
+  - name: bundle install
+    bundler:
+      state: present
+      chdir: /home/{{ ansible_ssh_user }}/mutual-aid
+  - name: yarn install
+    yarn:
+      executable: /home/{{ ansible_ssh_user }}/npm/bin/yarn
+      path: /home/{{ ansible_ssh_user }}/mutual-aid
+  - name: add yarn executable to PATH
+    copy:
+      dest: /etc/profile.d/yarn-path.sh
+      content: 'PATH=$PATH:/home/{{ ansible_ssh_user }}/npm/bin/yarn'
+  - name: copy database.yml to config
+    copy:
+      src: files/database.yml
+      dest: /home/{{ ansible_ssh_user }}/mutual-aid/config/database.yml
+      owner: '{{ ansible_ssh_user }}'
+  - name: copy .env over
+    copy:
+      src: files/.env
+      dest: /home/{{ ansible_ssh_user }}/mutual-aid/.env
+      owner: '{{ ansible_ssh_user }}'

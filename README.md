@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/maebeale/mutual-aid.svg?style=svg)](https://circleci.com/gh/maebeale/mutual-aid)
+
 # Who we are:
 
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
@@ -118,7 +120,8 @@ Then, to run the app locally,
 ```
 $ bundle install
 $ yarn install
-$ rake dev:setup
+$ # in .env, add SYSTEM_EMAIL and SYSTEM_PASSWORD, or:
+$ SYSTEM_EMAIL=example@example.com SYSTEM_PASSWORD=12345678 rake db:rebuild_and_seed_dev
 $ rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
 ```
 
@@ -208,6 +211,17 @@ within it. This allows for any unexpected state data of the user from hanging ar
     - `rake db:import_submission_response_seeds` (runs the db/scripts/submission_response_seeds.rb file -- you could edit this to pull from the db/seeds/gitignored_csvs path if you have a file you want to import)
     - `rake db:import_user_seeds` (runs the db/scripts/user_seeds.rb file)
     - `rake db:import_custom_form_question_seeds` (runs the db/scripts/custom_form_question_seeds.rb file)
+
+* To load your data
+  - Use the templates provided in `db/seeds/public_template_csvs` to get your data formatted
+  - Save copies in `db/seeds/gitignored_csvs` (or keep them in your local dir)
+  - Edit `db/scripts/submission_response_seeds_gitignored_csvs` script to call your files
+  - Run `rails runner -e development db/scripts/submission_response_seeds_gitignored_csvs.rb`
+    - If you get this error:
+      - ```Running via Spring preloader in process 13613
+         Please specify a valid ruby command or the path of a script to run.
+         Run 'rails runner -h' for help.```
+      - Run `spring stop` and try again
 
 # Deploying the app
 ## If you decide to deploy to Heroku:

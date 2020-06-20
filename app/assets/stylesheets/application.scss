@@ -1,3 +1,7 @@
+$fa-font-path: '.';
+
+@import './fontawesome/fontawesome';
+@import './fontawesome/solid';
 @import './bulma_and_buefy';
 
 @import './custom_spacing_helpers';

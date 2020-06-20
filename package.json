@@ -2,7 +2,6 @@
   "name": "mutualaid",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
     "@vue/composition-api": "^0.5.0",
@@ -38,4 +37,3 @@
     "test": "mochapack --webpack-config config/webpack/test.js --require spec/javascript/setup.js --colors -u bdd-lazy-var/global 'spec/javascript/**/*.spec.js'"
   }
 }
-

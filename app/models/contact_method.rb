@@ -8,6 +8,10 @@ class ContactMethod < ApplicationRecord
   scope :method_name, -> (method_name){ where arel_table[:name].lower.eq(method_name) }
   scope :sample_one, -> { order(Arel.sql('RANDOM()')).first }
 
+  def self.map_common_names_to_fields(name)
+    name.downcase == 'email' ? 'email' : 'phone'
+  end
+
   def label
     I18n.t field, scope: [:models, :contact_method, :labels]
   end

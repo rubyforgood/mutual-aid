@@ -1,4 +1,39 @@
 
+## Timestamp,
+## "Name",
+## "service_area_name",
+## "phone",
+## "email",
+## "locale_name",
+## "Have you tested positive for COVID-19coronavirus?",
+## "Do you need aid or do you want to volunteer to provide aid?",
+# "offer_category_errands",
+# "offer_category_errands_funding",
+# "offer_category_errands_funding_description",
+# "offer_category_cash",
+# "offer_category_cash_description",
+# "offer_category_housing",
+## "Are you interested in being a neighborhood steward?",
+## "skills",
+## "Questions/Comments/Suggestions?",
+## "Signature of Volunteer/Needs Requester: Confirming that I am of legal age and am freely signing this agreement electronically. I have read this form and understand that by signing this form, I am giving up legal rights and remedies.",
+# "urgency_level_name",
+# "ask_category_groceries",
+# "ask_category_groceries_funding",
+# "ask_category_groceries_funding_description",
+# "ask_category_groceries_diet_description",
+# "ask_category_medication_delivery",
+# "ask_category_medication_delivery_pharmacy_description",
+# "ask_category_medication_delivery_funding",
+# "ask_category_medication_delivery_funding",
+# "ask_category_cash",
+# "ask_category_cash_description",
+# "ask_category_miscellaneous",
+## "Can you share some ways you identify yourself? i.e class, race, gender identity, (dis)ability etc",
+## "Has the COVID-19 (Corona virus) virus has affected you (directly or indirectly)? If yes, how?",
+# "ask_category_bulk_descr",
+## "Do you also want to volunteer to provide aid?",
+## "Signature of Volunteer/Needs Requester: Confirming that I am of legal age and am freely signing this agreement electronically. I have read this form and understand that by signing this form, I am giving up legal rights and remedies."
 
 class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
@@ -53,43 +88,67 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   end
 
   def create_contact_method_from_row(row)
-    if row["email"].present? || row["Email"].present?
-      preferred_contact_method_name = "Email"
-      field_name = "email"
-    elsif row["phone"].present? || row["telephone"].present? || row["Telephone"].present? || row["Phone"].present?
-      preferred_contact_method_name = "Call"
-      field_name = "phone"
+    preferred_contact_method = row["preferred_contact_method"]&.strip
+    if preferred_contact_method.present?
+      field_name = ContactMethod.map_common_names_to_fields(preferred_contact_method)
+      ContactMethod.where("LOWER(name) = ?", preferred_contact_method.downcase).first_or_create!(name: row["preferred_contact_method"], field: field_name)
     else
-      preferred_contact_method_name = "Unknown"
-      field_name = "phone" # TODO - needs to be SOMEthing
+      if row["phone"].present? || row["telephone"].present? || row["Telephone"].present? || row["Phone"].present?
+        preferred_contact_method_name = "Call"
+        field_name = "phone"
+      elsif row["email"].present? || row["Email"].present?
+        preferred_contact_method_name = "Email"
+        field_name = "email"
+      else
+        preferred_contact_method_name = "Unknown"
+        field_name = "phone" # TODO - needs to be SOMEthing
+      end
+      contact_methods = ContactMethod.method_name(preferred_contact_method_name.downcase.strip) # was hitting Arel error when chaining
+      contact_methods = ContactMethod.where(id: contact_methods.pluck(:id))
+      contact_methods.first_or_create!(name: preferred_contact_method_name, field: field_name, enabled: true)
     end
-    contact_methods = ContactMethod.method_name(preferred_contact_method_name.downcase.strip) # was hitting Arel error when chaining
-    contact_methods = ContactMethod.where(id: contact_methods.pluck(:id))
-    contact_methods.first_or_create!(name: preferred_contact_method_name, field: field_name, enabled: true)
+  end
+
+  def find_preferred_locale_in_row(row)
+    locale_name = row["locale_name"]&.strip
+    SystemLocale.where("LOWER(locale_name) = ?", locale_name).first
   end
 
   def create_person_from_row(row)
-    location = create_location_from_row(row)
+    preferred_locale = find_preferred_locale_in_row(row)
+    service_area = create_service_area_from_row(row)
+    location = create_location_from_row(row, service_area)
     preferred_contact_method = create_contact_method_from_row(row)
-    phone = nil
-    email = nil
-    if preferred_contact_method&.name.downcase == "IDK".downcase
-      phone = row["phone"] || row["telephone"] || row["Telephone"] || row["Phone"] || "UNKNOWN PHONE"
-    elsif preferred_contact_method&.name.downcase == "email"
-      email = row["email"] || row["Email"] || "ImportedWithNoEmail@example.com"
-    elsif preferred_contact_method&.name.downcase == "call"
-      phone = row["phone"] || row["telephone"] || row["Telephone"] || row["Phone"] || "[imported with no phone]"
-    else
-      phone = "[imported with no phone]"
+    phone = (row["phone"] || row["telephone"] || row["Telephone"] || row["Phone"] || row["Mobile"] || row["mobile"] || row["Cell"] || row["cell"])&.strip
+    email = (row["email"] || row["Email"])&.strip
+    if preferred_contact_method.name.downcase == 'phone'
+      phone ||= "[imported with no phone]"
     end
-    Person.where(name: row["Name"]&.strip, email: email&.strip, phone: phone&.strip, location: location).first_or_create!(preferred_contact_method: preferred_contact_method)
+    if preferred_contact_method.name.downcase == 'email'
+      email ||= "ImportedWithNoEmail@example.com"
+    end
+    Person.where(name: row["Name"]&.strip, email: email&.strip, phone: phone&.strip).
+           first_or_create!(preferred_contact_method: preferred_contact_method,
+                            service_area: service_area, location: location,
+                            skills: row["skills"]&.strip,
+                            preferred_locale: preferred_locale&.locale)
   end
 
-  def create_location_from_row(row)
-    Location.where(street_address: row["Address"],
-                   city: row["City"], state: row["State"], zip: row["Zip"],
-                   county: row["Count"], region: row["Region"],
-                   neighborhood: row["Neighborhood"]).first_or_create!
+  def create_location_from_row(row, service_area)
+    if row["Address"].present? || row["City"].present? || row["State"].present? ||
+        row["Zip"].present? || row["County"].present? || row["Region"].present? ||
+        row["Neighborhood"].present?
+      Location.where(street_address: row["Address"]&.strip,
+                     city: row["City"]&.strip, state: row["State"]&.strip, zip: row["Zip"]&.strip,
+                     county: row["County"]&.strip, region: row["Region"]&.strip,
+                     neighborhood: row["Neighborhood"]&.strip).first_or_create!(service_area: service_area)
+    end
+  end
+
+  def create_service_area_from_row(row)
+    if row["service_area_name"].present?
+      ServiceArea.where("LOWER(name) = ?", row["service_area_name"]&.strip.downcase).first_or_create!(name: row["service_area_name"]&.strip)
+    end
   end
 
   def create_listings_data_from_row(row, person, created_at)
@@ -191,11 +250,19 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     CommunityResource.where(organization: @current_organization).first_or_create!(is_created_by_admin: true, name: "PLACEHOLDER")
   end
 
+  def create_listings_data_from_category_questions(row, person, created_at)
+
+  end
+
   def process_row(row)
     created_at = parse_date(row["Timestamp"])
     person = create_person_from_row(row) # NOTE: this calls create_location_from_row
 
-    listings = create_listings_data_from_row(row, person, created_at)
+    if CustomFormQuestion.translated_name_prefix('offer_category_').any?
+      listings = create_listings_data_from_category_questions(row, person, created_at)
+    else
+      listings = create_listings_data_from_row(row, person, created_at)
+    end
 
     submission = Submission.where(created_at: created_at, person: person, form_name: @form_type).first_or_create!(body: listings.map(&:inspect))
     # add custom form responses to submission
@@ -244,4 +311,3 @@ end
 # What resources can you offer? check all applicable
 # Do you have special skills or particular resources you would like us to know about?
 # Are there any notes about what you've offered above?
-

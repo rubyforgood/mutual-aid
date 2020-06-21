@@ -26,5 +26,10 @@ class CustomFormQuestion < ApplicationRecord
   }
 
   scope :translated_name, ->(name) { joins(:mobility_string_translations).
-      where("LOWER(mobility_string_translations.name) = ?", name) }
+      where("mobility_string_translations.key = 'name' AND mobility_string_translations.locale = 'en'").
+      where("LOWER(mobility_string_translations.value) = ?", name) }
+
+  scope :translated_name_prefix, ->(prefix) { joins(:mobility_string_translations).
+      where("mobility_string_translations.key = 'name' AND mobility_string_translations.locale = 'en'").
+      where("mobility_string_translations.value ILIKE ?", "#{prefix}%") }
 end

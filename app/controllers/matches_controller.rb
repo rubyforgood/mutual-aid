@@ -84,12 +84,12 @@ class MatchesController < ApplicationController
         @provider = Listing.where(type: type, id: params[:provider_id]).first
       end
 
-      @unmatched_asks = Ask.unmatched.map{ |a| [ a.name_and_match_history.html_safe, a.id ] }.sort_by(&:first)
-      @unmatched_offers = Offer.unmatched.map{ |o| [ o.name_and_match_history.html_safe, o.id] }.sort_by(&:first)
+      @matchable_asks = Ask.matchable.map{ |a| [ a.name_and_match_history.html_safe, a.id ] }.sort_by(&:first)
+      @matchable_offers = Offer.matchable.map{ |o| [ o.name_and_match_history.html_safe, o.id] }.sort_by(&:first)
 
       if @match.receiver_id && @match.provider_id
-        @matched_asks = (@unmatched_asks + [[@match.receiver&.name_and_match_history.html_safe, @match.receiver&.id ]]).sort_by(&:first)
-        @matched_offers = (@unmatched_offers + [[@match.provider&.name_and_match_history.html_safe, @match.provider&.id ]]).sort_by(&:first)
+        @matched_asks = (@matchable_asks + [[@match.receiver&.name_and_match_history.html_safe, @match.receiver&.id ]]).sort_by(&:first)
+        @matched_offers = (@matchable_offers + [[@match.provider&.name_and_match_history.html_safe, @match.provider&.id ]]).sort_by(&:first)
       else
 
       end

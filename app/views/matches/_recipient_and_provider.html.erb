@@ -57,16 +57,16 @@
       </div>
       <br>
       <!-- # display receiver select -->
-      <%= f.input :receiver_id, as: :select, include_blank: true, collection: @unmatched_asks, selected: params[:receiver_id] %>
+      <%= f.input :receiver_id, as: :select, include_blank: true, collection: @matchable_asks, selected: params[:receiver_id] %>
       <%= f.hidden_field :receiver_type, value: "Ask" %>
     <% else %>
       <!-- # display provider select -->
-      <%= f.input :provider_id, as: :select, include_blank: true, collection: @unmatched_offers, selected: params[:provider_id] %>
+      <%= f.input :provider_id, as: :select, include_blank: true, collection: @matchable_offers, selected: params[:provider_id] %>
       <%= f.hidden_field :provider_type, value: "Offer" %>
 
       <% unless @receiver.present? || @match.receiver_id %>
         <!-- # display receiver select -->
-        <%= f.input :receiver_id, as: :select, include_blank: true, collection: @unmatched_asks, selected: params[:receiver_id] %>
+        <%= f.input :receiver_id, as: :select, include_blank: true, collection: @matchable_asks, selected: params[:receiver_id] %>
         <%= f.hidden_field :receiver_type, value: "Ask" %>
       <% end %>
     <% end %>

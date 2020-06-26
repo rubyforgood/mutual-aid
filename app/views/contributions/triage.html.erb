@@ -10,6 +10,7 @@
                 label: "Notes (for THIS CATEGORY only! create a new <a href='/asks/new?person_id=#{@contribution.person&.id}'> Ask
                   </a> or <a href='/offers/new?person_id=#{@contribution.person&.id}'> Offer
                   </a>, as needed, but save this form first!)".html_safe %>
+    <%= f.input :inexhaustible, as: :radio_buttons %>
   </div>
 
   <%= f.button :submit,

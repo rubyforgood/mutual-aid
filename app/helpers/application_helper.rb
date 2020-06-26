@@ -41,9 +41,9 @@ module ApplicationHelper
       resource = resource.becomes(resource.class.superclass)
     end
     link_to(triage_contribution_path(resource),
-            title: "Triage/edit",
+            title: "Triage",
             class: "button triage-button #{button_color_class || 'is-primary'}") do
-      "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage/edit</span>".html_safe
+      "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage</span>".html_safe
     end
   end
 

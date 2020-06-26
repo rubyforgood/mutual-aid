@@ -61,4 +61,14 @@ module ApplicationHelper
     end
     date_or_datetime.strftime("#{strftime}#{' @ %l:%M %P' if date_or_datetime.is_a?(DateTime)}")
   end
+
+  def urgency_level_display(urgency_level_text)
+    if urgency_level_text.include?("1-2")
+      "<span class='tag is-warning is-light'>
+        <span class='fa fa-is-exclamation-triangle'></span>
+        <span>#{urgency_level_text}</span></span>".html_safe
+    else
+      urgency_level_text
+    end
+  end
 end

@@ -16,6 +16,11 @@ class MatchesController < ApplicationController
       person = Person.find(params[:connected_to_person_id])
       @matches = @matches.connected_to_person_id(person)
     end
+
+    # match_ids filter
+    if params[:match_ids].present?
+      @matches = @matches.match_ids(params[:match_ids])
+    end
   end
 
   def show

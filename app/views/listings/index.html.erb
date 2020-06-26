@@ -29,7 +29,8 @@
         </td>
         <td><%= listing.title %></td>
         <td><%= listing.person&.name %></td>
-        <td><%= listing.all_tags_to_s.upcase %></td>
+        <td><span class="tag is-info is-light"><%= listing.all_tags_to_s.upcase %></span></td>
+        <td><%= listing.title %></td>
         <td><%= listing.service_area&.name %></td>
         <td><%= shorthand_display(listing.created_at) %></td>
         <td style="white-space: nowrap" title="<%= listing.status %>">

@@ -7,9 +7,9 @@ class CategoryFilter
     }
   end
 
-  def intialize(parameters)
-    @parameters = parameters
-  end
-  def filter
+  def self.filter(relation, parameters)
+    ids = parameters["Category"]
+    return relation if ids.blank?
+    relation.tagged_with(Category.roots.where(id: ids).pluck('name'), any: true)
   end
 end

@@ -6,7 +6,7 @@ class ContributionTypeFilter
     ]}
   end
 
-  def filter(model, parameters)
-
+  def self.filter(relation, _parameters)
+    relation
   end
 end

@@ -3,7 +3,6 @@
 class ContactMethod < ApplicationRecord
   has_many :people, inverse_of: :preferred_contact_method, foreign_key: :preferred_contact_method_id, dependent: :restrict_with_error
 
-  scope :as_filter_types, -> { enabled.distinct(:name) }
   scope :email, -> { find_by name: 'Email' }
   scope :enabled, -> { where enabled: true }
   scope :field_name, -> (field_name){ where arel_table[:field].lower.eq(field_name) }

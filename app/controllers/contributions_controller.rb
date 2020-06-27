@@ -6,8 +6,9 @@ class ContributionsController < ApplicationController
 
   # FIXME: this should probably be wrapped by a policy scope?
   def index
-    @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
-    filter = BrowseFilter.new(filter_params)
+    @filter_types = [ContributionTypeFilter, CategoryFilter, ServiceAreaFilter, ContactMethodFilter].map(&:options).to_json
+    # The BrowserFilter takes the result of the parameters from the FilterType checkboxes and returns a list of contributions
+    filter = BrowseFilter.new(filter_params, self)
     @contributions = ContributionBlueprint.render(filter.contributions, contribution_blueprint_options)
     respond_to do |format|
       format.html

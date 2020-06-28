@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.2] - 2020-06-27
 
 ### Breaking changes
 * #492 If you were relying on the stock header/footer text on ask/offer forms, that text will need to be customized.

@@ -1,7 +1,7 @@
 class CustomFormQuestion < ApplicationRecord
   extend Mobility
   translates :name, type: :string
-  translates :option_list, type: :string # if this is json, ok to say string here?
+#   translates :option_list, type: :string # if this is json, ok to say string here?
   translates :hint_text, type: :string
 
   has_many :submission_responses
@@ -29,7 +29,7 @@ class CustomFormQuestion < ApplicationRecord
       where("mobility_string_translations.key = 'name' AND mobility_string_translations.locale = 'en'").
       where("LOWER(mobility_string_translations.value) = ?", name) }
 
-  scope :translated_name_prefix, ->(prefix) { joins(:mobility_string_translations).
+  scope :translated_name_stem, ->(stem) { joins(:mobility_string_translations).
       where("mobility_string_translations.key = 'name' AND mobility_string_translations.locale = 'en'").
-      where("mobility_string_translations.value ILIKE ?", "#{prefix}%") }
+      where("mobility_string_translations.value ILIKE ?", "%#{stem}%") }
 end

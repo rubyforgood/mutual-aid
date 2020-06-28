@@ -131,7 +131,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
            first_or_create!(preferred_contact_method: preferred_contact_method,
                             service_area: service_area, location: location,
                             skills: row["skills"]&.strip,
-                            preferred_locale: preferred_locale&.locale)
+                            preferred_locale: preferred_locale&.locale || "en")
   end
 
   def create_location_from_row(row, service_area)
@@ -146,12 +146,19 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   end
 
   def create_service_area_from_row(row)
-    if row["service_area_name"].present?
-      ServiceArea.where("LOWER(name) = ?", row["service_area_name"]&.strip.downcase).first_or_create!(name: row["service_area_name"]&.strip)
-    end
+    location_type = LocationType.where(name: "service_area").first_or_create!
+    location = Location.where(location_type: location_type).first_or_create!
+    ServiceArea.translated_name(row["service_area_name"]&.strip.downcase).
+                first_or_create!(name: row["service_area_name"]&.strip || "Unknown County",
+                                 service_area_type: row["service_area_type_name"] || "county",
+                                 organization: Organization.first,
+                                 location: location)
   end
 
-  def create_listings_data_from_row(row, person, created_at)
+  def create_listings_data_from_row(row, submission)
+    person = submission.person
+    created_at = submission.created_at
+    service_area = submission.service_area
     listings = []
     categories_cfq = CustomFormQuestion.where(name: @categories_question_name).first_or_create!
     categories = row[@categories_question_name].to_s.strip.split(/[,;]/)
@@ -160,13 +167,16 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     categories.each do |category|
       listing = Listing.where(person: person,
                               title: "imported #{Time.current}",
+                              service_area: person.service_area,
+                              submission: submission,
+                              type: submission.form_name.include?("request") ? "Ask" : "Offer",
                               created_at: created_at).first_or_create! # TODO add descriptions
-      categories_cfq.option_list << category unless categories_cfq.tag_list.includes?(category)
+      categories_cfq.option_list << category unless categories_cfq.option_list.includes?(category)
       listing.tag_list << category
       categories_cfq.save!
       listing.save!
 
-      create_any_needed_matches(listing, row_status)
+      create_any_needed_matches(listing, row)
 
       listings << listing
     end
@@ -180,15 +190,15 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     # offer data has date instead of status
     status = row["status"] || row["Date last used"].present? ? row["Date last used"] : nil
 
-    if Match::STATUSES.include?(status.downcase)
+    if Match::STATUSES.include?(status&.downcase)
       system_status = status.downcase
     else
       status_is_a_date = (status&.include?("-") || status&.include?("/"))
-      if status.downcase == "completed" || status_is_a_date
+      if status&.downcase == "completed" || status_is_a_date
         system_status = "match_completed"
-      elsif status.downcase == "started"
+      elsif status&.downcase == "started"
         system_status = "match_confirmed"
-      elsif status.downcase == "reoccurring"
+      elsif status&.downcase == "reoccurring"
         system_status = nil # TODO - not sure if these should be nil on import?
       elsif status == nil
         system_status = nil
@@ -199,10 +209,10 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     system_status
   end
 
-  def create_any_needed_matches(listing, status)
-    system_status = get_system_status(status)
+  def create_any_needed_matches(listing, row)
+    system_status = get_system_status(row)
 
-    type = listing.submission.form_name.include?("request") ? "Ask" : "Offer"
+    type = listing.type
 
     if system_status != nil
       if type == "Ask"
@@ -218,7 +228,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
   def create_submission_response_from_row(row, question, submission)
     response_value = row[question.name]&.strip
-    responses = SubmissionResponse.where(question: question, submission: submission, created_at: created_at)
+    responses = SubmissionResponse.where(custom_form_question: question, submission: submission, created_at: submission.created_at)
     if ["Yes", "No", "Maybe"].include?(response_value)
       if responses.none?
         @new_records_count += 1
@@ -229,19 +239,22 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
         puts "#{log} Submission --------#{history_log_name(row)}"
         @dupe_records_count += 1
       end
-      question = response.question
-      question.input_type = "radio"
+      question = response.custom_form_question
+      question.input_type ||= "radio"
       question.save!
     else
       if responses.none?
         @new_records_count += 1
-        response = responses.first_or_create!(string_response: response_value, created_by: @current_user, updated_by: @current_user, organization: @current_organization)
+        response = responses.first_or_create!(string_response: response_value)
       else
         response = responses.last
         log = "GOT DUPE"
         puts "#{log} Submission --------#{history_log_name(row)}"
         @dupe_records_count += 1
       end
+      question = response.custom_form_question
+      question.input_type ||= "string"
+      question.save!
     end
     response
   end
@@ -250,21 +263,54 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     CommunityResource.where(organization: @current_organization).first_or_create!(is_created_by_admin: true, name: "PLACEHOLDER")
   end
 
-  def create_listings_data_from_category_questions(row, person, created_at)
+  def create_listings_data_from_category_questions(row, submission)
+    created_at = submission.created_at
+    person = submission.person
+    service_area = submission.service_area
+    listings = []
+    category_headers = CustomFormQuestion.translated_name_stem('_category_').
+                                          where.not("mobility_string_translations.value ILIKE ? OR
+                                                      mobility_string_translations.value ILIKE ?",
+                                                    "%_funding%", "%_description")
+    category_headers.each do |category_cfq|
+      answer = YAML.load(row[category_cfq].to_s)
+      if answer
+        category_name = category_cfq.name.downcase.gsub("offer_category_", "").gsub("ask_category_", "")
+        category = Category.where(name: category_name).first_or_create!
+        row_status = row["status"]&.strip
+        listing = Listing.where(person: person,
+                                title: "imported #{Time.current}",
+                                service_area: service_area,
+                                submission: submission,
+                                type: category_cfq.name.split("_").first.classify,
+                                created_at: created_at).first_or_create! # TODO add descriptions
+        category_cfq.option_list << category_name unless category_cfq.option_list.include?(category_name)
+        listing.tag_list << category_name
+        category_cfq.save!
+        listing.save!
 
+        create_any_needed_matches(listing, row)
+
+        listings << listing
+      end
+    end
+    listings
   end
 
   def process_row(row)
     created_at = parse_date(row["Timestamp"])
     person = create_person_from_row(row) # NOTE: this calls create_location_from_row
+    submission = Submission.where(created_at: created_at, person: person, form_name: @form_type).
+                            first_or_create!(service_area: person.service_area)
 
-    if CustomFormQuestion.translated_name_prefix('offer_category_').any?
-      listings = create_listings_data_from_category_questions(row, person, created_at)
+    if inline_response_categories?
+      listings = create_listings_data_from_category_questions(row, submission)
     else
-      listings = create_listings_data_from_row(row, person, created_at)
+      listings = create_listings_data_from_row(row, submission)
     end
+    submission.body = listings.map(&:inspect)
+    submission.save!
 
-    submission = Submission.where(created_at: created_at, person: person, form_name: @form_type).first_or_create!(body: listings.map(&:inspect))
     # add custom form responses to submission
     @custom_form_questions.each do |question|
       create_submission_response_from_row(row, question, submission)
@@ -273,6 +319,10 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
   def history_log_name(row)
     " +++ submission created at: " + row["Timestamp"].to_s
+  end
+
+  def inline_response_categories?
+    CustomFormQuestion.translated_name_stem('_category_').any?
   end
 end
 

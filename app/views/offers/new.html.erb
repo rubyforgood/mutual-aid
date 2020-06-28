@@ -1,36 +1,21 @@
 <h1 class="title">Offer support</h1>
+
 <p class="subtitle">
-<%= Organization.current_organization.name %>
+<%= @organization.name %>
 </p>
 
 <div class="columns">
   <div class="column is-half-tablet">
-    <content class="is-medium">
-      <!-- TODO: pull this, and other form text from some customizable setting -->
-      <p>
-      If you would like to volunteer or donate resources, please fill out this offer form.
-      </p>
-      <p class="mt-1 mb-1">
-      Your contact information is required, kept private with our core organizers, and only shared with your consent.
-      </p>
-    </content>
-
-    <div id="offer">
+    <div class="content mb-1">
+      <%= sanitize @form.header_html %>
     </div>
 
-    <content class="is-medium">
-      <p class="mt-1">
-      Many thanks to Chicago organizer Kelly Hayes, as well as Mutual Aid Medford and Somerville for sharing resources and best practices.
-      Inspiration has also been taken from resources listed in Cindy Milstein and Kitty Stryker's Medium article.
-      </p>
-      <p class="mt-1">
-      Any additional revisions, comments, or questions may be emailed to LansingMutualAid@outlook.com.
-      </p>
-      <p class="mt-1">
-      Please give what you can and take what you need, while remembering best practices for consent, your own capacity,
-      and safe ways to interact with others. Remember that items can carry germs/pathogens, so please be mindful when making donations.
-      </p>
-    </content>
+    <div id="offer">
+    </div> <!-- this closing tag is necessary -->
+
+    <div class="content mt-1">
+      <%= sanitize @form.footer_html %>
+    </div>
   </div>
 </div>
 

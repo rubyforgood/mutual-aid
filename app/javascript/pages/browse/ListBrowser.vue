@@ -54,9 +54,6 @@ export default {
     urgencyColor() {
       return this.showUrgentIcon ? 'is-warning' : 'is-light is-warning'
     },
-    createdAtDate() {
-      return new Date(this.created_at)
-    }
   },
 }
 </script>

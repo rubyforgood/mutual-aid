@@ -6,7 +6,7 @@ class AsksController < PublicController
   end
 
   def new
-    serialize(Submission.new)
+    render_form(Submission.new)
   end
 
   def create
@@ -14,12 +14,12 @@ class AsksController < PublicController
     if submission.save
       redirect_to contribution_thank_you_path, notice: 'Ask was successfully created.'
     else
-      serialize(submission)
-      render :new
+      render_form(submission)
     end
   end
 
   private
+
     def submission_params
       params[:submission].tap do |p|
         p[:form_name] = 'Ask_form'
@@ -27,10 +27,15 @@ class AsksController < PublicController
       end
     end
 
-    def serialize(submission)
+    def render_form(submission)
+      @form = Form.find_by!(contribution_type_name: 'Ask')
+      @organization = Organization.current_organization
+
       @json = {
         submission: SubmissionBlueprint.render_as_hash(submission),
         configuration: ConfigurationBlueprint.render_as_hash(nil),
       }.to_json
+
+      render :new
     end
 end

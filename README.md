@@ -120,12 +120,13 @@ Then, to run the app locally,
 ```
 $ bundle install
 $ yarn install
-$ # in .env, add SYSTEM_EMAIL and SYSTEM_PASSWORD, or:
-$ SYSTEM_EMAIL=example@example.com SYSTEM_PASSWORD=12345678 rake db:rebuild_and_seed_dev
-$ rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
+$ bin/rake db:rebuild_and_seed_dev
+$ bin/rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
 ```
 
-While working on the Forms or Contributions pages (or any Vue code), open a front end server in another tab to autocompile changes.
+In development, webpacker runs a separate server to support automatic hot-swapping.
+This is only necessary when working on pages containing vue code, but will also speed up initial page loads on other pages.
+Run this in a separate terminal.
 ```
 $ bin/webpacker-dev-server
 ```
@@ -173,13 +174,6 @@ Also, if you would like docker-compose to run in daemon mode (which means that i
 
 # Other Tips to Get Started
 
-## Environment variables
-* Copy the `.env.ci.example` file to two new files and set the values as needed/desired. Other than localhost and port 587, you can set the values to whatever you'd like.
-  - `.env.development.local`
-  - `.env.test.local`
-
-
-
 ## Logging In
 A username and password to log in and test the app are in `seeds.rb` (which then references your environment variables)
 
@@ -187,7 +181,7 @@ A username and password to log in and test the app are in `seeds.rb` (which then
 * Running `bin/test` will run ruby tests (rspec) and then the js tests (mocha) if all the rspec tests pass
 * To run front end tests and back end tests individually:
     * Vue.js front end tests: `yarn test` or `yarn test -w` (mocha and chai are included in the `package.json` )
-    * Rails front end and back end tests: `rspec` (rspec is included in the Gemfile)
+    * Rails front end and back end tests: `bin/rspec` (rspec is included in the Gemfile)
 
 When writing rspec tests within the spec/request directory, you can use `Warden::Test:Helpers`
 which give you access to the ```login_as(user, :scope => :user)``` method, as well as the ```logout``` method.

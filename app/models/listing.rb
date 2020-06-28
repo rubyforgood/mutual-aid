@@ -10,7 +10,7 @@ class Listing < ApplicationRecord
   belongs_to :service_area
   belongs_to :location, optional: true
   belongs_to :submission, optional: true
-  belongs_to :urgency_level, optional: true
+  belongs_to :urgency_level, optional: true, class_name: "UrgencyLevel"
 
   has_many :matches_as_receiver, class_name: "Match", foreign_key: "receiver_id"
   has_many :matches_as_provider, class_name: "Match", foreign_key: "provider_id"
@@ -26,6 +26,7 @@ class Listing < ApplicationRecord
   scope :asks, ->(){ where(type: Ask.to_s) }
   scope :offers, ->(){ where(type: Offer.to_s) }
   scope :created_on, ->(created_on){ where("created_at::date = ?", created_on) }
+  scope :inexhaustible, ->() { where(inexhaustible: true) }
   scope :location_id, ->(location_id){ where(location_id: location_id.to_i) }
   scope :match_status, ->(match_status){ where(state: match_status.to_s) }
   scope :person_id, ->(person_id){ where(person_id: person_id.to_i) }
@@ -52,7 +53,7 @@ class Listing < ApplicationRecord
   end
 
   def name_and_match_history
-    "(#{type}-#{all_tags_to_s.upcase})</strong> #{person.match_history}. (#{person.name})"
+    "(#{type}-#{all_tags_to_s.upcase}#{" ***INEXHAUSTIBLE*** " if inexhaustible?}) #{person.match_history}. (#{person.name}#{" --- $" + person.monthly_donation_amount_max.to_s + "/mo left" if person.monthly_donation_amount_max&.to_f > 0.0})"
   end
 
   def status

@@ -15,6 +15,7 @@ class Match < ApplicationRecord
   #
 
   scope :id, ->(id) { where(id: id) }
+  scope :match_ids, -> (match_ids) { where('matches.id::text = ANY (ARRAY[?])', match_ids) }
   scope :needs_follow_up, ->() { joins(:communication_logs).where("communication_logs.needs_follow_up = ?", true) }
   scope :status, ->(status) { where(status == "all" || !status.present? ? "matches.id IS NOT NULL" : "matches.status = '#{status.downcase}'") }
   scope :this_month, -> { where("matches.created_at >= ? AND matches.created_at <= ?",

@@ -6,17 +6,15 @@ class OffersController < PublicController
   end
 
   def new
-    serialize(Submission.new)
+    render_form(Submission.new)
   end
 
   def create
     submission = SubmissionForm.build submission_params
-
     if submission.save
       redirect_to contribution_thank_you_path, notice: 'Offer was successfully created.'
     else
-      serialize(submission)
-      render :new
+      render_form(submission)
     end
   end
 
@@ -29,10 +27,15 @@ class OffersController < PublicController
       end
     end
 
-    def serialize(submission)
+    def render_form(submission)
+      @form = Form.find_by!(contribution_type_name: 'Offer')
+      @organization = Organization.current_organization
+
       @json = {
         submission: SubmissionBlueprint.render_as_hash(submission),
         configuration: ConfigurationBlueprint.render_as_hash(nil),
       }.to_json
+
+      render :new
     end
 end

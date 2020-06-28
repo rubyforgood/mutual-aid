@@ -1,51 +1,21 @@
 <h1 class="title">Request support</h1>
+
 <p class="subtitle">
-<%= Organization.current_organization.name %>
+<%= @organization.name %>
 </p>
 
 <div class="columns">
   <div class="column is-half-tablet">
-    <content class="is-medium">
-      <!-- TODO: pull this, and other form text from some customizable setting -->
-      <p>
-      Do you need something? Please tell us what we can bring or do by filling out this form, and we'll get it done.
-      All information is strictly confidentially, and will not be used for another purpose.
-      </p>
-      <p class="mt-1">
-      In the event that we must make decisions on resources and aid, priority will defer to children and to those with
-      systemic barriers for more traditional resources, for instance undocumented peoples.
-      </p>
-      <p class="mt-1">
-      If you would like to volunteer or offer resources, fill out
-      <%= link_to 'this offer form', new_offer_path %>
-
-      </p>
-      <p class="mt-1">
-      If you wish to make a monetary donation, you may donate
-      <a href="https://donorbox.org/lansing-mutual-aid-covid-19-response-donations">here</a>.
-
-      </p>
-      <p class="mt-1 mb-1">
-      If you would like to be an Lansing Mutual Aid Organizer, please fill out
-      <a href="https://forms.gle/MZBy2Ax726NfuquS6">this form</a>.
-      </p>
-    </content>
-
-    <div id="ask">
+    <div class="content mb-1">
+      <%= sanitize @form.header_html %>
     </div>
 
-    <content class="is-medium">
-      <p class="mt-1 title is-4">
-      Thank you!
-      </p>
-      <p class="mt-1">
-      This resource is influenced by many other mutual aid efforts across the country — notably Chicago organizer Kelly Hayes, as well
-      as Mutual Aid Medford and Somerville.
-      </p>
-      <p class="mt-1">
-      Any additional revisions, comments, or questions may be emailed to LansingMutualAid@outlook.com.
-      </p>
-    </content>
+    <div id="ask">
+    </div> <!-- this closing tag is necessary -->
+
+    <div class="content mt-1">
+      <%= sanitize @form.footer_html %>
+    </div>
   </div>
 </div>
 

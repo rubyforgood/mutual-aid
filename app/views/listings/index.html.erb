@@ -8,47 +8,56 @@
   <thead>
     <tr>
       <th>Type</th>
-      <th>Title</th>
       <th>Person</th>
+      <th>Category</th>
+      <th>Title</th>
       <th>Service Area</th>
-      <th>Created at</th>
-      <th>Match Status</th>
-      <th>Respond</th>
+      <th>Created</th>
+      <th>Urgency</th>
+      <th>Match</th>
+      <th>Action</th>
       <!-- <th>Find Match</th>-->
-      <th>Create Match</th>
-      <th>Triage/edit</th>
     </tr>
   </thead>
 
   <tbody>
     <% @listings.each do |listing| %>
+      <% unmatched = listing.status == "unmatched" %>
+      <% urgency_level_text = UrgencyLevel.find(listing.urgency_level_id)&.name %>
       <tr>
-        <td><span class="<%= listing.icon_class %>"></span> <%= listing.type %></td>
-        <td><%= listing.title %></td>
+        <td style="white-space: nowrap">
+          <span class="<%= listing.icon_class %>"></span> <%= listing.type %>
+        </td>
         <td><%= listing.person&.name %></td>
+        <td><span class="tag is-info is-light"><%= listing.all_tags_to_s.upcase %></span></td>
+        <td><%= listing.title %></td>
         <td><%= listing.service_area&.name %></td>
         <td><%= shorthand_display(listing.created_at) %></td>
-        <td>
-          <span class="tag <%= listing.status == "unmatched" ? "is-warning" : "is-primary" %>">
-            <%= listing.status %><%= " (#{listing.matches.count})" if listing.matches.count > 1 %>
-          </span>
-        </td>
-        <td><%= link_to("Respond", respond_contribution_path(listing, contribution_type: listing.type),
-                        class: "button #{listing.status == "unmatched" ? "is-primary" : "is-primary is-outlined"}") %>
-        </td>
-        <!-- # TODO - add find match functionality <td><%##= link_to("Find Match [TBD]", match_listing_path(listing), class: "button") %></td>-->
-        <td>
-          <% if listing.offer? %>
-            <%= link_to("Create Match",
-                        new_match_path(provider_id: listing.id, provider_type: listing.type),
-                        class: "button") %>
+        <td><%= urgency_level_display(urgency_level_text) if urgency_level_text %></td>
+        <td style="white-space: nowrap" title="<%= listing.status %>">
+          <% if unmatched %>
+            <span class="tag is-warning is-light">
+              <%= listing.status %><%= " (#{listing.matches.count})" if listing.matches.count > 1 %>
+            </span>
+            <span class="tag <%= 'is-warning fa fa-exclamation' %>"></span>
           <% else %>
-            <%= link_to("Create Match",
-                        new_match_path(receiver_id: listing.id, receiver_type: listing.type),
-                        class: "button") %>
+            <% if listing.matches.count > 1 %>
+              <%= link_to "Matches #{" (#{listing.matches.count})"}", matches_path(match_ids: listing.matches.map(&:id)), class: "button is-primary is-outlined" %>
+            <% else %>
+              <%= link_to "Match", edit_match_path(listing.matches.last), class: "button is-primary is-outlined" %>
+            <% end %>
           <% end %>
         </td>
-        <td><%= triage_button(listing) %></td>
+        <td>
+          <% if unmatched %>
+            <%= link_to("<span class='fa fa-reply'></span> <span> &nbsp Respond</span>".html_safe, respond_contribution_path(listing, contribution_type: listing.type),
+                        class: "button #{unmatched ? "is-primary" : "is-primary is-outlined"}") %>
+          <% else %>
+            <% button_css_class = "#{unmatched ? "is-primary is-outlined" : "is-primary"}" %>
+            <%= triage_button(listing, button_css_class) %>
+          <% end %>
+        </td>
+        <!-- # TODO - add find match functionality <td><%##= link_to("Find Match [TBD]", match_listing_path(listing), class: "button") %></td>-->
       </tr>
     <% end %>
   </tbody>

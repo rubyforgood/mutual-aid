@@ -11,13 +11,13 @@ RSpec.describe Ask do
     end
   end
 
-  describe 'unmatched' do
-    it 'returns unmatched asks' do
+  describe 'matchable' do
+    it 'returns matchable asks' do
       unmatched_ask = create(:ask)
       match = create(:match, :with_ask_and_offer)
       matched_ask = match.receiver
 
-      expect(Ask.unmatched).to eq([unmatched_ask])
+      expect(Ask.matchable).to eq([unmatched_ask])
     end
   end
 end

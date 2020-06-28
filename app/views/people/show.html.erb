@@ -57,14 +57,14 @@
       <hr>
       <h3>Unmatched Asks:</h3>
       <!-- # listing ask tags-->
-      <%= render "people/profile_partials/profile_listings_section", listings: @person.asks.unmatched %>
+      <%= render "people/profile_partials/profile_listings_section", listings: @person.asks.matchable %>
     <% end %>
   </div>
   <div class="content offer-tags">
     <hr>
     <h3>Unmatched Offers:</h3>
     <!-- # listing ask tags-->
-    <%= render "people/profile_partials/profile_listings_section", listings: @person.offers.unmatched %>
+    <%= render "people/profile_partials/profile_listings_section", listings: @person.offers.matchable %>
   </div>
 
   <div class="content">

@@ -7,8 +7,6 @@
         <th>Urgency</th>
         <th>Service Area</th>
         <th>Connect</th>
-        <th>Profile</th>
-        <th>Match</th>
         <th>Respond</th>
 <!--        <th>Details</th>-->
       </tr>
@@ -26,13 +24,7 @@
           <SingleIcon :iconType="contribution.contact_types[0].name" />
         </td>
         <td>
-          <a :href="contribution.profile_path" class="button icon-list is-primary is-outlined"><span class="fa fa-user-circle"></span></a>
-        </td>
-        <td>
-          <a :href="contribution.match_path" class="button icon-list is-primary is-outlined">Match</a>
-        </td>
-        <td>
-          <a :href="contribution.respond_path" class="button icon-list is-primary"><span class="fa fa-reply"></span></a>
+          <a :href="contribution.respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
         </td>
 <!--        <td>{{ contribution.title }}</td>-->
       </tr>

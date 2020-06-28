@@ -35,15 +35,15 @@ module ApplicationHelper
     end
   end
 
-  def triage_button(resource)
+  def triage_button(resource, button_color_class=nil)
     resource_class = resource.class
     if resource_class != Person && (resource_class.superclass != ApplicationRecord)
       resource = resource.becomes(resource.class.superclass)
     end
     link_to(triage_contribution_path(resource),
-            title: "Triage/edit",
-            class: "button triage-button is-primary") do
-      "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage/edit</span>".html_safe
+            title: "Triage",
+            class: "button triage-button #{button_color_class || 'is-primary'}") do
+      "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage</span>".html_safe
     end
   end
 
@@ -60,5 +60,15 @@ module ApplicationHelper
       strftime = "%a"
     end
     date_or_datetime.strftime("#{strftime}#{' @ %l:%M %P' if date_or_datetime.is_a?(DateTime)}")
+  end
+
+  def urgency_level_display(urgency_level_text)
+    if urgency_level_text.include?("1-2")
+      "<span class='tag is-warning is-light'>
+        <span class='fa fa-is-exclamation-triangle'></span>
+        <span>#{urgency_level_text}</span></span>".html_safe
+    else
+      urgency_level_text
+    end
   end
 end

@@ -1,12 +1,23 @@
 # Changelog
 
 ## [Unreleased]
-### Enhancements
-* #492 Customize header/footer text on ask/offer forms.
 
 ### Breaking changes
 * #492 If you were relying on the stock header/footer text on ask/offer forms, that text will need to be customized.
 
+### Enhancements
+* #509 Rudimentary ansible support
+* #513 Improve readme setup instructions
+* #523 #522 Improve people index layout
+* #531 #492 Customize header/footer text on ask/offer forms.
+* #532 Consolidating dotenv files
+* #534 #517 Add release-it package
+* #542 Add inexhaustible to Listing
+* #544 Remove profile & match buttons from Contributions page
+* #545 Update listings index layout
+
+### Bugfixes
+* #524 Fix vue styles (Add a stylesheet_pack_tag to include vue styles in prod)
 
 ## [0.2.1] - 2020-06-13
 ### Bugfixes

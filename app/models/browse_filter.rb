@@ -39,11 +39,7 @@ class BrowseFilter
   def options
     return {} unless context
 
-    {
-      profile_path: ->(id) { context.person_path(id) },
-      respond_path: ->(id) { context.respond_contribution_path(id)},
-      match_path: ->(id) { Listing.find(id).type == "Ask" ? context.new_match_path(receiver_id: id) : context.new_match_path(provider_id: id)}
-    }
+    { respond_path: ->(id) { context.respond_contribution_path(id)} }
   end
 
   private

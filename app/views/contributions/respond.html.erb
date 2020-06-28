@@ -86,11 +86,11 @@
     <% Contribution::TYPES.each do |type| %>
       <hr>
       <% contribution_assn = type.to_s.pluralize.downcase %>
-      <strong><%= "#{person.name}'s " %> other unmatched <%= contribution_assn.titleize %>:</strong>
+      <strong><%= "#{person.name}'s " %> other matchable <%= contribution_assn.titleize %>:</strong>
       <br>
-      <% if @contribution.person.public_send(contribution_assn).unmatched.
+      <% if @contribution.person.public_send(contribution_assn).matchable.
           where.not("listings.id = ?", @contribution.id).any? %>
-        <% @contribution.person.public_send(contribution_assn).unmatched.
+        <% @contribution.person.public_send(contribution_assn).matchable.
             where.not("listings.id = ?", @contribution.id).
             order(created_at: :desc).each do |contribution| %>
           <%= link_to("<span class='#{contribution.icon_class}'></span>  #{

@@ -58,7 +58,6 @@ class ContributionsController < ApplicationController
   end
 
   def set_contribution
-    type = params["contribution_type"]&.classify || "Ask"
-    @contribution = Listing.where(type: type, id: params[:id]).first
+    @contribution = Listing.find(params[:id])
   end
 end

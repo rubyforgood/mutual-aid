@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_161554) do
+ActiveRecord::Schema.define(version: 2020_06_25_153314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 2020_06_08_161554) do
     t.bigint "location_id"
     t.bigint "submission_id"
     t.bigint "urgency_level_id"
+    t.boolean "inexhaustible", default: false, null: false
     t.index ["location_id"], name: "index_listings_on_location_id"
     t.index ["person_id"], name: "index_listings_on_person_id"
     t.index ["service_area_id"], name: "index_listings_on_service_area_id"

@@ -24,6 +24,7 @@
     "@vue/test-utils": "^1.0.0-beta.33",
     "bdd-lazy-var": "^2.5.4",
     "chai": "^4.2.0",
+    "dotenv-cli": "^3.2.0",
     "jsdom": "^16.2.2",
     "jsdom-global": "^3.0.2",
     "mocha": "^6",
@@ -37,7 +38,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "release": "release-it",
+    "release": "dotenv -c -- release-it",
     "test": "mochapack --webpack-config config/webpack/test.js --require spec/javascript/setup.js --colors -u bdd-lazy-var/global 'spec/javascript/**/*.spec.js'"
   }
 }

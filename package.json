@@ -12,6 +12,7 @@
     "bulma": "^0.8.2",
     "css-loader": "^3.5.2",
     "file-loader": "^6.0.0",
+    "null-loader": "^4.0.0",
     "sass-loader": "8.0.2",
     "style-loader": "^1.1.4",
     "vue": "^2.6.11",

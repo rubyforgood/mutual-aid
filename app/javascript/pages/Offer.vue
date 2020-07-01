@@ -124,7 +124,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 label.required-field:after {
   content: '*';
   color: orange;

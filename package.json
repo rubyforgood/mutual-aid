@@ -2,6 +2,9 @@
   "name": "mutualaid",
   "private": true,
   "version": "0.2.2",
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@rails/ujs": "^6.0.0",

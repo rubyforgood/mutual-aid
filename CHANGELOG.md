@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Enhancements
+* #558 Improve contributions readability (remove labels, change prominence of created_at values)
+
 ## [0.2.2] - 2020-06-27
 
 ### Breaking changes

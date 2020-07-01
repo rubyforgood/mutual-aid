@@ -80,8 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// FIXME: this includes bulma/buefy a second time in application.css!
-@import 'bulma/bulma';
+@import 'bulma/sass/utilities/_all';
 
 .tileListItem {
   @include tablet {

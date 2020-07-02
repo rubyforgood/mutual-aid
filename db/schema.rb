@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_153314) do
+ActiveRecord::Schema.define(version: 2020_06_29_213045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,36 @@ ActiveRecord::Schema.define(version: 2020_06_25_153314) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["person_id"], name: "index_donations_on_person_id"
+  end
+
+  create_table "expense_types", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.bigint "expense_type_id", null: false
+    t.bigint "shared_account_id", null: false
+    t.date "processed_on"
+    t.string "name"
+    t.bigint "person_id"
+    t.string "expense_type"
+    t.string "status"
+    t.float "amount"
+    t.float "fee"
+    t.float "net"
+    t.string "transaction_id_number"
+    t.string "reference_txn_id_number"
+    t.string "note"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["expense_type_id"], name: "index_expenses_on_expense_type_id"
+    t.index ["organization_id"], name: "index_expenses_on_organization_id"
+    t.index ["person_id"], name: "index_expenses_on_person_id"
+    t.index ["shared_account_id"], name: "index_expenses_on_shared_account_id"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -519,6 +549,10 @@ ActiveRecord::Schema.define(version: 2020_06_25_153314) do
   add_foreign_key "community_resources", "organizations"
   add_foreign_key "community_resources", "service_areas"
   add_foreign_key "donations", "people"
+  add_foreign_key "expenses", "expense_types"
+  add_foreign_key "expenses", "organizations"
+  add_foreign_key "expenses", "people"
+  add_foreign_key "expenses", "shared_accounts"
   add_foreign_key "feedbacks", "matches"
   add_foreign_key "form_questions", "custom_form_questions"
   add_foreign_key "form_questions", "forms"

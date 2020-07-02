@@ -1,0 +1,45 @@
+<%= render "layouts/view_header", resource: @expenses.first %>
+
+<%= render "search_boxes" %>
+
+<hr>
+
+<div class="title is-5">
+  TOTAL: <%= number_to_currency(@expenses_total) %>
+</div>
+
+<hr>
+
+<table class="table table-hover table-curved table-condensed">
+  <thead>
+    <tr>
+      <th>SharedAccount</th>
+      <th>Processed on</th>
+      <th>Name</th>
+      <th>Person</th>
+      <th>Expense type</th>
+      <th>Status</th>
+      <th>Amount</th>
+      <th>Fee</th>
+      <th>Net</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expenses.each do |expense| %>
+      <tr>
+        <td><%= expense.shared_account&.name %></td>
+        <td><%= expense.processed_on %></td>
+        <td><%= expense.name %></td>
+        <td><%= expense.person&.name %></td>
+        <td><%= expense.expense_type&.name %></td>
+        <td><%= expense.status %></td>
+        <td><%= number_to_currency(expense.amount) %></td>
+        <td><%= number_to_currency(expense.fee) %></td>
+        <td><%= number_to_currency(expense.net) %></td>
+        <td><%= edit_button(expense) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

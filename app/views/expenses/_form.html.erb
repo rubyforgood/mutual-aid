@@ -1,0 +1,21 @@
+<%= simple_form_for @expense do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :shared_account %>
+    <%= f.input :processed_on %>
+    <%= f.input :name %>
+    <%= f.association :person %>
+    <%= f.association :expense_type %>
+    <%= f.input :status %>
+    <%= f.input :amount %>
+    <%= f.input :fee %>
+    <%= f.input :net %>
+    <%= f.input :transaction_id_number %>
+    <%= f.input :reference_txn_id_number %>
+    <%= f.input :note %>
+    <%= f.association :organization %>
+  </div>
+
+  <%= render "layouts/view_footer_buttons", f: f, record: @expense, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+<% end %>

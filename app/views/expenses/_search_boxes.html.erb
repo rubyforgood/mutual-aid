@@ -1,0 +1,31 @@
+<%= simple_form_for :expenses,
+                    html: { class: 'is-horizontal'},
+                    url: expenses_path,
+                    method: :get do |f| %>
+
+  <%= hidden_field_tag :sort, value=(params[:sort] || "id") %>
+  <%= hidden_field_tag :direction, value=(params[:direction] == "asc" ? "desc": "desc") %>
+  <%= hidden_field_tag :table, value=(params[:table] || params[:controller]) %>
+
+  <div class="has-text-left label">Search:</div>
+  <div id="search-boxes" class="has-text-left search-boxes">
+    <div class="">
+      <div class="is-grouped is-inline-flex">
+        <%= select_tag :person_id,
+                       options_for_select(@people || [], selected: params[:person_id]),
+                       include_blank: "-- Connected to --",
+                       class: 'input select optional' %>
+        <%= select_tag :expense_type_name,
+                       options_for_select(@expense_type_names || [], selected: params[:expense_type_name]),
+                       include_blank: "-- Expense type --",
+                       class: 'input select optional' %>
+        <%= select_tag :status,
+                       options_for_select(@statuses || [], selected: params[:status]),
+                       include_blank: "-- Any match status --",
+                       class: 'input select optional' %>
+        <%= f.button :submit, "Search", class: "form-group button is-primary", name: nil %>
+        <%= clear_search_button %>
+      </div>
+    </div>
+  </div>
+<% end %>

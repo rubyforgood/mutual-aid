@@ -1,0 +1,69 @@
+<%= render "layouts/view_header", resource: @expense %>
+
+<p>
+  <strong>Account:</strong>
+  <%= @expense.account %>
+</p>
+
+<p>
+  <strong>Processed on:</strong>
+  <%= @expense.processed_on %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @expense.name %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @expense.person&.name %>
+</p>
+
+<p>
+  <strong>Expense type:</strong>
+  <%= @expense.expense_type&.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @expense.status %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= number_to_currency(@expense.amount) %>
+</p>
+
+<p>
+  <strong>Fee:</strong>
+  <%= number_to_currency(@expense.fee) %>
+</p>
+
+<p>
+  <strong>Net:</strong>
+  <%= number_to_currency(@expense.net) %>
+</p>
+
+<p>
+  <strong>Transaction:</strong>
+  <%= @expense.transaction_id %>
+</p>
+
+<p>
+  <strong>Reference txn:</strong>
+  <%= @expense.reference_txn_id %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @expense.note %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @expense.organization&.name %>
+</p>
+
+<%= edit_button(@expense) %>
+<%= link_to 'Back', expenses_path %>

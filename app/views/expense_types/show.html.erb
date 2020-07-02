@@ -1,0 +1,14 @@
+<%= render "layouts/view_header", resource: @expense_type %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @expense_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @expense_type.description %>
+</p>
+
+<%= link_to 'Edit', edit_expense_type_path(@expense_type) %> |
+<%= link_to 'Back', expense_types_path %>

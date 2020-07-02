@@ -84,6 +84,8 @@ end
   end
 
 [Ask, Offer].each do |type|
+  next if Form.exists? contribution_type_name: type.name
+
   form = Form.create!(
     name: type.name,
     contribution_type_name: type.name,

@@ -9,6 +9,9 @@ class CommunicationLog < ApplicationRecord
 
   scope :needs_follow_up, ->(boolean=nil){ where(needs_follow_up: boolean || true) }
 
+  # TODO: test current_user nil
+  # TODO: convert to keyword params
+  # TODO: are class methods the best way to handle log creation?
   def self.log_email(email_object, delivery_status, person, delivery_method=nil, current_user=nil)
     self.create!(delivery_method: delivery_method || ContactMethod.email,
                  delivery_status: delivery_status,

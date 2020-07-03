@@ -1,10 +1,13 @@
 const path = require('path')
 const { environment } = require('@rails/webpacker')
 const { VueLoaderPlugin } = require('vue-loader')
-const vue = require('./loaders/vue') // todo: flatten this
 
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
-environment.loaders.prepend('vue', vue)
+
+environment.loaders.prepend('vue', {
+  test: /\.vue(\.erb)?$/,
+  use: [{loader: 'vue-loader'}],
+})
 
 environment.config.merge({
   output: {

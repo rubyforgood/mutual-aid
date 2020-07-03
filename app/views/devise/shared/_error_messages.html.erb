@@ -1,14 +1,15 @@
 <% if resource.errors.any? %>
-  <div id="error_explanation" class="col-md-12 text-center">
+  <div id="error_explanation" class="col-md-12 has-text-centered">
+    <br>
     <div class="col-md-12">
-      <span>
+      <span class="has-text-danger has-text-weight-bold">
         <%= I18n.t("errors.messages.not_saved",
                    count: resource.errors.count,
                    resource: resource.class.model_name.human.downcase)
         %>
       </span>
       <% resource.errors.full_messages.each do |message| %>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="has-text-danger alert alert-warning alert-dismissible fade show" role="alert">
           <%= message %>
 <!--          <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
 <!--            <span aria-hidden="true">&times;</span>-->
@@ -16,5 +17,6 @@
         </div>
       <% end %>
     </div>
+    <hr>
   </div>
 <% end %>

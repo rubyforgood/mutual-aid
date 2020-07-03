@@ -10,11 +10,6 @@ class UsersController < ApplicationController
   def show
   end
 
-  def new
-    @user = User.new
-    set_form_dropdowns
-  end
-
   def edit
     if @user == current_user
       redirect_to edit_user_registration_path
@@ -23,16 +18,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      redirect_to users_path, notice: "User was successfully submitted."
-    else
-      set_form_dropdowns
-      render :new
-    end
+  def new # handled by RegistrationsController
+    redirect_to new_user_registration_path
   end
+
+  # def create # handled by RegistrationsController
+  # end
 
   def update
     if @user.update(user_params)
@@ -58,7 +49,7 @@ class UsersController < ApplicationController
     @contact_methods = ContactMethod.enabled # for nested Person
   end
 
-  def user_params
+  def user_params # NOTE: add new params to RegistrationsController as needed
     params.require(:user).permit(:email, person_attributes: [ :id, :name, :email, :phone, :preferred_contact_method_id, :_destroy ] )
   end
 end

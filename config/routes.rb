@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
 
   get "/admin",                    to: "admin#landing_page",    as: "landing_page_admin"
   get "/admin/forms",              to: "admin#form_admin",      as: "form_admin"
@@ -68,7 +68,7 @@ Rails.application.routes.draw do
   resources :system_locales
   resources :system_settings
   resources :teams
-  resources :users
+  resources :users, except: :create
 
   root :to => 'public_pages#landing_page'
 end

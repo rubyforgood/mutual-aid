@@ -1,51 +1,66 @@
-<div class="row text-center login-screen" style="vertical-align:middle;">
-  <div class="col-md-6 col-md-offset-2 logo-image text-center">
+<div class="row has-text-centered login-screen" style="vertical-align:middle;">
+  <div class="col-md-6 col-md-offset-2 logo-image has-text-centered">
     <%= render 'shared/organization_logo' %>
   </div>
-  <div class="col-md-4 text-center">
-    <h2>Sign up</h2>
+  <div class="col-md-4 has-text-centered">
+    <br>
+    <h2><span class="title is-1"><%= @current_user ? "New User" : "Sign up" %></span></h2>
+    <br><br>
 
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="form-group">
-        <%= f.input :email,
-                    required: true,
-                    email_field: true,
-                    autofocus: true,
-                    autocomplete: "email",
-                    input_html: {class: "form-control form-field-display-block required-field wide-response"},
-                    label_html: {class: "form-field-display-block"} %>
+      <div class="is-inline-flex has-no-right-padding">
+        <div class="field">
+          <%= f.input :email,
+                      required: true,
+                      email_field: true,
+                      autofocus: true,
+                      autocomplete: "email" %>
+        </div>
       </div>
 
-      <div class="form-group">
-        <%= f.input :password,
-                    required: true,
-                    email_field: true,
-                    autofocus: true,
-                    autocomplete: "new-password",
-                    # hint: ("<em>(#{@minimum_password_length} characters minimum)</em>".html_safe if @minimum_password_length),
-                    input_html: {class: "form-control form-field-display-block required-field wide-response"},
-                    label_html: {class: "form-field-display-block"} %>
+      <div></div>
+
+      <div class="is-inline-flex">
+        <div class="field">
+          <%= f.input :password,
+                      required: true,
+                      email_field: true,
+                      autofocus: true,
+                      autocomplete: "new-password",
+                      hint: ("<em>(#{@minimum_password_length} characters minimum)</em>".html_safe if @minimum_password_length) %>
+        </div>
+
+        <div class="field">
+          <%= f.input :password_confirmation,
+                      required: true,
+                      email_field: true,
+                      autofocus: true,
+                      autocomplete: "new-password",
+                      hint: ("<em>(#{@minimum_password_length} characters minimum)</em>".html_safe if @minimum_password_length) %>
+        </div>
       </div>
 
-      <div class="form-group">
-        <%= f.input :password_confirmation,
-                    required: true,
-                    email_field: true,
-                    autofocus: true,
-                    autocomplete: "new-password",
-                    hint: ("<em>(#{@minimum_password_length} characters minimum)</em>".html_safe if @minimum_password_length),
-                    input_html: {class: "form-control form-field-display-block required-field wide-response"},
-                    label_html: {class: "form-field-display-block"} %>
-      </div>
+      <% if @current_user %>
+        <div></div>
+
+        <div class="is-inline-flex">
+          <div class="field">
+            <%= select_tag :person_id,
+                           options_for_select(@people_array || [], selected: params[:person_id]),
+                           include_blank: "-- #{Person.model_name.human} --",
+                           hint: "Person not on the list? <a href='people/new'>Create a new one</a>".html_safe,
+                           class: 'input select required' %>
+          </div>
+        </div>
+      <% end %>
 
       <div class="actions" id="login_button">
-        <%= f.button :submit, "Sign up", class: "btn btn-success button" %>
+        <%= f.button :submit, "#{@current_user ? "Create user" : "Sign up"}", class: "button is-primary" %>
       </div>
     <% end %>
     <br>
-    <%= render "devise/shared/links" %>
+    <%= render "devise/shared/links" unless @current_user %>
   </div>
 </div>
-

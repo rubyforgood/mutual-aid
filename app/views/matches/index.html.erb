@@ -27,11 +27,13 @@
         <td><%= shorthand_display(match.created_at) %></td>
         <td><%= shorthand_display(match.updated_at) %></td>
         <td>
-          <span class="tag is-info is-light has-text-weight-bold"><%= match.receiver&.all_tags_to_s.upcase %></span>
+          <!-- # TODO - add 'tag' class back in once Listings are one category per -->
+          <span class="is-info is-light has-text-weight-bold"><%= match.receiver&.all_tags_to_s.upcase %></span>
           <br>
           <%= match.receiver&.person&.name %></td>
         <td>
-          <span class="tag is-info is-light has-text-weight-bold"><%= match.provider&.all_tags_to_s.upcase %></span>
+          <!--  # TODO - add 'tag' class back in once Listings are one category per -->
+          <span class="is-info is-light has-text-weight-bold"><%= match.provider&.all_tags_to_s.upcase %></span>
           <br>
           <%= match.provider&.person&.name %></td>
         <td><%= match.status.titleize %></td>

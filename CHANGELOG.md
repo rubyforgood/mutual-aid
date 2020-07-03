@@ -20,14 +20,18 @@
 * Fix bug where inexhaustible wasn't updating when edited on Triage page #604
 * Add more terms to glossary #603
 * Add Listings index to Contribution data section of Admin landing page #602
+* Allow user creation when logged in. #564 
+
 
 ## [0.2.6] - 2020-07-25
 ### Enhancements
 * Allow custom questions to be added to Ask and Offer forms #597
 
+
 ## [0.2.5] - 2020-07-24
 ### Bugfixes
 * Only show visible subcategories for any visible category #594
+
 
 ## [0.2.4] - 2020-07-23
 ### Bugfixes
@@ -40,21 +44,22 @@
 * Add +Listing buttons to Submission #578 #590
 * Add node-version dotfile
 
+
 ## [0.2.3] - 2020-07-09
 ### Enhancements
 * Improve contributions readability (remove labels, change prominence of created_at values). #558
 * Nested Categories now display under their parent on index #570
 
 ### Bugfixes
-* Font-awesome icons now load in more deployed environments. #479, #560, #566
+* Font-awesome icons not loading in some deployed environments. #479, #560, #566
 * Tags are now displayed independently on Matches index (to fix nowrap issue) #565
 * HTML-sanitization now works for custom landing (and about) page text #568
 * Categories are now correctly ordered on forms #569
 * Subcategories on Ask/Offer form weren't displaying their descriptions. #571
 
-
 ### Development notes
 * All frontend assets are being served by webpack and sprockets has been removed 👋🏾🙏🏾! #566
+
 
 ## [0.2.2] - 2020-06-27
 

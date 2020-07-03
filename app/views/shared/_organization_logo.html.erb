@@ -1,0 +1,5 @@
+<% if @current_organization&.logo_url %>
+  <%= image_tag @current_organization.logo_url, width: 300, alt: 'Logo' %>
+<% else %>
+  <%= image_pack_tag 'media/images/logo.png', width: 300, alt: 'Logo' %>
+<% end %>

@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'bulma/bulma';
+@import 'bulma/sass/utilities/_all';
 
 .tileListItem {
   @include tablet {

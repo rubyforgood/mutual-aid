@@ -2,33 +2,36 @@
 
 ## [Unreleased]
 ### Enhancements
-* #558 Improve contributions readability (remove labels, change prominence of created_at values)
+* Improve contributions readability (remove labels, change prominence of created_at values). #558
 
 ### Bugfixes
-* #479, #560, #566 Font-awesome icons not loading in some deployed environments.
+* Font-awesome icons not loading in some deployed environments. #479, #560, #566
 
 ### Development notes
-* #566 All frontend assets are being served by webpack and sprockets has been removed 👋🏾🙏🏾!
+* All frontend assets are being served by webpack and sprockets has been removed 👋🏾🙏🏾! #566
 
 
 ## [0.2.2] - 2020-06-27
 
 ### Breaking changes
-* #492 If you were relying on the stock header/footer text on ask/offer forms, that text will need to be customized.
+* If you were relying on the stock header/footer text on ask/offer forms, that text will need to be customized. #492
 
 ### Enhancements
-* #509 Rudimentary ansible support
-* #513 Improve readme setup instructions
-* #523 #522 Improve people index layout
-* #531 #492 Customize header/footer text on ask/offer forms.
-* #532 Consolidating dotenv files
-* #534 #517 Add release-it package
-* #542 Add inexhaustible to Listing
-* #544 Remove profile & match buttons from Contributions page
-* #545 Update listings index layout
+* Customize header/footer text on ask/offer forms. #531, #492
+* Rudimentary ansible support. #509
+* Improve readme setup instructions. #513
+* Improve people index layout. #523, #522
+* Add inexhaustible to Listing. #542
+* Remove profile & match buttons from Contributions page. #544
+* Update listings index layout. #545
 
 ### Bugfixes
-* #524 Fix vue styles (Add a stylesheet_pack_tag to include vue styles in prod)
+* Fix vue styles (add a stylesheet_pack_tag to include vue styles in prod). #524
+
+### Development notes
+* Consolidating dotenv files. #532
+* Add release-it package. #534, #517
+
 
 ## [0.2.1] - 2020-06-13
 ### Bugfixes

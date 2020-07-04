@@ -4,6 +4,13 @@
 ### Enhancements
 * #558 Improve contributions readability (remove labels, change prominence of created_at values)
 
+### Bugfixes
+* #479, #560, #566 Font-awesome icons not loading in some deployed environments.
+
+### Development notes
+* #566 All frontend assets are being served by webpack and sprockets has been removed 👋🏾🙏🏾!
+
+
 ## [0.2.2] - 2020-06-27
 
 ### Breaking changes

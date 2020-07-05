@@ -3,7 +3,9 @@
 ## [Unreleased]
 ### Enhancements
 * #558 Improve contributions readability (remove labels, change prominence of created_at values)
-* #565 Remove tag class until Listings have one category per Listing
+
+### Bugfixes
+* Display tags independently on Matches index (to fix nowrap issue) #565
 
 ## [0.2.2] - 2020-06-27
 

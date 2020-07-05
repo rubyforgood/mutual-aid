@@ -11,7 +11,20 @@
     <%= f.input :donations_module, as: :radio_buttons %>
     <%= f.input :shared_accounts_module, as: :radio_buttons %>
     <%= f.input :chat_module, as: :radio_buttons %>
-    <%= f.input :about_us_text, label: "About us text (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+    <hr>
+    <div class="html-info">
+      'HTML-enabled' fields below allow you to enter plain text and/or to include the following tags:
+      <br>
+      <ul>
+        <% HtmlSanitizer.tags.each do |el| %>
+          <li><%= el %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="is-inline-flex">
+      <%= f.input :about_us_text,
+                  label: "About us text (<a href='https://htmleditor.io/'>HTML-enabled</a>)".html_safe %>
+    </div>
     <div class="is-inline-flex">
       <%= f.input :landing_page_text_who,
                   label: "Landing page text: Who (

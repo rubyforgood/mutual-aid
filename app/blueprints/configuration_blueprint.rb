@@ -1,6 +1,6 @@
 class ConfigurationBlueprint < Blueprinter::Base
   association :categories, blueprint: CategoryBlueprint, view: :with_subcategories do
-    Category.visible.roots.includes(:categories)
+    Category.visible.roots.includes(:categories).order(:display_order, :name)
   end
 
   association :contact_methods, blueprint: ContactMethodBlueprint do

@@ -8,13 +8,13 @@ require("@rails/ujs").start()
 // require("@rails/activestorage").start()
 // require("channels")
 
+// Induce webpack to emit all files under app/assets/images so that
+// they can be referenced in rails views via the image_pack_tag helper
+require.context('images', true)
 
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-//
-// const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
+// Induce webpack to process css
+import 'stylesheets/application'
 
-
+// Entrypoints into JS, made available as window.EntryPoints
+// See config/webpack/environment.js
 export * from '../entry_points'

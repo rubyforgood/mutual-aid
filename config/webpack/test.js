@@ -14,6 +14,16 @@ process.env.RAILS_ENV = process.env.RAILS_ENV || 'test'
 const environment = require('./environment')
 const nodeExternals = require('webpack-node-externals');
 
+// Ignore styles
+// See https://sysgears.github.io/mochapack/docs/installation/webpack-configuration.html#without-css-modules
+environment.loaders.keys().forEach((key) => {
+  if (key.match(/css|sass|moduleCss|moduleSass/)) {
+    const loader = environment.loaders.get(key)
+    delete loader.use
+    loader.loader = 'null-loader'
+  }
+})
+
 environment.config.merge({
   output: {
     devtoolModuleFilenameTemplate: '[absolute-resource-path]',
@@ -23,5 +33,6 @@ environment.config.merge({
   externals: [nodeExternals()],
   devtool: 'inline-cheap-module-source-map'
 })
+
 
 module.exports = environment.toWebpackConfig()

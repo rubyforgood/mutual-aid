@@ -27,11 +27,15 @@
         <td><%= shorthand_display(match.created_at) %></td>
         <td><%= shorthand_display(match.updated_at) %></td>
         <td>
-          <span class="tag is-info is-light has-text-weight-bold"><%= match.receiver&.all_tags_to_s.upcase %></span>
+          <% match.receiver&.all_tags_unique&.each do |tag_name| %>
+            <span class="tag is-info is-light has-text-weight-bold"><%= tag_name.upcase %></span>
+          <% end %>
           <br>
           <%= match.receiver&.person&.name %></td>
         <td>
-          <span class="tag is-info is-light has-text-weight-bold"><%= match.provider&.all_tags_to_s.upcase %></span>
+          <% match.provider&.all_tags_unique&.each do |tag_name| %>
+            <span class="tag is-info is-light has-text-weight-bold"><%= tag_name.upcase %></span>
+          <% end %>
           <br>
           <%= match.provider&.person&.name %></td>
         <td><%= match.status.titleize %></td>

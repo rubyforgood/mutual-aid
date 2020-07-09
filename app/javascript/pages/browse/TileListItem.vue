@@ -23,13 +23,13 @@
       </div>
 
       <div class="text">
+        <div>
+          <small><time :datetime="createdAtDate.toISOString()">{{ createdAtDate.toLocaleDateString() }} {{ createdAtDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</time></small>
+        </div>
         <h5 class="has-text-weight-bold">{{ title }}</h5>
         <p>{{ description }}</p>
         <div v-if="service_area" class="has-text-grey-lighter">
-          <small>Service area:</small> {{ service_area.name }}
-        </div>
-        <div class="has-text-grey-lighter">
-          <small>Submitted: <time :datetime="createdAtDate.toISOString()">{{ createdAtDate.toLocaleDateString() }} {{ createdAtDate.toLocaleTimeString() }}</time></small>
+          {{ service_area.name }}
         </div>
       </div>
     </div>
@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'bulma/bulma';
+@import 'bulma/sass/utilities/_all';
 
 .tileListItem {
   @include tablet {

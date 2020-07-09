@@ -1,4 +1,4 @@
-<%= render "layouts/view_header", resource: @categories.first %>
+<%= render "layouts/view_header", resource: @root_categories.first %>
 
 <div class="index">
   <div class="columns is-marginless">
@@ -7,8 +7,8 @@
         <thead>
         <tr>
           <th>Name</th>
+          <th>Parent category</th>
           <th>Description</th>
-          <th>Parent</th>
           <th>Is created by admin</th>
           <th>Display to public</th>
           <th>Display order</th>
@@ -17,17 +17,28 @@
         </thead>
 
         <tbody>
-        <% @categories.each do |category| %>
-          <tr>
-            <td><%= category.name %></td>
-            <td><%= category.description %></td>
-            <td><%= category.parent&.name %></td>
-            <td><%= yes_no(category.is_created_by_admin) %></td>
-            <td><%= yes_no(category.display_to_public) %></td>
-            <td><%= category.display_order %></td>
-            <td><%= edit_button(category) %></td>
-          </tr>
-        <% end %>
+          <% @root_categories.each do |root_category| %>
+            <tr>
+              <td><%= root_category.name %></td>
+              <td><%= root_category.parent&.name %></td>
+              <td><%= root_category.description %></td>
+              <td><%= yes_no(root_category.is_created_by_admin) %></td>
+              <td><%= yes_no(root_category.display_to_public) %></td>
+              <td><%= root_category.display_order %></td>
+              <td><%= edit_button(root_category) %></td>
+            </tr>
+            <% root_category.categories.each do |category| %>
+              <tr class="grey-row">
+                <td><%= category.name %></td>
+                <td><%= category.parent&.name %></td>
+                <td><%= category.description %></td>
+                <td><%= yes_no(category.is_created_by_admin) %></td>
+                <td><%= yes_no(category.display_to_public) %></td>
+                <td><%= category.display_order %></td>
+                <td><%= edit_button(category) %></td>
+              </tr>
+            <% end %>
+          <% end %>
         </tbody>
       </table>
     </div>

@@ -21,6 +21,6 @@ class HtmlSanitizer
   end
 
   def sanitize_for_vue
-    sanitize_for_rails.gsub(/"/, "\\\"").gsub(/'/, "\\'").gsub(/[\r\n]+/, "\\\n")
+    sanitize_for_rails.gsub(/"/, "\\\"").gsub(/'/, "\\'").gsub(/[\r\n]+/, "\\\n").html_safe
   end
 end

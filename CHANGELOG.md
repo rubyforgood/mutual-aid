@@ -3,12 +3,15 @@
 ## [Unreleased]
 ### Enhancements
 * Improve contributions readability (remove labels, change prominence of created_at values). #558
+* Nested Categories now display under their parent on index #570
 
 ### Bugfixes
-* Font-awesome icons weren't loading in some deployed environments. #479, #560, #566
-* Display tags independently on Matches index (to fix nowrap issue) #565
-* Order root level Categories on forms #569
+* Font-awesome icons now load in more deployed environments. #479, #560, #566
+* Tags are now displayed independently on Matches index (to fix nowrap issue) #565
+* HTML-sanitization now works for custom landing (and about) page text #568
+* Categories are now correctly ordered on forms #569
 * Subcategories on Ask/Offer form weren't displaying their descriptions. #571
+
 
 ### Development notes
 * All frontend assets are being served by webpack and sprockets has been removed 👋🏾🙏🏾! #566

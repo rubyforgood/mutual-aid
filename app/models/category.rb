@@ -4,7 +4,7 @@ class Category < ApplicationRecord
     inverse_of: :categories,
     optional: true,
   )
-  has_many(:categories, -> { order :display_order },
+  has_many(:categories, -> { order(:display_order, :name) },
     class_name: "Category",
     foreign_key: :parent_id,
     inverse_of: :parent
@@ -13,7 +13,7 @@ class Category < ApplicationRecord
   validates :name, presence: true
 
   scope :visible, -> { where(display_to_public: true) }
-  scope :roots,   -> { where(parent: nil) }
+  scope :roots,   -> { where(parent: nil).order(:display_order, :name) }
 
   # Currently only filtering by top-level categories
   scope :as_filter_types, -> { roots.select(:id, :name)}

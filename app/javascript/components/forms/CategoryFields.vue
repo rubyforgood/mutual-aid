@@ -32,14 +32,18 @@
           <input v-if="anySelected(subcategories)" :name="fieldNamePrefix" :value="name" type="hidden" />
 
           <div v-for="{id: subId, name: subName, description: subDescription} in subcategories" :key="subId">
-            <b-checkbox
-              v-model="selectedTags"
-              :name="fieldNamePrefix"
-              :native-value="subName"
-              size="is-medium"
+            <b-field class="pb-05" grouped>
+              <b-checkbox
+                v-model="selectedTags"
+                :name="fieldNamePrefix"
+                :native-value="subName"
+                size="is-medium"
               >
-              {{ subName | capitalize }}
-            </b-checkbox>
+                <span>{{ subName | capitalize }}</span>
+                <span v-if="subDescription" class="is-size-6"> {{ "- " + subDescription }} </span>
+              </b-checkbox>
+
+            </b-field>
           </div>
         </div>
       </b-collapse>

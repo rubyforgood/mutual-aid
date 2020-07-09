@@ -5,7 +5,8 @@
 * Improve contributions readability (remove labels, change prominence of created_at values). #558
 
 ### Bugfixes
-* Font-awesome icons not loading in some deployed environments. #479, #560, #566
+* Font-awesome icons weren't loading in some deployed environments. #479, #560, #566
+* Subcategories on Ask/Offer form weren't displaying their descriptions. #571
 
 ### Development notes
 * All frontend assets are being served by webpack and sprockets has been removed 👋🏾🙏🏾! #566

@@ -6,13 +6,11 @@
 
 ### Bugfixes
 * Font-awesome icons not loading in some deployed environments. #479, #560, #566
+* Display tags independently on Matches index (to fix nowrap issue) #565
+* Order root level Categories on forms #569
 
 ### Development notes
 * All frontend assets are being served by webpack and sprockets has been removed 👋🏾🙏🏾! #566
-
-
-### Bugfixes
-* Display tags independently on Matches index (to fix nowrap issue) #565
 
 ## [0.2.2] - 2020-06-27
 

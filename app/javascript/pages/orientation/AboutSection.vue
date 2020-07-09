@@ -1,7 +1,7 @@
 <template>
   <div class='section'>
     <h2 class='subtitle'>{{title}}</h2>
-    <p class='description'>{{description}}</p>
+    <p v-html="description" class='description'></p>
   </div>
 </template>
 

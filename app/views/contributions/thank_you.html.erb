@@ -3,7 +3,7 @@
 </div>
 
 <div class="header">
-  <%= @system_setting.confirmation_page_text_header&.html_safe %>
+  <%= HtmlSanitizer.new(@system_setting.confirmation_page_text_header).sanitize_for_rails %>
 </div>
 
 <hr>
@@ -35,6 +35,6 @@
 </div>
 
 <div class="footer">
-  <%= @system_setting.confirmation_page_text_footer&.html_safe %>
+  <%= HtmlSanitizer.new(@system_setting.confirmation_page_text_footer).sanitize_for_rails %>
 </div>
 

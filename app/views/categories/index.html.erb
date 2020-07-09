@@ -28,7 +28,7 @@
               <td><%= edit_button(root_category) %></td>
             </tr>
             <% root_category.categories.each do |category| %>
-              <tr class="grey-row">
+              <tr class="has-background-white-ter has-text-grey">
                 <td><%= category.name %></td>
                 <td><%= category.parent&.name %></td>
                 <td><%= category.description %></td>

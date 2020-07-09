@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.3] - 2020-07-09
 ### Enhancements
 * Improve contributions readability (remove labels, change prominence of created_at values). #558
 * Nested Categories now display under their parent on index #570

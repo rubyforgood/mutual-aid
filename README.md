@@ -44,7 +44,7 @@ This project uses webpacker to bundle front end assets, including:
 ## Setting up services
 Some choices for how to run services in your development environment:
 * If you decide to use Docker:
-    * [Docker](#development-with-docker) 
+    * [Docker](#development-with-docker)
 * If you want to install local services on your development host:
     * Redis 4+
     * PostgreSQL 9.5+
@@ -67,13 +67,13 @@ The easiest way to manage different installations with node.js is with [nvm](htt
 
 You'll also need Yarn, a package manager for node.js. To install that:
 * For Mac (Homebrew): `brew install yarn`
-* Debian/Ubuntu: 
+* Debian/Ubuntu:
 ```
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt update && sudo apt install yarn
 ```
-* On Enterprise Linux (CentOS/RHEL/Fedora/Amazon Linux/Sci Linux): 
+* On Enterprise Linux (CentOS/RHEL/Fedora/Amazon Linux/Sci Linux):
 ```
 curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
 sudo yum install yarn
@@ -140,14 +140,14 @@ To get started using the application with docker,
 2. Install [docker-compose](https://docs.docker.com/compose/install/)
 3. Clone the repository, and open the repository folder in your favorite command line or terminal application.
 4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml`.
-5. Run 
+5. Run
    ```bash
    docker-compose run app '/usr/local/bin/rake' secret \
     | echo "SECRET_KEY_BASE=$(tail -1 -)" > .env
    ```
    to give rails the information it needs to be able to launch
 6. Now you should be able to run `docker-compose up -d`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
-7. To setup the database, you can run 
+7. To setup the database, you can run
   ```bash
   docker-compose run \
     -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" \
@@ -159,7 +159,7 @@ To get started using the application with docker,
 
 **NOTE** Do not use this method in production! This is for **testing & development only* the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
 
-Note that if you are developing this application, running `docker-compose up` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes you changes, run `docker-compose up --build` instead. 
+Note that if you are developing this application, running `docker-compose up` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes you changes, run `docker-compose up --build` instead.
 
 Also, if you would like docker-compose to run in daemon mode (which means that it will exit once the images have been set up and the application starts running) you may use `docker-compose up -d`. This will not show you any logging output from the application, however, and you will not be able to exit the application directly. To view logs when docker-compose is running in daemon mode, use `docker-compose logs`. To stop the application and all its services, run `docker-compose down`.
 
@@ -191,15 +191,15 @@ within it. This allows for any unexpected state data of the user from hanging ar
 
 ## Data
 * Running `db:seed` will create basic types, etc, for test and production environments.
-* We also added some fake data seed files for you to use that are callable via rake tasks (these are in `lib/tasks/db.rake`) 
+* We also added some fake data seed files for you to use that are callable via rake tasks (these are in `lib/tasks/db.rake`)
   - To start fresh with prod seeds only (e.g. user account, organization, basic contact methods, languages, etc): `rake db:rebuild_and_seed`
-  - To add some dev seeds: `rake db:import_all_seeds` 
-  - All options: 
+  - To add some dev seeds: `rake db:import_all_seeds`
+  - All options:
     - `rake db:rebuild_and_seed` (drop, create, migrate, seed, stats_check)
     - `rake db:rebuild_and_seed_dev` (drop, create, migrate, seed, import_all_seeds, stats_check)
     - `rake db:stats_check` (outputs record totals)
     - `rake db:truncate_tables` (runs truncate on all tables)
-    - `rake db:recreate_all_seeds` (delete_all_data, seed, import_all_seeds, stats_check)   
+    - `rake db:recreate_all_seeds` (delete_all_data, seed, import_all_seeds, stats_check)
     - `rake db:import_all_seeds` (import_dev_seeds, import_submission_response_seeds, import_user_seeds, import_custom_form_question_seeds, stats_check)
     - `rake db:import_dev_seeds` (runs the db/seeds/dev_seeds.rb file)
     - `rake db:import_submission_response_seeds` (runs the db/scripts/submission_response_seeds.rb file -- you could edit this to pull from the db/seeds/gitignored_csvs path if you have a file you want to import)
@@ -220,8 +220,66 @@ within it. This allows for any unexpected state data of the user from hanging ar
 # Deploying the app
 ## If you decide to deploy to Heroku:
 * [Heroku Command Line Interface](https://devcenter.heroku.com/categories/command-line)
+* If you have HTTPS enabled (requires a paid dyno), be sure to enable `config.force_ssl = true` on line 47 of `config/environments/production.rb`
+
 ## If you decide to use Docker:
-* [Docker Desktop](https://www.docker.com/products/docker-desktop) to use the docker-compose steps listed above
+
+_Note_: These instructions assume you are working with shell access to a system with Docker and docker-compose available (such as a Digital Ocean Docker image).
+
+_Note_: These instructions assume you already have a domain name registered and pointed it at the
+IP address of your server.
+
+1. You'll need to get the code on the server. The recommended way to do this is with a [GitHub Deploy Key](https://developer.github.com/v3/guides/managing-deploy-keys/). Deploy Keys are just SSH keys that are tied to a project, instead of being tied to a user, which means that they can persist independently of the project's membership. You can use [GitHub's guide on generating SSH keys to generate your deploy key](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+2. After you've generated your deploy key and added it to your project, clone the project.
+3. Create a Caddyfile. It can live anywhere (Mutual Aid Tompkins has ours at `~/.config/Caddyfile`), and it should look like this, replacing `your.domain.name` with your organization's desired domain name:
+
+   ```
+   your.domain.name {
+     header {
+       Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
+     }
+
+     root * /config/public
+
+     # Serve static files (like assets and packs) with the file_server
+     @static_files {
+       file
+     }
+     file_server @static_files
+
+     # Anything that's not a static file, proxy to puma/rails
+     @backend {
+       not file
+     }
+     reverse_proxy @backend http://app:3000
+   }
+   ```
+
+4. Navigate to the `docker/production` directory within your clone of the repo. You should see a file named `docker-compose.yml`.
+5. Run
+   ```bash
+   docker-compose run app '/usr/local/bin/rake' secret \
+    | echo "SECRET_KEY_BASE=$(tail -1 -)" > .env
+   ```
+   This will generate a secret token and add it to a file named `.env`, which will be available when
+   `docker-compose` starts.
+6. Generate (using a password manager) a password for the Postgres database, and append it to the `.env` file. Your `.env` file should look something like:
+   ```bash
+   SECRET_KEY_BASE=<A fairly long string of numbers>
+   POSTGRES_PASSWORD=<your postgres password>
+   ```
+7. Start the server, database, and reverse proxy by running `docker-compose --build -d`
+8. Initialize the database with
+   ```bash
+   docker-compose run \
+     -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" \
+     -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" \
+     app rails db:prepare db:seed
+   ```
+   This will setup the database and create a default admin user with the email and password as  specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to  `docker-compose` with the `-e` option. If you don't want to create the default user, you can just  run `docker-compose run app db:prepare` and create the account using the sign up option on the  website. **Only run this command the first time you set up your instance**
+
+You should be good to go! Visit your domain name to get started.
+
 ## Make sure to run `rake db:seed`
 
 # Diagrams!

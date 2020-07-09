@@ -70,5 +70,8 @@ Rails.application.routes.draw do
   resources :teams
   resources :users, except: :create
 
+  get "/new_user", to: "new_users#new", as: "admin_new_user"
+  post "/new_user", to: "new_users#create"
+
   root :to => 'public_pages#landing_page'
 end

@@ -1,0 +1,32 @@
+<div class="row has-text-centered login-screen" style="vertical-align:middle;">
+  <div class="has-text-centered">
+    <br>
+    <h2><span class="title is-1">New User</span></h2>
+    <br><br>
+
+    <%= simple_form_for(@new_user, url: admin_new_user_path(@new_user)) do |f| %>
+
+      <div class="is-inline-flex has-no-right-padding">
+        <div class="field">
+          <%= f.input :email,
+                      email_field: true,
+                      autofocus: true,
+                      autocomplete: "email" %>
+        </div>
+      </div>
+
+      <div></div>
+
+      <div class="is-inline-flex">
+        <div class="field">
+          <%= f.input :name %>
+        </div>
+      </div>
+
+
+      <div class="actions" id="login_button">
+        <%= f.button :submit, "Create user", class: "button is-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

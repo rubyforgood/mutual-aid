@@ -6,6 +6,11 @@ RSpec.describe SubmissionForm do
   let(:service_area)   { create :service_area }
   let(:questions)      { create_list :custom_form_question, 2 }
 
+  let(:categories) {[
+    create(:category, name: 'errands'),
+    create(:category, name: 'groceries'),
+  ]}
+
   describe 'creating a new submission' do
     let(:params) {{
       form_name: 'Offer_form',
@@ -13,7 +18,7 @@ RSpec.describe SubmissionForm do
       service_area: service_area.id,
       listing_attributes: {
         type: 'Offer',
-        tag_list: ['errands','groceries'],
+        tag_list: categories.map(&:id),
         description: 'on a quiet day i can hear her breathing',
       },
       location_attributes: {
@@ -170,13 +175,11 @@ RSpec.describe SubmissionForm do
 
       context 'with invalid params' do
         before do
-          Rails.logger.level = :debug
           params[:person_attributes][:email] = ''
           submission
         end
 
         it 'does not create any new records' do
-          Rails.logger.warn '=' * 80
           expect { submission.save }
             .to  change(Location,   :count).by(0)
             .and change(Listing,    :count).by(0)

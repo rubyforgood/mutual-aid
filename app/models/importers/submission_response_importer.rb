@@ -1,40 +1,3 @@
-
-## Timestamp,
-## "Name",
-## "service_area_name",
-## "phone",
-## "email",
-## "locale_name",
-## "Have you tested positive for COVID-19coronavirus?",
-## "Do you need aid or do you want to volunteer to provide aid?",
-# "offer_category_errands",
-# "offer_category_errands_funding",
-# "offer_category_errands_funding_description",
-# "offer_category_cash",
-# "offer_category_cash_description",
-# "offer_category_housing",
-## "Are you interested in being a neighborhood steward?",
-## "skills",
-## "Questions/Comments/Suggestions?",
-## "Signature of Volunteer/Needs Requester: Confirming that I am of legal age and am freely signing this agreement electronically. I have read this form and understand that by signing this form, I am giving up legal rights and remedies.",
-# "urgency_level_name",
-# "ask_category_groceries",
-# "ask_category_groceries_funding",
-# "ask_category_groceries_funding_description",
-# "ask_category_groceries_diet_description",
-# "ask_category_medication_delivery",
-# "ask_category_medication_delivery_pharmacy_description",
-# "ask_category_medication_delivery_funding",
-# "ask_category_medication_delivery_funding",
-# "ask_category_cash",
-# "ask_category_cash_description",
-# "ask_category_miscellaneous",
-## "Can you share some ways you identify yourself? i.e class, race, gender identity, (dis)ability etc",
-## "Has the COVID-19 (Corona virus) virus has affected you (directly or indirectly)? If yes, how?",
-# "ask_category_bulk_descr",
-## "Do you also want to volunteer to provide aid?",
-## "Signature of Volunteer/Needs Requester: Confirming that I am of legal age and am freely signing this agreement electronically. I have read this form and understand that by signing this form, I am giving up legal rights and remedies."
-
 class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
   def initialize(current_user, form_type, categories_question_name=nil)
@@ -75,11 +38,11 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def process_headers_as_data(rows)
     rows.headers.each_with_index do |header_name, idx|
       if header_name # skip blank headers!
-        puts header_name
         question = CustomFormQuestion.where("LOWER(name) = ?", header_name.downcase.strip).
-                                      where(form_type: @form_type).
-            # where.not(name: @categories_question_name). # TODO exclude categories answer from import
-            first_or_create!(display_order: idx, input_type: "string", name: header_name.downcase.strip)
+            where(form_type: @form_type).first_or_create!(display_order: idx,
+                                                          input_type: "string",
+                                                          name: header_name.strip)
+        # where.not(name: @categories_question_name). # TODO exclude categories answer from import
         question.update_attributes!(display_order: idx, input_type: "string") # in case question was already in db
         question.save!
         @custom_form_questions << question
@@ -268,22 +231,19 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     person = submission.person
     service_area = submission.service_area
     listings = []
-    category_headers = CustomFormQuestion.translated_name_stem('_category_').
-                                          where.not("mobility_string_translations.value ILIKE ? OR
-                                                      mobility_string_translations.value ILIKE ?",
-                                                    "%_funding%", "%_description")
+    category_headers = CustomFormQuestion.translated_name_stem('_category_').where.not("mobility_string_translations.value ILIKE ? OR  mobility_string_translations.value ILIKE ?", "%_funding%", "%_description")
     category_headers.each do |category_cfq|
-      answer = YAML.load(row[category_cfq].to_s)
+      answer = YAML.load(row[category_cfq.name].to_s)
       if answer
         category_name = category_cfq.name.downcase.gsub("offer_category_", "").gsub("ask_category_", "")
         category = Category.where(name: category_name).first_or_create!
         row_status = row["status"]&.strip
         listing = Listing.where(person: person,
-                                title: "imported #{Time.current}",
                                 service_area: service_area,
                                 submission: submission,
                                 type: category_cfq.name.split("_").first.classify,
-                                created_at: created_at).first_or_create! # TODO add descriptions
+                                created_at: created_at).
+                          first_or_create!(title: "imported #{Time.current}") # TODO add descriptions
         category_cfq.option_list << category_name unless category_cfq.option_list.include?(category_name)
         listing.tag_list << category_name
         category_cfq.save!
@@ -361,3 +321,44 @@ end
 # What resources can you offer? check all applicable
 # Do you have special skills or particular resources you would like us to know about?
 # Are there any notes about what you've offered above?
+#
+#
+#
+#
+#
+#
+## Timestamp,
+## "Name",
+## "service_area_name",
+## "phone",
+## "email",
+## "locale_name",
+## "Have you tested positive for COVID-19coronavirus?",
+## "Do you need aid or do you want to volunteer to provide aid?",
+# "offer_category_errands",
+# "offer_category_errands_funding",
+# "offer_category_errands_funding_description",
+# "offer_category_cash",
+# "offer_category_cash_description",
+# "offer_category_housing",
+## "Are you interested in being a neighborhood steward?",
+## "skills",
+## "Questions/Comments/Suggestions?",
+## "Signature of Volunteer/Needs Requester: Confirming that I am of legal age and am freely signing this agreement electronically. I have read this form and understand that by signing this form, I am giving up legal rights and remedies.",
+# "urgency_level_name",
+# "ask_category_groceries",
+# "ask_category_groceries_funding",
+# "ask_category_groceries_funding_description",
+# "ask_category_groceries_diet_description",
+# "ask_category_medication_delivery",
+# "ask_category_medication_delivery_pharmacy_description",
+# "ask_category_medication_delivery_funding",
+# "ask_category_medication_delivery_funding",
+# "ask_category_cash",
+# "ask_category_cash_description",
+# "ask_category_miscellaneous",
+## "Can you share some ways you identify yourself? i.e class, race, gender identity, (dis)ability etc",
+## "Has the COVID-19 (Corona virus) virus has affected you (directly or indirectly)? If yes, how?",
+# "ask_category_bulk_descr",
+## "Do you also want to volunteer to provide aid?",
+## "Signature of Volunteer/Needs Requester: Confirming that I am of legal age and am freely signing this agreement electronically. I have read this form and understand that by signing this form, I am giving up legal rights and remedies."

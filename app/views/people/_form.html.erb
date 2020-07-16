@@ -27,9 +27,17 @@
       <%= f.input :monthly_donation_amount_max, as: :float, label: "Cash $/month", hint: "(Self-reported monthly quota)" %>
     </div>
 
+    <div class="field">
+      <%= f.simple_fields_for :location do |ff| %>
+        <%= render "location_fields", ff: ff, f: f %>
+      <% end %>
+    </div>
+
     <%= f.input :skills %>
     <%= f.input :notes %>
     <%= f.association :user %>
+
+
   </div>
 
   <%= render "layouts/view_footer_buttons", f: f, resource: @person, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>

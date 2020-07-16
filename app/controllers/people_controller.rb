@@ -2,7 +2,8 @@ class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   def index
-    @people = Person.all
+    @people = Person.includes(:user, :preferred_contact_method, :location, :service_area).
+                     references(:user, :preferred_contact_method, :location, :service_area)
   end
 
   def show
@@ -19,6 +20,9 @@ class PeopleController < ApplicationController
   end
 
   def edit
+    unless @person.location
+      @person.location = Location.new
+    end
     set_form_dropdowns
   end
 
@@ -76,6 +80,19 @@ class PeopleController < ApplicationController
           :service_area_id,
           :preferred_locale,
           :preferred_contact_timeframe,
-          :preferred_contact_method_id)
+          :preferred_contact_method_id,
+          location_attributes: [
+              :id,
+              :location_type_id,
+              :street_address,
+              :city,
+              :state,
+              :zip,
+              :county,
+              :region,
+              :neighborhood,
+              :_destroy,
+          ],
+      )
     end
 end

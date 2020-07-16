@@ -1,3 +1,9 @@
+<style>
+  .field.is-horizontal {
+    display: inline-block;
+  }
+</style>
+
 <%= simple_form_for @community_resource do |f| %>
   <% if f.object.errors.any? %>
     <div id="error_explanation">

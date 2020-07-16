@@ -1,3 +1,8 @@
+<style>
+  .field.is-horizontal {
+    display: inline-block;
+  }
+</style>
 <%= simple_form_for @listing do |f| %>
   <%= f.error_notification %>
 
@@ -8,7 +13,7 @@
                   </a> or <a href='/offers/new?person_id=#{@person&.id}'> Offer
                   </a>, as needed, but save this form first!)".html_safe %>
     <div class="field is-grouped">
-      <%= f.input :type, as: :select, collection: ["Ask", "Offer"] %>
+      <%= f.input :type, as: :select, collection: ["Ask", "Offer"], selected: action_name == "new" ? params[:type] : f.object.type %>
       <% if action_name == 'new' %>
         <%= f.hidden_field :state, value: f.object.state || "received" %>
       <% else %>
@@ -16,10 +21,10 @@
       <% end %>
     </div>
     <%= f.input :tag_list, as: :check_boxes, collection: @available_tags %>
-    <%= f.association :person, include_blank: true %>
-    <%= f.association :service_area, include_blank: true %>
-    <%= f.association :location, include_blank: true %>
-    <%= (f.association :submission, include_blank: true) if current_user.sys_admin_role? %>
+    <%= f.association :person, include_blank: true, selected: params[:person_id] %>
+    <%= f.association :service_area, include_blank: true, selected: params[:service_area_id] %>
+    <%= f.association :location, include_blank: true, selected: params[:location_id] %>
+    <%= (f.association :submission, include_blank: true, selected: params[:submission_id]) if current_user.sys_admin_role? || params[:submission_id] %>
     <%= f.input :inexhaustible, as: :radio_buttons %>
   </div>
 

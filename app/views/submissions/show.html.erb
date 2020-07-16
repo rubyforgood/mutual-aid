@@ -44,6 +44,14 @@
     <%= show_button(listing, "View " + listing.name, listing.icon_class) %>
     <br>
   <% end %>
+  <%= link_to "Add Offer", new_listing_path(submission_id: @submission.id, person_id: @submission.person_id,
+                                            service_area_id: @submission.service_area_id,
+                                            location_id: @submission.person.location_id,
+                                            type: "Offer") %>
+  <%= link_to "Add Ask", new_listing_path(submission_id: @submission.id, person_id: @submission.person_id,
+                                          service_area_id: @submission.service_area_id,
+                                          location_id: @submission.person.location_id,
+                                          type: "Ask") %>
 </div>
 <hr>
 <div>

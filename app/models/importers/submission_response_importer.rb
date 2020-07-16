@@ -39,11 +39,11 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     rows.headers.each_with_index do |header_name, idx|
       if header_name # skip blank headers!
         question = CustomFormQuestion.where("LOWER(name) = ?", header_name.downcase.strip).
-            where(form_type: @form_type).first_or_create!(display_order: idx,
-                                                          input_type: "string",
-                                                          name: header_name.strip)
+            where(form_type: @form_type).first_or_create!(display_order: idx, input_type: "string",
+                                                          name: header_name.downcase.strip)
         # where.not(name: @categories_question_name). # TODO exclude categories answer from import
         question.update_attributes!(display_order: idx, input_type: "string") # in case question was already in db
+
         question.save!
         @custom_form_questions << question
       end

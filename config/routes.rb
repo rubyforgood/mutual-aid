@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   resources :software_feedbacks
   resources :submissions
   resources :submission_responses
+  resources :submission_response_imports, only: [:new, :create]
   resources :system_locales
   resources :system_settings
   resources :teams

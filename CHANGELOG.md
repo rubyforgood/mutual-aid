@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Enhancements
+* Make login logo get populated from current_organization (last is_instance_owner) #581
+
 ## [0.2.3] - 2020-07-09
 ### Enhancements
 * Improve contributions readability (remove labels, change prominence of created_at values). #558

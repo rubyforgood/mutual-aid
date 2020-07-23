@@ -109,7 +109,18 @@ class Importers::BaseImporter
     records_report("initial")
 
     rows = CSV.read(path, headers: true)
+    import_rows(rows)
+  end
 
+  def import_string(string)
+    Rails.logger.info("START IMPORT------------#{Time.now}")
+    records_report("initial")
+
+    rows = CSV.parse(string, headers: true)
+    import_rows(rows)
+  end
+
+  def import_rows(rows)
     process_headers_as_data(rows)
 
     ActiveRecord::Base.transaction do

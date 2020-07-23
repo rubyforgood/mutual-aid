@@ -1,0 +1,21 @@
+<fieldset>
+  <%= ff.error_notification %>
+
+  <div class="form-inputs">
+    <%= ff.hidden_field :id %>
+
+    <div class="field is-grouped">
+      <%= ff.association :location_type %>
+      <%= ff.input :street_address, hint: "(can be an intersection or crosstreet)" %>
+      <%= ff.input :city %>
+      <%= ff.input :state, input_html: { maxlength: 2, size: 2 }, hint: "(e.g. TN, MI, NY)" %>
+      <%= ff.input :zip, input_html: { maxlength: 5, size: 5 }, hint: "(e.g. 12345)" %>
+    </div>
+
+    <div class="field is-grouped">
+      <%= ff.input :county %>
+      <%= ff.input :region %>
+      <%= ff.input :neighborhood %>
+    </div>
+  </div>
+</fieldset>

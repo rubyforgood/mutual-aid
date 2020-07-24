@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.5] - 2020-07-24
 ### Bugfixes
 * Only show visible subcategories for any visible category #594
 

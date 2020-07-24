@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.4] - 2020-07-23
 ### Bugfixes
 * Make login logo get populated from current_organization (last is_instance_owner) #581
 

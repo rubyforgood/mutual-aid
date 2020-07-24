@@ -1,34 +1,16 @@
-<%= form_for :submission_response_import, url: submission_response_imports_path, multipart: true do |f| %>
-  <div class="title is-3">Submission Response Import</div>
+<h1 class="title is-3">Submission Response Import</h1>
 
-  <div id="file-js-example" class="file has-name">
-    <label class="file-label">
-      <input class="file-input" type="file" name="submission_response_import">
-      <span class="file-cta">
-      <span class="file-icon">
-        <i class="fas fa-upload"></i>
-      </span>
-      <span class="file-label">
-        Choose a file…
-      </span>
-    </span>
-      <span class="file-name" style="width: 50em;">
-      No file uploaded
-      <%= f.file_field :file %>
-    </span>
-    </label>
-    <%= f.submit "Upload",
-                 class: "button is-primary",
-                 name: nil %>
+<%= form_with url: submission_response_imports_path, multipart: true, local: true do |f| %>
+  <div id="upload">
   </div>
+
+  <%= f.submit "Import", class: "button is-primary" %>
 <% end  %>
 
 <script>
-    const fileInput = document.querySelector('#file-js-example input[type=file]');
-    fileInput.onchange = () => {
-        if (fileInput.files.length > 0) {
-            const fileName = document.querySelector('#file-js-example .file-name');
-            fileName.textContent = fileInput.files[0].name;
-        }
-    }
+  document.addEventListener('DOMContentLoaded', () => {
+    EntryPoints.fileUpload('#upload', {
+      fieldName: 'submission_response_import[file]',
+    })
+  })
 </script>

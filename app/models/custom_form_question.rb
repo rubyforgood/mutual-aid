@@ -32,4 +32,8 @@ class CustomFormQuestion < ApplicationRecord
   scope :translated_name_stem, ->(stem) { joins(:mobility_string_translations).
       where("mobility_string_translations.key = 'name' AND mobility_string_translations.locale = 'en'").
       where("mobility_string_translations.value ILIKE ?", "%#{stem}%") }
+
+  scope :for_form, ->(form) { joins(:form_questions).where(form_questions: {form: form}) }
+
+  scope :ordered, ->() { order(:display_order) }
 end

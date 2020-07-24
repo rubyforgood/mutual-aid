@@ -6,7 +6,7 @@
 
 ### Enhancements
 * Update submissions importer #577 & #579
-* Add UI to upload submission responses for import #589
+* Add UI to upload submission responses for import #589, #585
 * Improve tag_list checkbox UI #579
 * Add +Listing buttons to Submission #578
 

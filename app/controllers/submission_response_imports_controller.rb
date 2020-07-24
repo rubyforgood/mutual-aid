@@ -4,7 +4,7 @@ class SubmissionResponseImportsController < ApplicationController
   end
 
   def create
-    uploaded_file = params[:submission_response_import]
+    uploaded_file = params[:submission_response_import][:file]
 
     SubmissionResponseImportJob.perform_later(
       user_id: current_user.id,

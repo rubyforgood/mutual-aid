@@ -4,8 +4,7 @@ RSpec.describe SubmissionForm do
   let(:contact_method) { create :contact_method_email }
   let(:location_type)  { create :location_type }
   let(:service_area)   { create :service_area }
-  let(:question_1)   { create :custom_form_question }
-  let(:question_2)   { create :custom_form_question }
+  let(:questions)      { create_list :custom_form_question, 2 }
 
   describe 'creating a new submission' do
     let(:params) {{
@@ -30,8 +29,8 @@ RSpec.describe SubmissionForm do
         name: 'Harriet Tubman',
       },
       responses_attributes: {
-        question_1.id.to_s => "answer 1",
-        question_2.id.to_s => "answer 2"
+        questions.first.id.to_s  => "answer 1",
+        questions.second.id.to_s => "answer 2"
       },
     }}
 
@@ -127,11 +126,8 @@ RSpec.describe SubmissionForm do
       subject(:submission_responses) { submission.submission_responses }
 
       it 'builds SubmissionResponses' do
-        expect(submission_responses.first.string_response).to eq("answer 1")
-      end
-
-      it 'builds SubmissionResponses' do
         expect(submission_responses.length).to eq(2)
+        expect(submission_responses.first.string_response).to eq("answer 1")
       end
     end
 
@@ -196,7 +192,7 @@ RSpec.describe SubmissionForm do
     end
   end
 
-  pending 'updating an existing submission' do
+  describe 'updating an existing submission' do
     let(:existing_listing)  { create :offer, state: :unmatched, description: 'keep' }
     let(:existing_location) { create :location, city: 'Chicago', zip: '10101' }
     let(:existing_person)   { create :person, location: existing_location, name: 'old name', email: 'keep@me.org' }
@@ -241,7 +237,7 @@ RSpec.describe SubmissionForm do
     end
 
     it 'applies pending changes to submission and nested objects' do
-      expect(submission.submission_responses.first.string_response).to be_changed
+      expect(submission.submission_responses.first).to be_changed
       expect(submission.listings.first).to be_changed
       expect(submission.person.location).to be_changed
       expect(submission.person).to be_changed
@@ -249,7 +245,7 @@ RSpec.describe SubmissionForm do
     end
 
     it 'applies new values to submission and nested objects' do
-      expect(submission.submission_responses.first.state).to eq 'updated answer'
+      expect(submission.submission_responses.first.string_response).to eq 'updated answer'
       expect(submission.listings.first.state).to eq 'matched'
       expect(submission.person.location.city).to eq 'Shikaakwa'
       expect(submission.person.name).to eq 'new name'

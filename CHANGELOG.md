@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.6] - 2020-07-25
 ### Enhancements
 * Allow custom questions to be added to Ask and Offer forms #597
 

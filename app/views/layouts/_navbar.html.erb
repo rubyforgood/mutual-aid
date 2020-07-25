@@ -3,7 +3,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     EntryPoints.navBar('#navBar', {
       loggedIn: <%= current_user.present? %>,
-      logoUrl: '<%= Organization.current_organization.logo_url %>'
+      logoUrl: '<%= Organization.current_organization&.logo_url %>'
     })
   })
 </script>

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "/listings", type: :request do
+  let(:organization) { create :organization, is_instance_owner: true }
   let(:valid_attributes) {{
     location_attributes: {zip: "12345"},
     tag_list: ["", "cash"],

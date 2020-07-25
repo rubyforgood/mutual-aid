@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "/", type: :request do
+  let(:organization) { create :organization, is_instance_owner: true }
+
   it 'has landing_page_text_what populated from system_setting' do
     expected_what_text = Faker::Lorem.sentence
     new_system_setting = build(:system_setting, landing_page_text_what: expected_what_text)

@@ -8,9 +8,11 @@ class Organization < ApplicationRecord
 
   validates :name, presence: true
 
-  # TODO: rename to instance_owner?
-  scope :current_organization, -> { find_by(is_instance_owner: true) }
   scope :org_chart, -> { where(display_on_org_chart: true) }
+
+  def self.current_organization
+    where(is_instance_owner: true).last
+  end
 
   def primary_contact
     positions.find_by(is_primary: true)

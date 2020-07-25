@@ -10,12 +10,6 @@ class Category < ApplicationRecord
     inverse_of: :parent
   )
 
-  has_many(:visible_subcategories, -> { visible.order(:display_order, :name) },
-           class_name: "Category",
-           foreign_key: :parent_id,
-           inverse_of: :parent
-  )
-
   validates :name, presence: true
 
   scope :visible, -> { where(display_to_public: true) }

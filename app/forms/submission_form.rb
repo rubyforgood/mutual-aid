@@ -2,9 +2,10 @@ class SubmissionForm < BaseForm
   with_options default: nil do
     integer :id
     record  :service_area
-    hash    :listing_attributes,  strip: false
-    hash    :location_attributes, strip: false
-    hash    :person_attributes,   strip: false
+    hash    :listing_attributes,   strip: false
+    hash    :location_attributes,  strip: false
+    hash    :person_attributes,    strip: false
+    hash    :responses_attributes, strip: false
     string  :form_name
     string  :privacy_level_requested  # fixme: not submitted as yet
   end
@@ -13,6 +14,7 @@ class SubmissionForm < BaseForm
     build_location
     build_person
     build_listing
+    build_submission_responses
     build_submission
   end
 
@@ -40,6 +42,14 @@ class SubmissionForm < BaseForm
       end
     end
 
+    def build_submission_responses
+      @submission_responses = responses_attributes.each_with_object([]) do |(custom_form_question_id, answer), obj|
+        response = SubmissionResponseForm.build custom_form_question_id: custom_form_question_id,
+                                                string_response: answer
+        obj << response
+      end
+    end
+
     def submission_attributes
       given_inputs
         .slice(
@@ -51,6 +61,7 @@ class SubmissionForm < BaseForm
           body: body_json,
           person: @person,
           listings: [@listing],
+          submission_responses: @submission_responses,
         )
     end
 

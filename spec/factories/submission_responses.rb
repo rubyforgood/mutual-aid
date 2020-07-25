@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :submission_response do
-    submission { nil }
-    custom_form_question { nil }
+    submission
+    custom_form_question
     boolean_response { false }
     date_response { "2020-05-12" }
     datetime_response { "2020-05-12 23:13:57" }

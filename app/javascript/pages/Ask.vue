@@ -29,7 +29,7 @@
     /><SpacerField />
 
     <CustomQuestions
-      fieldNamePrefix="submission[responses]"
+      fieldNamePrefix="submission[responses_attributes]"
       :questions="form.questions"
     /><SpacerField />
 

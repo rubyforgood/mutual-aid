@@ -28,6 +28,11 @@
       :person="person"
     /><SpacerField />
 
+    <CustomQuestions
+      fieldNamePrefix="submission[responses_attributes]"
+      :questions="form.questions"
+    /><SpacerField />
+
     <CategoryFields
       :fieldNamePrefix="withListingPrefix('tag_list[]')"
       :categories="configuration.categories"
@@ -57,6 +62,7 @@ import {
   CategoryFields,
   CommentsField,
   ContactFields,
+  CustomQuestions,
   ErrorMessages,
   LocationFields,
   NameField,
@@ -71,6 +77,7 @@ export default {
     CategoryFields,
     CommentsField,
     ContactFields,
+    CustomQuestions,
     ErrorMessages,
     LocationFields,
     NameField,
@@ -81,6 +88,7 @@ export default {
   props: {
     submission: Object,
     configuration: Object,
+    form: Object,
   },
   data() {
     return {

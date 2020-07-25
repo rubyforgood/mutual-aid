@@ -7,6 +7,7 @@ describe('Offer', () => {
   def('wrapper', () => mount(Offer, {
     localVue: configure(createLocalVue()),
     propsData: {
+      form: $form,
       submission: $submission,
       configuration: {
         categories: [],
@@ -40,6 +41,10 @@ describe('Offer', () => {
 
   def('submission', () => { return {
     listing: $offer,
+  }})
+
+  def('form', () => { return {
+    questions: [],
   }})
 
   describe('service area', () => {

@@ -34,6 +34,7 @@ class AsksController < PublicController
       @json = {
         submission: SubmissionBlueprint.render_as_hash(submission),
         configuration: ConfigurationBlueprint.render_as_hash(nil),
+        form: FormBlueprint.render_as_hash(@form),
       }.to_json
 
       render :new

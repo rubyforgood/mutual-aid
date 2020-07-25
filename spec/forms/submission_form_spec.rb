@@ -196,86 +196,86 @@ RSpec.describe SubmissionForm do
     end
   end
 
-  # describe 'updating an existing submission' do
-  #   let(:existing_listing)  { create :offer, state: :unmatched, description: 'keep' }
-  #   let(:existing_location) { create :location, city: 'Chicago', zip: '10101' }
-  #   let(:existing_person)   { create :person, location: existing_location, name: 'old name', email: 'keep@me.org' }
-  #
-  #   let(:existing_submission) { create(:submission,
-  #     person: existing_person,
-  #     listings: [existing_listing],
-  #     form_name: 'Offer_form',
-  #     privacy_level_requested: 'volunteers',
-  #   )}
-  #   let(:existing_response) { create :submission_response, submission: existing_submission }
-  #
-  #   let(:params) {{
-  #     id: existing_submission.id,
-  #     form_name: 'Ask_form',
-  #     service_area: existing_listing.service_area.id,
-  #     listing_attributes: {
-  #       id: existing_listing.id,
-  #       state: 'matched',
-  #     },
-  #     location_attributes: {
-  #       id: existing_location.id,
-  #       city: 'Shikaakwa',
-  #     },
-  #     person_attributes: {
-  #       id: existing_person.id,
-  #       name: 'new name',
-  #     },
-  #     responses_attributes: {
-  #       existing_response.custom_form_question_id.to_s => "updated answer",
-  #     },
-  #   }}
-  #
-  #   let(:submission) { SubmissionForm.build params }
-  #
-  #   it 'returns the existing records' do
-  #     expect(submission.listings.first.id).to be existing_listing.id
-  #     expect(submission.submission_responses.first.id).to be existing_response.id
-  #     expect(submission.person.location.id).to be existing_location.id
-  #     expect(submission.person.id).to be existing_person.id
-  #     expect(submission.id).to be existing_submission.id
-  #   end
-  #
-  #   it 'applies pending changes to submission and nested objects' do
-  #     expect(submission.submission_responses.first.string_response).to be_changed
-  #     expect(submission.listings.first).to be_changed
-  #     expect(submission.person.location).to be_changed
-  #     expect(submission.person).to be_changed
-  #     expect(submission).to be_changed  # TODO: should submissions be editable?
-  #   end
-  #
-  #   it 'applies new values to submission and nested objects' do
-  #     expect(submission.submission_responses.first.state).to eq 'updated answer'
-  #     expect(submission.listings.first.state).to eq 'matched'
-  #     expect(submission.person.location.city).to eq 'Shikaakwa'
-  #     expect(submission.person.name).to eq 'new name'
-  #     expect(submission.form_name).to eq 'Ask_form'
-  #   end
-  #
-  #   it 'does not change values that were not given' do
-  #     expect(submission.listings.first.description).to eq 'keep'
-  #     expect(submission.person.location.zip).to eq '10101'
-  #     expect(submission.person.email).to eq 'keep@me.org'
-  #     expect(submission.privacy_level_requested).to eq 'volunteers'
-  #   end
-  #
-  #   describe 'with no nested attributes'
-  #
-  #   describe 'on save' do
-  #     before { submission }
-  #
-  #     it 'does not create any new objects on save' do
-  #       expect { submission.save }
-  #         .to  change(Listing,            :count).by(0)
-  #         .and change(Location,           :count).by(0)
-  #         .and change(Person,             :count).by(0)
-  #         .and change(Submission,         :count).by(0)
-  #         .and change(SubmissionResponse, :count).by(0)
-  #     end
-  #   end
-  # end
+  pending 'updating an existing submission' do
+    let(:existing_listing)  { create :offer, state: :unmatched, description: 'keep' }
+    let(:existing_location) { create :location, city: 'Chicago', zip: '10101' }
+    let(:existing_person)   { create :person, location: existing_location, name: 'old name', email: 'keep@me.org' }
+
+    let(:existing_submission) { create(:submission,
+      person: existing_person,
+      listings: [existing_listing],
+      form_name: 'Offer_form',
+      privacy_level_requested: 'volunteers',
+    )}
+    let(:existing_response) { create :submission_response, submission: existing_submission }
+
+    let(:params) {{
+      id: existing_submission.id,
+      form_name: 'Ask_form',
+      service_area: existing_listing.service_area.id,
+      listing_attributes: {
+        id: existing_listing.id,
+        state: 'matched',
+      },
+      location_attributes: {
+        id: existing_location.id,
+        city: 'Shikaakwa',
+      },
+      person_attributes: {
+        id: existing_person.id,
+        name: 'new name',
+      },
+      responses_attributes: {
+        existing_response.custom_form_question_id.to_s => "updated answer",
+      },
+    }}
+
+    let(:submission) { SubmissionForm.build params }
+
+    it 'returns the existing records' do
+      expect(submission.listings.first.id).to be existing_listing.id
+      expect(submission.submission_responses.first.id).to be existing_response.id
+      expect(submission.person.location.id).to be existing_location.id
+      expect(submission.person.id).to be existing_person.id
+      expect(submission.id).to be existing_submission.id
+    end
+
+    it 'applies pending changes to submission and nested objects' do
+      expect(submission.submission_responses.first.string_response).to be_changed
+      expect(submission.listings.first).to be_changed
+      expect(submission.person.location).to be_changed
+      expect(submission.person).to be_changed
+      expect(submission).to be_changed  # TODO: should submissions be editable?
+    end
+
+    it 'applies new values to submission and nested objects' do
+      expect(submission.submission_responses.first.state).to eq 'updated answer'
+      expect(submission.listings.first.state).to eq 'matched'
+      expect(submission.person.location.city).to eq 'Shikaakwa'
+      expect(submission.person.name).to eq 'new name'
+      expect(submission.form_name).to eq 'Ask_form'
+    end
+
+    it 'does not change values that were not given' do
+      expect(submission.listings.first.description).to eq 'keep'
+      expect(submission.person.location.zip).to eq '10101'
+      expect(submission.person.email).to eq 'keep@me.org'
+      expect(submission.privacy_level_requested).to eq 'volunteers'
+    end
+
+    describe 'with no nested attributes'
+
+    describe 'on save' do
+      before { submission }
+
+      it 'does not create any new objects on save' do
+        expect { submission.save }
+          .to  change(Listing,            :count).by(0)
+          .and change(Location,           :count).by(0)
+          .and change(Person,             :count).by(0)
+          .and change(Submission,         :count).by(0)
+          .and change(SubmissionResponse, :count).by(0)
+      end
+    end
+  end
 end

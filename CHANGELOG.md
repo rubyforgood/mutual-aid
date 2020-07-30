@@ -7,6 +7,7 @@
 
 ### Bugfixes
 * Fix bug where inexhaustible wasn't updating when edited on Triage page #604
+* Add more terms to glossary #603
 
 ## [0.2.6] - 2020-07-25
 ### Enhancements

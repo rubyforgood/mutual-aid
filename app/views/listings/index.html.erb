@@ -43,27 +43,18 @@
             <span class="tag <%= 'is-warning fa fa-exclamation' %>"></span>
           <% else %>
             <% if listing.matches.count > 1 %>
-              <%= link_to "Matches #{" (#{listing.matches.count})"}", matches_path(match_ids: listing.matches.map(&:id)), class: "button is-primary is-outlined" %>
+              <%= link_to "View Matches #{" (#{listing.matches.count})"}", matches_path(match_ids: listing.matches.map(&:id)), class: "button is-primary is-outlined" %>
             <% else %>
-              <%= link_to "Match", edit_match_path(listing.matches.last), class: "button is-primary is-outlined" %>
+              <%= link_to "View Match", edit_match_path(listing.matches.last), class: "button is-primary is-outlined" %>
             <% end %>
           <% end %>
         </td>
         <td>
-          <% if unmatched %>
-            <%= link_to("<span class='fa fa-reply'></span> <span> &nbsp Respond</span>".html_safe, respond_contribution_path(listing, contribution_type: listing.type),
-                        class: "button #{unmatched ? "is-primary" : "is-primary is-outlined"}") %>
-          <% else %>
-            <% button_css_class = "#{unmatched ? "is-primary is-outlined" : "is-primary"}" %>
-            <%= triage_button(listing, button_css_class) %>
-          <% end %>
+          <%= link_to("<span class='fa fa-reply'></span> <span> &nbsp Respond</span>".html_safe, respond_contribution_path(listing, contribution_type: listing.type),
+                      class: "button #{unmatched ? "is-primary" : "is-primary is-outlined"}") %>
         </td>
         <td>
-          <%= link_to(triage_contribution_path(listing),
-                      title: "Triage",
-                      class: "button triage-button is-primary'}") do
-            "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage</span>".html_safe
-          end %>
+          <%= triage_button(listing, 'is-primary is-outlined') %>
         </td>
         <!-- # TODO - add find match functionality <td><%##= link_to("Find Match [TBD]", match_listing_path(listing), class: "button") %></td>-->
       </tr>

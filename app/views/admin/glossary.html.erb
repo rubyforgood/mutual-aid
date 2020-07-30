@@ -77,6 +77,17 @@
       <hr>
 
       <%= link_to "Yearbook", yearbook_admin_path %>: List of everyone who has a Position. (Later we can have Profile photos.)
+
+      <hr>
+
+      <%= link_to "Respond", respond_contribution_path(Listing.first) %>: Preview a Contribution and prepare to "Respond" to the person by adding a Tentative Match
+      <br>
+      <%= link_to "Triage", triage_contribution_path(Listing.first) %>: Update Contribution -- Add short summary, change description, indicate if 'Inexhaustible'
+      <br>
+      <span class="has-text-weight-bold">Tentative Match:</span> This is a real Match. The first point of contact is to choose a potential match, and then to contact both parties.
+      <br>
+      <span class="has-text-weight-bold">Inexhaustible:</span> This Contribution can be matched many times, will continue to show up in dropdowns, etc
+
     </div>
   </div>
 </div>

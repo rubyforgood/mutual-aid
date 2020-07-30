@@ -54,7 +54,7 @@ RSpec.describe "/users", type: :request do
       context "As a regular user" do
         before(:each) { sign_in(create(:user)) }
 
-        it "disallows you from editing another user's record" do  
+        it "disallows you from editing another user's record" do
           get edit_user_url(subject)
           expect(response).not_to be_successful
         end
@@ -97,7 +97,7 @@ RSpec.describe "/users", type: :request do
     let(:new_attributes) {
       { email: "different_" + valid_attributes["email"] }
     }
-    let(:invalid_new_attributes) { 
+    let(:invalid_new_attributes) {
       { email: "bademail" }
     }
 

@@ -11,7 +11,7 @@ RSpec.describe "/people", type: :request do
   describe "GET /index" do
     subject { get people_url }
 
-    before(:each) { create(:person) } 
+    before(:each) { create(:person) }
 
     it_behaves_like "basic user authorization required" 
   end
@@ -114,7 +114,7 @@ RSpec.describe "/people", type: :request do
     let(:new_attributes) {
       { email: "different_" + valid_attributes["email"] }
     }
-    let(:invalid_new_attributes) { 
+    let(:invalid_new_attributes) {
       { email: "bademail" }
     }
 
@@ -135,7 +135,7 @@ RSpec.describe "/people", type: :request do
           expect do
             patch user_url(subject), params: { user: new_attributes }
             subject.reload
-          end.to change{subject.updated_at}
+          end.to change { subject.updated_at }
           expect(response).to redirect_to(users_url(default_url_options))
         end
       end
@@ -174,7 +174,7 @@ RSpec.describe "/people", type: :request do
     subject { create(:user) }
 
     it_behaves_like "redirects without authorization"
-    
+
     context "As a regular user" do
       before(:each) { sign_in(create(:user)) }
 

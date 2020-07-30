@@ -30,13 +30,13 @@ class ApplicationController < ActionController::Base
 
   private
 
-  
-  def user_not_authenticated(exception)
+  def user_not_authenticated(_exception)
     flash[:error] = "This requires authentication, please sign-in first."
     respond_to do |format|
-      format.html { render 'devise/sessions/new.html.erb', :layout => "application", :status => 401 }
+      format.html { render 'devise/sessions/new.html.erb', layout: "application", status: 401 }
       format.xml  { head 401 }
       format.any  { head 401 }
+    end
   end
 
   def user_not_authorized(exception)
@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
     flash[:error] = "Sorry, you're not authorized to do that."
     Rails.logger.error "[UNAUTHORIZED] #{exception}. (#{policy_name}.#{exception.query})"
     respond_to do |format|
-      format.html { render 'errors/403.html.erb', :layout => "application", :status => 403 }
+      format.html { render 'errors/403.html.erb', layout: "application", status: 403 }
       format.xml  { head 403 }
       format.any  { head 403 }
     end

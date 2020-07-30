@@ -22,6 +22,7 @@ RSpec.describe ContributionBlueprint do
                                "id" => contribution.id,
                                "contribution_type" => "Ask",
                                "category_tags" => [{"id" => expected_category_id, "name" => expected_category}],
+                               "inexhaustible" => contribution.inexhaustible,
                                "urgency" => {"id" => 1, "name" => "Within 1-2 days"},
                                # # TODO: not yet implemented:
                                # "availability" => [{"id" => 1, "name" => "AM"}],

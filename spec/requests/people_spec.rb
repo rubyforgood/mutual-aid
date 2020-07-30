@@ -171,17 +171,22 @@ RSpec.describe "/people", type: :request do
   end
 
   fdescribe "DELETE /destroy" do
-    subject { create(:user) }
+    let(:user) { create(:user)}
+    let(:person) { create(:person, user: user) }
+    let(:subject) { delete person_url(person) }
 
     it_behaves_like "redirects without authorization"
 
     context "As a regular user" do
-      before(:each) { sign_in(create(:user)) }
+      before(:each) do
+        sign_in(user)
+      end
 
       it "does not destroy a user" do
+        person
         expect {
-          delete user_url(subject)
-        }.not_to change(User, :count)
+          delete person_url(person)
+        }.not_to change(Person, :count)
         expect(response).not_to be_successful
       end
     end
@@ -190,11 +195,11 @@ RSpec.describe "/people", type: :request do
       before(:each) { sign_in(create(:user, :sys_admin)) }
 
       it "destroys the requested user and redirects to the users list" do
-        user = User.create! valid_attributes
+        person
         expect {
-          delete user_url(user)
-        }.to change(User, :count).by(-1)
-        expect(response).to redirect_to(users_url(default_url_options))
+          delete person_url(person)
+        }.to change(Person, :count).by(-1)
+        expect(response).to redirect_to(people_url(default_url_options))
       end
     end
   end

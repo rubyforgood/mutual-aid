@@ -15,7 +15,8 @@ const iconNameMapping = {
   WhatsApp: 'whatsapp',
   Call: 'phone',
   Ask: 'hand-sparkles',
-  Offer: 'hand-holding-heart'
+  Offer: 'hand-holding-heart',
+  Inexhaustible: 'hourglass-half has-text-primary'
 }
 
 export default {

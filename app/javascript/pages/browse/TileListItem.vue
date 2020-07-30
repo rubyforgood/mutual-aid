@@ -13,7 +13,7 @@
     <div class="body">
       <div class="row left">
         <SingleIcon :iconType="contribution_type" klass="" />
-        <MappedIconList :iconTypes="contact_types" />
+        <MappedIconList :iconTypes="iconList" />
         <span class="has-text-right">
           <b-tag v-if="urgency" :class="urgencyColor">
             <b-icon v-if="showUrgentIcon" icon="exclamation-triangle" size="is-small" />
@@ -52,6 +52,7 @@ export default {
     category_tags: {type: Array, default: () => []},
     service_area: {type: Object, default: null},
     title: String,
+    inexhaustible: Boolean,
     description: String,
     created_at: Number,
     urgency: Object,
@@ -68,6 +69,9 @@ export default {
   computed: {
     showUrgentIcon() {
       return !(this.urgency && this.urgency.id > 1)
+    },
+    iconList() {
+      return this.inexhaustible ? [ ...this.contact_types, {name: 'Inexhaustible'} ] : this.contact_types
     },
     urgencyColor() {
       return this.showUrgentIcon ? 'is-light is-warning' : ''

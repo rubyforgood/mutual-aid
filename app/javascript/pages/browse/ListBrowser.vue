@@ -11,8 +11,12 @@
 <!--        <th>Details</th>-->
       </tr>
       <tr v-for="contribution in contributions" :key="contribution.id">
-        <td><MappedIconList :iconTypes="[{name: contribution.contribution_type}]" /></td>
-        <td><TagList :tags="contribution.category_tags" /></td>
+        <td>
+          <MappedIconList :iconTypes="contribution.inexhaustible ? [{name: contribution.contribution_type}, {name: 'Inexhaustible'}] : [{name: contribution.contribution_type}]" />
+        </td>
+        <td>
+          <TagList :tags="contribution.category_tags" />
+        </td>
         <td>
           <b-tag v-if="contribution.urgency" :class="!(contribution.urgency && contribution.urgency.id > 1) ? 'is-light is-warning' : ''" size="is-small" >
             <b-icon v-if="!(contribution.urgency && contribution.urgency.id > 1)" icon="exclamation-triangle" />

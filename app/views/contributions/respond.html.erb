@@ -18,6 +18,12 @@
         <%#= edit(@contribution) %><!-- # TODO - add update action back in once we have moved controllers-->
     </div>
     <div class="created_at">Created on <%= shorthand_display(@contribution.created_at) %></div>
+    <% if @contribution.inexhaustible %>
+      <br>
+      <%= "<br>".html_safe if @contribution.title.present? %>
+      <span class="has-text-primary"><span class="fa fa-hourglass-half"></span>&nbsp;INHEXHAUSTIBLE (can be matched repeatedly)</span>
+      <%= "<br>".html_safe if @contribution.title.present? %>
+    <% end %>
     <%= "<br>".html_safe if @contribution.title.present? || @contribution.description.present? %>
     <div class="subtitle is-5"><%= @contribution.title %></div>
     <div class="description"><%= @contribution.description %></div>

@@ -1,7 +1,7 @@
 {
   "name": "mutualaid",
   "private": true,
-  "version": "0.2.6",
+  "version": "0.2.7",
   "engines": {
     "node": "12.x"
   },

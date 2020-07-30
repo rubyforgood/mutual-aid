@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.7] - 2020-07-30
 ### Enhancements
 * Display inexhaustible icon on Contributions, Matches, Respond #601
 * Update Listings index layout to include buttons to get to Listing edit #604

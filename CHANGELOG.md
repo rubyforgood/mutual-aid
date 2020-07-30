@@ -1,7 +1,7 @@
 # Changelog
 
 ## [Unreleased]
-## Enhancements
+### Enhancements
 * Display inexhaustible icon on Contributions, Matches, Respond #601
 
 ## [0.2.6] - 2020-07-25

@@ -16,6 +16,7 @@
       <th>Urgency</th>
       <th>Match</th>
       <th>Action</th>
+      <th>Triage</th>
       <!-- <th>Find Match</th>-->
     </tr>
   </thead>
@@ -56,6 +57,13 @@
             <% button_css_class = "#{unmatched ? "is-primary is-outlined" : "is-primary"}" %>
             <%= triage_button(listing, button_css_class) %>
           <% end %>
+        </td>
+        <td>
+          <%= link_to(triage_contribution_path(listing),
+                      title: "Triage",
+                      class: "button triage-button is-primary'}") do
+            "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage</span>".html_safe
+          end %>
         </td>
         <!-- # TODO - add find match functionality <td><%##= link_to("Find Match [TBD]", match_listing_path(listing), class: "button") %></td>-->
       </tr>

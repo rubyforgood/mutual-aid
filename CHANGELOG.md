@@ -3,6 +3,10 @@
 ## [Unreleased]
 ### Enhancements
 * Display inexhaustible icon on Contributions, Matches, Respond #601
+* Update Listings index layout to include buttons to get to Listing edit #604
+
+### Bugfixes
+* Fix bug where inexhaustible wasn't updating when edited on Triage page #604
 
 ## [0.2.6] - 2020-07-25
 ### Enhancements

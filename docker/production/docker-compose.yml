@@ -12,8 +12,8 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: mat
-      POSTGRES_DB: mutualaidtompkins
+      POSTGRES_USER: ${POSTGRES_USER:-ma}
+      POSTGRES_DB: ${POSTGRES_DB:-mutualaid}
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     logging:
       driver: json-file
@@ -66,4 +66,3 @@ services:
       options:
         max-size: "200k"
         max-file: "10"
-

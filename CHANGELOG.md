@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.8] - 2020-08-02
 ### Bugfixes
 * Remove final & operator so all nils -> 0.0  #618
 

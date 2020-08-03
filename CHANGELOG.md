@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Bugfixes
+* Remove final & operator so all nils -> 0.0  #618
+
 ## [0.2.7] - 2020-07-30
 ### Enhancements
 * Display inexhaustible icon on Contributions, Matches, Respond #601

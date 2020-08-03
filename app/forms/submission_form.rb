@@ -37,16 +37,18 @@ class SubmissionForm < BaseForm
     end
 
     def build_submission
-      (id? ? Submission.find(id) : Submission.new).tap do |submission|
+      submission.tap do |submission|
         submission.attributes = submission_attributes
       end
     end
 
     def build_submission_responses
-      @submission_responses = responses_attributes.each_with_object([]) do |(custom_form_question_id, answer), obj|
-        response = SubmissionResponseForm.build custom_form_question_id: custom_form_question_id,
-                                                string_response: answer
-        obj << response
+      @submission_responses = responses_attributes.map do |(custom_form_question_id, answer)|
+        SubmissionResponseForm.build(
+          submission: submission,
+          custom_form_question_id: custom_form_question_id,
+          string_response: answer,
+        )
       end
     end
 
@@ -69,5 +71,9 @@ class SubmissionForm < BaseForm
       given_inputs
         .merge(service_area: service_area.id)
         .to_json
+    end
+
+    def submission
+      @submisson ||= Submission.find_or_new(id)
     end
 end

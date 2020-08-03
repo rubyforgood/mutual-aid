@@ -1,4 +1,6 @@
 class SubmissionResponseForm < BaseForm
+  record :submission
+
   with_options default: nil do
     integer  :id
     integer  :custom_form_question_id
@@ -12,8 +14,11 @@ class SubmissionResponseForm < BaseForm
   end
 
   def execute
-    SubmissionResponse.find_or_new(id).tap do |submission_response|
-      submission_response.attributes = given_inputs
-    end
+    response = submission.submission_responses.find { |response|
+      response.custom_form_question_id == custom_form_question_id
+    } || SubmissionResponse.new
+
+    response.attributes = given_inputs
+    response
   end
 end

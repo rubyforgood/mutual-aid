@@ -8,7 +8,7 @@ RUN apk add --update-cache postgresql-dev zlib build-base tzdata nodejs yarn
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 ENV RAILS_ENV='' \
     POSTGRES_HOST='' \

@@ -4,7 +4,7 @@ class SubmissionForm < BaseForm
   with_options default: nil do
     integer :id
     record  :service_area
-    hash    :listing_attributes,   strip: false
+    hash    :listing_attributes,   strip: false  # todo: rename
     hash    :location_attributes,  strip: false
     hash    :person_attributes,    strip: false
     string  :form_name
@@ -14,7 +14,7 @@ class SubmissionForm < BaseForm
   def execute
     build_location
     build_person
-    build_listing
+    build_listings
     build_submission_responses
     build_submission
   end
@@ -29,12 +29,16 @@ class SubmissionForm < BaseForm
       @person ||= PersonForm.build person_attributes.merge location: @location
     end
 
-    def build_listing
-      @listing ||= ListingForm.build listing_attributes.merge(
-        person: @person,
-        location: @location,
-        service_area: service_area
-      )
+    def build_listings
+      # todo: rename `tag_list`
+      @listings = (listing_attributes[:tag_list] || []).map do |category_id|
+        ListingForm.build listing_attributes.merge(
+          category: category_id,
+          location: @location,
+          person: @person,
+          service_area: service_area,
+        )
+      end
     end
 
     def build_submission
@@ -64,7 +68,7 @@ class SubmissionForm < BaseForm
         .merge(
           body: body_json,
           person: @person,
-          listings: [@listing],
+          listings: @listings,
           submission_responses: @submission_responses,
         )
     end

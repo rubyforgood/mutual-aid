@@ -120,7 +120,7 @@ export default {
   data() {
     return {
       location: this.submission.location || {},
-      listing: this.submission.listing || {},
+      listing: this.submission.listing || {},  // todo: change to render from multiple listings
       person: this.submission.person || {},
     }
   },

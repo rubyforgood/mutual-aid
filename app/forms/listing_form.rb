@@ -1,10 +1,10 @@
 class ListingForm < BaseForm
   with_options default: nil do
     integer :id
-    record  :person
+    record  :category
     record  :location
+    record  :person
     record  :service_area
-    array   :tag_list, default: []  # todo now: rename
     string  :description
     string  :state
     string  :type
@@ -12,8 +12,9 @@ class ListingForm < BaseForm
 
   def execute
     Listing.find_or_new(id).tap do |listing|
-      tags = Category.where(id: tag_list).pluck(:name)
-      listing.attributes = given_inputs.merge(tag_list: tags)
+      listing.attributes = given_inputs.
+        reject{ |k, _v| k == :category }.
+        merge(tag_list: [category.name])
     end
   end
 end

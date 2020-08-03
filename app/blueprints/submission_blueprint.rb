@@ -9,9 +9,7 @@ class SubmissionBlueprint < Blueprinter::Base
     submission&.person&.location
   end
 
-  association :listing, blueprint: ListingBlueprint do |submission|
-    submission.listings.first
-  end
+  association :listings, blueprint: ListingBlueprint
 
   field :errors do |submission|
     submission.errors.as_json(full_messages: true)

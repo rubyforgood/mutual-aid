@@ -12,7 +12,7 @@ describe('CategoryFields', () => {
 
   def('props', () => {
     return {
-      fieldNamePrefix: 'listing[tag_list][]',
+      fieldNamePrefix: 'listing[categories][]',
       categories: $categories,
       tags: $tags,
     }

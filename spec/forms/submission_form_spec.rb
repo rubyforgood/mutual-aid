@@ -16,9 +16,9 @@ RSpec.describe SubmissionForm do
       form_name: 'Offer_form',
       privacy_level_requested: 'anyone',
       service_area: service_area.id,
-      listing_attributes: {
+      listings_attributes: {
         type: 'Offer',
-        tag_list: categories.map(&:id),
+        categories: categories.map(&:id),
         description: 'on a quiet day i can hear her breathing',
       },
       location_attributes: {
@@ -152,13 +152,13 @@ RSpec.describe SubmissionForm do
 
       it 'captures all inputs given' do
         expect(json.keys).to contain_exactly(
-          'form_name', 'listing_attributes', 'location_attributes',
+          'form_name', 'listings_attributes', 'location_attributes',
           'person_attributes', 'responses_attributes', 'privacy_level_requested', 'service_area'
         )
       end
 
       it 'includes nested attributes' do
-        expect(json['listing_attributes'].keys).to contain_exactly('description', 'tag_list', 'type')
+        expect(json['listings_attributes'].keys).to contain_exactly('description', 'categories', 'type')
       end
 
       it 'includes values provided' do
@@ -224,7 +224,7 @@ RSpec.describe SubmissionForm do
       id: existing_submission.id,
       form_name: 'Ask_form',
       service_area: existing_listing.service_area.id,
-      listing_attributes: {
+      listings_attributes: {
         id: existing_listing.id,
         state: 'matched',
       },

@@ -2,7 +2,7 @@ class SubmissionForm < BaseForm
   with_options default: nil do
     integer :id
     record  :service_area
-    hash    :listing_attributes,   strip: false  # todo: rename
+    hash    :listings_attributes,  strip: false
     hash    :location_attributes,  strip: false
     hash    :person_attributes,    strip: false
     hash    :responses_attributes, strip: false
@@ -29,9 +29,8 @@ class SubmissionForm < BaseForm
     end
 
     def build_listings
-      # todo: rename `tag_list`
-      @listings = (listing_attributes[:tag_list] || []).map do |category_id|
-        ListingForm.build listing_attributes.merge(
+      @listings = (listings_attributes[:categories] || []).map do |category_id|
+        ListingForm.build listings_attributes.merge(
           category: category_id,
           location: @location,
           person: @person,

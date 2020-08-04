@@ -126,7 +126,15 @@ RSpec.describe SubmissionForm do
         expect(listings.first.location).to be submission.person.location
       end
 
-      # todo: sub-categories
+      context 'when a subcategory is selected' do
+        let(:category)    { create :category, name: 'housing' }
+        let(:subcategory) { create :category, name: 'temporary', parent: category }
+        let(:categories)  { [subcategory] }
+
+        it 'tags the listing with both the parent and subcategories' do
+          expect(listings.first.tag_list).to eq ['housing', 'temporary']
+        end
+      end
     end
 
     describe 'has_many submission_responses' do

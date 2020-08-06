@@ -1,11 +1,12 @@
 class SubmissionForm < BaseForm
+  hash :responses_attributes, strip: false, default: {}
+
   with_options default: nil do
     integer :id
     record  :service_area
     hash    :listing_attributes,   strip: false
     hash    :location_attributes,  strip: false
     hash    :person_attributes,    strip: false
-    hash    :responses_attributes, strip: false
     string  :form_name
     string  :privacy_level_requested  # fixme: not submitted as yet
   end
@@ -38,6 +39,7 @@ class SubmissionForm < BaseForm
 
     def build_submission
       submission.tap do |submission|
+        # todo: this has to be smarter if we want to support partial updates
         submission.attributes = submission_attributes
       end
     end

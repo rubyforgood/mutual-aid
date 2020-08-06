@@ -28,10 +28,9 @@ RSpec.describe SubmissionForm do
         email: 'we@together.coop',
         name: 'Harriet Tubman',
       },
-      responses_attributes: {
-        questions.first.id.to_s  => "answer 1",
-        questions.second.id.to_s => "answer 2"
-      },
+      responses_attributes: questions.map.with_index { |question, index|
+        [question.id.to_s, "answer #{index + 1}"]
+      }.to_h,
     }}
 
     subject(:submission) { SubmissionForm.build params }
@@ -128,6 +127,14 @@ RSpec.describe SubmissionForm do
       it 'builds SubmissionResponses' do
         expect(submission_responses.length).to eq(2)
         expect(submission_responses.first.string_response).to eq("answer 1")
+      end
+
+      context 'when there are no custom questions' do
+        let(:questions) { [] }
+
+        it 'works without error' do
+          expect(submission_responses).to be_empty
+        end
       end
     end
 

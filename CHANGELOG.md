@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.9] - 2020-08-06
 ### Enhancements
 * Ask/Offer form now generates a listing for each category selected #536, #620
 

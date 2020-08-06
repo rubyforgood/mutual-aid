@@ -29,14 +29,14 @@
           <p v-if="description" class="mb-1"> {{ description }} </p>
 
           <!-- If any subcategories are selected, add parent category to list of tags submitted -->
-          <input v-if="anySelected(subcategories)" :name="fieldNamePrefix" :value="name" type="hidden" />
+          <input v-if="anySelected(subcategories)" :name="fieldNamePrefix" :value="id" type="hidden" />
 
           <div v-for="{id: subId, name: subName, description: subDescription} in subcategories" :key="subId">
             <b-field class="pb-05" grouped>
               <b-checkbox
                 v-model="selectedTags"
                 :name="fieldNamePrefix"
-                :native-value="subName"
+                :native-value="subId"
                 size="is-medium"
               >
                 <span>{{ subName | capitalize }}</span>

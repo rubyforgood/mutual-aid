@@ -23,7 +23,7 @@ class OffersController < PublicController
     def submission_params
       params[:submission].tap do |p|
         p[:form_name] = 'Offer_form'
-        p[:listing_attributes][:type] = 'Offer'
+        p[:listings_attributes][:type] = 'Offer'
       end
     end
 

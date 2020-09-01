@@ -10,7 +10,7 @@ We ♥ contributors! By participating in this project, you agree to abide by the
 
 Here are the basic steps to submit a pull request. Make sure that you're working on an [open issue]–if the relevant issue doesn't exist, open it!
 
-[open issue]: https://github.com/maebeale/mutual-aid-app/issues
+[open issue]: https://github.com/rubyforgod/mutual-aid-app/issues
 
 1. Claim an issue on [our issue tracker][open issue] by assigning it to yourself (core team member) or commenting. If the issue doesn't exist yet, open it.
 

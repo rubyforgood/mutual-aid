@@ -34,7 +34,7 @@
   tasks:
   - name: fetch mutualaid repo
     git:
-      repo: 'https://github.com/maebeale/mutual-aid.git'
+      repo: 'https://github.com/rubyforgood/mutual-aid.git'
       dest: /home/{{ ansible_ssh_user }}/mutual-aid
   - name: adjust mutualaid repo permissions
     file:

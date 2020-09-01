@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/maebeale/mutual-aid.svg?style=svg)](https://circleci.com/gh/maebeale/mutual-aid)
+[![CircleCI](https://circleci.com/gh/rubyforgood/mutual-aid.svg?style=svg)](https://circleci.com/gh/rubyforgood/mutual-aid)
 
 # Who we are:
 
@@ -23,7 +23,7 @@ If you have any question of us source code maintainers, please feel free to reac
 
 # Contributing
 
-Visit our [CONTRIBUTING.md](https://github.com/maebeale/mutual-aid-app/blob/master/CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
+Visit our [CONTRIBUTING.md](https://github.com/rubyforgood/mutual-aid-app/blob/master/CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
 
 
 # Setting Up Development

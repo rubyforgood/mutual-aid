@@ -1,4 +1,7 @@
 # Changelog
+## [Unreleased]
+### Development notes
+* Switched primary branch from `master` to `main` #658
 
 ## [0.2.9] - 2020-08-06
 ### Enhancements

@@ -8,9 +8,9 @@ We ♥ contributors! By participating in this project, you agree to abide by the
 
 [code of conduct]: https://github.com/rubyforgood/code-of-conduct
 
-Here are the basic steps to submit a pull request. Make sure that you're working on an [projects/4]–if the relevant issue doesn't exist, open it!
+Here are the basic steps to submit a pull request. Make sure that you're working on an [https://github.com/rubyforgood/mutual-aid/projects/4]–if the relevant issue doesn't exist, open it!
 
-1. Claim an issue on [our issue tracker][projects/4] by assigning it to yourself (core team member) or commenting. If the issue doesn't exist yet, open it.
+1. Claim an issue on [our roadmap/issue tracker][https://github.com/rubyforgood/mutual-aid/projects/4] by assigning it to yourself (core team member) or commenting. If the issue doesn't exist yet, open it.
 
 2. Fork the repo.
 

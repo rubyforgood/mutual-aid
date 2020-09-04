@@ -99,8 +99,6 @@ sudo yum install yarn
 ```
 
 ## Setting up Heroku
-=======
->>>>>>> 5eea6cb... First pass at condensing/rearranging the README
 
 # Setting up development
 

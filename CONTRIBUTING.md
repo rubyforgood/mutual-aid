@@ -8,6 +8,8 @@ We ♥ contributors! By participating in this project, you agree to abide by the
 
 [code of conduct]: https://github.com/rubyforgood/code-of-conduct
 
+We have two projects - [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) and [Story map](https://github.com/rubyforgood/mutual-aid/projects/2). These cover the same list of github issues, but the [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) focuses on prioritization of issues, whereas the [Story map](https://github.com/rubyforgood/mutual-aid/projects/2) is a higher level overview and a good reference point of user flows (tho it was last updated in spring 2020).
+
 Here are the basic steps to submit a pull request. Make sure that you're working on an [https://github.com/rubyforgood/mutual-aid/projects/4]–if the relevant issue doesn't exist, open it!
 
 1. Claim an issue on [our roadmap/issue tracker][https://github.com/rubyforgood/mutual-aid/projects/4] by assigning it to yourself (core team member) or commenting. If the issue doesn't exist yet, open it.

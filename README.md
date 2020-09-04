@@ -1,5 +1,22 @@
 [![CircleCI](https://circleci.com/gh/rubyforgood/mutual-aid.svg?style=svg)](https://circleci.com/gh/rubyforgood/mutual-aid)
 
+### Welcome, and thanks for coming by!
+
+# Ruby for Good 2020 invite:
+Mutual Aid is when people get together to build community by volunarily sharing resources with each other. Mutual Aid groups are more concerned about local resiliency than global campaigns, and prefer solidarity before charity. Mutual aid groups have existed around the world for over 200 years. Mutual aid groups generally prioritize the needs of minorities and other underserved communities.
+
+About mutual aid, [a list](https://bigdoorbrigade.wordpress.com/2017/01/31/what-do-we-mean-by-mutual-aid/)
+About mutual aid, [a video that covers a lot of ground](https://www.deanspade.net/2019/07/10/animated-video-about-mutual-aid/)
+Many people working in mutual aid were overwhelmed by requests early this year due to the COVID pandemic. Some of these groups were relying on dispatchers to match up people who could help each other. These dispatchers were in turn relying on spreadsheets, and the spreadsheets grew to be unmanageable. We've created an app to help. Seven mutual aid groups in cities across the country are now using this app.
+
+Our current status is that dispatcher capacity is waning as local governments restart schools and lift pandemic bans. We have some bugfixes and small tickets to address this problem. We're also looking for people who are willing to spend a few days digging in to our new peer-to-peer communication path that will ease how much we rely on dispatchers.
+
+We would love contributions from newbies, experienced devs, UX/UI designers and PM folks. We'll have tickets for people to work on as individuals, and we'll have pairing and groupings available too. Hope to see you in #mutualaid and/or the social events being held!
+
+[Github](https://github.com/rubyforgood/mutual-aid)
+Slack channel: #mutualaid
+Slack Contacts: @maebeale, @lasitha, @Howard, @svetlana, @Robin, @Siv Jones
+
 # Who we are:
 
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
@@ -25,7 +42,7 @@ If you have any question of us source code maintainers, please feel free to reac
 
 Visit our [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
 
-We have two projects - Roadmap and Feature map (https://github.com/rubyforgood/mutual-aid/projects). These cover the same list of github issues, but the Roadmap focuses on prioritization of issues, whereas the Feature Map is a higher level overview and a good reference point of user flows.
+We have two projects - [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) and [Story map](https://github.com/rubyforgood/mutual-aid/projects/2). These cover the same list of github issues, but the [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) focuses on prioritization of issues, whereas the [Story map](https://github.com/rubyforgood/mutual-aid/projects/2) is a higher level overview and a good reference point of user flows.
 All issues (and maps) are being groomed throughout these two weeks (9/1 - 9/13), so, please keep checking back for updates. If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us in the #mutualaid channel in the Ruby for Good Slack!
 
 # Setting Up Development
@@ -82,94 +99,25 @@ sudo yum install yarn
 ```
 
 ## Setting up Heroku
+=======
+>>>>>>> 5eea6cb... First pass at condensing/rearranging the README
 
-The Rails and webpack processes can be launched with Heroku, if you choose to go that route. You can install Heroku Local using [these instructions](https://devcenter.heroku.com/articles/heroku-cli).
+# Setting up development
 
-## Setting up other hosting
-(If you've done this, please submit a PR so we can include instructions here!)
-
-
-## Running the App!
-
-First, make sure local services are running
-
-### Starting Local Services
-
-#### ... with individually installed services
-
-Ensure Postgres is running. We recommend Postgres.app for macOS if you don't already have it installed.
-
-Mailcatcher cannot be bundled, for that reason we must use:
-
-```
-$ gem install mailcatcher
-```
-
-To get the MailCatcher gem's mail server up run:
-
-```
-$ mailcatcher
-Go to http://localhost:1080/
-Send mail through smtp://localhost:1025
-```
-
-Note: You only need mailcatcher if you're interested doing a lot of work on emails in the development environment. (They'll still be visible in the server log, but mailcatcher makes mailer work SO much easier.)
-
-### Run the App Locally
-
-Then, to run the app locally,
-
-```
-$ bundle install
-$ yarn install
-$ bin/rake db:rebuild_and_seed_dev
-$ bin/rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
-```
-
-In development, webpacker runs a separate server to support automatic hot-swapping.
-This is only necessary when working on pages containing vue code, but will also speed up initial page loads on other pages.
-Run this in a separate terminal.
-```
-$ bin/webpacker-dev-server
-```
-
-## Development with Docker
-
-The application includes a pre-configured [docker-compose](https://docs.docker.com/compose/) environment. This environment includes two containers, which together deploy the application and a postgres database for it to connect to.
-
-To get started using the application with docker,
-1. Install [Docker](https://www.docker.com/get-started)
-2. Install [docker-compose](https://docs.docker.com/compose/install/)
-3. Clone the repository, and open the repository folder in your favorite command line or terminal application.
-4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml`.
-5. Run
-   ```bash
-   docker-compose run app '/usr/local/bin/rake' secret \
-    | echo "SECRET_KEY_BASE=$(tail -1 -)" > .env
-   ```
-   to give rails the information it needs to be able to launch
-6. Now you should be able to run `docker-compose up -d`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
-7. To setup the database, you can run
-  ```bash
-  docker-compose run \
-    -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" \
-    -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" \
-    app rails db:prepare db:seed
-  ```
-  This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `docker-compose run app db:prepare` and create the account using the sign up option on the website.
-8. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
-
-**NOTE** Do not use this method in production! This is for **testing & development only* the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
-
-Note that if you are developing this application, running `docker-compose up` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes you changes, run `docker-compose up --build` instead.
-
-Also, if you would like docker-compose to run in daemon mode (which means that it will exit once the images have been set up and the application starts running) you may use `docker-compose up -d`. This will not show you any logging output from the application, however, and you will not be able to exit the application directly. To view logs when docker-compose is running in daemon mode, use `docker-compose logs`. To stop the application and all its services, run `docker-compose down`.
-
-**NOTE** the application will save its state between successively invocations of `docker-compose up --build`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `docker-compose`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `docker-compose down --volumes --remove-orphans`. In particular, you may need to do this if you are making breaking changes to the database structure, or if you have corrupted something somehow. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it. So make sure you back up anything you want to save before running the command.
+Visit our [SETUP.md](SETUP.md) file for more information on making your contribution. We look forward to it!
 
 
 # Viewing the Application
-## if you chose the local route, then you are good to go on:
+## We've got a demo instance!
+* [http://mutual-aid-demo.herokuapp.com/](http://mutual-aid-demo.herokuapp.com/) 
+* credentials: mutualaidtesting@example.com, testing123
+
+### Glossary! 
+* We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glossary)  that's available in the demo instance once you're logged in.
+You can also check out the [view code](blob/main/app/views/admin/glossary.html.erb).
+
+
+## if you chose the local [SETUP](SETUP.md) route, then you are good to go on:
   http://localhost:3000
   $ `rspec` (to run the test suite), or, `bundle exec rspec` (if the `rspec` does not work)
 
@@ -219,70 +167,6 @@ within it. This allows for any unexpected state data of the user from hanging ar
          Run 'rails runner -h' for help.```
       - Run `spring stop` and try again
 
-# Deploying the app
-## If you decide to deploy to Heroku:
-* [Heroku Command Line Interface](https://devcenter.heroku.com/categories/command-line)
-* If you have HTTPS enabled (requires a paid dyno), be sure to enable `config.force_ssl = true` on line 47 of `config/environments/production.rb`
-
-## If you decide to use Docker:
-
-_Note_: These instructions assume you are working with shell access to a system with Docker and docker-compose available (such as a Digital Ocean Docker image).
-
-_Note_: These instructions assume you already have a domain name registered and pointed it at the
-IP address of your server.
-
-1. You'll need to get the code on the server. The recommended way to do this is with a [GitHub Deploy Key](https://developer.github.com/v3/guides/managing-deploy-keys/). Deploy Keys are just SSH keys that are tied to a project, instead of being tied to a user, which means that they can persist independently of the project's membership. You can use [GitHub's guide on generating SSH keys to generate your deploy key](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
-2. After you've generated your deploy key and added it to your project, clone the project.
-3. Create a Caddyfile. It can live anywhere (Mutual Aid Tompkins has ours at `~/.config/Caddyfile`), and it should look like this, replacing `your.domain.name` with your organization's desired domain name:
-
-   ```
-   your.domain.name {
-     header {
-       Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
-     }
-
-     root * /config/public
-
-     # Serve static files (like assets and packs) with the file_server
-     @static_files {
-       file
-     }
-     file_server @static_files
-
-     # Anything that's not a static file, proxy to puma/rails
-     @backend {
-       not file
-     }
-     reverse_proxy @backend http://app:3000
-   }
-   ```
-
-4. Navigate to the `docker/production` directory within your clone of the repo. You should see a file named `docker-compose.yml`.
-5. Run
-   ```bash
-   docker-compose run app '/usr/local/bin/rake' secret \
-    | echo "SECRET_KEY_BASE=$(tail -1 -)" > .env
-   ```
-   This will generate a secret token and add it to a file named `.env`, which will be available when
-   `docker-compose` starts.
-6. Generate (using a password manager) a password for the Postgres database, and append it to the `.env` file. Your `.env` file should look something like:
-   ```bash
-   SECRET_KEY_BASE=<A fairly long string of numbers>
-   POSTGRES_PASSWORD=<your postgres password>
-   ```
-7. Start the server, database, and reverse proxy by running `docker-compose --build -d`
-8. Initialize the database with
-   ```bash
-   docker-compose run \
-     -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" \
-     -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" \
-     app rails db:prepare db:seed
-   ```
-   This will setup the database and create a default admin user with the email and password as  specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to  `docker-compose` with the `-e` option. If you don't want to create the default user, you can just  run `docker-compose run app db:prepare` and create the account using the sign up option on the  website. **Only run this command the first time you set up your instance**
-
-You should be good to go! Visit your domain name to get started.
-
-## Make sure to run `rake db:seed`
 
 # Diagrams!
 We've got a rudimentary ERD diagram, and some workflow diagrams all in one `db_diagram_yEd.graphml` file in the db dir

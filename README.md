@@ -68,7 +68,10 @@ Visit our [DEPLOYMENT.md](DEPLOYMENT.md) guide for more information on deploying
 * [Code of conduct](https://github.com/rubyforgood/code-of-conduct)
 * [Changelog](CHANGELOG.md)
 * [Dev environment setup](SETUP.md)
+* [Seeding and importing data](SEEDING.md)
 * [Some testing tips](TESTING.md)
+* [Rudimentary ERD and workflow diagrams](db/db_diagram_yEd.graphml)
+* Customization (WIP)
 
 ## Who we are
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
@@ -80,43 +83,3 @@ The idea is that each group -- or cluster of groups -- would own their database 
 Ideally mutual aid networks will have their own tech teams, but we will provide initial support as capacity permits.
 
 Feel free to [browse some of our earliest notes](ORIENTATION.md).
-
-# Other Tips to Get Started
-
-### Logging In
-A username and password to log in and test the app are in `seeds.rb` (which then references your environment variables)
-
-### Data (seeds and imports)
-* Running `db:seed` will create basic types, etc, for test and production environments.
-* We also added some fake data seed files for you to use that are callable via rake tasks (these are in `lib/tasks/db.rake`)
-  - To start fresh with prod seeds only (e.g. user account, organization, basic contact methods, languages, etc): `rake db:rebuild_and_seed`
-  - To add some dev seeds: `rake db:import_all_seeds`
-  - All options:
-    - `rake db:rebuild_and_seed` (drop, create, migrate, seed, stats_check)
-    - `rake db:rebuild_and_seed_dev` (drop, create, migrate, seed, import_all_seeds, stats_check)
-    - `rake db:stats_check` (outputs record totals)
-    - `rake db:truncate_tables` (runs truncate on all tables)
-    - `rake db:recreate_all_seeds` (delete_all_data, seed, import_all_seeds, stats_check)
-    - `rake db:import_all_seeds` (import_dev_seeds, import_submission_response_seeds, import_user_seeds, import_custom_form_question_seeds, stats_check)
-    - `rake db:import_dev_seeds` (runs the db/seeds/dev_seeds.rb file)
-    - `rake db:import_submission_response_seeds` (runs the db/scripts/submission_response_seeds.rb file -- you could edit this to pull from the db/seeds/gitignored_csvs path if you have a file you want to import)
-    - `rake db:import_user_seeds` (runs the db/scripts/user_seeds.rb file)
-    - `rake db:import_custom_form_question_seeds` (runs the db/scripts/custom_form_question_seeds.rb file)
-
-* To load your data
-  - Use the templates provided in `db/seeds/public_template_csvs` to get your data formatted
-  - Save copies in `db/seeds/gitignored_csvs` (or keep them in your local dir)
-  - Edit `db/scripts/submission_response_seeds_gitignored_csvs` script to call your files
-  - Run `rails runner -e development db/scripts/submission_response_seeds_gitignored_csvs.rb`
-    - If you get this error:
-      - ```Running via Spring preloader in process 13613
-         Please specify a valid ruby command or the path of a script to run.
-         Run 'rails runner -h' for help.```
-      - Run `spring stop` and try again
-
-# Diagrams!
-We've got a rudimentary ERD diagram, and some workflow diagrams all in one `db_diagram_yEd.graphml` file in the db dir
-(yEd is desktop software for creating diagrams)
-
-# Customization
-### How to change colors (TBD)...

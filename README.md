@@ -1,30 +1,41 @@
 [![CircleCI](https://circleci.com/gh/rubyforgood/mutual-aid.svg?style=svg)](https://circleci.com/gh/rubyforgood/mutual-aid)
 
-### Welcome, and thanks for coming by!
+**Welcome, and thanks for coming by! 👋🏾**
 
-# Ruby for Good 2020 invite
+## What is mutual aid?
 Mutual Aid is when people get together to build community by volunarily sharing resources with each other. Mutual Aid groups are more concerned about local resiliency than global campaigns, and prefer solidarity before charity. Mutual aid groups have existed around the world for over 200 years. Mutual aid groups generally prioritize the needs of minorities and other underserved communities.
 
-Our [project pitch deck](https://docs.google.com/presentation/d/1iUakTWYsj1tMAyOUO-1gp4oxNJzwGTFsZnkkDJk8Ax8/edit?usp=drive_web&ouid=109561030287749477812) for the event
+To learn more about mutual aid, checkout this [list](https://bigdoorbrigade.wordpress.com/2017/01/31/what-do-we-mean-by-mutual-aid/) and [video](https://www.deanspade.net/2019/07/10/animated-video-about-mutual-aid/).
 
-About mutual aid, [a list](https://bigdoorbrigade.wordpress.com/2017/01/31/what-do-we-mean-by-mutual-aid/)
-About mutual aid, [a video that covers a lot of ground](https://www.deanspade.net/2019/07/10/animated-video-about-mutual-aid/)
-Many people working in mutual aid were overwhelmed by requests early this year due to the COVID pandemic. Some of these groups were relying on dispatchers to match up people who could help each other. These dispatchers were in turn relying on spreadsheets, and the spreadsheets grew to be unmanageable. We've created an app to help. Seven mutual aid groups in cities across the country are now using this app.
+Many people working in mutual aid were overwhelmed by requests early this year due to the COVID pandemic. Some of these groups were relying on dispatchers to match up people who could help each other. These dispatchers were in turn relying on spreadsheets, and the spreadsheets grew to be unmanageable.
 
-Our current status is that dispatcher capacity is waning as local governments restart schools and lift pandemic bans. We have some bugfixes and small tickets to address this problem. We're also looking for people who are willing to spend a few days digging in to our new peer-to-peer communication path that will ease how much we rely on dispatchers.
+We've created an app to support this work, currently used by seven mutual aid groups in cities across the country.
 
-We would love contributions from newbies, experienced devs, UX/UI designers and PM folks. We'll have tickets for people to work on as individuals, and we'll have pairing and groupings available too. Hope to see you in #mutualaid and/or the social events being held!
-Visit our [CONTRIBUTING.md](CONTRIBUTING.md) file for more info.
+## Ruby for Good 2020
 
-We have two projects - [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) and [Story map](https://github.com/rubyforgood/mutual-aid/projects/2). These cover the same list of github issues, but the [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) focuses on prioritization of issues, whereas the [Story map](https://github.com/rubyforgood/mutual-aid/projects/2) is a higher level overview and a good reference point of user flows (tho it was last updated spring 2020).
-All issues (and maps) are being groomed throughout these two weeks (9/1 - 9/13), so, please keep checking back for updates. If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us in the #mutualaid channel in the Ruby for Good Slack!
+Our current status is that dispatcher capacity is waning as local governments restart schools and lift pandemic bans. We have some bugfixes and smaller tickets to support the ongoing work of **dispatch-based** mutual aid.  We're also looking for people who are willing to spend a few days digging in to our new **peer-to-peer** communication path that will ease how much we rely on dispatchers.
 
+More (and snazzier!) details in our [project pitch deck](https://docs.google.com/presentation/d/1iUakTWYsj1tMAyOUO-1gp4oxNJzwGTFsZnkkDJk8Ax8/edit?usp=drive_web&ouid=109561030287749477812) for the event.
 
-[GitHub](https://github.com/rubyforgood/mutual-aid)
+We would love contributions from newbies, experienced devs, UX/UI designers and PM folks. We'll have standalone tickets that can be worked on fairly **independently**, as well as some that will need more **collaboration**.
 
-Slack channel: #mutualaid
-Slack contacts: @maebeale, @lasitha, @Howard, @svetlana, PM support: @Ginger A, Stakeholder reps: @Robin, @Siv Jones
+We are using two GitHub 'Projects' for planning, providing two different perspectives on the same issues:
 
+* [Roadmap](https://github.com/rubyforgood/mutual-aid/projects), a Kanban style board focussed on prioritization and workflow. This will be our **primary** planning tool during Ruby for Good.
+* [Story map](https://github.com/rubyforgood/mutual-aid/projects/2), a higher level overview and a good reference point of user flows (though it was last updated spring 2020 so is a bit out of date).
+
+All issues are being groomed throughout these two weeks (9/1 - 9/13), so please keep checking back for updates.
+
+Visit our [CONTRIBUTING.md](CONTRIBUTING.md) file for how to get started!
+
+If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us on Slack or comment on issues themselves.
+
+* Ruby for Good Slack channel: #mutualaid
+* Slack contacts: `@maebeale`, `@lasitha`, `@Howard`, `@svetlana`, PM support: `@Ginger A`
+* Stakeholder reps on slack: `@Robin`, `@Siv Jones`
+* [GitHub repo](https://github.com/rubyforgood/mutual-aid)
+
+Hope to see you on Slack and/or the social events being held!
 
 # Who we are
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.

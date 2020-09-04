@@ -1,12 +1,13 @@
 ## Contributing
 
-(This is copied from our beloved [Ruby for Good]: https://www.rubyforgood.org)
+(This is copied from our beloved [Ruby for Good](https://www.rubyforgood.org))
+
+[code of conduct]: https://github.com/rubyforgood/code-of-conduct
 
 We ♥ contributors! By participating in this project, you agree to abide by the Ruby for Good [code of conduct].
 
 **First:** if you're unsure or afraid of *anything*, just ask or submit the issue or pull request anyways. You won't be yelled at for giving your best effort. The worst that can happen is that you'll be politely asked to change something. We appreciate any sort of contributions, and don't want a wall of rules to get in the way of that.
 
-[code of conduct]: https://github.com/rubyforgood/code-of-conduct
 
 We have two projects - [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) and [Story map](https://github.com/rubyforgood/mutual-aid/projects/2). These cover the same list of github issues, but the [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) focuses on prioritization of issues, whereas the [Story map](https://github.com/rubyforgood/mutual-aid/projects/2) is a higher level overview and a good reference point of user flows (tho it was last updated in spring 2020).
 

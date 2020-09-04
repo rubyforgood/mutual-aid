@@ -65,3 +65,5 @@ IP address of your server.
 You should be good to go! Visit your domain name to get started.
 
 ## Make sure to run `rake db:seed`
+
+([Return to README.md](README.md))

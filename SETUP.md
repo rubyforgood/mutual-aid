@@ -138,6 +138,7 @@ To get started using the application with docker,
     app rails db:prepare db:seed
   ```
   This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `docker-compose run app db:prepare` and create the account using the sign up option on the website.
+
 8. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
 
 **NOTE** Do not use this method in production! This is for **testing & development only* the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
@@ -148,3 +149,5 @@ Also, if you would like docker-compose to run in daemon mode (which means that i
 
 **NOTE** the application will save its state between successively invocations of `docker-compose up --build`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `docker-compose`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `docker-compose down --volumes --remove-orphans`. In particular, you may need to do this if you are making breaking changes to the database structure, or if you have corrupted something somehow. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it. So make sure you back up anything you want to save before running the command.
 
+
+([Return to README.md](README.md))

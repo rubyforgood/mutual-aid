@@ -25,6 +25,8 @@ If you have any question of us source code maintainers, please feel free to reac
 
 Visit our [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
 
+We have two projects - Roadmap and Feature map (https://github.com/rubyforgood/mutual-aid/projects). These cover the same list of github issues, but the Roadmap focuses on prioritization of issues, whereas the Feature Map is a higher level overview and a good reference point of user flows.
+All issues (and maps) are being groomed throughout these two weeks (9/1 - 9/13), so, please keep checking back for updates. If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us in the #mutualaid channel in the Ruby for Good Slack!
 
 # Setting Up Development
 

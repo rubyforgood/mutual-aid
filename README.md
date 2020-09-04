@@ -6,6 +6,7 @@
 Mutual Aid is when people get together to build community by volunarily sharing resources with each other. Mutual Aid groups are more concerned about local resiliency than global campaigns, and prefer solidarity before charity. Mutual aid groups have existed around the world for over 200 years. Mutual aid groups generally prioritize the needs of minorities and other underserved communities.
 
 Our [project pitch deck](https://docs.google.com/presentation/d/1iUakTWYsj1tMAyOUO-1gp4oxNJzwGTFsZnkkDJk8Ax8/edit?usp=drive_web&ouid=109561030287749477812) for the event
+
 About mutual aid, [a list](https://bigdoorbrigade.wordpress.com/2017/01/31/what-do-we-mean-by-mutual-aid/)
 About mutual aid, [a video that covers a lot of ground](https://www.deanspade.net/2019/07/10/animated-video-about-mutual-aid/)
 Many people working in mutual aid were overwhelmed by requests early this year due to the COVID pandemic. Some of these groups were relying on dispatchers to match up people who could help each other. These dispatchers were in turn relying on spreadsheets, and the spreadsheets grew to be unmanageable. We've created an app to help. Seven mutual aid groups in cities across the country are now using this app.
@@ -18,12 +19,14 @@ Visit our [CONTRIBUTING.md](CONTRIBUTING.md) file for more info.
 We have two projects - [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) and [Story map](https://github.com/rubyforgood/mutual-aid/projects/2). These cover the same list of github issues, but the [Roadmap](https://github.com/rubyforgood/mutual-aid/projects) focuses on prioritization of issues, whereas the [Story map](https://github.com/rubyforgood/mutual-aid/projects/2) is a higher level overview and a good reference point of user flows (tho it was last updated spring 2020).
 All issues (and maps) are being groomed throughout these two weeks (9/1 - 9/13), so, please keep checking back for updates. If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us in the #mutualaid channel in the Ruby for Good Slack!
 
+
 [GitHub](https://github.com/rubyforgood/mutual-aid)
+
 Slack channel: #mutualaid
-Slack Contacts: @maebeale, @lasitha, @Howard, @svetlana, @Robin, @Siv Jones
+Slack contacts: @maebeale, @lasitha, @Howard, @svetlana, PM support: @Ginger A, Stakeholder reps: @Robin, @Siv Jones
+
 
 # Who we are:
-
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
 
 We aim to support people in working smarter, not harder.
@@ -51,14 +54,12 @@ Please, get involved! All of our communities could benefit from more resiliency 
 If you have any question of us source code maintainers, please feel free to reach out in the #mutualaid channel in Ruby for Good Slack (we're affiliated) or connect with us through GitHub.
 
 # Contributing
-
 Visit our [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
 
 We have two projects - Roadmap and Feature map (https://github.com/rubyforgood/mutual-aid/projects). These cover the same list of github issues, but the Roadmap focuses on prioritization of issues, whereas the Feature Map is a higher level overview and a good reference point of user flows.
-All issues (and maps) are being groomed throughout these two weeks (9/1 - 9/13), so, please keep checking back for updates. If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us in the #mutualaid channel in the Ruby for Good Slack!
+All issues (and maps) are being groomed throughout these two weeks (9/1/2020 - 9/13/2020), so, please keep checking back for updates. If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us in the #mutualaid channel in the Ruby for Good Slack!
 
 # Setting up development
-
 Visit our [SETUP.md](SETUP.md) file for more information on making your contribution. We look forward to it!
 
 # Viewing the Application
@@ -72,11 +73,12 @@ Visit our [SETUP.md](SETUP.md) file for more information on making your contribu
 
 ## if you chose the local [SETUP](SETUP.md) route (and are running the app locally via `rails s`), then you are good to go on:
   [http://localhost:3000](http://localhost:3000)
-  $ `rspec` (to run the test suite), or, `bundle exec rspec` (if the `rspec` does not work)
+  $ `rspec` (to run the test suite), or, `bin/rspec` (if the `rspec` does not work)
 
 ## Glossary!
 * We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glossary)  that's available in the demo instance once you're logged in.
 You can also check out the [view code](blob/main/app/views/admin/glossary.html.erb).
+
 
 
 # Deploying the app
@@ -100,7 +102,7 @@ You use `FactoryBot.create(:user)` before the `login_as` method and pass it in a
 BE SURE to include the line ```after { Warden.test_reset! } ``` after the `before do` block with the `login_as` method
 within it. This allows for any unexpected state data of the user from hanging around and causing errors.
 
-## Data
+## Data (seeds and imports)
 * Running `db:seed` will create basic types, etc, for test and production environments.
 * We also added some fake data seed files for you to use that are callable via rake tasks (these are in `lib/tasks/db.rake`)
   - To start fresh with prod seeds only (e.g. user account, organization, basic contact methods, languages, etc): `rake db:rebuild_and_seed`

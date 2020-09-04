@@ -9,14 +9,13 @@ Antrim County & Grand Traverse, along with some other area groups are interested
 
 Initial workflow / UI concerns were started and shared with the groups on April 1, 2020 (wish this were all a joke). The demo, using Bootstrap, went over well. Next steps have included removing that demo code and flushing it out in VUE.js. 
 
-We started off using a [Miro board](https://miro.com/app/board/o9J_kuKI5h8=/) for planning. (Contact us for access.). At this point we're trying to get better about using the Projects feature on Github, along w Github issues so contributors can see everything within the repo.
+We started off using a [Miro board](https://miro.com/app/board/o9J_kuKI5h8=/) for planning. (Contact us for access.). At this point we're trying to get better about using the Projects feature on GitHub, along w GitHub issues so contributors can see everything within the repo.
 
 Our team community norm: timing is difficult for everyone given the current uncertainties of our world, so we should communicate clearly that any of us might, at any time, have to back out from things we were hoping to accomplish. As a community, we prefer open and early communication about such things, and we want to make sure nobody feels pressured because circumstances have changed in a way they did not anticipate.
 
 
 # Priorities
 ## People
-
 * The groups we’re working with are "people first," and believe strongly in not referring to users as "offerers" or "askers," but instead the idea of seeing the whole person and their membership in the community as priority.
 
 ## Holistic approach
@@ -114,3 +113,6 @@ Our team community norm: timing is difficult for everyone given the current unce
     * It’s important to have a tool that houses the tasks
     * And have visibility
     * And eventually tools to sort and organize the tasks
+
+
+([Return to README.md](README.md))

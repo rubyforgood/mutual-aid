@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/rubyforgood/mutual-aid.svg?style=svg)](https://circleci.com/gh/rubyforgood/mutual-aid)
+[![CircleCI](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main.svg?style=svg)](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main)
 
 ### Welcome, and thanks for coming by!
 

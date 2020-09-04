@@ -38,8 +38,8 @@ RSpec.describe "/contributions", type: :request do
 
     it 'parses requests for a filtered list' do
       categories = [
-        create(:category, id: 50, name: Faker::Lorem.word),
-        create(:category, id: 70, name: Faker::Lorem.word)
+        create(:category, name: Faker::Lorem.word),
+        create(:category, name: Faker::Lorem.word)
       ]
       both_tags_listing = create(:listing, tag_list: categories.map(&:name))
       expected_area = both_tags_listing.service_area
@@ -50,7 +50,10 @@ RSpec.describe "/contributions", type: :request do
       no_tags_correct_area_listing = create(:listing, service_area: expected_area)
 
       # passing `as: json` to `get` does some surprising things to the request and its params that would break this test
-      get contributions_url, params: { 'Category[50]': 1, 'Category[70]': 1, "ServiceArea[#{expected_area.id}]": 1 }, headers: {'HTTP_ACCEPT' => 'application/json'}
+      get contributions_url, {
+        params: { "Category[#{categories[0].id}]": 1, "Category[#{categories[1].id}]": 1, "ServiceArea[#{expected_area.id}]": 1 },
+        headers: {'HTTP_ACCEPT' => 'application/json'}
+      }
 
       expect(response.body).to match(/#{expected_area.name.to_json}/)
 

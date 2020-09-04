@@ -2,7 +2,7 @@
 
 ### Welcome, and thanks for coming by!
 
-# Ruby for Good 2020 invite:
+# Ruby for Good 2020 invite
 Mutual Aid is when people get together to build community by volunarily sharing resources with each other. Mutual Aid groups are more concerned about local resiliency than global campaigns, and prefer solidarity before charity. Mutual aid groups have existed around the world for over 200 years. Mutual aid groups generally prioritize the needs of minorities and other underserved communities.
 
 Our [project pitch deck](https://docs.google.com/presentation/d/1iUakTWYsj1tMAyOUO-1gp4oxNJzwGTFsZnkkDJk8Ax8/edit?usp=drive_web&ouid=109561030287749477812) for the event
@@ -26,7 +26,7 @@ Slack channel: #mutualaid
 Slack contacts: @maebeale, @lasitha, @Howard, @svetlana, PM support: @Ginger A, Stakeholder reps: @Robin, @Siv Jones
 
 
-# Who we are:
+# Who we are
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
 
 We aim to support people in working smarter, not harder.
@@ -63,19 +63,19 @@ All issues (and maps) are being groomed throughout these two weeks (9/1/2020 - 9
 Visit our [SETUP.md](SETUP.md) file for more information on making your contribution. We look forward to it!
 
 # Viewing the Application
-## We've got a demo instance!
+### We've got a demo instance!
 * [http://mutual-aid-demo.herokuapp.com/](http://mutual-aid-demo.herokuapp.com/) 
 * credentials: mutualaidtesting@example.com, testing123
 
-## And a test instance you can use to test your changes before deploying to your production environment
+### And a test instance you can use to test your changes before deploying to your production environment
 * [http://mutual-aid-test.herokuapp.com/](http://mutual-aid-test.herokuapp.com/) 
 * credentials: mutualaidtesting@example.com, testing123
 
-## if you chose the local [SETUP](SETUP.md) route (and are running the app locally via `rails s`), then you are good to go on:
+### If you chose the local [SETUP](SETUP.md) route (and are running the app locally via `rails s`), then you are good to go on:
   [http://localhost:3000](http://localhost:3000)
   $ `rspec` (to run the test suite), or, `bin/rspec` (if the `rspec` does not work)
 
-## Glossary!
+### Glossary!
 * We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glossary)  that's available in the demo instance once you're logged in.
 You can also check out the [view code](blob/main/app/views/admin/glossary.html.erb).
 
@@ -87,10 +87,10 @@ Visit our [DEPLOYMENT.md](DEPLOYMENT.md) file for more information on deploying 
 
 # Other Tips to Get Started
 
-## Logging In
+### Logging In
 A username and password to log in and test the app are in `seeds.rb` (which then references your environment variables)
 
-## Testing
+### Testing
 * Running `bin/test` will run ruby tests (rspec) and then the js tests (mocha) if all the rspec tests pass
 * To run front end tests and back end tests individually:
     * Vue.js front end tests: `yarn test` or `yarn test -w` (mocha and chai are included in the `package.json` )
@@ -102,7 +102,7 @@ You use `FactoryBot.create(:user)` before the `login_as` method and pass it in a
 BE SURE to include the line ```after { Warden.test_reset! } ``` after the `before do` block with the `login_as` method
 within it. This allows for any unexpected state data of the user from hanging around and causing errors.
 
-## Data (seeds and imports)
+### Data (seeds and imports)
 * Running `db:seed` will create basic types, etc, for test and production environments.
 * We also added some fake data seed files for you to use that are callable via rake tasks (these are in `lib/tasks/db.rake`)
   - To start fresh with prod seeds only (e.g. user account, organization, basic contact methods, languages, etc): `rake db:rebuild_and_seed`
@@ -135,4 +135,4 @@ We've got a rudimentary ERD diagram, and some workflow diagrams all in one `db_d
 (yEd is desktop software for creating diagrams)
 
 # Customization
-## How to change colors (TBD)...
+### How to change colors (TBD)...

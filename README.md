@@ -26,7 +26,7 @@ We are using two GitHub 'Projects' for planning, providing two different perspec
 
 All issues are being groomed throughout these two weeks (9/1 - 9/13), so please keep checking back for updates.
 
-Visit our [CONTRIBUTING.md](CONTRIBUTING.md) file for how to get started!
+Hope to see you on Slack and/or the social events being held!
 
 If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us on Slack or comment on issues themselves.
 
@@ -35,12 +35,23 @@ If you have any questions and/or are having a hard time finding where or how to 
 * Stakeholder reps on slack: `@Robin`, `@Siv Jones`
 * [GitHub repo](https://github.com/rubyforgood/mutual-aid)
 
-Hope to see you on Slack and/or the social events being held!
+## Contribute!
+Check out [this guide](CONTRIBUTING.md) for how to get started. We look forward to your contributions and brilliance and being!
 
-# Who we are
+## Get involved in your local mutual aid efforts!
+Mutual aid is not new. If it is new to you, please check out the history of mutual aid in your neighborhood or region, as likely you will find mentors and partners ready to accept your help. There are most likely leaders of color in your area. Please see if there are ways to support them before creating your own new network. There is also plenty of research to be done, and national and regional networks to connect in to.
+
+Mutual aid groups are community groups that member-led, member-organized, and open to all to participate in.
+Mutual aid participants work together to figure out strategies and resources to meet each others' needs, such as food, housing, medical care, and disaster relief.
+
+Typically one member requests something and they are matched with a member who wishes to contribute that very thing.
+
+In addition to the background links in the 'What is mutual aid?' section, here's a [good definition of a mutual aid network](https://www.idealist.org/en/days/what-is-a-mutual-aid-network).
+
+Please, get involved! All of our communities could benefit from more resiliency and connection.
+
+## Who we are
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
-
-We aim to support people in working smarter, not harder.
 
 This is not intended to be strictly a "product" -- we will be in partnership with specific mutual aid groups to solicit feedback and support their operations, with a nod to all mutual aid groups and administrative best practices.
 
@@ -48,27 +59,8 @@ The idea is that each group -- or cluster of groups -- would own their database 
 
 Ideally mutual aid networks will have their own tech teams, but we will provide initial support as capacity permits.
 
-Feel free to [browse some of our earliest notes](ORIENTATION.md)
+Feel free to [browse some of our earliest notes](ORIENTATION.md).
 
-
-# Background
-Mutual aid is not new. If it is new to you, please check out the history of mutual aid in your neighborhood or region, as likely you will find mentors and partners ready to accept your help. There are most likely leaders of color in your area. Please see if there are ways to support them before creating your own new network.
-
-Mutual aid groups are community groups that member-led, member-organized, and open to all to participate in.
-Mutual aid participants work together to figure out strategies and resources to meet each others' needs, such as food, housing, medical care, and disaster relief.
-Typically one member requests something and they are matched with a member who wishes to contribute that very thing.
-In addition to the background links in the Ruby for Good section, here's a [good definition of a mutual aid network](https://www.idealist.org/en/days/what-is-a-mutual-aid-network).
-There is plenty of research to be done, and national and regional networks to connect in to.
-Please, get involved! All of our communities could benefit from more resiliency and connection.
-
-
-If you have any question of us source code maintainers, please feel free to reach out in the #mutualaid channel in Ruby for Good Slack (we're affiliated) or connect with us through GitHub.
-
-# Contributing
-Visit our [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on making your contribution. We look forward to it!
-
-We have two projects - Roadmap and Feature map (https://github.com/rubyforgood/mutual-aid/projects). These cover the same list of github issues, but the Roadmap focuses on prioritization of issues, whereas the Feature Map is a higher level overview and a good reference point of user flows.
-All issues (and maps) are being groomed throughout these two weeks (9/1/2020 - 9/13/2020), so, please keep checking back for updates. If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us in the #mutualaid channel in the Ruby for Good Slack!
 
 # Setting up development
 Visit our [SETUP.md](SETUP.md) file for more information on making your contribution. We look forward to it!

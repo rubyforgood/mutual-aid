@@ -58,7 +58,7 @@ Please, get involved! All of our communities could benefit from more resiliency 
 
 ## Glossary
 We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glossary)  that's available in the demo instance once you're logged in.
-You can also review it [in code](blob/main/app/views/admin/glossary.html.erb).
+You can also review it [in code](app/views/admin/glossary.html.erb).
 
 ## Deploying the app
 Visit our [DEPLOYMENT.md](DEPLOYMENT.md) guide for more information on deploying the app.

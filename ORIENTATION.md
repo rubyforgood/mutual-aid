@@ -1,4 +1,4 @@
-# Our history
+## Our history
 We saw mutual aid groups for communities we are connected to -- and those across the US/world -- creating/sharing publicly-accessible spreadsheets of people asking for support that included lots of personally-identifying information including ways in which they’re vulnerable, identities, contact info, etc.
 
 Also saw some of the more tech-savvy groups trying to use lots of tabs within spreadsheets to organize the firehose and complexity of data.
@@ -14,11 +14,11 @@ We started off using a [Miro board](https://miro.com/app/board/o9J_kuKI5h8=/) fo
 Our team community norm: timing is difficult for everyone given the current uncertainties of our world, so we should communicate clearly that any of us might, at any time, have to back out from things we were hoping to accomplish. As a community, we prefer open and early communication about such things, and we want to make sure nobody feels pressured because circumstances have changed in a way they did not anticipate.
 
 
-# Priorities
-## People
+## Priorities
+### People
 * The groups we’re working with are "people first," and believe strongly in not referring to users as "offerers" or "askers," but instead the idea of seeing the whole person and their membership in the community as priority.
 
-## Holistic approach
+### Holistic approach
 * Existing platforms (e.g. marketplaces and even mutual aid specific ones) seem to focus on the listings feature exclusively, whereas we want to offer integration with mutual aid group operations (administration, pod mapping, resource sharing, fewer logins, central point of access granted/denied, etc)
 
 ## Features
@@ -67,7 +67,7 @@ Our team community norm: timing is difficult for everyone given the current unce
     * Import/export of listings, volunteers
 * Bug reporting
 
-# Current status
+## Current status (a bit out of date)
 * Basic CRUD for Community resources
 * Basic CRUD for offer and ask (one of those so far)
 * Switch to Bulma CSS
@@ -82,7 +82,7 @@ Our team community norm: timing is difficult for everyone given the current unce
 * CI
 * Initial README, CONTRIBUTING, code-of-conduct, LICENSE
 
-# What’s next
+## What’s next (also a bit out of date)
 * Outreach, dev team building, partnership with other groups
     * Code for America, Code for DC, Ruby for Good, Title Track, AHA
         * Concern: we don’t want to build the team into a mythical man month problem

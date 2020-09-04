@@ -50,6 +50,16 @@ In addition to the background links in the 'What is mutual aid?' section, here's
 
 Please, get involved! All of our communities could benefit from more resiliency and connection.
 
+## Check out the demo
+[http://mutual-aid-demo.herokuapp.com/](http://mutual-aid-demo.herokuapp.com/)
+
+* username: `demouser@example.com`
+* password: `doubly dreamy demo`
+
+## Glossary
+We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glossary)  that's available in the demo instance once you're logged in.
+You can also review it [in code](blob/main/app/views/admin/glossary.html.erb).
+
 ## Who we are
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
 
@@ -64,24 +74,6 @@ Feel free to [browse some of our earliest notes](ORIENTATION.md).
 
 # Setting up development
 Visit our [SETUP.md](SETUP.md) file for more information on making your contribution. We look forward to it!
-
-# Viewing the Application
-### We've got a demo instance!
-* [http://mutual-aid-demo.herokuapp.com/](http://mutual-aid-demo.herokuapp.com/) 
-* credentials: mutualaidtesting@example.com, testing123
-
-### And a test instance you can use to test your changes before deploying to your production environment
-* [http://mutual-aid-test.herokuapp.com/](http://mutual-aid-test.herokuapp.com/) 
-* credentials: mutualaidtesting@example.com, testing123
-
-### If you chose the local [SETUP](SETUP.md) route (and are running the app locally via `rails s`), then you are good to go on:
-  [http://localhost:3000](http://localhost:3000)
-  $ `rspec` (to run the test suite), or, `bin/rspec` (if the `rspec` does not work)
-
-### Glossary!
-* We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glossary)  that's available in the demo instance once you're logged in.
-You can also check out the [view code](blob/main/app/views/admin/glossary.html.erb).
-
 
 
 # Deploying the app

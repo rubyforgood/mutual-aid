@@ -31,7 +31,7 @@ Here are the basic steps to submit a pull request. Make sure that you're working
 
 1. Run the test suite (`bin/rake`). We only merge pull requests with a passing test suite, and it's great to know that you have a clean slate.
 
-1. Add your code and tests as needed. If you are adding functionality or fixing a bug, you probably should add a test or many (if you're not sure how, comment and we might able to help)!
+1. Add your code and tests as needed. If you are adding functionality or fixing a bug, you probably should add a test or many (if you're not sure how, comment and we might able to help)! See [TESTING.md](TESTING.md) for some testing tips relevant to this codebase.
 
 1. Check the files that you added or changed with Rubocop, a ruby code linter: `bundle exec rubocop path/file1 path/file2`. You can add the `-a` option to fix some offenses automatically. Fix the others by hand until Rubocop reports no more offenses.
 

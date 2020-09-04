@@ -21,7 +21,7 @@ We would love contributions from newbies, experienced devs, UX/UI designers and 
 
 We are using two GitHub 'Projects' for planning, providing two different perspectives on the same issues:
 
-* [Roadmap](https://github.com/rubyforgood/mutual-aid/projects), a Kanban style board focussed on prioritization and workflow. This will be our **primary** planning tool during Ruby for Good.
+* [Roadmap](https://github.com/rubyforgood/mutual-aid/projects/4), a Kanban style board focussed on prioritization and workflow. This will be our **primary** planning tool during Ruby for Good.
 * [Story map](https://github.com/rubyforgood/mutual-aid/projects/2), a higher level overview and a good reference point of user flows (though it was last updated spring 2020 so is a bit out of date).
 
 All issues are being groomed throughout these two weeks (9/1 - 9/13), so please keep checking back for updates.
@@ -60,6 +60,16 @@ Please, get involved! All of our communities could benefit from more resiliency 
 We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glossary)  that's available in the demo instance once you're logged in.
 You can also review it [in code](blob/main/app/views/admin/glossary.html.erb).
 
+## Deploying the app
+Visit our [DEPLOYMENT.md](DEPLOYMENT.md) guide for more information on deploying the app.
+
+## More guides and documentation
+* [Contribution guide](CONTRIBUTING.md)
+* [Code of conduct](https://github.com/rubyforgood/code-of-conduct)
+* [Changelog](CHANGELOG.md)
+* [Dev environment setup](SETUP.md)
+* [Some testing tips](TESTING.md)
+
 ## Who we are
 We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
 
@@ -71,31 +81,10 @@ Ideally mutual aid networks will have their own tech teams, but we will provide 
 
 Feel free to [browse some of our earliest notes](ORIENTATION.md).
 
-
-# Setting up development
-Visit our [SETUP.md](SETUP.md) file for more information on making your contribution. We look forward to it!
-
-
-# Deploying the app
-
-Visit our [DEPLOYMENT.md](DEPLOYMENT.md) file for more information on deploying the app.
-
 # Other Tips to Get Started
 
 ### Logging In
 A username and password to log in and test the app are in `seeds.rb` (which then references your environment variables)
-
-### Testing
-* Running `bin/test` will run ruby tests (rspec) and then the js tests (mocha) if all the rspec tests pass
-* To run front end tests and back end tests individually:
-    * Vue.js front end tests: `yarn test` or `yarn test -w` (mocha and chai are included in the `package.json` )
-    * Rails front end and back end tests: `bin/rspec` (rspec is included in the Gemfile)
-
-When writing rspec tests within the spec/request directory, you can use `Warden::Test:Helpers`
-which give you access to the ```login_as(user, :scope => :user)``` method, as well as the ```logout``` method.
-You use `FactoryBot.create(:user)` before the `login_as` method and pass it in as the required resource variable.
-BE SURE to include the line ```after { Warden.test_reset! } ``` after the `before do` block with the `login_as` method
-within it. This allows for any unexpected state data of the user from hanging around and causing errors.
 
 ### Data (seeds and imports)
 * Running `db:seed` will create basic types, etc, for test and production environments.

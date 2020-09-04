@@ -1,3 +1,4 @@
+## Seeding
 
 Running `db:seed` will create basic types, etc, for test and production environments.
 
@@ -17,7 +18,7 @@ We also added some fake data seed files for you to use that are callable via rak
     - `rake db:import_user_seeds` (runs the db/scripts/user_seeds.rb file)
     - `rake db:import_custom_form_question_seeds` (runs the db/scripts/custom_form_question_seeds.rb file)
 
-To load your data:
+## Importing
 
 * Use the templates provided in `db/seeds/public_template_csvs` to get your data formatted
 * Save copies in `db/seeds/gitignored_csvs` (or keep them in your local dir)
@@ -28,3 +29,5 @@ To load your data:
          Please specify a valid ruby command or the path of a script to run.
          Run 'rails runner -h' for help.```
       - Run `spring stop` and try again
+
+[Back to README.md](README.md))

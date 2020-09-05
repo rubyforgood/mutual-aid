@@ -52,7 +52,6 @@ namespace :db do
   task :import_custom_form_question_seeds => :environment do
     require "#{Rails.root}/db/scripts/custom_form_question_seeds.rb"
   end
-
 end
 
 

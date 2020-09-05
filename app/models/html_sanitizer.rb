@@ -1,7 +1,7 @@
 class HtmlSanitizer
   def self.tags
-    %w[a abbr blockquote br cite code dd dfn div dl dt img kbd li mark ol
-         p pre q s samp small strike sub sup time ul var]
+    %w[a abbr b blockquote br cite code dd dfn div dl dt h1 h2 h3 h4 h5 h6 img
+       kbd li mark ol p pre q s samp small span strike sub sup time ul var]
   end
 
   def self.html_attributes

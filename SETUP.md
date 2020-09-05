@@ -65,9 +65,9 @@ The Rails and webpack processes can be launched with Heroku, if you choose to go
 
 We've used the [dotenv](https://github.com/bkeepers/dotenv) gem to reference .env files in the main project level of the repo. Check out their README!
 We've provided example data, but please change them for your team, and, per their repo, you can save specific env files per environment, 
-e.g. (`env.development.local`, `env.text.local`). All of these are already in the gitignore, but we've kept `.env` in there bc `circleci` needs it.
+e.g. (`.env.development.local`, `.env.text.local`). All of these are already in the gitignore, but we've kept `.env` in there bc `circleci` needs it.
 
-(Remember to add them manually in Heroku or wherever you deploy!)
+Remember to configure environment variables in Heroku or wherever you deploy! Only the development environment uses `.env`
 
 
 ## Running the App!
@@ -99,20 +99,26 @@ Note: You only need mailcatcher if you're interested doing a lot of work on emai
 ### Run the App Locally
 
 Then, to run the app locally,
-
 ```
-$ bundle install
-$ yarn install
+$ bundle && yarn
 $ bin/rake db:rebuild_and_seed_dev
 $ bin/rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
 ```
 
-In development, webpacker runs a separate server to support automatic hot-swapping.
-This is only necessary when working on pages containing vue code, but will also speed up initial page loads on other pages.
-Run this in a separate terminal.
+In a separate terminal:
 ```
 $ bin/webpacker-dev-server
 ```
+
+Note about deprecation warnings. Ruby 2.7 deprecated some commonly used syntax so our codebase currently spits out a _lot_ of warnings.
+It will take some time for all our gems to get caught up, so in the meantime you might consider turning off deprecation warnings.
+There are [several ways](https://www.andrewm.codes/posts/hiding-ruby-2-7-deprecation-warnings-in-rails-6-2mil/) to do this.
+An alternative to the methods listed in the artice is to create an alias `alias nodep='export RUBYOPT="-W:no-deprecated"'`, giving
+you the flexibility to toggle warnings in each terminal session as appropriate.
+
+### Run tests
+See [TESTING.md](TESTING.md).
+
 
 ## Development with Docker
 
@@ -141,13 +147,13 @@ To get started using the application with docker,
 
 8. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
 
-**NOTE** Do not use this method in production! This is for **testing & development only* the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
+**NOTE** Do not use this method in production! This is for **testing & development only** the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
 
 Note that if you are developing this application, running `docker-compose up` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes you changes, run `docker-compose up --build` instead.
 
 Also, if you would like docker-compose to run in daemon mode (which means that it will exit once the images have been set up and the application starts running) you may use `docker-compose up -d`. This will not show you any logging output from the application, however, and you will not be able to exit the application directly. To view logs when docker-compose is running in daemon mode, use `docker-compose logs`. To stop the application and all its services, run `docker-compose down`.
 
-**NOTE** the application will save its state between successively invocations of `docker-compose up --build`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `docker-compose`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `docker-compose down --volumes --remove-orphans`. In particular, you may need to do this if you are making breaking changes to the database structure, or if you have corrupted something somehow. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it. So make sure you back up anything you want to save before running the command.
+**NOTE** the application will save its state between successive invocations of `docker-compose up --build`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `docker-compose`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `docker-compose down --volumes --remove-orphans`. In particular, you may need to do this if you are making breaking changes to the database structure, or if you have corrupted something somehow. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it. So make sure you back up anything you want to save before running the command.
 
 
 ([Return to README.md](README.md))

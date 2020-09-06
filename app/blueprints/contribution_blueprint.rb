@@ -8,7 +8,7 @@ class ContributionBlueprint < Blueprinter::Base
   association :urgency, blueprint: DefaultBlueprint do |contribution, _options|
     UrgencyLevel.find(contribution.urgency_level_id)
   end
-  fields :title, :description
+  fields :title, :description, :inexhaustible
   field :created_at do |contribution, _options|
     contribution.created_at.to_f * 1000 # Javascript wants miliseconds, not seconds
   end

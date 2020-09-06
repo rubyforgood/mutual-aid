@@ -23,7 +23,7 @@ class AsksController < PublicController
     def submission_params
       params[:submission].tap do |p|
         p[:form_name] = 'Ask_form'
-        p[:listing_attributes][:type] = 'Ask'
+        p[:listings_attributes][:type] = 'Ask'
       end
     end
 

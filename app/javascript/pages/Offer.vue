@@ -34,7 +34,7 @@
     /><SpacerField />
 
     <CategoryFields
-      :fieldNamePrefix="withListingPrefix('tag_list[]')"
+      :fieldNamePrefix="withListingPrefix('categories[]')"
       :categories="configuration.categories"
       :tags="listing.tag_list"
     >
@@ -120,12 +120,12 @@ export default {
   data() {
     return {
       location: this.submission.location || {},
-      listing: this.submission.listing || {},
+      listing: this.submission.listing || {},  // todo: change to render from multiple listings
       person: this.submission.person || {},
     }
   },
   created: function() {
-    this.withListingPrefix = partial(fieldNameWithPrefix, 'submission[listing_attributes]')
+    this.withListingPrefix = partial(fieldNameWithPrefix, 'submission[listings_attributes]')
     this.withPersonPrefix  = partial(fieldNameWithPrefix, 'submission[person_attributes]')
   },
   skillsMessage,

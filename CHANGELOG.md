@@ -1,4 +1,28 @@
 # Changelog
+## [Unreleased]
+### Development notes
+* Switched primary branch from `master` to `main` #658
+
+## [0.2.9] - 2020-08-06
+### Enhancements
+* Ask/Offer form now generates a listing for each category selected #536, #620
+
+### Bugfixes
+* Ask/Offer form breaks when no custom questions are configured #621, #622
+
+## [0.2.8] - 2020-08-02
+### Bugfixes
+* Remove final & operator so all nils -> 0.0  #618
+
+## [0.2.7] - 2020-07-30
+### Enhancements
+* Display inexhaustible icon on Contributions, Matches, Respond #601
+* Update Listings index layout to include buttons to get to Listing edit #604
+
+### Bugfixes
+* Fix bug where inexhaustible wasn't updating when edited on Triage page #604
+* Add more terms to glossary #603
+* Add Listings index to Contribution data section of Admin landing page #602
 
 ## [0.2.6] - 2020-07-25
 ### Enhancements

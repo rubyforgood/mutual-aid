@@ -27,6 +27,9 @@
         <td><%= shorthand_display(match.created_at) %></td>
         <td><%= shorthand_display(match.updated_at) %></td>
         <td>
+          <% if match.receiver.inexhaustible? %>
+            <span class="fa fa-hourglass-half has-text-primary"></span>&nbsp;
+          <% end %>
           <% match.receiver&.all_tags_unique&.each do |tag_name| %>
             <span class="tag is-info is-light has-text-weight-bold"><%= tag_name.upcase %></span>
           <% end %>

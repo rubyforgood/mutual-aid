@@ -1,11 +1,12 @@
 class SubmissionForm < BaseForm
+  hash :responses_attributes, strip: false, default: {}
+
   with_options default: nil do
     integer :id
     record  :service_area
-    hash    :listing_attributes,   strip: false
+    hash    :listings_attributes,  strip: false
     hash    :location_attributes,  strip: false
     hash    :person_attributes,    strip: false
-    hash    :responses_attributes, strip: false
     string  :form_name
     string  :privacy_level_requested  # fixme: not submitted as yet
   end
@@ -13,7 +14,7 @@ class SubmissionForm < BaseForm
   def execute
     build_location
     build_person
-    build_listing
+    build_listings
     build_submission_responses
     build_submission
   end
@@ -28,25 +29,31 @@ class SubmissionForm < BaseForm
       @person ||= PersonForm.build person_attributes.merge location: @location
     end
 
-    def build_listing
-      @listing ||= ListingForm.build listing_attributes.merge(
-        person: @person,
-        location: @location,
-        service_area: service_area
-      )
+    def build_listings
+      @listings = (listings_attributes[:categories] || []).map do |category_id|
+        ListingForm.build listings_attributes.merge(
+          category: category_id,
+          location: @location,
+          person: @person,
+          service_area: service_area,
+        )
+      end
     end
 
     def build_submission
-      (id? ? Submission.find(id) : Submission.new).tap do |submission|
+      submission.tap do |submission|
+        # todo: this has to be smarter if we want to support partial updates
         submission.attributes = submission_attributes
       end
     end
 
     def build_submission_responses
-      @submission_responses = responses_attributes.each_with_object([]) do |(custom_form_question_id, answer), obj|
-        response = SubmissionResponseForm.build custom_form_question_id: custom_form_question_id,
-                                                string_response: answer
-        obj << response
+      @submission_responses = responses_attributes.map do |(custom_form_question_id, answer)|
+        SubmissionResponseForm.build(
+          submission: submission,
+          custom_form_question_id: custom_form_question_id,
+          string_response: answer,
+        )
       end
     end
 
@@ -60,7 +67,7 @@ class SubmissionForm < BaseForm
         .merge(
           body: body_json,
           person: @person,
-          listings: [@listing],
+          listings: @listings,
           submission_responses: @submission_responses,
         )
     end
@@ -69,5 +76,9 @@ class SubmissionForm < BaseForm
       given_inputs
         .merge(service_area: service_area.id)
         .to_json
+    end
+
+    def submission
+      @submisson ||= Submission.find_or_new(id)
     end
 end

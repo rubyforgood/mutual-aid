@@ -12,9 +12,14 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: mat
-      POSTGRES_DB: mutualaidtompkins
+      POSTGRES_USER: ${POSTGRES_USER:-ma}
+      POSTGRES_DB: ${POSTGRES_DB:-mutualaid}
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    logging:
+      driver: json-file
+      options:
+        max-size: "200k"
+        max-file: "10"
   app:
     build:
       context: ../..
@@ -39,6 +44,11 @@ services:
       SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
     volumes:
       - "public:/usr/src/app/public"
+    logging:
+      driver: json-file
+      options:
+        max-size: "200k"
+        max-file: "10"
   caddy:
     image: caddy
     volumes:
@@ -51,3 +61,8 @@ services:
     restart: always
     depends_on:
       - app
+    logging:
+      driver: json-file
+      options:
+        max-size: "200k"
+        max-file: "10"

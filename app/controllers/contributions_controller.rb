@@ -32,12 +32,14 @@ class ContributionsController < ApplicationController
     contribution_params = params[@contribution.type.downcase.to_sym]
     title = contribution_params[:title]
     description = contribution_params[:description]
-    if @contribution.update(title: title, description: description)
-      CommunicationLog.create!(person: @contribution.person,
-                               sent_at: Time.current,
-                               subject: "triaged by #{current_user.name}",
-                               delivery_status: "connected",
-                               delivery_method: @contribution.person.preferred_contact_method)
+    inexhaustible = contribution_params[:inexhaustible]
+
+    if @contribution.update(title: title, description: description, inexhaustible: inexhaustible)
+      # CommunicationLog.create!(person: @contribution.person,
+      #                          sent_at: Time.current,
+      #                          subject: "triaged by #{current_user.name}",
+      #                          delivery_status: "connected",
+      #                          delivery_method: @contribution.person.preferred_contact_method)
       redirect_to respond_contribution_path(@contribution), notice: 'Contribution was successfully updated.'
     else
       render triage_contribution_path(@contribution)

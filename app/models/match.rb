@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: matches
+#
+#  id            :bigint           not null, primary key
+#  completed     :boolean          default(FALSE), not null
+#  exchanged_at  :datetime
+#  notes         :string
+#  provider_type :string
+#  receiver_type :string
+#  status        :string
+#  tentative     :boolean          default(TRUE), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  provider_id   :integer
+#  receiver_id   :integer
+#
 class Match < ApplicationRecord
   belongs_to :receiver, polymorphic: true, inverse_of: :matches_as_receiver
   belongs_to :provider, polymorphic: true, inverse_of: :matches_as_provider

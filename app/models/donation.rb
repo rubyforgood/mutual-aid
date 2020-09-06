@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: donations
+#
+#  id             :bigint           not null, primary key
+#  channel        :string
+#  notes          :text
+#  thank_you_sent :string
+#  value          :float
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  person_id      :bigint           not null
+#
+# Indexes
+#
+#  index_donations_on_person_id  (person_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (person_id => people.id)
+#
 class Donation < ApplicationRecord
   belongs_to :person, optional: true
 

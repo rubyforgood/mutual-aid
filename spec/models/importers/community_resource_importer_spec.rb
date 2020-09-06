@@ -31,5 +31,42 @@ RSpec.describe Importers::CommunityResourceImporter do
       resource = CommunityResource.last
       expect(resource.name).to eq 'Food Vouchers'
     end
+
+    it 'creates a CommunityResource with a website_url' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.website_url).to eq 'https://example.com'
+    end
+
+    it 'creates a CommunityResource with a facebook_url' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.facebook_url).to eq 'https://facebook.com/sample'
+    end
+
+    it 'creates a CommunityResource with a phone' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.phone).to eq '818-555-9876'
+    end
+
+    it 'creates a CommunityResource with a description' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.description).to eq 'A long description of text.'
+    end
+
+    it 'creates a CommunityResource with an organization' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.organization.name).to eq "WIC"
+    end
+
+    # failing bc needs location type but we dont know what type it is
+    # it 'creates a CommunityResource with a location street' do
+    #   subject.import_string single_record
+    #   resource = CommunityResource.last
+    #   expect(resource.location.street_address).to eq "123 Main Street"
+    # end
   end
 end

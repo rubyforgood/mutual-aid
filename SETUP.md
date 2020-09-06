@@ -107,7 +107,7 @@ $ bin/rails s # or, rails s -p 9000 (or whatever port you want to use that's not
 
 In a separate terminal:
 ```
-$ bin/webpacker-dev-server
+$ bin/webpack-dev-server
 ```
 
 Note about deprecation warnings. Ruby 2.7 deprecated some commonly used syntax so our codebase currently spits out a _lot_ of warnings.

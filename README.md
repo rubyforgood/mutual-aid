@@ -66,7 +66,7 @@ Visit our [deployment guide](doc/deployment.md) for more information on deployin
 ## More guides and documentation
 * [Contribution guide](doc/contributing.md)
 * [Code of conduct](https://github.com/rubyforgood/code-of-conduct)
-* [Changelog](CHANGELOG.md)
+* [Releases and Changelog](https://github.com/rubyforgood/mutual-aid/releases)
 * [Dev environment setup](doc/setup.md)
 * [Seeding and importing data](doc/seeding.md)
 * [Some testing tips](doc/testing.md)

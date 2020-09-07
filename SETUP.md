@@ -6,39 +6,52 @@ This is a Ruby on Rails 6.0 application with Vue + Webpack included.
 
 To get started developing on your machine, you'll need the following tools installed:
 
-* ruby 2.7
-* bundler 2+ (ruby package manager)
-* node 10+
-* yarn 1.16+ (node package manager)
+* ruby 2.7+, bundler 2+
+* node 10+, yarn 1.16+
 
 This project uses webpacker to bundle front end assets, including:
-* vue 0.8.2+
-* bulma css 2.6.11+
+
+* [vue](https://vuejs.org/) 2+
+* [bulma css](https://bulma.io/) 0.8+
+* [buefy](https://buefy.org/) 0.8+
 
 ## Setting up services
-Some choices for how to run services in your development environment:
-* If you decide to use Docker:
-    * [Docker](#development-with-docker)
-* If you want to install local services on your development host:
-    * PostgreSQL 9.5+
-    * Mailcatcher 0.7.1
 
-## Setting up Ruby and Bundler
+There are two ways to run services in your development environment:
 
-The easiest way to manage different installations of Ruby (we think) is with [rbenv](https://github.com/rbenv/rbenv). After following the installation instructions on the rbenv repo and restarting your terminal, you'll be able to run `rbenv install` in the root directory of the repository. rbenv will handle installing Ruby and switching to it for you when you enter the repo (so no need to worry about your other Ruby installs!) After that, run `gem install bundler` and you'll be all set to run `bundle install`.
+* Use [Docker](#development-with-docker).
+* Install local services on your development host:
+    * [PostgreSQL 9.5+](#setting-up-postgresql)
+    * [Mailcatcher 0.7.1](#setting-up-mailcatcher)
 
-If you run into a problem where your bundle install says you're on an older version of bundler than what's in the lockfile, run `gem update --system` to update RubyGems, then `gem install bundler:[latest-version-you-want], e.g. gem install bundler:2.1.2]`
+## Ruby and Bundler
+
+The easiest way to manage different installations of Ruby (we think) is with [rbenv](https://github.com/rbenv/rbenv).
+
+1. Follow the installation instructions on the [rbenv repo](https://github.com/rbenv/rbenv)
+1. Restart your terminal, then, in the root directory of the repository:
+    ```
+    rbenv install
+    gem install bundler
+    bundle install
+    ```
+`rbenv` will handle installing Ruby and switching to it for you when you enter the repo (so no need to worry about your other Ruby installs!).
+
+If you run into a problem where your bundle install says you're on an older version of bundler than what's in the lockfile, run `gem update --system` to update RubyGems, then:
+`gem install bundler:[latest-version-you-want]`, e.g. `gem install bundler:2.1.2`
 
 Depending on your system, you might have trouble building the `pg` gem, probably due to a missing `libpq-fe.h`. To get the necessary libraries installed:
+
 * For Mac (Homebrew): `brew install postgresql`
 * Debian/Ubuntu: `sudo apt-get install libpq-dev`
 * On Enterprise Linux (CentOS/RHEL/Fedora/Amazon Linux/Sci Linux): `yum install postgresql-devel`
 
-## Setting up Node with Yarn
+## Node and Yarn
 
 The easiest way to manage different installations with node.js is with [nvm](https://github.com/nvm-sh/nvm). After following the installation instructions, type `nvm install` to install and run the right version of node.js.
 
 You'll also need Yarn, a package manager for node.js. To install that:
+
 * For Mac (Homebrew): `brew install yarn`
 * Debian/Ubuntu:
 ```
@@ -52,72 +65,108 @@ curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yu
 sudo yum install yarn
 ```
 
-## Setting up Heroku (and using it for development)
+## Setting up PostgreSQL
 
-The Rails and webpack processes can be launched with Heroku, if you choose to go that route. You can install Heroku Local using [these instructions](https://devcenter.heroku.com/articles/heroku-cli).
+### On OS X
+We recommend:
 
-## Setting up other hosting
+* The [Postgres.app](Postgres.app), or
+* Installing with [`homebrew`](https://wiki.postgresql.org/wiki/Homebrew).
 
-(If you've done this, please submit a PR so we can include instructions here!)
+### On Linux
+1. Use your favorite package manager, eg:
+    ```
+    sudo apt-get update
+    sudo apt-get install postgresql postgresql-contrib libpq-dev
+    ```
+2. Create a user for use with the mutual-aid app (or for other databases as well, if you like)
+    ```
+    # Choose a username and replace <username> below.
+    # This will prompt for a password, make sure to remember it for later
+    sudo -u postgres createuser <username> --pwprompt --createdb --no-superuser --no-createrole
+    ```
+3. Give the app knowledge of these creds:
+    - Create or edit a `.env.local` file at the root of the project (alongside `.env`)
+    - Set the following values to match the username and password from above.
+    ```
+    POSTGRES_USER=username
+    POSTGRES_PASSWORD="password"
+    ```
+    - Note: the "quotes" around password are required if it contains spaces
+4. Test the setup by ensuring the following runs without error:
+    ```
+    bin/rake db:setup
+    ```
+
+## Setting up Mailcatcher
+
+You only need mailcatcher if you're doing a lot of work on emails in the development environment.
+Without it, emails will be logged in the server log (log/development.log), but mailcatcher makes mailer work SO much easier.
+
+Mailcatcher cannot be bundled, so has to be installed globally:
+```
+$ gem install mailcatcher
+```
+
+Start the mail server with:
+```
+$ mailcatcher
+```
+And go to http://localhost:1080/
+Mail can be sent through smtp://localhost:1025
 
 
 ## Environment variables
 
 We've used the [dotenv](https://github.com/bkeepers/dotenv) gem to reference .env files in the main project level of the repo. Check out their README!
-We've provided example data, but please change them for your team, and, per their repo, you can save specific env files per environment, 
-e.g. (`.env.development.local`, `.env.text.local`). All of these are already in the gitignore, but we've kept `.env` in there bc `circleci` needs it.
 
-Remember to configure environment variables in Heroku or wherever you deploy! Only the development environment uses `.env`
+You can override any values in `.env` by introducing an `.env.local` file or more targetted files per environment, e.g. `.env.development.local`, `.env.test.local`.
+All of these are already ignored in our repository so its safe to put credentials there (you can also use `chown/chmod` to further secure them).
+
+Remember to configure environment variables in Heroku or wherever you deploy!
+Only the development environment uses `.env` files.
 
 
 ## Running the App!
 
-First, make sure local services are running
+First, make sure local services or docker are running.
 
-### Starting Local Services
-
-#### ... with individually installed services
-
-Ensure Postgres is running. We recommend Postgres.app for macOS if you don't already have it installed.
-
-Mailcatcher cannot be bundled, for that reason we must use:
-
-```
-$ gem install mailcatcher
-```
-
-To get the MailCatcher gem's mail server up run:
-
-```
-$ mailcatcher
-Go to http://localhost:1080/
-Send mail through smtp://localhost:1025
-```
-
-Note: You only need mailcatcher if you're interested doing a lot of work on emails in the development environment. (They'll still be visible in the server log, but mailcatcher makes mailer work SO much easier.)
-
-### Run the App Locally
-
-Then, to run the app locally,
+Then, to run the app locally:
 ```
 $ bundle && yarn
 $ bin/rake db:rebuild_and_seed_dev
 $ bin/rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
 ```
-
-In a separate terminal:
+And in a separate terminal:
 ```
 $ bin/webpacker-dev-server
 ```
 
-Note about deprecation warnings. Ruby 2.7 deprecated some commonly used syntax so our codebase currently spits out a _lot_ of warnings.
+You should now be able to see the app running at http://localhost:3000
+
+
+## Running tests
+See [TESTING.md](TESTING.md).
+
+
+## Note about deprecation warnings.
+Ruby 2.7 deprecated some commonly used syntax so our codebase currently spits out a _lot_ of warnings.
+
 It will take some time for all our gems to get caught up, so in the meantime you might consider turning off deprecation warnings.
 There are [several ways](https://www.andrewm.codes/posts/hiding-ruby-2-7-deprecation-warnings-in-rails-6-2mil/) to do this.
+
 An alternative to the methods listed in the artice is to create an alias `alias nodep='export RUBYOPT="-W:no-deprecated"'`, giving
 you the flexibility to toggle warnings in each terminal session as appropriate.
 
-### Run tests
-See [TESTING.md](TESTING.md).
+
+## Setting up Heroku (and using it for development)
+
+The Rails and webpack processes can be launched with Heroku, if you choose to go that route. You can install Heroku Local using [these instructions](https://devcenter.heroku.com/articles/heroku-cli).
+
+
+## Setting up other hosting
+
+(If you've done this, please submit a PR so we can include instructions here!)
 
 
 ## Development with Docker

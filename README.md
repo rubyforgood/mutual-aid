@@ -36,7 +36,7 @@ If you have any questions and/or are having a hard time finding where or how to 
 * [GitHub repo](https://github.com/rubyforgood/mutual-aid)
 
 ## Contribute!
-Check out [this guide](CONTRIBUTING.md) for how to get started. We look forward to your contributions and brilliance and being!
+Check out [this guide](doc/contributing.md) for how to get started. We look forward to your contributions and brilliance and being!
 
 ## Get involved in your local mutual aid efforts!
 Mutual aid is not new. If it is new to you, please check out the history of mutual aid in your neighborhood or region, as likely you will find mentors and partners ready to accept your help. There are most likely leaders of color in your area. Please see if there are ways to support them before creating your own new network. There is also plenty of research to be done, and national and regional networks to connect in to.
@@ -61,15 +61,15 @@ We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glo
 You can also review it [in code](app/views/admin/glossary.html.erb).
 
 ## Deploying the app
-Visit our [DEPLOYMENT.md](DEPLOYMENT.md) guide for more information on deploying the app.
+Visit our [deployment guide](doc/deployment.md) for more information on deploying the app.
 
 ## More guides and documentation
-* [Contribution guide](CONTRIBUTING.md)
+* [Contribution guide](doc/contributing.md)
 * [Code of conduct](https://github.com/rubyforgood/code-of-conduct)
 * [Changelog](CHANGELOG.md)
-* [Dev environment setup](SETUP.md)
-* [Seeding and importing data](SEEDING.md)
-* [Some testing tips](TESTING.md)
+* [Dev environment setup](doc/setup.md)
+* [Seeding and importing data](doc/seeding.md)
+* [Some testing tips](doc/testing.md)
 * [Rudimentary ERD and workflow diagrams](db/db_diagram_yEd.graphml)
 * Customization (WIP)
 
@@ -82,4 +82,4 @@ The idea is that each group -- or cluster of groups -- would own their database 
 
 Ideally mutual aid networks will have their own tech teams, but we will provide initial support as capacity permits.
 
-Feel free to [browse some of our earliest notes](ORIENTATION.md).
+Feel free to browse [some of our earliest notes](doc/orientation.md).

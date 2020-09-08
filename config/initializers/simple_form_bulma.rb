@@ -46,7 +46,7 @@ SimpleForm.setup do |config|
       file:          :vertical_file,
       radio_buttons: :horizontal_radio,
       range:         :vertical_range,
-      time:          :horizontal_multi_select
+      time:          :horizontal_multi_select,
   }
 
   # vertical forms

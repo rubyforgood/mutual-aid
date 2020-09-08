@@ -1,23 +1,25 @@
 <template>
   <div class='orientation section'>
-    <div class='columns'>
-      <div class='column'>
+    <div class='columns actions is-centered'>
+      <div class='column is-one-third'>
+        <div class='box action'>
           <h2 class='subtitle is-3'>Need some help?</h2>
           <div class='action-buttons'>
             <a href="/asks/new" class="button is-primary">Submit an Ask</a>
           </div>
+        </div>
       </div>
-      <div class='column'>
+      <div class='column is-one-third'>
+        <div class='box action'>
           <h2 class='subtitle is-3'>Want to help?</h2>
           <div class='action-buttons'>
             <a href="/offers/new" class="button is-primary">Submit an Offer</a>
-            <br><br>
-            <br>
           </div>
+        </div>
       </div>
     </div>
-    <div>
-      <h1 class='title'>Mutual Aid</h1>
+    <div class='level'>
+      <h1 class='title level-item'>Mutual Aid</h1>
     </div>
     <div class='columns'>
       <div class='column'>
@@ -30,9 +32,9 @@
         <AboutSection id='landing_page_text_how' title="Where do you fit in?" :description="landing_page_text_how"/>
       </div>
     </div>
-    <div class='columns'>
-      <div class='column'><a href='/community_resources/new'>Submit a community resource</a></div>
-      <div class='column'><a href='/announcements/new'>Submit an announcement</a></div>
+    <div class='columns is-centered links'>
+      <div class='column'><a href='/community_resources/new' class='button is-primary is-outlined'>Submit a Community Resource</a></div>
+      <div class='column'><a href='/announcements/new' class='button is-primary is-outlined'>Submit an Announcement</a></div>
     </div>
   </div>
 </template>
@@ -62,7 +64,33 @@ export default {
 </script>
 
 <style scoped>
-  .column div{
-    text-align:left;
+  .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+
+  .action {
+    height: 80%;
+  }
+
+  .columns.actions {
+    height: 22em;
+  }
+
+  .column {
+    text-align: center;
+  }
+
+  .level {
+    border-top: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
+    padding: 1.5em;
+  }
+
+  .links {
+    border-top: 1px solid darkgrey;
+  }
+
 </style>

@@ -16,6 +16,7 @@ If appropriate, use github's [issue linking keywords](https://docs.github.com/en
 - [ ] Any next steps that seem like a good ideas have been created as issues for future discussion & implementation
 - [ ] High quality tests have been added, or an explanation has been given why the features cannot be tested
 - [ ] New features have been documented, and the code is understandable and well commented
+- [ ] Entry added to CHANGELOG.md if appropriate
 
 
 ## What

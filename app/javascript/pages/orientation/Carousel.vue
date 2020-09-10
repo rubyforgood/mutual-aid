@@ -4,7 +4,9 @@
             :autoplay="auto"
             :arrow="arrow"
             :repeat="arrowBoth"
-            :arrow-hover="arrowHover">
+            :arrow-hover="arrowHover"
+            :interval="interval"
+            :pause-hover="pauseHover">
             <b-carousel-item v-for="(announcement, i) in announcements" :key="i">
                 <section :class="`hero is-medium is-light`" style="background-color:grey-lightest">
                     <div class="hero-body has-text-centered">
@@ -25,8 +27,10 @@ export default {
         return {
             auto: true,
             arrow: true,
+            pauseHover: false,
             arrowBoth: true,
             arrowHover: false,
+            interval: 5000,
             announcements: [{title: 'No Current Announcements', description: ''}],
         }
     },

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/public",                   to: "public_pages#landing_page",        as: "landing_page_public"
   get "/about",                    to: "public_pages#about",               as: "about_public"
   get "/announcements_list",       to: "public_pages#announcements",       as: "announcements_public"
+  get "/announcements_public",     to: "public_pages#announcements_json"
   get "/community_resources_list", to: "public_pages#community_resources", as: "community_resources_public"
 
   resources :announcements

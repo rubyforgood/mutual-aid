@@ -1,50 +1,60 @@
 <template>
   <div class='orientation section'>
-    <div class='columns actions is-centered'>
-      <div class='column is-one-third'>
-        <div class='box action'>
-          <h2 class='subtitle is-3'>Need some help?</h2>
-          <div class='action-buttons'>
-            <a href="/asks/new" class="button is-primary">Submit an Ask</a>
+      <div class='columns actions is-centered'>
+        <div class='column is-one-third'>
+          <div class='box action'>
+            <h2 class='subtitle is-3'>Need some help?</h2>
+            <div class='action-buttons'>
+              <a href="/asks/new" class="button is-primary">Submit an Ask</a>
+            </div>
+          </div>
+        </div>
+        <div class='column is-one-third'>
+          <div class='box action'>
+            <h2 class='subtitle is-3'>Want to help?</h2>
+            <div class='action-buttons'>
+              <a href="/offers/new" class="button is-primary">Submit an Offer</a>
+            </div>
           </div>
         </div>
       </div>
-      <div class='column is-one-third'>
-        <div class='box action'>
-          <h2 class='subtitle is-3'>Want to help?</h2>
-          <div class='action-buttons'>
-            <a href="/offers/new" class="button is-primary">Submit an Offer</a>
-          </div>
+      <hr>
+      <div class='level'>
+        <h1 class='title level-item'>Mutual Aid</h1>
+      </div>
+      <hr>
+      <div class='columns'>
+        <div class='column'>
+          <AboutSection id='landing_page_text_what' title='What is Mutual Aid?' :description="landing_page_text_what"/>
+        </div>
+        <div class='column'>
+          <AboutSection id='landing_page_text_who' title='Who are we?' :description="landing_page_text_who"/>
+        </div>
+        <div class='column'>
+          <AboutSection id='landing_page_text_how' title="Where do you fit in?" :description="landing_page_text_how"/>
         </div>
       </div>
-    </div>
-    <div class='level'>
-      <h1 class='title level-item'>Mutual Aid</h1>
-    </div>
-    <div class='columns'>
-      <div class='column'>
-        <AboutSection id='landing_page_text_what' title='What is Mutual Aid?' :description="landing_page_text_what"/>
+      <div class='section anouncements columns is-centered'>
+        <div class='column is-half'>
+          <Carousel id='landing_anouncements' name='carousel' />
+        </div>
       </div>
-      <div class='column'>
-        <AboutSection id='landing_page_text_who' title='Who are we?' :description="landing_page_text_who"/>
+      <hr>
+      <div class='columns is-centered links'>
+        <div class='column'><a href='/community_resources/new' class='button is-primary is-outlined'>Submit a Community Resource</a></div>
+        <div class='column'><a href='/announcements/new' class='button is-primary is-outlined'>Submit an Announcement</a></div>
       </div>
-      <div class='column'>
-        <AboutSection id='landing_page_text_how' title="Where do you fit in?" :description="landing_page_text_how"/>
-      </div>
-    </div>
-    <div class='columns is-centered links'>
-      <div class='column'><a href='/community_resources/new' class='button is-primary is-outlined'>Submit a Community Resource</a></div>
-      <div class='column'><a href='/announcements/new' class='button is-primary is-outlined'>Submit an Announcement</a></div>
-    </div>
   </div>
 </template>
 
 <script>
 import AboutSection from "./orientation/AboutSection";
+import Carousel from "./orientation/Carousel";
 
 export default {
   components:{
-    AboutSection
+    AboutSection,
+    Carousel,
   },
   props:{
     organization: String,
@@ -61,36 +71,32 @@ export default {
               "We'll help connect you." }
   }
 }
+
 </script>
 
 <style scoped>
+
   .box {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-
   .action {
     height: 80%;
   }
-
   .columns.actions {
     height: 22em;
   }
-
   .column {
     text-align: center;
   }
-
   .level {
-    border-top: 1px solid darkgrey;
-    border-bottom: 1px solid darkgrey;
     padding: 1.5em;
   }
 
-  .links {
-    border-top: 1px solid darkgrey;
+  hr {
+    background-color: darkgrey;
   }
 
 </style>

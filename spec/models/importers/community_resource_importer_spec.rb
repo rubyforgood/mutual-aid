@@ -221,26 +221,44 @@ RSpec.describe Importers::CommunityResourceImporter do
         CSV
       }
 
-    it 'sets the service area name from the service_area_counties if service_area_name and service_area_town_names are not provided' do 
-      subject.import_string single_record_with_service_area_counties
-      resource = CommunityResource.last
+      it 'sets the service area name from the service_area_counties if service_area_name and service_area_town_names are not provided' do 
+        subject.import_string single_record_with_service_area_counties
+        resource = CommunityResource.last
 
-      expect(resource.service_area.name).to eq "Queens County, Brooklyn"
-    end
+        expect(resource.service_area.name).to eq "Queens County, Brooklyn"
+      end
 
-    it 'sets the service area location county' do
-      subject.import_string single_record_with_service_area_counties
-      resource = CommunityResource.last 
+      it 'sets the service area location county' do
+        subject.import_string single_record_with_service_area_counties
+        resource = CommunityResource.last 
 
-      expect(resource.service_area.location.county).to eq "Queens County, Brooklyn"
-    end
+        expect(resource.service_area.location.county).to eq "Queens County, Brooklyn"
+      end
 
-    it 'sets the service area type to county' do
-      subject.import_string single_record_with_service_area_counties
-      resource = CommunityResource.last 
+      it 'sets the service area type to county' do
+        subject.import_string single_record_with_service_area_counties
+        resource = CommunityResource.last 
 
-      expect(resource.service_area.service_area_type).to eq "county"
+        expect(resource.service_area.service_area_type).to eq "county"
+      end
     end
   end
+
+  context 'with multiple records for a community resource' do
+    let(:multiple_records) {
+       <<~CSV
+        category_name,name,organization_name,street,city,state,zip,county,service_area_name,service_area_counties,service_area_town_names,phone,website_url,facebook_url,publish_from,publish_until,is_created_by_admin,is_approved,youtube_identifier,description
+        food,Food Vouchers,WIC,1340 State Route 9,Lake George,NY,12845,Warren,,,,518-761-6425,https://www.warrencountyny.gov/wic/,https://www.facebook.com/Warren-County-New-York-113824060252510/,2020-08-10,,TRUE,TRUE,,'WIC offers food vouchers to moms, dads, foster parents, guardians, pregnant women, grandparents and step-parents who are income-eligible. Open Monday through Friday. Call to verify hours.'
+        food,Food Vouchers,WIC,383 Broadway,Fort Edward,NY,12828,Washington,,,,518-746-2460,https://washingtoncountyny.gov/179/WIC-Program,https://www.facebook.com/washingtoncountynywic/,2020-08-10,,TRUE,TRUE,,'WIC offers food vouchers to moms, dads, foster parents, guardians, pregnant women, grandparents and step-parents who are income-eligible. Open Monday through Friday from 8:30 a.m. to 4:30 p.m.'
+        food,Neighborhood Opportunity Center,Warren-Hamilton Counties Community Action Agency,190 Maple Street,Glens Falls,NY,12801,Warren,,,,518-793-0636,http://wahacaa.org/,https://www.facebook.com/wahccaeo/,2020-08-10,,TRUE,TRUE,,'Offers emergency food assistance. Families regardless of residency with limited food resources are invited to visit the Glens Falls Neighborhood Opportunity Center weekly to access food available. Open Monday through Friday from 8 a.m to 4:30 p.m.'
+        clothing,Neighborhood Opportunity Center,Warren-Hamilton Counties Community Action Agency,190 Maple Street,Glens Falls,NY,12801,Warren,,,,518-793-0636,http://wahacaa.org/,https://www.facebook.com/wahccaeo/,2020-08-10,,TRUE,TRUE,,'Families regardless of residency with limited resources are invited to visit weekly to access the available free clothing. Open Monday through Friday 8 a.m. to 4:30 p.m.'
+        CSV
+      } 
+
+      it 'creates a three CommunityResources in the database' do
+      expect {
+        subject.import_string multiple_records
+      }.to change { CommunityResource.count }.from(0).to(3)
+    end
   end
 end

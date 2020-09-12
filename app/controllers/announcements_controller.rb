@@ -10,6 +10,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def show
+    @announcement = Announcement.find(params[:id])
   end
 
   def new

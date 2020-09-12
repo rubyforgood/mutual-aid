@@ -1,11 +1,22 @@
 <template>
   <div class='orientation section'>
-      <div class='columns actions is-centered'>
+      <div class='org-heading is-centered'>
+        <h1 class='title org-name is-2'>{{organization}}</h1>
+      </div>
+      <div id='announcement-slides' class='section columns is-centered'>
+        <div class='column is-half'>
+          <Carousel id='landing_anouncements' name='carousel' />
+        </div>
+      </div>
+      <div class='columns actions is-centered is-variable is-3'>
         <div class='column is-one-third'>
           <div class='box action'>
             <h2 class='subtitle is-3'>Need some help?</h2>
             <div class='action-buttons'>
               <a href="/asks/new" class="button is-primary">Submit an Ask</a>
+            </div>
+            <div>
+              <a href="/contributions">View asks</a>
             </div>
           </div>
         </div>
@@ -14,6 +25,9 @@
             <h2 class='subtitle is-3'>Want to help?</h2>
             <div class='action-buttons'>
               <a href="/offers/new" class="button is-primary">Submit an Offer</a>
+            </div>
+            <div>
+              <a href="/contributions">View offers</a>
             </div>
           </div>
         </div>
@@ -32,11 +46,6 @@
         </div>
         <div class='column'>
           <AboutSection id='landing_page_text_how' title="Where do you fit in?" :description="landing_page_text_how"/>
-        </div>
-      </div>
-      <div class='section anouncements columns is-centered'>
-        <div class='column is-half'>
-          <Carousel id='landing_anouncements' name='carousel' />
         </div>
       </div>
       <hr>
@@ -76,17 +85,28 @@ export default {
 
 <style scoped>
 
+  .org-heading {  
+    text-align: center;
+    padding-bottom: 1.5em;
+  }
+  .orientation.section {
+    padding-top: 0px;
+  }
   .box {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  .action {
-    height: 80%;
+    height: 90%;
   }
   .columns.actions {
-    height: 22em;
+    min-height: 20em;
+    max-height: 40em;
+    padding-top: 2.5em;
+    align-items: stretch;
+  }
+  .action-buttons {
+    padding-bottom: 1em;
   }
   .column {
     text-align: center;
@@ -94,9 +114,12 @@ export default {
   .level {
     padding: 1.5em;
   }
-
   hr {
     background-color: darkgrey;
   }
-
+  #announcement-slides {
+    padding-top: 1em;
+    height: 20em;
+    margin-bottom: 1.5em;
+  }
 </style>

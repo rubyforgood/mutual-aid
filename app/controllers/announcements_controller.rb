@@ -3,7 +3,7 @@ class AnnouncementsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 
-  layout :determine_layout
+  layout :determine_layout, only: [:new, :create, :show]
 
   def index
     @announcements = Announcement.order(created_at: :desc)

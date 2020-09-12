@@ -38,9 +38,14 @@ services:
       dockerfile: ./docker/development/app/Dockerfile
       args:
         APP_PORT: *APP_PORT
+    user: ${UID}
     ports:
       - target: *APP_PORT
         published: *APP_PORT
+    volumes:
+      - ../..:/usr/src/app
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/usr/src/app/node_modules
     depends_on:
       - db
       - email
@@ -51,3 +56,5 @@ services:
       POSTGRES_HOST: db
 volumes:
   db:
+  gem_cache:
+  node_modules:

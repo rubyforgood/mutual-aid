@@ -51,6 +51,4 @@ Rails.application.configure do
   config.action_mailer.default_options = { :from => ENV["EMAIL_FROM_ADDR"] }
   config.action_mailer.default_url_options = { :host => ENV["EMAIL_DEFAULT_URL_HOST"]  }
   config.action_mailer.smtp_settings = { :address => ENV["EMAIL_HOST"], :port => ENV["EMAIL_PORT"] }
-
-  config.secret_key_base = ENV['SECRET_KEY_BASE']
 end

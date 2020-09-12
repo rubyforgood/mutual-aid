@@ -49,12 +49,5 @@ services:
       <<: *x-email-defaults
       RAILS_ENV: docker-development
       POSTGRES_HOST: db
-      # You can set this by running
-      # rake secret
-      # The resulting key should be placed in a .env file
-      # in this directory, or you can pass it to
-      # docker-compose up --build -e SECRET_KEY_BASE=...
-      # Otherwise the database setup step will fail
-      SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
 volumes:
   db:

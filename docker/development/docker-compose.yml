@@ -47,7 +47,7 @@ services:
     environment:
       <<: *x-shared-postgres-environment
       <<: *x-email-defaults
-      RAILS_ENV: docker-development
+      RAILS_ENV: development
       POSTGRES_HOST: db
 volumes:
   db:

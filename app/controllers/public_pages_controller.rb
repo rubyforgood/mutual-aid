@@ -1,4 +1,6 @@
 class PublicPagesController < PublicController
+  include NotUsingPunditYet
+
   layout "without_navbar", only: [:announcements, :community_resources]
 
   def about

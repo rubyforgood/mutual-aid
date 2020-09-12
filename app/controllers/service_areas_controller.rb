@@ -1,4 +1,6 @@
 class ServiceAreasController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_service_area, only: [:show, :edit, :update, :destroy]
 
   def index

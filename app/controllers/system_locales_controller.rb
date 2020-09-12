@@ -1,4 +1,6 @@
 class SystemLocalesController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_system_locale, only: [:show, :edit, :update, :destroy]
 
   def index

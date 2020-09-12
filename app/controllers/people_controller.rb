@@ -1,13 +1,14 @@
 class PeopleController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   def index
-    @people = Person.includes(:user, :preferred_contact_method, :location, :service_area).
+    @people = policy_scope(Person).includes(:user, :preferred_contact_method, :location, :service_area).
                      references(:user, :preferred_contact_method, :location, :service_area)
   end
 
   def show
+    authorize @person
+
     @receiver_matches = @person.matches_as_receiver
     @provider_matches = @person.matches_as_provider
     receiver_match_ids = @receiver_matches.pluck("matches.id")
@@ -17,6 +18,7 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    authorize @person
     set_form_dropdowns
   end
 

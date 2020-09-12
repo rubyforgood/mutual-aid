@@ -1,14 +1,12 @@
 class ApplicationController < ActionController::Base
   include DeliverNowWithErrorHandling
-  include Pundit
+  include Authorization
 
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :set_admin_status
   before_action :set_system_setting
   around_action :switch_locale
-
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def set_admin_status
     @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role? # allows admin user to simulate with param=false
@@ -36,18 +34,6 @@ class ApplicationController < ActionController::Base
       format.html { render 'devise/sessions/new.html.erb', layout: "application", status: 401 }
       format.xml  { head 401 }
       format.any  { head 401 }
-    end
-  end
-
-  def user_not_authorized(exception)
-    policy_name = exception.policy.class.to_s.underscore
-
-    flash[:error] = "Sorry, you're not authorized to do that."
-    Rails.logger.error "[UNAUTHORIZED] #{exception}. (#{policy_name}.#{exception.query})"
-    respond_to do |format|
-      format.html { render 'errors/403.html.erb', layout: "application", status: 403 }
-      format.xml  { head 403 }
-      format.any  { head 403 }
     end
   end
 end

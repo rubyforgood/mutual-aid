@@ -1,4 +1,6 @@
 class MatchesController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_match, only: [:edit, :update, :destroy]
 
   def index

@@ -1,4 +1,5 @@
 class AnnouncementsController < ApplicationController
+  include NotUsingPunditYet
 
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]

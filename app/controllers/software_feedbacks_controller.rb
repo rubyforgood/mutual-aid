@@ -1,4 +1,6 @@
 class SoftwareFeedbacksController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_software_feedback, only: [:show, :edit, :update, :destroy]
 
   def index

@@ -1,4 +1,5 @@
 class SubmissionResponseImportsController < ApplicationController
+  include NotUsingPunditYet
 
   def new
   end

@@ -1,4 +1,6 @@
 class OrganizationsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
   def index

@@ -80,3 +80,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   #
 end
+
+Pundit::Matchers.configure do |config|
+  config.user_alias = :acting_user
+end

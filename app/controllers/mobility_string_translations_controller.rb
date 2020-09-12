@@ -1,4 +1,6 @@
 class MobilityStringTranslationsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_mobility_string_translation, only: [:show, :edit, :update, :destroy]
 
   def index

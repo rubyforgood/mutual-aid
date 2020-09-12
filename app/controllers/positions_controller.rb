@@ -1,4 +1,6 @@
 class PositionsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_position, only: [:show, :edit, :update, :destroy]
 
   def index

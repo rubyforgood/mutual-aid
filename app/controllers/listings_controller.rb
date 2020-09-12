@@ -1,4 +1,6 @@
 class ListingsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
 
   def index

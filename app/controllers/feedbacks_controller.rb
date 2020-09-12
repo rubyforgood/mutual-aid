@@ -1,4 +1,6 @@
 class FeedbacksController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
 
   def index

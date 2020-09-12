@@ -1,4 +1,6 @@
 class ContributionsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :authenticate_user!, except: [:combined_form, :respond, :thank_you]
   before_action :set_contribution, only: [:respond, :triage]
 

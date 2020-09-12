@@ -1,4 +1,6 @@
 class AsksController < PublicController
+  include NotUsingPunditYet
+
   layout "without_navbar", only: [:new, :create]
 
   def index

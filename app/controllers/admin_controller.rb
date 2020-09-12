@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+  include NotUsingPunditYet
 
   before_action :authenticate_user!, except: [:new, :create]
 

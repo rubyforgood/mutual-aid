@@ -1,4 +1,6 @@
 class OffersController < PublicController
+  include NotUsingPunditYet
+
   layout "without_navbar", only: [:new, :create]
 
   def index

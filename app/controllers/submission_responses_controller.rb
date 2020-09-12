@@ -1,4 +1,6 @@
 class SubmissionResponsesController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_submission_response, only: [:show, :edit, :update, :destroy]
 
   def index

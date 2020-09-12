@@ -1,4 +1,6 @@
 class SharedAccountsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_shared_account, only: [:show, :edit, :update, :destroy]
 
   def index

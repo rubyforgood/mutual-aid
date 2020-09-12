@@ -48,6 +48,7 @@ end
 group :test do
   # an XML formatter is required for fancier CircleCI results
   gem 'rspec_junit_formatter'
+  gem 'pundit-matchers'
 end
 
 group :development do

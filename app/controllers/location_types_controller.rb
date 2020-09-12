@@ -1,4 +1,6 @@
 class LocationTypesController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_location_type, only: [:show, :edit, :update, :destroy]
 
   def index

@@ -1,4 +1,6 @@
 class ContactMethodsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_contact_method, only: [:show, :edit, :update, :destroy]
 
   def index

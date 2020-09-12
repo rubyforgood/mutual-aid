@@ -1,4 +1,6 @@
 class CommunicationLogsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_communication_log, only: [:show, :edit, :update, :destroy]
 
   def index

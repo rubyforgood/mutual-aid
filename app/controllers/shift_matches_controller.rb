@@ -1,4 +1,6 @@
 class ShiftMatchesController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_shift_match, only: [:show, :edit, :update, :destroy]
 
   def index

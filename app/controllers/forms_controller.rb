@@ -1,4 +1,6 @@
 class FormsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_form, only: [:show, :edit, :update, :destroy]
 
   def index

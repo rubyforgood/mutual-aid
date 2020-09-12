@@ -1,4 +1,6 @@
 class ShiftsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_shift, only: [:show, :edit, :update, :destroy]
 
   def index

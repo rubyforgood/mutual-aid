@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   def index

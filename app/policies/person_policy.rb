@@ -1,24 +1,44 @@
 class PersonPolicy < ApplicationPolicy
-  attr_reader :user, :record
-
-  def initialize(user, record)
-    @user = user
-    @record = record
+  class Scope < Scope
+    def resolve
+      case
+      when sys_admin? || admin?
+        original_scope.all
+      when acting_user.present?
+        original_scope.where(user_id: acting_user.id)
+      else
+        original_scope.none
+      end
+    end
   end
 
-  def edit?
-    update?
+  def read?
+    person_attached_to_acting_user? ||
+      sys_admin? ||
+      admin?
   end
 
-  def update?
-    user&.person == record || user.sys_admin_role? || user.admin_role?
+  def change?
+    person_attached_to_acting_user? ||
+      sys_admin? ||
+      admin?
   end
 
-  def create?
-    (user.id == record&.user_id) || user.sys_admin_role? # && user.person.nil?
+  def add?
+    person_attached_to_acting_user? ||
+      sys_admin?
   end
 
-  def destroy?
-    user.sys_admin_role?
+  def delete?
+    sys_admin?
+  end
+
+  private
+  def person
+    record
+  end
+
+  def person_attached_to_acting_user?
+    person.user_id == acting_user&.id
   end
 end

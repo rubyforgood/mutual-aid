@@ -1,4 +1,6 @@
 class CustomFormQuestionsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_custom_form_question, only: [:show, :edit, :update, :destroy]
 
   def index

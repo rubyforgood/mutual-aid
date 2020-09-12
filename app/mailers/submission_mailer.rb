@@ -25,11 +25,11 @@ class SubmissionMailer < ApplicationMailer
     @system_settings = SystemSetting.current_settings
 
     system_email = ENV["SYSTEM_EMAIL"]
-    sendgrid_from_email = ENV["SENDGRID_FROM_EMAIL"]
-    contact_email = @form_contact&.person&.email || "#{sendgrid_from_email}"
+    smtp_from_email = ENV["SMTP_FROM_EMAIL"]
+    contact_email = @form_contact&.person&.email || "#{smtp_from_email}"
     contact_name =  @form_contact&.person&.name || @form_contact&.name || contact_email
     contact_email_with_name = %("#{contact_name} (#{Organization.current_organization.name})" <#{contact_email}>)
-    bcc_emails = [contact_email, sendgrid_from_email, system_email].uniq.join("; ")
+    bcc_emails = [contact_email, smtp_from_email, system_email].uniq.join("; ")
 
     @subject =  "#{ENV["SYSTEM_APP_NAME"]} confirmation (" + @person.updated_at.to_date.to_s + ")"
 

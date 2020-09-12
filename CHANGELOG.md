@@ -1,5 +1,11 @@
 # Changelog
 ## [Unreleased]
+### Breaking changes
+* Users can now register themselves (was previously blocked by #660)
+
+### Bugfixes
+* Get outgoing email working #660, #676
+
 ### Development notes
 * Switched primary branch from `master` to `main` #658
 

@@ -1,11 +1,14 @@
-import {mount, shallowMount} from '@vue/test-utils'
+import {createLocalVue, mount, shallowMount} from '@vue/test-utils'
+import {configure} from 'vue_config'
 import Browse from 'pages/Browse.vue'
 import ListBrowser from 'pages/browse/ListBrowser'
 import TileBrowser from 'pages/browse/TileBrowser'
 import Filters from 'pages/browse/Filters'
 
 describe('Browse', () => {
-  def('wrapper', () => mount(Browse))
+  def('wrapper', () => mount(Browse, {
+    localVue: configure(createLocalVue())
+  }))
 
   describe('browser view', () => {
     def('showTilesButton', () => $wrapper.find('button#show-tiles'))

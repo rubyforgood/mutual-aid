@@ -17,13 +17,6 @@ export default class {
     parsedFilters(filters = []) {
         return filters.map((filter) => '' + filter + '=1').join('&')
     }
-    types() {
-        return {
-            any: "browsing asks and offers",
-            asks: "looking for help",
-            offers: "can offer help"
-        }
-    }
     defaultFetch() {
         return typeof window === 'undefined' ? this.noopFetch : (args) => window.fetch(args)
     }

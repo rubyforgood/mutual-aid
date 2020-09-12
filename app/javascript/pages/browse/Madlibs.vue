@@ -54,6 +54,10 @@ const defaultContributionTypes = {
 }
 
 export default {
+  model: {
+    prop: 'activeFilters',
+    event: 'change'
+  },
   props: {
     activeFilters: {type: Array},
     contributions: {type: Array},
@@ -154,7 +158,7 @@ export default {
       this.contributionTimeFrames = urgencies
     },
     updateFiltersFromMadlibs() {
-      this.$emit('change', this.madlibsFilters())
+      this.$emit('change', this.madlibsFilters)
     }
   },
 }

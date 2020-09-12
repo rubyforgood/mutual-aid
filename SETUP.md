@@ -139,7 +139,7 @@ $ bin/rails s # or, rails s -p 9000 (or whatever port you want to use that's not
 ```
 And in a separate terminal:
 ```
-$ bin/webpacker-dev-server
+$ bin/webpack-dev-server
 ```
 
 You should now be able to see the app running at http://localhost:3000

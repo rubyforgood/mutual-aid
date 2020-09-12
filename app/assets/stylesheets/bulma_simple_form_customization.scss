@@ -35,6 +35,11 @@
     }
   }
 
+  .vertical-checkboxes {
+    max-height: 25em;
+    overflow: scroll;
+  }
+
   .radio+.radio, .checkbox+.checkbox {
     margin-left: .75em; // spacing between radio/checkbox items
   }
@@ -71,3 +76,4 @@
     }
   }
 }
+

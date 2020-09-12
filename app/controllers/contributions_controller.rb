@@ -5,6 +5,7 @@ class ContributionsController < ApplicationController
   layout "without_navbar", only: [:thank_you]
 
   def index
+    
     @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
     filter = BrowseFilter.new(filter_params, self)
     @contributions = ContributionBlueprint.render(filter.contributions, **filter.options)

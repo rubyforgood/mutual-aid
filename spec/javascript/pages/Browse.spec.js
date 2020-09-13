@@ -50,6 +50,16 @@ describe('Browse', () => {
   })
 
   describe("Mablibs filtering", () => {
+    def('madlibsTypeDropdown', () => $wrapper.find('select#madlibs-type'))
 
+    describe('when changing the type dropdown', () => {
+      beforeEach(async () => {
+
+      })
+  
+      it("updates the checkboxes when making a dropdown selection", () => {
+
+      })
+    })
   })
 })

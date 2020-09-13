@@ -2,7 +2,7 @@
   <div class="madlibs">
     <p>
       <span class="madlibs-inline">I am </span>
-      <b-select v-model="contributionTypeFilter">
+      <b-select id='madlibs-type' v-model="contributionTypeFilter">
         <option
           v-for="[id, option] in Object.entries(contributionTypes)"
           :value="id"
@@ -12,7 +12,7 @@
         </option>
       </b-select>
       <span class="madlibs-inline"> with </span>
-      <b-select v-model="contributionCategoryFilter">
+      <b-select id='madlibs-category' v-model="contributionCategoryFilter">
         <option
           v-for="[id, category] in Object.entries(contributionCategories)"
           :value="id"
@@ -22,7 +22,7 @@
         </option>
       </b-select>
       <span class="madlibs-inline">. I live near </span>
-      <b-select v-model="contributionServiceAreaFilter">
+      <b-select id='madlibs-service-area' v-model="contributionServiceAreaFilter">
         <option
           v-for="[id, serviceArea] in Object.entries(contributionServiceAreas)"
           :value="id"
@@ -32,7 +32,7 @@
         </option>
       </b-select>
       <span class="madlibs-inline">and I need help</span>
-      <b-select v-model="contributionTimeFrameFilter">
+      <b-select id='madlibs-urgency' v-model="contributionTimeFrameFilter">
         <option
           v-for="[id, timeFrame] in Object.entries(contributionTimeFrames)"
           :value="id"
@@ -59,7 +59,7 @@ export default {
   },
   props: {
     activeFilters: {type: Array},
-    contributions: {type: Array},
+    contributions: {type: Array, default: ()=>[]},
     filterTypes: {type: Array, default: ()=>[]},
     initialFilters: {
       type: Array,
@@ -139,6 +139,8 @@ export default {
   },
   methods: {
     setMadlibsFilters() {
+      if (this.contributions.length == 0) return
+
       let categories = { any: 'any category' }
       let serviceAreas = { anywhere: '(anywhere)' }
       let urgencies = {}

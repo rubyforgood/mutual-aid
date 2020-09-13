@@ -62,6 +62,42 @@ RSpec.describe Importers::CommunityResourceImporter do
       expect(resource.organization.name).to eq "WIC"
     end
 
+    it 'sets the location street on the CommunityResource Organization' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.organization.location.street_address).to eq "123 Main Street"
+    end
+
+    it 'sets the location city on the CommunityResource Organization' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.organization.location.city).to eq "Springfield"
+    end
+
+    it 'sets the location state on the CommunityResource Organization' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.organization.location.state).to eq "XY"
+    end
+
+    it 'sets the location zip on the CommunityResource Organization' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.organization.location.zip).to eq "12345"
+    end
+
+    it 'sets the location county on the CommunityResource Organization' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.organization.location.county).to eq "Queens County"
+    end
+
+    it 'sets the location type on the CommunityResource Organization' do
+      subject.import_string single_record
+      resource = CommunityResource.last
+      expect(resource.organization.location.location_type.name).to eq "business"
+    end
+
     it 'creates a CommunityResource with a business location type' do
       subject.import_string single_record
       resource = CommunityResource.last
@@ -252,13 +288,48 @@ RSpec.describe Importers::CommunityResourceImporter do
         food,Food Vouchers,WIC,383 Broadway,Fort Edward,NY,12828,Washington,,,,518-746-2460,https://washingtoncountyny.gov/179/WIC-Program,https://www.facebook.com/washingtoncountynywic/,2020-08-10,,TRUE,TRUE,,'WIC offers food vouchers to moms, dads, foster parents, guardians, pregnant women, grandparents and step-parents who are income-eligible. Open Monday through Friday from 8:30 a.m. to 4:30 p.m.'
         food,Neighborhood Opportunity Center,Warren-Hamilton Counties Community Action Agency,190 Maple Street,Glens Falls,NY,12801,Warren,,,,518-793-0636,http://wahacaa.org/,https://www.facebook.com/wahccaeo/,2020-08-10,,TRUE,TRUE,,'Offers emergency food assistance. Families regardless of residency with limited food resources are invited to visit the Glens Falls Neighborhood Opportunity Center weekly to access food available. Open Monday through Friday from 8 a.m to 4:30 p.m.'
         clothing,Neighborhood Opportunity Center,Warren-Hamilton Counties Community Action Agency,190 Maple Street,Glens Falls,NY,12801,Warren,,,,518-793-0636,http://wahacaa.org/,https://www.facebook.com/wahccaeo/,2020-08-10,,TRUE,TRUE,,'Families regardless of residency with limited resources are invited to visit weekly to access the available free clothing. Open Monday through Friday 8 a.m. to 4:30 p.m.'
-        CSV
-      } 
+       CSV
+     }
 
-      it 'creates a three CommunityResources in the database' do
+    it 'creates a three CommunityResources in the database' do
       expect {
         subject.import_string multiple_records
       }.to change { CommunityResource.count }.from(0).to(3)
+    end
+
+    it 'is not making sense' do
+      subject.import_string multiple_records
+      resources = CommunityResource.all
+      puts "DEBUG::KGW -- found #{resources.count} community resources"
+      resources.each do |resource|
+        puts "  -> Resource: #{resource.inspect}"
+      end
+    end
+
+    it 'creates two WIC organizations' do
+      subject.import_string multiple_records
+      organizations = Organization.where name: "WIC"
+      expect(organizations.count).to eq 2
+    end
+
+    it 'creates one Warren-Hamilton Counties Action Agency organization' do
+      subject.import_string multiple_records
+      organizations = Organization.where name: "Warren-Hamilton Counties Community Action Agency"
+      expect(organizations.count).to eq 1
+    end
+
+    it 'creates a Neighborhood Opportunity Center community resource' do
+      subject.import_string multiple_records
+      organization = Organization.find_by name: "Warren-Hamilton Counties Community Action Agency"
+      resources = organization.community_resources.select { |resource| resource.name == "Neighborhood Opportunity Center" }
+      expect(resources.count).to eq 1
+    end
+
+    it 'adds all of the tags to the record' do
+      subject.import_string multiple_records
+      organization = Organization.find_by name: "Warren-Hamilton Counties Community Action Agency"
+      resource = organization.community_resources.detect { |resource| resource.name == "Neighborhood Opportunity Center" }
+      expect(resource.tag_list).to eq %w(food clothing)
     end
   end
 end

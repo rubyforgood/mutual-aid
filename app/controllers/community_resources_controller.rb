@@ -3,7 +3,7 @@ class CommunityResourcesController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_community_resource, only: [:show, :edit, :update, :destroy]
 
-  layout :determine_layout, only: [:new, :create, :show]
+  layout :determine_layout, only: [:new, :show]
 
   def index
     @community_resources = CommunityResource.includes(:organization).references(:organization).order(created_at: :desc)
@@ -57,7 +57,7 @@ class CommunityResourcesController < ApplicationController
     end
 
     def determine_layout
-      "without_navbar" unless @system_setting.display_navbar
+      "without_navbar" unless @system_setting.display_navbar?
     end
 
     def community_resource_params

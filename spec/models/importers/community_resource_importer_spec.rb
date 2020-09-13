@@ -331,5 +331,13 @@ RSpec.describe Importers::CommunityResourceImporter do
       resource = organization.community_resources.detect { |resource| resource.name == "Neighborhood Opportunity Center" }
       expect(resource.tag_list).to eq %w(food clothing)
     end
+
+    it 'adds concats the descriptions to a record' do
+      subject.import_string multiple_records
+      organization = Organization.find_by name: "Warren-Hamilton Counties Community Action Agency"
+      resource = organization.community_resources.detect { |resource| resource.name == "Neighborhood Opportunity Center" } 
+
+      expect(resource.description).to eq "'Offers emergency food assistance. Families regardless of residency with limited food resources are invited to visit the Glens Falls Neighborhood Opportunity Center weekly to access food available. Open Monday through Friday from 8 a.m to 4:30 p.m.'\n\n'Families regardless of residency with limited resources are invited to visit weekly to access the available free clothing. Open Monday through Friday 8 a.m. to 4:30 p.m.'"
+    end
   end
 end

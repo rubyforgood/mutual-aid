@@ -4,7 +4,6 @@ class Importers::CommunityResourceImporter < Importers::BaseImporter
   end
 
   def process_row(row)
-    puts "DEBUG::KGW -- processing org #{row["organization_name"]}"
     organization = Organization.joins(:location).includes(:location)
                        .where(name: row["organization_name"])
                        .where(locations: {
@@ -36,7 +35,7 @@ class Importers::CommunityResourceImporter < Importers::BaseImporter
     if resource
       # Add breaks after the description so that if we are updating this resource with other row data there are visible
       # gaps between each description entry
-      resource.description += "#{row["description"]}\n\n"
+      resource.description += "\n\n#{row["description"]}"
       resource.tag_list.add(row["category_name"])
 
       resource.save

@@ -1,19 +1,3 @@
-# == Schema Information
-#
-# Table name: contact_methods
-#
-#  id         :bigint           not null, primary key
-#  enabled    :boolean          default(TRUE), not null
-#  field      :string
-#  icon_class :string
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-# Indexes
-#
-#  index_contact_methods_on_enabled  (enabled)
-#
 class ContactMethod < ApplicationRecord
   has_many :people, inverse_of: :preferred_contact_method, foreign_key: :preferred_contact_method_id, dependent: :restrict_with_error
 
@@ -32,3 +16,20 @@ class ContactMethod < ApplicationRecord
     I18n.t field, scope: [:models, :contact_method, :labels]
   end
 end
+
+# == Schema Information
+#
+# Table name: contact_methods
+#
+#  id         :bigint           not null, primary key
+#  enabled    :boolean          default(TRUE), not null
+#  field      :string
+#  icon_class :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_contact_methods_on_enabled  (enabled)
+#

@@ -1,3 +1,14 @@
+FactoryBot.define do
+  factory :category do
+    name { "MyString" }
+    parent { nil }
+    description { "MyText" }
+    display_to_public { false }
+    display_order { 1 }
+    is_created_by_admin { false }
+  end
+end
+
 # == Schema Information
 #
 # Table name: categories
@@ -21,13 +32,3 @@
 #  index_categories_on_name                 (name)
 #  index_categories_on_parent_id            (parent_id)
 #
-FactoryBot.define do
-  factory :category do
-    name { "MyString" }
-    parent { nil }
-    description { "MyText" }
-    display_to_public { false }
-    display_order { 1 }
-    is_created_by_admin { false }
-  end
-end

@@ -1,3 +1,11 @@
+FactoryBot.define do
+  factory :team do
+    name { "MyString" }
+    description { "MyString" }
+    organization { nil }
+  end
+end
+
 # == Schema Information
 #
 # Table name: teams
@@ -19,10 +27,3 @@
 #
 #  fk_rails_...  (organization_id => organizations.id)
 #
-FactoryBot.define do
-  factory :team do
-    name { "MyString" }
-    description { "MyString" }
-    organization { nil }
-  end
-end

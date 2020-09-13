@@ -1,3 +1,8 @@
+class FormQuestion < ApplicationRecord
+  belongs_to :form
+  belongs_to :custom_form_question
+end
+
 # == Schema Information
 #
 # Table name: form_questions
@@ -18,7 +23,3 @@
 #  fk_rails_...  (custom_form_question_id => custom_form_questions.id)
 #  fk_rails_...  (form_id => forms.id)
 #
-class FormQuestion < ApplicationRecord
-  belongs_to :form
-  belongs_to :custom_form_question
-end

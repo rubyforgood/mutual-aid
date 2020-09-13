@@ -1,3 +1,8 @@
+FactoryBot.define do
+  factory :system_setting do
+  end
+end
+
 # == Schema Information
 #
 # Table name: system_settings
@@ -23,7 +28,3 @@
 #  created_at                         :datetime         not null
 #  updated_at                         :datetime         not null
 #
-FactoryBot.define do
-  factory :system_setting do
-  end
-end

@@ -1,3 +1,10 @@
+class LocationType < ApplicationRecord
+  has_many :locations
+  SERVICE_AREA_TYPE = "service_area"
+
+  scope :visible, -> { where(display_to_public: true) }
+end
+
 # == Schema Information
 #
 # Table name: location_types
@@ -13,9 +20,3 @@
 #
 #  index_location_types_on_display_to_public  (display_to_public)
 #
-class LocationType < ApplicationRecord
-  has_many :locations
-  SERVICE_AREA_TYPE = "service_area"
-
-  scope :visible, -> { where(display_to_public: true) }
-end

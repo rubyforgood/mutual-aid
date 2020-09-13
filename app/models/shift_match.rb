@@ -1,3 +1,8 @@
+class ShiftMatch < ApplicationRecord
+  belongs_to :shift
+  belongs_to :match
+end
+
 # == Schema Information
 #
 # Table name: shift_matches
@@ -19,7 +24,3 @@
 #  fk_rails_...  (match_id => matches.id)
 #  fk_rails_...  (shift_id => shifts.id)
 #
-class ShiftMatch < ApplicationRecord
-  belongs_to :shift
-  belongs_to :match
-end

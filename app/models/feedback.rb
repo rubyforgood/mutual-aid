@@ -1,3 +1,7 @@
+class Feedback < ApplicationRecord
+  belongs_to :match
+end
+
 # == Schema Information
 #
 # Table name: feedbacks
@@ -19,6 +23,3 @@
 #
 #  fk_rails_...  (match_id => matches.id)
 #
-class Feedback < ApplicationRecord
-  belongs_to :match
-end

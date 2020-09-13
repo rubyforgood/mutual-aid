@@ -1,3 +1,13 @@
+FactoryBot.define do
+  factory :feedback do
+    match { nil }
+    is_from_receiver { false }
+    completed { false }
+    quality { 1 }
+    description { "MyText" }
+  end
+end
+
 # == Schema Information
 #
 # Table name: feedbacks
@@ -19,12 +29,3 @@
 #
 #  fk_rails_...  (match_id => matches.id)
 #
-FactoryBot.define do
-  factory :feedback do
-    match { nil }
-    is_from_receiver { false }
-    completed { false }
-    quality { 1 }
-    description { "MyText" }
-  end
-end

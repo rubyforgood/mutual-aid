@@ -1,3 +1,12 @@
+FactoryBot.define do
+  factory :submission do
+    association :person
+    association :service_area
+    form_name { "ask_form" }
+    body { "Hash of form params" }
+  end
+end
+
 # == Schema Information
 #
 # Table name: submissions
@@ -21,11 +30,3 @@
 #  fk_rails_...  (person_id => people.id)
 #  fk_rails_...  (service_area_id => service_areas.id)
 #
-FactoryBot.define do
-  factory :submission do
-    association :person
-    association :service_area
-    form_name { "ask_form" }
-    body { "Hash of form params" }
-  end
-end

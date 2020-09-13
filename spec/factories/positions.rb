@@ -1,3 +1,10 @@
+FactoryBot.define do
+  factory :position do
+    association :person
+    association :organization
+  end
+end
+
 # == Schema Information
 #
 # Table name: positions
@@ -29,9 +36,3 @@
 #  fk_rails_...  (person_id => people.id)
 #  fk_rails_...  (team_id => teams.id)
 #
-FactoryBot.define do
-  factory :position do
-    association :person
-    association :organization
-  end
-end

@@ -1,3 +1,14 @@
+FactoryBot.define do
+  factory :mobility_string_translation do
+    association :translatable # stubbing this out to Announcement only rn, but it is polymorphic
+    locale { "MyString" }
+    key { "MyString" }
+    value { "MyString" }
+    created_by { nil }
+    is_approved { false }
+  end
+end
+
 # == Schema Information
 #
 # Table name: mobility_string_translations
@@ -20,13 +31,3 @@
 #  index_mobility_string_translations_on_query_keys              (translatable_type,key,value,locale)
 #  index_mobility_string_translations_on_translatable_attribute  (translatable_id,translatable_type,key)
 #
-FactoryBot.define do
-  factory :mobility_string_translation do
-    association :translatable # stubbing this out to Announcement only rn, but it is polymorphic
-    locale { "MyString" }
-    key { "MyString" }
-    value { "MyString" }
-    created_by { nil }
-    is_approved { false }
-  end
-end

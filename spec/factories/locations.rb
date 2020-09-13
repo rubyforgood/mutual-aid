@@ -1,3 +1,9 @@
+FactoryBot.define do
+  factory :location do
+    association :location_type
+  end
+end
+
 # == Schema Information
 #
 # Table name: locations
@@ -22,8 +28,3 @@
 #
 #  fk_rails_...  (location_type_id => location_types.id)
 #
-FactoryBot.define do
-  factory :location do
-    association :location_type
-  end
-end

@@ -1,3 +1,10 @@
+FactoryBot.define do
+  factory :form_question do
+    form { nil }
+    custom_form_question { nil }
+  end
+end
+
 # == Schema Information
 #
 # Table name: form_questions
@@ -18,9 +25,3 @@
 #  fk_rails_...  (custom_form_question_id => custom_form_questions.id)
 #  fk_rails_...  (form_id => forms.id)
 #
-FactoryBot.define do
-  factory :form_question do
-    form { nil }
-    custom_form_question { nil }
-  end
-end

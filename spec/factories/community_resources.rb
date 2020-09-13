@@ -1,3 +1,9 @@
+FactoryBot.define do
+  factory :community_resource do
+    name { "MyString" }
+  end
+end
+
 # == Schema Information
 #
 # Table name: community_resources
@@ -35,8 +41,3 @@
 #  fk_rails_...  (organization_id => organizations.id)
 #  fk_rails_...  (service_area_id => service_areas.id)
 #
-FactoryBot.define do
-  factory :community_resource do
-    name { "MyString" }
-  end
-end

@@ -1,3 +1,17 @@
+FactoryBot.define do
+  factory :match do
+
+    association :provider
+    association :receiver
+
+    trait :with_ask_and_offer do
+      association :provider, factory: :offer
+      association :receiver, factory: :ask
+    end
+
+  end
+end
+
 # == Schema Information
 #
 # Table name: matches
@@ -15,16 +29,3 @@
 #  provider_id   :integer
 #  receiver_id   :integer
 #
-FactoryBot.define do
-  factory :match do
-
-    association :provider
-    association :receiver
-
-    trait :with_ask_and_offer do
-      association :provider, factory: :offer
-      association :receiver, factory: :ask
-    end
-
-  end
-end

@@ -1,3 +1,13 @@
+FactoryBot.define do
+  factory :offer do
+    type { "Offer" }
+
+    association :person
+    association :service_area
+
+  end
+end
+
 # == Schema Information
 #
 # Table name: listings
@@ -33,12 +43,3 @@
 #  fk_rails_...  (service_area_id => service_areas.id)
 #  fk_rails_...  (submission_id => submissions.id)
 #
-FactoryBot.define do
-  factory :offer do
-    type { "Offer" }
-
-    association :person
-    association :service_area
-
-  end
-end

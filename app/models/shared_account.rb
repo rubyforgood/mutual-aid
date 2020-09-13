@@ -1,3 +1,6 @@
+class SharedAccount < ApplicationRecord
+end
+
 # == Schema Information
 #
 # Table name: shared_accounts
@@ -11,5 +14,3 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-class SharedAccount < ApplicationRecord
-end

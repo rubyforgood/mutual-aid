@@ -1,3 +1,8 @@
+class Form < ApplicationRecord
+  belongs_to :organization
+  has_many :questions, class_name: 'FormQuestion'
+end
+
 # == Schema Information
 #
 # Table name: forms
@@ -20,7 +25,3 @@
 #
 #  fk_rails_...  (organization_id => organizations.id)
 #
-class Form < ApplicationRecord
-  belongs_to :organization
-  has_many :questions, class_name: 'FormQuestion'
-end

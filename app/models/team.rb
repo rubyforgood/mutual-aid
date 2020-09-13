@@ -1,3 +1,11 @@
+class Team < ApplicationRecord
+  belongs_to :organization
+
+  has_many :positions
+
+  scope :org_chart, -> { where(display_on_org_chart: true) }
+end
+
 # == Schema Information
 #
 # Table name: teams
@@ -19,10 +27,3 @@
 #
 #  fk_rails_...  (organization_id => organizations.id)
 #
-class Team < ApplicationRecord
-  belongs_to :organization
-
-  has_many :positions
-
-  scope :org_chart, -> { where(display_on_org_chart: true) }
-end

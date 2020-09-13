@@ -1,3 +1,12 @@
+FactoryBot.define do
+  factory :system_locale do
+    locale { "MyString" }
+    locale_name { "MyString" }
+    publish_in_dropdowns { false }
+    publish_translations { false }
+  end
+end
+
 # == Schema Information
 #
 # Table name: system_locales
@@ -16,11 +25,3 @@
 #  index_system_locales_on_publish_in_dropdowns  (publish_in_dropdowns)
 #  index_system_locales_on_publish_translations  (publish_translations)
 #
-FactoryBot.define do
-  factory :system_locale do
-    locale { "MyString" }
-    locale_name { "MyString" }
-    publish_in_dropdowns { false }
-    publish_translations { false }
-  end
-end

@@ -1,3 +1,10 @@
+FactoryBot.define do
+  factory :history_log do
+    topic { "MyString" }
+    name { "MyString" }
+  end
+end
+
 # == Schema Information
 #
 # Table name: history_logs
@@ -8,9 +15,3 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-FactoryBot.define do
-  factory :history_log do
-    topic { "MyString" }
-    name { "MyString" }
-  end
-end

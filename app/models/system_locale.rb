@@ -1,3 +1,6 @@
+class SystemLocale < ApplicationRecord
+end
+
 # == Schema Information
 #
 # Table name: system_locales
@@ -16,5 +19,3 @@
 #  index_system_locales_on_publish_in_dropdowns  (publish_in_dropdowns)
 #  index_system_locales_on_publish_translations  (publish_translations)
 #
-class SystemLocale < ApplicationRecord
-end

@@ -1,3 +1,31 @@
+FactoryBot.define do
+  factory :user, aliases: [:created_by] do # TODO: implement admin via Pundit
+    email { Faker::Internet.email }
+    password { 'minimal_password' }
+    confirmed_at { Time.zone.today }
+
+    trait :admin do
+      role { :admin }
+	  end
+
+    trait :neighbor do
+      role { :neighbor }
+    end
+
+    trait :volunteer do
+      role { :volunteer }
+    end
+
+    trait :dispatcher do
+      role { :dispatcher }
+    end
+
+    trait :sys_admin do
+      role { :sys_admin }
+    end
+  end
+end
+
 # == Schema Information
 #
 # Table name: users
@@ -32,30 +60,3 @@
 #  index_users_on_role                  (role)
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
 #
-FactoryBot.define do
-  factory :user, aliases: [:created_by] do # TODO: implement admin via Pundit
-    email { Faker::Internet.email }
-    password { 'minimal_password' }
-    confirmed_at { Time.zone.today }
-
-    trait :admin do
-      role { :admin }
-	  end
-
-    trait :neighbor do
-      role { :neighbor }
-    end
-
-    trait :volunteer do
-      role { :volunteer }
-    end
-
-    trait :dispatcher do
-      role { :dispatcher }
-    end
-
-    trait :sys_admin do
-      role { :sys_admin }
-    end
-  end
-end

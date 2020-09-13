@@ -1,3 +1,9 @@
+FactoryBot.define do
+  factory :custom_form_question do
+    name { "My custom question" }
+  end
+end
+
 # == Schema Information
 #
 # Table name: custom_form_questions
@@ -14,8 +20,3 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-FactoryBot.define do
-  factory :custom_form_question do
-    name { "My custom question" }
-  end
-end

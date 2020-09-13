@@ -1,3 +1,12 @@
+FactoryBot.define do
+  factory :organization do
+    name { Faker::Name.name }
+    trait :with_location do
+      association :location
+    end
+  end
+end
+
 # == Schema Information
 #
 # Table name: organizations
@@ -31,11 +40,3 @@
 #  fk_rails_...  (location_id => locations.id)
 #  fk_rails_...  (service_area_id => service_areas.id)
 #
-FactoryBot.define do
-  factory :organization do
-    name { Faker::Name.name }
-    trait :with_location do
-      association :location
-    end
-  end
-end

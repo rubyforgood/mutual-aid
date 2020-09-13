@@ -1,3 +1,13 @@
+FactoryBot.define do
+  factory :service_area do
+    association :location
+    association :organization
+    service_area_type { Faker::Name.name }
+    parent { nil }
+    name { Faker::Name.name }
+  end
+end
+
 # == Schema Information
 #
 # Table name: service_areas
@@ -30,12 +40,3 @@
 #  fk_rails_...  (location_id => locations.id)
 #  fk_rails_...  (organization_id => organizations.id)
 #
-FactoryBot.define do
-  factory :service_area do
-    association :location
-    association :organization
-    service_area_type { Faker::Name.name }
-    parent { nil }
-    name { Faker::Name.name }
-  end
-end

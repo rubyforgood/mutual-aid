@@ -1,3 +1,11 @@
+FactoryBot.define do
+  factory :location_type do
+    name { "MyString" }
+    description { "MyString" }
+    display_to_public { true }
+  end
+end
+
 # == Schema Information
 #
 # Table name: location_types
@@ -13,10 +21,3 @@
 #
 #  index_location_types_on_display_to_public  (display_to_public)
 #
-FactoryBot.define do
-  factory :location_type do
-    name { "MyString" }
-    description { "MyString" }
-    display_to_public { true }
-  end
-end

@@ -1,3 +1,15 @@
+FactoryBot.define do
+  factory :listing do
+    type { %w(Offer Ask).sample }
+    association :person
+    association :service_area
+
+    trait :with_location do
+      association :location
+    end
+  end
+end
+
 # == Schema Information
 #
 # Table name: listings
@@ -33,14 +45,3 @@
 #  fk_rails_...  (service_area_id => service_areas.id)
 #  fk_rails_...  (submission_id => submissions.id)
 #
-FactoryBot.define do
-  factory :listing do
-    type { %w(Offer Ask).sample }
-    association :person
-    association :service_area
-
-    trait :with_location do
-      association :location
-    end
-  end
-end

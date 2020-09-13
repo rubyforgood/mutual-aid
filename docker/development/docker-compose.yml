@@ -38,7 +38,7 @@ services:
       dockerfile: ./docker/development/app/Dockerfile
       args:
         APP_PORT: *APP_PORT
-    user: ${UID}
+    user: "${UID}"
     ports:
       - target: *APP_PORT
         published: *APP_PORT
@@ -54,6 +54,22 @@ services:
       <<: *x-email-defaults
       RAILS_ENV: development
       POSTGRES_HOST: db
+
+  test:
+    build:
+      context: ../..
+      dockerfile: ./docker/development/app/Dockerfile
+    user: "${UID}"
+    depends_on:
+      - db
+      - email
+    environment:
+      <<: *x-shared-postgres-environment
+      <<: *x-email-defaults
+      RAILS_ENV: test
+      POSTGRES_HOST: db
+    command: bundle exec rspec
+
 volumes:
   db:
   gem_cache:

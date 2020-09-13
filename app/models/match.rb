@@ -67,3 +67,21 @@ class Match < ApplicationRecord
     "Connected on #{created_at.strftime('%m-%-d-%Y')}: #{name} #{receiver.all_tags_to_s}"
   end
 end
+
+# == Schema Information
+#
+# Table name: matches
+#
+#  id            :bigint           not null, primary key
+#  completed     :boolean          default(FALSE), not null
+#  exchanged_at  :datetime
+#  notes         :string
+#  provider_type :string
+#  receiver_type :string
+#  status        :string
+#  tentative     :boolean          default(TRUE), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  provider_id   :integer
+#  receiver_id   :integer
+#

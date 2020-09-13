@@ -33,3 +33,39 @@ FactoryBot.define do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: people
+#
+#  id                          :bigint           not null, primary key
+#  email                       :string
+#  email_2                     :string
+#  monthly_donation_amount_max :float            default(0.0)
+#  monthly_matches_max         :integer          default(0)
+#  name                        :string
+#  notes                       :text
+#  phone                       :string
+#  phone_2                     :string
+#  preferred_contact_timeframe :string
+#  preferred_locale            :string           default("en"), not null
+#  skills                      :text
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  location_id                 :bigint
+#  preferred_contact_method_id :integer
+#  service_area_id             :bigint
+#  user_id                     :bigint
+#
+# Indexes
+#
+#  index_people_on_location_id      (location_id)
+#  index_people_on_service_area_id  (service_area_id)
+#  index_people_on_user_id          (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (location_id => locations.id)
+#  fk_rails_...  (service_area_id => service_areas.id)
+#  fk_rails_...  (user_id => users.id)
+#

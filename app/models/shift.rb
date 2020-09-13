@@ -17,3 +17,27 @@ class Shift < ApplicationRecord
     "#{started_at&.strftime("%a at %l:%M")} #{started_at&.strftime("%P") unless hide_starting_p} - #{ended_at&.strftime("%l:%M %P") || ("TBD" if started_at.present?)}#{started_at&.strftime(", %B %d %Y")}"
   end
 end
+
+# == Schema Information
+#
+# Table name: shifts
+#
+#  id         :bigint           not null, primary key
+#  ended_at   :datetime
+#  notes      :text
+#  started_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  person_id  :bigint           not null
+#  team_id    :bigint           not null
+#
+# Indexes
+#
+#  index_shifts_on_person_id  (person_id)
+#  index_shifts_on_team_id    (team_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (person_id => people.id)
+#  fk_rails_...  (team_id => teams.id)
+#

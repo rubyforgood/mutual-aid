@@ -42,7 +42,6 @@
         </option>
       </b-select>
     </p>
-    <p>{{ madlibsFilters.join("&") }}</p>
   </div>
 </template>
 

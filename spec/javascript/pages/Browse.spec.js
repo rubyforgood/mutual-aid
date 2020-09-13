@@ -4,6 +4,7 @@ import Browse from 'pages/Browse.vue'
 import ListBrowser from 'pages/browse/ListBrowser'
 import TileBrowser from 'pages/browse/TileBrowser'
 import Filters from 'pages/browse/Filters'
+import Madlibs from 'pages/browse/Madlibs'
 
 describe('Browse', () => {
   def('wrapper', () => mount(Browse, {
@@ -46,5 +47,9 @@ describe('Browse', () => {
         assert.notExists($showTilesButton.attributes('disabled'))
       })
     })
+  })
+
+  describe("Mablibs filtering", () => {
+
   })
 })

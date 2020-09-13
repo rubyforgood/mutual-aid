@@ -24,6 +24,7 @@
 
 <script>
 import { Carousel } from 'buefy';
+const fetch = require("node-fetch");
 
 export default {
     data() {

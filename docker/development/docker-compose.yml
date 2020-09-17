@@ -38,23 +38,39 @@ services:
       dockerfile: ./docker/development/app/Dockerfile
       args:
         APP_PORT: *APP_PORT
+    user: "${UID}"
     ports:
       - target: *APP_PORT
         published: *APP_PORT
+    volumes:
+      - ../..:/usr/src/app
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/usr/src/app/node_modules
     depends_on:
       - db
       - email
     environment:
       <<: *x-shared-postgres-environment
       <<: *x-email-defaults
-      RAILS_ENV: docker-development
+      RAILS_ENV: development
       POSTGRES_HOST: db
-      # You can set this by running
-      # rake secret
-      # The resulting key should be placed in a .env file
-      # in this directory, or you can pass it to
-      # docker-compose up --build -e SECRET_KEY_BASE=...
-      # Otherwise the database setup step will fail
-      SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
+
+  test:
+    build:
+      context: ../..
+      dockerfile: ./docker/development/app/Dockerfile
+    user: "${UID}"
+    depends_on:
+      - db
+      - email
+    environment:
+      <<: *x-shared-postgres-environment
+      <<: *x-email-defaults
+      RAILS_ENV: test
+      POSTGRES_HOST: db
+    command: bundle exec rspec
+
 volumes:
   db:
+  gem_cache:
+  node_modules:

@@ -12,7 +12,6 @@ ENV RAILS_ENV='' \
     POSTGRES_PASSWORD='' \
     POSTGRES_USER='postgres' \
     POSTGRES_DB='' \
-    SECRET_KEY_BASE='' \
     EMAIL_PORT='' \
     EMAIL_HOST='' \
     EMAIL_FROM_ADDR='' \

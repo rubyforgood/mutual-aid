@@ -65,6 +65,10 @@ curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yu
 sudo yum install yarn
 ```
 
+### Optional Support for asdf-vm
+
+If you would like to use [asdf-vm](https://asdf-vm.com) to manage versions of `ruby`, `yarn` and `nodejs`, simply run `asdf install`. This will automatically install the necessary dependencies for you.
+
 ## Setting up PostgreSQL
 
 ### On OS X
@@ -177,25 +181,20 @@ To get started using the application with docker,
 1. Install [Docker](https://www.docker.com/get-started)
 2. Install [docker-compose](https://docs.docker.com/compose/install/)
 3. Clone the repository, and open the repository folder in your favorite command line or terminal application.
-4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml`.
-5. Now you should be able to run `docker-compose up -d`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
+4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml` and a file named `Makefile`.
+5. Now you should be able to run `make start`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
 6. To setup the database, you can run
-  ```bash
-  docker-compose run \
-    -e SYSTEM_EMAIL="theemailyouwanttouse@example.com" \
-    -e SYSTEM_PASSWORD="ThePasswordYouWantToUse" \
-    app rails db:prepare db:seed
-  ```
-  This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables you passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `docker-compose run app db:prepare` and create the account using the sign up option on the website.
+  `EMAIL=${SYSTEM_EMAIL} PASSWORD=${SYSTEM_PASSWORD} make seed`
+  This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables which are ultimately passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `make prepare` and create the account using the sign up option on the website.
 
 7. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
 
 **NOTE** Do not use this method in production! This is for **testing & development only** the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
 
-Note that if you are developing this application, running `docker-compose up` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes you changes, run `docker-compose up --build` instead.
+Note that if you are developing this application, running `make start` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes you changes, run `make build` instead.
 
-Also, if you would like docker-compose to run in daemon mode (which means that it will exit once the images have been set up and the application starts running) you may use `docker-compose up -d`. This will not show you any logging output from the application, however, and you will not be able to exit the application directly. To view logs when docker-compose is running in daemon mode, use `docker-compose logs`. To stop the application and all its services, run `docker-compose down`.
+Also, if you would like `docker-compose` to run in daemon mode (which means that it will exit once the images have been set up and the application starts running) you may use `make startd`. This will not show you any logging output from the application, however, and you will not be able to exit the application directly. To view logs when docker-compose is running in daemon mode, use `make logs`. To stop the application and all its services, run `make stop`.
 
-**NOTE** the application will save its state between successive invocations of `docker-compose up --build`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `docker-compose`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `docker-compose down --volumes --remove-orphans`. In particular, you may need to do this if you are making breaking changes to the database structure, or if you have corrupted something somehow. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it. So make sure you back up anything you want to save before running the command.
+**NOTE** the application will save its state between successive invocations of `make build`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `make start`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `make wipe`. In particular, you may need to do this if you are making breaking changes to the database structure, or if you have corrupted something somehow. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it. So make sure you back up anything you want to save before running the command.
 
 ([Return to README.md](README.md))

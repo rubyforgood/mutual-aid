@@ -252,7 +252,7 @@ Destroys all docker resources for the application and services.
 
 ### Notes
 
-- Of course, all of the above binstubs are simply short hands for various `docker-compose` incantations - there's nothing stopping your from simply using `docker-compose` to interact with the services listed in the [`docker/development/docker-compose.yml`](../docker/development/docker-compose.yml).
+- Of course, all of the above binstubs are simply short hands for various `docker-compose` incantations - there's nothing stopping you from using `docker-compose` to interact with the services listed in the [`docker/development/docker-compose.yml`](../docker/development/docker-compose.yml).
 - Do not use this method in production! This is for **testing & development only** the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
 - The application will save its state between successive invocations of `bin/start`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `bin/start`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `bin/clean` or `bin/bootstrap` to start over from scratch. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it.
 

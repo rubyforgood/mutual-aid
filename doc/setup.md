@@ -181,20 +181,79 @@ To get started using the application with docker,
 1. Install [Docker](https://www.docker.com/get-started)
 2. Install [docker-compose](https://docs.docker.com/compose/install/)
 3. Clone the repository, and open the repository folder in your favorite command line or terminal application.
-4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml` and a file named `Makefile`.
-5. Now you should be able to run `make start`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
-6. To setup the database, you can run
-  `SYSTEM_EMAIL=${SYSTEM_EMAIL} SYSTEM_PASSWORD=${SYSTEM_PASSWORD} make seed`
-  This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables which are ultimately passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `make prepare` and create the account using the sign up option on the website.
 
-7. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
+### Bootstrapping the application for development
 
-**NOTE** Do not use this method in production! This is for **testing & development only** the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
+```
+bin/bootstrap
+```
 
-Note that if you are developing this application, running `make start` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes you changes, run `make build` instead.
+Tears down any exiting images, containers, networks, etc. and sets everything up from scratch. This also seeds the development database - you will be prompted to enter your desired credentials for the development admin user.
 
-Also, if you would like `docker-compose` to run in daemon mode (which means that it will exit once the images have been set up and the application starts running) you may use `make startd`. This will not show you any logging output from the application, however, and you will not be able to exit the application directly. To view logs when docker-compose is running in daemon mode, use `make logs`. To stop the application and all its services, run `make stop`.
+### Running tests
 
-**NOTE** the application will save its state between successive invocations of `make build`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `make start`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `make wipe`. In particular, you may need to do this if you are making breaking changes to the database structure, or if you have corrupted something somehow. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it. So make sure you back up anything you want to save before running the command.
+```
+bin/test-docker
+```
+
+Runs the tests inside the context of the `app` container
+
+Analogous to: `bin/test`
+
+### Starting the application and its services
+
+```
+bin/start
+```
+
+Starts the web application container and its supporting services - RDBMS, mailcatcher, etc.
+
+Analogous to: `bin/rails server`
+
+The application should be available at [https://localhost:3000](http://localhost:3000). You can sign in using the email and password you provided in the when you ran `bin/bootstrap`. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
+
+**NOTE** It's probably a good idea to start the `webpack-dev-sever` to compile webpacks out-of-band of webserver requests - this tends to run into the `rack-timeout` in the docker development environment. The `bin/start` script takes an optional service name - or list of names - to startup. The `webpack-dev-server` _can_ be started issuing the following command:
+
+```
+bin/start webpacker
+```
+
+Additionally, if you don't mind mixing the logs from the `app`, and `webpacker` services you can also startup both like so:
+
+```
+bin/start app webpacker
+```
+
+### Stopping the application and its services
+
+```
+bin/stop
+```
+
+Stops the web application container and its supporting services - RDBMS, mailcatcher, webpacker, etc.
+
+### Obtaining a shell
+
+```
+bin/shell
+```
+
+Starts a shell inside the application container and establishes a TTY connection to it from the user's terminal.
+
+Useful for things like generating migrations, exploring the container file system, etc.
+
+### Deleting all application resources
+
+```
+bin/clean
+```
+
+Destroys all docker resources for the application and services.
+
+### Notes
+
+- Of course, all of the above binstubs are simply short hands for various `docker-compose` incantations - there's nothing stopping your from simply using `docker-compose` to interact with the services listed in the [`docker/development/docker-compose.yml`](../docker/development/docker-compose.yml).
+- Do not use this method in production! This is for **testing & development only** the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
+- The application will save its state between successive invocations of `bin/start`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `bin/start`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `bin/clean` or `bin/bootstrap` to start over from scratch. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it.
 
 <sub>↩ Back to [README](/README.md)</sub>

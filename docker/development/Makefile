@@ -19,7 +19,7 @@ seed_test:
 	docker-compose run app bin/rake db:seed RAILS_ENV=test
 
 start:
-	docker-compose up
+	docker-compose up app
 
 startd:
 	docker-compose up -d

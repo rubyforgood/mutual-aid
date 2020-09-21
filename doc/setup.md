@@ -122,7 +122,7 @@ Mail can be sent through smtp://localhost:1025
 
 ## Environment variables
 
-We've used the [dotenv](https://github.com/bkeepers/dotenv) gem to reference .env files in the main project level of the repo. Check out their README!
+We're using the [dotenv](https://github.com/bkeepers/dotenv) gem to reference .env files in the main project level of the repo. Check out their README!
 
 You can override any values in `.env` by introducing an `.env.local` file or more targetted files per environment, e.g. `.env.development.local`, `.env.test.local`.
 All of these are already ignored in our repository so its safe to put credentials there (you can also use `chown/chmod` to further secure them).
@@ -179,19 +179,22 @@ The application includes a pre-configured [docker-compose](https://docs.docker.c
 
 To get started using the application with docker,
 1. Install [Docker](https://www.docker.com/get-started)
-2. Install [docker-compose](https://docs.docker.com/compose/install/)
-3. Clone the repository, and open the repository folder in your favorite command line or terminal application.
-4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml` and a file named `Makefile`.
-5. Now you should be able to run `make start`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
-6. To setup the database, you can run
-  `SYSTEM_EMAIL=${SYSTEM_EMAIL} SYSTEM_PASSWORD=${SYSTEM_PASSWORD} make seed`
-  This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables which are ultimately passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `make prepare` and create the account using the sign up option on the website.
 
-7. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
+1. Install [docker-compose](https://docs.docker.com/compose/install/)
+
+1. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml` and a file named `Makefile`.
+
+1. To setup the database, run `make seed`. This will setup the database and populate it with some seed data, including a root user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables specified in `.env` (see [Environment variables](#environment-variables) if you'd like to customize them).
+
+1. Now you should be able to run `make start`.
+
+1. Navigate to `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password from above.
+
+1. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
 
 **NOTE** Do not use this method in production! This is for **testing & development only** the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
 
-Note that if you are developing this application, running `make start` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes you changes, run `make build` instead.
+Note that if you are developing this application, running `make start` a second time after you have made changes may not update the version of the application deployed by `docker-compose`. To ensure that `docker-compose` builds a new image that includes your changes, run `make build` instead.
 
 Also, if you would like `docker-compose` to run in daemon mode (which means that it will exit once the images have been set up and the application starts running) you may use `make startd`. This will not show you any logging output from the application, however, and you will not be able to exit the application directly. To view logs when docker-compose is running in daemon mode, use `make logs`. To stop the application and all its services, run `make stop`.
 

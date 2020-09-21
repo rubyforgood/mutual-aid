@@ -1,6 +1,6 @@
 # Deploying the app
 
-(continued from [README.md](README.md))
+<sub>↩ Back to [README](/README.md)</sub>
 
 ## If you decide to deploy to Heroku:
 * [Heroku Command Line Interface](https://devcenter.heroku.com/categories/command-line)
@@ -66,4 +66,5 @@ You should be good to go! Visit your domain name to get started.
 
 ## Make sure to run `rake db:seed`
 
-([Return to README.md](README.md))
+
+<sub>↩ Back to [README](/README.md)</sub>

@@ -115,4 +115,4 @@ Our team community norm: timing is difficult for everyone given the current unce
     * And eventually tools to sort and organize the tasks
 
 
-([Return to README.md](README.md))
+<sub>↩ Back to [README](/README.md)</sub>

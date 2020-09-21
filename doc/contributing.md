@@ -21,7 +21,7 @@ In any case, go ahead and 'Assign' yourself to the issue (if someone's already a
 Once you start working on the issue in earnest, please move it into the 'In progress' column on the [Roadmap].
 
 ## Setup your development environment
-See [SETUP.md](SETUP.md)
+See our [setup guide](setup.md).
 
 ## Put together a Pull Request
 
@@ -31,13 +31,13 @@ Here are the basic steps to submit a pull request. Make sure that you're working
 
 1. Run the test suite (`bin/rake`). We only merge pull requests with a passing test suite, and it's great to know that you have a clean slate.
 
-1. Add your code and tests as needed. If you are adding functionality or fixing a bug, you probably should add a test or many (if you're not sure how, comment and we might able to help)! See [TESTING.md](TESTING.md) for some testing tips relevant to this codebase.
+1. Add your code and tests as needed. If you are adding functionality or fixing a bug, you probably should add a test or many (if you're not sure how, comment and we might able to help)! See [doc/testing.md](testing.md) for some testing tips relevant to this codebase.
 
 1. Check the files that you added or changed with Rubocop, a ruby code linter: `bundle exec rubocop path/file1 path/file2`. You can add the `-a` option to fix some offenses automatically. Fix the others by hand until Rubocop reports no more offenses.
 
 1. Run the test suite again (`bin/rake`)  to be sure everythng still works.
 
-1. If you think mutual-aid groups using our app need to know about the changes you made, add an entry to the [CHANGELOG.md](CHANGELOG.md). Reviewing what's already in there will give you a sense of what types of changes need to be documented.
+1. If you think mutual-aid groups using our app need to know about the changes you made, add an entry to the [CHANGELOG.md](/CHANGELOG.md). Reviewing what's already in there will give you a sense of what types of changes need to be documented.
 
 1. Push to your fork (or directly to rubyforgood/mutual-aid) and submit a pull request. Include the issue number (ex. `Resolves #1`) in the PR description.
 
@@ -53,3 +53,6 @@ Some things that will increase the chance that your pull request is accepted:
 
 ## Lastly...
 Bask in the glory that is you! ✨🙏🏾
+
+
+<sub>↩ Back to [README](/README.md)</sub>

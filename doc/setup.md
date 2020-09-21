@@ -1,6 +1,6 @@
 # Setting Up Development
 
-(continued from [README.md](README.md))
+<sub>↩ Back to [README](/README.md)</sub>
 
 This is a Ruby on Rails 6.0 application with Vue + Webpack included.
 
@@ -150,7 +150,7 @@ You should now be able to see the app running at http://localhost:3000
 
 
 ## Running tests
-See [TESTING.md](TESTING.md).
+See [doc/testing.md](testing.md).
 
 
 ## Note about deprecation warnings.
@@ -197,4 +197,4 @@ Also, if you would like `docker-compose` to run in daemon mode (which means that
 
 **NOTE** the application will save its state between successive invocations of `make build`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `make start`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `make wipe`. In particular, you may need to do this if you are making breaking changes to the database structure, or if you have corrupted something somehow. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it. So make sure you back up anything you want to save before running the command.
 
-([Return to README.md](README.md))
+<sub>↩ Back to [README](/README.md)</sub>

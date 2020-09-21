@@ -184,7 +184,7 @@ To get started using the application with docker,
 4. From within the repository, navigate to the `/docker/development` folder. If you are in the right folder, you will see a file named `docker-compose.yml` and a file named `Makefile`.
 5. Now you should be able to run `make start`. This will start the application in daemon mode, which means that the server will keep running in the background. If you navigate to  `localhost:3000` in your browser, you will see an error. This is normal, and it means that you still need to setup the database.
 6. To setup the database, you can run
-  `EMAIL=${SYSTEM_EMAIL} PASSWORD=${SYSTEM_PASSWORD} make seed`
+  `SYSTEM_EMAIL=${SYSTEM_EMAIL} SYSTEM_PASSWORD=${SYSTEM_PASSWORD} make seed`
   This will setup the database and create a default admin user with the email and password as specified by the `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` environment variables which are ultimately passed to `docker-compose` with the `-e` option. If you don't want to create the default user, you can just run `make prepare` and create the account using the sign up option on the website.
 
 7. You should now be able to reload `localhost:3000` in your browser. If everything went well, the website should appear and be functional. You can sign in using the email and password you set in the previous step. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.

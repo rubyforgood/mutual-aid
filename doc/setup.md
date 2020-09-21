@@ -69,6 +69,15 @@ sudo yum install yarn
 
 If you would like to use [asdf-vm](https://asdf-vm.com) to manage versions of `ruby`, `yarn` and `nodejs`, simply run `asdf install`. This will automatically install the necessary dependencies for you.
 
+If you haven't setup `asdf` before, you will first need to follow the [installation instructions](https://asdf-vm.com/#/core-manage-asdf?id=install), then install plugins:
+```
+asdf plugin add ruby
+asdf plugin add yarn
+asdf plugin add nodejs
+bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
+```
+If you get an error about needing `GnuPG`, you will first have to install gnupg. Eg, on OS X, `brew install gpg`.
+
 ## Setting up PostgreSQL
 
 ### On OS X

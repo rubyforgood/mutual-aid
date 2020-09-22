@@ -52,6 +52,7 @@ class SystemSettingsController < ApplicationController
 
     def system_setting_params
       params.require(:system_setting).permit(
+        :allow_peer_to_peer_matching,
         :allow_sms,
         :exchange_type,
         :separate_asks_offers,

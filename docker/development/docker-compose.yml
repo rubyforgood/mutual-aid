@@ -8,6 +8,7 @@ x-shared-postgres-environment: &x-shared-postgres-environment
 x-shared-environment-defaults:
   - &APP_PORT "${APP_PORT:-3000}"
   - &EMAIL_PORT "${EMAIL_PORT:-1080}"
+  - &WEBPACKER_DEV_SERVER_PORT "${WEBPACKER_DEV_SERVER_PORT:-3035}"
 
 x-email-defaults: &x-email-defaults
   EMAIL_PORT: *EMAIL_PORT
@@ -32,6 +33,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - db:/var/lib/postgresql/data
+
   app:
     build:
       context: ../..
@@ -48,12 +50,33 @@ services:
       - node_modules:/usr/src/app/node_modules
     depends_on:
       - db
-      - email
     environment:
       <<: *x-shared-postgres-environment
       <<: *x-email-defaults
       RAILS_ENV: development
       POSTGRES_HOST: db
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+      WEBPACKER_DEV_SERVER_PORT: *WEBPACKER_DEV_SERVER_PORT
+
+  webpacker:
+    build:
+      context: ../..
+      dockerfile: ./docker/development/app/Dockerfile
+      args:
+        APP_PORT: *WEBPACKER_DEV_SERVER_PORT
+    user: "${UID}"
+    command: ./bin/webpack-dev-server
+    volumes:
+      - ../..:/usr/src/app
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/usr/src/app/node_modules
+    ports:
+      - target: *WEBPACKER_DEV_SERVER_PORT
+        published: *WEBPACKER_DEV_SERVER_PORT
+    environment:
+      - NODE_ENV=development
+      - RAILS_ENV=development
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
 
   test:
     build:

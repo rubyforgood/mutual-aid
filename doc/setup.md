@@ -188,7 +188,14 @@ To get started using the application with docker,
 bin/bootstrap
 ```
 
-Tears down any exiting images, containers, networks, etc. and sets everything up from scratch. This also seeds the development database - you will be prompted to enter your desired credentials for the development admin user.
+Tears down any exiting images, containers, networks, etc. and sets everything up from scratch. This also seeds the development database. You can create a default admin account by setting `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` values in `<project-root>/.env.local`:
+
+```
+SYSTEM_EMAIL=admin@mutualaid.localhost
+SYSTEM_PASSWORD=mutualaid
+```
+
+then run the bootstrapping process.
 
 ### Running tests
 

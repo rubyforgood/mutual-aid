@@ -2,27 +2,7 @@
 
 set -e
 
-function cleanup() {
-    # Start from a clean slate
-    bin/clean
-}
+bin/clean
 
-function read_admin_credentials() {
-    echo ""
-    echo "----------------------------------------------------"
-    echo "Please input the desired admin account credentials:"
-    read -r -p    "email: " admin_email
-    read -sr -p "password: " admin_password
-}
-
-function seed_database() {
-    read_admin_credentials
-
-    # Setup the application
-    docker-compose -f docker/development/docker-compose.yml run --rm \
-                   -e SYSTEM_EMAIL="${admin_email}" -e SYSTEM_PASSWORD="${admin_password}" \
-                   app rails db:prepare db:seed
-}
-
-cleanup
-seed_database
+docker-compose -f docker/development/docker-compose.yml run --rm \
+               app rails db:prepare db:seed

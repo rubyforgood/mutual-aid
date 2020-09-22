@@ -39,7 +39,10 @@ class BrowseFilter
   def options
     return {} unless context
 
-    { respond_path: ->(id) { context.respond_contribution_path(id)} }
+    {
+      respond_path: ->(id) { context.respond_contribution_path(id)},
+      view_path: ->(id) { context.contribution_path(id)}
+    }
   end
 
   private

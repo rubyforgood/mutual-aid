@@ -1,0 +1,4 @@
+<section class="section">
+  <h1 class="title"><%= contribution.type %>: <%= contribution.all_tags_unique.map(&:humanize).join(", ") %></h1>
+  <p class="subtitle"><%= contribution.description %></p>
+</section>

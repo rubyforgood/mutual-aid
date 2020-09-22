@@ -1,11 +1,11 @@
 <template>
   <section class="MapBrowser">
     <mapbox
-        access-token="pk.eyJ1Ijoibml0cm8tbWFwLXRlYW0iLCJhIjoiY2tmZTJkYWV1MDBzYzMwbzM0a2VrbmhvZCJ9.oQhyoN77onZHe9otKsFAuw"
+        access-token="pk.eyJ1IjoibXV0dWFsLWFpZC1hcHAiLCJhIjoiY2tmZTBvd3UwMDBhbTJ4cDlic2JmMWZoaiJ9.rWscBjdl1SMT5N0yekIJYg"
         :map-options="{
-          style: 'mapbox://styles/mapbox/light-v9',
+          style: 'mapbox://styles/mapbox/streets-v11',
           center: [-96, 37.8],
-          zoom: 3,
+          zoom: 4,
         }"
         :geolocate-control="{
           show: true,
@@ -32,33 +32,6 @@ export default {
         type: 'symbol',
         source: {
           type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: [
-              {
-                type: 'Feature',
-                geometry: {
-                  type: 'Point',
-                  coordinates: [-77.03238901390978, 38.913188059745586],
-                },
-                properties: {
-                  title: 'Mapbox DC',
-                  icon: 'monument',
-                },
-              },
-              {
-                type: 'Feature',
-                geometry: {
-                  type: 'Point',
-                  coordinates: [-122.414, 37.776],
-                },
-                properties: {
-                  title: 'Mapbox SF',
-                  icon: 'harbor',
-                },
-              },
-            ],
-          },
         },
         layout: {
           'icon-image': '{icon}-15',
@@ -87,3 +60,10 @@ export default {
   },
 }
 </script>
+
+<style>
+  #map {
+    width: 100%;
+    height: 500px;
+  }
+</style>

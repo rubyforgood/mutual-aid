@@ -3,6 +3,10 @@ include ApplicationHelper
 
 class PeerToPeerMailer < ApplicationMailer
   def peer_to_peer_email
-    # more details to go here
+    if SystemSetting.peer_to_peer?
+      #send email
+    else
+      Rails.logger.info("Email could not be sent")
+    end
   end
 end

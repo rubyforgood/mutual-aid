@@ -185,7 +185,7 @@ To get started using the application with docker,
 ### Bootstrapping the application for development
 
 ```
-bin/bootstrap
+bin/dev/bootstrap
 ```
 
 Tears down any exiting images, containers, networks, etc. and sets everything up from scratch. This also seeds the development database. You can create a default admin account by setting `SYSTEM_EMAIL` and `SYSTEM_PASSWORD` values in `<project-root>/.env.local`:
@@ -200,7 +200,7 @@ then run the bootstrapping process.
 ### Running tests
 
 ```
-bin/test-docker
+bin/dev/test
 ```
 
 Runs the tests inside the context of the `app` container
@@ -210,31 +210,31 @@ Analogous to: `bin/test`
 ### Starting the application and its services
 
 ```
-bin/serve
+bin/dev/serve
 ```
 
 Starts the web application container and its supporting services - RDBMS, mailcatcher, etc.
 
 Analogous to: `bin/rails server`
 
-The application should be available at [https://localhost:3000](http://localhost:3000). You can sign in using the email and password you provided in the when you ran `bin/bootstrap`. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
+The application should be available at [https://localhost:3000](http://localhost:3000). You can sign in using the email and password you provided in the when you ran `bin/dev/bootstrap`. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
 
-Additionally, if you want to keep the logs from each of the services separate, `bin/serve` also takes an optional service name - or list of service names - to start in a single session. For example you might want to separate the `email`, and `webpacker` logs when interacting with a debugger in the `app` service to prevent losing the debugging context on log output from `email` or `webpacker`. In that case, you could open two separate terminals. In the first you would start the rails application:
+Additionally, if you want to keep the logs from each of the services separate, `bin/dev/serve` also takes an optional service name - or list of service names - to start in a single session. For example you might want to separate the `email`, and `webpacker` logs when interacting with a debugger in the `app` service to prevent losing the debugging context on log output from `email` or `webpacker`. In that case, you could open two separate terminals. In the first you would start the rails application:
 
 ```
-bin/serve app
+bin/dev/serve app
 ```
 
 and in the second terminal start `email` and `webpacker`
 
 ```
-bin/serve email webpacker
+bin/dev/serve email webpacker
 ```
 
 ### Stopping the application and its services
 
 ```
-bin/stop
+bin/dev/stop
 ```
 
 Stops the web application container and its supporting services - RDBMS, mailcatcher, webpacker, etc.
@@ -242,7 +242,7 @@ Stops the web application container and its supporting services - RDBMS, mailcat
 ### Obtaining a shell
 
 ```
-bin/shell
+bin/dev/shell
 ```
 
 Starts a shell inside the application container and establishes a TTY connection to it from the user's terminal.
@@ -252,7 +252,7 @@ Useful for things like generating migrations, exploring the container file syste
 ### Deleting all application resources
 
 ```
-bin/clean
+bin/dev/clean
 ```
 
 Destroys all docker resources for the application and services.
@@ -261,6 +261,6 @@ Destroys all docker resources for the application and services.
 
 - Of course, all of the above binstubs are simply short hands for various `docker-compose` incantations - there's nothing stopping you from using `docker-compose` to interact with the services listed in the [`docker/development/docker-compose.yml`](../docker/development/docker-compose.yml).
 - Do not use this method in production! This is for **testing & development only** the configuration used with in this docker-compose file is highly insecure and should never be exposed to the public internet.
-- The application will save its state between successive invocations of `bin/start`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `bin/start`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `bin/clean` or `bin/bootstrap` to start over from scratch. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it.
+- The application will save its state between successive invocations of `bin/dev/start`. This means that if you make changes to the database - for example by adding content or users - then those changes will persist the next time you start the application with `bin/dev/start`. You can wipe all the state of the application and all the services (including the postgres database) attached to it by running `bin/dev/clean` or `bin/dev/bootstrap` to start over from scratch. However, do be careful, because this will delete **all** the state saved in the application and database - and there is no way to retrieve it.
 
 <sub>↩ Back to [README](/README.md)</sub>

@@ -2,7 +2,7 @@
 
 set -e
 
-bin/clean
+bin/dev/clean
 
 docker-compose -f docker/development/docker-compose.yml run --rm \
                app rails db:prepare db:seed

@@ -203,7 +203,7 @@ Analogous to: `bin/test`
 ### Starting the application and its services
 
 ```
-bin/start
+bin/serve
 ```
 
 Starts the web application container and its supporting services - RDBMS, mailcatcher, etc.
@@ -212,16 +212,16 @@ Analogous to: `bin/rails server`
 
 The application should be available at [https://localhost:3000](http://localhost:3000). You can sign in using the email and password you provided in the when you ran `bin/bootstrap`. This docker compose also setups an a `mailcatcher` server, which you can access at `localhost:1080`. All emails will be delivered to mailcatcher, which should allow you to setup user accounts.
 
-**NOTE** It's probably a good idea to start the `webpack-dev-sever` to compile webpacks out-of-band of webserver requests - this tends to run into the `rack-timeout` in the docker development environment. The `bin/start` script takes an optional service name - or list of names - to startup. The `webpack-dev-server` _can_ be started issuing the following command:
+Additionally, if you want to keep the logs from each of the services separate, `bin/serve` also takes an optional service name - or list of service names - to start in a single session. For example you might want to separate the `email`, and `webpacker` logs when interacting with a debugger in the `app` service to prevent losing the debugging context on log output from `email` or `webpacker`. In that case, you could open two separate terminals. In the first you would start the rails application:
 
 ```
-bin/start webpacker
+bin/serve app
 ```
 
-Additionally, if you don't mind mixing the logs from the `app`, and `webpacker` services you can also startup both like so:
+and in the second terminal start `email` and `webpacker`
 
 ```
-bin/start app webpacker
+bin/serve email webpacker
 ```
 
 ### Stopping the application and its services

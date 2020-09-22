@@ -50,7 +50,6 @@ services:
       - node_modules:/usr/src/app/node_modules
     depends_on:
       - db
-      - email
     environment:
       <<: *x-shared-postgres-environment
       <<: *x-email-defaults

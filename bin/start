@@ -1,5 +1,0 @@
-#!/bin/bash
-
-SERVICES="${@:-app}"
-
-docker-compose -f ./docker/development/docker-compose.yml up --build $SERVICES

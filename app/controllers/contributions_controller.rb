@@ -26,6 +26,15 @@ class ContributionsController < ApplicationController
     )
   end
 
+  def claim_ask_form
+    contribution_id = params[:id]
+    render locals: { contribution_id: contribution_id }
+  end
+
+  def claim_ask
+    redirect_to contribution_path(params[:id])
+  end
+
   def combined_form
   end
 

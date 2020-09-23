@@ -1,0 +1,20 @@
+<section>
+  <h1 class="title">Claim This Ask</h1>
+  <div class="box">
+    <p class="mb-2">
+      Information you enter here will be delivered directly to the other party.
+      Remember to protect yourself and never provide sensitive personal info to
+      strangers.
+    </p>
+        
+    <%= simple_form_for :peer_to_peer_match, url: claim_ask_contribution_path(contribution_id) do |f| %>
+      <%= f.input :provider_alias, as: :string, label: false, placeholder: "Alias or handle (do not use your real name here)" %>
+      <%= f.input :preferred_contact_method, collection: ContactMethod.pluck(:name, :id), label: "Contact Method" %>
+      <%= f.input :message, as: :text, placeholder: "Add some introductory text here. We do not share your contact information
+                                                     with the other party. Please only share information that you are comfortable
+                                                    sharing to facilitate this conversation.".squish %>
+      <%= f.button :submit, "I understand, let's go!", class: "is-primary" %>
+    <% end %>
+  </div>
+  <%= link_to "<i class=\"fas fa-arrow-left\"></i> Nevermind, I'm not ready".html_safe, :back %>
+</section>

@@ -54,20 +54,23 @@ class Person < ApplicationRecord
     offers.any? ? offers&.map(&:all_tags_unique) : []
   end
 
+  def anonymize_email
+    person_email = email.gsub!(/\A(.).*@.*(.)\z/, '\1******@******\2')
+  end
+  
+  def anonymize_name
+    person_name = name.split(" ")
+    person_name.map do |name|
+      initial = name[0]
+      name = name.tr('[a-zA-Z]', '*')
+      initial + name[1..-1]
+    end.join(" ")
+  end
+
   private def preferred_contact_method_present!
     return unless preferred_contact_method
     field = preferred_contact_method.field
     errors.add(field, :blank) if self[field].blank?
-  end
-
-  private def anonymize_email
-    person_email = email.gsub!(/\A(.).*@.*(.)\z/, '\1******@******\2')
-    person_email + ".com"
-  end
-  
-  private def anonymize_name
-    person_name = name.split(" ")
-    person_name.map{|m| m.gsub!(/\A(.)(.*)\z/, "*****")}
   end
 end
 

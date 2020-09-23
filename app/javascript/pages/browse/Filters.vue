@@ -1,23 +1,47 @@
 <template>
   <section>
-    <h5 class="subtitle is-5">Filters</h5>
+    <b-collapse :open="false" id="collapse-filters">
+      <span
+        class="subtitle is-4"
+        slot="trigger"
+        slot-scope="props"
+      >
+        <b-icon :icon="props.open ? 'caret-down' : 'caret-right'"></b-icon>
+        Filters
+      </span>
 
-    <b-collapse v-for="(type, index) of filterTypes" :key="index" :open="initialOpenStatus(index)">
-      <h4 slot="trigger" slot-scope="props">
-        {{ type.name }} <a>{{ props.open ? '-' : '+' }}</a>
-      </h4>
-      <ul>
-        <li v-for="filter of type.filters" :key="filter.id">
-          <b-checkbox
-            :native-value="filter.id"
-            :value="currentFilters"
-            @input="$emit('change', $event)"
+      <div class="columns mt-1">
+        <b-collapse
+          class="column"
+          v-for="(type, index) of filterTypes"
+          :key="index"
+          :open="initialOpenStatus(index)"
+        >
+          <span
+            class="subtitle is-5"
+            slot="trigger"
+            slot-scope="props"
           >
-            {{ filter.name }}
-            <MappedIconList :iconTypes="[{id: filter.name, name: filter.name}]" v-if="showIconsForFilter(filter.name)"  class="is-inline"/>
-          </b-checkbox>
-        </li>
-      </ul>
+            {{ type.name }} <a>{{ props.open ? '-' : '+' }}</a>
+          </span>
+          <ul class="mt-1">
+            <li v-for="filter of type.filters" :key="filter.id">
+              <b-checkbox
+                :native-value="filter.id"
+                :value="currentFilters"
+                @input="$emit('change', $event)"
+              >
+                {{ filter.name }}
+                <MappedIconList
+                  :iconTypes="[{id: filter.name, name: filter.name}]"
+                  v-if="showIconsForFilter(filter.name)"
+                  class="is-inline"
+                />
+              </b-checkbox>
+            </li>
+          </ul>
+        </b-collapse>
+      </div>
     </b-collapse>
   </section>
 </template>

@@ -7,13 +7,18 @@
       </p>
     </div>
 
-    <section class="section columns">
-      <section class="column is-one-quarter">
-        <BrowserSelector :browser="browser" @clicked="browser = $event" />
-
-        <Filters :filterTypes="filterTypes" v-model="activeFilters" />
+    <section>
+      <section class="mt-3 mb-3">
+        <div class="card">
+          <div class="card-content">
+            <Filters :filterTypes="filterTypes" v-model="activeFilters" />
+          </div>
+        </div>
       </section>
-      <component :is="browser" :contributions="activeContributions" class="column" />
+      <section>
+        <BrowserSelector :browser="browser" @clicked="browser = $event" />
+      </section>
+      <component :is="browser" :contributions="activeContributions" class="row" />
     </section>
   </div>
 </template>

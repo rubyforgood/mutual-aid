@@ -54,8 +54,20 @@ class Person < ApplicationRecord
     offers.any? ? offers&.map(&:all_tags_unique) : []
   end
 
+  def anonymized_name_and_email
+    "#{anonymize_name} #{anonymize_email}"
+  end
+
   def anonymize_email
-    person_email = email&.gsub!(/\A(.).*@.*(.)\z/, '\1******@******\2')
+    return if email.blank?
+
+    at_index = email.index("@")
+    words = email.split(".")
+    top_level_domain = words.pop
+
+    masked_email = "*" * words.join(".").length
+    masked_email[at_index] = "@"
+    masked_email.concat(".", top_level_domain)
   end
   
   def anonymize_name

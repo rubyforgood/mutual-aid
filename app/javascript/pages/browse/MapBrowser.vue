@@ -1,7 +1,7 @@
 <template>
   <section class="MapBrowser">
+    <!-- FIXME Pull access-token via environment variable -->
     <mapbox
-        // FIXME Pull access-token via environment variable
         access-token="pk.eyJ1IjoibXV0dWFsLWFpZC1hcHAiLCJhIjoiY2tmZTBvd3UwMDBhbTJ4cDlic2JmMWZoaiJ9.rWscBjdl1SMT5N0yekIJYg"
         :map-options="{
           style: 'mapbox://styles/mapbox/streets-v11',

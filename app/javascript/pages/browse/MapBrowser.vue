@@ -25,6 +25,10 @@
 import Mapbox from 'mapbox-gl-vue'
 
 export default {
+  props: {
+    contributions: {type: Array, default: () => []},
+    filters: Object,
+  },
   components: { Mapbox },
   methods: {
     loaded(map) {
@@ -61,6 +65,13 @@ export default {
           'text-anchor': 'top',
         },
       })
+
+
+      const buildGeoJson = () => {
+        this.contributions.forEach(contribution => {
+
+        })
+      }
 
       geojson.features.forEach(function (marker) {
         var el = document.createElement('div');

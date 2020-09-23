@@ -23,6 +23,7 @@ import BrowserSelector from './browse/BrowserSelector'
 import Filters from './browse/Filters'
 import ListBrowser from './browse/ListBrowser'
 import TileBrowser from './browse/TileBrowser'
+import MapBrowser from './browse/MapBrowser'
 import ContributionFetcher from './browse/ContributionFetcher'
 
 export default {
@@ -31,6 +32,7 @@ export default {
     Filters,
     ListBrowser,
     TileBrowser,
+    MapBrowser,
   },
   props: {
     contributions: {type: Array},

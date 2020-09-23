@@ -4,8 +4,8 @@
         access-token="pk.eyJ1IjoibXV0dWFsLWFpZC1hcHAiLCJhIjoiY2tmZTBvd3UwMDBhbTJ4cDlic2JmMWZoaiJ9.rWscBjdl1SMT5N0yekIJYg"
         :map-options="{
           style: 'mapbox://styles/mapbox/streets-v11',
-          center: [-96, 37.8],
-          zoom: 4,
+          center: [-75.1635262, 39.9527237],
+          zoom: 9,
         }"
         :geolocate-control="{
           show: true,
@@ -32,6 +32,10 @@ export default {
         type: 'symbol',
         source: {
           type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [],
+          },
         },
         layout: {
           'icon-image': '{icon}-15',

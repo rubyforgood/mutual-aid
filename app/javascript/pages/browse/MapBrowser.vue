@@ -69,9 +69,11 @@ export default {
 
       const buildGeoJson = () => {
         this.contributions.forEach(contribution => {
-
+          console.log(contribution.service_area)
         })
       }
+
+      buildGeoJson()
 
       geojson.features.forEach(function (marker) {
         var el = document.createElement('div');

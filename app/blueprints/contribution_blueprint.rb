@@ -1,7 +1,7 @@
 class ContributionBlueprint < Blueprinter::Base
   identifier :id
   association :categories_for_tags, name: :category_tags, blueprint: DefaultBlueprint
-  association :service_area, blueprint: DefaultBlueprint
+  association :service_area, blueprint: ServiceAreaBlueprint
   association :contact_types, blueprint: DefaultBlueprint do |contribution, _options|
     [contribution.person.preferred_contact_method]
   end

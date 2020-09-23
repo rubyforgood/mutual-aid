@@ -61,7 +61,8 @@ class Person < ApplicationRecord
   end
 
   private def anonymize_email
-    email.gsub!(/\A(.).*@.*(.)\z/, '\1******@******\2')
+    person_email = email.gsub!(/\A(.).*@.*(.)\z/, '\1******@******\2')
+    person_email + ".com"
   end
   
   private def anonymize_name

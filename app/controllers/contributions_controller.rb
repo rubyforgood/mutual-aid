@@ -1,6 +1,7 @@
 class ContributionsController < ApplicationController
   before_action :authenticate_user!, except: [:combined_form, :respond, :thank_you]
   before_action :set_contribution, only: [:respond, :triage]
+  before_action :check_peer_to_peer_system_setting, only: [:show, :claim_contribution, :claim_contribution_form]
 
   layout "without_navbar", only: [:thank_you]
 
@@ -26,12 +27,12 @@ class ContributionsController < ApplicationController
     )
   end
 
-  def claim_ask_form
-    contribution_id = params[:id]
-    render locals: { contribution_id: contribution_id }
+  def claim_contribution_form
+    contribution = Listing.find(params[:id])
+    render locals: { contribution: contribution }
   end
 
-  def claim_ask
+  def claim_contribution
     # create a match
     # log the communication
     # send an email from do not reply address
@@ -85,5 +86,9 @@ class ContributionsController < ApplicationController
 
   def set_contribution
     @contribution = Listing.find(params[:id])
+  end
+
+  def check_peer_to_peer_system_setting
+    # raise Unauthorized exception unless SystemSetting.allow_peer_to_peer_matching?
   end
 end

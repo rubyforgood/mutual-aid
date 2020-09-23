@@ -59,6 +59,15 @@ class Person < ApplicationRecord
     field = preferred_contact_method.field
     errors.add(field, :blank) if self[field].blank?
   end
+
+  private def anonymize_email
+    email.gsub!(/\A(.).*@.*(.)\z/, '\1******@******\2')
+  end
+  
+  private def anonymize_name
+    person_name = name.split(" ")
+    person_name.map{|m| m.gsub!(/\A(.)(.*)\z/, "*****")}
+  end
 end
 
 # == Schema Information

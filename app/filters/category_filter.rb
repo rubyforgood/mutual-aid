@@ -1,4 +1,4 @@
-class CategoryFilter
+class CategoryFilter < BasicFilter
   def self.options
     {
       name: "Categories",
@@ -7,9 +7,11 @@ class CategoryFilter
     }
   end
 
-  def self.filter(relation, parameters)
-    ids = parameters["Category"]
-    return relation if ids.blank?
-    relation.tagged_with(Category.roots.where(id: ids).pluck('name'), any: true)
+  def filter(scope)
+    return super unless parameters
+    scope.tagged_with(
+      Category.roots.where(id: parameters.keys).pluck('name'),
+      any: true
+    )
   end
 end

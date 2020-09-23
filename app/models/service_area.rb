@@ -36,7 +36,6 @@ class ServiceArea < ApplicationRecord
       .where("mobility_string_translations.key = 'name' AND mobility_string_translations.locale = 'en'")
       .where('LOWER(mobility_string_translations.value) = ?', name) }
 
-  scope :as_filter_types, -> { i18n.select :id, :name }
   scope :publicly_visible, -> { where(display_to_public: true) }
 
   def full_name

@@ -1,4 +1,4 @@
-class ContactMethodFilter
+class ContactMethodFilter < BasicFilter
   def self.options
     {
       name: 'Contact Methods',
@@ -6,7 +6,8 @@ class ContactMethodFilter
     }
   end
 
-  def self.filter(relation, _parameters)
-    relation
+  def filter(scope)
+    return super unless parameters
+    scope.joins(:person).where(people: { preferred_contact_method: parameters.keys })
   end
 end

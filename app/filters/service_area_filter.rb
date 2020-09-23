@@ -1,4 +1,4 @@
-class ServiceAreaFilter
+class ServiceAreaFilter < BasicFilter
   def self.options
     {
       name: 'Service Areas',
@@ -6,7 +6,8 @@ class ServiceAreaFilter
     }
   end
 
-  def self.filter(relation, _parameters)
-    relation
+  def filter(scope)
+    return super unless parameters
+    scope.where(service_area_id: parameters.keys)
   end
 end

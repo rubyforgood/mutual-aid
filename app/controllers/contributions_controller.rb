@@ -8,7 +8,7 @@ class ContributionsController < ApplicationController
   def index
     @filter_types = BrowseFilter.filter_options_json
     # The BrowserFilter takes the result of the parameters from the FilterType checkboxes and returns a list of contributions
-    filter = BrowseFilter.new(filter_params, self)
+    filter = BrowseFilter.new(allowed_params)
     @contributions = ContributionBlueprint.render(filter.contributions, contribution_blueprint_options)
     respond_to do |format|
       format.html
@@ -41,13 +41,6 @@ class ContributionsController < ApplicationController
   end
 
   private
-  #
-  # def filter_params
-  #   return Hash.new unless allowed_params && allowed_params.to_h.any?
-  #   allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key}.tap do |hash|
-  #     hash.keys.each { |key| hash[key] = hash[key].keys}
-  #   end
-  # end
 
   def peer_to_peer_mode?
     @system_setting.peer_to_peer?
@@ -57,6 +50,10 @@ class ContributionsController < ApplicationController
     options = {}
     options[:view_path] = ->(id) { contribution_path(id) }
     options
+  end
+
+  def allowed_params
+    params.permit(:format, BrowseFilter::ALLOWED_PARAMS_FILTER)
   end
 
   def contribution

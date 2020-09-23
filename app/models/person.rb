@@ -55,15 +55,17 @@ class Person < ApplicationRecord
   end
 
   def anonymize_email
-    person_email = email.gsub!(/\A(.).*@.*(.)\z/, '\1******@******\2')
+    person_email = email&.gsub!(/\A(.).*@.*(.)\z/, '\1******@******\2')
   end
   
   def anonymize_name
-    person_name = name.split(" ")
-    person_name.map do |name|
-      initial = name[0]
-      name = '*' * name.length
-      initial + name[1..-1]
+    return if name.blank?
+
+    names = name.split(" ")
+    names.map do |n|
+      initial = n.first
+      n = '*' * n.length
+      initial + n[1..-1]
     end.join(" ")
   end
 

@@ -32,6 +32,9 @@ class ContributionsController < ApplicationController
   end
 
   def claim_ask
+    # create a match
+    # log the communication
+    # send an email from do not reply address
     redirect_to contribution_path(params[:id])
   end
 

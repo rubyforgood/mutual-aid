@@ -1,8 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
-bin/dev/clean
+function setup() {
+    local environment
+    environment="$1"
 
-docker-compose -f docker/development/docker-compose.yml run --rm \
-               app rails db:prepare db:seed
+    docker-compose -f docker/development/docker-compose.yml \
+                   run --rm \
+                   app bin/rails db:reset RAILS_ENV="${environment}"
+}
+
+bin/dev/clean
+setup development
+setup test

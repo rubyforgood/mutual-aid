@@ -1,5 +1,6 @@
 version: "3.4"
 x-shared-postgres-environment: &x-shared-postgres-environment
+  POSTGRES_DB: "${POSTGRES_DB}"
   POSTGRES_USER: "${POSTGRES_USER:-postgres}"
   # this variable should be set in a .env file or passed via the docker-compose cli
   POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"

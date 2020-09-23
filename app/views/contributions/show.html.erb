@@ -5,5 +5,7 @@
   <div class="box">
     <p><strong><%= contribution.person.anonymize_name %></strong> - <%= contribution.person.anonymize_email %></p> 
     <p class="subtitle"><%= contribution.description %></p>
-  <div>
+    <button class="button is-primary">Claim this Ask</button>
+  </div>
+  <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>
 </section>

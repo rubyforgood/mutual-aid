@@ -62,7 +62,7 @@ class Person < ApplicationRecord
     person_name = name.split(" ")
     person_name.map do |name|
       initial = name[0]
-      name = name.tr('[a-zA-Z]', '*')
+      name = '*' * name.length
       initial + name[1..-1]
     end.join(" ")
   end

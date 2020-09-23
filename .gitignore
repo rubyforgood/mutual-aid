@@ -60,5 +60,3 @@ yarn-debug.log*
 
 # Ignore vim swapfiles
 # .*.swp
-
-vendor/bundle

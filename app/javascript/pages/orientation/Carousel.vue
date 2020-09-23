@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     fetchAnnouncements() {
-      fetch('/announcements_public')
+      fetch('/announcements_list.json?')
       .then(response => response.json())
       .then(data => {
         if (data.length > 0) {

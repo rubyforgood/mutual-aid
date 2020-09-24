@@ -1,7 +1,6 @@
 class ContributionsController < ApplicationController
   before_action :authenticate_user!, except: [:combined_form, :respond, :thank_you]
   before_action :set_contribution, only: [:respond, :triage]
-  before_action :check_peer_to_peer_system_setting, only: [:show, :claim_contribution, :claim_contribution_form]
 
   layout "without_navbar", only: [:thank_you]
 
@@ -34,6 +33,7 @@ class ContributionsController < ApplicationController
 
   def claim_contribution
     # TODO: Need to handle race conditions to prevent creating multiple matches for same contribution.
+
     contribution = Listing.find(params[:id])
     ActiveRecord::Base.transaction do
       create_person_record! if current_user.person.blank?
@@ -43,7 +43,7 @@ class ContributionsController < ApplicationController
     notify_peer_and_log_communication!(contribution)
     redirect_to contribution_path(params[:id]), notice: 'Claim was successful!'
   rescue
-    render 'claim_contribution_form'
+    render :claim_contribution_form, notice: 'There was an error. Please try again.'
   end
 
   def combined_form
@@ -95,10 +95,6 @@ class ContributionsController < ApplicationController
     @contribution = Listing.find(params[:id])
   end
 
-  def check_peer_to_peer_system_setting
-    # raise Unauthorized exception unless SystemSetting.allow_peer_to_peer_matching?
-  end
-
   def peer_to_peer_match_params
     params.require(:peer_to_peer_match).permit(:peer_alias, :preferred_contact_method_id, :preferred_contact_details, :message)
   end
@@ -135,7 +131,7 @@ class ContributionsController < ApplicationController
   end
 
   def notify_peer_and_log_communication!(contribution)
-    peer_to_peer_email = PeerToPeerMatchMailer.peer_to_peer_email(contribution)
+    peer_to_peer_email = PeerToPeerMatchMailer.peer_to_peer_email(contribution, peer_to_peer_match_params)
     delivery_status = deliver_now_with_error_handling(peer_to_peer_email, "peer_to_peer_email")
     CommunicationLog.log_email(peer_to_peer_email, delivery_status, current_user.person, nil, current_user)
   end

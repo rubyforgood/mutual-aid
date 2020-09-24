@@ -36,7 +36,8 @@ class ContributionsController < ApplicationController
     contribution = Listing.find(params[:id])
     ActiveRecord::Base.transaction do
       create_person_record! if current_user.person.blank?
-      match = create_match_for_contribution!(contribution)
+      create_match_for_contribution!(contribution)
+      contribution.matched!
     end
     notify_peer_and_log_communication!(contribution)
     redirect_to contribution_path(params[:id]), notice: 'Claim was successful!'

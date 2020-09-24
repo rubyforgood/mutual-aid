@@ -5,7 +5,11 @@
   <div class="box">
     <p><strong><%= contribution.person.anonymized_name_and_email %></strong></p>
     <p class="subtitle"><%= contribution.description %></p>
-    <%= button_to "Claim this #{contribution.type}", claim_contribution_form_contribution_path(contribution), class: "button is-primary", method: :get %>
+    <% if contribution.matched? %>
+      <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
+    <% else %>
+      <%= button_to "Claim this #{contribution.type}", claim_contribution_form_contribution_path(contribution), class: "button is-primary", method: :get %>
+    <% end %>
   </div>
   <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>
 </section>

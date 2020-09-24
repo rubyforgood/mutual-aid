@@ -39,7 +39,7 @@ class ContributionsController < ApplicationController
       create_communication_log!(match)
     end
     # send an email from do not reply address
-    redirect_to contribution_path(params[:id])
+    redirect_to contribution_path(params[:id]), notice: 'Claim was successful!'
   rescue
     redirect_to :back
   end

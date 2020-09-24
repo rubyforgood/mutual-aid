@@ -1,6 +1,8 @@
 module ContributionsHelper
   def peer_to_peer_preferred_contact_details
     preferred_contact_method = peer_to_peer_preferred_contact_method
+    return if preferred_contact_method.blank?
+
     if preferred_contact_method.name == "Email"
       current_user&.person&.email
     else

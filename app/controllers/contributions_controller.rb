@@ -1,7 +1,6 @@
 class ContributionsController < ApplicationController
   before_action :authenticate_user!, except: [:combined_form, :respond, :thank_you]
   before_action :set_contribution, only: [:respond, :triage]
-  before_action :check_peer_to_peer_system_setting, only: [:show, :claim_contribution, :claim_contribution_form]
 
   layout "without_navbar", only: [:thank_you]
 
@@ -33,15 +32,18 @@ class ContributionsController < ApplicationController
   end
 
   def claim_contribution
+    # TODO: Need to handle race conditions to prevent creating multiple matches for same contribution.
+
+    contribution = Listing.find(params[:id])
     ActiveRecord::Base.transaction do
       create_person_record! if current_user.person.blank?
-      match = create_match_for_contribution!
-      create_communication_log!(match)
+      create_match_for_contribution!(contribution)
+      contribution.matched!
     end
-    # send an email from do not reply address
+    notify_peer_and_log_communication!(contribution)
     redirect_to contribution_path(params[:id]), notice: 'Claim was successful!'
   rescue
-    redirect_to :back
+    render :claim_contribution_form, notice: 'There was an error. Please try again.'
   end
 
   def combined_form
@@ -93,10 +95,6 @@ class ContributionsController < ApplicationController
     @contribution = Listing.find(params[:id])
   end
 
-  def check_peer_to_peer_system_setting
-    # raise Unauthorized exception unless SystemSetting.allow_peer_to_peer_matching?
-  end
-
   def peer_to_peer_match_params
     params.require(:peer_to_peer_match).permit(:peer_alias, :preferred_contact_method_id, :preferred_contact_details, :message)
   end
@@ -115,8 +113,7 @@ class ContributionsController < ApplicationController
     Person.create!(person_params.merge(contact_method_details))
   end
 
-  def create_match_for_contribution!
-    contribution = Listing.find(params[:id])
+  def create_match_for_contribution!(contribution)
     match_params = if contribution.ask?
                       { receiver: contribution, provider: create_offer_for_ask!(contribution) }
                     elsif contribution.offer? # TODO: check if community resource type when it's added
@@ -133,13 +130,9 @@ class ContributionsController < ApplicationController
     Ask.create!(person: current_user.person, service_area: contribution.service_area)
   end
 
-  def create_communication_log!(match)
-    communication_log_params = {
-                                  person: current_user.person,
-                                  match: match,
-                                  delivery_method_id: peer_to_peer_match_params[:preferred_contact_method_id],
-                                  body: peer_to_peer_match_params[:message],
-                                }
-    CommunicationLog.create!(communication_log_params)
+  def notify_peer_and_log_communication!(contribution)
+    peer_to_peer_email = PeerToPeerMatchMailer.peer_to_peer_email(contribution, peer_to_peer_match_params)
+    delivery_status = deliver_now_with_error_handling(peer_to_peer_email, "peer_to_peer_email")
+    CommunicationLog.log_email(peer_to_peer_email, delivery_status, current_user.person, nil, current_user)
   end
 end

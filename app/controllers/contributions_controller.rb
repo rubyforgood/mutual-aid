@@ -28,6 +28,10 @@ class ContributionsController < ApplicationController
 
   def claim_contribution_form
     contribution = Listing.find(params[:id])
+    if contribution.person&.email.blank?
+      flash.now[:alert] = "We are sorry, this contributor hasn't provided
+                         an email address yet and can't communicate this way".squish
+    end
     render locals: { contribution: contribution }
   end
 

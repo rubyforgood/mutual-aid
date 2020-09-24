@@ -5,7 +5,7 @@
   <div class="box">
     <p><strong><%= contribution.person.anonymized_name_and_email %></strong></p>
     <p class="subtitle"><%= contribution.description %></p>
-    <%= button_to "Claim this #{contribution.type}", claim_contribution_form_contribution_path(contribution), class: "button is-primary", method: :get %>
+    <%= button_to "Claim This #{contribution.type}", claim_contribution_form_contribution_path(contribution), class: "button is-primary", method: :get %>
   </div>
   <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>
 </section>

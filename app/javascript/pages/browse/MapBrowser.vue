@@ -38,7 +38,10 @@ export default {
           {
             'type': 'Feature',
             'properties': {
-              'message': 'Contributions Title', // contributions.title
+              'title': 'Contributions Title', // contributions.title
+              'description': 'Contributions Description', // contributions.description
+              'categoryTag': 'First category', // contributions.category_tags (first element)
+              'urgency': 'Contributions Urgency', // contributions.urgency
               'iconSize': [60, 60],
               'contributionType': 'offer', // contributions.contribution_type
             },
@@ -58,8 +61,6 @@ export default {
           data: geojson,
         },
         layout: {
-          'icon-image': '{icon}-15',
-          'text-field': '{title}',
           'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
           'text-offset': [0, 0.6],
           'text-anchor': 'top',
@@ -80,12 +81,10 @@ export default {
         el.style.width = marker.properties.iconSize[0] + 'px';
         el.style.height = marker.properties.iconSize[1] + 'px';
 
-        el.addEventListener('click', function () {
-          window.alert(marker.properties.message);
-        });
-
         new mapboxgl.Marker(el)
           .setLngLat(marker.geometry.coordinates)
+          .setPopup(new mapboxgl.Popup({ offset: 35 })
+          .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.categoryTag + '</p><p>' + marker.properties.description + '</p>'))
           .addTo(map);
       });
     },

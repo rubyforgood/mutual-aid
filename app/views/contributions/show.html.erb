@@ -8,7 +8,7 @@
     <% if contribution.matched? %>
       <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
     <% else %>
-      <%= button_to "Claim This #{contribution.type}", claim_contribution_form_contribution_path(contribution), class: "button is-primary", method: :get %>
+      <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", method: :get %>
     <% end %>
   </div>
   <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>

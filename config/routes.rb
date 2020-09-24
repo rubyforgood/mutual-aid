@@ -33,9 +33,8 @@ Rails.application.routes.draw do
       get "/triage", to: "contributions#triage", as: "triage"
       patch "/triage", to: "contributions#triage_update"
       post "/triage", to: "contributions#triage_update"
-      post :claim_contribution
-      get :claim_contribution_form
     end
+    resources :claims, only: [:new, :create]
   end
   resources :custom_form_questions
   resources :donations

@@ -7,7 +7,7 @@
       strangers.
     </p>
         
-    <%= simple_form_for :peer_to_peer_match, url: claim_contribution_contribution_path(contribution) do |f| %>
+    <%= simple_form_for :peer_to_peer_match, url: contribution_claims_path(contribution) do |f| %>
       <%= f.input :peer_alias, as: :string, label: false, placeholder: "Alias or handle (do not use your real name here)", required: true %>
       <%= f.input :preferred_contact_method_id, collection: ContactMethod.pluck(:name, :id), label: "Preferred contact method", selected: peer_to_peer_preferred_contact_method&.id, required: true %>
       <%= f.input :preferred_contact_details, as: :string, placeholder: "Add your phone number or email address", input_html: { value: peer_to_peer_preferred_contact_details }, required: true  %>

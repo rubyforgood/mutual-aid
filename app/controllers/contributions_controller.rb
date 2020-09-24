@@ -33,6 +33,7 @@ class ContributionsController < ApplicationController
   end
 
   def claim_contribution
+    # TODO: Need to handle race conditions to prevent creating multiple matches for same contribution.
     contribution = Listing.find(params[:id])
     ActiveRecord::Base.transaction do
       create_person_record! if current_user.person.blank?

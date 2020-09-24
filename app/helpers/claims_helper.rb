@@ -1,4 +1,4 @@
-module ContributionsHelper
+module ClaimsHelper
   def peer_to_peer_preferred_contact_details
     preferred_contact_method = peer_to_peer_preferred_contact_method
     return if preferred_contact_method.blank?

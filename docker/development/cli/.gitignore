@@ -1,0 +1,6 @@
+# Generated files
+/target/**
+
+# Keep the executable
+!/target/**/
+!/target/release/cli

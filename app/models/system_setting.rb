@@ -64,7 +64,6 @@ end
 #
 #  id                                 :bigint           not null, primary key
 #  about_us_text                      :text
-#  allow_peer_to_peer_matching        :boolean          default(FALSE), not null
 #  allow_sms                          :boolean          default(FALSE), not null
 #  announcements_module               :boolean          default(TRUE), not null
 #  chat_module                        :boolean          default(TRUE), not null
@@ -73,7 +72,6 @@ end
 #  confirmation_page_text_footer      :string
 #  confirmation_page_text_header      :string
 #  confirmation_page_text_link_header :string
-#  display_navbar                     :boolean          default(FALSE)
 #  donations_module                   :boolean          default(TRUE), not null
 #  exchange_type                      :string           default("peer_to_peer"), not null
 #  landing_page_text_how              :text

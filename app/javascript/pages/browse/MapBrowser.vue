@@ -39,23 +39,7 @@ export default {
     loaded(map) {
       let geojson = {
         'type': 'FeatureCollection',
-        'features': [
-          {
-            'type': 'Feature',
-            'properties': {
-              'title': 'Contributions Title', // contributions.title
-              'description': 'Contributions Description', // contributions.description
-              'categoryTag': 'First category', // contributions.category_tags (first element)
-              'urgency': 'Contributions Urgency', // contributions.urgency
-              'iconSize': [60, 60],
-              'contributionType': 'offer', // contributions.contribution_type
-            },
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-75.1635262, 39.9527237]
-            }
-          }, 
-        ]
+        'features': []
       }
 
       const buildGeoJson = () => {
@@ -64,10 +48,8 @@ export default {
 
           this.contributions.forEach(contribution => {
             console.log("contribution", contribution)
-            // this is where we build the address to search for
-            let features = []
             geoCodingService.forwardGeocode({
-              query: 'Chester, PA',
+              query: `${contribution.location.street_address} ${contribution.service_area.location.city} ${contribution.service_area.location.state} ${contribution.service_area.location.zip_code}`,
               limit: 1
             }).send()
               .then(response => {
@@ -75,16 +57,13 @@ export default {
 
                 const match = response.body;
 
-                console.log("match", match.features)
-                // console.log("g.f", geojson.features)
-
                 geojson.features = [ ...geojson.features, {
                   'type': 'Feature',
                   'properties': {
                     'title': contribution.name,
-                    'description': contribution.description,
-                    'categoryTag': 'First category', // contributions.category_tags (first element)
-                    'urgency': contribution.urgency,
+                    'description': contribution.description ? contribution.description : "",
+                    'categoryTag': contribution.category_tags[0].name,
+                    'urgency': contribution.urgency ? contribution.urgency : "",
                     'icon': 'harbor',
                     'iconSize': [60, 60],
                     'contributionType': contribution.contribution_type,
@@ -94,40 +73,9 @@ export default {
                     'coordinates': match.features[0].center
                   }
                 } ]
-
-                console.log("geojson-after-update", geojson)
               })
               .then(() => {
-                console.log("geojson", geojson)
                 if (forwarded === this.contributions.length) resolve()
-                // map.addLayer({
-                //   id: 'points',
-                //   type: 'symbol',
-                //   source: {
-                //     type: 'geojson',
-                //     data: geojson,
-                //   },
-                //   layout: {
-                //     'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-                //     'text-offset': [0, 0.6],
-                //     'text-anchor': 'top',
-                //   },
-                // })
-
-                // geojson.features.forEach(function (marker) {
-                //   console.log("marker", marker)
-                //   var el = document.createElement('div');
-                //   el.className = 'marker ' + marker.properties.contributionType + '-marker';
-                //   el.style.width = marker.properties.iconSize[0] + 'px';
-                //   el.style.height = marker.properties.iconSize[1] + 'px';
-
-                //   new mapboxgl.Marker(el)
-                //     .setLngLat(marker.geometry.coordinates)
-                //     .setPopup(new mapboxgl.Popup({ offset: 35 })
-                //     .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.categoryTag + '</p><p>' + marker.properties.description + '</p>'))
-                //     .addTo(map);
-                // });
-
               })
             })
           })
@@ -151,7 +99,7 @@ export default {
 
           geojson.features.forEach(function (marker) {
             var el = document.createElement('div');
-            el.className = 'marker ' + marker.properties.contributionType + '-marker';
+            el.className = 'marker ' + marker.properties.contributionType.toLowerCase() + '-marker';
             el.style.width = marker.properties.iconSize[0] + 'px';
             el.style.height = marker.properties.iconSize[1] + 'px';
 

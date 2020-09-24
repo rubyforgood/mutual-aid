@@ -36,14 +36,18 @@ class ContributionsController < ApplicationController
 
     contribution = Listing.find(params[:id])
     ActiveRecord::Base.transaction do
-      create_person_record! if current_user.person.blank?
-      create_match_for_contribution!(contribution)
+      Person.create_from_peer_to_peer_params!(current_user, peer_to_peer_match_params) if current_user.person.blank?
+      Match.create_match_for_contribution!(contribution, current_user)
       contribution.matched!
     end
     notify_peer_and_log_communication!(contribution)
     redirect_to contribution_path(params[:id]), notice: 'Claim was successful!'
   rescue
-    render :claim_contribution_form, notice: 'There was an error. Please try again.'
+    render(
+      :claim_contribution_form,
+      locals: { contribution: contribution },
+      notice: 'There was an error. Please try again.'
+    )
   end
 
   def combined_form
@@ -97,37 +101,6 @@ class ContributionsController < ApplicationController
 
   def peer_to_peer_match_params
     params.require(:peer_to_peer_match).permit(:peer_alias, :preferred_contact_method_id, :preferred_contact_details, :message)
-  end
-
-  def create_person_record!
-    contact_method = ContactMethod.find(peer_to_peer_match_params[:preferred_contact_method_id])
-    contact_method_details = if contact_method.name == "Email"
-                               { email: peer_to_peer_match_params[:preferred_contact_details] }
-                             else
-                               { phone: peer_to_peer_match_params[:preferred_contact_details] }
-                             end
-
-    person_params = { name: peer_to_peer_match_params[:peer_alias],
-                      preferred_contact_method: contact_method,
-                      user: current_user }
-    Person.create!(person_params.merge(contact_method_details))
-  end
-
-  def create_match_for_contribution!(contribution)
-    match_params = if contribution.ask?
-                      { receiver: contribution, provider: create_offer_for_ask!(contribution) }
-                    elsif contribution.offer? # TODO: check if community resource type when it's added
-                      { receiver: create_ask_for_offer!(contribution), provider: contribution }
-                    end
-    Match.create!(match_params)
-  end
-
-  def create_offer_for_ask!(contribution)
-    Offer.create!(person: current_user.person, service_area: contribution.service_area)
-  end
-
-  def create_ask_for_offer!(contribution)
-    Ask.create!(person: current_user.person, service_area: contribution.service_area)
   end
 
   def notify_peer_and_log_communication!(contribution)

@@ -33,10 +33,15 @@ class ContributionsController < ApplicationController
   end
 
   def claim_contribution
-    # create a match
-    # log the communication
+    ActiveRecord::Base.transaction do
+      create_person_record! if current_user.person.blank?
+      match = create_match_for_contribution!
+      create_communication_log!(match)
+    end
     # send an email from do not reply address
     redirect_to contribution_path(params[:id])
+  rescue
+    redirect_to :back
   end
 
   def combined_form
@@ -90,5 +95,51 @@ class ContributionsController < ApplicationController
 
   def check_peer_to_peer_system_setting
     # raise Unauthorized exception unless SystemSetting.allow_peer_to_peer_matching?
+  end
+
+  def peer_to_peer_match_params
+    params.require(:peer_to_peer_match).permit(:peer_alias, :preferred_contact_method_id, :preferred_contact_details, :message)
+  end
+
+  def create_person_record!
+    contact_method = ContactMethod.find(peer_to_peer_match_params[:preferred_contact_method_id])
+    contact_method_details = if contact_method.name == "Email"
+                               { email: peer_to_peer_match_params[:preferred_contact_details] }
+                             else
+                               { phone: peer_to_peer_match_params[:preferred_contact_details] }
+                             end
+
+    person_params = { name: peer_to_peer_match_params[:peer_alias],
+                      preferred_contact_method: contact_method,
+                      user: current_user }
+    Person.create!(person_params.merge(contact_method_details))
+  end
+
+  def create_match_for_contribution!
+    contribution = Listing.find(params[:id])
+    match_params = if contribution.ask?
+                      { receiver: contribution, provider: create_offer_for_ask!(contribution) }
+                    elsif contribution.offer? # TODO: check if community resource type when it's added
+                      { receiver: create_ask_for_offer!(contribution), provider: contribution }
+                    end
+    Match.create!(match_params)
+  end
+
+  def create_offer_for_ask!(contribution)
+    Offer.create!(person: current_user.person, service_area: contribution.service_area)
+  end
+
+  def create_ask_for_offer!(contribution)
+    Ask.create!(person: current_user.person, service_area: contribution.service_area)
+  end
+
+  def create_communication_log!(match)
+    communication_log_params = {
+                                  person: current_user.person,
+                                  match: match,
+                                  delivery_method_id: peer_to_peer_match_params[:preferred_contact_method_id],
+                                  body: peer_to_peer_match_params[:message],
+                                }
+    CommunicationLog.create!(communication_log_params)
   end
 end

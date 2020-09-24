@@ -40,7 +40,7 @@ class BrowseFilter
     return {} unless context
 
     options = { respond_path: ->(id) { context.respond_contribution_path(id)} }
-    options[:view_path] = ->(id) { context.contribution_path(id) } if SystemSetting.allow_peer_to_peer_matching?
+    options[:view_path] = ->(id) { context.contribution_path(id) } if SystemSetting.current_settings&.peer_to_peer?
     options
   end
 

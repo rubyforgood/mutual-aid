@@ -32,10 +32,6 @@ class SystemSetting < ApplicationRecord
     self.last
   end
 
-  def self.allow_peer_to_peer_matching?
-    current_settings&.allow_peer_to_peer_matching
-  end
-
   def dispatch_assisted?
     exchange_type == "dispatch_assisted"
   end

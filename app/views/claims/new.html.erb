@@ -9,7 +9,7 @@
         
     <%= simple_form_for :claim, url: contribution_claims_path(contribution) do |f| %>
       <%= f.input :peer_alias, as: :string, label: false, placeholder: "Alias or handle (do not use your real name here)", required: true %>
-      <%= f.input :preferred_contact_method_id, collection: ContactMethod.pluck(:name, :id), label: "Preferred contact method", selected: preferred_contact_method_id, required: true %>
+      <%= f.input :preferred_contact_method_id, collection: Array(ContactMethod.email), label: "Preferred contact method", required: true %>
       <%= f.input :preferred_contact_info, as: :string, placeholder: "Add your phone number or email address", input_html: { value: preferred_contact_info }, required: true  %>
       <%= f.input :message, as: :text, required: true, placeholder: "Add some introductory text here. We do not share your contact information
                                                      with the other party. Please only share information that you are comfortable

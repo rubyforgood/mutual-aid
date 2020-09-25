@@ -199,16 +199,6 @@ then run the bootstrapping process.
 
 **BEWARE**  This script is intended to be a quick way to start from noting and get a working instance of the application - suitable for development - up and running. It is also appropriate if you should find yourself at a total loss and want to start over with your development environment. This destroys and recreates the volumes for the various containers - IE databases, gem caches, yarn caches will be destroyed - which can be costly in wall clock time.
 
-### Running tests
-
-```
-bin/dev/test
-```
-
-Runs the tests inside the context of the `app` container
-
-Analogous to: `bin/test`
-
 ### Starting the application and its services
 
 ```
@@ -250,6 +240,17 @@ bin/dev/stop
 ```
 
 Stops the web application container and its supporting services - RDBMS, mailcatcher, webpacker, etc.
+
+
+### Running tests
+
+```
+bin/dev/test
+```
+
+Runs the tests inside the context of the `app` container
+
+Analogous to: `bin/test`
 
 ### Deleting all application resources
 

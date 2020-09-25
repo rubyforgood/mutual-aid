@@ -233,14 +233,6 @@ and in the second terminal start `email` and `webpacker`
 bin/dev/serve email webpacker
 ```
 
-### Stopping the application and its services
-
-```
-bin/dev/stop
-```
-
-Stops the web application container and its supporting services - RDBMS, mailcatcher, webpacker, etc.
-
 ### Obtaining a shell
 
 ```
@@ -250,6 +242,14 @@ bin/dev/shell
 Starts a shell inside the application container and establishes a TTY connection to it from the user's terminal.
 
 Useful for things like starting a rails console, generating migrations, running one-off tests, exploring the container file system, etc. This will most likely be the tool you most-often reach for while developing with the local Docker development setup.
+
+### Stopping the application and its services
+
+```
+bin/dev/stop
+```
+
+Stops the web application container and its supporting services - RDBMS, mailcatcher, webpacker, etc.
 
 ### Deleting all application resources
 

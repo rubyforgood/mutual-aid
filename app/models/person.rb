@@ -22,18 +22,17 @@ class Person < ApplicationRecord
 
   validate :preferred_contact_method_present!
 
-  def self.create_from_peer_to_peer_params!(current_user, peer_to_peer_params)
-    contact_method = ContactMethod.find(peer_to_peer_params[:preferred_contact_method_id])
-    contact_method_details = if contact_method.name == "Email"
-                               { email: peer_to_peer_params[:preferred_contact_details] }
-                             else
-                               { phone: peer_to_peer_params[:preferred_contact_details] }
-                             end
-
-    person_params = { name: peer_to_peer_params[:peer_alias],
+  # FIXME: extract into an interactor
+  def self.create_from_peer_to_peer_params!(current_user, name:, preferred_contact_method_id:, contact_info:)
+    contact_method = ContactMethod.find(preferred_contact_method_id)
+    person_params = { name: name,
                       preferred_contact_method: contact_method,
                       user: current_user }
-    create!(person_params.merge(contact_method_details))
+
+    contact_method_name = contact_method.name == "Email" ? :email : :phone
+    person_params[contact_method_name] = contact_info
+
+    create!(person_params)
   end
 
   def name_and_email

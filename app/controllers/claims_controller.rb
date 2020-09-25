@@ -13,7 +13,11 @@ class ClaimsController < ApplicationController
 
     contribution = Listing.find(params[:contribution_id])
     ActiveRecord::Base.transaction do
-      Person.create_from_peer_to_peer_params!(current_user, peer_to_peer_match_params) if current_user.person.blank?
+      if current_user.person.blank?
+        Person.create_from_peer_to_peer_params!(current_user, name: peer_to_peer_match_params[:peer_alias],
+                                                preferred_contact_method_id: peer_to_peer_match_params[:preferred_contact_method_id],
+                                                contact_info: peer_to_peer_match_params[:preferred_contact_details])
+      end
       Match.create_match_for_contribution!(contribution, current_user)
       contribution.matched!
     end

@@ -41,6 +41,7 @@ class Match < ApplicationRecord
     result
   end
 
+  # FIXME: extract into an interactor
   def self.create_match_for_contribution!(contribution, current_user)
     match_params = if contribution.ask?
                       { receiver: contribution, provider: create_offer_for_ask!(contribution, current_user) }

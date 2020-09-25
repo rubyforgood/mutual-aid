@@ -30,6 +30,7 @@ RSpec.describe ContributionBlueprint do
                                # "publish_until_humanized" => "this year",
                                "created_at" => (contribution.created_at.to_f * 1000), # Javascript wants miliseconds, not seconds
                                'respond_path' => nil,
+                               'view_path' => nil,
                                'profile_path' => nil,
                                'match_path' => nil,
                                "service_area" => {"id" => contribution.service_area.id, "name" => expected_area_name},

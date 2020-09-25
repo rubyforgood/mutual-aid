@@ -14,6 +14,17 @@ class ContributionsController < ApplicationController
     end
   end
 
+  def show
+    contribution = Listing.find(params[:id])
+
+    render(
+      :show,
+      locals: {
+        contribution: contribution,
+      }
+    )
+  end
+
   def combined_form
   end
 

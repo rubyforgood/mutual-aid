@@ -39,6 +39,9 @@
           <a :href="respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
         </div>
       </div>
+      <div class="buttonSpacing" v-if="view_path">
+        <a :href="view_path" class="button icon-list is-primary"><span class=""> View</span></a>
+      </div>
     </div>
   </div>
 </template>
@@ -61,6 +64,7 @@ export default {
     contact_types: {type: Array, default: () => []},
     profile_path: String,
     respond_path: String,
+    view_path: String,
     match_path: String
   },
   components: {

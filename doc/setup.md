@@ -249,7 +249,7 @@ bin/dev/shell
 
 Starts a shell inside the application container and establishes a TTY connection to it from the user's terminal.
 
-Useful for things like generating migrations, exploring the container file system, etc.
+Useful for things like starting a rails console, generating migrations, running one-off tests, exploring the container file system, etc. This will most likely be the tool you most-often reach for while developing with the local Docker development setup.
 
 ### Deleting all application resources
 

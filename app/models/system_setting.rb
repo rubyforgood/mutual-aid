@@ -32,7 +32,6 @@ class SystemSetting < ApplicationRecord
     self.last
   end
 
-
   def dispatch_assisted?
     exchange_type == "dispatch_assisted"
   end

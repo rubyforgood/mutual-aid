@@ -64,4 +64,16 @@ RSpec.describe "/contributions", type: :request do
       expect(response_ids).not_to include(no_tags_correct_area_listing.id)
     end
   end
+
+  describe "GET /contributions/:id" do
+    it "is successful" do
+      contribution = create(:listing)
+
+      get(
+        contribution_url(contribution),
+      )
+
+      expect(response).to be_successful
+    end
+  end
 end

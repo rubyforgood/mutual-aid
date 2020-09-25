@@ -1,6 +1,6 @@
 <template>
   <div class="listBrowser">
-    <table class="table table-hover table-curved table-condensed is-hoverable">
+    <table class="table table-hover table-curved table-condensed is-hoverable is-fullwidth">
       <tr>
         <th>Type</th>
         <th>Categories</th>

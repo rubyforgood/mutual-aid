@@ -8,8 +8,8 @@ describe('Browse', () => {
   def('wrapper', () => mount(Browse))
 
   describe('browser view', () => {
-    def('showTilesButton', () => $wrapper.find('button#show-tiles'))
-    def('showListButton', () => $wrapper.find('button#show-list'))
+    def('showTilesButton', () => $wrapper.find('a#show-tiles'))
+    def('showListButton', () => $wrapper.find('a#show-list'))
 
     it('loads the Filters', function() {
       assert.isTrue($wrapper.contains(Filters))
@@ -21,9 +21,8 @@ describe('Browse', () => {
         assert.isFalse($wrapper.contains(ListBrowser))
       })
 
-      it('disables the Tile view button', () => {
-        assert.equal($showTilesButton.attributes('disabled'), 'disabled')
-        assert.notExists($showListButton.attributes('disabled'))
+      it('activates the Tile view button', () => {
+        assert.deepEqual($showTilesButton.classes(), ['navbar-item', 'is-active'])
       })
     })
 
@@ -38,9 +37,8 @@ describe('Browse', () => {
         assert.isFalse($wrapper.contains(TileBrowser))
       })
 
-      it('disables the List view button', () => {
-        assert.equal($showListButton.attributes('disabled'), 'disabled')
-        assert.notExists($showTilesButton.attributes('disabled'))
+      it('activates the List view button', () => {
+        assert.deepEqual($showListButton.classes(), ['navbar-item', 'is-active'])
       })
     })
   })

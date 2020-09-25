@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="icon in iconData" :key="icon.name" class="tag">
+    <li v-for="icon in iconData" :key="icon.name" class="tag ml-1">
       <b-icon :icon="icon.image" :aria-label="icon.name"/>
     </li>
   </ul>

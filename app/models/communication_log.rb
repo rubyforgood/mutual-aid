@@ -9,10 +9,10 @@ class CommunicationLog < ApplicationRecord
 
   scope :needs_follow_up, ->(boolean=nil){ where(needs_follow_up: boolean || true) }
 
-  def self.log_submission_email(email_object, delivery_status, submission, delivery_method=nil, current_user=nil)
+  def self.log_email(email_object, delivery_status, person, delivery_method=nil, current_user=nil)
     self.create!(delivery_method: delivery_method || ContactMethod.email,
                  delivery_status: delivery_status,
-                 person: submission.person,
+                 person: person,
                  sent_at: Time.current,
                  subject: email_object.subject,
                  body: email_object.html_part&.body || email_object.body.raw_source,

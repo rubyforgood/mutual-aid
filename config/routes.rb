@@ -26,13 +26,14 @@ Rails.application.routes.draw do
   resources :contact_methods
   get "/combined_form", to: "contributions#combined_form", as: "combined_form"
   get "/thank_you", to: "contributions#thank_you", as: "contribution_thank_you"
-  resources :contributions, only: [:index] do
+  resources :contributions, only: [:index, :show] do
     member do
       get "/respond", to: "contributions#respond", as: "respond"
       get "/triage", to: "contributions#triage", as: "triage"
       patch "/triage", to: "contributions#triage_update"
       post "/triage", to: "contributions#triage_update"
     end
+    resources :claims, only: [:new, :create]
   end
   resources :custom_form_questions
   resources :donations

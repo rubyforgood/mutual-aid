@@ -250,7 +250,7 @@ Stops the web application container and its supporting services - RDBMS, mailcat
 bin/dev/test
 ```
 
-Runs the tests inside the context of the `app` container
+Runs the entire application test suite inside the context of the `app` container
 
 Analogous to: `bin/test`
 

@@ -48,7 +48,7 @@ class Match < ApplicationRecord
                     elsif contribution.offer? # TODO: check if community resource type when it's added
                       { receiver: create_ask_for_offer!(contribution, current_user), provider: contribution }
                     end
-    Match.create!(match_params)
+    Match.create!(match_params.merge(status: "match_confirmed"))
   end
 
   def self.create_offer_for_ask!(ask, current_user)

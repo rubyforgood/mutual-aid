@@ -49,7 +49,7 @@
 
             this.contributions.forEach(contribution => {
               geoCodingService.forwardGeocode({
-                query: `${contribution.location.street_address} ${contribution.service_area.location.city} ${contribution.service_area.location.state} ${contribution.service_area.location.zip_code}`,
+                query: `${contribution.location && contribution.location.street_address ? contribution.location.street_address : ""} ${contribution.service_area.location.city} ${contribution.service_area.location.state} ${contribution.service_area.location.zip_code}`,
                 limit: 1
               }).send()
                 .then(response => {

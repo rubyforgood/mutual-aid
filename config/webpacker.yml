@@ -76,11 +76,6 @@ development: &development-settings
     watch_options:
       ignored: "**/node_modules/**"
 
-docker-development:
-  <<: *default
-  compile: true
-  check_yarn_integrity: true
-
 test:
   <<: *default
   compile: true

@@ -28,7 +28,7 @@ gem 'faker' # need this in prod for demo seeds to work
 gem 'jbuilder', '~> 2.7'
 gem 'mobility', '~> 0.8.9'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.0'
 gem 'rack-timeout'
 gem 'reform-rails'
 gem 'sendgrid-ruby'

@@ -11,11 +11,10 @@ class PublicPagesController < PublicController
 
   def announcements
     @announcements = Announcement.where(is_approved: true).published
-  end
-
-  def announcements_json
-    announcements = Announcement.where(is_approved: true).published
-    render json: announcements
+    respond_to do |format|
+      format.html
+      format.json { render json: @announcements }
+    end
   end
 
   def community_resources

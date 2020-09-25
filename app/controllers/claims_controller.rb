@@ -31,7 +31,9 @@ class ClaimsController < ApplicationController
   end
 
   def notify_peer_and_log_communication!(contribution)
-    peer_to_peer_email = PeerToPeerMatchMailer.peer_to_peer_email(contribution, peer_to_peer_match_params)
+    peer_to_peer_email = PeerToPeerMatchMailer.peer_to_peer_email(contribution,
+                                                                  peer_alias: peer_to_peer_match_params[:peer_alias],
+                                                                  message: peer_to_peer_match_params[:message])
     delivery_status = deliver_now_with_error_handling(peer_to_peer_email, "peer_to_peer_email")
     CommunicationLog.log_email(peer_to_peer_email, delivery_status, current_user.person, nil, current_user)
   end

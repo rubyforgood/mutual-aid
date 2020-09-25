@@ -182,6 +182,8 @@ To get started using the application with docker,
 2. Install [docker-compose](https://docs.docker.com/compose/install/)
 3. Clone the repository, and open the repository folder in your favorite command line or terminal application.
 
+We provide helpful shorthand, binstubs to get started using and interacting with the local Docker development environment:
+
 ### Bootstrapping the application for development
 
 ```

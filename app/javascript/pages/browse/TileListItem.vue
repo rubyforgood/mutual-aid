@@ -38,9 +38,9 @@
         <div class="buttonSpacing" v-if="respond_path">
           <a :href="respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
         </div>
-      </div>
-      <div class="buttonSpacing" v-if="view_path">
-        <a :href="view_path" class="button icon-list is-primary"><span class=""> View</span></a>
+        <div class="buttonSpacing" v-if="view_path">
+          <a :href="view_path" class="button icon-list is-primary"><span class=""> View</span></a>
+        </div>
       </div>
     </div>
   </div>

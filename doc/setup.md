@@ -175,7 +175,7 @@ The Rails and webpack processes can be launched with Heroku, if you choose to go
 
 ## Development with Docker
 
-The application includes a pre-configured [docker-compose](https://docs.docker.com/compose/) environment. This environment includes two containers, which together deploy the application and a postgres database for it to connect to.
+The application includes a pre-configured [docker-compose](https://docs.docker.com/compose/) environment for development. This environment includes descriptors for the application and its supporting services.
 
 To get started using the application with docker,
 1. Install [Docker](https://www.docker.com/get-started)

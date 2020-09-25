@@ -1,5 +1,8 @@
 # Changelog
 ## [Unreleased]
+### Enhancements
+* Add map to contributions page that dynamically adds pins for Asks/Offers
+
 ### Breaking changes
 * Users can now register themselves (was previously blocked by #660)
 

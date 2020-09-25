@@ -13,7 +13,7 @@
 
         <Filters :filterTypes="filterTypes" v-model="activeFilters" />
       </section>
-      <component :is="browser" :contributions="activeContributions" class="column" />
+      <component :is="browser" :contributions="activeContributions" class="column" accessToken="pk.eyJ1IjoibXV0dWFsLWFpZC1hcHAiLCJhIjoiY2tmZTBvd3UwMDBhbTJ4cDlic2JmMWZoaiJ9.rWscBjdl1SMT5N0yekIJYg"/>
     </section>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <section class="section">
-  <h2>Request for Contribution</h2>
-  <h1 class="title"><%= contribution.type %>: <%= contribution.all_tags_unique.map(&:humanize).join(", ") %></h1>
+  <h1>Request for Contribution</h1>
+  <h2 class="title"><%= contribution.type %>: <%= contribution.all_tags_unique.map(&:humanize).join(", ") %></h2>
   <br>
   <div class="box">
     <p><strong><%= contribution.person.anonymized_name_and_email %></strong></p>

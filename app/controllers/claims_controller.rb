@@ -19,13 +19,7 @@ class ClaimsController < ApplicationController
     # TODO: Need to handle race conditions to prevent creating multiple matches for same contribution.
     contribution = Listing.find(params[:contribution_id])
     ActiveRecord::Base.transaction do
-      if current_person.blank?
-        Person.create_from_peer_to_peer_params!(current_user, name: claim_params[:peer_alias],
-                                                preferred_contact_method_id: claim_params[:preferred_contact_method_id],
-                                                contact_info: claim_params[:preferred_contact_info])
-      elsif current_person.present? && current_person.email.blank?
-        current_person.update!(email: claim_params[:preferred_contact_info])
-      end
+      add_person_details!
       Match.create_match_for_contribution!(contribution, current_user)
       contribution.matched!
     end
@@ -37,6 +31,15 @@ class ClaimsController < ApplicationController
 
   def claim_params
     params.require(:claim).permit(:peer_alias, :preferred_contact_method_id, :preferred_contact_info, :message)
+  end
+
+  def add_person_details!
+    AddPersonDetailsFromClaimParams.run!(
+      user: current_user,
+      name: claim_params[:peer_alias],
+      preferred_contact_method_id: claim_params[:preferred_contact_method_id],
+      contact_info: claim_params[:preferred_contact_info]
+    )
   end
 
   def email_peer!(contribution)

@@ -32,7 +32,7 @@ RSpec.describe ContributionBlueprint do
                                'respond_path' => nil,
                                'profile_path' => nil,
                                'match_path' => nil,
-                               "service_area" => {"id" => contribution.service_area.id, "name" => expected_area_name},
+                               "service_area" => {"id" => contribution.service_area.id, "name" => expected_area_name, "location" => { "id" => contribution.service_area.location.id, "city" => contribution.service_area.location.city, "county" => contribution.service_area.location.county, "neighborhood" => contribution.service_area.location.neighborhood, "region" => contribution.service_area.location.region, "state" => contribution.service_area.location.state, "street_address" => contribution.service_area.location.street_address, "zip" => contribution.service_area.location.zip}},
                                # "map_location" => "44.5,-85.1",
                                "title" => contribution.title,
                                "description" => contribution.description,

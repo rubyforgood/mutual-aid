@@ -80,21 +80,6 @@ services:
       - RAILS_ENV=development
       - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
 
-  test:
-    build:
-      context: ../..
-      dockerfile: ./docker/development/app/Dockerfile
-    user: "${UID}"
-    depends_on:
-      - db
-      - email
-    environment:
-      <<: *x-shared-postgres-environment
-      <<: *x-email-defaults
-      RAILS_ENV: test
-      POSTGRES_HOST: db
-    command: bundle exec rspec
-
 volumes:
   db:
   gem_cache:

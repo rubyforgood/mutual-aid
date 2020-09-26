@@ -51,7 +51,7 @@ services:
         published: *APP_PORT
     volumes:
       - ../..:/usr/src/app
-      - gem_cache:/usr/local/bundle/gems
+      - gem_cache:/usr/local/bundle/
       - node_modules:/usr/src/app/node_modules
     depends_on:
       - db
@@ -74,7 +74,7 @@ services:
     command: ./bin/webpack-dev-server
     volumes:
       - ../..:/usr/src/app
-      - gem_cache:/usr/local/bundle/gems
+      - gem_cache:/usr/local/bundle/
       - node_modules:/usr/src/app/node_modules
     ports:
       - target: *WEBPACKER_DEV_SERVER_PORT

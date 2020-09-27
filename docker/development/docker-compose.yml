@@ -21,8 +21,9 @@ x-email-defaults: &x-email-defaults
 services:
   email:
     build:
-      context: .
-      dockerfile: ./email/Dockerfile
+      context: ../..
+      dockerfile: ./docker/development/email/Dockerfile
+    command: [ "mailcatcher", "--foreground", "--ip", "0.0.0.0" ]
     depends_on:
       - db
     ports:
@@ -43,8 +44,8 @@ services:
     build:
       context: ../..
       dockerfile: ./docker/development/app/Dockerfile
-      args:
-        APP_PORT: *APP_PORT
+      target: base
+    command: [ "bundle", "exec", "rails", "server", "-b", "0.0.0.0" ]
     user: "${UID}"
     ports:
       - target: *APP_PORT
@@ -68,10 +69,9 @@ services:
     build:
       context: ../..
       dockerfile: ./docker/development/app/Dockerfile
-      args:
-        APP_PORT: *WEBPACKER_DEV_SERVER_PORT
+      target: base
     user: "${UID}"
-    command: ./bin/webpack-dev-server
+    command: [ "./bin/webpack-dev-server" ]
     volumes:
       - ../..:/usr/src/app
       - gem_cache:/usr/local/bundle/

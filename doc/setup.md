@@ -104,9 +104,6 @@ We recommend:
 
 ## Setting up Mailcatcher
 
-You only need mailcatcher if you're doing a lot of work on emails in the development environment.
-Without it, emails will be logged in the server log (log/development.log), but mailcatcher makes mailer work SO much easier.
-
 Mailcatcher cannot be bundled, so has to be installed globally:
 ```
 $ gem install mailcatcher
@@ -117,7 +114,11 @@ Start the mail server with:
 $ mailcatcher
 ```
 And go to http://localhost:1080/
-Mail can be sent through smtp://localhost:1025
+
+By default, some user actions, such as registration, will fail if mailcatcher is not running.
+This is an intentional choice to keep development as close to production as possible.
+If you prefer to fire up mailcatcher only when you're working on emails, you can override this behavior
+via [environment variables](#environment-variables).
 
 
 ## Environment variables

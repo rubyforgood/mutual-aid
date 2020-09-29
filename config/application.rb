@@ -51,7 +51,7 @@ module Mutualaid
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_caching = false
     config.action_mailer.perform_deliveries = true
-    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.raise_delivery_errors = ENV['RAISE_MAIL_DELIVERY_ERRORS'] != 'false'
     config.action_mailer.smtp_settings = {
       address:   ENV['SMTP_HOST'],
       port:      (ENV['SMTP_PORT'].presence || 587).to_i,

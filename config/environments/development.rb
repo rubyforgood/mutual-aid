@@ -41,7 +41,7 @@ Rails.application.configure do
 
   # connect action mailer to the development SMTP server
   config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_ADDRESS'],
+    address: ENV['SMTP_HOST'],
     port:    (ENV['SMTP_PORT'].presence || 587).to_i,
     domain:  ENV['SYSTEM_HOST_NAME'],
   }

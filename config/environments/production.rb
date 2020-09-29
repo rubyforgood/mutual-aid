@@ -64,7 +64,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: ENV['SYSTEM_HOST_NAME'] }
   config.action_mailer.smtp_settings = {
-      address:              ENV['SMTP_ADDRESS'],
+      address:              ENV['SMTP_HOST'],
       port:                 "#{ENV['SMTP_PORT'] || 587}".to_i,
       domain:               ENV['SYSTEM_HOST_NAME'],
       user_name:            ENV['SMTP_USERNAME'],

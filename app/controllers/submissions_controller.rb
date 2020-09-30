@@ -24,7 +24,7 @@ class SubmissionsController < ApplicationController
       Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
       # send the email
       autoemail = SubmissionMailer.new_submission_confirmation_email(@submission)
-      delivery_status = deliver_now_with_error_handling(autoemail, "new_submission_confirmation_email")
+      delivery_status = Messenger.new(autoemail, "new_submission_confirmation_email").deliver_now
 
       # store email that was sent
       CommunicationLog.log_email(autoemail, delivery_status, @submission.person, nil, current_user)

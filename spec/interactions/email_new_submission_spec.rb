@@ -24,7 +24,7 @@ RSpec.describe EmailNewSubmission do
     before { interaction }
 
     it 'saves the sent status in the log entry' do
-      expect(last_log.delivery_status).to eq CommunicationLog::DEFAULT_DELIVERY_STATUS
+      expect(last_log.delivery_status).to eq 'sent'
     end
   end
 
@@ -38,7 +38,7 @@ RSpec.describe EmailNewSubmission do
     end
 
     it 'marks the log entry as failed' do
-      expect(last_log.delivery_status).to eq 'undeliverable'
+      expect(last_log.delivery_status).to eq 'error'
     end
   end
 end

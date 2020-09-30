@@ -185,7 +185,7 @@ Listing.all.each do |listing|
                            sent_at: listing.created_at,
                            delivery_method: ContactMethod.email,
                            needs_follow_up: [true, false].sample,
-                           delivery_status: CommunicationLog::DELIVERY_STATUSES.sample,
+                           delivery_status: Messenger.delivery_statuses.sample,
                            subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
                            body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
                            auto_generated: true,
@@ -193,7 +193,7 @@ Listing.all.each do |listing|
 end
 # 70% get random manual logs
 Listing.all.sample((Listing.count * 70)/100) do |listing|
-  delivery_status = (CommunicationLog::DELIVERY_STATUSES - [CommunicationLog::DEFAULT_DELIVERY_STATUS]).sample
+  delivery_status = (Messenger.delivery_statuses - Messenger.default_status).sample
   CommunicationLog.create!(person: listing.person,
                            match: listing.matches.first,
                            created_by: User.all.sample,

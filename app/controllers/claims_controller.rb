@@ -41,7 +41,7 @@ class ClaimsController < ApplicationController
     peer_to_peer_email = PeerToPeerMatchMailer.peer_to_peer_email(contribution,
                                                                   peer_alias: claim_params[:peer_alias],
                                                                   message: claim_params[:message])
-    delivery_status = deliver_now_with_error_handling(peer_to_peer_email, "peer_to_peer_email")
+    delivery_status = Messenger.new(peer_to_peer_email, "peer_to_peer_email").deliver_now
     CommunicationLog.log_email(peer_to_peer_email, delivery_status, current_user.person, nil, current_user)
   end
 

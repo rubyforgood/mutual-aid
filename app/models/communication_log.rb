@@ -4,9 +4,6 @@ class CommunicationLog < ApplicationRecord
   belongs_to :match, optional: true
   belongs_to :created_by, optional: true, class_name: "User", foreign_key: "created_by_id"
 
-  DEFAULT_DELIVERY_STATUS = "sent"
-  DELIVERY_STATUSES = [DEFAULT_DELIVERY_STATUS, "connected", "undeliverable"]
-
   scope :needs_follow_up, ->(boolean=nil){ where(needs_follow_up: boolean || true) }
 
   # TODO: test current_user nil

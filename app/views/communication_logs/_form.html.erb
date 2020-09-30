@@ -47,8 +47,8 @@
                   selected: f.object.delivery_method_id || params[:delivery_method_id] || @delivery_method_id %>
       <%= f.input :delivery_status, as: :select, required: true,
                   label: "What was the result?",
-                  collection: CommunicationLog::DELIVERY_STATUSES,
-                  selected: f.object.delivery_status || params[:delivery_status] || CommunicationLog::DEFAULT_DELIVERY_STATUS %>
+                  collection: Messenger.delivery_statuses,
+                  selected: f.object.delivery_status || params[:delivery_status] || Messenger.default_status %>
     </div>
 
     <div class="field is-grouped">

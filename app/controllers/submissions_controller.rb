@@ -21,14 +21,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
 
     if @submission.save
-      Rails.logger.info "----------------SEND EMAIL CONFIRMATION"
-      # send the email
-      autoemail = SubmissionMailer.new_submission_confirmation_email(@submission)
-      delivery_status = Messenger.new(autoemail, "new_submission_confirmation_email").deliver_now
-
-      # store email that was sent
-      CommunicationLog.log_email(autoemail, delivery_status, @submission.person, nil, current_user)
-
+      EmailNewSubmission.run! submission: @submission, user: current_user
       redirect_to submissions_path, notice: 'Submission successfully created.'
     else
       set_form_dropdowns

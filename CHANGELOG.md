@@ -5,6 +5,8 @@
 
 ### Breaking changes
 * Users can now register themselves (was previously blocked by #660)
+* The `SMTP_ADDRESS` environment variable has been renamed to `SMTP_HOST` #750
+    - Existing deploymed environments will have to be updated and restarted/redeployed.
 
 ### Bugfixes
 * Get outgoing email working #660, #676

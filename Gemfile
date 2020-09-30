@@ -51,8 +51,8 @@ end
 
 group :development do
   gem 'annotate'
-  gem 'guard-rspec', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rerun'
   gem 'spring'
   gem 'spring-commands-rspec', require: false
   gem 'spring-watcher-listen', '~> 2.0.0'

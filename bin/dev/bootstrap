@@ -2,15 +2,21 @@
 
 set -e
 
-function setup() {
-    local environment
-    environment="$1"
-
-    docker-compose -f docker/development/docker-compose.yml \
-                   run --rm \
-                   app bin/rails db:reset RAILS_ENV="${environment}"
+function dc() {
+  docker-compose -f docker/development/docker-compose.yml run --rm "$@"
 }
 
+# start fresh
 bin/dev/clean
-setup development
-setup test
+
+# will create the app container, create both dev and test databases, and seed dev
+dc app bin/rails db:reset
+
+# only the test db needs to be explicitly seeded
+dc app bin/rails db:seed RAILS_ENV=test
+
+# build the image and make sure webpack can compile; don't start webpack-dev-server
+dc webpacker bin/webpack
+
+# build the image; don't start mailcatcher yet
+dc email echo done!

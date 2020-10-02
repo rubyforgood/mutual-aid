@@ -1,20 +1,56 @@
 # Changelog
 ## [Unreleased]
-### Enhancements
-* Add map to contributions page that dynamically adds pins for Asks/Offers
-* Ask|Offer form submissions now send an email to the contributor and log the communication #758
-
 ### Breaking changes
 * The `SMTP_ADDRESS` environment variable has been renamed to `SMTP_HOST` #750
-    - Existing deploymed environments will have to be updated and restarted/redeployed.
+    - Existing deployed environments will have to be updated and restarted/redeployed
+
+### Enhancements
+* Rudimentary peer-to-peer exchange; users can initiate a match w/o dispatcher involvement #730, #741
+* New map view on Contributions page that dynamically adds pins for Asks/Offers #720, #742
+* Redesigned Landing page #626
+* Redesigned Contributions page with collapsible filters section #728, #735, #747
+* Allow expanded set of html tags for site customization (eg /about page) #683
+* Ask|Offer form submissions now email the contributor and log the communication #758
+* Admins can now toggle whether to show the Navigation bar on Community Resource and Announcement pages #691
+* Add data migration task to separate old asks/offers into multiple listings #624
+* Considerable improvements to readme and guides #669, #674, #675, #679, #682, #662, #688, #689, #746
 
 ### Bugfixes
 * Get outgoing email working #660, #676
 * User signup is now working (was previously blocked by #660), however has been disabled ↙️
 * Disable user signup until we get authorizations working #767
+* Fix long horizontal scroll of tag lists 615
 
 ### Development notes
+* Moved repo under `rubyforgood` organization 💎❤️
 * Switched primary branch from `master` to `main` #658
+* Major improvements to our docker development setup #685, #700, #706, #722, #726, #740, #743, #746, #757, #760
+* Added a pull request template #678, #733, #751
+* Introduce `annotate` gem to help with schema discovery #686
+* Support `asdf` tool manager #703, #762
+* Drop `guard` support #749
+
+### Appreciations 🙏🏾 💞
+* @viamin
+* @svileshina
+* @slaloggia
+* @reevesalic
+* @pollygee
+* @phylum
+* @thestephenmarshall
+* @maricris-sn
+* @lucasfeijo
+* @kevinschlabach
+* @indiebrain
+* @isabeltunguxd
+* @gingeralbertson
+* @grenewode
+* @evertoncunha
+* @eabousaif
+* @danielmmack
+* @craigjz
+* @cflipse
+* @acherukuri
 
 ## [0.2.9] - 2020-08-06
 ### Enhancements

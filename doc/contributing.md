@@ -11,12 +11,12 @@ We are using two GitHub 'Projects' for planning, providing two different perspec
 * [Roadmap](https://github.com/rubyforgood/mutual-aid/projects/4), a Kanban style board focussed on prioritization and workflow.
 * [Story map](https://github.com/rubyforgood/mutual-aid/projects/2), a higher level overview and a good reference point of user flows (though it was last updated spring 2020 so is a bit out of date).
 
-Feel free to browse issues and contact us (via Slack or issue comments) if anything is unclear.
+Feel free to browse issues and contact us via issue comments if anything is unclear.
 
 ## Claim an issue
 Once you've identified something you'd like to work on, its best to comment on the issue and let maintainers know you're looking into it. That way, they can relay any context that might not be obvious or documented.
 
-In any case, go ahead and 'Assign' yourself to the issue (if someone's already assigned, that is likely still fine, just reach out to them to start collaborating).
+In any case, go ahead and 'Assign' yourself to the issue (if someone's already assigned, that is likely still fine, just reach out to them if you want to collaborate).
 
 Once you start working on the issue in earnest, please move it into the 'In progress' column on the [Roadmap].
 
@@ -27,29 +27,31 @@ See our [setup guide](setup.md).
 
 Here are the basic steps to submit a pull request. Make sure that you're working on an [https://github.com/rubyforgood/mutual-aid/projects/4]–if the relevant issue doesn't exist, open it!
 
-1. Fork the repo (if you've already been added as a contributor via Ruby for Good, you can skip this step).
+1. Fork the repo (unless you're a contributor on the project, in which case you can clone it directly) and get it [set up](setup.md).
 
-1. Run the test suite (`bin/rake`). We only merge pull requests with a passing test suite, and it's great to know that you have a clean slate.
+1. Run the test suite (`bin/rake` or `bin/dev/test`). We only merge pull requests with a passing test suite, and it's great to know that you have a clean slate.
 
 1. Add your code and tests as needed. If you are adding functionality or fixing a bug, you probably should add a test or many (if you're not sure how, comment and we might able to help)! See [doc/testing.md](testing.md) for some testing tips relevant to this codebase.
 
-1. Check the files that you added or changed with Rubocop, a ruby code linter: `bundle exec rubocop path/file1 path/file2`. You can add the `-a` option to fix some offenses automatically. Fix the others by hand until Rubocop reports no more offenses.
+1. Ideally (but optionally) run your changes through `Rubocop`, a ruby code linter and `eslint`. We'll hopefully get this step automated soon.
 
-1. Run the test suite again (`bin/rake`)  to be sure everythng still works.
+1. Run the test suite again  to be sure everythng still works.
 
 1. If you think mutual-aid groups using our app need to know about the changes you made, add an entry to the [CHANGELOG.md](/CHANGELOG.md). Reviewing what's already in there will give you a sense of what types of changes need to be documented.
 
 1. Push to your fork (or directly to rubyforgood/mutual-aid) and submit a pull request. Include the issue number (ex. `Resolves #1`) in the PR description.
 
-1. For any changes, please create a feature branch and open a PR for it when you feel it's ready to merge. Even if there's no real disagreement about a PR, at least one other person on the team needs to look over a PR before merging. The purpose of this review requirement is to ensure shared knowledge of the app and its changes and to take advantage of the benefits of working together changes without any single person being a bottleneck to making progress.
+1. We provide a pull request template; please look over it and fill in any relevant bits. This is intended to give ideas and guidance around what to document and consider, not as a rigid set of rules.
 
-At this point you're waiting on us–we'll try to respond to your PR quickly. We may suggest some changes or improvements or alternatives.
+1. Even if there's no real disagreement about a PR, at least one other person on the team needs to look over a PR before merging. The purpose of this review requirement is to ensure shared knowledge of the app and its changes and to take advantage of the benefits of working together changes without any single person being a bottleneck to making progress.
+
+At this point you're waiting on us -- we'll try to respond to your PR quickly. We may suggest some changes or improvements or alternatives.
 
 Some things that will increase the chance that your pull request is accepted:
 
-* Use Rails idioms and helpers
+* Use Rails and Vue idioms and helpers
 * Include tests that fail without your code, and pass with it
-* Update the documentation, the surrounding one, examples elsewhere, guides, whatever is affected by your contribution
+* Update the documentation, examples elsewhere, guides, whatever is affected by your contribution
 
 ## Lastly...
 Bask in the glory that is you! ✨🙏🏾

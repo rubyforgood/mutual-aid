@@ -1,0 +1,15 @@
+<section class="section">
+  <h1>Request for Contribution</h1>
+  <h2 class="title"><%= contribution.type %>: <%= contribution.all_tags_unique.map(&:humanize).join(", ") %></h2>
+  <br>
+  <div class="box">
+    <p><strong><%= contribution.person.anonymized_name_and_email %></strong></p>
+    <p class="subtitle"><%= contribution.description %></p>
+    <% if contribution.matched? %>
+      <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
+    <% else %>
+      <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", method: :get %>
+    <% end %>
+  </div>
+  <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>
+</section>

@@ -1,14 +1,22 @@
 class PublicPagesController < PublicController
   include NotUsingPunditYet
 
-  layout "without_navbar", only: [:announcements, :community_resources]
+  layout :determine_layout
 
   def about
     @about_us_text = HtmlSanitizer.new(@system_setting.about_us_text).sanitize_for_rails
   end
 
+  def determine_layout
+    "without_navbar" unless @system_setting.display_navbar?
+  end
+
   def announcements
     @announcements = Announcement.where(is_approved: true).published
+    respond_to do |format|
+      format.html
+      format.json { render json: @announcements }
+    end
   end
 
   def community_resources

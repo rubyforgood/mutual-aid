@@ -1,44 +1,49 @@
 <template>
-  <li class="tileListItem box is-paddingless">
-    <div class="header">
-      <div class="tags">
-        <div class="right-tags tags">
-          <div class="left-tags">
-            <TagList :tags="category_tags" class="categoryTags" tagClasses="tag is-info is-light subtitle is-5" />
-          </div>
+  <div class="tileListItem is-marginless is-paddingless">
+    <div class="box ml-1 mr-1 mb-1 mt-1">
+      <div class="header">
+        <div class="row left">
+          <SingleIcon :iconType="contribution_type" klass="" />
+          <MappedIconList :iconTypes="iconList" />
         </div>
-      </div>
-    </div>
-
-    <div class="body">
-      <div class="row left">
-        <SingleIcon :iconType="contribution_type" klass="" />
-        <MappedIconList :iconTypes="iconList" />
-        <span class="has-text-right">
+        <div class="row right">
           <b-tag v-if="urgency" :class="urgencyColor">
             <b-icon v-if="showUrgentIcon" icon="exclamation-triangle" size="is-small" />
             {{ urgency.name }}
           </b-tag>
-        </span>
+        </div>
       </div>
 
-      <div class="text">
-        <div>
-          <small><time :datetime="createdAtDate.toISOString()">{{ createdAtDate.toLocaleDateString() }} {{ createdAtDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</time></small>
+      <div class="body">
+        <div class="tags">
+          <div class="right-tags tags">
+            <div class="left-tags">
+              <TagList :tags="category_tags" class="categoryTags" tagClasses="tag is-info is-light subtitle" />
+            </div>
+          </div>
         </div>
-        <h5 class="has-text-weight-bold">{{ title }}</h5>
-        <p>{{ description }}</p>
-        <div v-if="service_area" class="has-text-grey-lighter">
-          {{ service_area.name }}
+
+        <div class="text">
+          <div>
+            <small><time :datetime="createdAtDate.toISOString()">{{ createdAtDate.toLocaleDateString() }} {{ createdAtDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</time></small>
+          </div>
+          <h5 class="has-text-weight-bold">{{ title }}</h5>
+          <p>{{ description }}</p>
+          <div v-if="service_area" class="has-text-grey-lighter">
+            {{ service_area.name }}
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="buttonSpacing" v-if="respond_path">
+          <a :href="respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
+        </div>
+        <div class="buttonSpacing" v-if="view_path">
+          <a :href="view_path" class="button icon-list is-primary"><span class=""> View</span></a>
         </div>
       </div>
     </div>
-    <div class="actions">
-      <div class="buttonSpacing" v-if="respond_path">
-        <a :href="respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
-      </div>
-    </div>
-  </li>
+  </div>
 </template>
 
 <script>
@@ -59,6 +64,7 @@ export default {
     contact_types: {type: Array, default: () => []},
     profile_path: String,
     respond_path: String,
+    view_path: String,
     match_path: String
   },
   components: {

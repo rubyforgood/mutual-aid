@@ -5,6 +5,7 @@
     <%= f.input :exchange_type, as: :select, collection: @exchange_types %>
     <%= f.input :separate_asks_offers, as: :radio_buttons, label: "Separate ask and offer forms" %>
     <%= f.input :allow_sms, as: :radio_buttons %>
+    <%= f.input :display_navbar, as: :radio_buttons, hint: "Display the navbar on the Community Resources and Annoucements pages" %>
     <%= f.input :community_resources_module, as: :radio_buttons %>
     <%= f.input :announcements_module, as: :radio_buttons %>
     <%= f.input :positions_module, as: :radio_buttons %>

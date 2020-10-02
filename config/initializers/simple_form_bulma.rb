@@ -39,14 +39,14 @@ SimpleForm.setup do |config|
   config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
       boolean:       :horizontal_boolean,
-      check_boxes:   :horizontal_checkboxes,
+      check_boxes:   :vertical_checkboxes,
       collection:    :vertical_collection,
       date:          :horizontal_multi_select,
       datetime:      :horizontal_multi_select,
       file:          :vertical_file,
       radio_buttons: :horizontal_radio,
       range:         :vertical_range,
-      time:          :horizontal_multi_select
+      time:          :horizontal_multi_select,
   }
 
   # vertical forms

@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+set -e
+
+function dc() {
+    docker-compose -f docker/development/docker-compose.yml $@
+}
+
+function build_images() {
+    # Build all local docker images
+    dc build
+}
+
+function prepare_database_schema() {
+    # Recreate both development and test databases from scratch; then
+    # seed the development database.
+    dc run --rm app bin/rails db:reset
+}
+
+function seed_test_database() {
+    dc run --rm app bin/rails db:seed RAILS_ENV=test
+}
+
+function prepare_databases() {
+    prepare_database_schema
+    seed_test_database
+}
+
+function build_webpack() {
+    # Ensure that the webpacker serivce can build the packs
+    dc run --rm webpacker bin/webpack
+}
+
+# start fresh
+bin/dev/clean
+
+build_images
+prepare_databases
+build_webpack
+echo "done!"

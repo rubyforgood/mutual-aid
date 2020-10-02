@@ -22,6 +22,19 @@ class Person < ApplicationRecord
 
   validate :preferred_contact_method_present!
 
+  # FIXME: extract into an interactor
+  def self.create_from_peer_to_peer_params!(current_user, name:, preferred_contact_method_id:, contact_info:)
+    contact_method = ContactMethod.find(preferred_contact_method_id)
+    person_params = { name: name,
+                      preferred_contact_method: contact_method,
+                      user: current_user }
+
+    contact_method_name = contact_method.name == "Email" ? :email : :phone
+    person_params[contact_method_name] = contact_info
+
+    create!(person_params)
+  end
+
   def name_and_email
     "#{name} (#{email})"
   end
@@ -54,9 +67,49 @@ class Person < ApplicationRecord
     offers.any? ? offers&.map(&:all_tags_unique) : []
   end
 
+  def anonymized_name_and_email
+    "#{Anonymize.name(name)} #{Anonymize.email(email)}"
+  end
+
   private def preferred_contact_method_present!
     return unless preferred_contact_method
     field = preferred_contact_method.field
     errors.add(field, :blank) if self[field].blank?
   end
 end
+
+# == Schema Information
+#
+# Table name: people
+#
+#  id                          :bigint           not null, primary key
+#  email                       :string
+#  email_2                     :string
+#  monthly_donation_amount_max :float            default(0.0)
+#  monthly_matches_max         :integer          default(0)
+#  name                        :string
+#  notes                       :text
+#  phone                       :string
+#  phone_2                     :string
+#  preferred_contact_timeframe :string
+#  preferred_locale            :string           default("en"), not null
+#  skills                      :text
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  location_id                 :bigint
+#  preferred_contact_method_id :integer
+#  service_area_id             :bigint
+#  user_id                     :bigint
+#
+# Indexes
+#
+#  index_people_on_location_id      (location_id)
+#  index_people_on_service_area_id  (service_area_id)
+#  index_people_on_user_id          (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (location_id => locations.id)
+#  fk_rails_...  (service_area_id => service_areas.id)
+#  fk_rails_...  (user_id => users.id)
+#

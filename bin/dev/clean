@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Remove all containers, volumes, images, etc associated with this project's services.
+docker-compose -f ./docker/development/docker-compose.yml down --rmi=all --volumes --remove-orphans

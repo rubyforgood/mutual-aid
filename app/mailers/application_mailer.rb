@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "#{ENV["SENDGRID_FROM_EMAIL"] || ENV["SYSTEM_EMAIL"]}"
+  default from: "#{ENV["SMTP_FROM_EMAIL"]}"
   layout 'mailer'
 end

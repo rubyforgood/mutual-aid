@@ -57,6 +57,7 @@ class SystemSettingsController < ApplicationController
         :allow_sms,
         :exchange_type,
         :separate_asks_offers,
+        :display_navbar,
 
         :announcements_module,
         :community_resources_module,

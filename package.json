@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "@mapbox/mapbox-sdk": "^0.11.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
     "@vue/composition-api": "^0.5.0",
@@ -15,6 +16,7 @@
     "bulma": "^0.8.2",
     "css-loader": "^3.5.2",
     "file-loader": "^6.0.0",
+    "mapbox-gl-vue": "^2.0.4",
     "null-loader": "^4.0.0",
     "sass-loader": "8.0.2",
     "style-loader": "^1.1.4",

@@ -41,6 +41,24 @@ class Match < ApplicationRecord
     result
   end
 
+  # FIXME: extract into an interactor
+  def self.create_match_for_contribution!(contribution, current_user)
+    match_params = if contribution.ask?
+                      { receiver: contribution, provider: create_offer_for_ask!(contribution, current_user) }
+                    elsif contribution.offer? # TODO: check if community resource type when it's added
+                      { receiver: create_ask_for_offer!(contribution, current_user), provider: contribution }
+                    end
+    Match.create!(match_params.merge(status: "match_confirmed"))
+  end
+
+  def self.create_offer_for_ask!(ask, current_user)
+    Offer.create!(person: current_user.person, service_area: ask.service_area)
+  end
+
+  def self.create_ask_for_offer!(offer, current_user)
+    Ask.create!(person: current_user.person, service_area: offer.service_area)
+  end
+
   def category
     receiver.all_tags_to_s
   end
@@ -67,3 +85,21 @@ class Match < ApplicationRecord
     "Connected on #{created_at.strftime('%m-%-d-%Y')}: #{name} #{receiver.all_tags_to_s}"
   end
 end
+
+# == Schema Information
+#
+# Table name: matches
+#
+#  id            :bigint           not null, primary key
+#  completed     :boolean          default(FALSE), not null
+#  exchanged_at  :datetime
+#  notes         :string
+#  provider_type :string
+#  receiver_type :string
+#  status        :string
+#  tentative     :boolean          default(TRUE), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  provider_id   :integer
+#  receiver_id   :integer
+#

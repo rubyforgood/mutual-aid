@@ -27,30 +27,26 @@
 default: &default
   adapter:  postgresql
   encoding: unicode
-  username: <%= ENV.fetch('POSTGRES_USER',     nil) %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD', nil) %>
-  database: <%= ENV.fetch('POSTGRES_DB',       nil) %>
+  username: <%= ENV['POSTGRES_USER'].presence || nil %>
+  password: <%= ENV['POSTGRES_PASSWORD'].presence || nil %>
+  database: <%= ENV['POSTGRES_DB'].presence || nil %>
   # https://til.hashrocket.com/posts/6918d4e62b-use-postgresql-socket-in-databaseyml
-  host:     <%= ENV.fetch('POSTGRES_HOST',     '/var/run/postgres') %>
+  host:     <%= ENV['POSTGRES_HOST'].presence || '/var/run/postgres' %>
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool:     <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  pool:     <%= ENV["RAILS_MAX_THREADS"].presence || 5 %>
 
 development:
   <<: *default
-  database: <%= ENV.fetch('POSTGRES_DB', 'mutualaid_development') %>
-
-docker-development:
-  <<: *default
-  database: <%= ENV.fetch('POSTGRES_DB', 'mutualaid_development') %>
+  database: <%= ENV['POSTGRES_DB'].presence || 'mutualaid_development' %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: <%= ENV.fetch('POSTGRES_DB', 'mutualaid_test') %>
+  database: <%= ENV['POSTGRES_DB'].presence || 'mutualaid_test' %>
 
 production:
   <<: *default
-  database: <%= ENV.fetch('POSTGRES_DB', 'mutualaid_production') %>
-  username: <%= ENV.fetch('POSTGRES_USER', 'mutualaid') %>
+  database: <%= ENV['POSTGRES_DB'].presence || 'mutualaid_production' %>
+  username: <%= ENV['POSTGRES_USER'].presence || 'mutualaid' %>

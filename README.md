@@ -11,32 +11,41 @@ Many people working in mutual aid were overwhelmed by requests early this year d
 
 We've created an app to support this work, currently used by seven mutual aid groups in cities across the country.
 
-## Ruby for Good 2020
+Our current status is that dispatcher capacity is waning as local governments restart schools and lift pandemic bans. While we contiune to support the ongoing work of **dispatch-based** mutual aid, we're now building out a new **peer-to-peer** communication path that will ease reliance on dispatchers.
 
-Our current status is that dispatcher capacity is waning as local governments restart schools and lift pandemic bans. We have some bugfixes and smaller tickets to support the ongoing work of **dispatch-based** mutual aid.  We're also looking for people who are willing to spend a few days digging in to our new **peer-to-peer** communication path that will ease how much we rely on dispatchers.
-
-More (and snazzier!) details in our [project pitch deck](https://docs.google.com/presentation/d/1iUakTWYsj1tMAyOUO-1gp4oxNJzwGTFsZnkkDJk8Ax8/edit?usp=drive_web&ouid=109561030287749477812) for the event.
-
-We would love contributions from newbies, experienced devs, UX/UI designers and PM folks. We'll have standalone tickets that can be worked on fairly **independently**, as well as some that will need more **collaboration**.
-
-We are using two GitHub 'Projects' for planning, providing two different perspectives on the same issues:
-
-* [Roadmap](https://github.com/rubyforgood/mutual-aid/projects/4), a Kanban style board focussed on prioritization and workflow. This will be our **primary** planning tool during Ruby for Good.
-* [Story map](https://github.com/rubyforgood/mutual-aid/projects/2), a higher level overview and a good reference point of user flows (though it was last updated spring 2020 so is a bit out of date).
-
-All issues are being groomed throughout these two weeks (9/1 - 9/13), so please keep checking back for updates.
-
-Hope to see you on Slack and/or the social events being held!
-
-If you have any questions and/or are having a hard time finding where or how to jump in to the project, reach out to us on Slack or comment on issues themselves.
-
-* Ruby for Good Slack channel: #mutualaid
-* Slack contacts: `@maebeale`, `@lasitha`, `@Howard`, `@svetlana`, PM support: `@Ginger A`
-* Stakeholder reps on slack: `@Robin`, `@Siv Jones`
-* [GitHub repo](https://github.com/rubyforgood/mutual-aid)
+More (and snazzier!) details in this [project pitch deck](https://docs.google.com/presentation/d/1iUakTWYsj1tMAyOUO-1gp4oxNJzwGTFsZnkkDJk8Ax8/edit?usp=drive_web&ouid=109561030287749477812).
 
 ## Contribute!
-Check out [this guide](CONTRIBUTING.md) for how to get started. We look forward to your contributions and brilliance and being!
+We would love contributions from newbies, experienced devs, UX/UI designers and PM folks. We have standalone tickets that can be worked on fairly **independently**, as well as some that will need more **collaboration**.
+
+Check out [this guide](doc/contributing.md) for how to get started.
+
+If you have any questions and/or are having a hard time finding where or how to jump in to the project, please comment on an issue and we'll be in touch.
+
+We look forward to your contributions and brilliance and being!
+
+## Check out the demo
+[http://mutual-aid-demo.herokuapp.com/](http://mutual-aid-demo.herokuapp.com/)
+
+* username: `demouser@example.com`
+* password: `doubly dreamy demo`
+
+## Glossary
+We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glossary)  that's available in the demo instance once you're logged in.
+You can also review it [in code](app/views/admin/glossary.html.erb).
+
+## Deploying the app
+Visit our [deployment guide](doc/deployment.md) for more information on deploying the app.
+
+## More guides and documentation
+* [Contribution guide](doc/contributing.md)
+* [Code of conduct](https://github.com/rubyforgood/code-of-conduct)
+* [Releases and Changelog](https://github.com/rubyforgood/mutual-aid/releases)
+* [Dev environment setup](doc/setup.md)
+* [Seeding and importing data](doc/seeding.md)
+* [Some testing tips](doc/testing.md)
+* [Rudimentary ERD and workflow diagrams](db/db_diagram_yEd.graphml)
+* Customization (WIP)
 
 ## Get involved in your local mutual aid efforts!
 Mutual aid is not new. If it is new to you, please check out the history of mutual aid in your neighborhood or region, as likely you will find mentors and partners ready to accept your help. There are most likely leaders of color in your area. Please see if there are ways to support them before creating your own new network. There is also plenty of research to be done, and national and regional networks to connect in to.
@@ -50,31 +59,8 @@ In addition to the background links in the 'What is mutual aid?' section, here's
 
 Please, get involved! All of our communities could benefit from more resiliency and connection.
 
-## Check out the demo
-[http://mutual-aid-demo.herokuapp.com/](http://mutual-aid-demo.herokuapp.com/)
-
-* username: `demouser@example.com`
-* password: `doubly dreamy demo`
-
-## Glossary
-We wrote up a [Glossary of terms](http://mutual-aid-demo.herokuapp.com/admin/glossary)  that's available in the demo instance once you're logged in.
-You can also review it [in code](blob/main/app/views/admin/glossary.html.erb).
-
-## Deploying the app
-Visit our [DEPLOYMENT.md](DEPLOYMENT.md) guide for more information on deploying the app.
-
-## More guides and documentation
-* [Contribution guide](CONTRIBUTING.md)
-* [Code of conduct](https://github.com/rubyforgood/code-of-conduct)
-* [Changelog](CHANGELOG.md)
-* [Dev environment setup](SETUP.md)
-* [Seeding and importing data](SEEDING.md)
-* [Some testing tips](TESTING.md)
-* [Rudimentary ERD and workflow diagrams](db/db_diagram_yEd.graphml)
-* Customization (WIP)
-
 ## Who we are
-We are devs committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
+We are devs and organizers committed to making mutual aid manageable and longstanding, so as to build, support, and strengthen resilient communities.
 
 This is not intended to be strictly a "product" -- we will be in partnership with specific mutual aid groups to solicit feedback and support their operations, with a nod to all mutual aid groups and administrative best practices.
 
@@ -82,4 +68,4 @@ The idea is that each group -- or cluster of groups -- would own their database 
 
 Ideally mutual aid networks will have their own tech teams, but we will provide initial support as capacity permits.
 
-Feel free to [browse some of our earliest notes](ORIENTATION.md).
+Feel free to browse [some of our earliest notes](doc/orientation.md).

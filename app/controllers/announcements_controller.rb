@@ -4,13 +4,14 @@ class AnnouncementsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 
-  layout "without_navbar", only: [:new, :create, :show]
+  layout :determine_layout, only: [:new, :show]
 
   def index
     @announcements = Announcement.order(created_at: :desc)
   end
 
   def show
+    @announcement = Announcement.find(params[:id])
   end
 
   def new
@@ -46,6 +47,10 @@ class AnnouncementsController < ApplicationController
   private
     def set_announcement
       @announcement = Announcement.find(params[:id])
+    end
+
+    def determine_layout
+      "without_navbar" unless @system_setting.display_navbar?
     end
 
     def announcement_params

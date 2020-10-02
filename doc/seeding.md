@@ -30,4 +30,5 @@ We also added some fake data seed files for you to use that are callable via rak
          Run 'rails runner -h' for help.```
       - Run `spring stop` and try again
 
-[Back to README.md](README.md))
+
+<sub>↩ Back to [README](/README.md)</sub>

@@ -12,7 +12,7 @@
       <%= "No email on record." %>
     <% end %>
     Phone: <%= @person.phone %></p>
-  <p><%= "(" + @person.location&.full_name + ")" if @person.location_id %></p>
+  <p><%= "(" + @person.location.name + ")" if @person.location_id %></p>
 
   <br>
 

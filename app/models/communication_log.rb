@@ -4,20 +4,18 @@ class CommunicationLog < ApplicationRecord
   belongs_to :match, optional: true
   belongs_to :created_by, optional: true, class_name: "User", foreign_key: "created_by_id"
 
-  DEFAULT_DELIVERY_STATUS = "sent"
-  DELIVERY_STATUSES = [DEFAULT_DELIVERY_STATUS, "connected", "undeliverable"]
-
   scope :needs_follow_up, ->(boolean=nil){ where(needs_follow_up: boolean || true) }
 
-  def self.log_email(email_object, delivery_status, person, delivery_method=nil, current_user=nil)
-    self.create!(delivery_method: delivery_method || ContactMethod.email,
-                 delivery_status: delivery_status,
-                 person: person,
-                 sent_at: Time.current,
-                 subject: email_object.subject,
-                 body: email_object.html_part&.body || email_object.body.raw_source,
-                 created_by: current_user,
-                 auto_generated: true,
+  def self.log_email(email:, delivery_status:, person:, initiator: nil)
+    create!(
+      delivery_method: ContactMethod.email,
+      delivery_status: delivery_status,
+      person: person,
+      sent_at: Time.current,
+      subject: email.subject,
+      body: email.html_part&.body || email.body.raw_source,
+      created_by: initiator,
+      auto_generated: true,
     )
   end
 

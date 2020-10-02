@@ -1,6 +1,7 @@
 require "#{Rails.root}/app/helpers/application_helper.rb"
-include ApplicationHelper
+include ApplicationHelper  # TODO: better way to solve this?
 
+# TODO: could do with specs
 class SubmissionMailer < ApplicationMailer
 
   def new_submission_confirmation_email(submission, system_setting=nil)

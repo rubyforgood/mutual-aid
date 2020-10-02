@@ -2,6 +2,7 @@
 ## [Unreleased]
 ### Enhancements
 * Add map to contributions page that dynamically adds pins for Asks/Offers
+* Ask|Offer form submissions now send an email to the contributor and log the communication #758
 
 ### Breaking changes
 * Users can now register themselves (was previously blocked by #660)

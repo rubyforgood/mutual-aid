@@ -1,4 +1,5 @@
 import {createLocalVue, mount, shallowMount} from '@vue/test-utils'
+import {assert, expect} from 'chai'
 import {configure} from 'vue_config'
 import Browse from 'pages/Browse.vue'
 import ListBrowser from 'pages/browse/ListBrowser'
@@ -8,7 +9,19 @@ import Madlibs from 'pages/browse/Madlibs'
 
 describe('Browse', () => {
   def('wrapper', () => mount(Browse, {
-    localVue: configure(createLocalVue())
+    localVue: configure(createLocalVue()),
+    propsData: {
+      contributions: [
+        {
+          type: 'Ask',
+          category_tags: [{1: 'care'}],
+          contact_types: [{3: "Email"}],
+          service_area: {1: 'Summer Court'},
+          urgency: {1: 'Anytime'},
+          created_at: 1599316859679.2122
+        }
+      ]
+    }
   }))
 
   describe('browser view', () => {
@@ -51,14 +64,24 @@ describe('Browse', () => {
 
   describe("Mablibs filtering", () => {
     def('madlibsTypeDropdown', () => $wrapper.find('select#madlibs-type'))
+    def('filterTypeAsk', () => $wrapper.find('#Contribution-Types'))
+    def('filterTypeOffer', () => $wrapper.find())
 
     describe('when changing the type dropdown', () => {
-      beforeEach(async () => {
+      // beforeEach(async () => {
 
-      })
+      // })
   
-      it("updates the checkboxes when making a dropdown selection", () => {
+      it("updates the checkboxes when making a dropdown selection", async () => {
+        const options = $madlibsTypeDropdown.findAll('option')
+        await options.at(1).setSelected()
 
+        debugger;
+        expect($madlibsTypeDropdown.find('option:checked').element.value).to.equal('asks')
+
+        // assert.equal($madlibsTypeDropdown.options[$madlibsTypeDropdown.selectedIndex].value, 'asks')
+        assert.equal($filterTypeAsk.checked, true)
+        assert.equal($filterTypeOffer.checked, false)
       })
     })
   })

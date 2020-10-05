@@ -1,4 +1,6 @@
 [![CircleCI](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main.svg?style=svg)](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main)
+[![Heroku Mutual Aid Test Status](http://heroku-badge.herokuapp.com/?app=mutual-aid-test&svg=1)](https://mutual-aid-test.herokuapp.com)
+[![Heroku Mutual Aid Demo Status](http://heroku-badge.herokuapp.com/?app=mutual-aid-demo&svg=1)](https://mutual-aid-demo.herokuapp.com)
 
 **Welcome, and thanks for coming by! 👋🏾**
 

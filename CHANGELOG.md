@@ -5,12 +5,13 @@
 * Ask|Offer form submissions now send an email to the contributor and log the communication #758
 
 ### Breaking changes
-* Users can now register themselves (was previously blocked by #660)
 * The `SMTP_ADDRESS` environment variable has been renamed to `SMTP_HOST` #750
     - Existing deploymed environments will have to be updated and restarted/redeployed.
 
 ### Bugfixes
 * Get outgoing email working #660, #676
+* User signup is now working (was previously blocked by #660), however has been disabled ↙️
+* Disable user signup until we get authorizations working #767
 
 ### Development notes
 * Switched primary branch from `master` to `main` #658

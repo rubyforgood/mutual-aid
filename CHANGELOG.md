@@ -12,7 +12,7 @@ We're still in the [initial development phase](https://www.jering.tech/articles/
 This changelog also serves to acknowledge the incredible people who've contributed brilliance, effort and being. Their handles are listed under the first release they each  touched. 💗🙏🏾
 
 
-## [Unreleased]
+## [0.3.0] - 2020-10-05
 ### Breaking changes
 * The `SMTP_ADDRESS` environment variable has been renamed to `SMTP_HOST` #750
     - Existing deployed environments will have to be updated and restarted/redeployed

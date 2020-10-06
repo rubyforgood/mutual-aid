@@ -12,8 +12,7 @@ We're still in the [initial development phase](https://www.jering.tech/articles/
 This changelog also serves to acknowledge the incredible people who've contributed brilliance, effort and being. Their handles are listed under the first release they each  touched. 💗🙏🏾
 
 
-[Unreleased]
-------------
+## [Unreleased]
 ### Breaking changes
 * The `SMTP_ADDRESS` environment variable has been renamed to `SMTP_HOST` #750
     - Existing deployed environments will have to be updated and restarted/redeployed
@@ -67,8 +66,7 @@ This changelog also serves to acknowledge the incredible people who've contribut
 * @acherukuri
 
 
-[0.2.9] - 2020-08-06
---------------------
+## [0.2.9] - 2020-08-06
 ### Enhancements
 * Ask/Offer form now generates a listing for each category selected #536, #620
 
@@ -76,14 +74,12 @@ This changelog also serves to acknowledge the incredible people who've contribut
 * Ask/Offer form breaks when no custom questions are configured #621, #622
 
 
-[0.2.8] - 2020-08-02
---------------------
+## [0.2.8] - 2020-08-02
 ### Bugfixes
 * Remove final & operator so all nils -> 0.0  #618
 
 
-[0.2.7] - 2020-07-30
---------------------
+## [0.2.7] - 2020-07-30
 ### Enhancements
 * Display inexhaustible icon on Contributions, Matches, Respond #601
 * Update Listings index layout to include buttons to get to Listing edit #604
@@ -94,20 +90,17 @@ This changelog also serves to acknowledge the incredible people who've contribut
 * Add Listings index to Contribution data section of Admin landing page #602
 
 
-[0.2.6] - 2020-07-25
---------------------
+## [0.2.6] - 2020-07-25
 ### Enhancements
 * Allow custom questions to be added to Ask and Offer forms #597
 
 
-[0.2.5] - 2020-07-24
---------------------
+## [0.2.5] - 2020-07-24
 ### Bugfixes
 * Only show visible subcategories for any visible category #594
 
 
-[0.2.4] - 2020-07-23
---------------------
+## [0.2.4] - 2020-07-23
 ### Bugfixes
 * Make login logo get populated from current_organization (last is_instance_owner) #581
 
@@ -119,8 +112,7 @@ This changelog also serves to acknowledge the incredible people who've contribut
 * Add node-version dotfile
 
 
-[0.2.3] - 2020-07-09
---------------------
+## [0.2.3] - 2020-07-09
 ### Enhancements
 * Improve contributions readability (remove labels, change prominence of created_at values). #558
 * Nested Categories now display under their parent on index #570
@@ -136,8 +128,7 @@ This changelog also serves to acknowledge the incredible people who've contribut
 * All frontend assets are being served by webpack and sprockets has been removed 👋🏾🙏🏾! #566
 
 
-[0.2.2] - 2020-06-27
---------------------
+## [0.2.2] - 2020-06-27
 ### Breaking changes
 * If you were relying on the stock header/footer text on ask/offer forms, that text will need to be customized. #492
 
@@ -162,14 +153,12 @@ This changelog also serves to acknowledge the incredible people who've contribut
 * @bascibaran
 
 
-[0.2.1] - 2020-06-13
---------------------
+## [0.2.1] - 2020-06-13
 ### Bugfixes
 * Rename `CustomFormQuestion.name` scope to fix heroku build error
 
 
-[0.2] - 2020-06-13
-------------------
+## [0.2] - 2020-06-13
 *DEPRECATED*
 
 ### Enhancements
@@ -180,8 +169,7 @@ This changelog also serves to acknowledge the incredible people who've contribut
 * @SMores
 
 
-[0.1] - 2020-06-04
-------------------
+## [0.1] - 2020-06-04
 *DEPRECATED*
 
 This is an MVP that provides ask and offer forms (that stop people from storing everyone's data in public spreadsheets), and provides a way to "match" people.

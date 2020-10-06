@@ -1,5 +1,19 @@
-# Changelog
-## [Unreleased]
+Changelog
+=========
+This codebase isn't able to strictly adhere to the [Semantic Versioning Specification](https://semver.org/) because it doesn't currenty declare a public API.
+
+However, to support upgrade paths for mutual aid groups who've deployed the app, we will use common SemVer practices to communicate the impact of changes in each release.
+
+We're still in the [initial development phase](https://www.jering.tech/articles/semantic-versioning-in-practice#initial-development-phase), so we are versioning releases with these modified rules:
+* Major version (0.x.y) -> will remain at 0 until we're ready to release v1.
+* Minor version (0.X.y) -> will be incremented to indicate a **breaking** change, something that will require some action on your part in order to upgrade.
+* Patch version (0.x.Y) -> incremented whenever we release backward compatible changes, including new features, bugfixes etc.
+
+This changelog also serves to acknowledge the incredible people who've contributed brilliance, effort and being. Their handles are listed under the first release they each  touched. 💗🙏🏾
+
+
+[Unreleased]
+------------
 ### Breaking changes
 * The `SMTP_ADDRESS` environment variable has been renamed to `SMTP_HOST` #750
     - Existing deployed environments will have to be updated and restarted/redeployed

@@ -168,7 +168,7 @@ end
 end
 
 Person.where.not(email: nil).sample(7).each do |person|
-  User.where(email: person.email).first_or_create!(confirmed_at: person.created_at, password: person.name.parameterize)
+  User.where(email: person.email).first_or_create!(confirmed_at: person.created_at, password: "password-#{person.name.parameterize}")
 end
 
 # autoemail logs per Listing

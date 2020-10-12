@@ -13,7 +13,7 @@ class HtmlSanitizer
     @string = string
   end
 
-  def sanitize_for_rails
+  def sanitize
     return "" unless @string
     safe_list_sanitizer = Rails::Html::SafeListSanitizer.new
     safe_list_sanitizer.sanitize(@string,

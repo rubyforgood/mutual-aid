@@ -2,7 +2,7 @@ class PublicPagesController < PublicController
   layout :determine_layout
 
   def about
-    @about_us_text = HtmlSanitizer.new(@system_setting.about_us_text).sanitize_for_rails
+    @about_us_text = HtmlSanitizer.new(@system_setting.about_us_text).sanitize
   end
 
   def determine_layout

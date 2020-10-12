@@ -4,8 +4,8 @@ RSpec.describe HtmlSanitizer, type: :model do
   let(:sanitizer) { described_class.new(string) }
   let(:partial_whitelist) { %w[b br h1 div span ol ul li] }
 
-  describe "#sanitize_for_rails" do
-    subject { sanitizer.sanitize_for_rails }
+  describe "#sanitize" do
+    subject { sanitizer.sanitize }
 
     let(:string) do
       %Q{

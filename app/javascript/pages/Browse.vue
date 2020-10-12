@@ -19,6 +19,13 @@
         <BrowserSelector :browser="browser" @clicked="browser = $event" />
       </section>
       <component :is="browser" :contributions="activeContributions" class="row" accessToken="pk.eyJ1IjoibXV0dWFsLWFpZC1hcHAiLCJhIjoiY2tmZTBvd3UwMDBhbTJ4cDlic2JmMWZoaiJ9.rWscBjdl1SMT5N0yekIJYg"/>
+      <section class="has-text-centered mt-2">
+        <h2 class="is-size-4 mb-1">Can't find what you're looking for?</h2>
+        <div>
+          <a href="/asks/new" class="button is-primary">Submit an Ask</a>
+          <a href="/offers/new" class="button is-primary">Submit an Offer</a>
+        </div>
+      </section>
     </section>
   </div>
 </template>
@@ -83,3 +90,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+  a {
+    margin: 0 0.5em;
+  }
+</style>

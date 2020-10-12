@@ -2,11 +2,6 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    EntryPoints.orientation('#orientation', {
-      organization: "<%= @organization_name %>",
-      landing_page_text_what: "<%= @landing_page_text_what %>",
-      landing_page_text_who:  "<%= @landing_page_text_who %>",
-      landing_page_text_how:  "<%= @landing_page_text_how %>"
-    })
+    EntryPoints.orientation('#orientation', <%= raw @json %>)
   })
 </script>

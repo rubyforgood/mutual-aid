@@ -27,9 +27,11 @@ class PublicPagesController < PublicController
   end
 
   def landing_page
-    @landing_page_text_what = HtmlSanitizer.new(@system_setting.landing_page_text_what).sanitize_for_vue
-    @landing_page_text_who = HtmlSanitizer.new(@system_setting.landing_page_text_who).sanitize_for_vue
-    @landing_page_text_how = HtmlSanitizer.new(@system_setting.landing_page_text_how).sanitize_for_vue
-    @organization_name = Organization.current_organization.name
+    @json = {
+      landing_page_text_what: HtmlSanitizer.new(@system_setting.landing_page_text_what).sanitize,
+      landing_page_text_who: HtmlSanitizer.new(@system_setting.landing_page_text_who).sanitize,
+      landing_page_text_how: HtmlSanitizer.new(@system_setting.landing_page_text_how).sanitize,
+      organization_name: Organization.current_organization.name,
+    }.to_json
   end
 end

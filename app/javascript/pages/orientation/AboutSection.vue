@@ -1,5 +1,5 @@
 <template>
-  <div class='section'>
+  <div class='section custom-text'>
     <h2 class='subtitle'>{{title}}</h2>
     <p v-html="description" class='description'></p>
   </div>
@@ -8,8 +8,8 @@
 <script>
 export default {
   props:{
-    title:{type: String, default:"This is a placeholder!"},
-    description:{type: String, default:"Put descriptive things about this section here"}
+    title: {type: String, default: "This is a placeholder!"},
+    description: {type: String, default: "Put descriptive things about this section here"}
   },
 }
 </script>

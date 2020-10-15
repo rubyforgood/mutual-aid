@@ -69,5 +69,5 @@ Address how this change will improve/lessen the security of the application - fo
 
 ### Meta
 <!--
-Any additional notes you have regarding your experience working on this pull request as a contributer. If this is very detailed, it could be a good idea to create an issue to address it.
+Any additional notes you have regarding your experience working on this pull request as a contributor. If this is very detailed, it could be a good idea to create an issue to address it.
 -->

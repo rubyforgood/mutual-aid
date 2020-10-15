@@ -11,6 +11,9 @@ We're still in the [initial development phase](https://www.jering.tech/articles/
 
 This changelog also serves to acknowledge the incredible people who've contributed brilliance, effort and being. Their handles are listed under the first release they each  touched. 💗🙏🏾
 
+## [Unreleased]
+* Unordered lists in user provided custom text (eg /about) now display with discs ('bullets') #777, #779
+* Allow custom text on landing page to override default text #769, #780
 
 ## [0.3.0] - 2020-10-05
 ### Breaking changes

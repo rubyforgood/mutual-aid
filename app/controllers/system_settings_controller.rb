@@ -12,10 +12,12 @@ class SystemSettingsController < ApplicationController
   def new
     @system_setting = SystemSetting.new
     @exchange_types = SystemSetting::EXCHANGE_TYPES
+    @offer_defaults = SystemSetting::OFFER_DEFAULTS
   end
 
   def edit
     @exchange_types = SystemSetting::EXCHANGE_TYPES
+    @offer_defaults = SystemSetting::OFFER_DEFAULTS
   end
 
   def create
@@ -56,6 +58,7 @@ class SystemSettingsController < ApplicationController
         :exchange_type,
         :separate_asks_offers,
         :display_navbar,
+        :offer_defaults,
 
         :announcements_module,
         :community_resources_module,

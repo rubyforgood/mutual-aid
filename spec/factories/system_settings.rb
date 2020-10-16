@@ -23,6 +23,7 @@ end
 #  landing_page_text_how              :text
 #  landing_page_text_what             :text
 #  landing_page_text_who              :text
+#  offer_defaults                     :string
 #  positions_module                   :boolean          default(TRUE), not null
 #  separate_asks_offers               :boolean          default(TRUE), not null
 #  shared_accounts_module             :boolean          default(TRUE), not null

@@ -8,6 +8,11 @@ class SystemSetting < ApplicationRecord
       "peer_to_peer" # everything is public
   ]
 
+  OFFER_DEFAULTS = [
+    "inexhaustible",
+    "single_offer"
+  ]
+
   # everything is public, including contact info
   # everything is public, but messaging is deidentified
   # things are optionally public, but request to connect is moderated by dispatch
@@ -74,6 +79,7 @@ end
 #  landing_page_text_how              :text
 #  landing_page_text_what             :text
 #  landing_page_text_who              :text
+#  offer_defaults                     :string
 #  positions_module                   :boolean          default(TRUE), not null
 #  separate_asks_offers               :boolean          default(TRUE), not null
 #  shared_accounts_module             :boolean          default(TRUE), not null

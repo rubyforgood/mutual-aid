@@ -13,6 +13,7 @@ AllCops:
     - 'tmp/*'
     - 'config/initializers/*'
     - 'lib/tasks/*'
+    - 'Guardfile'
 
 Layout/LineLength:
   Max: 100

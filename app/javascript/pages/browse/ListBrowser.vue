@@ -8,6 +8,7 @@
         <th>Service Area</th>
         <th>Connect</th>
         <th>Respond</th>
+        <th>Contributor Name</th>
 <!--        <th>Details</th>-->
       </tr>
       <tr v-for="contribution in contributions" :key="contribution.id">
@@ -30,6 +31,7 @@
         <td>
           <a :href="contribution.respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
         </td>
+        <td>{{ contribution.name.match(/\((.*)\)/)[1] }}</td>
 <!--        <td>{{ contribution.title }}</td>-->
       </tr>
     </table>

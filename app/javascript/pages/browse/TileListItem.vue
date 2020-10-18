@@ -32,6 +32,9 @@
           <div v-if="service_area" class="has-text-grey-lighter">
             {{ service_area.name }}
           </div>
+          <div>
+            {{ `From: ${name.match(/\((.*)\)/)[1]}` }}
+          </div>
         </div>
       </div>
       <div class="actions">
@@ -65,7 +68,8 @@ export default {
     profile_path: String,
     respond_path: String,
     view_path: String,
-    match_path: String
+    match_path: String,
+    name: String
   },
   components: {
     TagList,

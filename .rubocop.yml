@@ -9,8 +9,10 @@ AllCops:
     - 'Gemfile'
     - 'Rakefile'
     - 'spec/spec_helper.rb'
-    - 'spec/**/*'
     - 'node_modules/**/*'
+    - 'tmp/*'
+    - 'config/initializers/*'
+    - 'lib/tasks/*'
 
 Layout/LineLength:
   Max: 100
@@ -26,3 +28,7 @@ Lint/AmbiguousBlockAssociation:
 
 Style/Documentation:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - spec/**/*

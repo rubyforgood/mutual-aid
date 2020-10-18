@@ -11,12 +11,14 @@ AllCops:
     - 'spec/spec_helper.rb'
     - 'node_modules/**/*'
     - 'tmp/*'
-    - 'config/initializers/*'
+    - 'config/initializers/**/*'
     - 'lib/tasks/*'
     - 'Guardfile'
 
 Layout/LineLength:
   Max: 100
+  Exclude: 
+    - 'config/routes.rb'
 
 Metrics/BlockLength:
   Exclude:

@@ -9,6 +9,8 @@ AllCops:
     - 'Gemfile'
     - 'Rakefile'
     - 'spec/spec_helper.rb'
+    - 'spec/**/*'
+    - 'node_modules/**/*'
 
 Layout/LineLength:
   Max: 100

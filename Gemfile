@@ -27,6 +27,7 @@ gem 'devise'
 gem 'faker' # need this in prod for demo seeds to work
 gem 'jbuilder', '~> 2.7'
 gem 'mobility', '~> 0.8.9'
+gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.0'
 gem 'rack-timeout'
@@ -47,6 +48,7 @@ end
 group :test do
   # an XML formatter is required for fancier CircleCI results
   gem 'rspec_junit_formatter'
+  gem 'rails-controller-testing'
 end
 
 group :development do

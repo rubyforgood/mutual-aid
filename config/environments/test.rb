@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
@@ -40,7 +42,6 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   # Required here for CircleCI; FIXME: set via env vars instead
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   require "#{Rails.root}/app/helpers/index_action_buttons.rb"
   require "#{Rails.root}/app/helpers/communication_log_buttons.rb"
@@ -41,7 +43,7 @@ module ApplicationHelper
       resource = resource.becomes(resource.class.superclass)
     end
     link_to(triage_contribution_path(resource),
-            title: "Triage",
+            title: 'Triage',
             class: "button triage-button #{button_color_class || 'is-primary'}") do
       "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage</span>".html_safe
     end
@@ -51,19 +53,19 @@ module ApplicationHelper
     # if date is in the future OR not earlier than 7 days ago, show long version
     today = Time.zone.today
     if date_or_datetime.to_date == today
-      strftime = "Today"
+      strftime = 'Today'
     elsif date_or_datetime.to_date == (today - 1.day)
-      strftime = "Yesterday"
+      strftime = 'Yesterday'
     elsif (date_or_datetime.to_date >= today + 1.day) || !(date_or_datetime.to_date > (today - 7.days))
-      strftime = "%a, %b %d, %Y"
+      strftime = '%a, %b %d, %Y'
     else
-      strftime = "%a"
+      strftime = '%a'
     end
     date_or_datetime.strftime("#{strftime}#{' @ %l:%M %P' if date_or_datetime.is_a?(DateTime)}")
   end
 
   def urgency_level_display(urgency_level_text)
-    if urgency_level_text.include?("1-2")
+    if urgency_level_text.include?('1-2')
       "<span class='tag is-warning is-light'>
         <span class='fa fa-is-exclamation-triangle'></span>
         <span>#{urgency_level_text}</span></span>".html_safe

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ListingConverter
   def convert listing
     Listing.transaction do
@@ -7,10 +9,7 @@ class ListingConverter
 
       remaining_tag_sets.map do |tag_set|
         listing.dup.tap do |new_listing|
-          new_listing.update!(
-            tag_list: tag_set,
-            created_at: listing.created_at,
-          )
+          new_listing.update!(tag_list: tag_set, created_at: listing.created_at)
         end
       end
     end
@@ -28,14 +27,13 @@ class ListingConverter
     end
 
     def gather_lineages
-      Category.all.map{ |category| [category.name, category.lineage] }.to_h
+      Category.all.map { |category| [category.name, category.lineage] }.to_h
     end
 
     def split tag_list
-      matching_lineages = lineages
-        .values_at(*tag_list)
-        .sort_by{ |lineage| lineage.size }
-        .reverse
+      matching_lineages = lineages.values_at(*tag_list)
+                                  .sort_by { |lineage| lineage.size }
+                                  .reverse
 
       matching_lineages.reduce([]) do |minimal_set, lineage|
         with_lineage = minimal_set + [lineage]

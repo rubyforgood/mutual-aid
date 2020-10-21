@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PeerToPeerMatchMailer < ApplicationMailer
   def peer_to_peer_email(contribution, peer_alias:, message:)
     peer_email_address = contribution.person.email

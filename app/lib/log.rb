@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Log
   # The ruby Logger::Formatter will log an Exception's backtrace but
   # ActiveSupport::Logger::SimpleFormatter overrides this behavior,

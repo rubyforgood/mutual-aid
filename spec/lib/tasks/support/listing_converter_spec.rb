@@ -9,7 +9,7 @@ RSpec.describe ListingConverter do
 
   context 'without sub-categories' do
     let(:tags)        { %w[cash errands housing] }
-    let!(:categories) { tags.map{ |name| create :category, name: name }}
+    let!(:categories) { tags.map { |name| create :category, name: name } }
     let(:listing)     { create :listing, tag_list: tags }
 
     it 'removes all but one tag from the original listing' do
@@ -62,7 +62,7 @@ RSpec.describe ListingConverter do
     let!(:listing)     { create :listing, tag_list: %w[food meals] }
 
     it 'does not create any new listings' do
-      expect{ convert }.to_not change(Listing, :count)
+      expect { convert }.to_not change(Listing, :count)
     end
 
     it 'leaves the listing tags unchanged' do
@@ -88,20 +88,22 @@ RSpec.describe ListingConverter do
     it 'creates listing for the remaining tag sets' do
       expect(convert.map(&:tag_list)).to match_array [
         %w[cash],
-        %w[food groceries],
+        %w[food groceries]
       ]
     end
   end
 
   describe 'TagSplitter' do
     let(:splitter) { ListingConverter::TagSplitter.new(lineages) }
-    let(:lineages) {{
-      'grandchild'  => %w[parent child grandchild],
-      'child'       => %w[parent child],
-      'other_child' => %w[parent other_child],
-      'parent'      => %w[parent],
-      'orphan'      => %w[orphan],
-    }}
+    let(:lineages) do
+      {
+        'grandchild' => %w[parent child grandchild],
+        'child' => %w[parent child],
+        'other_child' => %w[parent other_child],
+        'parent' => %w[parent],
+        'orphan' => %w[orphan]
+      }
+    end
 
     subject { splitter.split tag_list }
 

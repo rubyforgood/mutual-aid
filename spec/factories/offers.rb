@@ -1,10 +1,9 @@
 FactoryBot.define do
   factory :offer do
-    type { "Offer" }
+    type { 'Offer' }
 
     association :person
     association :service_area
-
   end
 end
 

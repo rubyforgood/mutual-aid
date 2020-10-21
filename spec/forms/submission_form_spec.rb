@@ -6,40 +6,43 @@ RSpec.describe SubmissionForm do
   let(:service_area)   { create :service_area }
   let(:questions)      { create_list :custom_form_question, 2 }
 
-  let(:categories) {[
-    create(:category, name: 'toys'),
-    create(:category, name: 'groceries'),
-  ]}
+  let(:categories) do
+    [
+      create(:category, name: 'toys'),
+      create(:category, name: 'groceries')
+    ]
+  end
 
   describe 'creating a new submission' do
-    let(:params) {{
-      form_name: 'Offer_form',
-      privacy_level_requested: 'anyone',
-      service_area: service_area.id,
-      listings_attributes: {
-        type: 'Offer',
-        categories: categories.map(&:id),
-        description: 'on a quiet day i can hear her breathing',
-      },
-      location_attributes: {
-        id: nil,
-        city: 'Anakwashtank',
-        state: 'DC', # statehood now!
-        location_type: location_type.id
-      },
-      person_attributes: {
-        id: nil,
-        preferred_contact_method: contact_method.id,
-        email: 'we@together.coop',
-        name: 'Harriet Tubman',
-      },
-      responses_attributes: questions.map.with_index { |question, index|
-        [question.id.to_s, "answer #{index + 1}"]
-      }.to_h,
-    }}
+    let(:params) do
+      {
+        form_name: 'Offer_form',
+        privacy_level_requested: 'anyone',
+        service_area: service_area.id,
+        listings_attributes: {
+          type: 'Offer',
+          categories: categories.map(&:id),
+          description: 'on a quiet day i can hear her breathing'
+        },
+        location_attributes: {
+          id: nil,
+          city: 'Anakwashtank',
+          state: 'DC', # statehood now!
+          location_type: location_type.id
+        },
+        person_attributes: {
+          id: nil,
+          preferred_contact_method: contact_method.id,
+          email: 'we@together.coop',
+          name: 'Harriet Tubman'
+        },
+        responses_attributes: questions.map.with_index do |question, index|
+          [question.id.to_s, "answer #{index + 1}"]
+        end.to_h
+      }
+    end
 
     subject(:submission) { SubmissionForm.build params }
-
 
     it 'builds a Submission instance' do
       expect(submission).to be_a Submission
@@ -89,7 +92,7 @@ RSpec.describe SubmissionForm do
         context 'which is optional' do
           before do
             params[:location_attributes] = {
-              street_address: '',
+              street_address: ''
             }
           end
 
@@ -114,7 +117,7 @@ RSpec.describe SubmissionForm do
       end
 
       it 'populates categories on the listing' do
-        expect(listings.map(&:tag_list).flatten).to eq ['toys', 'groceries']
+        expect(listings.map(&:tag_list).flatten).to eq %w[toys groceries]
         expect(listings.first.tag_list).to eq ['toys']
       end
 
@@ -132,7 +135,7 @@ RSpec.describe SubmissionForm do
         let(:categories)  { [subcategory] }
 
         it 'tags the listing with both the parent and subcategories' do
-          expect(listings.first.tag_list).to eq ['housing', 'temporary']
+          expect(listings.first.tag_list).to eq %w[housing temporary]
         end
       end
     end
@@ -142,7 +145,7 @@ RSpec.describe SubmissionForm do
 
       it 'builds SubmissionResponses' do
         expect(submission_responses.length).to eq(2)
-        expect(submission_responses.first.string_response).to eq("answer 1")
+        expect(submission_responses.first.string_response).to eq('answer 1')
       end
 
       context 'when there are no custom questions' do
@@ -165,7 +168,8 @@ RSpec.describe SubmissionForm do
       end
 
       it 'includes nested attributes' do
-        expect(json['listings_attributes'].keys).to contain_exactly('description', 'categories', 'type')
+        expect(json['listings_attributes'].keys).to contain_exactly('description',
+                                                                    'categories', 'type')
       end
 
       it 'includes values provided' do
@@ -184,10 +188,14 @@ RSpec.describe SubmissionForm do
 
         it 'creates new records for itself and all nested objects' do
           expect { submission.save }
-            .to  change(Listing,    :count).by(2)
-            .and change(Location,   :count).by(1)
-            .and change(Person,     :count).by(1)
-            .and change(Submission, :count).by(1)
+            .to  change(Listing, :count)
+            .by(2)
+            .and change(Location, :count)
+            .by(1)
+            .and change(Person, :count)
+            .by(1)
+            .and change(Submission, :count)
+            .by(1)
         end
       end
 
@@ -199,10 +207,14 @@ RSpec.describe SubmissionForm do
 
         it 'does not create any new records' do
           expect { submission.save }
-            .to  change(Location,   :count).by(0)
-            .and change(Listing,    :count).by(0)
-            .and change(Person,     :count).by(0)
-            .and change(Submission, :count).by(0)
+            .to  change(Location, :count)
+            .by(0)
+            .and change(Listing, :count)
+            .by(0)
+            .and change(Person, :count)
+            .by(0)
+            .and change(Submission, :count)
+            .by(0)
         end
 
         it 'propogates nested errors up to the submission' do
@@ -217,36 +229,44 @@ RSpec.describe SubmissionForm do
   describe 'updating an existing submission' do
     let(:existing_listing)  { create :offer, state: :unmatched, description: 'keep' }
     let(:existing_location) { create :location, city: 'Chicago', zip: '10101' }
-    let(:existing_person)   { create :person, location: existing_location, name: 'old name', email: 'keep@me.org' }
+    let(:existing_person)   do
+      create :person,
+             location: existing_location,
+             name: 'old name',
+             email: 'keep@me.org'
+    end
 
-    let(:existing_submission) { create(:submission,
-      person: existing_person,
-      listings: [existing_listing],
-      form_name: 'Offer_form',
-      privacy_level_requested: 'volunteers',
-    )}
+    let(:existing_submission) do
+      create(:submission,
+             person: existing_person,
+             listings: [existing_listing],
+             form_name: 'Offer_form',
+             privacy_level_requested: 'volunteers')
+    end
     let(:existing_response) { create :submission_response, submission: existing_submission }
 
-    let(:params) {{
-      id: existing_submission.id,
-      form_name: 'Ask_form',
-      service_area: existing_listing.service_area.id,
-      listings_attributes: {
-        id: existing_listing.id,
-        state: 'matched',
-      },
-      location_attributes: {
-        id: existing_location.id,
-        city: 'Shikaakwa',
-      },
-      person_attributes: {
-        id: existing_person.id,
-        name: 'new name',
-      },
-      responses_attributes: {
-        existing_response.custom_form_question_id.to_s => "updated answer",
-      },
-    }}
+    let(:params) do
+      {
+        id: existing_submission.id,
+        form_name: 'Ask_form',
+        service_area: existing_listing.service_area.id,
+        listings_attributes: {
+          id: existing_listing.id,
+          state: 'matched'
+        },
+        location_attributes: {
+          id: existing_location.id,
+          city: 'Shikaakwa'
+        },
+        person_attributes: {
+          id: existing_person.id,
+          name: 'new name'
+        },
+        responses_attributes: {
+          existing_response.custom_form_question_id.to_s => 'updated answer'
+        }
+      }
+    end
 
     let(:submission) { SubmissionForm.build params }
 
@@ -263,7 +283,7 @@ RSpec.describe SubmissionForm do
       # expect(submission.listings.first).to be_changed
       expect(submission.person.location).to be_changed
       expect(submission.person).to be_changed
-      expect(submission).to be_changed  # TODO: should submissions be editable?
+      expect(submission).to be_changed # TODO: should submissions be editable?
     end
 
     it 'applies new values to submission and nested objects' do
@@ -288,11 +308,16 @@ RSpec.describe SubmissionForm do
 
       it 'does not create any new objects on save' do
         expect { submission.save }
-          .to  change(Listing,            :count).by(0)
-          .and change(Location,           :count).by(0)
-          .and change(Person,             :count).by(0)
-          .and change(Submission,         :count).by(0)
-          .and change(SubmissionResponse, :count).by(0)
+          .to change(Listing, :count)
+          .by(0)
+          .and change(Location, :count)
+          .by(0)
+          .and change(Person, :count)
+          .by(0)
+          .and change(Submission, :count)
+          .by(0)
+          .and change(SubmissionResponse, :count)
+          .by(0)
       end
     end
   end

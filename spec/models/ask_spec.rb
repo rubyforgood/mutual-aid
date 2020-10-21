@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Ask do
   describe 'matched' do
     it 'returns matched asks' do
-      unmatched_ask = create(:ask)
+      create(:ask)
       match = create(:match, :with_ask_and_offer)
       matched_ask = match.receiver
 
@@ -15,7 +15,7 @@ RSpec.describe Ask do
     it 'returns matchable asks' do
       unmatched_ask = create(:ask)
       match = create(:match, :with_ask_and_offer)
-      matched_ask = match.receiver
+      match.receiver
 
       expect(Ask.matchable).to eq([unmatched_ask])
     end

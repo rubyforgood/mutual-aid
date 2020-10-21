@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 class SharedAccountsController < ApplicationController
-  before_action :set_shared_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_shared_account, only: %i[show edit update destroy]
 
   def index
     @shared_accounts = SharedAccount.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @shared_account = SharedAccount.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @shared_account = SharedAccount.new(shared_account_params)
@@ -39,11 +39,12 @@ class SharedAccountsController < ApplicationController
   end
 
   private
-    def set_shared_account
-      @shared_account = SharedAccount.find(params[:id])
-    end
 
-    def shared_account_params
-      params.require(:shared_account).permit(:name, :account_url, :username, :password_hint, :notes)
-    end
+  def set_shared_account
+    @shared_account = SharedAccount.find(params[:id])
+  end
+
+  def shared_account_params
+    params.require(:shared_account).permit(:name, :account_url, :username, :password_hint, :notes)
+  end
 end

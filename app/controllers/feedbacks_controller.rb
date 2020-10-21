@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 class FeedbacksController < ApplicationController
-  before_action :set_feedback, only: [:show, :edit, :update, :destroy]
+  before_action :set_feedback, only: %i[show edit update destroy]
 
   def index
     @feedbacks = Feedback.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @feedback = Feedback.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @feedback = Feedback.new(feedback_params)
@@ -39,11 +39,12 @@ class FeedbacksController < ApplicationController
   end
 
   private
-    def set_feedback
-      @feedback = Feedback.find(params[:id])
-    end
 
-    def feedback_params
-      params.require(:feedback).permit(:match_id, :is_from_receiver, :completed, :quality, :description)
-    end
+  def set_feedback
+    @feedback = Feedback.find(params[:id])
+  end
+
+  def feedback_params
+    params.require(:feedback).permit(:match_id, :is_from_receiver, :completed, :quality, :description)
+  end
 end

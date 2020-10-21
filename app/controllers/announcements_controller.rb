@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 class AnnouncementsController < ApplicationController
+  before_action :authenticate_user!, except: %i[new create]
+  before_action :set_announcement, only: %i[show edit update destroy]
 
-  before_action :authenticate_user!, except: [:new, :create]
-  before_action :set_announcement, only: [:show, :edit, :update, :destroy]
-
-  layout :determine_layout, only: [:new, :show]
+  layout :determine_layout, only: %i[new show]
 
   def index
     @announcements = Announcement.order(created_at: :desc)
@@ -17,14 +18,14 @@ class AnnouncementsController < ApplicationController
     @announcement = Announcement.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @announcement = Announcement.new(announcement_params)
 
     if @announcement.save
-      redirect_to @admin_status ? announcements_path : contribution_thank_you_path, notice: "Announcement was successfully submitted.#{ " We'll review." unless @admin_status }"
+      redirect_to @admin_status ? announcements_path : contribution_thank_you_path,
+                  notice: "Announcement was successfully submitted.#{ " We'll review." unless @admin_status }"
     else
       render :new
     end
@@ -44,21 +45,22 @@ class AnnouncementsController < ApplicationController
   end
 
   private
-    def set_announcement
-      @announcement = Announcement.find(params[:id])
-    end
 
-    def determine_layout
-      "without_navbar" unless @system_setting.display_navbar?
-    end
+  def set_announcement
+    @announcement = Announcement.find(params[:id])
+  end
 
-    def announcement_params
-      params.require(:announcement).permit(
-          :name,
-          :description,
-          :is_approved,
-          :publish_from,
-          :publish_until
-      )
-    end
+  def determine_layout
+    'without_navbar' unless @system_setting.display_navbar?
+  end
+
+  def announcement_params
+    params.require(:announcement).permit(
+      :name,
+      :description,
+      :is_approved,
+      :publish_from,
+      :publish_until
+    )
+  end
 end

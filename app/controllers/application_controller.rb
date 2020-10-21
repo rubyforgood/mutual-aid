@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
@@ -6,11 +8,13 @@ class ApplicationController < ActionController::Base
   around_action :switch_locale
 
   def set_admin_status
-    @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role? # allows admin user to simulate with param=false
+    # allows admin user to simulate with param=false
+    @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role?
   end
 
   def set_system_setting
-    @system_setting = SystemSetting.first || SystemSetting.create! # should only be one of these records per instance
+    # should only be one of these records per instance
+    @system_setting = SystemSetting.first || SystemSetting.create!
   end
 
   def switch_locale(&action)
@@ -26,7 +30,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
+    flash[:alert] = 'You are not authorized to perform this action.'
     redirect_to(request.referrer || root_path)
   end
 end

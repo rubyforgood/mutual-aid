@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class FormQuestionsController < ApplicationController
-  before_action :set_form_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_form_question, only: %i[show edit update destroy]
 
   def index
     @form_questions = FormQuestion.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @form_question = FormQuestion.new
@@ -40,12 +41,16 @@ class FormQuestionsController < ApplicationController
   def destroy
     @form_question.destroy
     respond_to do |form_questionat|
-      form_questionat.html { redirect_to form_questions_url, notice: 'FormQuestion was successfully destroyed.' }
+      form_questionat.html {
+        redirect_to form_questions_url,
+                    notice: 'FormQuestion was successfully destroyed.'
+      }
       form_questionat.json { head :no_content }
     end
   end
 
   private
+
   def set_form_question
     @form_question = FormQuestion.find(params[:id])
   end
@@ -57,8 +62,8 @@ class FormQuestionsController < ApplicationController
 
   def form_question_params
     params.require(:form_question).permit(
-        :form_id,
-        :custom_form_question_id,
+      :form_id,
+      :custom_form_question_id
     )
   end
 end

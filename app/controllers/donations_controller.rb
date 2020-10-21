@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 class DonationsController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
-  before_action :set_donation, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i[new create]
+  before_action :set_donation, only: %i[show edit update destroy]
 
   def index
     @donations = Donation.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     set_form_dropdowns
@@ -23,7 +24,8 @@ class DonationsController < ApplicationController
     @donation = Donation.new(donation_params)
 
     if @donation.save
-      redirect_to @admin_status ? donations_path : contribution_thank_you_path, notice: 'Donation was successfully created.'
+      redirect_to @admin_status ? donations_path : contribution_thank_you_path,
+                  notice: 'Donation was successfully created.'
     else
       set_form_dropdowns
       render :new
@@ -45,21 +47,22 @@ class DonationsController < ApplicationController
   end
 
   private
-    def set_donation
-      @donation = Donation.find(params[:id])
-    end
 
-    def set_form_dropdowns
-      @contact_methods = ContactMethod.enabled
-    end
+  def set_donation
+    @donation = Donation.find(params[:id])
+  end
 
-    def donation_params
-      params.require(:donation).permit(
-          :value,
-          :channel,
-          :thank_you_sent,
-          :notes,
-          person_attributes: [ :id, :preferred_contact_method_id, :name, :email, :phone, :_destroy ]
-      )
-    end
+  def set_form_dropdowns
+    @contact_methods = ContactMethod.enabled
+  end
+
+  def donation_params
+    params.require(:donation).permit(
+      :value,
+      :channel,
+      :thank_you_sent,
+      :notes,
+      person_attributes: %i[id preferred_contact_method_id name email phone _destroy]
+    )
+  end
 end

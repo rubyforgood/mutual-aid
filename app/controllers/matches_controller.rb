@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class MatchesController < ApplicationController
   before_action :set_match, only: [:edit, :update, :destroy]
 
   def index
-    @matches = Match.status(params[:status] || "all").order(updated_at: :desc)
+    @matches = Match.status(params[:status] || 'all').order(updated_at: :desc)
 
     # follow_up_status filter
-    @statuses = Match::STATUSES.map{|s| [s.titleize, s]}
+    @statuses = Match::STATUSES.map{ |s| [s.titleize, s] }
     if params[:follow_up_status].present?
       @matches = @matches.follow_up_status(params[:follow_up_status])
     end
@@ -24,7 +26,9 @@ class MatchesController < ApplicationController
   end
 
   def show
-    @match = Match.includes(:communication_logs).references(:communication_logs).where(id: params[:id]).last
+    @match = Match.includes(:communication_logs)
+                  .references(:communication_logs)
+                  .where(id: params[:id]).last
   end
 
   def new
@@ -77,45 +81,47 @@ class MatchesController < ApplicationController
   end
 
   private
-    def set_match
-      @match = Match.find(params[:id])
+
+  def set_match
+    @match = Match.find(params[:id])
+  end
+
+  def set_form_dropdowns
+    type = params['receiver_id'].present? ? 'Ask' : 'Offer' # TODO: change w resources
+    if type == 'Ask'
+      @receiver = Listing.where(type: type, id: params[:receiver_id]).first
+    elsif type == 'Offer'
+      @provider = Listing.where(type: type, id: params[:provider_id]).first
     end
 
-    def set_form_dropdowns
-      type = params["receiver_id"].present? ? "Ask" : "Offer" # TODO change w resources
-      if type == "Ask"
-        @receiver = Listing.where(type: type, id: params[:receiver_id]).first
-      elsif type == "Offer"
-        @provider = Listing.where(type: type, id: params[:provider_id]).first
-      end
+    @matchable_asks = Ask.matchable.map{ |a| [ a.name_and_match_history.html_safe, a.id ] }.sort_by(&:first)
+    @matchable_offers = Offer.matchable.map{ |o| [ o.name_and_match_history.html_safe, o.id] }.sort_by(&:first)
 
-      @matchable_asks = Ask.matchable.map{ |a| [ a.name_and_match_history.html_safe, a.id ] }.sort_by(&:first)
-      @matchable_offers = Offer.matchable.map{ |o| [ o.name_and_match_history.html_safe, o.id] }.sort_by(&:first)
+    if @match.receiver_id && @match.provider_id
+      @matched_asks = (@matchable_asks + [[@match.receiver&.name_and_match_history.html_safe, @match.receiver&.id ]]).sort_by(&:first)
+      @matched_offers = (@matchable_offers + [[@match.provider&.name_and_match_history.html_safe, @match.provider&.id ]]).sort_by(&:first)
+    else
 
-      if @match.receiver_id && @match.provider_id
-        @matched_asks = (@matchable_asks + [[@match.receiver&.name_and_match_history.html_safe, @match.receiver&.id ]]).sort_by(&:first)
-        @matched_offers = (@matchable_offers + [[@match.provider&.name_and_match_history.html_safe, @match.provider&.id ]]).sort_by(&:first)
-      else
-
-      end
-      @statuses = Match::STATUSES.map{|s| [s.titleize, s]}
-
-      @communication_logs = CommunicationLog.where(match: @match)
-
-      @edit_connection_mode = YAML.load(params[:edit_connection_mode].to_s)
     end
+    @statuses = Match::STATUSES.map{|s| [s.titleize, s]}
 
-    def match_params
-      params.require(:match).permit(
-          :receiver_id,
-          :provider_id,
-          :shift_id,
-          :receiver_type,
-          :provider_type,
-          :exchanged_at,
-          :status,
-          :notes,
-          :tentative,
-          :completed)
-    end
+    @communication_logs = CommunicationLog.where(match: @match)
+
+    @edit_connection_mode = YAML.load(params[:edit_connection_mode].to_s)
+  end
+
+  def match_params
+    params.require(:match).permit(
+      :receiver_id,
+      :provider_id,
+      :shift_id,
+      :receiver_type,
+      :provider_type,
+      :exchanged_at,
+      :status,
+      :notes,
+      :tentative,
+      :completed
+    )
+  end
 end

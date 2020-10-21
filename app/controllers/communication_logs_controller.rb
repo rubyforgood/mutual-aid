@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class CommunicationLogsController < ApplicationController
-  before_action :set_communication_log, only: [:show, :edit, :update, :destroy]
+  before_action :set_communication_log, only: %i[show edit update destroy]
 
   def index
-    @communication_logs = CommunicationLog.includes(:delivery_method, :person).
-        references(:delivery_method, :person).order(sent_at: :desc)
+    @communication_logs = CommunicationLog.includes(:delivery_method, :person)
+                                          .references(:delivery_method, :person)
+                                          .order(sent_at: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @communication_log = CommunicationLog.new
@@ -23,9 +25,11 @@ class CommunicationLogsController < ApplicationController
 
     if @communication_log.save
       if params[:commit]&.include?('Save and go to Match')
-        redirect_to edit_match_path(@communication_log.match), notice: 'Communication log was successfully created.'
+        redirect_to edit_match_path(@communication_log.match),
+                    notice: 'Communication log was successfully created.'
       elsif params[:commit]&.include?('Save and go to Respond')
-        redirect_to respond_contribution_path(params[:communication_log][:contribution_id]), notice: 'Communication log was successfully created.'
+        redirect_to respond_contribution_path(params[:communication_log][:contribution_id]),
+                    notice: 'Communication log was successfully created.'
       else
         redirect_to communication_logs_path, notice: 'Communication log was successfully created.'
       end
@@ -48,9 +52,11 @@ class CommunicationLogsController < ApplicationController
   def update
     if @communication_log.update(communication_log_params)
       if params[:commit]&.include?('Save and go to Match')
-        redirect_to edit_match_path(@communication_log.match), notice: 'Communication log was successfully updated.'
+        redirect_to edit_match_path(@communication_log.match),
+                    notice: 'Communication log was successfully updated.'
       elsif params[:commit]&.include?('Save and go to Respond')
-        redirect_to respond_contribution_path(params[:communication_log][:contribution_id]), notice: 'Communication log was successfully updated.'
+        redirect_to respond_contribution_path(params[:communication_log][:contribution_id]),
+                    notice: 'Communication log was successfully updated.'
       else
         redirect_to communication_logs_path, notice: 'Communication log was successfully updated.'
       end
@@ -66,34 +72,36 @@ class CommunicationLogsController < ApplicationController
   end
 
   private
-    def set_communication_log
-      @communication_log = CommunicationLog.find(params[:id])
-    end
 
-    def set_form_dropdowns
-      if params[:delivery_method_name].present?
-        @delivery_method_id = ContactMethod.where("LOWER(name) = ?", params[:delivery_method_name].downcase).last&.id
-      else
-        @delivery_method_id = ContactMethod.where("LOWER(name) = ?", "call").last&.id
-      end
-      @person =  @communication_log.person || Person.where(id: params[:person_id]).last
-      @match = @communication_log.match || Match.where(id: params[:match_id]).last
-      @contribution = Listing.where(id: params[:contribution_id]).last
-    end
+  def set_communication_log
+    @communication_log = CommunicationLog.find(params[:id])
+  end
 
-    def communication_log_params
-      params.require(:communication_log).permit(
-          :person_id,
-          :match_id,
-          :body,
-          :created_by_id,
-          :delivery_method_id,
-          :delivery_status,
-          :needs_follow_up,
-          :outbound,
-          :sent_at,
-          :subject,
-          :auto_generated
-      )
+  def set_form_dropdowns
+    if params[:delivery_method_name].present?
+      @delivery_method_id = ContactMethod.where("LOWER(name) = ?", params[:delivery_method_name]
+                                         .downcase).last&.id
+    else
+      @delivery_method_id = ContactMethod.where("LOWER(name) = ?", "call").last&.id
     end
+    @person =  @communication_log.person || Person.where(id: params[:person_id]).last
+    @match = @communication_log.match || Match.where(id: params[:match_id]).last
+    @contribution = Listing.where(id: params[:contribution_id]).last
+  end
+
+  def communication_log_params
+    params.require(:communication_log).permit(
+      :person_id,
+      :match_id,
+      :body,
+      :created_by_id,
+      :delivery_method_id,
+      :delivery_status,
+      :needs_follow_up,
+      :outbound,
+      :sent_at,
+      :subject,
+      :auto_generated
+    )
+  end
 end

@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class SoftwareFeedbacksController < ApplicationController
-  before_action :set_software_feedback, only: [:show, :edit, :update, :destroy]
+  before_action :set_software_feedback, only: %i[show edit update destroy]
 
   def index
     @software_feedbacks = SoftwareFeedback.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @software_feedback = SoftwareFeedback.new
@@ -43,17 +44,20 @@ class SoftwareFeedbacksController < ApplicationController
   end
 
   private
-    def set_software_feedback
-      @software_feedback = SoftwareFeedback.find(params[:id])
-    end
 
-    def set_form_dropdowns
-      @feedback_types = SoftwareFeedback::FEEDBACK_TYPES
-      @module_name = SoftwareFeedback::MODULE_NAMES
-      @urgencies = SoftwareFeedback::URGENCIES
-    end
+  def set_software_feedback
+    @software_feedback = SoftwareFeedback.find(params[:id])
+  end
 
-    def software_feedback_params
-      params.require(:software_feedback).permit(:created_by_id, :feedback_type, :module_name, :page_url, :name, :urgency, :urgency_order, :notes, :completed, :completed_at)
-    end
+  def set_form_dropdowns
+    @feedback_types = SoftwareFeedback::FEEDBACK_TYPES
+    @module_name = SoftwareFeedback::MODULE_NAMES
+    @urgencies = SoftwareFeedback::URGENCIES
+  end
+
+  def software_feedback_params
+    params.require(:software_feedback).permit(:created_by_id, :feedback_type, :module_name,
+                                              :page_url, :name, :urgency, :urgency_order, :notes,
+                                              :completed, :completed_at)
+  end
 end

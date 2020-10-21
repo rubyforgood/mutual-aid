@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class FormsController < ApplicationController
-  before_action :set_form, only: [:show, :edit, :update, :destroy]
+  before_action :set_form, only: %i[show edit update destroy]
 
   def index
     @forms = Form.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @form = Form.new
@@ -46,22 +47,23 @@ class FormsController < ApplicationController
   end
 
   private
-    def set_form
-      @form = Form.find(params[:id])
-    end
 
-    def set_form_dropdowns
-      @contribution_types = ["Ask", "Offer", "CommunityResource"]
-    end
+  def set_form
+    @form = Form.find(params[:id])
+  end
 
-    def form_params
-      params.require(:form).permit(
-          :contribution_type_name,
-          :display_categories,
-          :footer_html,
-          :header_html,
-          :name,
-          :organization_id
-      )
-    end
+  def set_form_dropdowns
+    @contribution_types = %w[Ask Offer CommunityResource]
+  end
+
+  def form_params
+    params.require(:form).permit(
+      :contribution_type_name,
+      :display_categories,
+      :footer_html,
+      :header_html,
+      :name,
+      :organization_id
+    )
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Match < ApplicationRecord
   belongs_to :receiver, polymorphic: true, inverse_of: :matches_as_receiver
   belongs_to :provider, polymorphic: true, inverse_of: :matches_as_provider
@@ -44,11 +46,11 @@ class Match < ApplicationRecord
   # FIXME: extract into an interactor
   def self.create_match_for_contribution!(contribution, current_user)
     match_params = if contribution.ask?
-                      { receiver: contribution, provider: create_offer_for_ask!(contribution, current_user) }
-                    elsif contribution.offer? # TODO: check if community resource type when it's added
+                     { receiver: contribution, provider: create_offer_for_ask!(contribution, current_user) }
+                   elsif contribution.offer? # TODO: check if community resource type when it's added
                       { receiver: create_ask_for_offer!(contribution, current_user), provider: contribution }
-                    end
-    Match.create!(match_params.merge(status: "match_confirmed"))
+                   end
+    Match.create!(match_params.merge(status: 'match_confirmed'))
   end
 
   def self.create_offer_for_ask!(ask, current_user)
@@ -64,7 +66,7 @@ class Match < ApplicationRecord
   end
 
   def name
-    "#{"[#{status}] "}#{receiver.name} & #{provider.name} (#{created_at.strftime("%m-%d-%Y")})"
+    "#{"[#{status}] "}#{receiver.name} & #{provider.name} (#{created_at.strftime('%m-%d-%Y')})"
   end
 
   def needs_follow_up?

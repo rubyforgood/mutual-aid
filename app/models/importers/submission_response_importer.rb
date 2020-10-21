@@ -1,5 +1,6 @@
-class Importers::SubmissionResponseImporter < Importers::BaseImporter
+# frozen_string_literal: true
 
+class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def initialize(current_user, form_type, categories_question_name=nil)
     require "#{Rails.root}/db/scripts/tuple_counts.rb"
     # audit_info(current_user) # TODO
@@ -10,10 +11,10 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     @custom_form_questions = []
     @form_type = form_type
     @categories_question_name = categories_question_name ||
-      if form_type.include?("request")
-        "What do you need? Check all that apply"
-      elsif form_type.include?("offer")
-        "What resources can you offer? check all applicable"
+      if form_type.include?('request')
+        'What do you need? Check all that apply'
+      elsif form_type.include?('offer')
+        'What resources can you offer? check all applicable'
       end
     @current_organization = Organization.current_organization
     @organization_listing = create_organization_community_resource
@@ -28,21 +29,21 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   end
 
   def primary_import_klass_name
-    "Submission"
+    'Submission'
   end
 
   def is_row_header(row)
-    ["timestamp"].include?(row["Timestamp"]&.downcase)
+    ['timestamp'].include?(row['Timestamp']&.downcase)
   end
 
   def process_headers_as_data(rows)
     rows.headers.each_with_index do |header_name, idx|
       if header_name # skip blank headers!
-        question = CustomFormQuestion.where("LOWER(name) = ?", header_name.downcase.strip).
-            where(form_type: @form_type).first_or_create!(display_order: idx, input_type: "string",
+        question = CustomFormQuestion.where('LOWER(name) = ?', header_name.downcase.strip).
+            where(form_type: @form_type).first_or_create!(display_order: idx, input_type: 'string',
                                                           name: header_name.downcase.strip)
         # where.not(name: @categories_question_name). # TODO exclude categories answer from import
-        question.update_attributes!(display_order: idx, input_type: "string") # in case question was already in db
+        question.update_attributes!(display_order: idx, input_type: 'string') # in case question was already in db
 
         question.save!
         @custom_form_questions << question
@@ -51,30 +52,32 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   end
 
   def create_contact_method_from_row(row)
-    preferred_contact_method = row["preferred_contact_method"]&.strip
+    preferred_contact_method = row['preferred_contact_method']&.strip
     if preferred_contact_method.present?
       field_name = ContactMethod.map_common_names_to_fields(preferred_contact_method)
-      ContactMethod.where("LOWER(name) = ?", preferred_contact_method.downcase).first_or_create!(name: row["preferred_contact_method"], field: field_name)
+      ContactMethod.where('LOWER(name) = ?', preferred_contact_method.downcase).first_or_create!(name: row['preferred_contact_method'], field: field_name)
     else
-      if row["phone"].present? || row["telephone"].present? || row["Telephone"].present? || row["Phone"].present?
-        preferred_contact_method_name = "Call"
-        field_name = "phone"
-      elsif row["email"].present? || row["Email"].present?
-        preferred_contact_method_name = "Email"
-        field_name = "email"
+      if row['phone'].present? || row['telephone'].present? || row['Telephone'].present? || row['Phone'].present?
+        preferred_contact_method_name = 'Call'
+        field_name = 'phone'
+      elsif row['email'].present? || row['Email'].present?
+        preferred_contact_method_name = 'Email'
+        field_name = 'email'
       else
-        preferred_contact_method_name = "Unknown"
-        field_name = "phone" # TODO - needs to be SOMEthing
+        preferred_contact_method_name = 'Unknown'
+        field_name = 'phone' # TODO - needs to be SOMEthing
       end
-      contact_methods = ContactMethod.method_name(preferred_contact_method_name.downcase.strip) # was hitting Arel error when chaining
+      # was hitting Arel error when chaining
+      contact_methods = ContactMethod.method_name(preferred_contact_method_name.downcase.strip)
       contact_methods = ContactMethod.where(id: contact_methods.pluck(:id))
-      contact_methods.first_or_create!(name: preferred_contact_method_name, field: field_name, enabled: true)
+      contact_methods.first_or_create!(name: preferred_contact_method_name,
+                                       field: field_name, enabled: true)
     end
   end
 
   def find_preferred_locale_in_row(row)
-    locale_name = row["locale_name"]&.strip
-    SystemLocale.where("LOWER(locale_name) = ?", locale_name).first
+    locale_name = row['locale_name']&.strip
+    SystemLocale.where('LOWER(locale_name) = ?', locale_name).first
   end
 
   def create_person_from_row(row)
@@ -305,8 +308,6 @@ end
 ### Add any details about your request,
 ### Is your need recurring?,
 ### Organizer Results and Comments
-
-
 
 ## ID
 # Organizer/notes

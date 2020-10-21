@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HtmlSanitizer
   def self.tags
     %w[a abbr b blockquote br cite code dd dfn div dl dt h1 h2 h3 h4 h5 h6 img

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 class Importers::BaseImporter
@@ -59,7 +61,6 @@ class Importers::BaseImporter
   def is_row_skip(row)
     row["to_import"] && row["to_import"].downcase == "n"
   end
-
 
   def row_processing_requirement(row)
     results = []

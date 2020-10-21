@@ -1,11 +1,12 @@
-class Importers::CustomFormQuestionImporter < Importers::BaseImporter
+# frozen_string_literal: true
 
+class Importers::CustomFormQuestionImporter < Importers::BaseImporter
   def klasses_array
     [CustomFormQuestion]
   end
 
   def primary_import_klass_name
-    "CustomFormQuestion"
+    'CustomFormQuestion'
   end
 
   def required_fields_array
@@ -21,23 +22,23 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
   end
 
   def find_or_create_custom_form_question(row)
-    locale = row["locale"] || "en"
-    form_type = row["form_type"]
-    input_type = row["input_type"] || "string"
-    is_required = YAML.load(row["is_required"].to_s)
-    display_order = row["display_order"].present? ? row["display_order"].to_i : 10
-    hint_text = row["hint_text"]
-    option_list = row["option_list"].present? ? row["option_list"].split(";") : []
-    name = row["question_name"]
-    form_hook = row["form_hook"]
+    locale = row['locale'] || 'en'
+    form_type = row['form_type']
+    input_type = row['input_type'] || 'string'
+    is_required = YAML.load(row['is_required'].to_s)
+    display_order = row['display_order'].present? ? row['display_order'].to_i : 10
+    hint_text = row['hint_text']
+    option_list = row['option_list'].present? ? row['option_list'].split(';') : []
+    name = row['question_name']
+    form_hook = row['form_hook']
 
     dupes_query = find_dupes_through_translations(name)
     if dupes_query.any?
-      @log = "GOT DUPE"
+      @log = 'GOT DUPE'
       @dupe_records_count += 1
       custom_form_question = dupes_query.last
     else
-      @log = "CREATED"
+      @log = 'CREATED'
       custom_form_question = CustomFormQuestion.create!(form_type: form_type,
                                                         input_type: input_type,
                                                         is_required: is_required,

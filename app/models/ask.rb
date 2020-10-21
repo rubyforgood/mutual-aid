@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ask < Listing
   belongs_to :service_area, inverse_of: :asks
 

@@ -1,6 +1,8 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
+  include Pagy::Backend
+
   def index
     @pagy, @people = pagy(
       Person.includes(:user, :preferred_contact_method, :location, :service_area).

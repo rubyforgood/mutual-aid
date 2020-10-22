@@ -3,7 +3,6 @@ module ApplicationHelper
   require "#{Rails.root}/app/helpers/communication_log_buttons.rb"
 
   include IndexActionButtons, CommunicationLogButtons
-  include Pagy::Frontend
 
   def yes_no(boolean)
     "<span class='#{ boolean ? "fa fa-check-circle has-text-success" : "fa fa-ban" }'></span>".html_safe

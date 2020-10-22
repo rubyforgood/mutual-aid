@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :set_system_setting
   around_action :switch_locale
 
-  include Pagy::Backend
-
   def set_admin_status
     @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role? # allows admin user to simulate with param=false
   end

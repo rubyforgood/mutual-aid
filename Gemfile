@@ -48,7 +48,6 @@ end
 group :test do
   # an XML formatter is required for fancier CircleCI results
   gem 'rspec_junit_formatter'
-  gem 'rails-controller-testing'
 end
 
 group :development do

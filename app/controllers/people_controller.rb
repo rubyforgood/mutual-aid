@@ -1,9 +1,13 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
+  include Pagination
+
   def index
-    @people = Person.includes(:user, :preferred_contact_method, :location, :service_area).
-                     references(:user, :preferred_contact_method, :location, :service_area)
+    @pagy, @people = pagy(
+      Person.includes(:user, :preferred_contact_method, :location, :service_area).
+             references(:user, :preferred_contact_method, :location, :service_area)
+    )
   end
 
   def show

@@ -15,15 +15,8 @@ describe '/people', type: :request do
 
     it 'paginates results' do
       get people_url
-      expected, remainder = people.partition.with_index { |p, i| i < Pagy::VARS[:items] }
-
-      expected.each do |person|
-        expect(response.body).to match(/#{person.name}/)
-      end
-
-      remainder.each do |person|
-        expect(response.body).to_not match(/#{person.name}/)
-      end
+      people_links = response.body.scan %r{href="/people/\d+/.+"}
+      expect(people_links.size).to eq Pagy::VARS[:items]
     end
   end
 end

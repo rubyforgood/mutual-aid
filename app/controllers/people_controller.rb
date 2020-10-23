@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
-  include Pagy::Backend
+  include Pagination
 
   def index
     @pagy, @people = pagy(

@@ -1,0 +1,21 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'node_modules/**/*'
+
+Layout/LineLength:
+  Max: 120
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - spec/**/*

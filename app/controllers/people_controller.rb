@@ -7,8 +7,8 @@ class PeopleController < ApplicationController
 
   def index
     @pagy, @people = pagy(
-      Person.includes(:user, :preferred_contact_method, :location, :service_area).
-             references(:user, :preferred_contact_method, :location, :service_area)
+      Person.includes(:user, :preferred_contact_method, :location, :service_area)
+             .references(:user, :preferred_contact_method, :location, :service_area)
     )
   end
 

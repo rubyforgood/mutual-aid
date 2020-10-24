@@ -90,15 +90,15 @@ class PeopleController < ApplicationController
       :preferred_contact_method_id,
       location_attributes: %i[
         id
-          location_type_id
-          street_address
-          city
-          state
-          zip
-          county
-          region
-          neighborhood
-          _destroy
+        location_type_id
+        street_address
+        city
+        state
+        zip
+        county
+        region
+        neighborhood
+        _destroy
       ]
     )
   end

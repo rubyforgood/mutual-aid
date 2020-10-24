@@ -32,7 +32,6 @@ class Submission < ApplicationRecord
   def name
     "(#{created_at.strftime("%m-%d-%Y")}) #{form_name.titleize} - #{service_area.name}"
   end
-
 end
 
 # == Schema Information

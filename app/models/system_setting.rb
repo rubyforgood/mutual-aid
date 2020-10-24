@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class SystemSetting < ApplicationRecord
-
   EXCHANGE_TYPES = [
       'fully_moderated', # no public access
       'dispatch_moderated',  # peer-to-peer, but
@@ -53,7 +52,6 @@ class SystemSetting < ApplicationRecord
   def peer_to_peer?
     exchange_type == 'peer_to_peer'
   end
-
 end
 
 # == Schema Information

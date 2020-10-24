@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Importers::CustomFormQuestionImporter < Importers::BaseImporter
-
   def klasses_array
     [CustomFormQuestion]
   end

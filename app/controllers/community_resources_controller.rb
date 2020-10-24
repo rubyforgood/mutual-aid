@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CommunityResourcesController < ApplicationController
-
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_community_resource, only: [:show, :edit, :update, :destroy]
 

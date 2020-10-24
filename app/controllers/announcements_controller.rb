@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AnnouncementsController < ApplicationController
-
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 

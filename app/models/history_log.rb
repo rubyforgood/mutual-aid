@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class HistoryLog < ApplicationRecord
-
   validates :name, presence: true
 
   # TODO: enable this to track Listing edits

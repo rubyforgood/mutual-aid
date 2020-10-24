@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Importers::UserImporter < Importers::BaseImporter
-
   def initialize(current_user, create_users_if_possible=true)
     require "#{Rails.root}/db/scripts/tuple_counts.rb"
     audit_info(current_user)

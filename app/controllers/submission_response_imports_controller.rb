@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class SubmissionResponseImportsController < ApplicationController
-
   def new; end
 
   def create

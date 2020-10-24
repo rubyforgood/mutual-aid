@@ -24,7 +24,6 @@ class CommunicationLog < ApplicationRecord
   def name
     "#{delivery_method&.name}: #{subject} #{created_at.strftime("%A, %B %d, %Y at %l:%M %P")}"
   end
-
 end
 
 # == Schema Information

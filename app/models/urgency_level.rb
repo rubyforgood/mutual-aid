@@ -20,5 +20,4 @@ class UrgencyLevel
     ids = [id].flatten
     ids.map {|i| TYPES.select {|t| t.id == i }}
   end
-
 end

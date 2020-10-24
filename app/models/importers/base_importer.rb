@@ -277,14 +277,14 @@ def parse_date(date_string)
       date = Date.new(y.to_i, m.to_i, d.to_i)
     else
       begin
-        date = date_string.to_date  # TODO - add exception?
+        date = date_string.to_date  # TODO: - add exception?
       rescue => e
         binding.pry ### USE FOR TESTING IMPORTERS
       end
     end
   elsif date_string&.include?("-")
     begin
-      date = date_string.to_date  # TODO - add exception?
+      date = date_string.to_date  # TODO: - add exception?
     rescue => e
       binding.pry ### USE FOR TESTING IMPORTERS
     end

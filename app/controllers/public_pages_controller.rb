@@ -25,7 +25,7 @@ class PublicPagesController < PublicController
   end
 
   def contributions
-    redirect_to listings_path # TODO - change current /listings endpoint to point to this one
+    redirect_to listings_path # TODO: - change current /listings endpoint to point to this one
   end
 
   def landing_page

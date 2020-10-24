@@ -84,7 +84,7 @@ class MatchesController < ApplicationController
     end
 
     def set_form_dropdowns
-      type = params["receiver_id"].present? ? "Ask" : "Offer" # TODO change w resources
+      type = params["receiver_id"].present? ? "Ask" : "Offer" # TODO: change w resources
       if type == "Ask"
         @receiver = Listing.where(type: type, id: params[:receiver_id]).first
       elsif type == "Offer"

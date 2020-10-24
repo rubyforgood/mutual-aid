@@ -8,7 +8,7 @@ RSpec.describe "/", type: :request do
 
     get '/'
 
-    # TODO assert
+    # TODO: assert
   end
 
   it 'has landing_page_text_who populated from system_setting' do
@@ -18,7 +18,7 @@ RSpec.describe "/", type: :request do
 
     get '/'
 
-    # TODO assert
+    # TODO: assert
   end
 
   it 'has landing_page_text_how populated from system_setting' do
@@ -28,7 +28,7 @@ RSpec.describe "/", type: :request do
 
     get '/'
 
-    # TODO assert
+    # TODO: assert
   end
 
 end

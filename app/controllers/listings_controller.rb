@@ -48,11 +48,11 @@ class ListingsController < ApplicationController
     match_polymorphic_params = listing_type == Ask ? { receiver: @listing } : { provider: @listing }
     @match = Match.new
     @match.update(match_polymorphic_params)
-    @possible_providers = Listing.offers # TODO - get this to be a filtered list -- need to add logic by which to match
+    @possible_providers = Listing.offers # TODO: - get this to be a filtered list -- need to add logic by which to match
   end
 
   def match_confirm
-    @match = Match.first # TODO - implement match id here
+    @match = Match.first # TODO: - implement match id here
   end
 
   def show

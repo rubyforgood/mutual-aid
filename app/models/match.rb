@@ -73,10 +73,10 @@ class Match < ApplicationRecord
     communication_logs.needs_follow_up.any?
   end
 
-  def person_names # TODO move this to presenter
+  def person_names # TODO: move this to presenter
     receiver_name = [Listing, Ask, Offer].include?(receiver.class) ? receiver.person&.name : receiver.name if receiver
     provider_name = [Listing, Ask, Offer].include?(provider.class) ? provider.person&.name : provider.name if provider
-    "#{receiver_name} -and- #{provider_name}" # TODO need to adjust for community resource
+    "#{receiver_name} -and- #{provider_name}" # TODO: need to adjust for community resource
   end
 
   def short_name

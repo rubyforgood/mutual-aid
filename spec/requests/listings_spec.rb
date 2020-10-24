@@ -60,7 +60,7 @@ RSpec.describe "/listings", type: :request do
     end
 
     it "includes fields for nested models" do
-      skip # TODO - fixme
+      skip # TODO: - fixme
       expect(response.body).to include "listing_location_attributes_street"
     end
   end

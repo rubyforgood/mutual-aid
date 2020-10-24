@@ -4,7 +4,7 @@ class HistoryLog < ApplicationRecord
 
   validates :name, presence: true
 
-  # TODO enable this to track Listing edits
+  # TODO: enable this to track Listing edits
   # def self.generate_record_log!(record, current_user, log_type="UPDATED", extra_detail=nil)
   #   current_user ||= User.first
   #   klass = record.class

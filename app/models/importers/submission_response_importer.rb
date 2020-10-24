@@ -66,7 +66,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
         field_name = "email"
       else
         preferred_contact_method_name = "Unknown"
-        field_name = "phone" # TODO - needs to be SOMEthing
+        field_name = "phone" # TODO: - needs to be SOMEthing
       end
       contact_methods = ContactMethod.method_name(preferred_contact_method_name.downcase.strip) # was hitting Arel error when chaining
       contact_methods = ContactMethod.where(id: contact_methods.pluck(:id))
@@ -135,7 +135,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
                               service_area: person.service_area,
                               submission: submission,
                               type: submission.form_name.include?("request") ? "Ask" : "Offer",
-                              created_at: created_at).first_or_create! # TODO add descriptions
+                              created_at: created_at).first_or_create! # TODO: add descriptions
       categories_cfq.option_list << category unless categories_cfq.option_list.includes?(category)
       listing.tag_list << category
       categories_cfq.save!
@@ -164,7 +164,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       elsif status&.downcase == "started"
         system_status = "match_confirmed"
       elsif status&.downcase == "reoccurring"
-        system_status = nil # TODO - not sure if these should be nil on import?
+        system_status = nil # TODO: - not sure if these should be nil on import?
       elsif status == nil
         system_status = nil
       else
@@ -245,7 +245,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
                                 submission: submission,
                                 type: category_cfq.name.split("_").first.classify,
                                 created_at: created_at).
-                          first_or_create!(title: "imported #{Time.current}") # TODO add descriptions
+                          first_or_create!(title: "imported #{Time.current}") # TODO: add descriptions
         category_cfq.option_list << category_name unless category_cfq.option_list.include?(category_name)
         listing.tag_list << category_name
         category_cfq.save!

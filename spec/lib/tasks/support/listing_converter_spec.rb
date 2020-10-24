@@ -95,7 +95,7 @@ RSpec.describe ListingConverter do
 
   describe 'TagSplitter' do
     let(:splitter) { ListingConverter::TagSplitter.new(lineages) }
-    let(:lineages) { 
+    let(:lineages) {
       {
         'grandchild' => %w[parent child grandchild],
         'child' => %w[parent child],
@@ -103,7 +103,7 @@ RSpec.describe ListingConverter do
         'parent' => %w[parent],
         'orphan' => %w[orphan],
       }
-    }    
+    }
 
     subject { splitter.split tag_list }
 

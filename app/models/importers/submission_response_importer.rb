@@ -307,8 +307,6 @@ end
 ### Is your need recurring?,
 ### Organizer Results and Comments
 
-
-
 ## ID
 # Organizer/notes
 ## Timestamp

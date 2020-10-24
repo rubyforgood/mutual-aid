@@ -62,7 +62,6 @@ class Importers::BaseImporter
     row['to_import'] && row['to_import'].downcase == 'n'
   end
 
-
   def row_processing_requirement(row)
     results = []
     required_fields_array.map do |rr|

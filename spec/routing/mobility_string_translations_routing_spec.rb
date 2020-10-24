@@ -18,7 +18,6 @@ RSpec.describe MobilityStringTranslationsController, type: :routing do
       expect(get: '/mobility_string_translations/1/edit').to route_to('mobility_string_translations#edit', id: '1')
     end
 
-
     it 'routes to #create' do
       expect(post: '/mobility_string_translations').to route_to('mobility_string_translations#create')
     end

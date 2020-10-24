@@ -18,7 +18,6 @@ RSpec.describe ContactMethodsController, type: :routing do
       expect(get: '/contact_methods/1/edit').to route_to('contact_methods#edit', id: '1')
     end
 
-
     it 'routes to #create' do
       expect(post: '/contact_methods').to route_to('contact_methods#create')
     end

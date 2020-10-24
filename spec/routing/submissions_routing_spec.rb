@@ -18,7 +18,6 @@ RSpec.describe SubmissionsController, type: :routing do
       expect(get: '/submissions/1/edit').to route_to('submissions#edit', id: '1')
     end
 
-
     it 'routes to #create' do
       expect(post: '/submissions').to route_to('submissions#create')
     end

@@ -40,7 +40,6 @@ RSpec.describe SubmissionForm do
 
     subject(:submission) { SubmissionForm.build params }
 
-
     it 'builds a Submission instance' do
       expect(submission).to be_a Submission
     end

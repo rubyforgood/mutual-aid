@@ -18,7 +18,6 @@ RSpec.describe SoftwareFeedbacksController, type: :routing do
       expect(get: '/software_feedbacks/1/edit').to route_to('software_feedbacks#edit', id: '1')
     end
 
-
     it 'routes to #create' do
       expect(post: '/software_feedbacks').to route_to('software_feedbacks#create')
     end

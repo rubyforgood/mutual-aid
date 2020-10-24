@@ -18,7 +18,6 @@ RSpec.describe SystemLocalesController, type: :routing do
       expect(get: '/system_locales/1/edit').to route_to('system_locales#edit', id: '1')
     end
 
-
     it 'routes to #create' do
       expect(post: '/system_locales').to route_to('system_locales#create')
     end

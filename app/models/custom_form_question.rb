@@ -11,7 +11,7 @@ class CustomFormQuestion < ApplicationRecord
   has_many :mobility_string_translations, inverse_of: :translatable, class_name: 'MobilityStringTranslation', foreign_key: :translatable_id
 
   INPUT_TYPES_AND_STORAGE = {
-      'date' => 'date_response',
+    'date' => 'date_response',
       'datetime' => 'datetime_response',
       'info_text' => nil,
       'integer' => 'integer_response',

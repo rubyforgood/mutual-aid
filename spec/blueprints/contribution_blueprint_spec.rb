@@ -19,7 +19,7 @@ RSpec.describe ContributionBlueprint do
     contribution.service_area.save!
     expected_data = { 'contributions' =>
                           [{
-                               'id' => contribution.id,
+                            'id' => contribution.id,
                                'contribution_type' => 'Ask',
                                'category_tags' => [{ 'id' => expected_category_id, 'name' => expected_category }],
                                'inexhaustible' => contribution.inexhaustible,
@@ -40,7 +40,7 @@ RSpec.describe ContributionBlueprint do
                                'title' => contribution.title,
                                'description' => contribution.description,
                                'contact_types' => [{ 'id' => expected_contact_method.id, 'name' => expected_contact_method.name }]
-                           }]
+                          }]
     }
     result = ContributionBlueprint.render([contribution], root: 'contributions')
     expect(JSON.parse(result)).to match(expected_data)

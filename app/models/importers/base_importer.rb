@@ -33,10 +33,10 @@ class Importers::BaseImporter
     @dupe_records_count = 0
     @row_processing_error_messages = []
     @counts_hash = { row_count: @row_count,
-                    row_success_count: @row_success_count,
-                    new_records_count: @new_records_count,
-                    dupe_records_count: @dupe_records_count,
-                    row_error_count: @row_error_count }
+                     row_success_count: @row_success_count,
+                     new_records_count: @new_records_count,
+                     dupe_records_count: @dupe_records_count,
+                     row_error_count: @row_error_count }
     @initial_model_logs = ''
     @initial_model_counts = {}
     @final_diff_model_counts = {}

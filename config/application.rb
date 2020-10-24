@@ -55,11 +55,11 @@ module Mutualaid
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = ENV['RAISE_MAIL_DELIVERY_ERRORS'] != 'false'
     config.action_mailer.smtp_settings = {
-      address:   ENV['SMTP_HOST'],
-      port:      (ENV['SMTP_PORT'].presence || 587).to_i,
+      address: ENV['SMTP_HOST'],
+      port: (ENV['SMTP_PORT'].presence || 587).to_i,
       user_name: ENV['SMTP_USERNAME'],
-      password:  ENV['SMTP_PASSWORD'],
-      domain:    ENV['SYSTEM_HOST_NAME'],
+      password: ENV['SMTP_PASSWORD'],
+      domain: ENV['SYSTEM_HOST_NAME'],
       authentication: 'plain',
       enable_starttls_auto: true
     }

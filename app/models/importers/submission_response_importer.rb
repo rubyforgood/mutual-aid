@@ -41,7 +41,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       if header_name # skip blank headers!
         question = CustomFormQuestion.where('LOWER(name) = ?', header_name.downcase.strip)
             .where(form_type: @form_type).first_or_create!(display_order: idx, input_type: 'string',
-                                                          name: header_name.downcase.strip)
+                                                           name: header_name.downcase.strip)
         # where.not(name: @categories_question_name). # TODO exclude categories answer from import
         question.update_attributes!(display_order: idx, input_type: 'string') # in case question was already in db
 
@@ -93,9 +93,9 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     end
     Person.where(name: row['Name']&.strip, email: email&.strip, phone: phone&.strip)
            .first_or_create!(preferred_contact_method: preferred_contact_method,
-                            service_area: service_area, location: location,
-                            skills: row['skills']&.strip,
-                            preferred_locale: preferred_locale&.locale || 'en')
+                             service_area: service_area, location: location,
+                             skills: row['skills']&.strip,
+                             preferred_locale: preferred_locale&.locale || 'en')
   end
 
   def create_location_from_row(row, service_area)
@@ -114,9 +114,9 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     location = Location.where(location_type: location_type).first_or_create!
     ServiceArea.translated_name(row['service_area_name']&.strip.downcase)
                 .first_or_create!(name: row['service_area_name']&.strip || 'Unknown County',
-                                 service_area_type: row['service_area_type_name'] || 'county',
-                                 organization: Organization.first,
-                                 location: location)
+                                  service_area_type: row['service_area_type_name'] || 'county',
+                                  organization: Organization.first,
+                                  location: location)
   end
 
   def create_listings_data_from_row(row, submission)

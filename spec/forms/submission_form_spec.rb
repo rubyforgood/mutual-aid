@@ -16,26 +16,26 @@ RSpec.describe SubmissionForm do
     let(:params) { 
       {
         form_name: 'Offer_form',
-      privacy_level_requested: 'anyone',
-      service_area: service_area.id,
-      listings_attributes: {
+        privacy_level_requested: 'anyone',
+        service_area: service_area.id,
+        listings_attributes: {
         type: 'Offer',
         categories: categories.map(&:id),
         description: 'on a quiet day i can hear her breathing'
       },
-      location_attributes: {
+        location_attributes: {
         id: nil,
         city: 'Anakwashtank',
         state: 'DC', # statehood now!
         location_type: location_type.id
       },
-      person_attributes: {
+        person_attributes: {
         id: nil,
         preferred_contact_method: contact_method.id,
         email: 'we@together.coop',
         name: 'Harriet Tubman'
       },
-      responses_attributes: questions.map.with_index { |question, index|
+        responses_attributes: questions.map.with_index { |question, index|
         [question.id.to_s, "answer #{index + 1}"]
       }.to_h
       }}
@@ -232,21 +232,21 @@ RSpec.describe SubmissionForm do
     let(:params) { 
       {
         id: existing_submission.id,
-      form_name: 'Ask_form',
-      service_area: existing_listing.service_area.id,
-      listings_attributes: {
+        form_name: 'Ask_form',
+        service_area: existing_listing.service_area.id,
+        listings_attributes: {
         id: existing_listing.id,
         state: 'matched'
       },
-      location_attributes: {
+        location_attributes: {
         id: existing_location.id,
         city: 'Shikaakwa'
       },
-      person_attributes: {
+        person_attributes: {
         id: existing_person.id,
         name: 'new name'
       },
-      responses_attributes: {
+        responses_attributes: {
         existing_response.custom_form_question_id.to_s => 'updated answer'
       }
       }}

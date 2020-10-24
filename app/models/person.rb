@@ -75,6 +75,7 @@ class Person < ApplicationRecord
 
   private def preferred_contact_method_present!
     return unless preferred_contact_method
+
     field = preferred_contact_method.field
     errors.add(field, :blank) if self[field].blank?
   end

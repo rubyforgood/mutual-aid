@@ -13,6 +13,7 @@ class UrgencyLevel
 
   def self.find(id)
     return unless id
+
     TYPES[id - 1]
   end
 

@@ -15,8 +15,8 @@ class ListingForm < BaseForm
   def execute
     Listing.find_or_new(id).tap do |listing|
       listing.attributes = given_inputs
-        .reject { |k, _v| k == :category }
-        .merge(tag_list: category.lineage)
+                           .reject { |k, _v| k == :category }
+                           .merge(tag_list: category.lineage)
     end
   end
 end

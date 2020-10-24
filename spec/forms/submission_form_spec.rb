@@ -187,10 +187,14 @@ RSpec.describe SubmissionForm do
 
         it 'creates new records for itself and all nested objects' do
           expect { submission.save }
-            .to  change(Listing,    :count).by(2)
-            .and change(Location,   :count).by(1)
-            .and change(Person,     :count).by(1)
-            .and change(Submission, :count).by(1)
+            .to change(Listing, :count)
+            .by(2)
+            .and change(Location, :count)
+            .by(1)
+            .and change(Person, :count)
+            .by(1)
+            .and change(Submission, :count)
+            .by(1)
         end
       end
 
@@ -202,10 +206,14 @@ RSpec.describe SubmissionForm do
 
         it 'does not create any new records' do
           expect { submission.save }
-            .to  change(Location,   :count).by(0)
-            .and change(Listing,    :count).by(0)
-            .and change(Person,     :count).by(0)
-            .and change(Submission, :count).by(0)
+            .to change(Location, :count)
+            .by(0)
+            .and change(Listing, :count)
+            .by(0)
+            .and change(Person, :count)
+            .by(0)
+            .and change(Submission, :count)
+            .by(0)
         end
 
         it 'propogates nested errors up to the submission' do
@@ -295,11 +303,16 @@ RSpec.describe SubmissionForm do
 
       it 'does not create any new objects on save' do
         expect { submission.save }
-          .to  change(Listing,            :count).by(0)
-          .and change(Location,           :count).by(0)
-          .and change(Person,             :count).by(0)
-          .and change(Submission,         :count).by(0)
-          .and change(SubmissionResponse, :count).by(0)
+          .to change(Listing, :count)
+          .by(0)
+          .and change(Location, :count)
+          .by(0)
+          .and change(Person, :count)
+          .by(0)
+          .and change(Submission, :count)
+          .by(0)
+          .and change(SubmissionResponse, :count)
+          .by(0)
       end
     end
   end

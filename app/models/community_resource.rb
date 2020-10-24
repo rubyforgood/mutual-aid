@@ -24,7 +24,7 @@ class CommunityResource < ApplicationRecord
     now_strftime = Time.now.strftime('%Y-%m-%d %H:%M')
 
     where(is_approved: true)
-        .where("(publish_from IS NULL OR publish_from <= '#{now_strftime}') AND
+      .where("(publish_from IS NULL OR publish_from <= '#{now_strftime}') AND
            (publish_until IS NULL OR '#{now_strftime}' <= COALESCE(publish_until, now()) )")
   end
 

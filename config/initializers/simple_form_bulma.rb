@@ -38,7 +38,7 @@ SimpleForm.setup do |config|
   # Wrappers for forms and inputs
   config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
-      boolean:       :horizontal_boolean,
+    boolean:       :horizontal_boolean,
       check_boxes:   :vertical_checkboxes,
       collection:    :vertical_collection,
       date:          :horizontal_multi_select,

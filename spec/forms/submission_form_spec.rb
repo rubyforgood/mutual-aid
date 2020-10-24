@@ -15,7 +15,7 @@ RSpec.describe SubmissionForm do
   describe 'creating a new submission' do
     let(:params) { 
       {
-      form_name: 'Offer_form',
+        form_name: 'Offer_form',
       privacy_level_requested: 'anyone',
       service_area: service_area.id,
       listings_attributes: {
@@ -38,7 +38,7 @@ RSpec.describe SubmissionForm do
       responses_attributes: questions.map.with_index { |question, index|
         [question.id.to_s, "answer #{index + 1}"]
       }.to_h
-    }}
+      }}
 
     subject(:submission) { SubmissionForm.build params }
 
@@ -231,7 +231,7 @@ RSpec.describe SubmissionForm do
 
     let(:params) { 
       {
-      id: existing_submission.id,
+        id: existing_submission.id,
       form_name: 'Ask_form',
       service_area: existing_listing.service_area.id,
       listings_attributes: {
@@ -249,7 +249,7 @@ RSpec.describe SubmissionForm do
       responses_attributes: {
         existing_response.custom_form_question_id.to_s => 'updated answer'
       }
-    }}
+      }}
 
     let(:submission) { SubmissionForm.build params }
 

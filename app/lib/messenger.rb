@@ -7,8 +7,7 @@ class Messenger
     %i[sent
        connected
        undeliverable
-       error
-    ]
+       error]
   end
 
   def self.default_status

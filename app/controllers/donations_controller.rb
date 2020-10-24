@@ -57,7 +57,7 @@ class DonationsController < ApplicationController
 
   def donation_params
     params.require(:donation).permit(
-        :value,
+      :value,
         :channel,
         :thank_you_sent,
         :notes,

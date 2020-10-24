@@ -85,7 +85,7 @@ class CommunicationLogsController < ApplicationController
 
   def communication_log_params
     params.require(:communication_log).permit(
-        :person_id,
+      :person_id,
         :match_id,
         :body,
         :created_by_id,

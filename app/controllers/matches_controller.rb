@@ -110,7 +110,7 @@ class MatchesController < ApplicationController
 
   def match_params
     params.require(:match).permit(
-        :receiver_id,
+      :receiver_id,
         :provider_id,
         :shift_id,
         :receiver_type,

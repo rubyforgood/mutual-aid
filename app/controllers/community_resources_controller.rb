@@ -26,7 +26,7 @@ class CommunityResourcesController < ApplicationController
     @community_resource = CommunityResource.new(community_resource_params)
 
     if @community_resource.save
-      redirect_to @admin_status ? community_resources_path : contribution_thank_you_path, notice: "Community resource was successfully submitted.#{ " We'll review." unless @admin_status }"
+      redirect_to @admin_status ? community_resources_path : contribution_thank_you_path, notice: "Community resource was successfully submitted.#{" We'll review." unless @admin_status}"
     else
       set_form_dropdowns
       render :new

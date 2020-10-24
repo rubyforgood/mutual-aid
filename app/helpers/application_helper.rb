@@ -7,7 +7,7 @@ module ApplicationHelper
   include IndexActionButtons, CommunicationLogButtons
 
   def yes_no(boolean)
-    "<span class='#{ boolean ? "fa fa-check-circle has-text-success" : "fa fa-ban" }'></span>".html_safe
+    "<span class='#{boolean ? "fa fa-check-circle has-text-success" : "fa fa-ban"}'></span>".html_safe
   end
 
   def edit_button(resource, button_text='Edit', icon_class='fa fa-edit',
@@ -20,7 +20,7 @@ module ApplicationHelper
       link_to(path.present? ? "#{path}?#{params}" : edit_polymorphic_path(resource, params),
               title: button_title || (action_name || button_text + ' ' + controller_path || resource_class.to_s),
               class: "button edit-button #{button_class}") do
-        "<span class='#{ icon_class || resource_class::ICON }'></span><span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
+        "<span class='#{icon_class || resource_class::ICON}'></span><span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
       end
     end
   end

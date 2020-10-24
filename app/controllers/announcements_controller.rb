@@ -24,7 +24,7 @@ class AnnouncementsController < ApplicationController
     @announcement = Announcement.new(announcement_params)
 
     if @announcement.save
-      redirect_to @admin_status ? announcements_path : contribution_thank_you_path, notice: "Announcement was successfully submitted.#{ " We'll review." unless @admin_status }"
+      redirect_to @admin_status ? announcements_path : contribution_thank_you_path, notice: "Announcement was successfully submitted.#{" We'll review." unless @admin_status}"
     else
       render :new
     end

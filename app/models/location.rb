@@ -20,11 +20,11 @@ class Location < ApplicationRecord
   scope :street_address, ->(street_address){ where(street_address: street_address.to_s) }
 
   def name
-    "#{ address }#{ " (" + location_type&.name + ")" if location_type }"
+    "#{address}#{" (" + location_type&.name + ")" if location_type}"
   end
 
   def address
-    "#{ street_address }#{ ", " + city if city }#{ " " + state if state }"
+    "#{street_address}#{", " + city if city}#{" " + state if state}"
   end
 end
 

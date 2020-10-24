@@ -39,7 +39,7 @@ class ServiceArea < ApplicationRecord
   scope :publicly_visible, -> { where(display_to_public: true) }
 
   def full_name
-    "#{ parent.name.upcase + ": " if parent}#{name}#{ " (" + service_area_type + ")" if service_area_type}"
+    "#{parent.name.upcase + ": " if parent}#{name}#{" (" + service_area_type + ")" if service_area_type}"
   end
 end
 

@@ -40,8 +40,7 @@ RSpec.describe ContributionBlueprint do
                             'title' => contribution.title,
                             'description' => contribution.description,
                             'contact_types' => [{ 'id' => expected_contact_method.id, 'name' => expected_contact_method.name }]
-                          }]
-    }
+                          }] }
     result = ContributionBlueprint.render([contribution], root: 'contributions')
     expect(JSON.parse(result)).to match(expected_data)
   end

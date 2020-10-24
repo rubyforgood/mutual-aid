@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ConfigurationBlueprint < Blueprinter::Base
   association :categories, blueprint: CategoryBlueprint, view: :with_subcategories do
     Category.visible.roots.includes(:categories)

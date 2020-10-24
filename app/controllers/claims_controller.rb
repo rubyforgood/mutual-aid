@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ClaimsController < ApplicationController
   def new
     contribution = Listing.find(params[:contribution_id])

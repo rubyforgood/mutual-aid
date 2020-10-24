@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Match < ApplicationRecord
   belongs_to :receiver, polymorphic: true, inverse_of: :matches_as_receiver
   belongs_to :provider, polymorphic: true, inverse_of: :matches_as_provider

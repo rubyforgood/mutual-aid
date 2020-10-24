@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class DonationsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_donation, only: [:show, :edit, :update, :destroy]

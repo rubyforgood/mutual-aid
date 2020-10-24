@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
   def initialize(current_user, form_type, categories_question_name=nil)

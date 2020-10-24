@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # FilterTypeBlueprint
 #
 # The `.render` method will accept a class (usually an ActiveRecord::Model) or an array of classes 

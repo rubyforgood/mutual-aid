@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SystemLocalesController < ApplicationController
   before_action :set_system_locale, only: [:show, :edit, :update, :destroy]
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'csv'
 
 desc "Extra db functions: stats_check, reset db with seeds, import csv and seed data"

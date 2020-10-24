@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
 
   # FIXME: drop controller override when the pundit work is ready, #514

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Shift < ApplicationRecord
   belongs_to :person, optional: true
   belongs_to :team

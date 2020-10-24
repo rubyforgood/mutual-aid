@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CustomFormQuestion < ApplicationRecord
   extend Mobility
   translates :name, type: :string

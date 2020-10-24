@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Messenger
   attr_reader :email, :identifier
 

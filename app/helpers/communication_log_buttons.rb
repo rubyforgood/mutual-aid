@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module CommunicationLogButtons
 
   def remote_communication_log_button(person,

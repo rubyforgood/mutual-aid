@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Anonymize
   def self.name(name)
     return if name.blank?

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ShiftsController < ApplicationController
   before_action :set_shift, only: [:show, :edit, :update, :destroy]
 

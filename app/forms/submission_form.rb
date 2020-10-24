@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SubmissionForm < BaseForm
   hash :responses_attributes, strip: false, default: {}
 

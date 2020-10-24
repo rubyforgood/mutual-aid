@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
 

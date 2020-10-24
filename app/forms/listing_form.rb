@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ListingForm < BaseForm
   with_options default: nil do
     integer :id

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ShiftMatchesController < ApplicationController
   before_action :set_shift_match, only: [:show, :edit, :update, :destroy]
 

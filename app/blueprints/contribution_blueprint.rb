@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ContributionBlueprint < Blueprinter::Base
   identifier :id
   association :categories_for_tags, name: :category_tags, blueprint: DefaultBlueprint

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "#{Rails.root}/app/helpers/application_helper.rb"
 include ApplicationHelper  # TODO: better way to solve this?
 

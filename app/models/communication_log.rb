@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CommunicationLog < ApplicationRecord
   belongs_to :delivery_method, class_name: "ContactMethod", foreign_key: "delivery_method_id"
   belongs_to :person, optional: true

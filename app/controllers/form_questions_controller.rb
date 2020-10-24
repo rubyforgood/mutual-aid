@@ -7,8 +7,7 @@ class FormQuestionsController < ApplicationController
     @form_questions = FormQuestion.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @form_question = FormQuestion.new

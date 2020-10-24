@@ -7,15 +7,13 @@ class OrganizationsController < ApplicationController
     @organizations = Organization.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @organization = Organization.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @organization = Organization.new(organization_params)

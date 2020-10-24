@@ -7,15 +7,13 @@ class SubmissionResponsesController < ApplicationController
     @submission_responses = SubmissionResponse.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @submission_response = SubmissionResponse.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @submission_response = SubmissionResponse.new(submission_response_params)

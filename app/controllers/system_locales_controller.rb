@@ -7,15 +7,13 @@ class SystemLocalesController < ApplicationController
     @system_locales = SystemLocale.order(:locale_name)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @system_locale = SystemLocale.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @system_locale = SystemLocale.new(system_locale_params)

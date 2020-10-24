@@ -8,8 +8,7 @@ class SystemSettingsController < ApplicationController
     @system_settings = SystemSetting.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @system_setting = SystemSetting.new

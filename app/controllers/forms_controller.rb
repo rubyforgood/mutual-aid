@@ -7,8 +7,7 @@ class FormsController < ApplicationController
     @forms = Form.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @form = Form.new

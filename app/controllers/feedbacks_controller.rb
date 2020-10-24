@@ -7,15 +7,13 @@ class FeedbacksController < ApplicationController
     @feedbacks = Feedback.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @feedback = Feedback.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @feedback = Feedback.new(feedback_params)

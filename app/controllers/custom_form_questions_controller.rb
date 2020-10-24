@@ -7,8 +7,7 @@ class CustomFormQuestionsController < ApplicationController
     @custom_form_questions = CustomFormQuestion.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @custom_form_question = CustomFormQuestion.new

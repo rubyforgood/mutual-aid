@@ -7,15 +7,13 @@ class SharedAccountsController < ApplicationController
     @shared_accounts = SharedAccount.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @shared_account = SharedAccount.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @shared_account = SharedAccount.new(shared_account_params)

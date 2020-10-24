@@ -7,8 +7,7 @@ class SoftwareFeedbacksController < ApplicationController
     @software_feedbacks = SoftwareFeedback.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @software_feedback = SoftwareFeedback.new

@@ -7,8 +7,7 @@ class MobilityStringTranslationsController < ApplicationController
     @mobility_string_translations = MobilityStringTranslation.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @mobility_string_translation = MobilityStringTranslation.new

@@ -7,15 +7,13 @@ class TeamsController < ApplicationController
     @teams = Team.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @team = Team.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @team = Team.new(team_params)

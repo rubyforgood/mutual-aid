@@ -55,8 +55,7 @@ class ListingsController < ApplicationController
     @match = Match.first # TODO: - implement match id here
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @listing = Listing.new

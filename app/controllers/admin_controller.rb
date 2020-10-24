@@ -17,14 +17,11 @@ class AdminController < ApplicationController
     @community_resources_pending_count = CommunityResource.pending_review.length
   end
 
-  def dispatch_steps
-  end
+  def dispatch_steps; end
 
-  def form_admin
-  end
+  def form_admin; end
 
-  def glossary
-  end
+  def glossary; end
 
   def yearbook
     @positions = Position.all

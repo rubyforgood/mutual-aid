@@ -7,8 +7,7 @@ class ContactMethodsController < ApplicationController
     @contact_methods = ContactMethod.order(:name)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @contact_method = ContactMethod.new

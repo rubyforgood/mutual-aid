@@ -8,8 +8,7 @@ class CategoriesController < ApplicationController
             order(display_to_public: :desc, display_order: :asc, name: :asc, parent_id: :asc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @category = Category.new

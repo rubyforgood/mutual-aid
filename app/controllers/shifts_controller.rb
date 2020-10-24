@@ -7,15 +7,13 @@ class ShiftsController < ApplicationController
     @shifts = Shift.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @shift = Shift.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @shift = Shift.new(shift_params)

@@ -8,8 +8,7 @@ class CommunicationLogsController < ApplicationController
         references(:delivery_method, :person).order(sent_at: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @communication_log = CommunicationLog.new

@@ -27,18 +27,15 @@ class ContributionsController < ApplicationController
     )
   end
 
-  def combined_form
-  end
+  def combined_form; end
 
   def respond
     @communication_logs = CommunicationLog.where(person: @contribution.person).order(sent_at: :desc)
   end
 
-  def thank_you
-  end
+  def thank_you; end
 
-  def triage
-  end
+  def triage; end
 
   def triage_update
     @contribution = Listing.find(params[:id])

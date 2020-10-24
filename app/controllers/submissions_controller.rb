@@ -7,8 +7,7 @@ class SubmissionsController < ApplicationController
     @submissions = Submission.order(created_at: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @submission = Submission.new

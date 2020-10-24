@@ -7,8 +7,7 @@ class ShiftMatchesController < ApplicationController
     @shift_matches = ShiftMatch.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @shift_match = ShiftMatch.new

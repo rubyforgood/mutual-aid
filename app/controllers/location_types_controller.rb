@@ -7,15 +7,13 @@ class LocationTypesController < ApplicationController
     @location_types = LocationType.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @location_type = LocationType.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @location_type = LocationType.new(location_type_params)

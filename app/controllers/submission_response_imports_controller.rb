@@ -2,8 +2,7 @@
 
 class SubmissionResponseImportsController < ApplicationController
 
-  def new
-  end
+  def new; end
 
   def create
     uploaded_file = params[:submission_response_import][:file]

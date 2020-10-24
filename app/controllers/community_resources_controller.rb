@@ -11,8 +11,7 @@ class CommunityResourcesController < ApplicationController
     @community_resources = CommunityResource.includes(:organization).references(:organization).order(created_at: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @community_resource = CommunityResource.new

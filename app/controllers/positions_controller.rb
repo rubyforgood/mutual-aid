@@ -7,15 +7,13 @@ class PositionsController < ApplicationController
     @positions = Position.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @position = Position.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @position = Position.new(position_params)

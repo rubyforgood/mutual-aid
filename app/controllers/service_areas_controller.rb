@@ -7,8 +7,7 @@ class ServiceAreasController < ApplicationController
     @service_areas = ServiceArea.order_by_translated_name(@system_locale&.locale)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     set_form_dropdowns

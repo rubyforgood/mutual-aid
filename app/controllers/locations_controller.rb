@@ -36,8 +36,7 @@ class LocationsController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @location = Location.new

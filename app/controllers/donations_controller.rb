@@ -8,8 +8,7 @@ class DonationsController < ApplicationController
     @donations = Donation.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     set_form_dropdowns

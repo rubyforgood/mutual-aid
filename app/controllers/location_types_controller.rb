@@ -41,6 +41,7 @@ class LocationTypesController < ApplicationController
   end
 
   private
+
     def set_location_type
       @location_type = LocationType.find(params[:id])
     end

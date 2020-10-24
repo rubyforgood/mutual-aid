@@ -48,6 +48,7 @@ class ServiceAreasController < ApplicationController
   end
 
   private
+
     def set_service_area
       @service_area = ServiceArea.find(params[:id])
     end

@@ -47,6 +47,7 @@ class DonationsController < ApplicationController
   end
 
   private
+
     def set_donation
       @donation = Donation.find(params[:id])
     end

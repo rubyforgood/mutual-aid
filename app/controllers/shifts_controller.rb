@@ -41,6 +41,7 @@ class ShiftsController < ApplicationController
   end
 
   private
+
     def set_shift
       @shift = Shift.find(params[:id])
     end

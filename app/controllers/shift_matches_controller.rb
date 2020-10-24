@@ -45,6 +45,7 @@ class ShiftMatchesController < ApplicationController
   end
 
   private
+
     def set_shift_match
       @shift_match = ShiftMatch.find(params[:id])
     end

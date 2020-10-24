@@ -68,6 +68,7 @@ class CommunicationLogsController < ApplicationController
   end
 
   private
+
     def set_communication_log
       @communication_log = CommunicationLog.find(params[:id])
     end

@@ -41,6 +41,7 @@ class SystemLocalesController < ApplicationController
   end
 
   private
+
     def set_system_locale
       @system_locale = SystemLocale.find(params[:id])
     end

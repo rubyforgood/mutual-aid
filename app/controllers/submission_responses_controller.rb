@@ -41,6 +41,7 @@ class SubmissionResponsesController < ApplicationController
   end
 
   private
+
     def set_submission_response
       @submission_response = SubmissionResponse.find(params[:id])
     end

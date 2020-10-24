@@ -45,6 +45,7 @@ class MobilityStringTranslationsController < ApplicationController
   end
 
   private
+
     def set_mobility_string_translation
       @mobility_string_translation = MobilityStringTranslation.find(params[:id])
     end

@@ -41,6 +41,7 @@ class PositionsController < ApplicationController
   end
 
   private
+
     def set_position
       @position = Position.find(params[:id])
     end

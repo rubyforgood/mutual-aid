@@ -58,6 +58,7 @@ class PeopleController < ApplicationController
   end
 
   private
+
     def set_person
       @person = Person.find(params[:id])
     end

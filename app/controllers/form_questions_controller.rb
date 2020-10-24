@@ -48,6 +48,7 @@ class FormQuestionsController < ApplicationController
   end
 
   private
+
   def set_form_question
     @form_question = FormQuestion.find(params[:id])
   end

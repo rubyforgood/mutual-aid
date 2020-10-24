@@ -48,6 +48,7 @@ class FormsController < ApplicationController
   end
 
   private
+
     def set_form
       @form = Form.find(params[:id])
     end

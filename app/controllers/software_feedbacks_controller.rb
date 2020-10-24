@@ -45,6 +45,7 @@ class SoftwareFeedbacksController < ApplicationController
   end
 
   private
+
     def set_software_feedback
       @software_feedback = SoftwareFeedback.find(params[:id])
     end

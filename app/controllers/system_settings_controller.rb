@@ -44,6 +44,7 @@ class SystemSettingsController < ApplicationController
   end
 
   private
+
     def set_system_setting
       @system_setting = SystemSetting.find(params[:id])
     end

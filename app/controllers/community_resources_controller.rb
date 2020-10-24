@@ -50,6 +50,7 @@ class CommunityResourcesController < ApplicationController
   end
 
   private
+
     def set_community_resource
       @community_resource = CommunityResource.find(params[:id])
     end

@@ -46,6 +46,7 @@ class AnnouncementsController < ApplicationController
   end
 
   private
+
     def set_announcement
       @announcement = Announcement.find(params[:id])
     end

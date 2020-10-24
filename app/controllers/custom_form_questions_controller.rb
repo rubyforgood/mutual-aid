@@ -43,6 +43,7 @@ class CustomFormQuestionsController < ApplicationController
   end
 
   private
+
     def set_custom_form_question
       @custom_form_question = CustomFormQuestion.find(params[:id])
     end

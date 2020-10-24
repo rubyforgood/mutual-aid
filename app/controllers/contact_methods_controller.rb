@@ -45,6 +45,7 @@ class ContactMethodsController < ApplicationController
   end
 
   private
+
     def set_contact_method
       @contact_method = ContactMethod.find(params[:id])
     end

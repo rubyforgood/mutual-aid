@@ -41,6 +41,7 @@ class SharedAccountsController < ApplicationController
   end
 
   private
+
     def set_shared_account
       @shared_account = SharedAccount.find(params[:id])
     end

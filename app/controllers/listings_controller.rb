@@ -13,7 +13,7 @@ class ListingsController < ApplicationController
     end
 
     # follow_up_status filter
-    @match_statuses = Listing::MATCH_STATUSES.map{|s| [s.titleize, s]}
+    @match_statuses = Listing::MATCH_STATUSES.map{ |s| [s.titleize, s] }
     if params[:match_status].present?
       @listings = @listings.match_status(params[:match_status])
     end
@@ -121,8 +121,8 @@ class ListingsController < ApplicationController
 
     def filter_params
       return Hash.new unless allowed_params && allowed_params.to_h.any?
-      allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key}.tap do |hash|
-        hash.keys.each { |key| hash[key] = hash[key].keys}
+      allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key }.tap do |hash|
+        hash.keys.each { |key| hash[key] = hash[key].keys }
       end
     end
 end

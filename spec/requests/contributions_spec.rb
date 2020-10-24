@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe '/contributions', type: :request do
-  let(:valid_attributes) {{
+  let(:valid_attributes) { {
       location_attributes: { zip: '12345' },
       tag_list: ['', 'cash']
       # name: Faker::Name.name,
@@ -9,7 +9,7 @@ RSpec.describe '/contributions', type: :request do
       # phone: Faker::PhoneNumber.phone_number
   }}
 
-  let(:invalid_attributes) {{
+  let(:invalid_attributes) { {
       location_attributes: { zip: '12e45' }
   }}
 
@@ -57,7 +57,7 @@ RSpec.describe '/contributions', type: :request do
 
       expect(response.body).to match(/#{expected_area.name.to_json}/)
 
-      response_ids = JSON.parse(response.body).map { |hash| hash['id']}
+      response_ids = JSON.parse(response.body).map { |hash| hash['id'] }
       expect(response_ids).to include(both_tags_listing.id)
       expect(response_ids).to include(one_tag_listing.id)
       expect(response_ids).not_to include(both_tags_wrong_area_listing.id)

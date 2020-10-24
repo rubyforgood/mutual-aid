@@ -10,6 +10,6 @@ class ContributionType
 
   def self.where(id: [], name: [])
     ids = (id + name).flatten
-    ids.map {|i| TYPES.find {|t| t.id == i }}
+    ids.map { |i| TYPES.find { |t| t.id == i } }
   end
 end

@@ -9,7 +9,7 @@ RSpec.describe ListingConverter do
 
   context 'without sub-categories' do
     let(:tags)        { %w[cash errands housing] }
-    let!(:categories) { tags.map{ |name| create :category, name: name }}
+    let!(:categories) { tags.map{ |name| create :category, name: name } }
     let(:listing)     { create :listing, tag_list: tags }
 
     it 'removes all but one tag from the original listing' do
@@ -95,7 +95,7 @@ RSpec.describe ListingConverter do
 
   describe 'TagSplitter' do
     let(:splitter) { ListingConverter::TagSplitter.new(lineages) }
-    let(:lineages) {{
+    let(:lineages) { {
       'grandchild'  => %w[parent child grandchild],
       'child'       => %w[parent child],
       'other_child' => %w[parent other_child],

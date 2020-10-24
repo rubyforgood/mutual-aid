@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ServiceAreasController < ApplicationController
   before_action :set_service_area, only: [:show, :edit, :update, :destroy]
 

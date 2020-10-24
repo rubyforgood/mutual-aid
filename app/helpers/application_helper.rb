@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module ApplicationHelper
   require "#{Rails.root}/app/helpers/index_action_buttons.rb"
   require "#{Rails.root}/app/helpers/communication_log_buttons.rb"

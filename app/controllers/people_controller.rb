@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 

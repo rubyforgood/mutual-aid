@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 UrgencyLevel = Struct.new(:id, :name, :other)
 # UrgencyLevel
 # We can convert this to some other type of class, such as an ActiveRecord model

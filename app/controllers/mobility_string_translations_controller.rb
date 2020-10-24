@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class MobilityStringTranslationsController < ApplicationController
   before_action :set_mobility_string_translation, only: [:show, :edit, :update, :destroy]
 

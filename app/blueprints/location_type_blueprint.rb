@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class LocationTypeBlueprint < Blueprinter::Base
   identifier :id
 

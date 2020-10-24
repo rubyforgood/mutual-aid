@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class SoftwareFeedbacksController < ApplicationController
   before_action :set_software_feedback, only: [:show, :edit, :update, :destroy]
 

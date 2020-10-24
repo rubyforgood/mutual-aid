@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ContactMethodsController < ApplicationController
   before_action :set_contact_method, only: [:show, :edit, :update, :destroy]
 

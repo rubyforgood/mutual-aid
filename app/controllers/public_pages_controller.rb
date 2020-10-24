@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class PublicPagesController < PublicController
   layout :determine_layout
 

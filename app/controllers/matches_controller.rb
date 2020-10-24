@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class MatchesController < ApplicationController
   before_action :set_match, only: [:edit, :update, :destroy]
 

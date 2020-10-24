@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class SharedAccountsController < ApplicationController
   before_action :set_shared_account, only: [:show, :edit, :update, :destroy]
 

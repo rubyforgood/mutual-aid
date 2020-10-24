@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class SystemSettingsController < ApplicationController
   before_action :set_system_setting, only: [:show, :edit, :update, :destroy]
   before_action :set_primary_organization, only: [:show, :edit, :update, :destroy]

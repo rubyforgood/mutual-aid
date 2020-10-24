@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Announcement < ApplicationRecord
   extend Mobility
   translates :name, type: :string

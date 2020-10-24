@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Position < ApplicationRecord
   belongs_to :organization
   belongs_to :person, optional: true

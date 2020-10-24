@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class OffersController < PublicController
   layout "without_navbar", only: [:new, :create]
 

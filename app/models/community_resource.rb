@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CommunityResource < ApplicationRecord
   extend Mobility
   translates :name, type: :string

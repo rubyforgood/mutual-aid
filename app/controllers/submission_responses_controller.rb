@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class SubmissionResponsesController < ApplicationController
   before_action :set_submission_response, only: [:show, :edit, :update, :destroy]
 

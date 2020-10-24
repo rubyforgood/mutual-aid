@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CommunicationLogsController < ApplicationController
   before_action :set_communication_log, only: [:show, :edit, :update, :destroy]
 

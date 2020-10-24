@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class FormQuestionsController < ApplicationController
   before_action :set_form_question, only: [:show, :edit, :update, :destroy]
 

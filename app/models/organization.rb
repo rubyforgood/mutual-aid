@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Organization < ApplicationRecord
   belongs_to :location, optional: true
   belongs_to :service_area, optional: true

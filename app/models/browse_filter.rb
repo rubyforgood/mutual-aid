@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # BrowseFilter code currently makes a lot of assumptions about the model coming in
 # I'm going to have to some lifting to make it accept other models
 # but at least all these changes will be isolated to this class

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Importers::SubmissionResponseImporter < Importers::BaseImporter
-  def initialize(current_user, form_type, categories_question_name=nil)
+  def initialize(current_user, form_type, categories_question_name = nil)
     require "#{Rails.root}/db/scripts/tuple_counts.rb"
     # audit_info(current_user) # TODO
     set_klasses

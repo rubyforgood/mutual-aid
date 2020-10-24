@@ -6,7 +6,7 @@ class CommunicationLog < ApplicationRecord
   belongs_to :match, optional: true
   belongs_to :created_by, optional: true, class_name: 'User', foreign_key: 'created_by_id'
 
-  scope :needs_follow_up, ->(boolean=nil) { where(needs_follow_up: boolean || true) }
+  scope :needs_follow_up, ->(boolean = nil) { where(needs_follow_up: boolean || true) }
 
   def self.log_email(email:, delivery_status:, person:, initiator: nil)
     create!(

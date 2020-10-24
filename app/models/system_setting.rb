@@ -3,10 +3,10 @@
 class SystemSetting < ApplicationRecord
   EXCHANGE_TYPES = [
     'fully_moderated', # no public access
-      'dispatch_moderated',  # peer-to-peer, but
-      'moderation_on_request', # option on Forms to request hidden from public and/or messaging moderation
-      'dispatch_assisted',  # peer-to-peer, but admins (dispatch/connectors/coordinators) can also complete matches
-      'peer_to_peer' # everything is public
+    'dispatch_moderated',  # peer-to-peer, but
+    'moderation_on_request', # option on Forms to request hidden from public and/or messaging moderation
+    'dispatch_assisted',  # peer-to-peer, but admins (dispatch/connectors/coordinators) can also complete matches
+    'peer_to_peer' # everything is public
   ]
 
   # everything is public, including contact info

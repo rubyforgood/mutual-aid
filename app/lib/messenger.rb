@@ -5,9 +5,9 @@ class Messenger
 
   def self.delivery_statuses
     %i[sent
-      connected
-      undeliverable
-      error
+       connected
+       undeliverable
+       error
     ]
   end
 

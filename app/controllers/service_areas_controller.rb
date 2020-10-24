@@ -65,23 +65,23 @@ class ServiceAreasController < ApplicationController
       :name,
       :description,
       location_attributes: %i[id
-                                  location_type_id
-                                  street_address
-                                  city
-                                  state
-                                  zip
-                                  county
-                                  region
-                                  neighborhood
-                                  _destroy],
+                              location_type_id
+                              street_address
+                              city
+                              state
+                              zip
+                              county
+                              region
+                              neighborhood
+                              _destroy],
       service_areas_attributes: %i[id
-                                  location_id
-                                  parent_id
-                                  organization_id
-                                  service_area_type
-                                  name
-                                  description
-                                  _destroy]
+                                   location_id
+                                   parent_id
+                                   organization_id
+                                   service_area_type
+                                   name
+                                   description
+                                   _destroy]
     )
   end
 end

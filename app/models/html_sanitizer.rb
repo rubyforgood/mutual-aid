@@ -8,7 +8,7 @@ class HtmlSanitizer
 
   def self.html_attributes
     %w[align alt border height src srcset width href hreflang name rel
-         value type class dir hidden id lang style tabindex title translate src]
+       value type class dir hidden id lang style tabindex title translate src]
   end
 
   def initialize(string)

@@ -114,7 +114,7 @@ RSpec.describe "/listings", type: :request do
       }}
 
       before do
-        #patch listing_url(listing), params: { listing: new_attributes }
+        # patch listing_url(listing), params: { listing: new_attributes }
       end
 
       it "updates the requested listing" do

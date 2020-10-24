@@ -22,7 +22,7 @@ class Submission < ApplicationRecord
   end
 
   def category_list
-    all_tags_list #["transportation", "groceries"]
+    all_tags_list # ["transportation", "groceries"]
   end
 
   def urgency

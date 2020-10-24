@@ -19,7 +19,7 @@ RSpec.describe Person, type: :model do
 
       it 'generates an error on the correct field' do
         person.valid?
-        expect(person.errors.messages).to eq({phone: ["can't be blank"]})
+        expect(person.errors.messages).to eq({ phone: ["can't be blank"] })
       end
     end
   end

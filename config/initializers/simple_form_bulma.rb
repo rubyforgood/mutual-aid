@@ -94,7 +94,7 @@ SimpleForm.setup do |config|
     b.wrapper tag: 'div', class: 'control' do |ba|
       ba.use :input, class: 'input'
     end
-    b.use :input, class: 'file-input', wrap_with: { tag: 'label', class: 'file-label'}
+    b.use :input, class: 'file-input', wrap_with: { tag: 'label', class: 'file-label' }
     b.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
     b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
   end
@@ -203,7 +203,7 @@ SimpleForm.setup do |config|
         bi.wrapper :input, tag: "div", class: "field" do |bf|
           bf.use :input, class: "input"
           bf.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-          bf.optional :hint, wrap_with: {tag: "p", class: "help"}
+          bf.optional :hint, wrap_with: { tag: "p", class: "help" }
         end
       end
     end

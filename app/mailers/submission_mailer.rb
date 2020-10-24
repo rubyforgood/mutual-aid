@@ -33,7 +33,7 @@ class SubmissionMailer < ApplicationMailer
     contact_email_with_name = %("#{contact_name} (#{Organization.current_organization.name})" <#{contact_email}>)
     bcc_emails = [contact_email, smtp_from_email, system_email].uniq.join('; ')
 
-    @subject =  "#{ENV["SYSTEM_APP_NAME"]} confirmation (" + @person.updated_at.to_date.to_s + ')'
+    @subject = "#{ENV["SYSTEM_APP_NAME"]} confirmation (" + @person.updated_at.to_date.to_s + ')'
 
     mail(to: @person.email,
          from: contact_email_with_name,

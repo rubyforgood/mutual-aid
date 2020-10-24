@@ -78,7 +78,7 @@ class CommunicationLogsController < ApplicationController
       else
         @delivery_method_id = ContactMethod.where('LOWER(name) = ?', 'call').last&.id
       end
-      @person =  @communication_log.person || Person.where(id: params[:person_id]).last
+      @person = @communication_log.person || Person.where(id: params[:person_id]).last
       @match = @communication_log.match || Match.where(id: params[:match_id]).last
       @contribution = Listing.where(id: params[:contribution_id]).last
     end

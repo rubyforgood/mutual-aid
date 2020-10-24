@@ -9,9 +9,9 @@ RSpec.describe FilterTypeBlueprint do
       expect(class_double).to receive(:as_filter_types).and_return(service_areas)
 
       expected_data = [
-        { 'id'=>'ServiceArea[1]', 'name'=>'East Bay Township' },
-        { 'id'=>'ServiceArea[2]', 'name'=>'Takoma' },
-        { 'id'=>'ServiceArea[3]', 'name'=>'Wicomico County' }
+        { 'id' => 'ServiceArea[1]', 'name' => 'East Bay Township' },
+        { 'id' => 'ServiceArea[2]', 'name' => 'Takoma' },
+        { 'id' => 'ServiceArea[3]', 'name' => 'Wicomico County' }
       ].to_json
       actual_data = FilterTypeBlueprint.render(class_double)
       expect(actual_data).to match(/#{expected_data}\z/)

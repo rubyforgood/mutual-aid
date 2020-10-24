@@ -59,47 +59,47 @@ class PeopleController < ApplicationController
 
   private
 
-    def set_person
-      @person = Person.find(params[:id])
-    end
+  def set_person
+    @person = Person.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @preferred_contact_methods = ContactMethod.enabled
-      enabled_locales = SystemLocale.where(publish_in_dropdowns: true)
-      @system_locales = enabled_locales.pluck(:locale_name, :locale)
-      @preferred_locale = enabled_locales.where(locale: @person.preferred_locale).first&.locale
-      @preferred_contact_timeframes = [['Morning', 'AM'], ['Afternoon', 'PM'], ['Evening', 'EVE']]
-    end
+  def set_form_dropdowns
+    @preferred_contact_methods = ContactMethod.enabled
+    enabled_locales = SystemLocale.where(publish_in_dropdowns: true)
+    @system_locales = enabled_locales.pluck(:locale_name, :locale)
+    @preferred_locale = enabled_locales.where(locale: @person.preferred_locale).first&.locale
+    @preferred_contact_timeframes = [['Morning', 'AM'], ['Afternoon', 'PM'], ['Evening', 'EVE']]
+  end
 
-    def person_params
-      params.require(:person).permit(
-          :name,
-          :phone,
-          :email,
-          :phone_2,
-          :email_2,
-          :skills,
-          :monthly_matches_max,
-          :monthly_donation_amount_max,
-          :notes,
-          :user_id,
-          :location_id,
-          :service_area_id,
-          :preferred_locale,
-          :preferred_contact_timeframe,
-          :preferred_contact_method_id,
-          location_attributes: %i[
-              id
-              location_type_id
-              street_address
-              city
-              state
-              zip
-              county
-              region
-              neighborhood
-              _destroy
-          ],
-      )
-    end
+  def person_params
+    params.require(:person).permit(
+        :name,
+        :phone,
+        :email,
+        :phone_2,
+        :email_2,
+        :skills,
+        :monthly_matches_max,
+        :monthly_donation_amount_max,
+        :notes,
+        :user_id,
+        :location_id,
+        :service_area_id,
+        :preferred_locale,
+        :preferred_contact_timeframe,
+        :preferred_contact_method_id,
+        location_attributes: %i[
+            id
+            location_type_id
+            street_address
+            city
+            state
+            zip
+            county
+            region
+            neighborhood
+            _destroy
+        ],
+    )
+  end
 end

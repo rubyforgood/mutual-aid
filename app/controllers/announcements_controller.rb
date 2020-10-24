@@ -45,21 +45,21 @@ class AnnouncementsController < ApplicationController
 
   private
 
-    def set_announcement
-      @announcement = Announcement.find(params[:id])
-    end
+  def set_announcement
+    @announcement = Announcement.find(params[:id])
+  end
 
-    def determine_layout
-      'without_navbar' unless @system_setting.display_navbar?
-    end
+  def determine_layout
+    'without_navbar' unless @system_setting.display_navbar?
+  end
 
-    def announcement_params
-      params.require(:announcement).permit(
-          :name,
-          :description,
-          :is_approved,
-          :publish_from,
-          :publish_until
-      )
-    end
+  def announcement_params
+    params.require(:announcement).permit(
+        :name,
+        :description,
+        :is_approved,
+        :publish_from,
+        :publish_until
+    )
+  end
 end

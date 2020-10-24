@@ -40,21 +40,21 @@ class SubmissionResponsesController < ApplicationController
 
   private
 
-    def set_submission_response
-      @submission_response = SubmissionResponse.find(params[:id])
-    end
+  def set_submission_response
+    @submission_response = SubmissionResponse.find(params[:id])
+  end
 
-    def submission_response_params
-      params.require(:submission_response).permit(
-        :array_response,
-        :boolean_response,
-        :custom_form_question_id,
-        :date_response,
-        :datetime_response,
-        :integer_response,
-        :string_response,
-        :submission_id,
-        :text_response,
-      )
-    end
+  def submission_response_params
+    params.require(:submission_response).permit(
+      :array_response,
+      :boolean_response,
+      :custom_form_question_id,
+      :date_response,
+      :datetime_response,
+      :integer_response,
+      :string_response,
+      :submission_id,
+      :text_response,
+    )
+  end
 end

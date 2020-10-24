@@ -40,11 +40,11 @@ class PositionsController < ApplicationController
 
   private
 
-    def set_position
-      @position = Position.find(params[:id])
-    end
+  def set_position
+    @position = Position.find(params[:id])
+  end
 
-    def position_params
-      params.require(:position).permit(:team_id, :organization_id, :person_id, :position_type, :name, :description, :start_date, :end_date, :is_primary, :notes, :display_on_org_chart)
-    end
+  def position_params
+    params.require(:position).permit(:team_id, :organization_id, :person_id, :position_type, :name, :description, :start_date, :end_date, :is_primary, :notes, :display_on_org_chart)
+  end
 end

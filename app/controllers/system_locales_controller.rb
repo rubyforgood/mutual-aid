@@ -40,11 +40,11 @@ class SystemLocalesController < ApplicationController
 
   private
 
-    def set_system_locale
-      @system_locale = SystemLocale.find(params[:id])
-    end
+  def set_system_locale
+    @system_locale = SystemLocale.find(params[:id])
+  end
 
-    def system_locale_params
-      params.require(:system_locale).permit(:locale, :locale_name, :publish_in_dropdowns, :publish_translations)
-    end
+  def system_locale_params
+    params.require(:system_locale).permit(:locale, :locale_name, :publish_in_dropdowns, :publish_translations)
+  end
 end

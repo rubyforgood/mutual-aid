@@ -48,22 +48,22 @@ class FormsController < ApplicationController
 
   private
 
-    def set_form
-      @form = Form.find(params[:id])
-    end
+  def set_form
+    @form = Form.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @contribution_types = ['Ask', 'Offer', 'CommunityResource']
-    end
+  def set_form_dropdowns
+    @contribution_types = ['Ask', 'Offer', 'CommunityResource']
+  end
 
-    def form_params
-      params.require(:form).permit(
-          :contribution_type_name,
-          :display_categories,
-          :footer_html,
-          :header_html,
-          :name,
-          :organization_id
-      )
-    end
+  def form_params
+    params.require(:form).permit(
+        :contribution_type_name,
+        :display_categories,
+        :footer_html,
+        :header_html,
+        :name,
+        :organization_id
+    )
+  end
 end

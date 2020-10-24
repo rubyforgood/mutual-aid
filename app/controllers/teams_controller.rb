@@ -40,11 +40,11 @@ class TeamsController < ApplicationController
 
   private
 
-    def set_team
-      @team = Team.find(params[:id])
-    end
+  def set_team
+    @team = Team.find(params[:id])
+  end
 
-    def team_params
-      params.require(:team).permit(:name, :description, :organization_id, :standing_meeting_schedule, :display_on_org_chart)
-    end
+  def team_params
+    params.require(:team).permit(:name, :description, :organization_id, :standing_meeting_schedule, :display_on_org_chart)
+  end
 end

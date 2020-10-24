@@ -12,7 +12,7 @@ class Donation < ApplicationRecord
 
   scope :this_month, -> { 
     where('donations.created_at >= ? AND donations.created_at <= ?',
-    Time.zone.now.beginning_of_month, Time.zone.now.end_of_month)
+          Time.zone.now.beginning_of_month, Time.zone.now.end_of_month)
   }                     
 
   def name

@@ -6,15 +6,15 @@ RSpec.describe SubmissionForm do
   let(:service_area)   { create :service_area }
   let(:questions)      { create_list :custom_form_question, 2 }
 
-  let(:categories) { 
+  let(:categories) {
     [
       create(:category, name: 'toys'),
       create(:category, name: 'groceries')
     ]
-  }  
+  }
 
   describe 'creating a new submission' do
-    let(:params) { 
+    let(:params) {
       {
         form_name: 'Offer_form',
         privacy_level_requested: 'anyone',
@@ -40,7 +40,7 @@ RSpec.describe SubmissionForm do
           [question.id.to_s, "answer #{index + 1}"]
         }.to_h
       }
-    }    
+    }
 
     subject(:submission) { SubmissionForm.build params }
 
@@ -230,16 +230,16 @@ RSpec.describe SubmissionForm do
     let(:existing_location) { create :location, city: 'Chicago', zip: '10101' }
     let(:existing_person)   { create :person, location: existing_location, name: 'old name', email: 'keep@me.org' }
 
-    let(:existing_submission) { 
+    let(:existing_submission) {
       create(:submission,
              person: existing_person,
              listings: [existing_listing],
              form_name: 'Offer_form',
              privacy_level_requested: 'volunteers')
-    }    
+    }
     let(:existing_response) { create :submission_response, submission: existing_submission }
 
-    let(:params) { 
+    let(:params) {
       {
         id: existing_submission.id,
         form_name: 'Ask_form',
@@ -260,7 +260,7 @@ RSpec.describe SubmissionForm do
         existing_response.custom_form_question_id.to_s => 'updated answer'
       }
       }
-    }    
+    }
 
     let(:submission) { SubmissionForm.build params }
 

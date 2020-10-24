@@ -27,11 +27,13 @@ class CustomFormQuestion < ApplicationRecord
       'youtube_video_id' => 'string_response',
   }
 
-  scope :translated_name, ->(name) { joins(:mobility_string_translations)
+  scope :translated_name, ->(name) { 
+                            joins(:mobility_string_translations)
       .where("mobility_string_translations.key = 'name' AND mobility_string_translations.locale = 'en'")
       .where('LOWER(mobility_string_translations.value) = ?', name) }
 
-  scope :translated_name_stem, ->(stem) { joins(:mobility_string_translations)
+  scope :translated_name_stem, ->(stem) { 
+                                 joins(:mobility_string_translations)
       .where("mobility_string_translations.key = 'name' AND mobility_string_translations.locale = 'en'")
       .where('mobility_string_translations.value ILIKE ?', "%#{stem}%") }
 

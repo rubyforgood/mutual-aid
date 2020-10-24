@@ -12,5 +12,4 @@ RSpec.describe Listing, type: :model do
       expect(Listing.tagged_with('cash')).to match_array([listing])
     end
   end
-
 end

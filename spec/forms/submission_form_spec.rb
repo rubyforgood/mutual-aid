@@ -232,11 +232,10 @@ RSpec.describe SubmissionForm do
 
     let(:existing_submission) { 
       create(:submission,
-                                       person: existing_person,
-                                       listings: [existing_listing],
-                                       form_name: 'Offer_form',
-                                       privacy_level_requested: 'volunteers'
-    )
+             person: existing_person,
+             listings: [existing_listing],
+             form_name: 'Offer_form',
+             privacy_level_requested: 'volunteers')
     }    
     let(:existing_response) { create :submission_response, submission: existing_submission }
 

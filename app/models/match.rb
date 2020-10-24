@@ -22,7 +22,7 @@ class Match < ApplicationRecord
   scope :status, ->(status) { where(status == 'all' || !status.present? ? 'matches.id IS NOT NULL' : "matches.status = '#{status.downcase}'") }
   scope :this_month, -> { 
     where('matches.created_at >= ? AND matches.created_at <= ?',
-    Time.zone.now.beginning_of_month, Time.zone.now.end_of_month)
+          Time.zone.now.beginning_of_month, Time.zone.now.end_of_month)
   }                     
 
   def self.connected_to_person_id(person)

@@ -91,6 +91,7 @@ class LocationsController < ApplicationController
       :zip,
       :county,
       :region,
-      :neighborhood)
+      :neighborhood
+    )
   end
 end

@@ -21,7 +21,7 @@ class BrowseFilter
   ALLOWED_PARAMS = (['ContributionType'] + FILTERS.keys).each_with_object({}) do |key, hash|
     hash[key] = {}
   end.freeze
-  ALLOWED_MODEL_NAMES = ['Ask', 'Offer'].freeze
+  ALLOWED_MODEL_NAMES = %w[Ask Offer].freeze
 
   attr_reader :parameters, :context
 

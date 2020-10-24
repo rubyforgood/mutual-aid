@@ -10,8 +10,8 @@ class Match < ApplicationRecord
   has_many :shift_matches
 
   ICON = 'fa fa-handshake'
-  INITIATORS = ['receiver', 'provider']
-  STATUSES = ['matched_tentatively', 'match_confirmed', 'match_completed', 'provider_gave_feedback', 'receiver_gave_feedback']
+  INITIATORS = %w[receiver provider]
+  STATUSES = %w[matched_tentatively match_confirmed match_completed provider_gave_feedback receiver_gave_feedback]
 
   # belongs_to :coordinator, optional: true #, class_name: "Position" # TODO
   #

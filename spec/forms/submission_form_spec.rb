@@ -117,7 +117,7 @@ RSpec.describe SubmissionForm do
       end
 
       it 'populates categories on the listing' do
-        expect(listings.map(&:tag_list).flatten).to eq ['toys', 'groceries']
+        expect(listings.map(&:tag_list).flatten).to eq %w[toys groceries]
         expect(listings.first.tag_list).to eq ['toys']
       end
 
@@ -135,7 +135,7 @@ RSpec.describe SubmissionForm do
         let(:categories)  { [subcategory] }
 
         it 'tags the listing with both the parent and subcategories' do
-          expect(listings.first.tag_list).to eq ['housing', 'temporary']
+          expect(listings.first.tag_list).to eq %w[housing temporary]
         end
       end
     end

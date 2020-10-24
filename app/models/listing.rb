@@ -23,7 +23,7 @@ class Listing < ApplicationRecord
 
   enum state: { unmatched: 0, matched: 1 }
 
-  MATCH_STATUSES = ['matched', 'unmatched']
+  MATCH_STATUSES = %w[matched unmatched]
 
   scope :asks, ->() { where(type: Ask.to_s) }
   scope :offers, ->() { where(type: Offer.to_s) }

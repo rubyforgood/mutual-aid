@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
     enabled_locales = SystemLocale.where(publish_in_dropdowns: true)
     @system_locales = enabled_locales.pluck(:locale_name, :locale)
     @preferred_locale = enabled_locales.where(locale: @person.preferred_locale).first&.locale
-    @preferred_contact_timeframes = [['Morning', 'AM'], ['Afternoon', 'PM'], ['Evening', 'EVE']]
+    @preferred_contact_timeframes = [%w[Morning AM], %w[Afternoon PM], %w[Evening EVE]]
   end
 
   def person_params

@@ -5,7 +5,7 @@ RSpec.describe ContributionBlueprint do
   let(:expected_category_id) { create(:category, name: expected_category).id }
   let(:contribution) do
     create(
-        :ask,
+      :ask,
         tag_list: [expected_category],
         title: Faker::Lorem.word,
         description: Faker::Lorem.sentence,

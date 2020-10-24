@@ -63,7 +63,7 @@ class CommunityResourcesController < ApplicationController
 
   def community_resource_params
     params.require(:community_resource).permit(
-        :description,
+      :description,
         :facebook_url,
         :is_approved,
         :name,

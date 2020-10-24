@@ -58,7 +58,7 @@ class FormsController < ApplicationController
 
   def form_params
     params.require(:form).permit(
-        :contribution_type_name,
+      :contribution_type_name,
         :display_categories,
         :footer_html,
         :header_html,

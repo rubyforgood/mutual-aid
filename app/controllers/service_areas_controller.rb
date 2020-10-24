@@ -59,7 +59,7 @@ class ServiceAreasController < ApplicationController
 
   def service_area_params
     params.require(:service_area).permit(
-        :parent_id,
+      :parent_id,
         :organization_id,
         :service_area_type,
         :name,

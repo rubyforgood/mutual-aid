@@ -11,11 +11,11 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     @custom_form_questions = []
     @form_type = form_type
     @categories_question_name = categories_question_name ||
-      if form_type.include?('request')
-        'What do you need? Check all that apply'
-      elsif form_type.include?('offer')
-        'What resources can you offer? check all applicable'
-      end
+                                if form_type.include?('request')
+                                  'What do you need? Check all that apply'
+                                elsif form_type.include?('offer')
+                                  'What resources can you offer? check all applicable'
+                                end
     @current_organization = Organization.current_organization
     @organization_listing = create_organization_community_resource
   end
@@ -101,8 +101,8 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
   def create_location_from_row(row, service_area)
     if row['Address'].present? || row['City'].present? || row['State'].present? ||
-        row['Zip'].present? || row['County'].present? || row['Region'].present? ||
-        row['Neighborhood'].present?
+       row['Zip'].present? || row['County'].present? || row['Region'].present? ||
+       row['Neighborhood'].present?
       Location.where(street_address: row['Address']&.strip,
                      city: row['City']&.strip, state: row['State']&.strip, zip: row['Zip']&.strip,
                      county: row['County']&.strip, region: row['Region']&.strip,

@@ -31,7 +31,7 @@ class CommunityResource < ApplicationRecord
   def published?
     now = Time.now
     is_approved &&
-    (publish_from.present? ? publish_from <= now : true) &&
+      (publish_from.present? ? publish_from <= now : true) &&
       (publish_until == nil || now < publish_until)
   end
 

@@ -282,13 +282,13 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.wrapper tag: 'div', class: 'field' do |ba|
       ba.use :label, class: 'label field-label'
-     ba.wrapper tag: 'div', class: 'field-body' do |baa|
-       baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
-         baaa.use :input, class: 'radio', type: 'radio'
-       end
-     end
-     ba.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-     ba.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+      ba.wrapper tag: 'div', class: 'field-body' do |baa|
+        baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
+          baaa.use :input, class: 'radio', type: 'radio'
+        end
+      end
+      ba.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
+      ba.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
     end
   end
 

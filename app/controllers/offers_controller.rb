@@ -23,23 +23,23 @@ class OffersController < PublicController
 
   private
 
-    def submission_params
-      params[:submission].tap do |p|
-        p[:form_name] = 'Offer_form'
-        p[:listings_attributes][:type] = 'Offer'
-      end
+  def submission_params
+    params[:submission].tap do |p|
+      p[:form_name] = 'Offer_form'
+      p[:listings_attributes][:type] = 'Offer'
     end
+  end
 
-    def render_form(submission)
-      @form = Form.find_by!(contribution_type_name: 'Offer')
-      @organization = Organization.current_organization
+  def render_form(submission)
+    @form = Form.find_by!(contribution_type_name: 'Offer')
+    @organization = Organization.current_organization
 
-      @json = {
-        submission: SubmissionBlueprint.render_as_hash(submission),
-        configuration: ConfigurationBlueprint.render_as_hash(nil),
-        form: FormBlueprint.render_as_hash(@form)
-      }.to_json
+    @json = {
+      submission: SubmissionBlueprint.render_as_hash(submission),
+      configuration: ConfigurationBlueprint.render_as_hash(nil),
+      form: FormBlueprint.render_as_hash(@form)
+    }.to_json
 
-      render :new
-    end
+    render :new
+  end
 end

@@ -195,18 +195,18 @@ SimpleForm.setup do |config|
 
     #
     #
-    config.wrappers :inline_input, tag: 'div', class: 'field is-horizontal' do |b|
-      b.wrapper :label, tag: 'div', class: 'field-label-left is-normal' do |bl|
-        bl.optional :label, class: 'label'
-      end
-      b.wrapper :input, tag: 'div', class: 'field-body' do |bi|
-        bi.wrapper :input, tag: 'div', class: 'field' do |bf|
-          bf.use :input, class: 'input'
-          bf.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-          bf.optional :hint, wrap_with: { tag: 'p', class: 'help' }
-        end
+  config.wrappers :inline_input, tag: 'div', class: 'field is-horizontal' do |b|
+    b.wrapper :label, tag: 'div', class: 'field-label-left is-normal' do |bl|
+      bl.optional :label, class: 'label'
+    end
+    b.wrapper :input, tag: 'div', class: 'field-body' do |bi|
+      bi.wrapper :input, tag: 'div', class: 'field' do |bf|
+        bf.use :input, class: 'input'
+        bf.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
+        bf.optional :hint, wrap_with: { tag: 'p', class: 'help' }
       end
     end
+  end
     #
     # config.wrappers :boolean, tag: 'div', class: 'control', error_class: 'has-error' do |b|
     #   b.use :html5
@@ -221,21 +221,21 @@ SimpleForm.setup do |config|
     ## horizontal forms
     #
     ## horizontal default_wrapper
-    config.wrappers :horizontal_form, tag: 'div', class: '', error_class: 'has-error', valid_class: 'has-no-error' do |b|
-      b.use :html5
-      b.use :placeholder, class: 'help has-text-grey-light'
-      b.optional :maxlength
-      b.optional :minlength
-      b.optional :pattern
-      b.optional :min_max
-      b.optional :readonly
-      b.wrapper :grid_wrapper, tag: 'div', class: 'field' do |ba|
-        ba.use :label, class: 'label', wrap_with: { tag: 'label', class: 'label' }
-        ba.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
-        ba.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
-        ba.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
-      end
+  config.wrappers :horizontal_form, tag: 'div', class: '', error_class: 'has-error', valid_class: 'has-no-error' do |b|
+    b.use :html5
+    b.use :placeholder, class: 'help has-text-grey-light'
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.wrapper :grid_wrapper, tag: 'div', class: 'field' do |ba|
+      ba.use :label, class: 'label', wrap_with: { tag: 'label', class: 'label' }
+      ba.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
+      ba.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
+      ba.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
     end
+  end
 
     ## horizontal input for boolean
     # config.wrappers :horizontal_boolean, tag: 'div', class: 'form-group row', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
@@ -255,57 +255,57 @@ SimpleForm.setup do |config|
     # end
 
     # bulma extension vertical input for boolean
-    config.wrappers :horizontal_boolean, tag: 'div', class: 'field horizontal-boolean is-horizontal', error_class: 'has-error' do |b|
-      b.use :html5
-      b.optional :readonly
-      b.use :input, class: 'is-checkradio is-info'
-      b.use :label
-      b.wrapper tag: 'div', class: 'field-body' do |ba|
-        ba.wrapper :form_check_wrapper, tag: 'div', class: 'control field is-horizontal' do |bb|
-          bb.use :input, wrap_with: { tag: 'label field-label field-label-left', class: 'checkbox' }
-          bb.use :label, class: 'checkbox'
-          bb.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
-          bb.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
-        end
+  config.wrappers :horizontal_boolean, tag: 'div', class: 'field horizontal-boolean is-horizontal', error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :input, class: 'is-checkradio is-info'
+    b.use :label
+    b.wrapper tag: 'div', class: 'field-body' do |ba|
+      ba.wrapper :form_check_wrapper, tag: 'div', class: 'control field is-horizontal' do |bb|
+        bb.use :input, wrap_with: { tag: 'label field-label field-label-left', class: 'checkbox' }
+        bb.use :label, class: 'checkbox'
+        bb.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
+        bb.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
       end
-      # b.wrapper tag: 'div', class: 'checkbox' do |ba|
-        #     ba.use :label_input
-        #   end
-        #
-        #   b.use :error, wrap_with: { tag: 'span', class: 'hint' }
-        #   b.use :hint,  wrap_with: { tag: 'p', class: 'hint' }
-      # end
     end
+    # b.wrapper tag: 'div', class: 'checkbox' do |ba|
+      #     ba.use :label_input
+      #   end
+      #
+      #   b.use :error, wrap_with: { tag: 'span', class: 'hint' }
+      #   b.use :hint,  wrap_with: { tag: 'p', class: 'hint' }
+    # end
+  end
 
-    config.wrappers :horizontal_radio, tag: 'div', class: 'horizontal-radio is-horizontal', error_class: 'has-error' do |b|
-      b.use :html5
-      b.optional :readonly
-      b.wrapper tag: 'div', class: 'field' do |ba|
-       ba.use :label, class: 'label field-label'
-       ba.wrapper tag: 'div', class: 'field-body' do |baa|
-         baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
-           baaa.use :input, class: 'radio', type: 'radio'
-         end
+  config.wrappers :horizontal_radio, tag: 'div', class: 'horizontal-radio is-horizontal', error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper tag: 'div', class: 'field' do |ba|
+     ba.use :label, class: 'label field-label'
+     ba.wrapper tag: 'div', class: 'field-body' do |baa|
+       baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
+         baaa.use :input, class: 'radio', type: 'radio'
        end
-       ba.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-       ba.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
-      end
+     end
+     ba.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
+     ba.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
     end
+  end
 
-    config.wrappers :horizontal_checkboxes, tag: 'div', class: 'horizontal-checkboxes is-horizontal', error_class: 'has-error' do |b|
-      b.use :html5
-      b.optional :readonly
-      b.wrapper tag: 'div', class: 'field' do |ba|
-        ba.use :label, class: 'label field-label'
-        ba.wrapper tag: 'div', class: 'field-body' do |baa|
-          baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
-            baaa.use :input, class: 'checkbox', type: 'checkbox'
-          end
+  config.wrappers :horizontal_checkboxes, tag: 'div', class: 'horizontal-checkboxes is-horizontal', error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper tag: 'div', class: 'field' do |ba|
+      ba.use :label, class: 'label field-label'
+      ba.wrapper tag: 'div', class: 'field-body' do |baa|
+        baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
+          baaa.use :input, class: 'checkbox', type: 'checkbox'
         end
       end
-      b.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-      b.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
     end
+    b.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
+    b.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+  end
 
     ## horizontal input for radio buttons and check boxes
     # config.wrappers :horizontal_collection, item_wrapper_class: 'form-check', tag: 'div', class: 'form-group row', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
@@ -365,18 +365,18 @@ SimpleForm.setup do |config|
   end
 
     ## horizontal multi select
-    config.wrappers :horizontal_multi_select, tag: 'div', class: 'field', error_class: 'has-error' do |b|
-      b.use :html5
-      b.optional :readonly
-      b.use :label, class: 'label'
-      b.wrapper :grid_wrapper, tag: 'div', class: 'control' do |ba|
-        ba.wrapper tag: 'div', class: 'field is-grouped' do |bb|
-          bb.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
-          ba.use :hint, wrap_with: { tag: 'small', class: 'help' } # adds hint above select
-        end
-        ba.use :full_error, wrap_with: { tag: 'div', class: 'help is-invalid invalid-feedback is-danger' }
+  config.wrappers :horizontal_multi_select, tag: 'div', class: 'field', error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: 'label'
+    b.wrapper :grid_wrapper, tag: 'div', class: 'control' do |ba|
+      ba.wrapper tag: 'div', class: 'field is-grouped' do |bb|
+        bb.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
+        ba.use :hint, wrap_with: { tag: 'small', class: 'help' } # adds hint above select
       end
+      ba.use :full_error, wrap_with: { tag: 'div', class: 'help is-invalid invalid-feedback is-danger' }
     end
+  end
 
     ## horizontal range input
     # config.wrappers :horizontal_range, tag: 'div', class: 'form-group row', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|

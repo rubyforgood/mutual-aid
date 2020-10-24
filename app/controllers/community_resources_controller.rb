@@ -49,32 +49,32 @@ class CommunityResourcesController < ApplicationController
 
   private
 
-    def set_community_resource
-      @community_resource = CommunityResource.find(params[:id])
-    end
+  def set_community_resource
+    @community_resource = CommunityResource.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @available_tags = Category.visible.pluck(:name) + @community_resource&.tag_list || []
-    end
+  def set_form_dropdowns
+    @available_tags = Category.visible.pluck(:name) + @community_resource&.tag_list || []
+  end
 
-    def determine_layout
-      'without_navbar' unless @system_setting.display_navbar?
-    end
+  def determine_layout
+    'without_navbar' unless @system_setting.display_navbar?
+  end
 
-    def community_resource_params
-      params.require(:community_resource).permit(
-          :description,
-          :facebook_url,
-          :is_approved,
-          :name,
-          :phone,
-          :publish_from,
-          :publish_until,
-          :service_area_id,
-          :website_url,
-          :youtube_identifier,
-          tag_list: [],
-          organization_attributes: %i[id name _destroy]
-          )
-    end
+  def community_resource_params
+    params.require(:community_resource).permit(
+        :description,
+        :facebook_url,
+        :is_approved,
+        :name,
+        :phone,
+        :publish_from,
+        :publish_until,
+        :service_area_id,
+        :website_url,
+        :youtube_identifier,
+        tag_list: [],
+        organization_attributes: %i[id name _destroy]
+        )
+  end
 end

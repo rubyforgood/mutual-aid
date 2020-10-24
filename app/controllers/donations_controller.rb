@@ -47,21 +47,21 @@ class DonationsController < ApplicationController
 
   private
 
-    def set_donation
-      @donation = Donation.find(params[:id])
-    end
+  def set_donation
+    @donation = Donation.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @contact_methods = ContactMethod.enabled
-    end
+  def set_form_dropdowns
+    @contact_methods = ContactMethod.enabled
+  end
 
-    def donation_params
-      params.require(:donation).permit(
-          :value,
-          :channel,
-          :thank_you_sent,
-          :notes,
-          person_attributes: %i[id preferred_contact_method_id name email phone _destroy]
-      )
-    end
+  def donation_params
+    params.require(:donation).permit(
+        :value,
+        :channel,
+        :thank_you_sent,
+        :notes,
+        person_attributes: %i[id preferred_contact_method_id name email phone _destroy]
+    )
+  end
 end

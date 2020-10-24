@@ -45,22 +45,22 @@ class MobilityStringTranslationsController < ApplicationController
 
   private
 
-    def set_mobility_string_translation
-      @mobility_string_translation = MobilityStringTranslation.find(params[:id])
-    end
+  def set_mobility_string_translation
+    @mobility_string_translation = MobilityStringTranslation.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @system_locales = SystemLocale.where(publish_in_dropdowns: true).pluck(:locale_name, :locale)
-    end
+  def set_form_dropdowns
+    @system_locales = SystemLocale.where(publish_in_dropdowns: true).pluck(:locale_name, :locale)
+  end
 
-    def mobility_string_translation_params
-      params.require(:mobility_string_translation).permit(
-        :translatable_type,
-        :translatable_id,
-        :locale,
-        :key,
-        :value,
-        :created_by_id,
-        :is_approved)
-    end
+  def mobility_string_translation_params
+    params.require(:mobility_string_translation).permit(
+      :translatable_type,
+      :translatable_id,
+      :locale,
+      :key,
+      :value,
+      :created_by_id,
+      :is_approved)
+  end
 end

@@ -92,37 +92,37 @@ class ListingsController < ApplicationController
 
   private
 
-    def set_listing
-      @listing = Listing.find(params[:id])
-    end
+  def set_listing
+    @listing = Listing.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @available_tags = Category.visible.pluck(:name) + @listing&.tag_list || []
-    end
+  def set_form_dropdowns
+    @available_tags = Category.visible.pluck(:name) + @listing&.tag_list || []
+  end
 
-    def listing_params
-      params.require(:listing).permit(
-        :description,
-        :inexhaustible,
-        :location_id,
-        :person_id,
-        :service_area_id,
-        :state,
-        :submission_id,
-        :title,
-        :type,
-        tag_list: []
-      )
-    end
+  def listing_params
+    params.require(:listing).permit(
+      :description,
+      :inexhaustible,
+      :location_id,
+      :person_id,
+      :service_area_id,
+      :state,
+      :submission_id,
+      :title,
+      :type,
+      tag_list: []
+    )
+  end
 
-    def allowed_params
-      @allowed_params ||= params.permit(:format, **BrowseFilter::ALLOWED_PARAMS)
-    end
+  def allowed_params
+    @allowed_params ||= params.permit(:format, **BrowseFilter::ALLOWED_PARAMS)
+  end
 
-    def filter_params
-      return Hash.new unless allowed_params && allowed_params.to_h.any?
-      allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key }.tap do |hash|
-        hash.keys.each { |key| hash[key] = hash[key].keys }
-      end
+  def filter_params
+    return Hash.new unless allowed_params && allowed_params.to_h.any?
+    allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key }.tap do |hash|
+      hash.keys.each { |key| hash[key] = hash[key].keys }
     end
+  end
 end

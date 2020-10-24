@@ -48,40 +48,40 @@ class ServiceAreasController < ApplicationController
 
   private
 
-    def set_service_area
-      @service_area = ServiceArea.find(params[:id])
-    end
+  def set_service_area
+    @service_area = ServiceArea.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @service_area_location_type = LocationType.where(name: LocationType::SERVICE_AREA_TYPE).first_or_create!
-      @service_area_types = ServiceArea::TYPES.map { |i| [i,i] }
-    end
+  def set_form_dropdowns
+    @service_area_location_type = LocationType.where(name: LocationType::SERVICE_AREA_TYPE).first_or_create!
+    @service_area_types = ServiceArea::TYPES.map { |i| [i,i] }
+  end
 
-    def service_area_params
-      params.require(:service_area).permit(
-          :parent_id,
-          :organization_id,
-          :service_area_type,
-          :name,
-          :description,
-          location_attributes: %i[id
-                                      location_type_id
-                                      street_address
-                                      city
-                                      state
-                                      zip
-                                      county
-                                      region
-                                      neighborhood
-                                      _destroy],
-          service_areas_attributes: %i[id
-                                      location_id
-                                      parent_id
-                                      organization_id
-                                      service_area_type
-                                      name
-                                      description
-                                      _destroy]
-      )
-    end
+  def service_area_params
+    params.require(:service_area).permit(
+        :parent_id,
+        :organization_id,
+        :service_area_type,
+        :name,
+        :description,
+        location_attributes: %i[id
+                                    location_type_id
+                                    street_address
+                                    city
+                                    state
+                                    zip
+                                    county
+                                    region
+                                    neighborhood
+                                    _destroy],
+        service_areas_attributes: %i[id
+                                    location_id
+                                    parent_id
+                                    organization_id
+                                    service_area_type
+                                    name
+                                    description
+                                    _destroy]
+    )
+  end
 end

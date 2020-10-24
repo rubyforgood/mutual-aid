@@ -44,36 +44,36 @@ class SystemSettingsController < ApplicationController
 
   private
 
-    def set_system_setting
-      @system_setting = SystemSetting.find(params[:id])
-    end
+  def set_system_setting
+    @system_setting = SystemSetting.find(params[:id])
+  end
 
-    def set_primary_organization
-      @primary_organization = Organization.where(is_instance_owner: true).last
-    end
+  def set_primary_organization
+    @primary_organization = Organization.where(is_instance_owner: true).last
+  end
 
-    def system_setting_params
-      params.require(:system_setting).permit(
-        :allow_sms,
-        :exchange_type,
-        :separate_asks_offers,
-        :display_navbar,
+  def system_setting_params
+    params.require(:system_setting).permit(
+      :allow_sms,
+      :exchange_type,
+      :separate_asks_offers,
+      :display_navbar,
 
-        :announcements_module,
-        :community_resources_module,
-        :donations_module,
-        :chat_module,
-        :positions_module,
-        :shared_accounts_module,
+      :announcements_module,
+      :community_resources_module,
+      :donations_module,
+      :chat_module,
+      :positions_module,
+      :shared_accounts_module,
 
-        :about_us_text,
-        :confirmation_page_text_header,
-        :confirmation_page_text_body,
-        :confirmation_page_text_link_header,
-        :confirmation_page_text_footer,
-        :landing_page_text_what,
-        :landing_page_text_who,
-        :landing_page_text_how
-      )
-    end
+      :about_us_text,
+      :confirmation_page_text_header,
+      :confirmation_page_text_body,
+      :confirmation_page_text_link_header,
+      :confirmation_page_text_footer,
+      :landing_page_text_what,
+      :landing_page_text_who,
+      :landing_page_text_how
+    )
+  end
 end

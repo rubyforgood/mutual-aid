@@ -30,5 +30,4 @@ RSpec.describe '/', type: :request do
 
     # TODO: assert
   end
-
 end

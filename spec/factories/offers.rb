@@ -4,7 +4,6 @@ FactoryBot.define do
 
     association :person
     association :service_area
-
   end
 end
 

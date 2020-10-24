@@ -32,7 +32,7 @@ module CommunicationLogButtons
             title: 'New communication log',
             class: "button add-button #{margin_class} is-primary is-outlined",
             method: method,
-            remote: remote ) do
+            remote: remote) do
       "<span class='#{icon_class}'></span><span style='padding-left: 0.25em'> #{button_text}</span>".html_safe
     end
   end

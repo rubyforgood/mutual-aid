@@ -10,8 +10,8 @@ module ApplicationHelper
     "<span class='#{boolean ? "fa fa-check-circle has-text-success" : "fa fa-ban"}'></span>".html_safe
   end
 
-  def edit_button(resource, button_text='Edit', icon_class='fa fa-edit',
-                  button_text_class=nil, button_class=nil, params={}, button_title=nil, path=nil)
+  def edit_button(resource, button_text = 'Edit', icon_class = 'fa fa-edit',
+                  button_text_class = nil, button_class = nil, params = {}, button_title = nil, path = nil)
     if resource
       resource_class = resource.class
       if resource_class.superclass != ApplicationRecord
@@ -25,7 +25,7 @@ module ApplicationHelper
     end
   end
 
-  def show_button(resource, button_text='View', icon_class='fa fa-eye', margin_class=nil, button_text_class=nil, params={})
+  def show_button(resource, button_text = 'View', icon_class = 'fa fa-eye', margin_class = nil, button_text_class = nil, params = {})
     resource_class = resource.class
     if resource_class != Person && (resource_class.superclass != ApplicationRecord)
       resource = resource.becomes(resource.class.superclass)
@@ -37,7 +37,7 @@ module ApplicationHelper
     end
   end
 
-  def triage_button(resource, button_color_class=nil)
+  def triage_button(resource, button_color_class = nil)
     resource_class = resource.class
     if resource_class != Person && (resource_class.superclass != ApplicationRecord)
       resource = resource.becomes(resource.class.superclass)

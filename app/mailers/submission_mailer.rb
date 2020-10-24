@@ -5,7 +5,7 @@ include ApplicationHelper  # TODO: better way to solve this?
 
 # TODO: could do with specs
 class SubmissionMailer < ApplicationMailer
-  def new_submission_confirmation_email(submission, system_setting=nil)
+  def new_submission_confirmation_email(submission, system_setting = nil)
     @submission = submission
 
     current_organization = Organization.current_organization

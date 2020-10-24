@@ -42,7 +42,8 @@ class SubmissionMailer < ApplicationMailer
          subject: @subject) do |format|
       format.html { 
         render template_path: 'submission_mailer',
-               template_name: 'new_submission_confirmation_email' }
+               template_name: 'new_submission_confirmation_email'
+      }      
     end
   end
 end

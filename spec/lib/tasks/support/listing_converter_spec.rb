@@ -102,7 +102,8 @@ RSpec.describe ListingConverter do
         'other_child' => %w[parent other_child],
         'parent' => %w[parent],
         'orphan' => %w[orphan]
-      }}
+      }
+    }    
 
     subject { splitter.split tag_list }
 

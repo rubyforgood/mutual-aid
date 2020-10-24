@@ -119,6 +119,7 @@ class MatchesController < ApplicationController
       :status,
       :notes,
       :tentative,
-      :completed)
+      :completed
+    )
   end
 end

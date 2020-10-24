@@ -62,6 +62,7 @@ class CategoriesController < ApplicationController
       :display_to_public,
       :is_created_by_admin,
       :parent_id,
-      categories_attributes: [])
+      categories_attributes: []
+    )
   end
 end

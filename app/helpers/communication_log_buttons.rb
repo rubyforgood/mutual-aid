@@ -127,7 +127,8 @@ module CommunicationLogButtons
               subject: subject,
               body: body,
               created_by_id: created_by&.id,
-              sent_at: Time.now),
+              sent_at: Time.now
+    ),
             title: 'New communication log',
             class: 'button add-button is-primary is-outlined') do
       "<span class='fa fa-plus}'></span><span style='padding-left: 0.25em'> Add a detailed log</span>".html_safe

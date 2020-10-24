@@ -8,8 +8,7 @@ class Category < ApplicationRecord
   has_many(:categories, -> { order(:display_order, :name) },
            class_name: 'Category',
            foreign_key: :parent_id,
-           inverse_of: :parent
-  )
+           inverse_of: :parent)
 
   validates :name, presence: true
 

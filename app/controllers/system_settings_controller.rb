@@ -58,14 +58,12 @@ class SystemSettingsController < ApplicationController
       :exchange_type,
       :separate_asks_offers,
       :display_navbar,
-
       :announcements_module,
       :community_resources_module,
       :donations_module,
       :chat_module,
       :positions_module,
       :shared_accounts_module,
-
       :about_us_text,
       :confirmation_page_text_header,
       :confirmation_page_text_body,

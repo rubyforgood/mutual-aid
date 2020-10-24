@@ -30,13 +30,13 @@ class ListingConverter
     end
 
     def gather_lineages
-      Category.all.map{ |category| [category.name, category.lineage] }.to_h
+      Category.all.map { |category| [category.name, category.lineage] }.to_h
     end
 
     def split tag_list
       matching_lineages = lineages
         .values_at(*tag_list)
-        .sort_by{ |lineage| lineage.size }
+        .sort_by { |lineage| lineage.size }
         .reverse
 
       matching_lineages.reduce([]) do |minimal_set, lineage|

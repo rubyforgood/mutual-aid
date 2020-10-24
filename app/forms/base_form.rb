@@ -6,6 +6,6 @@ class BaseForm < ActiveInteraction::Base
   end
 
   def given_inputs
-    inputs.select{ |key| given? key }
+    inputs.select { |key| given? key }
   end
 end

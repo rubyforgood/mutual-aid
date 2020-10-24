@@ -13,13 +13,13 @@ class ListingsController < ApplicationController
     end
 
     # follow_up_status filter
-    @match_statuses = Listing::MATCH_STATUSES.map{ |s| [s.titleize, s] }
+    @match_statuses = Listing::MATCH_STATUSES.map { |s| [s.titleize, s] }
     if params[:match_status].present?
       @listings = @listings.match_status(params[:match_status])
     end
 
     # person_id filter
-    @people = Person.all.map{ |p| [p.name, p.id] }.sort_by(&:first)
+    @people = Person.all.map { |p| [p.name, p.id] }.sort_by(&:first)
     if params[:person_id].present?
       person_id = Person.find(params[:person_id])&.id # verify the person is in the db
       @listings = @listings.person_id(person_id)

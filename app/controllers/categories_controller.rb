@@ -51,7 +51,7 @@ class CategoriesController < ApplicationController
     end
 
     def set_form_dropdowns
-      @parent_categories = Category.where.not(id: @category.id).order(:name).map{ |t| [t.name.titleize, t.id] }
+      @parent_categories = Category.where.not(id: @category.id).order(:name).map { |t| [t.name.titleize, t.id] }
     end
 
     def category_params

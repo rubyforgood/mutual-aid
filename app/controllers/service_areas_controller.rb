@@ -54,7 +54,7 @@ class ServiceAreasController < ApplicationController
 
   def set_form_dropdowns
     @service_area_location_type = LocationType.where(name: LocationType::SERVICE_AREA_TYPE).first_or_create!
-    @service_area_types = ServiceArea::TYPES.map { |i| [i,i] }
+    @service_area_types = ServiceArea::TYPES.map { |i| [i, i] }
   end
 
   def service_area_params

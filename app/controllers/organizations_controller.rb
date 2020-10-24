@@ -62,6 +62,6 @@ class OrganizationsController < ApplicationController
       :name,
       :phone,
       :website_url,
-        )
+    )
   end
 end

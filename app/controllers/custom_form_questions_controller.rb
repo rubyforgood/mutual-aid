@@ -50,13 +50,13 @@ class CustomFormQuestionsController < ApplicationController
   def custom_form_question_params
     params.require(:custom_form_question).permit(
       :input_type,
-        :is_required,
-        :form_type,
-        :hint_text,
-        :name,
-        :display_order,
-        :form_hook,
-        option_list: []
+      :is_required,
+      :form_type,
+      :hint_text,
+      :name,
+      :display_order,
+      :form_hook,
+      option_list: []
         )
   end
 end

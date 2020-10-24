@@ -111,14 +111,14 @@ class MatchesController < ApplicationController
   def match_params
     params.require(:match).permit(
       :receiver_id,
-        :provider_id,
-        :shift_id,
-        :receiver_type,
-        :provider_type,
-        :exchanged_at,
-        :status,
-        :notes,
-        :tentative,
-        :completed)
+      :provider_id,
+      :shift_id,
+      :receiver_type,
+      :provider_type,
+      :exchanged_at,
+      :status,
+      :notes,
+      :tentative,
+      :completed)
   end
 end

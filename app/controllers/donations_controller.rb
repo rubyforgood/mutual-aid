@@ -58,10 +58,10 @@ class DonationsController < ApplicationController
   def donation_params
     params.require(:donation).permit(
       :value,
-        :channel,
-        :thank_you_sent,
-        :notes,
-        person_attributes: %i[id preferred_contact_method_id name email phone _destroy]
+      :channel,
+      :thank_you_sent,
+      :notes,
+      person_attributes: %i[id preferred_contact_method_id name email phone _destroy]
     )
   end
 end

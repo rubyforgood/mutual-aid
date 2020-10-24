@@ -5,7 +5,8 @@ class CommunicationLogsController < ApplicationController
 
   def index
     @communication_logs = CommunicationLog.includes(:delivery_method, :person)
-        .references(:delivery_method, :person).order(sent_at: :desc)
+                                          .references(:delivery_method, :person)
+                                          .order(sent_at: :desc)
   end
 
   def show; end

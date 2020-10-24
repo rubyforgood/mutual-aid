@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
 
   def index
     @root_categories = Category.roots.includes(:categories).references(:categories)
-            .order(display_to_public: :desc, display_order: :asc, name: :asc, parent_id: :asc)
+                               .order(display_to_public: :desc, display_order: :asc, name: :asc, parent_id: :asc)
   end
 
   def show; end

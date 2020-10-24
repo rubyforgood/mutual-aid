@@ -40,8 +40,9 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     rows.headers.each_with_index do |header_name, idx|
       if header_name # skip blank headers!
         question = CustomFormQuestion.where('LOWER(name) = ?', header_name.downcase.strip)
-            .where(form_type: @form_type).first_or_create!(display_order: idx, input_type: 'string',
-                                                           name: header_name.downcase.strip)
+                                     .where(form_type: @form_type)
+                                     .first_or_create!(display_order: idx, input_type: 'string',
+                                                       name: header_name.downcase.strip)
         # where.not(name: @categories_question_name). # TODO exclude categories answer from import
         question.update_attributes!(display_order: idx, input_type: 'string') # in case question was already in db
 
@@ -92,10 +93,10 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       email ||= 'ImportedWithNoEmail@example.com'
     end
     Person.where(name: row['Name']&.strip, email: email&.strip, phone: phone&.strip)
-           .first_or_create!(preferred_contact_method: preferred_contact_method,
-                             service_area: service_area, location: location,
-                             skills: row['skills']&.strip,
-                             preferred_locale: preferred_locale&.locale || 'en')
+          .first_or_create!(preferred_contact_method: preferred_contact_method,
+                            service_area: service_area, location: location,
+                            skills: row['skills']&.strip,
+                            preferred_locale: preferred_locale&.locale || 'en')
   end
 
   def create_location_from_row(row, service_area)
@@ -113,10 +114,10 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     location_type = LocationType.where(name: 'service_area').first_or_create!
     location = Location.where(location_type: location_type).first_or_create!
     ServiceArea.translated_name(row['service_area_name']&.strip.downcase)
-                .first_or_create!(name: row['service_area_name']&.strip || 'Unknown County',
-                                  service_area_type: row['service_area_type_name'] || 'county',
-                                  organization: Organization.first,
-                                  location: location)
+               .first_or_create!(name: row['service_area_name']&.strip || 'Unknown County',
+                                 service_area_type: row['service_area_type_name'] || 'county',
+                                 organization: Organization.first,
+                                 location: location)
   end
 
   def create_listings_data_from_row(row, submission)
@@ -244,7 +245,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
                                 submission: submission,
                                 type: category_cfq.name.split('_').first.classify,
                                 created_at: created_at)
-                          .first_or_create!(title: "imported #{Time.current}") # TODO: add descriptions
+                         .first_or_create!(title: "imported #{Time.current}") # TODO: add descriptions
         category_cfq.option_list << category_name unless category_cfq.option_list.include?(category_name)
         listing.tag_list << category_name
         category_cfq.save!
@@ -262,7 +263,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     created_at = parse_date(row['Timestamp'])
     person = create_person_from_row(row) # NOTE: this calls create_location_from_row
     submission = Submission.where(created_at: created_at, person: person, form_name: @form_type)
-                            .first_or_create!(service_area: person.service_area)
+                           .first_or_create!(service_area: person.service_area)
 
     if inline_response_categories?
       listings = create_listings_data_from_category_questions(row, submission)

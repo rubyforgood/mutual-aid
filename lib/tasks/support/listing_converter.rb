@@ -35,9 +35,9 @@ class ListingConverter
 
     def split tag_list
       matching_lineages = lineages
-        .values_at(*tag_list)
-        .sort_by { |lineage| lineage.size }
-        .reverse
+                          .values_at(*tag_list)
+                          .sort_by { |lineage| lineage.size }
+                          .reverse
 
       matching_lineages.reduce([]) do |minimal_set, lineage|
         with_lineage = minimal_set + [lineage]

@@ -25,10 +25,11 @@ class ServiceArea < ApplicationRecord
   accepts_nested_attributes_for :location
 
   scope :order_by_translated_name, -> (locale = :en) {
-    includes(:mobility_string_translations).references(:mobility_string_translations)
-    .where('mobility_string_translations.locale = ?', locale.to_s)
-    .where('mobility_string_translations.key = ?', 'name')
-    .order(MobilityStringTranslation.arel_table['value'].lower.asc)
+    includes(:mobility_string_translations)
+      .references(:mobility_string_translations)
+      .where('mobility_string_translations.locale = ?', locale.to_s)
+      .where('mobility_string_translations.key = ?', 'name')
+      .order(MobilityStringTranslation.arel_table['value'].lower.asc)
   }
 
   scope :translated_name, ->(name) { 

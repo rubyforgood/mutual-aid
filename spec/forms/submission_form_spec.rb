@@ -10,7 +10,8 @@ RSpec.describe SubmissionForm do
     [
     create(:category, name: 'toys'),
     create(:category, name: 'groceries'),
-  ]}
+  ]
+  }  
 
   describe 'creating a new submission' do
     let(:params) { 
@@ -37,8 +38,9 @@ RSpec.describe SubmissionForm do
       },
         responses_attributes: questions.map.with_index { |question, index|
         [question.id.to_s, "answer #{index + 1}"]
-      }.to_h,
-      }}
+                              }.to_h,
+      }
+    }    
 
     subject(:submission) { SubmissionForm.build params }
 
@@ -226,7 +228,8 @@ RSpec.describe SubmissionForm do
                                        listings: [existing_listing],
                                        form_name: 'Offer_form',
                                        privacy_level_requested: 'volunteers',
-    )}
+    )
+    }    
     let(:existing_response) { create :submission_response, submission: existing_submission }
 
     let(:params) { 
@@ -249,7 +252,8 @@ RSpec.describe SubmissionForm do
         responses_attributes: {
         existing_response.custom_form_question_id.to_s => 'updated answer'
       },
-      }}
+      }
+    }    
 
     let(:submission) { SubmissionForm.build params }
 

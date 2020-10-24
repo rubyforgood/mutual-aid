@@ -75,6 +75,6 @@ class CommunityResourcesController < ApplicationController
       :youtube_identifier,
       tag_list: [],
       organization_attributes: %i[id name _destroy]
-        )
+    )
   end
 end

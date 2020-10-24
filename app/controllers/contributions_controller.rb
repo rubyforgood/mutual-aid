@@ -22,7 +22,7 @@ class ContributionsController < ApplicationController
     render(
       :show,
       locals: {
-        contribution: contribution,
+        contribution: contribution
       }
     )
   end

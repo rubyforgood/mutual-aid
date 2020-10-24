@@ -10,7 +10,7 @@ class ClaimsController < ApplicationController
     render locals: {
       contribution: contribution,
       preferred_contact_method_id: current_person&.preferred_contact_method&.id,
-      preferred_contact_info: current_person&.preferred_contact_info,
+      preferred_contact_info: current_person&.preferred_contact_info
     }
   end
 

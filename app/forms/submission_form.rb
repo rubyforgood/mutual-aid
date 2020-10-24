@@ -10,7 +10,7 @@ class SubmissionForm < BaseForm
     hash    :location_attributes,  strip: false
     hash    :person_attributes,    strip: false
     string  :form_name
-    string  :privacy_level_requested  # FIXME: not submitted as yet
+    string  :privacy_level_requested # FIXME: not submitted as yet
   end
 
   def execute

@@ -144,7 +144,7 @@ SimpleForm.setup do |config|
       end
     end
     b.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
   end
 
   config.wrappers :vertical_checkboxes, tag: 'div', class: 'vertical-checkboxes', error_class: 'has-error' do |b|
@@ -159,7 +159,7 @@ SimpleForm.setup do |config|
       end
     end
     b.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
   end
 
   ## vertical input for radio buttons and check boxes
@@ -288,7 +288,7 @@ SimpleForm.setup do |config|
        end
      end
      ba.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-     ba.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+     ba.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
     end
   end
 
@@ -304,7 +304,7 @@ SimpleForm.setup do |config|
       end
     end
     b.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
   end
 
   ## horizontal input for radio buttons and check boxes

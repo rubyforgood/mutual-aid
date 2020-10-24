@@ -62,19 +62,8 @@ class CommunityResourcesController < ApplicationController
   end
 
   def community_resource_params
-    params.require(:community_resource).permit(
-      :description,
-      :facebook_url,
-      :is_approved,
-      :name,
-      :phone,
-      :publish_from,
-      :publish_until,
-      :service_area_id,
-      :website_url,
-      :youtube_identifier,
-      tag_list: [],
-      organization_attributes: %i[id name _destroy]
-    )
+    params.require(:community_resource).permit(:description, :facebook_url, :is_approved, :name, :phone, :publish_from,
+                                               :publish_until, :service_area_id, :website_url, :youtube_identifier,
+                                               tag_list: [], organization_attributes: %i[id name _destroy])
   end
 end

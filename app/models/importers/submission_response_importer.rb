@@ -194,7 +194,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def create_submission_response_from_row(row, question, submission)
     response_value = row[question.name]&.strip
     responses = SubmissionResponse.where(custom_form_question: question, submission: submission, created_at: submission.created_at)
-    if ['Yes', 'No', 'Maybe'].include?(response_value)
+    if %w[Yes No Maybe].include?(response_value)
       if responses.none?
         @new_records_count += 1
         response = responses.first_or_create!(string_response: response_value, boolean_response: YAML.load(response_value.to_s))

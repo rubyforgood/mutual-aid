@@ -37,8 +37,8 @@ RSpec.describe SubmissionForm do
         name: 'Harriet Tubman'
       },
         responses_attributes: questions.map.with_index { |question, index|
-        [question.id.to_s, "answer #{index + 1}"]
-                              }.to_h
+          [question.id.to_s, "answer #{index + 1}"]
+        }.to_h
       }
     }    
 

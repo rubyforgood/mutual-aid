@@ -46,7 +46,7 @@ class ClaimsController < ApplicationController
       message: claim_params[:message]
     )
 
-    status = Messenger.new(peer_to_peer_email, "peer_to_peer_email").deliver_now
+    status = Messenger.new(peer_to_peer_email, 'peer_to_peer_email').deliver_now
 
     CommunicationLog.log_email(
       email: peer_to_peer_email,

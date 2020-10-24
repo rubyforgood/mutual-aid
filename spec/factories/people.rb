@@ -5,7 +5,7 @@ FactoryBot.define do
     preferred_contact_method { association :contact_method_email }
 
     trait :with_email do
-      preferred_contact_method { "email" }
+      preferred_contact_method { 'email' }
       email { Faker::Internet.email }
     end
 
@@ -15,7 +15,7 @@ FactoryBot.define do
     end
 
     trait :with_email_and_phone do
-      preferred_contact_method { "email" }
+      preferred_contact_method { 'email' }
       email { Faker::Internet.email }
       phone { Faker::PhoneNumber.phone_number }
     end

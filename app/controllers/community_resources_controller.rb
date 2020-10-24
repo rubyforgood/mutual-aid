@@ -59,7 +59,7 @@ class CommunityResourcesController < ApplicationController
     end
 
     def determine_layout
-      "without_navbar" unless @system_setting.display_navbar?
+      'without_navbar' unless @system_setting.display_navbar?
     end
 
     def community_resource_params

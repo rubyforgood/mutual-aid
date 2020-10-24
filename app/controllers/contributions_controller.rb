@@ -4,7 +4,7 @@ class ContributionsController < ApplicationController
   before_action :authenticate_user!, except: [:combined_form, :respond, :thank_you]
   before_action :set_contribution, only: [:respond, :triage]
 
-  layout "without_navbar", only: [:thank_you]
+  layout 'without_navbar', only: [:thank_you]
 
   def index
     @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])

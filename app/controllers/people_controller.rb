@@ -15,8 +15,8 @@ class PeopleController < ApplicationController
   def show
     @receiver_matches = @person.matches_as_receiver
     @provider_matches = @person.matches_as_provider
-    receiver_match_ids = @receiver_matches.pluck("matches.id")
-    provider_match_ids = @provider_matches.pluck("matches.id")
+    receiver_match_ids = @receiver_matches.pluck('matches.id')
+    provider_match_ids = @provider_matches.pluck('matches.id')
     @match_ids = receiver_match_ids + provider_match_ids
   end
 
@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
       enabled_locales = SystemLocale.where(publish_in_dropdowns: true)
       @system_locales = enabled_locales.pluck(:locale_name, :locale)
       @preferred_locale = enabled_locales.where(locale: @person.preferred_locale).first&.locale
-      @preferred_contact_timeframes = [["Morning", "AM"], ["Afternoon", "PM"], ["Evening", "EVE"]]
+      @preferred_contact_timeframes = [['Morning', 'AM'], ['Afternoon', 'PM'], ['Evening', 'EVE']]
     end
 
     def person_params

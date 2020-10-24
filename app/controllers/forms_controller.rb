@@ -53,7 +53,7 @@ class FormsController < ApplicationController
     end
 
     def set_form_dropdowns
-      @contribution_types = ["Ask", "Offer", "CommunityResource"]
+      @contribution_types = ['Ask', 'Offer', 'CommunityResource']
     end
 
     def form_params

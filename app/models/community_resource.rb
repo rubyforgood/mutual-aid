@@ -21,7 +21,7 @@ class CommunityResource < ApplicationRecord
   scope :pending_review, -> (){ where(is_approved: false) }
 
   def self.published
-    now_strftime = Time.now.strftime("%Y-%m-%d %H:%M")
+    now_strftime = Time.now.strftime('%Y-%m-%d %H:%M')
 
     where(is_approved: true).
         where("(publish_from IS NULL OR publish_from <= '#{ now_strftime }') AND
@@ -40,7 +40,7 @@ class CommunityResource < ApplicationRecord
   end
 
   def all_tags_to_s
-    all_tags_unique.join(", ")
+    all_tags_unique.join(', ')
   end
 end
 

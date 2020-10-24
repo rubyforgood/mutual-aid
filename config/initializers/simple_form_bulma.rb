@@ -195,15 +195,15 @@ SimpleForm.setup do |config|
 
     #
     #
-    config.wrappers :inline_input, tag: "div", class: "field is-horizontal" do |b|
-      b.wrapper :label, tag: "div", class: "field-label-left is-normal" do |bl|
-        bl.optional :label, class: "label"
+    config.wrappers :inline_input, tag: 'div', class: 'field is-horizontal' do |b|
+      b.wrapper :label, tag: 'div', class: 'field-label-left is-normal' do |bl|
+        bl.optional :label, class: 'label'
       end
-      b.wrapper :input, tag: "div", class: "field-body" do |bi|
-        bi.wrapper :input, tag: "div", class: "field" do |bf|
-          bf.use :input, class: "input"
+      b.wrapper :input, tag: 'div', class: 'field-body' do |bi|
+        bi.wrapper :input, tag: 'div', class: 'field' do |bf|
+          bf.use :input, class: 'input'
           bf.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-          bf.optional :hint, wrap_with: { tag: "p", class: "help" }
+          bf.optional :hint, wrap_with: { tag: 'p', class: 'help' }
         end
       end
     end
@@ -593,7 +593,7 @@ SimpleForm.setup do |config|
                                    end
 
       input_html_options[:class] ||= []
-      input_html_options[:class] << "date_picker_input"
+      input_html_options[:class] << 'date_picker_input'
       @builder.text_field(attribute_name, input_html_options)
     end
   end

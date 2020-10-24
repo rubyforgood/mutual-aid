@@ -51,7 +51,7 @@ class SubmissionsController < ApplicationController
     end
 
     def set_form_dropdowns
-      @form_names = ["ask_form", "offer_form", "community_resources_form", "announcements_form"]
+      @form_names = ['ask_form', 'offer_form', 'community_resources_form', 'announcements_form']
     end
 
     def submission_params

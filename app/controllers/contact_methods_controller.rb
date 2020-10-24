@@ -50,7 +50,7 @@ class ContactMethodsController < ApplicationController
     end
 
     def set_form_dropdowns
-      @fields = ["email", "phone"]
+      @fields = ['email', 'phone']
     end
 
     def contact_method_params

@@ -11,10 +11,10 @@ class Submission < ApplicationRecord
 
   accepts_nested_attributes_for :listings, :person
 
-  PRIVACY_LEVELS = ["anyone", "users", "volunteers", "dispatchers only"]
+  PRIVACY_LEVELS = ['anyone', 'users', 'volunteers', 'dispatchers only']
 
   def moderation_requested?
-    privacy_level_requested == "moderation_requested"
+    privacy_level_requested == 'moderation_requested'
   end
 
   def name
@@ -26,7 +26,7 @@ class Submission < ApplicationRecord
   end
 
   def urgency
-    "I can wait a week"
+    'I can wait a week'
   end
 
   def name

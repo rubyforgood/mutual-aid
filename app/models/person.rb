@@ -12,8 +12,8 @@ class Person < ApplicationRecord
   has_many :offers, inverse_of: :person
   has_many :listings
   has_many :matches, through: :listings
-  has_many :matches_as_receiver, through: :asks, class_name: "Match", foreign_key: "receiver_id"
-  has_many :matches_as_provider, through: :offers, class_name: "Match", foreign_key: "provider_id"
+  has_many :matches_as_receiver, through: :asks, class_name: 'Match', foreign_key: 'receiver_id'
+  has_many :matches_as_provider, through: :offers, class_name: 'Match', foreign_key: 'provider_id'
 
   has_many :communication_logs
   has_many :donations
@@ -31,7 +31,7 @@ class Person < ApplicationRecord
                       preferred_contact_method: contact_method,
                       user: current_user }
 
-    contact_method_name = contact_method.name == "Email" ? :email : :phone
+    contact_method_name = contact_method.name == 'Email' ? :email : :phone
     person_params[contact_method_name] = contact_info
 
     create!(person_params)
@@ -46,7 +46,7 @@ class Person < ApplicationRecord
   end
 
   def profile_photo(fest_code)
-    "missing.png"
+    'missing.png'
   end
 
   def match_history
@@ -58,7 +58,7 @@ class Person < ApplicationRecord
   end
 
   def all_tags_to_s
-    all_tags_unique.join(", ")
+    all_tags_unique.join(', ')
   end
 
   def ask_tag_list

@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to users_path, notice: "User was successfully submitted."
+      redirect_to users_path, notice: 'User was successfully submitted.'
     else
       set_form_dropdowns
       render :new

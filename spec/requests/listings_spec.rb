@@ -5,9 +5,9 @@ RSpec.describe '/listings', type: :request do
     {
       location_attributes: { zip: '12345' },
       tag_list: ['', 'cash'],
-    # name: Faker::Name.name,
-    # email: Faker::Internet.email,
-    # phone: Faker::PhoneNumber.phone_number
+      # name: Faker::Name.name,
+      # email: Faker::Internet.email,
+      # phone: Faker::PhoneNumber.phone_number
     }
   }
 

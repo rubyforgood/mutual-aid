@@ -57,11 +57,11 @@ class CategoriesController < ApplicationController
   def category_params
     params.require(:category).permit(
       :name,
-        :description,
-        :display_order,
-        :display_to_public,
-        :is_created_by_admin,
-        :parent_id,
-        categories_attributes: [])
+      :description,
+      :display_order,
+      :display_to_public,
+      :is_created_by_admin,
+      :parent_id,
+      categories_attributes: [])
   end
 end

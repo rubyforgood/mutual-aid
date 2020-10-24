@@ -57,11 +57,11 @@ class SubmissionsController < ApplicationController
   def submission_params
     params.require(:submission).permit(
       :body,
-        :created_at,
-        :form_name,
-        :person_id,
-        :privacy_level_requested,
-        :service_area_id,
+      :created_at,
+      :form_name,
+      :person_id,
+      :privacy_level_requested,
+      :service_area_id,
     )
   end
 end

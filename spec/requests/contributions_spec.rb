@@ -70,7 +70,7 @@ RSpec.describe "/contributions", type: :request do
       contribution = create(:listing)
 
       get(
-        contribution_url(contribution),
+        contribution_url(contribution)
       )
 
       expect(response).to be_successful

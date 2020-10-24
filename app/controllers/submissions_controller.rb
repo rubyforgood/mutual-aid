@@ -61,7 +61,7 @@ class SubmissionsController < ApplicationController
           :form_name,
           :person_id,
           :privacy_level_requested,
-          :service_area_id,
+          :service_area_id
       )
     end
 end

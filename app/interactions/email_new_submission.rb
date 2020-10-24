@@ -13,7 +13,7 @@ class EmailNewSubmission < ActiveInteraction::Base
       email: email,
       delivery_status: status,
       person: submission.person,
-      initiator: user,
+      initiator: user
     )
   end
 end

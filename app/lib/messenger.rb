@@ -7,7 +7,7 @@ class Messenger
     [ :sent,
       :connected,
       :undeliverable,
-      :error,
+      :error
     ]
   end
 

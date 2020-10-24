@@ -8,7 +8,7 @@ RSpec.describe SubmissionForm do
 
   let(:categories) {[
     create(:category, name: 'toys'),
-    create(:category, name: 'groceries'),
+    create(:category, name: 'groceries')
   ]}
 
   describe 'creating a new submission' do

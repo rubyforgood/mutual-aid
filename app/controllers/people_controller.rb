@@ -98,7 +98,7 @@ class PeopleController < ApplicationController
               :county,
               :region,
               :neighborhood,
-              :_destroy,
+              :_destroy
           ]
       )
     end

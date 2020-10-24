@@ -7,7 +7,7 @@ class Announcement < ApplicationRecord
 
   acts_as_taggable_on :tags
 
-  scope :pending_review, -> (){ where(is_approved: false) }
+  scope :pending_review, -> () { where(is_approved: false) }
 
   def self.published
     now_strftime = Time.now.strftime('%Y-%m-%d %H:%M')

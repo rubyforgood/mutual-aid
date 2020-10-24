@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ShiftMatchesController < ApplicationController
-  before_action :set_shift_match, only: [:show, :edit, :update, :destroy]
+  before_action :set_shift_match, only: %i[show edit update destroy]
 
   def index
     @shift_matches = ShiftMatch.all

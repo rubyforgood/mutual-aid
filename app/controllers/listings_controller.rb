@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
+  before_action :set_listing, only: %i[show edit update destroy match match_confirm]
 
   def index
     @listings = Listing.all

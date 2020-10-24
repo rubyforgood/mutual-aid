@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CustomFormQuestionsController < ApplicationController
-  before_action :set_custom_form_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_custom_form_question, only: %i[show edit update destroy]
 
   def index
     @custom_form_questions = CustomFormQuestion.all

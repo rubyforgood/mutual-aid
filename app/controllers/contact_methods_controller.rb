@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ContactMethodsController < ApplicationController
-  before_action :set_contact_method, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact_method, only: %i[show edit update destroy]
 
   def index
     @contact_methods = ContactMethod.order(:name)

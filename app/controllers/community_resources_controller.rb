@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class CommunityResourcesController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
-  before_action :set_community_resource, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i[new create]
+  before_action :set_community_resource, only: %i[show edit update destroy]
 
-  layout :determine_layout, only: [:new, :show]
+  layout :determine_layout, only: %i[new show]
 
   def index
     @community_resources = CommunityResource.includes(:organization).references(:organization).order(created_at: :desc)
@@ -74,7 +74,7 @@ class CommunityResourcesController < ApplicationController
           :website_url,
           :youtube_identifier,
           tag_list: [],
-          organization_attributes: [ :id, :name, :_destroy ]
+          organization_attributes: %i[id name _destroy]
           )
     end
 end

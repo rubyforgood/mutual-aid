@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ServiceAreasController < ApplicationController
-  before_action :set_service_area, only: [:show, :edit, :update, :destroy]
+  before_action :set_service_area, only: %i[show edit update destroy]
 
   def index
     @service_areas = ServiceArea.order_by_translated_name(@system_locale&.locale)
@@ -65,24 +65,24 @@ class ServiceAreasController < ApplicationController
           :service_area_type,
           :name,
           :description,
-          location_attributes: [ :id,
-                                      :location_type_id,
-                                      :street_address,
-                                      :city,
-                                      :state,
-                                      :zip,
-                                      :county,
-                                      :region,
-                                      :neighborhood,
-                                      :_destroy ],
-          service_areas_attributes: [ :id,
-                                      :location_id,
-                                      :parent_id,
-                                      :organization_id,
-                                      :service_area_type,
-                                      :name,
-                                      :description,
-                                      :_destroy ]
+          location_attributes: %i[id
+                                      location_type_id
+                                      street_address
+                                      city
+                                      state
+                                      zip
+                                      county
+                                      region
+                                      neighborhood
+                                      _destroy],
+          service_areas_attributes: %i[id
+                                      location_id
+                                      parent_id
+                                      organization_id
+                                      service_area_type
+                                      name
+                                      description
+                                      _destroy]
       )
     end
 end

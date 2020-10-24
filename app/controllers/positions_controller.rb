@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PositionsController < ApplicationController
-  before_action :set_position, only: [:show, :edit, :update, :destroy]
+  before_action :set_position, only: %i[show edit update destroy]
 
   def index
     @positions = Position.all

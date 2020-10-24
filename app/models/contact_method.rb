@@ -15,7 +15,7 @@ class ContactMethod < ApplicationRecord
   end
 
   def label
-    I18n.t field, scope: [:models, :contact_method, :labels]
+    I18n.t field, scope: %i[models contact_method labels]
   end
 end
 

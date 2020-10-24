@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AdminController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
+  before_action :authenticate_user!, except: %i[new create]
 
   def landing_page
     @submission_count = Submission.count

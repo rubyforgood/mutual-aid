@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SubmissionResponsesController < ApplicationController
-  before_action :set_submission_response, only: [:show, :edit, :update, :destroy]
+  before_action :set_submission_response, only: %i[show edit update destroy]
 
   def index
     @submission_responses = SubmissionResponse.all

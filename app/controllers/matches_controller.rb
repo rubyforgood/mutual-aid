@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MatchesController < ApplicationController
-  before_action :set_match, only: [:edit, :update, :destroy]
+  before_action :set_match, only: %i[edit update destroy]
 
   def index
     @matches = Match.status(params[:status] || 'all').order(updated_at: :desc)

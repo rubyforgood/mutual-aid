@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: %i[show edit update destroy]
 
   include Pagination
 
@@ -88,17 +88,17 @@ class PeopleController < ApplicationController
           :preferred_locale,
           :preferred_contact_timeframe,
           :preferred_contact_method_id,
-          location_attributes: [
-              :id,
-              :location_type_id,
-              :street_address,
-              :city,
-              :state,
-              :zip,
-              :county,
-              :region,
-              :neighborhood,
-              :_destroy
+          location_attributes: %i[
+              id
+              location_type_id
+              street_address
+              city
+              state
+              zip
+              county
+              region
+              neighborhood
+              _destroy
           ]
       )
     end

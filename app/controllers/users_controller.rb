@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i[new create]
+  before_action :set_user, only: %i[show edit update destroy]
 
   def index
     @users = User.all
@@ -59,6 +59,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, person_attributes: [ :id, :name, :email, :phone, :preferred_contact_method_id, :_destroy ] )
+    params.require(:user).permit(:email, person_attributes: %i[id name email phone preferred_contact_method_id _destroy] )
   end
 end

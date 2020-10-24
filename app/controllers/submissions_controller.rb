@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :edit, :update, :destroy]
+  before_action :set_submission, only: %i[show edit update destroy]
 
   def index
     @submissions = Submission.order(created_at: :desc)

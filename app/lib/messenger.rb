@@ -4,10 +4,10 @@ class Messenger
   attr_reader :email, :identifier
 
   def self.delivery_statuses
-    [ :sent,
-      :connected,
-      :undeliverable,
-      :error
+    %i[sent
+      connected
+      undeliverable
+      error
     ]
   end
 

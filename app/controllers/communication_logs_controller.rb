@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CommunicationLogsController < ApplicationController
-  before_action :set_communication_log, only: [:show, :edit, :update, :destroy]
+  before_action :set_communication_log, only: %i[show edit update destroy]
 
   def index
     @communication_logs = CommunicationLog.includes(:delivery_method, :person)

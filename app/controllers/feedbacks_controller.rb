@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FeedbacksController < ApplicationController
-  before_action :set_feedback, only: [:show, :edit, :update, :destroy]
+  before_action :set_feedback, only: %i[show edit update destroy]
 
   def index
     @feedbacks = Feedback.all

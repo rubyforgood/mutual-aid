@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LocationTypesController < ApplicationController
-  before_action :set_location_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_location_type, only: %i[show edit update destroy]
 
   def index
     @location_types = LocationType.all

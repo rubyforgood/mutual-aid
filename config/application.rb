@@ -41,7 +41,7 @@ module Mutualaid
     end
 
     # Permitted locales available for the application
-    I18n.available_locales = [:ar, :cs, :en, :es, :de, :fr, :pt, :th]
+    I18n.available_locales = %i[ar cs en es de fr pt th]
     config.i18n.enforce_available_locales
     # Mobility gem will fallbacks to locale set here
     I18n.default_locale = :en

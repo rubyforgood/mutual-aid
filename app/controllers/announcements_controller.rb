@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class AnnouncementsController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
-  before_action :set_announcement, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i[new create]
+  before_action :set_announcement, only: %i[show edit update destroy]
 
-  layout :determine_layout, only: [:new, :show]
+  layout :determine_layout, only: %i[new show]
 
   def index
     @announcements = Announcement.order(created_at: :desc)

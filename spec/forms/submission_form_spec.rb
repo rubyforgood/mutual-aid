@@ -6,13 +6,13 @@ RSpec.describe SubmissionForm do
   let(:service_area)   { create :service_area }
   let(:questions)      { create_list :custom_form_question, 2 }
 
-  let(:categories) {[
+  let(:categories) { [
     create(:category, name: 'toys'),
     create(:category, name: 'groceries'),
   ]}
 
   describe 'creating a new submission' do
-    let(:params) {{
+    let(:params) { {
       form_name: 'Offer_form',
       privacy_level_requested: 'anyone',
       service_area: service_area.id,
@@ -226,7 +226,7 @@ RSpec.describe SubmissionForm do
     )}
     let(:existing_response) { create :submission_response, submission: existing_submission }
 
-    let(:params) {{
+    let(:params) { {
       id: existing_submission.id,
       form_name: 'Ask_form',
       service_area: existing_listing.service_area.id,

@@ -40,10 +40,10 @@ class SubmissionMailer < ApplicationMailer
          bcc: bcc_emails,
          reply_to: contact_email_with_name.to_s + ', ' + system_email.to_s,
          subject: @subject) do |format|
-      format.html {
+      format.html do
         render template_path: 'submission_mailer',
                template_name: 'new_submission_confirmation_email'
-      }
+      end
     end
   end
 end

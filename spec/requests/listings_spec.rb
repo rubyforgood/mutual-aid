@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe '/listings', type: :request do
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     {
       location_attributes: { zip: '12345' },
       tag_list: ['', 'cash']
@@ -9,13 +9,13 @@ RSpec.describe '/listings', type: :request do
       # email: Faker::Internet.email,
       # phone: Faker::PhoneNumber.phone_number
     }
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     {
       location_attributes: { zip: '12e45' }
     }
-  }
+  end
 
   before { sign_in create(:user) }
 
@@ -81,9 +81,9 @@ RSpec.describe '/listings', type: :request do
     context 'with valid parameters' do
       it 'creates a new Listing and Location' do
         pending 'relationship between contribution form and addresses is tbd'
-        expect {
+        expect do
           post listings_url, params: { listing: valid_attributes }
-        }.to change(Listing, :count)
+        end.to change(Listing, :count)
           .by(1)
           .and change(Location, :count)
           .by(1)
@@ -98,9 +98,9 @@ RSpec.describe '/listings', type: :request do
 
     context 'with invalid parameters' do
       it 'does not create a new Listing' do
-        expect {
+        expect do
           post listings_url, params: { listing: invalid_attributes }
-        }.to change(Listing, :count).by(0)
+        end.to change(Listing, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
@@ -115,11 +115,11 @@ RSpec.describe '/listings', type: :request do
 
     context 'with valid parameters' do
       let(:new_street_address) { Faker::Address.street_address }
-      let(:new_attributes) {
+      let(:new_attributes) do
         {
           location_attributes: { street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI') }
         }
-      }
+      end
 
       before do
         # patch listing_url(listing), params: { listing: new_attributes }
@@ -148,9 +148,9 @@ RSpec.describe '/listings', type: :request do
   pending 'DELETE /destroy' do
     it 'destroys the requested listing' do
       listing = Listing.create! valid_attributes
-      expect {
+      expect do
         delete listing_url(listing)
-      }.to change(Listing, :count).by(-1)
+      end.to change(Listing, :count).by(-1)
     end
 
     it 'redirects to the listings list' do

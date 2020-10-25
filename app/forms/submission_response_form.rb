@@ -16,9 +16,9 @@ class SubmissionResponseForm < BaseForm
   end
 
   def execute
-    response = submission.submission_responses.find { |response|
+    response = submission.submission_responses.find do |response|
       response.custom_form_question_id == custom_form_question_id
-    } || SubmissionResponse.new
+    end || SubmissionResponse.new
 
     response.attributes = given_inputs
     response

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe '/contributions', type: :request do
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     {
       location_attributes: { zip: '12345' },
       tag_list: ['', 'cash'],
@@ -9,13 +9,13 @@ RSpec.describe '/contributions', type: :request do
       # email: Faker::Internet.email,
       # phone: Faker::PhoneNumber.phone_number
     }
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     {
       location_attributes: { zip: '12e45' },
     }
-  }
+  end
 
   before { sign_in create(:user) }
 

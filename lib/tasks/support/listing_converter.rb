@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ListingConverter
-  def convert listing
+  def convert(listing)
     Listing.transaction do
       first_tag_set, *remaining_tag_sets = splitter.split listing.tag_list
 
@@ -22,7 +22,7 @@ class ListingConverter
   class TagSplitter
     attr_reader :lineages
 
-    def initialize lineages = nil
+    def initialize(lineages = nil)
       @lineages = lineages || gather_lineages
     end
 
@@ -30,7 +30,7 @@ class ListingConverter
       Category.all.map { |category| [category.name, category.lineage] }.to_h
     end
 
-    def split tag_list
+    def split(tag_list)
       matching_lineages = lineages
                           .values_at(*tag_list)
                           .sort_by { |lineage| lineage.size }

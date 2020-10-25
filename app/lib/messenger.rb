@@ -15,7 +15,7 @@ class Messenger
   end
 
   # Can become a factory method once we support other media, eg SMS
-  def initialize email, identifier = nil
+  def initialize(email, identifier = nil)
     @email = email
     @identifier = identifier
   end

@@ -15,7 +15,10 @@ module CommunicationLogButtons
                                       path: nil,
                                       method: :post,
                                       remote: true)
-    delivery_method = ContactMethod.where(name: delivery_method_name.titleize).first_or_create!(name: delivery_method_name.titleize, field: nil, enabled: false)
+    delivery_method = ContactMethod.where(name: delivery_method_name.titleize).first_or_create!(
+      name: delivery_method_name.titleize,
+      field: nil, enabled: false
+    )
     link_to(create_remote_communication_logs_path(communication_log: {
                                                     person_id: person&.id,
                                                     match_id: match&.id,
@@ -113,7 +116,8 @@ module CommunicationLogButtons
                                     created_by: created_by)
   end
 
-  def new_communication_log_button(person, match: nil, subject: nil, body: nil, created_by: nil, needs_follow_up: true, contribution: nil)
+  def new_communication_log_button(person, match: nil, subject: nil, body: nil, created_by: nil,
+                                   needs_follow_up: true, contribution: nil)
     delivery_method = ContactMethod.where(name: 'Text').first_or_create!(field: 'phone', enabled: false)
     link_to(new_communication_log_path(
               contribution_id: contribution&.id,

@@ -8,7 +8,8 @@ class CustomFormQuestion < ApplicationRecord
 
   has_many :submission_responses
   has_many :form_questions
-  has_many :mobility_string_translations, inverse_of: :translatable, class_name: 'MobilityStringTranslation', foreign_key: :translatable_id
+  has_many :mobility_string_translations, inverse_of: :translatable, class_name: 'MobilityStringTranslation',
+                                          foreign_key: :translatable_id
 
   INPUT_TYPES_AND_STORAGE = {
     'date' => 'date_response',

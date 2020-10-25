@@ -96,8 +96,10 @@ class MatchesController < ApplicationController
     @matchable_offers = Offer.matchable.map { |o| [o.name_and_match_history.html_safe, o.id] }.sort_by(&:first)
 
     if @match.receiver_id && @match.provider_id
-      @matched_asks = (@matchable_asks + [[@match.receiver&.name_and_match_history.html_safe, @match.receiver&.id]]).sort_by(&:first)
-      @matched_offers = (@matchable_offers + [[@match.provider&.name_and_match_history.html_safe, @match.provider&.id]]).sort_by(&:first)
+      @matched_asks = (@matchable_asks + [[@match.receiver&.name_and_match_history.html_safe,
+                                           @match.receiver&.id]]).sort_by(&:first)
+      @matched_offers = (@matchable_offers + [[@match.provider&.name_and_match_history.html_safe,
+                                               @match.provider&.id]]).sort_by(&:first)
     else
 
     end

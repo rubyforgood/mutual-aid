@@ -19,7 +19,9 @@ class Match < ApplicationRecord
   scope :id, ->(id) { where(id: id) }
   scope :match_ids, -> (match_ids) { where('matches.id::text = ANY (ARRAY[?])', match_ids) }
   scope :needs_follow_up, ->() { joins(:communication_logs).where('communication_logs.needs_follow_up = ?', true) }
-  scope :status, ->(status) { where(status == 'all' || !status.present? ? 'matches.id IS NOT NULL' : "matches.status = '#{status.downcase}'") }
+  scope :status, ->(status) {
+    where(status == 'all' || !status.present? ? 'matches.id IS NOT NULL' : "matches.status = '#{status.downcase}'")
+  }
   scope :this_month, -> {
     where('matches.created_at >= ? AND matches.created_at <= ?',
           Time.zone.now.beginning_of_month, Time.zone.now.end_of_month)
@@ -30,7 +32,8 @@ class Match < ApplicationRecord
     shift_match_ids = []
     if person
       communication_match_ids = CommunicationLog.where(person: person).pluck(:match_id)
-      shift_match_ids = ShiftMatch.includes(:shift).references(:shift).where('shifts.person_id = ?', person.id).pluck(:match_id)
+      shift_match_ids = ShiftMatch.includes(:shift).references(:shift)
+                                  .where('shifts.person_id = ?', person.id).pluck(:match_id)
     end
     where(id: communication_match_ids + shift_match_ids)
   end

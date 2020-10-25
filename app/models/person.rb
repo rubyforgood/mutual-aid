@@ -6,7 +6,8 @@ class Person < ApplicationRecord
   belongs_to :user, optional: true, inverse_of: :person
   belongs_to :service_area, optional: true
   belongs_to :location, optional: true
-  belongs_to :preferred_contact_method, class_name: 'ContactMethod', foreign_key: :preferred_contact_method_id, inverse_of: :people
+  belongs_to :preferred_contact_method, class_name: 'ContactMethod', foreign_key: :preferred_contact_method_id,
+                                        inverse_of: :people
 
   has_many :asks, inverse_of: :person
   has_many :offers, inverse_of: :person
@@ -50,7 +51,8 @@ class Person < ApplicationRecord
   end
 
   def match_history
-    "#{asks.matched.length} out of #{asks.length} Asks matched, and, #{offers.matched.length} out of #{offers.length} Offers matched"
+    "#{asks.matched.length} out of #{asks.length} Asks matched, and, #{offers.matched.length} out of
+    #{offers.length} Offers matched"
   end
 
   def all_tags_unique

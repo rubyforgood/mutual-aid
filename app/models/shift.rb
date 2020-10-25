@@ -16,7 +16,8 @@ class Shift < ApplicationRecord
 
   def times
     hide_starting_p = started_at&.strftime('%p') == ended_at&.strftime('%p') ? true : false
-    "#{started_at&.strftime("%a at %l:%M")} #{started_at&.strftime("%P") unless hide_starting_p} - #{ended_at&.strftime("%l:%M %P") || ("TBD" if started_at.present?)}#{started_at&.strftime(", %B %d %Y")}"
+    "#{started_at&.strftime("%a at %l:%M")} #{started_at&.strftime("%P") unless hide_starting_p} -
+    #{ended_at&.strftime("%l:%M %P") || ("TBD" if started_at.present?)}#{started_at&.strftime(", %B %d %Y")}"
   end
 end
 

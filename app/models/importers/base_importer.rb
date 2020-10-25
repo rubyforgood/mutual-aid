@@ -90,7 +90,8 @@ class Importers::BaseImporter
   end
 
   def primary_import_klass_name
-    @klasses_array.last.model_name.human # assuming last klass in array is the imported class (and show diff in flash message)
+    # assuming last klass in array is the imported class (and show diff in flash message)
+    @klasses_array.last.model_name.human
   end
 
   def set_instance_variables(row)
@@ -143,7 +144,8 @@ class Importers::BaseImporter
               @row_error_count += 1
             end
           else
-            create_history_log(row, "ROW PROCESSING ERROR IN ROW##{@row_number}: #{@row_processing_error_messages.join(" +++ ")}")
+            create_history_log(row, "ROW PROCESSING ERROR IN ROW##{@row_number}: #{@row_processing_error_messages
+              .join(" +++ ")}")
             @row_error_count += 1
           end
           @row_count += 1

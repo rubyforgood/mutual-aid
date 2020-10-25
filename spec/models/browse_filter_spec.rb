@@ -20,7 +20,9 @@ RSpec.describe BrowseFilter do
       expect(model_class).to receive(:unmatched).and_return(used_scope)
     end
     one_urgency_level_id = [UrgencyLevel::TYPES.sample.id]
-    expect(used_scope).to receive(:where).with(urgency_level_id: one_urgency_level_id).exactly(ContributionType::TYPES.length).times
+    expect(used_scope).to receive(:where)
+                      .with(urgency_level_id: one_urgency_level_id)
+                      .exactly(ContributionType::TYPES.length).times
     BrowseFilter.new('UrgencyLevel' => one_urgency_level_id).contributions
   end
 end

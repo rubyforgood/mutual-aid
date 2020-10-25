@@ -55,7 +55,11 @@ RSpec.describe '/contributions', type: :request do
 
       # passing `as: json` to `get` does some surprising things to the request and its params that would break this test
       get contributions_url, {
-        params: { "Category[#{categories[0].id}]": 1, "Category[#{categories[1].id}]": 1, "ServiceArea[#{expected_area.id}]": 1 },
+        params: {
+          "Category[#{categories[0].id}]": 1,
+          "Category[#{categories[1].id}]": 1,
+          "ServiceArea[#{expected_area.id}]": 1
+        },
         headers: { 'HTTP_ACCEPT' => 'application/json' }
       }
 

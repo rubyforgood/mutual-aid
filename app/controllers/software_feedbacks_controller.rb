@@ -56,6 +56,7 @@ class SoftwareFeedbacksController < ApplicationController
   end
 
   def software_feedback_params
-    params.require(:software_feedback).permit(:created_by_id, :feedback_type, :module_name, :page_url, :name, :urgency, :urgency_order, :notes, :completed, :completed_at)
+    params.require(:software_feedback).permit(:created_by_id, :feedback_type, :module_name, :page_url,
+                                              :name, :urgency, :urgency_order, :notes, :completed, :completed_at)
   end
 end

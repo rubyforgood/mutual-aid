@@ -9,7 +9,8 @@ class ServiceArea < ApplicationRecord
   belongs_to :organization
   belongs_to :parent, class_name: 'ServiceArea', inverse_of: :service_areas, optional: true
 
-  has_many :mobility_string_translations, inverse_of: :translatable, class_name: 'MobilityStringTranslation', foreign_key: :translatable_id
+  has_many :mobility_string_translations, inverse_of: :translatable, class_name: 'MobilityStringTranslation',
+                                          foreign_key: :translatable_id
 
   has_many :asks, class_name: 'Ask', foreign_key: 'service_area_id', inverse_of: :service_area
   has_many :offers, class_name: 'Offer', foreign_key: 'service_area_id', inverse_of: :service_area

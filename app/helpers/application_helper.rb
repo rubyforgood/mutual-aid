@@ -20,12 +20,14 @@ module ApplicationHelper
       link_to(path.present? ? "#{path}?#{params}" : edit_polymorphic_path(resource, params),
               title: button_title || (action_name || button_text + ' ' + controller_path || resource_class.to_s),
               class: "button edit-button #{button_class}") do
-        "<span class='#{icon_class || resource_class::ICON}'></span><span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
+        "<span class='#{icon_class || resource_class::ICON}'></span>
+        <span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
       end
     end
   end
 
-  def show_button(resource, button_text = 'View', icon_class = 'fa fa-eye', margin_class = nil, button_text_class = nil, params = {})
+  def show_button(resource, button_text = 'View', icon_class = 'fa fa-eye', margin_class = nil,
+                  button_text_class = nil, params = {})
     resource_class = resource.class
     if resource_class != Person && (resource_class.superclass != ApplicationRecord)
       resource = resource.becomes(resource.class.superclass)
@@ -33,7 +35,8 @@ module ApplicationHelper
     link_to(polymorphic_path(resource, params),
             title: action_name || button_text + ' ' + controller_path || resource_class.to_s,
             class: "button show-button #{margin_class}") do
-      "<span class='#{icon_class}'></span><span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
+      "<span class='#{icon_class}'></span>
+      <span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
     end
   end
 

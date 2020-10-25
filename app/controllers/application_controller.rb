@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   around_action :switch_locale
 
   def set_admin_status
-    @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role? # allows admin user to simulate with param=false
+    # allows admin user to simulate with param=false
+    @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role?
   end
 
   def set_system_setting

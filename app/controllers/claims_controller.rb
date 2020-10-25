@@ -20,9 +20,11 @@ class ClaimsController < ApplicationController
     contribution = Listing.find(params[:contribution_id])
     ActiveRecord::Base.transaction do
       if current_person.blank?
-        Person.create_from_peer_to_peer_params!(current_user, name: claim_params[:peer_alias],
-                                                              preferred_contact_method_id: claim_params[:preferred_contact_method_id],
-                                                              contact_info: claim_params[:preferred_contact_info])
+        Person.create_from_peer_to_peer_params!(
+          current_user, name: claim_params[:peer_alias],
+                        preferred_contact_method_id: claim_params[:preferred_contact_method_id],
+                        contact_info: claim_params[:preferred_contact_info]
+        )
       elsif current_person.present? && current_person.email.blank?
         current_person.update!(email: claim_params[:preferred_contact_info])
       end

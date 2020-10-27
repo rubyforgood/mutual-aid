@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 class SubmissionResponsesController < ApplicationController
-  before_action :set_submission_response, only: [:show, :edit, :update, :destroy]
+  before_action :set_submission_response, only: %i[show edit update destroy]
 
   def index
     @submission_responses = SubmissionResponse.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @submission_response = SubmissionResponse.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @submission_response = SubmissionResponse.new(submission_response_params)
@@ -39,6 +39,7 @@ class SubmissionResponsesController < ApplicationController
   end
 
   private
+
     def set_submission_response
       @submission_response = SubmissionResponse.find(params[:id])
     end

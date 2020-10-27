@@ -1,22 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe "/contributions", type: :request do
+RSpec.describe '/contributions', type: :request do
   let(:valid_attributes) {{
-      location_attributes: {zip: "12345"},
-      tag_list: ["", "cash"],
+      location_attributes: { zip: '12345' },
+      tag_list: ['', 'cash'],
       # name: Faker::Name.name,
       # email: Faker::Internet.email,
       # phone: Faker::PhoneNumber.phone_number
   }}
 
   let(:invalid_attributes) {{
-      location_attributes: {zip: "12e45"},
+      location_attributes: { zip: '12e45' },
   }}
 
   before { sign_in create(:user) }
 
-  describe "GET /index" do
-    it "renders a successful response" do
+  describe 'GET /index' do
+    it 'renders a successful response' do
       create(:listing)
       get contributions_url
       expect(response).to be_successful
@@ -25,13 +25,13 @@ RSpec.describe "/contributions", type: :request do
     it 'allows asking for a specific subtype of listing' do
       ask = create(:ask, title: 'this is the ask title')
       offer = create(:offer, title: 'this is the offer title')
-      get contributions_url, params: {ContributionType: {'Ask' => 1}}
+      get contributions_url, params: { ContributionType: { 'Ask' => 1 } }
       expect(response.body).to match(ask.title)
       expect(response.body).not_to match(offer.title)
-      get contributions_url, params: {ContributionType: {'Offer' => 1}}
+      get contributions_url, params: { ContributionType: { 'Offer' => 1 } }
       expect(response.body).not_to match(ask.title)
       expect(response.body).to match(offer.title)
-      get contributions_url, params: {ContributionType: {'Ask' => 1, 'Offer' => 1}}
+      get contributions_url, params: { ContributionType: { 'Ask' => 1, 'Offer' => 1 } }
       expect(response.body).to match(ask.title)
       expect(response.body).to match(offer.title)
     end
@@ -52,7 +52,7 @@ RSpec.describe "/contributions", type: :request do
       # passing `as: json` to `get` does some surprising things to the request and its params that would break this test
       get contributions_url, {
         params: { "Category[#{categories[0].id}]": 1, "Category[#{categories[1].id}]": 1, "ServiceArea[#{expected_area.id}]": 1 },
-        headers: {'HTTP_ACCEPT' => 'application/json'}
+        headers: { 'HTTP_ACCEPT' => 'application/json' }
       }
 
       expect(response.body).to match(/#{expected_area.name.to_json}/)
@@ -65,8 +65,8 @@ RSpec.describe "/contributions", type: :request do
     end
   end
 
-  describe "GET /contributions/:id" do
-    it "is successful" do
+  describe 'GET /contributions/:id' do
+    it 'is successful' do
       contribution = create(:listing)
 
       get(

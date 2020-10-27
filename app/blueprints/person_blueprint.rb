@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PersonBlueprint < Blueprinter::Base
   identifier :id
 

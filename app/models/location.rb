@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Location < ApplicationRecord
   belongs_to :location_type
 
@@ -9,20 +11,20 @@ class Location < ApplicationRecord
   has_many :service_areas
 
   scope :city, ->(city){ where(city: city.to_s) }
-  scope :location_type_name, ->(location_type_name){ joins(:location_type).where("location_types.name = ?", location_type_name.to_s) }
+  scope :location_type_name, ->(location_type_name){ joins(:location_type).where('location_types.name = ?', location_type_name.to_s) }
   scope :person_id, ->(person_id){ where(person_id: person_id.to_i) }
-  scope :service_area_name, ->(service_area_name){ includes(listings: { service_area: :mobility_string_translations }).
-      references(listings: { service_area: :mobility_string_translations }).
-      where("mobility_string_translations.value = ?", service_area_name.to_s)
+  scope :service_area_name, ->(service_area_name){ includes(listings: { service_area: :mobility_string_translations })
+      .references(listings: { service_area: :mobility_string_translations })
+      .where('mobility_string_translations.value = ?', service_area_name.to_s)
   }
   scope :street_address, ->(street_address){ where(street_address: street_address.to_s) }
 
   def name
-    "#{ address }#{ " (" + location_type&.name + ")" if location_type }"
+    "#{address}#{" (" + location_type&.name + ")" if location_type}"
   end
 
   def address
-    "#{ street_address }#{ ", " + city if city }#{ " " + state if state }"
+    "#{street_address}#{", " + city if city}#{" " + state if state}"
   end
 end
 

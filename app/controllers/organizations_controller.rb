@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show, :edit, :update, :destroy]
+  before_action :set_organization, only: %i[show edit update destroy]
 
   def index
     @organizations = Organization.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @organization = Organization.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @organization = Organization.new(organization_params)
@@ -43,6 +43,7 @@ class OrganizationsController < ApplicationController
   end
 
   private
+
     def set_organization
       @organization = Organization.find(params[:id])
     end

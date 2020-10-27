@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # Uncomment this and change the path if necessary to include your own
 # components.
@@ -55,7 +56,7 @@ SimpleForm.setup do |config|
     ## Inputs
     # b.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
     b.use :label_input
-    b.use :hint,  wrap_with: { tag: :span, class: "help has-text-grey-light" }
+    b.use :hint,  wrap_with: { tag: :span, class: 'help has-text-grey-light' }
     b.use :error, wrap_with: { tag: :span, class: :error }
 
     ## full_messages_for

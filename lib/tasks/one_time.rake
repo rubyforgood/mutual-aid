@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require_relative './support/listing_converter'
 
 namespace :one_time do
-  desc "split listings with multiple tags into one listing for each tag"
+  desc 'split listings with multiple tags into one listing for each tag'
   task split_listings: :environment do
     converter = ListingConverter.new
 

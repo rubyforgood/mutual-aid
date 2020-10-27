@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class SoftwareFeedbacksController < ApplicationController
-  before_action :set_software_feedback, only: [:show, :edit, :update, :destroy]
+  before_action :set_software_feedback, only: %i[show edit update destroy]
 
   def index
     @software_feedbacks = SoftwareFeedback.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @software_feedback = SoftwareFeedback.new
@@ -43,6 +44,7 @@ class SoftwareFeedbacksController < ApplicationController
   end
 
   private
+
     def set_software_feedback
       @software_feedback = SoftwareFeedback.find(params[:id])
     end

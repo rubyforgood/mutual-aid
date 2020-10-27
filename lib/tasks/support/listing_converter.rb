@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ListingConverter
   def convert listing
     Listing.transaction do

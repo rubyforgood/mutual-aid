@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class CommunicationLog < ApplicationRecord
-  belongs_to :delivery_method, class_name: "ContactMethod", foreign_key: "delivery_method_id"
+  belongs_to :delivery_method, class_name: 'ContactMethod', foreign_key: 'delivery_method_id'
   belongs_to :person, optional: true
   belongs_to :match, optional: true
-  belongs_to :created_by, optional: true, class_name: "User", foreign_key: "created_by_id"
+  belongs_to :created_by, optional: true, class_name: 'User', foreign_key: 'created_by_id'
 
   scope :needs_follow_up, ->(boolean=nil){ where(needs_follow_up: boolean || true) }
 
@@ -22,7 +24,6 @@ class CommunicationLog < ApplicationRecord
   def name
     "#{delivery_method&.name}: #{subject} #{created_at.strftime("%A, %B %d, %Y at %l:%M %P")}"
   end
-
 end
 
 # == Schema Information

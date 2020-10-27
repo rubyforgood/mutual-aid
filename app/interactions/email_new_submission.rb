@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EmailNewSubmission < ActiveInteraction::Base
   object :submission
   object :user

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionBlueprint < Blueprinter::Base
   identifier :id
 

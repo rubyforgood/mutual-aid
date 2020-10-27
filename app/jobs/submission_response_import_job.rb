@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubmissionResponseImportJob < ApplicationJob
   queue_as :default
 

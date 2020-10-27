@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 class DonationsController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
-  before_action :set_donation, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i[new create]
+  before_action :set_donation, only: %i[show edit update destroy]
 
   def index
     @donations = Donation.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     set_form_dropdowns
@@ -45,6 +46,7 @@ class DonationsController < ApplicationController
   end
 
   private
+
     def set_donation
       @donation = Donation.find(params[:id])
     end
@@ -59,7 +61,7 @@ class DonationsController < ApplicationController
           :channel,
           :thank_you_sent,
           :notes,
-          person_attributes: [ :id, :preferred_contact_method_id, :name, :email, :phone, :_destroy ]
+          person_attributes: %i[id preferred_contact_method_id name email phone _destroy]
       )
     end
 end

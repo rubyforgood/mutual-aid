@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 class LocationTypesController < ApplicationController
-  before_action :set_location_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_location_type, only: %i[show edit update destroy]
 
   def index
     @location_types = LocationType.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @location_type = LocationType.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @location_type = LocationType.new(location_type_params)
@@ -39,6 +39,7 @@ class LocationTypesController < ApplicationController
   end
 
   private
+
     def set_location_type
       @location_type = LocationType.find(params[:id])
     end

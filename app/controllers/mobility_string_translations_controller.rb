@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class MobilityStringTranslationsController < ApplicationController
-  before_action :set_mobility_string_translation, only: [:show, :edit, :update, :destroy]
+  before_action :set_mobility_string_translation, only: %i[show edit update destroy]
 
   def index
     @mobility_string_translations = MobilityStringTranslation.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @mobility_string_translation = MobilityStringTranslation.new
@@ -43,6 +44,7 @@ class MobilityStringTranslationsController < ApplicationController
   end
 
   private
+
     def set_mobility_string_translation
       @mobility_string_translation = MobilityStringTranslation.find(params[:id])
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocationForm < BaseForm
   with_options default: nil do
     integer :id

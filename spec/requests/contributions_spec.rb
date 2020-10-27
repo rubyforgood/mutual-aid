@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe '/contributions', type: :request do
   let(:valid_attributes) {{
       location_attributes: { zip: '12345' },
-      tag_list: ['', 'cash']
+      tag_list: ['', 'cash'],
       # name: Faker::Name.name,
       # email: Faker::Internet.email,
       # phone: Faker::PhoneNumber.phone_number
   }}
 
   let(:invalid_attributes) {{
-      location_attributes: { zip: '12e45' }
+      location_attributes: { zip: '12e45' },
   }}
 
   before { sign_in create(:user) }
@@ -70,7 +70,7 @@ RSpec.describe '/contributions', type: :request do
       contribution = create(:listing)
 
       get(
-        contribution_url(contribution)
+        contribution_url(contribution),
       )
 
       expect(response).to be_successful

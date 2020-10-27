@@ -99,7 +99,7 @@ class PeopleController < ApplicationController
               region
               neighborhood
               _destroy
-          ]
+          ],
       )
     end
 end

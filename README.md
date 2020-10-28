@@ -1,6 +1,6 @@
 |CircleCI|Demo site|Test site|
 |-|-|-|
-|[![CircleCI](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main.svg?style=svg)](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main)|[![Heroku Mutual Aid Demo Status](http://heroku-badge.herokuapp.com/?app=mutual-aid-demo&svg=1)](https://mutual-aid-demo.herokuapp.com) [![Heroku Mutual Aid Demo Version](https://badgen.net/https/mutual-aid-demo.herokuapp.com/version)](https://mutual-aid-demo.herokuapp.com)|[![Heroku Mutual Aid Test Status](http://heroku-badge.herokuapp.com/?app=mutual-aid-test&svg=1)](https://mutual-aid-test.herokuapp.com) [![Heroku Mutual Aid Test Version](https://badgen.net/https/mutual-aid-test.herokuapp.com/version)](https://mutual-aid-test.herokuapp.com)|
+|[![CircleCI](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main.svg?style=svg)](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main)|[![Heroku Mutual Aid Demo Version](https://badgen.net/https/mutual-aid-demo.herokuapp.com/version)](https://mutual-aid-demo.herokuapp.com)|[![Heroku Mutual Aid Test Version](https://badgen.net/https/mutual-aid-test.herokuapp.com/version)](https://mutual-aid-test.herokuapp.com)|
 
 **Welcome, and thanks for coming by! 👋🏾**
 

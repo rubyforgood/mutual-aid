@@ -4,13 +4,13 @@ docker_image: &docker_image
 version: 2.1
 commands:
   bundle_install:
-    description: "Performs the bundler installation, relying on the CircleCI cache for performance"
+    description: 'Performs the bundler installation, relying on the CircleCI cache for performance'
     steps:
       - restore_cache:
           keys:
             - bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
       - run:
-          name: "Bundle Install"
+          name: 'Bundle Install'
           command: |
             set -euxo pipefail
             bundle config set frozen 'true'
@@ -20,20 +20,20 @@ commands:
           paths:
             - .bundle
   yarn_install:
-    description: "Performs node module installation, relying on the CircleCI cache for performance"
+    description: 'Performs node module installation, relying on the CircleCI cache for performance'
     steps:
       - restore_cache:
           keys:
             - node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
       - run:
-          name: "Yarn Modules Install"
+          name: 'Yarn Modules Install'
           command: bin/yarn install
       - save_cache:
           key: node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-  rspec_tests:
-    description: "Run the RSpec test suite"
+  rubocop:
+    description: 'Runs Rubocop'
     steps:
       - restore_cache:
           keys:
@@ -42,20 +42,35 @@ commands:
           keys:
             - node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
       - run:
-          name: "Run the RSpec Test Suite"
+          name: Rubocop
+          command: |
+            set -euxo pipefail
+            bundle config path .bundle 
+            bundle exec rubocop
+  rspec_tests:
+    description: 'Run the RSpec test suite'
+    steps:
+      - restore_cache:
+          keys:
+            - bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
+      - restore_cache:
+          keys:
+            - node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: 'Run the RSpec Test Suite'
           command: |
             set -euxo pipefail
             bundle config path .bundle
             bundle exec rails db:setup
             bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml
   yarn_tests:
-    description: "Run the Mocha test suite"
+    description: 'Run the Mocha test suite'
     steps:
       - restore_cache:
           keys:
             - node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
       - run:
-          name: "Run the Mocha Test Suite"
+          name: 'Run the Mocha Test Suite'
           command: yarn test --reporter mocha-junit-reporter
           environment:
             MOCHA_FILE: test/test-results.xml
@@ -73,6 +88,12 @@ jobs:
     steps:
       - checkout
       - yarn_install
+  rubocop:
+    docker:
+      - <<: *docker_image
+    steps:
+      - checkout
+      - rubocop
   ruby_tests:
     docker:
       - <<: *docker_image
@@ -106,6 +127,10 @@ workflows:
     jobs:
       - bundle
       - node_modules
+      - rubocop:
+          requires:
+            - bundle
+            - node_modules
       - ruby_tests:
           requires:
             - bundle
@@ -113,4 +138,3 @@ workflows:
       - js_tests:
           requires:
             - node_modules
-

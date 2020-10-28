@@ -102,7 +102,7 @@ class ListingsController < ApplicationController
 
   def listing_params
     params.require(:listing).permit(:description, :inexhaustible, :location_id, :person_id, :service_area_id,
-                                    :state, :submission_id, :title, :type, tag_list: [])
+                                    :state, :submission_id, :title, :type, tag_list: [],)
   end
 
   def allowed_params

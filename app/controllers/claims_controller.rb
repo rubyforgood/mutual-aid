@@ -10,7 +10,7 @@ class ClaimsController < ApplicationController
     render locals: {
       contribution: contribution,
       preferred_contact_method_id: current_person&.preferred_contact_method&.id,
-      preferred_contact_info: current_person&.preferred_contact_info
+      preferred_contact_info: current_person&.preferred_contact_info,
     }
   end
 
@@ -45,7 +45,7 @@ class ClaimsController < ApplicationController
     peer_to_peer_email = PeerToPeerMatchMailer.peer_to_peer_email(
       contribution,
       peer_alias: claim_params[:peer_alias],
-      message: claim_params[:message]
+      message: claim_params[:message],
     )
 
     status = Messenger.new(peer_to_peer_email, 'peer_to_peer_email').deliver_now
@@ -54,7 +54,7 @@ class ClaimsController < ApplicationController
       email: peer_to_peer_email,
       delivery_status: status,
       person: current_user.person,
-      initiator: current_user
+      initiator: current_user,
     )
   end
 

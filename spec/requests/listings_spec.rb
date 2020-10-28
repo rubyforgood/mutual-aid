@@ -4,7 +4,7 @@ RSpec.describe '/listings', type: :request do
   let(:valid_attributes) do
     {
       location_attributes: { zip: '12345' },
-      tag_list: ['', 'cash']
+      tag_list: ['', 'cash'],
       # name: Faker::Name.name,
       # email: Faker::Internet.email,
       # phone: Faker::PhoneNumber.phone_number
@@ -13,7 +13,7 @@ RSpec.describe '/listings', type: :request do
 
   let(:invalid_attributes) do
     {
-      location_attributes: { zip: '12e45' }
+      location_attributes: { zip: '12e45' },
     }
   end
 
@@ -117,7 +117,7 @@ RSpec.describe '/listings', type: :request do
       let(:new_street_address) { Faker::Address.street_address }
       let(:new_attributes) do
         {
-          location_attributes: { street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI') }
+          location_attributes: { street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI') },
         }
       end
 

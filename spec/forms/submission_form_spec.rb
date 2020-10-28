@@ -9,7 +9,7 @@ RSpec.describe SubmissionForm do
   let(:categories) do
     [
       create(:category, name: 'toys'),
-      create(:category, name: 'groceries')
+      create(:category, name: 'groceries'),
     ]
   end
 
@@ -38,7 +38,7 @@ RSpec.describe SubmissionForm do
         },
         responses_attributes: questions.map.with_index do |question, index|
           [question.id.to_s, "answer #{index + 1}"]
-        end.to_h
+        end.to_h,
       }
     end
 
@@ -92,7 +92,7 @@ RSpec.describe SubmissionForm do
         context 'which is optional' do
           before do
             params[:location_attributes] = {
-              street_address: ''
+              street_address: '',
             }
           end
 
@@ -235,7 +235,7 @@ RSpec.describe SubmissionForm do
              person: existing_person,
              listings: [existing_listing],
              form_name: 'Offer_form',
-             privacy_level_requested: 'volunteers')
+             privacy_level_requested: 'volunteers',)
     end
     let(:existing_response) { create :submission_response, submission: existing_submission }
 
@@ -246,15 +246,15 @@ RSpec.describe SubmissionForm do
         service_area: existing_listing.service_area.id,
         listings_attributes: {
           id: existing_listing.id,
-          state: 'matched'
+          state: 'matched',
         },
         location_attributes: {
           id: existing_location.id,
-          city: 'Shikaakwa'
+          city: 'Shikaakwa',
         },
         person_attributes: {
           id: existing_person.id,
-          name: 'new name'
+          name: 'new name',
         },
         responses_attributes: {
           existing_response.custom_form_question_id.to_s => 'updated answer'

@@ -25,3 +25,12 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Exclude:
     - spec/**/*
+
+Style/TrailingCommaInArguments:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false

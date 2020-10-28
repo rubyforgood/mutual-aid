@@ -117,7 +117,8 @@ RSpec.describe '/listings', type: :request do
       let(:new_street_address) { Faker::Address.street_address }
       let(:new_attributes) do
         {
-          location_attributes: { street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI') },
+          location_attributes: { street_address: new_street_address,
+                                 zip: Faker::Address.zip(state_abbreviation: 'MI') },
         }
       end
 

@@ -36,4 +36,13 @@ class PublicPagesController < PublicController
       organization_name: Organization.current_organization.name,
     }.to_json
   end
+
+  def version
+    version = JSON.parse(File.read(Rails.root.join('package.json'))).dig('version')
+    render json: {
+      subject: 'version',
+      status: version,
+      color: 'blue'
+    }
+  end
 end

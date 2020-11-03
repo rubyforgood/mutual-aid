@@ -23,6 +23,10 @@ FactoryBot.define do
     trait :sys_admin do
       role { :sys_admin }
     end
+
+    trait :with_person do
+      association :person
+    end
   end
 end
 

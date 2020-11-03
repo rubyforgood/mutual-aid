@@ -57,7 +57,7 @@ class Person < ApplicationRecord
   end
 
   def anonymized_name_and_email
-    "#{Anonymize.name(name)} #{Anonymize.email(email)}"
+    "#{Anonymize.name(name)} #{Anonymize.email(email)}".strip
   end
 
   private def preferred_contact_method_present!

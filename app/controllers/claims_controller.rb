@@ -14,14 +14,12 @@ class ClaimsController < ApplicationController
     }
   end
 
-  # FIXME: extract into an interactor
   def create
     # TODO: Need to handle race conditions to prevent creating multiple matches for same contribution.
     contribution = Listing.find(params[:contribution_id])
     ActiveRecord::Base.transaction do
       add_person_details!
-      Match.create_match_for_contribution!(contribution, current_user)
-      contribution.matched!
+      create_match_for_contribution!(contribution)
     end
     email_peer!(contribution)
     redirect_to contribution_path(params[:contribution_id]), notice: 'Claim was successful!'
@@ -40,6 +38,10 @@ class ClaimsController < ApplicationController
       preferred_contact_method_id: claim_params[:preferred_contact_method_id],
       contact_info: claim_params[:preferred_contact_info]
     )
+  end
+
+  def create_match_for_contribution!(contribution)
+    CreateMatchForContribution.run!(contribution: contribution, match_with: current_user)
   end
 
   def email_peer!(contribution)

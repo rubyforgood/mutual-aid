@@ -18,8 +18,8 @@ class EmailPeer < ActiveInteraction::Base
     CommunicationLog.log_email(
       email: peer_to_peer_email,
       delivery_status: status,
-      person: contribution.person, # to person?
-      initiator: user, # from person?
+      person: contribution.person,
+      initiator: user,
     )
   end
 end

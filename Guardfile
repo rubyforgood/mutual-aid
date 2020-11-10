@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
@@ -15,7 +17,6 @@
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
-
 # Note: The cmd option is now required due to the increasing number of ways
 #       rspec may be run, below are examples of the most common uses.
 #  * bundler: 'bundle exec rspec'
@@ -26,7 +27,7 @@
 #  * 'just' rspec: 'rspec'
 
 guard :rspec, cmd: "RUBYOPT='-W:no-deprecated' bin/spring rspec -f doc --no-profile" do
-  require "guard/rspec/dsl"
+  require 'guard/rspec/dsl'
   dsl = Guard::RSpec::Dsl.new(self)
 
   # Feel free to open issues for suggestions and improvements
@@ -66,6 +67,6 @@ guard :rspec, cmd: "RUBYOPT='-W:no-deprecated' bin/spring rspec -f doc --no-prof
   # Turnip features and steps
   watch(%r{^spec/acceptance/(.+)\.feature$})
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
-    Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
+    Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance'
   end
 end

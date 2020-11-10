@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # BrowseFilter code currently makes a lot of assumptions about the model coming in
 # I'm going to have to some lifting to make it accept other models
 # but at least all these changes will be isolated to this class
 class BrowseFilter
   FILTERS = {
     'ServiceArea' => ->(ids, scope) { scope.where(service_area: ids) },
-    'ContactMethod' => ->(ids, scope) { scope.joins(:person).where(people: {preferred_contact_method: ids})},
+    'ContactMethod' => ->(ids, scope) { scope.joins(:person).where(people: { preferred_contact_method: ids })},
     'Category' => lambda do |ids, scope|
       scope.tagged_with(
         Category.roots.where(id: ids).pluck('name'),

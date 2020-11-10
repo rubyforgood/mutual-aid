@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserRole
   ROLES = %w(unset neighbor volunteer dispatcher admin sys_admin).freeze
 

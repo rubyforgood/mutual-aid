@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ShiftMatch < ApplicationRecord
   belongs_to :shift
   belongs_to :match

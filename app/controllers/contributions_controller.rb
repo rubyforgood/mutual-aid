@@ -1,8 +1,10 @@
-class ContributionsController < ApplicationController
-  before_action :authenticate_user!, except: [:combined_form, :respond, :thank_you]
-  before_action :set_contribution, only: [:respond, :triage]
+# frozen_string_literal: true
 
-  layout "without_navbar", only: [:thank_you]
+class ContributionsController < ApplicationController
+  before_action :authenticate_user!, except: %i[combined_form respond thank_you]
+  before_action :set_contribution, only: %i[respond triage]
+
+  layout 'without_navbar', only: [:thank_you]
 
   def index
     @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
@@ -25,18 +27,15 @@ class ContributionsController < ApplicationController
     )
   end
 
-  def combined_form
-  end
+  def combined_form; end
 
   def respond
     @communication_logs = CommunicationLog.where(person: @contribution.person).order(sent_at: :desc)
   end
 
-  def thank_you
-  end
+  def thank_you; end
 
-  def triage
-  end
+  def triage; end
 
   def triage_update
     @contribution = Listing.find(params[:id])

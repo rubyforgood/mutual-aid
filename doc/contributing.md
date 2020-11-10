@@ -6,7 +6,7 @@ By participating in this project, you agree to abide by the Ruby for Good [code 
 **First:** if you're unsure or afraid of *anything*, just ask or submit the issue or pull request anyways. You won't be yelled at for giving your best effort. The worst that can happen is that you'll be politely asked to change something. We appreciate any sort of contributions, and don't want a wall of rules to get in the way of that.
 
 ## Find issues to work on
-We are using GitHub 'Projects' for planning. 
+We are using GitHub 'Projects' for planning.
 We have a series of [project boards](https://github.com/rubyforgood/mutual-aid/projects) with "Story Map" in their name that describe aspects of the site, plus a [Roadmap] board where we track progress and done-ness. Each Story Map project board may have notes at the top that summarize our current status. Below these notes are the issues that we'd like to work on.
 
 Feel free to read the current status and browse the issues. Contact us via issue comments if anything is unclear.
@@ -33,7 +33,7 @@ Here are the basic steps to submit a pull request. Make sure that you're working
 
 1. Ideally (but optionally) run your changes through `Rubocop`, a ruby code linter and `eslint`. We'll hopefully get this step automated soon.
 
-1. Run the test suite again  to be sure everythng still works.
+1. Run the test suite again to be sure everything still works.
 
 1. If you think mutual-aid groups using our app need to know about the changes you made, add an entry to the [CHANGELOG.md](/CHANGELOG.md). Reviewing what's already in there will give you a sense of what types of changes need to be documented.
 

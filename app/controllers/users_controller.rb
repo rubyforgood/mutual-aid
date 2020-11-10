@@ -1,14 +1,14 @@
-class UsersController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :authenticate_user!, except: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+class UsersController < ApplicationController
+  before_action :authenticate_user!, except: %i[new create]
+  before_action :set_user, only: %i[show edit update destroy]
 
   def index
     @users = User.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @user = User.new
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to users_path, notice: "User was successfully submitted."
+      redirect_to users_path, notice: 'User was successfully submitted.'
     else
       set_form_dropdowns
       render :new
@@ -59,6 +59,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, person_attributes: [ :id, :name, :email, :phone, :preferred_contact_method_id, :_destroy ] )
+    params.require(:user).permit(:email, person_attributes: %i[id name email phone preferred_contact_method_id _destroy] )
   end
 end

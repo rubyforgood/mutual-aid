@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 class ShiftsController < ApplicationController
-  before_action :set_shift, only: [:show, :edit, :update, :destroy]
+  before_action :set_shift, only: %i[show edit update destroy]
 
   def index
     @shifts = Shift.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @shift = Shift.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @shift = Shift.new(shift_params)
@@ -39,6 +39,7 @@ class ShiftsController < ApplicationController
   end
 
   private
+
     def set_shift
       @shift = Shift.find(params[:id])
     end

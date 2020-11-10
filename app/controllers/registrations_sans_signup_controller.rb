@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # FIXME: remove this when the pundit work is ready, #514
 # Devise override based on https://stackoverflow.com/a/8291318
 class RegistrationsSansSignupController < Devise::RegistrationsController

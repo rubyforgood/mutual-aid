@@ -14,6 +14,7 @@ This changelog also serves to acknowledge the incredible people who've contribut
 ## [Unreleased]
 * Unordered lists in user provided custom text (eg /about) now display with discs ('bullets') #777, #779
 * Allow custom text on landing page to override default text #769, #780
+* Add Rubocop #793
 
 ## [0.3.0] - 2020-10-05
 ### Breaking changes

@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 class SystemLocalesController < ApplicationController
-  before_action :set_system_locale, only: [:show, :edit, :update, :destroy]
+  before_action :set_system_locale, only: %i[show edit update destroy]
 
   def index
     @system_locales = SystemLocale.order(:locale_name)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @system_locale = SystemLocale.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @system_locale = SystemLocale.new(system_locale_params)
@@ -39,6 +39,7 @@ class SystemLocalesController < ApplicationController
   end
 
   private
+
     def set_system_locale
       @system_locale = SystemLocale.find(params[:id])
     end

@@ -12,7 +12,7 @@ const iconNameMapping = {
   Email: 'envelope',
   Text: 'mobile-alt',
   Phone: 'phone',
-  WhatsApp: 'whatsapp',
+  WhatsApp: 'whatsapp fab',
   Call: 'phone',
   Ask: 'hand-sparkles',
   Offer: 'hand-holding-heart',

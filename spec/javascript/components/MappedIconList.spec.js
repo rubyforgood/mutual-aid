@@ -11,6 +11,6 @@ describe('MappedIconList', () => {
     assert.exists(wrapper.find('b-icon-stub[aria-label=Email][icon=envelope]').text())
     assert.exists(wrapper.find('b-icon-stub[aria-label=Text][icon=mobile-alt]').text())
     assert.exists(wrapper.find('b-icon-stub[aria-label=Call][icon=phone]').text())
-    assert.exists(wrapper.find('b-icon-stub[aria-label=WhatsApp][icon=whatsapp]').text())
+    assert.exists(wrapper.find('b-icon-stub[aria-label=WhatsApp][icon="whatsapp fab"]').text())
   })
 })

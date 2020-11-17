@@ -40,7 +40,7 @@ end
 #  subject            :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  created_by_id      :bigint           default(1), not null
+#  created_by_id      :bigint
 #  delivery_method_id :bigint           not null
 #  match_id           :bigint
 #  person_id          :bigint

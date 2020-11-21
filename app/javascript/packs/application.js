@@ -18,3 +18,6 @@ import 'stylesheets/application'
 // Entrypoints into JS, made available as window.EntryPoints
 // See config/webpack/environment.js
 export * from '../entry_points'
+
+require("trix")
+require("@rails/actiontext")

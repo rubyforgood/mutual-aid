@@ -23,11 +23,10 @@ class BrowseFilter
   end.freeze
   ALLOWED_MODEL_NAMES = ['Ask', 'Offer'].freeze
 
-  attr_reader :parameters, :context
+  attr_reader :parameters
 
-  def initialize(parameters, context = nil)
+  def initialize(parameters)
     @parameters = parameters
-    @context = context
   end
 
   def contributions
@@ -36,14 +35,6 @@ class BrowseFilter
       models = ContributionType.where(name: model_names.intersection(ALLOWED_MODEL_NAMES)).map(&:model)
       models.map { |model| filter(model) }.flatten
     end
-  end
-
-  def options
-    return {} unless context
-
-    options = { respond_path: ->(id) { context.respond_contribution_path(id)} }
-    options[:view_path] = ->(id) { context.contribution_path(id) } if SystemSetting.current_settings&.peer_to_peer?
-    options
   end
 
   private

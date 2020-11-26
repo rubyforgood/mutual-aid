@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ContributionsController < ApplicationController
-  before_action :authenticate_user!, except: %i[combined_form respond thank_you]
+  before_action :authenticate_user!, unless: :peer_to_peer_mode?
   before_action :set_contribution, only: %i[respond triage]
 
   layout 'without_navbar', only: [:thank_you]
@@ -58,6 +58,9 @@ class ContributionsController < ApplicationController
 
   private
 
+  def peer_to_peer_mode?
+    @system_setting.peer_to_peer?
+  end
 
   def contribution_blueprint_options
     options = { respond_path: ->(id) { respond_contribution_path(id)} }

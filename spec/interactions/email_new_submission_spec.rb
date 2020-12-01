@@ -41,4 +41,13 @@ RSpec.describe EmailNewSubmission do
       expect(last_log.delivery_status).to eq 'error'
     end
   end
+
+  context 'when submission is initiated by anonymous user' do
+    let(:user) { nil }
+
+    it 'records a log with nil user' do
+      expect { interaction }.to change(CommunicationLog, :count).by(1)
+      expect(CommunicationLog.last.created_by).to be_nil
+    end
+  end
 end

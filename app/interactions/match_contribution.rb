@@ -5,27 +5,21 @@ class MatchContribution < ActiveInteraction::Base
   object :match_with, class: User
 
   def execute
-    create_match_for_contribution!
+    Match.create! match_receiver_and_provider.merge(status: 'match_confirmed')
     contribution.matched!
   end
 
   private
 
-  def create_match_for_contribution!
-    match_params = if contribution.ask?
-                      { receiver: contribution, provider: create_offer_for_ask! }
-                    elsif contribution.offer? # TODO: check if community resource type when it's added
-                      { receiver: create_ask_for_offer!, provider: contribution }
-                    end
-    Match.create!(match_params.merge(status: 'match_confirmed'))
-  end
-
-  def create_offer_for_ask!
-    Offer.create!(counter_contribution_params)
-  end
-
-  def create_ask_for_offer!
-    Ask.create!(counter_contribution_params)
+  def match_receiver_and_provider
+    if contribution.ask?
+      { receiver: contribution, provider: Offer.create!(counter_contribution_params) }
+    elsif contribution.offer?
+      { receiver: Ask.create!(counter_contribution_params), provider: contribution }
+    else
+      # TODO: check if community resource type when it's added
+      raise "Unhandled contribution type: #{contribution.type}"
+    end
   end
 
   def counter_contribution_params

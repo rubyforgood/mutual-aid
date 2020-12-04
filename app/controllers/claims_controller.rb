@@ -45,7 +45,7 @@ class ClaimsController < ApplicationController
   end
 
   def create_match_for_contribution!(contribution)
-    CreateMatchForContribution.run!(contribution: contribution, match_with: current_user)
+    MatchContribution.run!(contribution: contribution, match_with: current_user)
   end
 
   def email_peer!(contribution)

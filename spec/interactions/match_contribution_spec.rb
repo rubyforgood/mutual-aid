@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe CreateMatchForContribution do
+RSpec.describe MatchContribution do
   let(:user) { create(:user, :with_person) }
 
   before do
-    CreateMatchForContribution.run!(contribution: contribution, match_with: user)
+    MatchContribution.run!(contribution: contribution, match_with: user)
   end
 
   let(:last_match) { Match.last }

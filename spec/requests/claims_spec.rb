@@ -27,7 +27,7 @@ RSpec.describe '/contributions/:contribution_id/claims', type: :request do
 
     before do
       allow(AddPersonDetailsFromClaimParams).to receive(:run!)
-      allow(CreateMatchForContribution).to receive(:run!)
+      allow(MatchContribution).to receive(:run!)
       allow(EmailPeer).to receive(:run!)
     end
 
@@ -37,7 +37,7 @@ RSpec.describe '/contributions/:contribution_id/claims', type: :request do
       post contribution_claims_url(contribution), params: valid_attributes
 
       expect(AddPersonDetailsFromClaimParams).to have_received(:run!)
-      expect(CreateMatchForContribution).to have_received(:run!)
+      expect(MatchContribution).to have_received(:run!)
       expect(EmailPeer).to have_received(:run!)
     end
   end

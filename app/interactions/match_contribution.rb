@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateMatchForContribution < ActiveInteraction::Base
+class MatchContribution < ActiveInteraction::Base
   object :contribution, class: Listing
   object :match_with, class: User
 

@@ -13,12 +13,11 @@ RSpec.describe '/contributions', type: :request do
       location_attributes: { zip: '12e45' },
   }}
 
-  before { sign_in create(:user) }
+  let(:user) { create(:user) }
 
   ['when logged in', 'when logged out but p2p is enabled'].each do |scenario|
     describe scenario do
       before do
-        user = create(:user)
         sign_in user unless scenario =~ /logged out/
         allow_any_instance_of(SystemSetting).to receive(:peer_to_peer?).and_return(true) if scenario =~ /p2p is enabled/
       end
@@ -83,6 +82,20 @@ RSpec.describe '/contributions', type: :request do
 
           expect(response).to be_successful
         end
+      end
+    end
+  end
+
+  describe 'when logged out and p2p is disabled' do
+    describe 'GET /index' do
+      before do
+        allow_any_instance_of(SystemSetting).to receive(:peer_to_peer?).and_return(false)
+      end
+
+      it 'redirects to the user login page' do
+        create(:listing)
+        get contributions_url
+        assert_redirected_to new_user_session_url
       end
     end
   end

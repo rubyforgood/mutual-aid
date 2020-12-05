@@ -3,7 +3,7 @@
 class AddPersonDetailsFromClaimParams < ActiveInteraction::Base
   object :user
   string :name
-  integer :preferred_contact_method_id
+  record :preferred_contact_method, class: ContactMethod
   string :contact_info
 
   def execute
@@ -15,10 +15,6 @@ class AddPersonDetailsFromClaimParams < ActiveInteraction::Base
   end
 
   private
-
-  def preferred_contact_method
-    ContactMethod.find(preferred_contact_method_id)
-  end
 
   def preferred_contact_method_field
     preferred_contact_method.field.to_sym

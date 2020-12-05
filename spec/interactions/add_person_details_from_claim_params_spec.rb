@@ -6,7 +6,7 @@ RSpec.describe AddPersonDetailsFromClaimParams do
   let(:person_name) { "John Doe" }
 
   before do
-    AddPersonDetailsFromClaimParams.run!(user: user, name: person_name, preferred_contact_method_id: preferred_contact_method.id, contact_info: contact_info)
+    AddPersonDetailsFromClaimParams.run!(user: user, name: person_name, preferred_contact_method: preferred_contact_method.id, contact_info: contact_info)
   end
 
   context "when person record for the user is not present" do

@@ -25,7 +25,7 @@ class ClaimContribution < ActiveInteraction::Base
     AddPersonDetailsFromClaimParams.run!(
       user: current_user,
       name: claim_params[:peer_alias],
-      preferred_contact_method_id: claim_params[:preferred_contact_method_id],
+      preferred_contact_method: claim_params[:preferred_contact_method_id],
       contact_info: claim_params[:preferred_contact_info]
     )
   end

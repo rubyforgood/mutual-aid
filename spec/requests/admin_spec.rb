@@ -24,12 +24,12 @@ describe '/admin', type: :request do
     let(:glossary_html) { "<b>Word</b>: Definition" }
 
     it 'does not update the glossary_content if system_setting object is missing' do
-      patch glossary_admin_update_url(), params: { system_setting: { glossary_content: glossary_html }}
+      patch glossary_admin_update_url(), params: { system_setting: { glossary_content: glossary_html } }
       expect(system_settings.glossary_content.body).to be_nil
     end
 
     it 'updates glossary_content of the system_setting object' do
-      patch glossary_admin_update_url(system_settings), params: { system_setting: { glossary_content: glossary_html} }
+      patch glossary_admin_update_url(system_settings), params: { system_setting: { glossary_content: glossary_html } }
       expect(response.status).to eq 302
       expect(system_settings.glossary_content.body).not_to be_nil
     end

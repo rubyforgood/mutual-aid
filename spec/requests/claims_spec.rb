@@ -25,20 +25,12 @@ RSpec.describe '/contributions/:contribution_id/claims', type: :request do
       }
     end
 
-    before do
-      allow(AddPersonDetailsFromClaimParams).to receive(:run!)
-      allow(MatchContribution).to receive(:run!)
-      allow(EmailPeer).to receive(:run!)
-    end
+    it 'claims the contribution' do
+      allow(ClaimContribution).to receive(:run!)
 
-    it 'creates a new Person and Match and sends an email to peer', :aggregate_failures do
-      contribution = create(:listing)
+      post contribution_claims_url(1), params: valid_attributes
 
-      post contribution_claims_url(contribution), params: valid_attributes
-
-      expect(AddPersonDetailsFromClaimParams).to have_received(:run!)
-      expect(MatchContribution).to have_received(:run!)
-      expect(EmailPeer).to have_received(:run!)
+      expect(ClaimContribution).to have_received(:run!)
     end
   end
 end

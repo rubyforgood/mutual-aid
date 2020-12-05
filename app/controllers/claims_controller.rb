@@ -15,7 +15,11 @@ class ClaimsController < ApplicationController
   end
 
   def create
-    claim_contribution!
+    ClaimContribution.run!(
+      contribution: params[:contribution_id],
+      claim_params: claim_params[:claim],
+      current_user: current_user
+    )
     redirect_to contribution_path(params[:contribution_id]), notice: 'Claim was successful!'
   end
 
@@ -23,38 +27,6 @@ class ClaimsController < ApplicationController
 
   def claim_params
     params.require(:claim).permit(:peer_alias, :preferred_contact_method_id, :preferred_contact_info, :message)
-  end
-
-  def claim_contribution!
-    # TODO: Need to handle race conditions to prevent creating multiple matches for same contribution.
-    contribution = Listing.find(params[:contribution_id])
-    ActiveRecord::Base.transaction do
-      add_person_details!
-      create_match_for_contribution!(contribution)
-    end
-    email_peer!(contribution)
-  end
-
-  def add_person_details!
-    AddPersonDetailsFromClaimParams.run!(
-      user: current_user,
-      name: claim_params[:peer_alias],
-      preferred_contact_method_id: claim_params[:preferred_contact_method_id],
-      contact_info: claim_params[:preferred_contact_info]
-    )
-  end
-
-  def create_match_for_contribution!(contribution)
-    MatchContribution.run!(contribution: contribution, match_with: current_user)
-  end
-
-  def email_peer!(contribution)
-    EmailPeer.run!(
-      contribution: contribution,
-      peer_alias: claim_params[:peer_alias],
-      message: claim_params[:message],
-      user: current_user
-    )
   end
 
   def current_person

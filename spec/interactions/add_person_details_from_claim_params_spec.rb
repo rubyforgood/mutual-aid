@@ -24,13 +24,14 @@ RSpec.describe AddPersonDetailsFromClaimParams do
   context "when person record for the user is present" do
     let(:user) { create(:user, :with_person) }
 
-    it "updates the person record with given details" do
+    it "updates the person record with given details", :aggregate_failures do
       person = user.person
       expect(person).to have_attributes(
         name: person.name,
         preferred_contact_method: preferred_contact_method,
         phone: contact_info
       )
+      expect(user.reload.person).to eq(person)
     end
   end
 end

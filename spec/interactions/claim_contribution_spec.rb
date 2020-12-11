@@ -6,6 +6,8 @@ RSpec.describe ClaimContribution do
     allow(EmailPeer).to receive(:run!)
   end
 
+  let(:contribution) { create(:listing) }
+  let(:user) { create(:user)}
   let(:claim_params) do
     {
       peer_alias: 'alias',
@@ -14,46 +16,37 @@ RSpec.describe ClaimContribution do
     }
   end
 
+  subject(:interaction) { ClaimContribution.run!(contribution: contribution.id,
+                                                 claim_params: claim_params,
+                                                 current_user: user) }
+
   it "matches contribution and sends an email to peer", :aggregate_failures do
-    contribution = create(:listing)
     allow_any_instance_of(ClaimContribution).to receive(:add_person_details)
 
-    ClaimContribution.run!(
-      contribution: contribution.id,
-      claim_params: claim_params,
-      current_user: build(:user)
-    )
+    interaction
 
     expect(MatchContribution).to have_received(:run!)
     expect(EmailPeer).to have_received(:run!)
   end
 
-  it "creates a person if current user has no person record" do
-    contribution = create(:listing)
-    user = create(:user)
+  context "when current user has no person record" do
+    it "creates a person" do
+      interaction
 
-    ClaimContribution.run!(
-      contribution: contribution.id,
-      claim_params: claim_params,
-      current_user: user
-    )
-
-    expect(user.reload.person).to have_attributes(name: claim_params[:peer_alias],
-                                                  email: claim_params[:email],
-                                                  preferred_contact_method: ContactMethod.email,
-                                                  user: user)
+      expect(user.reload.person).to have_attributes(name: claim_params[:peer_alias],
+                                                    email: claim_params[:email],
+                                                    preferred_contact_method: ContactMethod.email,
+                                                    user: user)
+    end
   end
 
-  it "updates the person email address" do
-    contribution = create(:listing)
-    user = create(:user, :with_person)
+  context "when current has a person" do
+    let(:user) { create(:user, :with_person)}
 
-    ClaimContribution.run!(
-      contribution: contribution.id,
-      claim_params: claim_params,
-      current_user: user
-    )
+    it "updates the person email address" do
+      interaction
 
-    expect(user.reload.person).to have_attributes(email: claim_params[:email], user: user)
+      expect(user.reload.person).to have_attributes(email: claim_params[:email], user: user)
+    end
   end
 end

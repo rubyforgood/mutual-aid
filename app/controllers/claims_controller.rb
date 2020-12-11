@@ -26,7 +26,7 @@ class ClaimsController < ApplicationController
   private
 
   def claim_params
-    params.require(:claim).permit(:peer_alias, :preferred_contact_method_id, :preferred_contact_info, :message)
+    params.require(:claim).permit(:peer_alias, :email, :message)
   end
 
   def current_person

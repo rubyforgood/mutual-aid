@@ -4,8 +4,7 @@ class ClaimContribution < ActiveInteraction::Base
   record :contribution, class: Listing
   hash :claim_params do
     string :peer_alias
-    integer :preferred_contact_method_id
-    string :preferred_contact_info
+    string :email
     string :message
   end
   object :current_user, class: User
@@ -22,12 +21,20 @@ class ClaimContribution < ActiveInteraction::Base
   private
 
   def add_person_details
-    AddPersonDetailsFromClaimParams.run!(
-      user: current_user,
+    if current_user.person.blank?
+      Person.create!(new_person_params)
+    else
+      current_user.person.update!(email: claim_params[:email])
+    end
+  end
+
+  def new_person_params
+    {
       name: claim_params[:peer_alias],
-      preferred_contact_method: claim_params[:preferred_contact_method_id],
-      contact_info: claim_params[:preferred_contact_info]
-    )
+      preferred_contact_method: ContactMethod.email,
+      user: current_user,
+      email: claim_params[:email]
+    }
   end
 
   def create_match_for_contribution

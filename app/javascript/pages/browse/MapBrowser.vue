@@ -97,6 +97,7 @@
               },
             })
 
+            var bounds = new mapboxgl.LngLatBounds();
             geojson.features.forEach(function (marker) {
               var el = document.createElement('div');
               el.className = 'marker ' + marker.properties.contributionType.toLowerCase() + '-marker';
@@ -109,7 +110,9 @@
                 .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.categoryTag + '</p><p>' + marker.properties.description + '</p>'))
 
               newMarker.addTo(map)
+              bounds.extend(marker.geometry.coordinates);
             })
+            map.fitBounds(bounds, { padding: 50 });
           })
       },
       zoomend(map, e) {

@@ -16,6 +16,10 @@ This changelog also serves to acknowledge the incredible people who've contribut
 * Allow custom text on landing page to override default text #769, #780
 * Add Rubocop #793
 
+## [0.3.1] - 2020-10-10
+### Enhancement
+* Fit all the offers in the initial view for the map #774
+
 ## [0.3.0] - 2020-10-05
 ### Breaking changes
 * The `SMTP_ADDRESS` environment variable has been renamed to `SMTP_HOST` #750

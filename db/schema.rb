@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_172102) do
+ActiveRecord::Schema.define(version: 2020_11_13_172851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_172102) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "delivery_status"
     t.string "subject"
-    t.bigint "created_by_id", default: 1, null: false
+    t.bigint "created_by_id"
     t.string "body"
     t.boolean "outbound", default: true, null: false
     t.bigint "delivery_method_id", null: false

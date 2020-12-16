@@ -73,7 +73,8 @@ Rails.application.routes.draw do
   resources :system_settings
   resources :teams
   resources :users
-  resources :glossary, only: [:index]
+
+  resource :glossary, controller: :glossary, only: [:show]
 
   root :to => 'public_pages#landing_page'
 end

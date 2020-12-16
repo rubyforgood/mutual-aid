@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get '/admin/forms',              to: 'admin#form_admin',      as: 'form_admin'
   get '/admin/volunteers',         to: 'admin#volunteer_admin', as: 'volunteer_admin'
   get '/admin/dispatch',           to: 'admin#dispatch_steps',  as: 'dispatch_steps_admin'
-  get '/admin/glossary',           to: 'admin#glossary',        as: 'glossary_admin'
   get '/admin/yearbook',           to: 'admin#yearbook',        as: 'yearbook_admin'
 
   get '/public',                   to: 'public_pages#landing_page',        as: 'landing_page_public'
@@ -74,6 +73,7 @@ Rails.application.routes.draw do
   resources :system_settings
   resources :teams
   resources :users
+  resources :glossary, only: [:index]
 
   root :to => 'public_pages#landing_page'
 end

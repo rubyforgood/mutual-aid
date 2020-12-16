@@ -20,8 +20,6 @@ class AdminController < ApplicationController
 
   def form_admin; end
 
-  def glossary; end
-
   def yearbook
     @positions = Position.all
   end

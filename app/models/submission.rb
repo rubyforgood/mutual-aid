@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Submission < ApplicationRecord
   acts_as_taggable_on :tags
 
@@ -9,10 +11,10 @@ class Submission < ApplicationRecord
 
   accepts_nested_attributes_for :listings, :person
 
-  PRIVACY_LEVELS = ["anyone", "users", "volunteers", "dispatchers only"]
+  PRIVACY_LEVELS = ['anyone', 'users', 'volunteers', 'dispatchers only']
 
   def moderation_requested?
-    privacy_level_requested == "moderation_requested"
+    privacy_level_requested == 'moderation_requested'
   end
 
   def name
@@ -20,17 +22,16 @@ class Submission < ApplicationRecord
   end
 
   def category_list
-    all_tags_list #["transportation", "groceries"]
+    all_tags_list # ["transportation", "groceries"]
   end
 
   def urgency
-    "I can wait a week"
+    'I can wait a week'
   end
 
   def name
     "(#{created_at.strftime("%m-%d-%Y")}) #{form_name.titleize} - #{service_area.name}"
   end
-
 end
 
 # == Schema Information

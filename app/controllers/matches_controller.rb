@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class MatchesController < ApplicationController
-  before_action :set_match, only: [:edit, :update, :destroy]
+  before_action :set_match, only: %i[edit update destroy]
 
   def index
-    @matches = Match.status(params[:status] || "all").order(updated_at: :desc)
+    @matches = Match.status(params[:status] || 'all').order(updated_at: :desc)
 
     # follow_up_status filter
     @statuses = Match::STATUSES.map{|s| [s.titleize, s]}
@@ -77,15 +79,16 @@ class MatchesController < ApplicationController
   end
 
   private
+
     def set_match
       @match = Match.find(params[:id])
     end
 
     def set_form_dropdowns
-      type = params["receiver_id"].present? ? "Ask" : "Offer" # TODO change w resources
-      if type == "Ask"
+      type = params['receiver_id'].present? ? 'Ask' : 'Offer' # TODO: change w resources
+      if type == 'Ask'
         @receiver = Listing.where(type: type, id: params[:receiver_id]).first
-      elsif type == "Offer"
+      elsif type == 'Offer'
         @provider = Listing.where(type: type, id: params[:provider_id]).first
       end
 

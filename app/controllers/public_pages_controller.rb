@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PublicPagesController < PublicController
   layout :determine_layout
 
@@ -6,7 +8,7 @@ class PublicPagesController < PublicController
   end
 
   def determine_layout
-    "without_navbar" unless @system_setting.display_navbar?
+    'without_navbar' unless @system_setting.display_navbar?
   end
 
   def announcements
@@ -23,7 +25,7 @@ class PublicPagesController < PublicController
   end
 
   def contributions
-    redirect_to listings_path # TODO - change current /listings endpoint to point to this one
+    redirect_to listings_path # TODO: - change current /listings endpoint to point to this one
   end
 
   def landing_page
@@ -33,5 +35,14 @@ class PublicPagesController < PublicController
       landing_page_text_how: HtmlSanitizer.new(@system_setting.landing_page_text_how).sanitize,
       organization_name: Organization.current_organization.name,
     }.to_json
+  end
+
+  def version
+    version = JSON.parse(File.read(Rails.root.join('package.json'))).dig('version')
+    render json: {
+      subject: 'version',
+      status: version,
+      color: 'blue'
+    }
   end
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class EmailNewSubmission < ActiveInteraction::Base
   object :submission
-  object :user
+  object :user, default: nil
 
   def execute
     email = SubmissionMailer.new_submission_confirmation_email(submission)

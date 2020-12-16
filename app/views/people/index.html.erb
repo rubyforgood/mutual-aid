@@ -33,5 +33,14 @@
         <td><%= edit_button(person.user, "", "fa fa-user-edit") if person.user_id %></td>
       </tr>
     <% end %>
+    <% if @pagy.pages > 1 %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td colspan=2>
+          <%= pagy_bulma_nav(@pagy).html_safe %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

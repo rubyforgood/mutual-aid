@@ -1,7 +1,7 @@
-class SubmissionResponseImportsController < ApplicationController
+# frozen_string_literal: true
 
-  def new
-  end
+class SubmissionResponseImportsController < ApplicationController
+  def new; end
 
   def create
     uploaded_file = params[:submission_response_import][:file]

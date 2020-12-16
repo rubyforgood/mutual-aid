@@ -4,7 +4,7 @@ FactoryBot.define do
     is_from_receiver { false }
     completed { false }
     quality { 1 }
-    description { "MyText" }
+    description { 'MyText' }
   end
 end
 

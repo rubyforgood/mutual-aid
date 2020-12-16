@@ -40,7 +40,6 @@ RSpec.describe SubmissionForm do
 
     subject(:submission) { SubmissionForm.build params }
 
-
     it 'builds a Submission instance' do
       expect(submission).to be_a Submission
     end
@@ -142,7 +141,7 @@ RSpec.describe SubmissionForm do
 
       it 'builds SubmissionResponses' do
         expect(submission_responses.length).to eq(2)
-        expect(submission_responses.first.string_response).to eq("answer 1")
+        expect(submission_responses.first.string_response).to eq('answer 1')
       end
 
       context 'when there are no custom questions' do
@@ -244,7 +243,7 @@ RSpec.describe SubmissionForm do
         name: 'new name',
       },
       responses_attributes: {
-        existing_response.custom_form_question_id.to_s => "updated answer",
+        existing_response.custom_form_question_id.to_s => 'updated answer',
       },
     }}
 

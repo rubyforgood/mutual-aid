@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class ServiceAreasController < ApplicationController
-  before_action :set_service_area, only: [:show, :edit, :update, :destroy]
+  before_action :set_service_area, only: %i[show edit update destroy]
 
   def index
     @service_areas = ServiceArea.order_by_translated_name(@system_locale&.locale)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     set_form_dropdowns
@@ -46,6 +47,7 @@ class ServiceAreasController < ApplicationController
   end
 
   private
+
     def set_service_area
       @service_area = ServiceArea.find(params[:id])
     end
@@ -55,7 +57,6 @@ class ServiceAreasController < ApplicationController
       @service_area_types = ServiceArea::TYPES.map{ |i| [i,i] }
     end
 
-
     def service_area_params
       params.require(:service_area).permit(
           :parent_id,
@@ -63,24 +64,24 @@ class ServiceAreasController < ApplicationController
           :service_area_type,
           :name,
           :description,
-          location_attributes: [ :id,
-                                      :location_type_id,
-                                      :street_address,
-                                      :city,
-                                      :state,
-                                      :zip,
-                                      :county,
-                                      :region,
-                                      :neighborhood,
-                                      :_destroy ],
-          service_areas_attributes: [ :id,
-                                      :location_id,
-                                      :parent_id,
-                                      :organization_id,
-                                      :service_area_type,
-                                      :name,
-                                      :description,
-                                      :_destroy ]
+          location_attributes: %i[id
+                                      location_type_id
+                                      street_address
+                                      city
+                                      state
+                                      zip
+                                      county
+                                      region
+                                      neighborhood
+                                      _destroy],
+          service_areas_attributes: %i[id
+                                      location_id
+                                      parent_id
+                                      organization_id
+                                      service_area_type
+                                      name
+                                      description
+                                      _destroy]
       )
     end
 end

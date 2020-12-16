@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class Category < ApplicationRecord
   belongs_to(:parent,
-    class_name: "Category",
+    class_name: 'Category',
     inverse_of: :categories,
     optional: true,
   )
   has_many(:categories, -> { order(:display_order, :name) },
-    class_name: "Category",
+    class_name: 'Category',
     foreign_key: :parent_id,
     inverse_of: :parent
   )
@@ -19,7 +21,7 @@ class Category < ApplicationRecord
   scope :as_filter_types, -> { roots.select(:id, :name)}
 
   def full_name
-    "#{ parent&.name&.upcase + ": " if parent}#{parent.present? ? name : name.upcase }"
+    "#{parent&.name&.upcase + ": " if parent}#{parent.present? ? name : name.upcase}"
   end
 
   def lineage

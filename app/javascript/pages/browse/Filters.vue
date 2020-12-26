@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     allFiltersSelected: function () {
-      return JSON.stringify(this.allFilters.sort()) == JSON.stringify(this.currentFilters.sort())
+      return this.allFilters.length === this.currentFilters.length
     },
     indeterminateAll: function () {
       return this.currentFilters.length == 0

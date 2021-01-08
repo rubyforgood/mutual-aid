@@ -15,88 +15,106 @@ RSpec.describe '/contributions', type: :request do
 
   let(:user) { create(:user) }
 
-  ['when logged in', 'when logged out but p2p is enabled'].each do |scenario|
-    describe scenario do
+  describe 'access' do
+    describe 'when logged in' do
       before do
-        sign_in user unless scenario =~ /logged out/
-        allow_any_instance_of(SystemSetting).to receive(:peer_to_peer?).and_return(true) if scenario =~ /p2p is enabled/
+        sign_in user
       end
 
-      describe 'GET /index' do
-        it 'renders a successful response' do
-          create(:listing)
-          get contributions_url
-          expect(response).to be_successful
-        end
-
-        it 'allows asking for a specific subtype of listing' do
-          ask = create(:ask, title: 'this is the ask title')
-          offer = create(:offer, title: 'this is the offer title')
-          get contributions_url, params: { ContributionType: { 'Ask' => 1 } }
-          expect(response.body).to match(ask.title)
-          expect(response.body).not_to match(offer.title)
-          get contributions_url, params: { ContributionType: { 'Offer' => 1 } }
-          expect(response.body).not_to match(ask.title)
-          expect(response.body).to match(offer.title)
-          get contributions_url, params: { ContributionType: { 'Ask' => 1, 'Offer' => 1 } }
-          expect(response.body).to match(ask.title)
-          expect(response.body).to match(offer.title)
-        end
-
-        it 'parses requests for a filtered list' do
-          categories = [
-            create(:category, name: Faker::Lorem.word),
-            create(:category, name: Faker::Lorem.word)
-          ]
-          both_tags_listing = create(:listing, tag_list: categories.map(&:name))
-          expected_area = both_tags_listing.service_area
-          expected_area.name = Faker::Address.community
-          expected_area.save!
-          one_tag_listing = create(:listing, service_area: expected_area, tag_list: categories.sample.name)
-          both_tags_wrong_area_listing = create(:listing, tag_list: categories.map(&:name))
-          no_tags_correct_area_listing = create(:listing, service_area: expected_area)
-
-          # passing `as: json` to `get` does some surprising things to the request and its params that would break this test
-          get contributions_url, {
-            params: { "Category[#{categories[0].id}]": 1, "Category[#{categories[1].id}]": 1, "ServiceArea[#{expected_area.id}]": 1 },
-            headers: { 'HTTP_ACCEPT' => 'application/json' }
-          }
-
-          expect(response.body).to match(/#{expected_area.name.to_json}/)
-
-          response_ids = JSON.parse(response.body).map { |hash| hash['id']}
-          expect(response_ids).to include(both_tags_listing.id)
-          expect(response_ids).to include(one_tag_listing.id)
-          expect(response_ids).not_to include(both_tags_wrong_area_listing.id)
-          expect(response_ids).not_to include(no_tags_correct_area_listing.id)
-        end
+      it 'renders the index of contributions' do
+        create(:listing)
+        get contributions_url
+        expect(response).to be_successful
       end
 
-      describe 'GET /contributions/:id' do
-        it 'is successful' do
-          contribution = create(:listing)
-
-          get(
-            contribution_url(contribution),
-          )
-
-          expect(response).to be_successful
-        end
+      it 'is shows a contribution response page' do
+        contribution = create(:listing)
+        get contribution_url(contribution)
+        expect(response).to be_successful
       end
     end
-  end
 
-  describe 'when logged out and p2p is disabled' do
-    describe 'GET /index' do
+    describe 'when logged out but p2p is enabled' do
+      before do
+        allow_any_instance_of(SystemSetting).to receive(:peer_to_peer?).and_return(true)
+      end
+
+      it 'renders the index of contributions' do
+        create(:listing)
+        get contributions_url
+        expect(response).to be_successful
+      end
+
+      # # This test is commented out because it probably should redirect to
+      # # a page that's different than would dispatchers etc. see
+      #
+      # it 'is shows a contribution response page' do
+      #   contribution = create(:listing)
+      #   get contribution_url(contribution)
+      #   expect(response).to be_successful
+      # end
+    end
+
+    describe 'when logged out and p2p is disabled' do
       before do
         allow_any_instance_of(SystemSetting).to receive(:peer_to_peer?).and_return(false)
       end
 
-      it 'redirects to the user login page' do
+      it 'redirects to the user login page for the index of contributions' do
         create(:listing)
         get contributions_url
         assert_redirected_to new_user_session_url
       end
+
+      it 'redirects to the user login page for a link to an individual contribution' do
+        contribution = create(:listing)
+        get contribution_url(contribution)
+        assert_redirected_to new_user_session_url
+      end
+    end
+
+    it 'allows asking for a specific subtype of listing' do
+      sign_in user
+      ask = create(:ask, title: 'this is the ask title')
+      offer = create(:offer, title: 'this is the offer title')
+      get contributions_url, params: { ContributionType: { 'Ask' => 1 } }
+      expect(response.body).to match(ask.title)
+      expect(response.body).not_to match(offer.title)
+      get contributions_url, params: { ContributionType: { 'Offer' => 1 } }
+      expect(response.body).not_to match(ask.title)
+      expect(response.body).to match(offer.title)
+      get contributions_url, params: { ContributionType: { 'Ask' => 1, 'Offer' => 1 } }
+      expect(response.body).to match(ask.title)
+      expect(response.body).to match(offer.title)
+    end
+
+    it 'parses requests for a filtered list' do
+      sign_in user
+      categories = [
+        create(:category, name: Faker::Lorem.word),
+        create(:category, name: Faker::Lorem.word)
+      ]
+      both_tags_listing = create(:listing, tag_list: categories.map(&:name))
+      expected_area = both_tags_listing.service_area
+      expected_area.name = Faker::Address.community
+      expected_area.save!
+      one_tag_listing = create(:listing, service_area: expected_area, tag_list: categories.sample.name)
+      both_tags_wrong_area_listing = create(:listing, tag_list: categories.map(&:name))
+      no_tags_correct_area_listing = create(:listing, service_area: expected_area)
+
+      # passing `as: json` to `get` does some surprising things to the request and its params that would break this test
+      get contributions_url, {
+        params: { "Category[#{categories[0].id}]": 1, "Category[#{categories[1].id}]": 1, "ServiceArea[#{expected_area.id}]": 1 },
+        headers: { 'HTTP_ACCEPT' => 'application/json' }
+      }
+
+      expect(response.body).to match(/#{expected_area.name.to_json}/)
+
+      response_ids = JSON.parse(response.body).map { |hash| hash['id']}
+      expect(response_ids).to include(both_tags_listing.id)
+      expect(response_ids).to include(one_tag_listing.id)
+      expect(response_ids).not_to include(both_tags_wrong_area_listing.id)
+      expect(response_ids).not_to include(no_tags_correct_area_listing.id)
     end
   end
 end

@@ -84,5 +84,5 @@
 }
 
 .button.is-primary.is-focused:not(:active), .button.is-primary:focus:not(:active) {
-  box-shadow: 0 0 0 0.125em rgb(0 0 0 / 76%);
+  box-shadow: 0 0 0 0.125em rgba(0, 0, 0, 0.76);
 }

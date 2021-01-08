@@ -35,7 +35,7 @@ class AdminController < ApplicationController
     @system_settings.update(glossary_content: glossary_params[:glossary_content])
     redirect_to glossary_admin_path
   end
-
+  
   def yearbook
     @positions = Position.all
   end

@@ -77,5 +77,7 @@ Rails.application.routes.draw do
   resources :teams
   resources :users
 
+  resource :glossary, controller: :glossary, only: [:show]
+
   root :to => 'public_pages#landing_page'
 end

@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get '/admin/forms',              to: 'admin#form_admin',      as: 'form_admin'
   get '/admin/volunteers',         to: 'admin#volunteer_admin', as: 'volunteer_admin'
   get '/admin/dispatch',           to: 'admin#dispatch_steps',  as: 'dispatch_steps_admin'
+  get '/admin/glossary',           to: 'admin#glossary_index',  as: 'glossary_admin'
+  get '/admin/glossary_edit',      to: 'admin#glossary_edit',   as: 'glossary_admin_edit'
+  patch '/admin/glossary_edit',    to: 'admin#glossary_update', as: 'glossary_admin_update'
   get '/admin/yearbook',           to: 'admin#yearbook',        as: 'yearbook_admin'
 
   get '/public',                   to: 'public_pages#landing_page',        as: 'landing_page_public'

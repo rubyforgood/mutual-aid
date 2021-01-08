@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SystemSetting < ApplicationRecord
+  has_rich_text :glossary_content
+
   EXCHANGE_TYPES = [
       'fully_moderated', # no public access
       'dispatch_moderated',  # peer-to-peer, but

@@ -1,0 +1,13 @@
+<%= render partial: 'admin/glossary/header' %>
+<%= link_to "View Glossary", glossary_admin_path %>
+<hr>
+<div class="glossary_form">
+  <%= form_with model: @system_settings, url: glossary_admin_edit_path, local: true do |f| %>
+    <div class="field">
+      <%= f.rich_text_area :glossary_content %>
+    </div>
+    <div class="field">
+      <%= f.submit "Update Glossary" %>
+    </div>
+  <% end %>
+</div>

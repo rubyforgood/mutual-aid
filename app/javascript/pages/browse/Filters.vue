@@ -57,6 +57,8 @@
 <script>
 import MappedIconList from 'components/MappedIconList'
 
+// TODO: consider extracting a FilterType component.
+// see this comment: https://github.com/rubyforgood/mutual-aid/pull/799#pullrequestreview-554188100
 export default {
   components: {MappedIconList},
   props: {

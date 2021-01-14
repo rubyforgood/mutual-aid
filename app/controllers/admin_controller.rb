@@ -21,6 +21,7 @@ class AdminController < ApplicationController
 
   def form_admin; end
 
+  # FIXME: extract glossary related code into their own controller
   def glossary_edit
     @system_settings = SystemSetting.current_settings
     render 'admin/glossary/form'

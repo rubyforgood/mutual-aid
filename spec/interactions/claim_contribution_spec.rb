@@ -8,17 +8,16 @@ RSpec.describe ClaimContribution do
 
   let(:contribution) { create(:listing) }
   let(:user) { create(:user)}
-  let(:claim_params) do
-    {
-      peer_alias: 'alias',
-      email: 'user_email@example.com',
-      message: 'message'
-    }
-  end
+  let(:peer_alias) { 'alias' }
+  let(:email) { 'user_email@example.com' }
 
-  subject(:interaction) { ClaimContribution.run!(contribution: contribution.id,
-                                                 claim_params: claim_params,
-                                                 current_user: user) }
+  subject(:interaction) { ClaimContribution.run!(
+    contribution: contribution.id,
+    current_user: user,
+    email: email,
+    peer_alias: peer_alias,
+    message: 'message',
+  )}
 
   it "matches contribution and sends an email to peer", :aggregate_failures do
     allow_any_instance_of(ClaimContribution).to receive(:add_person_details)
@@ -33,8 +32,8 @@ RSpec.describe ClaimContribution do
     it "creates a person" do
       interaction
 
-      expect(user.reload.person).to have_attributes(name: claim_params[:peer_alias],
-                                                    email: claim_params[:email],
+      expect(user.reload.person).to have_attributes(name: peer_alias,
+                                                    email: email,
                                                     preferred_contact_method: ContactMethod.email,
                                                     user: user)
     end
@@ -46,7 +45,7 @@ RSpec.describe ClaimContribution do
     it "updates the person email address" do
       interaction
 
-      expect(user.reload.person).to have_attributes(email: claim_params[:email], user: user)
+      expect(user.reload.person).to have_attributes(email: email, user: user)
     end
   end
 end

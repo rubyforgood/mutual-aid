@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 class ClaimContribution < ActiveInteraction::Base
+  string :peer_alias
+  string :email
+  string :message
   record :contribution, class: Listing
-  hash :claim_params do
-    string :peer_alias
-    string :email
-    string :message
-  end
   object :current_user, class: User
 
   def execute
@@ -24,16 +22,16 @@ class ClaimContribution < ActiveInteraction::Base
     if current_user.person.blank?
       Person.create!(new_person_params)
     else
-      current_user.person.update!(email: claim_params[:email])
+      current_user.person.update!(email: email)
     end
   end
 
   def new_person_params
     {
-      name: claim_params[:peer_alias],
+      name: peer_alias,
       preferred_contact_method: ContactMethod.email,
       user: current_user,
-      email: claim_params[:email]
+      email: email,
     }
   end
 
@@ -44,8 +42,8 @@ class ClaimContribution < ActiveInteraction::Base
   def email_peer
     EmailPeer.run!(
       contribution: contribution,
-      peer_alias: claim_params[:peer_alias],
-      message: claim_params[:message],
+      peer_alias: peer_alias,
+      message: message,
       user: current_user
     )
   end

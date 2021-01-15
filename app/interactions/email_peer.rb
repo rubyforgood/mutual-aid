@@ -4,7 +4,7 @@ class EmailPeer < ActiveInteraction::Base
   string :peer_alias
   string :message
   object :contribution, class: Listing
-  object :user
+  object :user, default: nil
 
   def execute
     peer_to_peer_email = PeerToPeerMatchMailer.peer_to_peer_email(

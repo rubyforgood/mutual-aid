@@ -2,6 +2,7 @@
 
 class ClaimsController < ApplicationController
   include NotUsingPunditYet
+  skip_before_action :authenticate_user!, if: :peer_to_peer_mode?
 
   def new
     contribution = Listing.find(params[:contribution_id])
@@ -26,6 +27,10 @@ class ClaimsController < ApplicationController
   private
 
   def current_person
-    current_user.person
+    current_user&.person
+  end
+
+  def peer_to_peer_mode?
+    set_system_setting.peer_to_peer?
   end
 end

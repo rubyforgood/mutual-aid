@@ -2,7 +2,7 @@
 
 class MatchContribution < ActiveInteraction::Base
   object :contribution, class: Listing
-  object :match_with, class: User
+  object :match_with, class: Person
 
   def execute
     Match.create! match_receiver_and_provider.merge(status: 'match_confirmed')
@@ -23,10 +23,6 @@ class MatchContribution < ActiveInteraction::Base
   end
 
   def counter_contribution_params
-    { person: person, service_area: contribution.service_area }
-  end
-
-  def person
-    match_with.person
+    { person: match_with, service_area: contribution.service_area }
   end
 end

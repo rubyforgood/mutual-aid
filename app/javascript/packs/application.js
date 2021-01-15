@@ -8,6 +8,9 @@ require("@rails/ujs").start()
 // require("@rails/activestorage").start()
 // require("channels")
 
+require("trix")
+require("@rails/actiontext")
+
 // Induce webpack to emit all files under app/assets/images so that
 // they can be referenced in rails views via the image_pack_tag helper
 require.context('images', true)
@@ -18,6 +21,3 @@ import 'stylesheets/application'
 // Entrypoints into JS, made available as window.EntryPoints
 // See config/webpack/environment.js
 export * from '../entry_points'
-
-require("trix")
-require("@rails/actiontext")

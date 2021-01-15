@@ -14,19 +14,14 @@ class ClaimsController < ApplicationController
   end
 
   def create
-    ClaimContribution.run!(
+    ClaimContribution.run!(params.merge(
       contribution: params[:contribution_id],
-      claim_params: claim_params.to_h,
       current_user: current_user
-    )
+    ))
     redirect_to contribution_path(params[:contribution_id]), notice: 'Claim was successful!'
   end
 
   private
-
-  def claim_params
-    params.require(:claim).permit(:peer_alias, :email, :message)
-  end
 
   def current_person
     current_user.person

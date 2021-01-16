@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 class SystemSettingsController < ApplicationController
   include NotUsingPunditYet
 
-  before_action :set_system_setting, only: [:show, :edit, :update, :destroy]
-  before_action :set_primary_organization, only: [:show, :edit, :update, :destroy]
+  before_action :set_system_setting, only: %i[show edit update destroy]
+  before_action :set_primary_organization, only: %i[show edit update destroy]
 
   def index
     @system_settings = SystemSetting.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @system_setting = SystemSetting.new
@@ -44,6 +45,7 @@ class SystemSettingsController < ApplicationController
   end
 
   private
+
     def set_system_setting
       @system_setting = SystemSetting.find(params[:id])
     end

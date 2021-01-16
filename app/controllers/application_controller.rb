@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
-  include DeliverNowWithErrorHandling
   include Authorization
 
   protect_from_forgery with: :exception
@@ -29,7 +30,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authenticated(_exception)
-    flash[:error] = "This requires authentication, please sign-in first."
+    flash[:error] = 'This requires authentication, please sign-in first.'
     respond_to do |format|
       format.html { render 'devise/sessions/new.html.erb', layout: "application", status: 401 }
       format.xml  { head 401 }

@@ -1,13 +1,14 @@
 {
   "name": "mutualaid",
   "private": true,
-  "version": "0.2.9",
+  "version": "0.3.0",
   "engines": {
     "node": "12.x"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@mapbox/mapbox-sdk": "^0.11.0",
+    "@rails/actiontext": "^6.0.3-2",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
     "@vue/composition-api": "^0.5.0",
@@ -20,6 +21,7 @@
     "null-loader": "^4.0.0",
     "sass-loader": "8.0.2",
     "style-loader": "^1.1.4",
+    "trix": "^1.2.0",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.1",
     "vue-template-compiler": "^2.6.11",

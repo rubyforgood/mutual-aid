@@ -40,6 +40,12 @@ describe('Browse', () => {
       it('activates the List view button', () => {
         assert.deepEqual($showListButton.classes(), ['navbar-item', 'is-active'])
       })
+
+      it('renders Ask and Offer section with action buttons', () => {
+        assert.equal($wrapper.findAll('.has-text-centered a').length, 2)
+        assert.deepEqual($wrapper.findAll('.has-text-centered a').at(0).text(), 'Submit an Ask')
+        assert.deepEqual($wrapper.findAll('.has-text-centered a').at(1).text(), 'Submit an Offer')
+      })
     })
   })
 })

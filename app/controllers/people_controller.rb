@@ -1,9 +1,15 @@
+# frozen_string_literal: true
+
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: %i[show edit update destroy]
+
+  include Pagination
 
   def index
-    @people = policy_scope(Person).includes(:user, :preferred_contact_method, :location, :service_area).
-                     references(:user, :preferred_contact_method, :location, :service_area)
+    @pagy, @people = pagy(
+      policy_scope(Person).includes(:user, :preferred_contact_method, :location, :service_area)
+             .references(:user, :preferred_contact_method, :location, :service_area)
+    )
   end
 
   def show
@@ -11,8 +17,8 @@ class PeopleController < ApplicationController
 
     @receiver_matches = @person.matches_as_receiver
     @provider_matches = @person.matches_as_provider
-    receiver_match_ids = @receiver_matches.pluck("matches.id")
-    provider_match_ids = @provider_matches.pluck("matches.id")
+    receiver_match_ids = @receiver_matches.pluck('matches.id')
+    provider_match_ids = @provider_matches.pluck('matches.id')
     @match_ids = receiver_match_ids + provider_match_ids
   end
 
@@ -60,6 +66,7 @@ class PeopleController < ApplicationController
   end
 
   private
+
     def set_person
       @person = Person.find(params[:id])
     end
@@ -69,7 +76,7 @@ class PeopleController < ApplicationController
       enabled_locales = SystemLocale.where(publish_in_dropdowns: true)
       @system_locales = enabled_locales.pluck(:locale_name, :locale)
       @preferred_locale = enabled_locales.where(locale: @person.preferred_locale).first&.locale
-      @preferred_contact_timeframes = [["Morning", "AM"], ["Afternoon", "PM"], ["Evening", "EVE"]]
+      @preferred_contact_timeframes = [['Morning', 'AM'], ['Afternoon', 'PM'], ['Evening', 'EVE']]
     end
 
     def person_params
@@ -89,17 +96,17 @@ class PeopleController < ApplicationController
           :preferred_locale,
           :preferred_contact_timeframe,
           :preferred_contact_method_id,
-          location_attributes: [
-              :id,
-              :location_type_id,
-              :street_address,
-              :city,
-              :state,
-              :zip,
-              :county,
-              :region,
-              :neighborhood,
-              :_destroy,
+          location_attributes: %i[
+              id
+              location_type_id
+              street_address
+              city
+              state
+              zip
+              county
+              region
+              neighborhood
+              _destroy
           ],
       )
     end

@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 class CustomFormQuestionsController < ApplicationController
   include NotUsingPunditYet
 
-  before_action :set_custom_form_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_custom_form_question, only: %i[show edit update destroy]
 
   def index
     @custom_form_questions = CustomFormQuestion.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @custom_form_question = CustomFormQuestion.new
@@ -43,6 +44,7 @@ class CustomFormQuestionsController < ApplicationController
   end
 
   private
+
     def set_custom_form_question
       @custom_form_question = CustomFormQuestion.find(params[:id])
     end

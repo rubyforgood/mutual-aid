@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 class ContactMethodsController < ApplicationController
   include NotUsingPunditYet
 
-  before_action :set_contact_method, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact_method, only: %i[show edit update destroy]
 
   def index
     @contact_methods = ContactMethod.order(:name)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @contact_method = ContactMethod.new
@@ -45,12 +46,13 @@ class ContactMethodsController < ApplicationController
   end
 
   private
+
     def set_contact_method
       @contact_method = ContactMethod.find(params[:id])
     end
 
     def set_form_dropdowns
-      @fields = ["email", "phone"]
+      @fields = ['email', 'phone']
     end
 
     def contact_method_params

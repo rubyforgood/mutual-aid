@@ -25,9 +25,11 @@ FactoryBot.define do
     end
 
     trait :with_person do
-      after(:create) do |instance, evaluated|
-        create(:person, user: instance)
-      end
+      association :person
+      # TODO: make sure the simpler version above works
+      # after(:create) do |instance, evaluated|
+        # create(:person, user: instance)
+      # end
     end
   end
 end

@@ -6,12 +6,10 @@ By participating in this project, you agree to abide by the Ruby for Good [code 
 **First:** if you're unsure or afraid of *anything*, just ask or submit the issue or pull request anyways. You won't be yelled at for giving your best effort. The worst that can happen is that you'll be politely asked to change something. We appreciate any sort of contributions, and don't want a wall of rules to get in the way of that.
 
 ## Find issues to work on
-We are using two GitHub 'Projects' for planning, providing two different perspectives on the same issues:
+We are using GitHub 'Projects' for planning.
+We have a series of [project boards](https://github.com/rubyforgood/mutual-aid/projects) with "Story Map" in their name that describe aspects of the site, plus a [Roadmap] board where we track progress and done-ness. Each Story Map project board may have notes at the top that summarize our current status. Below these notes are the issues that we'd like to work on.
 
-* [Roadmap](https://github.com/rubyforgood/mutual-aid/projects/4), a Kanban style board focussed on prioritization and workflow.
-* [Story map](https://github.com/rubyforgood/mutual-aid/projects/2), a higher level overview and a good reference point of user flows (though it was last updated spring 2020 so is a bit out of date).
-
-Feel free to browse issues and contact us via issue comments if anything is unclear.
+Feel free to read the current status and browse the issues. Contact us via issue comments if anything is unclear.
 
 ## Claim an issue
 Once you've identified something you'd like to work on, its best to comment on the issue and let maintainers know you're looking into it. That way, they can relay any context that might not be obvious or documented.
@@ -25,7 +23,7 @@ See our [setup guide](setup.md).
 
 ## Put together a Pull Request
 
-Here are the basic steps to submit a pull request. Make sure that you're working on an [https://github.com/rubyforgood/mutual-aid/projects/4]–if the relevant issue doesn't exist, open it!
+Here are the basic steps to submit a pull request. Make sure that you're working on an issue in the [Roadmap]—if the relevant issue doesn't exist, open it!
 
 1. Fork the repo (unless you're a contributor on the project, in which case you can clone it directly) and get it [set up](setup.md).
 
@@ -35,7 +33,7 @@ Here are the basic steps to submit a pull request. Make sure that you're working
 
 1. Ideally (but optionally) run your changes through `Rubocop`, a ruby code linter and `eslint`. We'll hopefully get this step automated soon.
 
-1. Run the test suite again  to be sure everythng still works.
+1. Run the test suite again to be sure everything still works.
 
 1. If you think mutual-aid groups using our app need to know about the changes you made, add an entry to the [CHANGELOG.md](/CHANGELOG.md). Reviewing what's already in there will give you a sense of what types of changes need to be documented.
 
@@ -58,3 +56,5 @@ Bask in the glory that is you! ✨🙏🏾
 
 
 <sub>↩ Back to [README](/README.md)</sub>
+
+[Roadmap]: https://github.com/rubyforgood/mutual-aid/projects/4

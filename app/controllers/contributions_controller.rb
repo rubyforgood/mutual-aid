@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class ContributionsController < ApplicationController
   include NotUsingPunditYet
 
-  before_action :authenticate_user!, except: [:combined_form, :respond, :thank_you]
-  before_action :set_contribution, only: [:respond, :triage]
+  before_action :authenticate_user!, unless: :peer_to_peer_mode?
+  before_action :set_contribution, only: %i[respond triage]
 
-  layout "without_navbar", only: [:thank_you]
+  layout 'without_navbar', only: [:thank_you]
 
   def index
     @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
-    filter = BrowseFilter.new(filter_params, self)
-    @contributions = ContributionBlueprint.render(filter.contributions, **filter.options)
+    filter = BrowseFilter.new(filter_params)
+    @contributions = ContributionBlueprint.render(filter.contributions, contribution_blueprint_options)
     respond_to do |format|
       format.html
       format.json { render inline: @contributions }
@@ -27,18 +29,15 @@ class ContributionsController < ApplicationController
     )
   end
 
-  def combined_form
-  end
+  def combined_form; end
 
   def respond
     @communication_logs = CommunicationLog.where(person: @contribution.person).order(sent_at: :desc)
   end
 
-  def thank_you
-  end
+  def thank_you; end
 
-  def triage
-  end
+  def triage; end
 
   def triage_update
     @contribution = Listing.find(params[:id])
@@ -60,6 +59,16 @@ class ContributionsController < ApplicationController
   end
 
   private
+
+  def peer_to_peer_mode?
+    @system_setting.peer_to_peer?
+  end
+
+  def contribution_blueprint_options
+    options = { respond_path: ->(id) { respond_contribution_path(id)} }
+    options[:view_path] = ->(id) { contribution_path(id) } if SystemSetting.current_settings&.peer_to_peer?
+    options
+  end
 
   def filter_params
     return Hash.new unless allowed_params && allowed_params.to_h.any?

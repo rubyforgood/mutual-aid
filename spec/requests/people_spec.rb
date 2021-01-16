@@ -3,10 +3,18 @@ require 'rails_helper'
 RSpec.describe "/people", type: :request do
   include_context "signed in as sysadmin"
 
-  describe "GET /index" do
-    it "can render" do
-      get '/people'
+  describe 'GET /index' do
+    let!(:people) { create_list(:person, 40) }
+
+    it 'renders a successful response' do
+      get people_url
       expect(response).to be_successful
+    end
+
+    it 'paginates results' do
+      get people_url
+      people_links = response.body.scan %r{href="/people/\d+/.+"}
+      expect(people_links.size).to eq Pagy::VARS[:items]
     end
   end
 

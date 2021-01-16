@@ -2,8 +2,8 @@
   <%= @current_organization&.name %>
 </div>
 
-<div class="header">
-  <%= HtmlSanitizer.new(@system_setting.confirmation_page_text_header).sanitize_for_rails %>
+<div class="header custom-text">
+  <%= HtmlSanitizer.new(@system_setting.confirmation_page_text_header).sanitize %>
 </div>
 
 <hr>
@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<div class="footer">
-  <%= HtmlSanitizer.new(@system_setting.confirmation_page_text_footer).sanitize_for_rails %>
+<div class="footer custom-text">
+  <%= HtmlSanitizer.new(@system_setting.confirmation_page_text_footer).sanitize %>
 </div>
 

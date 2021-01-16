@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 class Importers::BaseImporter
@@ -10,17 +12,17 @@ class Importers::BaseImporter
     set_klasses
     establish_counts
 
-    @log = ""
+    @log = ''
     @translations = translations
   end
 
   def audit_info(current_user)
     # @current_organization = current_user&.organization  # TODO
     @current_user = current_user # || User.guest_user(@current_organization)  # TODO
-    puts "========"
+    puts '========'
     puts @current_user&.name
     # puts @current_organization&.name  # TODO
-    puts "========"
+    puts '========'
   end
 
   def establish_counts
@@ -30,12 +32,12 @@ class Importers::BaseImporter
     @new_records_count = 0
     @dupe_records_count = 0
     @row_processing_error_messages = []
-    @counts_hash = {row_count: @row_count,
+    @counts_hash = { row_count: @row_count,
                     row_success_count: @row_success_count,
                     new_records_count: @new_records_count,
                     dupe_records_count: @dupe_records_count,
-                    row_error_count: @row_error_count}
-    @initial_model_logs = ""
+                    row_error_count: @row_error_count }
+    @initial_model_logs = ''
     @initial_model_counts = {}
     @final_diff_model_counts = {}
   end
@@ -43,9 +45,9 @@ class Importers::BaseImporter
   def set_klasses
     @klasses_array = klasses_array
     @primary_klass_name = primary_import_klass_name
-    puts "========PRIMARY IMPORT CLASS: "
+    puts '========PRIMARY IMPORT CLASS: '
     puts @primary_klass_name
-    puts " ========"
+    puts ' ========'
   end
 
   def required_fields_array
@@ -57,9 +59,8 @@ class Importers::BaseImporter
   end
 
   def is_row_skip(row)
-    row["to_import"] && row["to_import"].downcase == "n"
+    row['to_import'] && row['to_import'].downcase == 'n'
   end
-
 
   def row_processing_requirement(row)
     results = []
@@ -106,7 +107,7 @@ class Importers::BaseImporter
 
   def import(path)
     Rails.logger.info("START IMPORT------------#{Time.now}")
-    records_report("initial")
+    records_report('initial')
 
     rows = CSV.read(path, headers: true)
     import_rows(rows)
@@ -114,7 +115,7 @@ class Importers::BaseImporter
 
   def import_string(string)
     Rails.logger.info("START IMPORT------------#{Time.now}")
-    records_report("initial")
+    records_report('initial')
 
     rows = CSV.parse(string, headers: true)
     import_rows(rows)
@@ -148,7 +149,7 @@ class Importers::BaseImporter
           @row_count += 1
         end
       end
-      records_report("final")
+      records_report('final')
     end
   end
 
@@ -157,19 +158,19 @@ class Importers::BaseImporter
   end
 
   def records_report(status)
-    if status == "initial"
+    if status == 'initial'
       initial_model_counts
     end
-    Rails.logger.info("---------")
+    Rails.logger.info('---------')
     Rails.logger.info(@initial_model_counts)
-    Rails.logger.info("---")
-    if status == "final"
+    Rails.logger.info('---')
+    if status == 'final'
       final_diff_model_counts
     end
     Rails.logger.info(@final_diff_model_counts)
-    Rails.logger.info("---")
+    Rails.logger.info('---')
     Rails.logger.info(@counts_hash)
-    Rails.logger.info("---------")
+    Rails.logger.info('---------')
     @counts_hash
   end
 
@@ -185,7 +186,7 @@ class Importers::BaseImporter
     end
     Rails.logger.info(pp logs)
     @initial_model_logs = logs
-    @counts_hash["INITIAL COUNTS"] = initial_counts_hash
+    @counts_hash['INITIAL COUNTS'] = initial_counts_hash
     @initial_model_counts = initial_counts_hash
   end
 
@@ -215,8 +216,8 @@ class Importers::BaseImporter
     Rails.logger.info(pp final_logs)
     Rails.logger.info(pp diff_logs)
 
-    @counts_hash["FINAL COUNTS"] = final_counts_hash
-    @counts_hash["+DIFF COUNTS"] = diff_counts_hash
+    @counts_hash['FINAL COUNTS'] = final_counts_hash
+    @counts_hash['+DIFF COUNTS'] = diff_counts_hash
 
     @new_records_count = diff_counts_hash[@primary_klass_name]
     @final_diff_model_counts = final_counts_hash
@@ -224,7 +225,7 @@ class Importers::BaseImporter
 
   def create_history_log(row, error_message=nil)
     begin
-      extra_detail = "+++ row_number#: " +
+      extra_detail = '+++ row_number#: ' +
           @row_number.to_s +
           " +++ #{history_log_name(row.to_s)}" +
           " +++ #{row.to_s}" +
@@ -252,7 +253,7 @@ class Importers::BaseImporter
           end
           records.each do |object_instance|
             if object_instance.can_destroy?
-              puts "==="
+              puts '==='
               puts object_instance.class
               puts object_instance.id
               object_instance.destroy!
@@ -266,8 +267,8 @@ end
 
 def parse_date(date_string)
   date = nil
-  if date_string&.include?("/")
-    m, d, y = date_string.split("/")
+  if date_string&.include?('/')
+    m, d, y = date_string.split('/')
     y, t = y.to_s.split(/\s+/)
 
     y = "20#{y}" if y.length == 2
@@ -275,14 +276,14 @@ def parse_date(date_string)
       date = Date.new(y.to_i, m.to_i, d.to_i)
     else
       begin
-        date = date_string.to_date  # TODO - add exception?
+        date = date_string.to_date  # TODO: - add exception?
       rescue => e
         binding.pry ### USE FOR TESTING IMPORTERS
       end
     end
-  elsif date_string&.include?("-")
+  elsif date_string&.include?('-')
     begin
-      date = date_string.to_date  # TODO - add exception?
+      date = date_string.to_date  # TODO: - add exception?
     rescue => e
       binding.pry ### USE FOR TESTING IMPORTERS
     end

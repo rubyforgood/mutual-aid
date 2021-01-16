@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 class FormsController < ApplicationController
   include NotUsingPunditYet
 
-  before_action :set_form, only: [:show, :edit, :update, :destroy]
+  before_action :set_form, only: %i[show edit update destroy]
 
   def index
     @forms = Form.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @form = Form.new
@@ -48,12 +49,13 @@ class FormsController < ApplicationController
   end
 
   private
+
     def set_form
       @form = Form.find(params[:id])
     end
 
     def set_form_dropdowns
-      @contribution_types = ["Ask", "Offer", "CommunityResource"]
+      @contribution_types = ['Ask', 'Offer', 'CommunityResource']
     end
 
     def form_params

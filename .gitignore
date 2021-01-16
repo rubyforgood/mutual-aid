@@ -30,6 +30,9 @@
 yarn-debug.log*
 .yarn-integrity
 
+# we use yarn instead
+.package-lock.json
+
 /spec/examples.txt
 
 # Ignore the recommended dontenv ingored files

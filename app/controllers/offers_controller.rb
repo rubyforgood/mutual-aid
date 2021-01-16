@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class OffersController < PublicController
   include NotUsingPunditYet
 
-  layout "without_navbar", only: [:new, :create]
+  layout 'without_navbar', only: %i[new create]
 
   def index
     redirect_to contributions_path
@@ -14,6 +16,7 @@ class OffersController < PublicController
   def create
     submission = SubmissionForm.build submission_params
     if submission.save
+      EmailNewSubmission.run! submission: submission, user: current_user
       redirect_to contribution_thank_you_path, notice: 'Offer was successfully created.'
     else
       render_form(submission)

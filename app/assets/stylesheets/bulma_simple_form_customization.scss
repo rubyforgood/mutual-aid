@@ -77,3 +77,16 @@
   }
 }
 
+// TODO: This probably won't apply on the Vue side?
+// Also curious whether this was broken in bulma/buefy or whether we somehow broke contrast on our end?
+// See changes and discussion related to:
+// https://github.com/rubyforgood/mutual-aid/pull/802/files#diff-c294dca894b2caf2991c841a93ea91a10835f5f4f31b816e06a5b01ff30599f4R80-R88
+.button.is-primary {
+  background-color: #00d1b2;
+  border-color: transparent;
+  color: #fff;
+}
+
+.button.is-primary.is-focused:not(:active), .button.is-primary:focus:not(:active) {
+  box-shadow: 0 0 0 0.125em rgba(0, 0, 0, 0.76);
+}

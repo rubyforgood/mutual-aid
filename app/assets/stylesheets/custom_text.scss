@@ -1,0 +1,6 @@
+.custom-text {
+  // Bulma strips list-style from ol, ul by default
+  ul {
+    list-style: disc inside;
+  }
+}

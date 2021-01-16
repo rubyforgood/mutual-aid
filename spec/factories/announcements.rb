@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :announcement, aliases: [:translatable] do
-    name { "MyString" }
+    name { 'MyString' }
   end
 end
 

@@ -1,42 +1,95 @@
 require 'rails_helper'
 
-RSpec.describe "/contributions", type: :request do
+RSpec.describe '/contributions', type: :request do
   let(:valid_attributes) {{
-      location_attributes: {zip: "12345"},
-      tag_list: ["", "cash"],
+      location_attributes: { zip: '12345' },
+      tag_list: ['', 'cash'],
       # name: Faker::Name.name,
       # email: Faker::Internet.email,
       # phone: Faker::PhoneNumber.phone_number
   }}
 
   let(:invalid_attributes) {{
-      location_attributes: {zip: "12e45"},
+      location_attributes: { zip: '12e45' },
   }}
 
-  before { sign_in create(:user) }
+  let(:user) { create(:user) }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      create(:listing)
-      get contributions_url
-      expect(response).to be_successful
+  describe 'access' do
+    describe 'when logged in' do
+      before do
+        sign_in user
+      end
+
+      it 'renders the index of contributions' do
+        create(:listing)
+        get contributions_url
+        expect(response).to be_successful
+      end
+
+      it 'is shows a contribution response page' do
+        contribution = create(:listing)
+        get contribution_url(contribution)
+        expect(response).to be_successful
+      end
+    end
+
+    describe 'when logged out but p2p is enabled' do
+      before do
+        allow_any_instance_of(SystemSetting).to receive(:peer_to_peer?).and_return(true)
+      end
+
+      it 'renders the index of contributions' do
+        create(:listing)
+        get contributions_url
+        expect(response).to be_successful
+      end
+
+      # # This test is commented out because it probably should redirect to
+      # # a page that's different than would dispatchers etc. see
+      #
+      # it 'is shows a contribution response page' do
+      #   contribution = create(:listing)
+      #   get contribution_url(contribution)
+      #   expect(response).to be_successful
+      # end
+    end
+
+    describe 'when logged out and p2p is disabled' do
+      before do
+        allow_any_instance_of(SystemSetting).to receive(:peer_to_peer?).and_return(false)
+      end
+
+      it 'redirects to the user login page for the index of contributions' do
+        create(:listing)
+        get contributions_url
+        assert_redirected_to new_user_session_url
+      end
+
+      it 'redirects to the user login page for a link to an individual contribution' do
+        contribution = create(:listing)
+        get contribution_url(contribution)
+        assert_redirected_to new_user_session_url
+      end
     end
 
     it 'allows asking for a specific subtype of listing' do
+      sign_in user
       ask = create(:ask, title: 'this is the ask title')
       offer = create(:offer, title: 'this is the offer title')
-      get contributions_url, params: {ContributionType: {'Ask' => 1}}
+      get contributions_url, params: { ContributionType: { 'Ask' => 1 } }
       expect(response.body).to match(ask.title)
       expect(response.body).not_to match(offer.title)
-      get contributions_url, params: {ContributionType: {'Offer' => 1}}
+      get contributions_url, params: { ContributionType: { 'Offer' => 1 } }
       expect(response.body).not_to match(ask.title)
       expect(response.body).to match(offer.title)
-      get contributions_url, params: {ContributionType: {'Ask' => 1, 'Offer' => 1}}
+      get contributions_url, params: { ContributionType: { 'Ask' => 1, 'Offer' => 1 } }
       expect(response.body).to match(ask.title)
       expect(response.body).to match(offer.title)
     end
 
     it 'parses requests for a filtered list' do
+      sign_in user
       categories = [
         create(:category, name: Faker::Lorem.word),
         create(:category, name: Faker::Lorem.word)
@@ -52,7 +105,7 @@ RSpec.describe "/contributions", type: :request do
       # passing `as: json` to `get` does some surprising things to the request and its params that would break this test
       get contributions_url, {
         params: { "Category[#{categories[0].id}]": 1, "Category[#{categories[1].id}]": 1, "ServiceArea[#{expected_area.id}]": 1 },
-        headers: {'HTTP_ACCEPT' => 'application/json'}
+        headers: { 'HTTP_ACCEPT' => 'application/json' }
       }
 
       expect(response.body).to match(/#{expected_area.name.to_json}/)
@@ -62,18 +115,6 @@ RSpec.describe "/contributions", type: :request do
       expect(response_ids).to include(one_tag_listing.id)
       expect(response_ids).not_to include(both_tags_wrong_area_listing.id)
       expect(response_ids).not_to include(no_tags_correct_area_listing.id)
-    end
-  end
-
-  describe "GET /contributions/:id" do
-    it "is successful" do
-      contribution = create(:listing)
-
-      get(
-        contribution_url(contribution),
-      )
-
-      expect(response).to be_successful
     end
   end
 end

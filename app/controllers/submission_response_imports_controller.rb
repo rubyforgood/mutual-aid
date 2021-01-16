@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 class SubmissionResponseImportsController < ApplicationController
   include NotUsingPunditYet
 
-  def new
-  end
+  def new; end
 
   def create
     uploaded_file = params[:submission_response_import][:file]

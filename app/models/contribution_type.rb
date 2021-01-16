@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ContributionType = Struct.new(:id, :name, :model)
 class ContributionType
   TYPES = [new('Ask', 'Ask', Ask), new('Offer', 'Offer', Offer)].freeze

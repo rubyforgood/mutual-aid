@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class LocationsController < ApplicationController
   include NotUsingPunditYet
 
-  before_action :set_location, only: [:show, :edit, :update, :destroy]
+  before_action :set_location, only: %i[show edit update destroy]
 
   def index
     @locations = Location.order(:state, :city, :region, :neighborhood, :street_address)
@@ -36,8 +38,7 @@ class LocationsController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @location = Location.new
@@ -74,6 +75,7 @@ class LocationsController < ApplicationController
   end
 
   private
+
   def set_location
     @location = Location.find(params[:id])
   end

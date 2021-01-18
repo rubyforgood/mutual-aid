@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ClaimsController < ApplicationController
+  include NotUsingPunditYet
+
   def new
     contribution = Listing.find(params[:contribution_id])
     if contribution.person&.email.blank?

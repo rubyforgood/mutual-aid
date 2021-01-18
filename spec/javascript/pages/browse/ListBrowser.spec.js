@@ -1,7 +1,7 @@
 import {createLocalVue, shallowMount} from '@vue/test-utils'
 import {configure} from 'vue_config'
 import ListBrowser from 'pages/browse/ListBrowser'
-import testData  from '../../../../lib/contributions.json'
+import testData from '../../../../lib/contributions.json'
 
 describe('ListBrowser', () => {
   def('contributions', testData)

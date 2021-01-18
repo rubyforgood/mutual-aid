@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     showRespondColumn() {
-      return !!this.contributions.find( contribution => !!contribution.respond_path)
+      return this.contributions.some( contribution => contribution.respond_path)
     }
   },
 }

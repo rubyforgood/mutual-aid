@@ -7,7 +7,7 @@
         <th>Urgency</th>
         <th>Service Area</th>
         <th>Connect</th>
-        <th>Respond</th>
+        <th><span v-if="showRespondColumn">Respond</span></th>
 <!--        <th>Details</th>-->
       </tr>
       <tr v-for="contribution in contributions" :key="contribution.id">
@@ -28,7 +28,9 @@
           <SingleIcon :iconType="contribution.contact_types[0].name" />
         </td>
         <td>
-          <a :href="contribution.respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
+          <div v-if="contribution.respond_path">
+            <a :href="contribution.respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
+          </div>
         </td>
 <!--        <td>{{ contribution.title }}</td>-->
       </tr>
@@ -52,12 +54,9 @@ export default {
     MappedIconList,
   },
   computed: {
-    showUrgentIcon() {
-      return !(this.urgency && this.urgency.id > 1)
-    },
-    urgencyColor() {
-      return this.showUrgentIcon ? 'is-warning' : 'is-light is-warning'
-    },
+    showRespondColumn() {
+      return !!this.contributions.find( contribution => !!contribution.respond_path)
+    }
   },
 }
 </script>

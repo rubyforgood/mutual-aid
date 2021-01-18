@@ -1,16 +1,24 @@
-import {assert} from 'chai'
-import {mount} from '@vue/test-utils'
+import {createLocalVue, shallowMount} from '@vue/test-utils'
+import {configure} from 'vue_config'
 import ListBrowser from 'pages/browse/ListBrowser'
-import testData from '../../../../lib/contributions.json'
+import testData  from '../../../../lib/contributions.json'
 
 describe('ListBrowser', () => {
-  it('works with reasonable data', function () {
-    // TODO - get this working again!!!
-    // const wrapper = mount(ListBrowser, {
-    //   propsData: {
-    //     contributions: testData.contributions,
-    //   },
-    // })
-    // assert.match(wrapper.text(), /look after my kid/i)
+  it('shows the respond column with typical data', function () {
+    const wrapper = shallowMount(ListBrowser, {
+      localVue: configure(createLocalVue()),
+      propsData: testData
+    })
+    var respondHeaders = wrapper.findAll('th').filter( header => header.text() == 'Respond')
+    assert.equal(1, respondHeaders.length)
+  })
+  it('hides the respond if there is no response urls', function() {
+    var responselessContributions = testData.contributions.map( contribution => { contribution.respond_path = ''; return contribution})
+    const wrapper = shallowMount(ListBrowser, {
+      localVue: configure(createLocalVue()),
+      propsData: {responselessContributions}
+    })
+    var respondHeaders = wrapper.findAll('th').filter( header => header.text() == 'Respond')
+    assert.equal(0, respondHeaders.length)
   })
 })

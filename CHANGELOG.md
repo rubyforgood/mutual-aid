@@ -16,6 +16,7 @@ This changelog also serves to acknowledge the incredible people who've contribut
 * Allow custom text on landing page to override default text #769, #780
 * Add Rubocop #793
 * Show the "Contributions" link in the navbar for P2P users even if they aren't logged in
+* Hide the respond button on contributions when nobody is logged in. (We'll add more functionality later for the peer-to-peer scneario) #819
 
 ## [0.3.1] - 2020-10-10
 ### Enhancement

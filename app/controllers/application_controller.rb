@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # TODO: this appears to be unused?
   def user_not_authenticated(_exception)
     flash[:error] = 'This requires authentication, please sign-in first.'
     respond_to do |format|

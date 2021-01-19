@@ -16,7 +16,7 @@ class ClaimsController < ApplicationController
   end
 
   def create
-    ClaimContribution.run!(params.merge(
+    ClaimContribution.run!(params[:claim].merge(
       contribution: params[:contribution_id],
       current_user: current_user
     ))

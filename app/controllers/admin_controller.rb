@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AdminController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :authenticate_user!, except: %i[new create]
   before_action :set_system_settings, only: [:glossary_edit, :glossary_index, :glossary_update]
 

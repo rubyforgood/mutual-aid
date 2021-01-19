@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ContributionsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :authenticate_user!, except: %i[thank_you], unless: :peer_to_peer_mode?
   before_action :set_contribution, only: %i[respond triage]
 

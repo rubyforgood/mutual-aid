@@ -5,17 +5,21 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
-    @users = User.all
+    @users = policy_scope(User).all
   end
 
-  def show; end
+  def show
+    authorize @user
+  end
 
   def new
     @user = User.new
+    authorize @user
     set_form_dropdowns
   end
 
   def edit
+    authorize @user
     if @user == current_user
       redirect_to edit_user_registration_path
     else
@@ -23,18 +27,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      redirect_to users_path, notice: 'User was successfully submitted.'
-    else
-      set_form_dropdowns
-      render :new
-    end
-  end
-
   def update
+    authorize @user
     if @user.update(user_params)
       redirect_to users_path, notice: 'User was successfully updated.'
     else
@@ -44,6 +38,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    authorize @user
     @user.destroy
     redirect_to users_path, notice: 'User was successfully destroyed.'
   end

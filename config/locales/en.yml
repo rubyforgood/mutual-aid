@@ -51,3 +51,5 @@ en:
       one: Match Feedback
       other: Match Feedback
       zero: Match Feedback
+  pundit:
+    default: 'You cannot perform this action.'

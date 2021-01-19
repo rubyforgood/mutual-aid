@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MatchesController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_match, only: %i[edit update destroy]
 
   def index

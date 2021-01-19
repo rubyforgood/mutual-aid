@@ -1,12 +1,10 @@
 require 'rails_helper'
 
-describe '/people', type: :request do
+RSpec.describe "/people", type: :request do
+  include_context "signed in as sysadmin"
+
   describe 'GET /index' do
     let!(:people) { create_list(:person, 40) }
-
-    before do
-      sign_in create(:user)
-    end
 
     it 'renders a successful response' do
       get people_url
@@ -17,6 +15,62 @@ describe '/people', type: :request do
       get people_url
       people_links = response.body.scan %r{href="/people/\d+/.+"}
       expect(people_links.size).to eq Pagy::VARS[:items]
+    end
+  end
+
+  describe "GET /show" do
+    let(:person) { FactoryBot.create(:person) }
+
+    it "can render" do
+      get "/people/#{person.id}"
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET /new" do
+    it "can render" do
+      get "/people/new"
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET /edit" do
+    let(:person) { FactoryBot.create(:person) }
+
+    it "can render" do
+      get "/people/#{person.id}/edit"
+      expect(response).to be_successful
+    end
+  end
+
+  describe "POST /create" do
+    it "can render" do
+      post "/people", params: { person: FactoryBot.attributes_for(:person) }
+      expect(response).to be_successful
+    end
+  end
+
+  describe "PATCH /update" do
+    let(:person) { FactoryBot.create(:person) }
+
+    it "updates the person" do
+      patch "/people/#{person.id}", params: { person: { name: "Aud Torvingen" } }
+      person.reload
+      expect(person.name).to eq("Aud Torvingen")
+    end
+  end
+
+  describe "DELETE /destroy" do
+    # we need to eager-create Person so that the Person is created
+    # before the `Person.count` block.
+    let!(:person) { FactoryBot.create(:person) }
+
+    it "deletes the person" do
+      expect {
+        delete "/people/#{person.id}"
+      }.to change {
+        Person.count
+      }.by(-1)
     end
   end
 end

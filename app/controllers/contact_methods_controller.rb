@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ContactMethodsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_contact_method, only: %i[show edit update destroy]
 
   def index

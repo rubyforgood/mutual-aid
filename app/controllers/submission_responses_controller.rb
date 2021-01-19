@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SubmissionResponsesController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_submission_response, only: %i[show edit update destroy]
 
   def index

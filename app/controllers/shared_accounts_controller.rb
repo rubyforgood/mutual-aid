@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SharedAccountsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_shared_account, only: %i[show edit update destroy]
 
   def index

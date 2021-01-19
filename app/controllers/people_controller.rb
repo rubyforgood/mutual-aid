@@ -7,12 +7,14 @@ class PeopleController < ApplicationController
 
   def index
     @pagy, @people = pagy(
-      Person.includes(:user, :preferred_contact_method, :location, :service_area)
+      policy_scope(Person).includes(:user, :preferred_contact_method, :location, :service_area)
              .references(:user, :preferred_contact_method, :location, :service_area)
     )
   end
 
   def show
+    authorize @person
+
     @receiver_matches = @person.matches_as_receiver
     @provider_matches = @person.matches_as_provider
     receiver_match_ids = @receiver_matches.pluck('matches.id')
@@ -22,10 +24,12 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    authorize @person
     set_form_dropdowns
   end
 
   def edit
+    authorize @person
     unless @person.location
       @person.location = Location.new
     end
@@ -34,6 +38,8 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(person_params)
+    @person.user ||= current_user
+    authorize @person
 
     if @person.save
       redirect_to people_path, notice: 'Person was successfully created.'
@@ -44,6 +50,7 @@ class PeopleController < ApplicationController
   end
 
   def update
+    authorize @person
     if @person.update(person_params)
       redirect_to people_path, notice: 'Person was successfully updated.'
     else
@@ -53,6 +60,7 @@ class PeopleController < ApplicationController
   end
 
   def destroy
+    authorize @person
     @person.destroy
     redirect_to people_url, notice: 'Person was successfully destroyed.'
   end

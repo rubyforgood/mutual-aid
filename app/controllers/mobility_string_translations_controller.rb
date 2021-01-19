@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MobilityStringTranslationsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_mobility_string_translation, only: %i[show edit update destroy]
 
   def index

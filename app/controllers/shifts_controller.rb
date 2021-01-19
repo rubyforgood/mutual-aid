@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ShiftsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_shift, only: %i[show edit update destroy]
 
   def index

@@ -4,21 +4,33 @@ import ListBrowser from 'pages/browse/ListBrowser'
 import testData  from '../../../../lib/contributions.json'
 
 describe('ListBrowser', () => {
-  it('shows the respond column with typical data', function () {
-    const wrapper = shallowMount(ListBrowser, {
+  def('contributions', testData)
+
+  def('wrapper', () => {
+    return shallowMount(ListBrowser, {
       localVue: configure(createLocalVue()),
-      propsData: testData
+      propsData: $contributions,
     })
-    var respondHeaders = wrapper.findAll('th').filter( header => header.text() == 'Respond')
-    assert.equal(1, respondHeaders.length)
   })
-  it('hides the respond if there is no response urls', function() {
-    var responselessContributions = testData.contributions.map( contribution => { contribution.respond_path = ''; return contribution})
-    const wrapper = shallowMount(ListBrowser, {
-      localVue: configure(createLocalVue()),
-      propsData: {responselessContributions}
+
+  def('tableHeaders', () => $wrapper.findAll('th').wrappers)
+
+  describe('respond column', () => {
+    it('shows the column with typical data', function () {
+      assert.isTrue($tableHeaders.some(header => header.text() == 'Respond'))
     })
-    var respondHeaders = wrapper.findAll('th').filter( header => header.text() == 'Respond')
-    assert.equal(0, respondHeaders.length)
+
+    describe('when contributions do not come with response urls', () => {
+      def('contributions', () => {
+        testData.contributions.map(contribution => {
+          contribution.respond_path = ''
+          return contribution
+        })
+      })
+
+      it('hides the respond button', function() {
+        assert.isFalse($tableHeaders.some(header => header.text() == 'Respond'))
+      })
+    })
   })
 })

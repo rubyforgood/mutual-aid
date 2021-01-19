@@ -23,7 +23,9 @@
         <DeleteButton action="/users/sign_out">Logout</DeleteButton>
       </b-navbar-item>
     </template>
+
     <template slot="end" v-else>
+      <b-navbar-item v-if="p2pEnabled" href="/contributions">Contributions</b-navbar-item>
       <b-navbar-item tag="div">
         <a href="/users/sign_in" class="button is-outlined">Login</a>
       </b-navbar-item>
@@ -38,8 +40,9 @@ import {FeedbackButton} from 'components/forms'
 
 export default {
   props: {
-    loggedIn: { type: Boolean, default: false },
-    logoUrl: { type: String },
+    loggedIn:   { type: Boolean, default: false },
+    logoUrl:    { type: String },
+    p2pEnabled: { type: Boolean, default: false },
   },
   components: {
     DeleteButton,

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AnnouncementsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :authenticate_user!, except: %i[new create]
   before_action :set_announcement, only: %i[show edit update destroy]
 

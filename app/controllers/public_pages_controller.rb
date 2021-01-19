@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PublicPagesController < PublicController
+  include NotUsingPunditYet
+
   layout :determine_layout
 
   def about

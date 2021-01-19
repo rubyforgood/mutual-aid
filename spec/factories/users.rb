@@ -23,6 +23,14 @@ FactoryBot.define do
     trait :sys_admin do
       role { :sys_admin }
     end
+
+    trait :with_person do
+      association :person
+      # TODO: make sure the simpler version above works
+      # after(:create) do |instance, evaluated|
+        # create(:person, user: instance)
+      # end
+    end
   end
 end
 

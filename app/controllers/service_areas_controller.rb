@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ServiceAreasController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_service_area, only: %i[show edit update destroy]
 
   def index

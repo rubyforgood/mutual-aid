@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class FeedbacksController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_feedback, only: %i[show edit update destroy]
 
   def index

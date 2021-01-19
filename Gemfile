@@ -30,6 +30,7 @@ gem 'mobility', '~> 0.8.9'
 gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.0'
+gem 'pundit'
 gem 'rack-timeout'
 gem 'reform-rails'
 gem 'rubocop-rails'
@@ -49,6 +50,7 @@ end
 group :test do
   # an XML formatter is required for fancier CircleCI results
   gem 'rspec_junit_formatter'
+  gem 'pundit-matchers'
 end
 
 group :development do

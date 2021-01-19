@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class OffersController < PublicController
+  include NotUsingPunditYet
+
   layout 'without_navbar', only: %i[new create]
 
   def index

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
+  include NotUsingPunditYet
+
   before_action :set_location, only: %i[show edit update destroy]
 
   def index

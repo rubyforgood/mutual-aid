@@ -3,11 +3,11 @@ class PersonPolicy < ApplicationPolicy
     def resolve
       case
       when can_admin?
-        original_scope.all
+        scope.all
       when user.present?
-        original_scope.where(user_id: user.id)
+        scope.where(user_id: user.id)
       else
-        original_scope.none
+        scope.none
       end
     end
   end

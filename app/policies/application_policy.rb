@@ -30,16 +30,16 @@ class ApplicationPolicy
   class Scope
     include Utils
 
-    attr_reader :original_scope
+    attr_reader :scope
 
-    def initialize(context, original_scope)
+    def initialize(context, scope)
       @user, @system_settings, @admin_param = extract context
-      @original_scope = original_scope
+      @scope = scope
     end
 
     # We default all permissions to false, and expect you to override as needed.
     def resolve
-      original_scope.none
+      scope.none
     end
   end
 

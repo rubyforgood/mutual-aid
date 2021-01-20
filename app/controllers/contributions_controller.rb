@@ -65,15 +65,17 @@ class ContributionsController < ApplicationController
   end
 
   def contribution_blueprint_options
-    options = { respond_path: ->(id) { respond_contribution_path(id)} }
+    options = {}
+    options[:respond_path] = ->(id) { respond_contribution_path(id)} if current_user
     options[:view_path] = ->(id) { contribution_path(id) } if SystemSetting.current_settings.peer_to_peer?
     options
   end
 
   def filter_params
-    return Hash.new unless allowed_params && allowed_params.to_h.any?
+    return {} unless allowed_params&.to_h.any?
+
     allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key}.tap do |hash|
-      hash.keys.each { |key| hash[key] = hash[key].keys}
+      hash.each_key { |key| hash[key] = hash[key].keys}
     end
   end
 

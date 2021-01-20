@@ -1,12 +1,5 @@
 require 'rails_helper'
 
-# FIXME: remove or consolidate this block once #834 is resolved
-RSpec.configure do
-  Pundit::Matchers.configure do |config|
-    config.user_alias = :acting_user
-  end
-end
-
 RSpec.describe AnnouncementPolicy do
   let(:context) { Context.new user: user }
   let(:announcement) { double :announcement }

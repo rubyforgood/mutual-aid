@@ -4,8 +4,8 @@ class PersonPolicy < ApplicationPolicy
       case
       when can_admin?
         original_scope.all
-      when acting_user.present?
-        original_scope.where(user_id: acting_user.id)
+      when user.present?
+        original_scope.where(user_id: user.id)
       else
         original_scope.none
       end
@@ -13,15 +13,15 @@ class PersonPolicy < ApplicationPolicy
   end
 
   def read?
-    person_attached_to_acting_user? || can_admin?
+    own_person? || can_admin?
   end
 
   def change?
-    person_attached_to_acting_user? || can_admin?
+    own_person? || can_admin?
   end
 
   def add?
-    person_attached_to_acting_user? || sys_admin?
+    own_person? || sys_admin?
   end
 
   def delete?
@@ -29,11 +29,12 @@ class PersonPolicy < ApplicationPolicy
   end
 
   private
+
   def person
     record
   end
 
-  def person_attached_to_acting_user?
-    person.user_id == acting_user&.id
+  def own_person?
+    person.user_id == user&.id
   end
 end

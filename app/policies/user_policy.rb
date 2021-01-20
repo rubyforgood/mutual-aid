@@ -4,8 +4,8 @@ class UserPolicy < ApplicationPolicy
       case
       when can_admin?
         original_scope.all
-      when acting_user.present?
-        original_scope.where(id: acting_user.id)
+      when user.present?
+        original_scope.where(id: user.id)
       else
         original_scope.none
       end
@@ -13,11 +13,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def read?
-    target_user_is_acting_user? || can_admin?
+    own_user? || can_admin?
   end
 
   def change?
-    target_user_is_acting_user? || can_admin?
+    own_user? || can_admin?
   end
 
   def add?
@@ -33,7 +33,7 @@ class UserPolicy < ApplicationPolicy
     record
   end
 
-  def target_user_is_acting_user?
-    acting_user.present? && target_user == acting_user
+  def own_user?
+    user.present? && target_user == user
   end
 end

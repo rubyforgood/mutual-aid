@@ -9,13 +9,13 @@ RSpec.describe ApplicationPolicy do
 
   describe 'initialization' do
     it 'accepts Context and extracts its contents' do
-      expect(policy.acting_user).to be user
+      expect(policy.user).to be user
       expect(policy.system_settings).to be system_settings
     end
 
     it 'also supports User instead of context' do
       policy = ApplicationPolicy.new user, record
-      expect(policy.acting_user).to be user
+      expect(policy.user).to be user
       expect(policy.system_settings).to be nil
     end
   end

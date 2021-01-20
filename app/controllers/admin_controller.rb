@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class AdminController < ApplicationController
-  include NotUsingPunditYet
-
-  before_action :authenticate_user!, except: %i[new create]
+  before_action :authenticate_user!
+  before_action :ensure_authorized_as_admin
   before_action :set_system_settings, only: [:glossary_edit, :glossary_index, :glossary_update]
 
   def landing_page
@@ -38,7 +37,7 @@ class AdminController < ApplicationController
     @system_settings.update(glossary_content: glossary_params[:glossary_content])
     redirect_to glossary_admin_path
   end
-  
+
   def yearbook
     @positions = Position.all
   end
@@ -51,5 +50,14 @@ class AdminController < ApplicationController
 
   def set_system_settings
     @system_settings = SystemSetting.current_settings
+  end
+
+  def ensure_authorized_as_admin
+    unless current_user.admin_role? || current_user.sys_admin_role?
+      fail Pundit::NotAuthorizedError, "Sorry, only admins are authorized to do that."
+    end
+
+    skip_authorization
+    skip_policy_scope
   end
 end

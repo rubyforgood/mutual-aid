@@ -1,4 +1,4 @@
-## Why
+### Why
 <!--
 A summary of what problem this pull request is trying to solve. Include a #reference to an existing issue, which should provide a more detailed explanation of the problem, as well as any discussion about the nature of the problem.
 
@@ -10,13 +10,13 @@ If appropriate, use github's [issue linking keywords](https://docs.github.com/en
 
 - [ ] All new features have been described in the pull request
 - [ ] Security & accessibility have been considered
-- [ ] All outstanding questions and concerns have been resolved
-- [ ] Any next steps that seem like good ideas have been created as issues for future discussion & implementation
 - [ ] High quality tests have been added, or an explanation has been given why the features cannot be tested
 - [ ] New features have been documented, and the code is understandable and well commented
 - [ ] Entry added to CHANGELOG.md if appropriate
+- [ ] All outstanding questions and concerns have been resolved
+- [ ] Any next steps that seem like good ideas have been created as issues for future discussion & implementation
 
-## What
+### What
 <!--
 A list of the changes included in this pull request. A checkbox list is probably a good choice here, and the boxes should be checked off as tasks are completed. This section may be omitted if the Why section provides enough information and only a few changes were made (eg, for simple bug reports).
 
@@ -29,7 +29,7 @@ Always highlight breaking changes or any changes that effect the behaviour of us
 Also, include screenshots if you can!
 -->
 
-## How
+### How
 <!--
 Describe how you solved the problem. This is not a replacement for documentation, but should give people context and a high-level understanding of your solution before/without reading your code. In particular, if your solution implements or makes use of any algorithms, protocols or paradigms that some developers may be unfamiliar with (such as using a cryptographic hash function, implementing a particular high performance data structure or using functional programming concepts, etc) you should mention it here, and ideally one or two links that point people to learning resources. Also, if you found anything difficult, or you feel that your solution is "clever", you should probably talk about it here, and explain what you did.
 -->
@@ -41,14 +41,14 @@ If possible you should add tests to ensure that any changes you make work as exp
 IF YOU CHANGED THE BEHAVIOR OF ANY TESTS THAT WERE PREVIOUSLY IMPLEMENTED ALWAYS MAKE A NOTE OF IT AND DESCRIBE WHAT YOU CHANGED AND WHY!
 -->
 
-## Next Steps
+### Next Steps
 <!--
 This section is to highlight any ideas you have for how this feature could be extended in the future.
 
 You should also consider adding issues for these next steps
 -->
 
-## Outstanding Questions, Concerns and Other Notes
+### Outstanding Questions, Concerns and Other Notes
 <!--
 Any questions or concerns you were unable to address while implementing this solution. For example, "I've implemented heat vision resistance, but do we expect to be attacked by superman?"
 

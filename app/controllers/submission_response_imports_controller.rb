@@ -15,6 +15,6 @@ class SubmissionResponseImportsController < ApplicationController
     )
 
     flash[:notice] = 'Your file has been uploaded and is being imported'
-    redirect_to landing_page_admin_path
+    redirect_to admin_dashboard_path
   end
 end

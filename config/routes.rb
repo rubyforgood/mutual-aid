@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   # FIXME: drop controller override when the pundit work is ready, #514
   devise_for :users, controllers: { registrations: 'registrations_sans_signup' }
 
-  get '/admin',                    to: 'admin#landing_page',    as: 'landing_page_admin'
+  scope '/admin' do
+    root to: 'admin_dashboard#show', as: 'admin_dashboard'
+  end
+
   get '/admin/forms',              to: 'admin#form_admin',      as: 'form_admin'
   get '/admin/volunteers',         to: 'admin#volunteer_admin', as: 'volunteer_admin'
   get '/admin/dispatch',           to: 'admin#dispatch_steps',  as: 'dispatch_steps_admin'

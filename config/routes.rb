@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     root to: 'admin_dashboard#show', as: 'admin_dashboard'
   end
 
-  get '/admin/forms',              to: 'admin#form_admin',      as: 'form_admin'
   get '/admin/volunteers',         to: 'admin#volunteer_admin', as: 'volunteer_admin'
   get '/admin/dispatch',           to: 'admin#dispatch_steps',  as: 'dispatch_steps_admin'
   get '/admin/glossary',           to: 'admin#glossary_index',  as: 'glossary_admin'

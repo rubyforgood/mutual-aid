@@ -8,8 +8,6 @@ class AdminController < ApplicationController
 
   def dispatch_steps; end
 
-  def form_admin; end
-
   # FIXME: extract glossary related code into their own controller
   def glossary_edit
     @system_settings = SystemSetting.current_settings

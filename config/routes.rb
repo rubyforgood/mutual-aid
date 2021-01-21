@@ -10,12 +10,12 @@ Rails.application.routes.draw do
 
     resource :volunteers,     only: [:show], controller: :volunteer_admin, as: 'volunteer_admin'
     resource :dispatch_steps, only: [:show]
+    resource :yearbook,       only: [:show], controller: :yearbook
   end
 
   get '/admin/glossary',           to: 'admin#glossary_index',  as: 'glossary_admin'
   get '/admin/glossary_edit',      to: 'admin#glossary_edit',   as: 'glossary_admin_edit'
   patch '/admin/glossary_edit',    to: 'admin#glossary_update', as: 'glossary_admin_update'
-  get '/admin/yearbook',           to: 'admin#yearbook',        as: 'yearbook_admin'
 
   get '/public',                   to: 'public_pages#landing_page',        as: 'landing_page_public'
   get '/about',                    to: 'public_pages#about',               as: 'about_public'

@@ -22,10 +22,6 @@ class AdminController < ApplicationController
     redirect_to glossary_admin_path
   end
 
-  def yearbook
-    @positions = Position.all
-  end
-
   private
 
   def glossary_params

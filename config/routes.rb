@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   scope '/admin' do
     root to: 'admin_dashboard#show', as: 'admin_dashboard'
 
-    resource :volunteers, only: [:show], controller: :volunteer_admin, as: 'volunteer_admin'
+    resource :volunteers,     only: [:show], controller: :volunteer_admin, as: 'volunteer_admin'
+    resource :dispatch_steps, only: [:show]
   end
 
-  get '/admin/dispatch',           to: 'admin#dispatch_steps',  as: 'dispatch_steps_admin'
   get '/admin/glossary',           to: 'admin#glossary_index',  as: 'glossary_admin'
   get '/admin/glossary_edit',      to: 'admin#glossary_edit',   as: 'glossary_admin_edit'
   patch '/admin/glossary_edit',    to: 'admin#glossary_update', as: 'glossary_admin_update'

@@ -6,8 +6,6 @@ class AdminController < ApplicationController
   before_action :authenticate_user!, except: %i[new create]
   before_action :set_system_settings, only: [:glossary_edit, :glossary_index, :glossary_update]
 
-  def dispatch_steps; end
-
   # FIXME: extract glossary related code into their own controller
   def glossary_edit
     @system_settings = SystemSetting.current_settings

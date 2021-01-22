@@ -13,10 +13,6 @@ Rails.application.routes.draw do
     resource :yearbook,       only: [:show], controller: :yearbook
   end
 
-  get '/admin/glossary',           to: 'admin#glossary_index',  as: 'glossary_admin'
-  get '/admin/glossary_edit',      to: 'admin#glossary_edit',   as: 'glossary_admin_edit'
-  patch '/admin/glossary_edit',    to: 'admin#glossary_update', as: 'glossary_admin_update'
-
   get '/public',                   to: 'public_pages#landing_page',        as: 'landing_page_public'
   get '/about',                    to: 'public_pages#about',               as: 'about_public'
   get '/announcements_list',       to: 'public_pages#announcements',       as: 'announcements_public'
@@ -80,7 +76,7 @@ Rails.application.routes.draw do
   resources :teams
   resources :users
 
-  resource :glossary, controller: :glossary, only: [:show]
+  resource :glossary, controller: :glossary, only: [:show, :edit, :update]
 
   root :to => 'public_pages#landing_page'
 end

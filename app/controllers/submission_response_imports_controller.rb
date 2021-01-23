@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class SubmissionResponseImportsController < ApplicationController
-  include NotUsingPunditYet
-
+class SubmissionResponseImportsController < AdminController
   def new; end
 
   def create

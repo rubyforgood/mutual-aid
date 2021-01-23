@@ -67,7 +67,7 @@ class Listing < ApplicationRecord
     elsif matches_as_provider.any?
       status = matches_as_provider.map{|m| m.completed?}.any? ? 'completed' : 'matched'
     end
-    update_attributes(state: status)
+    update(state: status)
     status
   end
 

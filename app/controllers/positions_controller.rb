@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class PositionsController < ApplicationController
-  include NotUsingPunditYet
-
+class PositionsController < AdminController
   before_action :set_position, only: %i[show edit update destroy]
 
   def index

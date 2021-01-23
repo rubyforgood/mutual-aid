@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class OrganizationsController < ApplicationController
-  include NotUsingPunditYet
-
+class OrganizationsController < AdminController
   before_action :set_organization, only: %i[show edit update destroy]
 
   def index

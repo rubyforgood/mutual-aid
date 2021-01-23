@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class CommunicationLogsController < ApplicationController
-  include NotUsingPunditYet
-
+class CommunicationLogsController < AdminController
   before_action :set_communication_log, only: %i[show edit update destroy]
 
   def index

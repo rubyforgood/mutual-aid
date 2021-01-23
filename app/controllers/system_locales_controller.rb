@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class SystemLocalesController < ApplicationController
-  include NotUsingPunditYet
-
+class SystemLocalesController < AdminController
   before_action :set_system_locale, only: %i[show edit update destroy]
 
   def index

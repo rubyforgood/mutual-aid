@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class SoftwareFeedbacksController < ApplicationController
-  include NotUsingPunditYet
-
+class SoftwareFeedbacksController < AdminController
   before_action :set_software_feedback, only: %i[show edit update destroy]
 
   def index

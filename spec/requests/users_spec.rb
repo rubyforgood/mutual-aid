@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "/users", type: :request do
-  include_context "signed in as sysadmin"
+  before { sign_in FactoryBot.create(:user, :sys_admin) }
 
   describe "GET /index" do
     it "can render" do

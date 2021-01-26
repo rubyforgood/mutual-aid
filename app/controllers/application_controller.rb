@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Authorization
 
   protect_from_forgery with: :exception
+
   before_action :authenticate_user!
   before_action :set_admin_status
   before_action :set_system_setting

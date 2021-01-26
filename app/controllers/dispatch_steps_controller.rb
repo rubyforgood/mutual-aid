@@ -1,0 +1,2 @@
+class DispatchStepsController < AdminController
+end

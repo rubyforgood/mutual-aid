@@ -91,5 +91,5 @@
   <hr>
 
   <%= link_to('Edit', edit_system_setting_path(@system_setting)) + " | " if current_user.sys_admin_role? %>
-  <%= link_to 'Admin', landing_page_admin_path %>
+  <%= link_to 'Admin', admin_dashboard_path %>
 </div>

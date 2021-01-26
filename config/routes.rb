@@ -5,14 +5,13 @@ Rails.application.routes.draw do
   # FIXME: drop controller override when the pundit work is ready, #514
   devise_for :users, controllers: { registrations: 'registrations_sans_signup' }
 
-  get '/admin',                    to: 'admin#landing_page',    as: 'landing_page_admin'
-  get '/admin/forms',              to: 'admin#form_admin',      as: 'form_admin'
-  get '/admin/volunteers',         to: 'admin#volunteer_admin', as: 'volunteer_admin'
-  get '/admin/dispatch',           to: 'admin#dispatch_steps',  as: 'dispatch_steps_admin'
-  get '/admin/glossary',           to: 'admin#glossary_index',  as: 'glossary_admin'
-  get '/admin/glossary_edit',      to: 'admin#glossary_edit',   as: 'glossary_admin_edit'
-  patch '/admin/glossary_edit',    to: 'admin#glossary_update', as: 'glossary_admin_update'
-  get '/admin/yearbook',           to: 'admin#yearbook',        as: 'yearbook_admin'
+  scope '/admin' do
+    root to: 'admin_dashboard#show', as: 'admin_dashboard'
+
+    resource :volunteers,     only: [:show], controller: :volunteer_admin, as: 'volunteer_admin'
+    resource :dispatch_steps, only: [:show]
+    resource :yearbook,       only: [:show], controller: :yearbook
+  end
 
   get '/public',                   to: 'public_pages#landing_page',        as: 'landing_page_public'
   get '/about',                    to: 'public_pages#about',               as: 'about_public'
@@ -77,7 +76,7 @@ Rails.application.routes.draw do
   resources :teams
   resources :users
 
-  resource :glossary, controller: :glossary, only: [:show]
+  resource :glossary, controller: :glossary, only: [:show, :edit, :update]
 
   root :to => 'public_pages#landing_page'
 end

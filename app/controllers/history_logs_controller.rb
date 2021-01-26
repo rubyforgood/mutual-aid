@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class HistoryLogsController < ApplicationController
-  include NotUsingPunditYet
-
+class HistoryLogsController < AdminController
   def index
     @history_logs = HistoryLog.all
   end

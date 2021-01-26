@@ -13,7 +13,7 @@ RSpec.describe '/listings', type: :request do
     location_attributes: { zip: '12e45' },
   }}
 
-  before { sign_in create(:user) }
+  before { sign_in create(:user, :admin) }
 
   describe 'GET /index' do
     it 'renders a successful response' do

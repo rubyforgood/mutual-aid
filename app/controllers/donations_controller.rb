@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class DonationsController < ApplicationController
-  include NotUsingPunditYet
-
+class DonationsController < AdminController
   before_action :authenticate_user!, except: %i[new create]
   before_action :set_donation, only: %i[show edit update destroy]
 

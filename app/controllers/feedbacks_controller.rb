@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class FeedbacksController < ApplicationController
-  include NotUsingPunditYet
-
+# FIXME: Will need to become a mixed-access controller when we add functionality for
+# neigbhors to create feedback. Maybe also consider renaming (MatchFeedback)?
+class FeedbacksController < AdminController
   before_action :set_feedback, only: %i[show edit update destroy]
 
   def index

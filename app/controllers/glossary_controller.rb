@@ -1,6 +1,6 @@
-class GlossaryController < PublicController
-  include NotUsingPunditYet
-
+class GlossaryController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show]
+  before_action :authorize_glossary
   before_action :set_system_settings
 
   def show; end
@@ -12,6 +12,10 @@ class GlossaryController < PublicController
   end
 
   private
+
+  def authorize_glossary
+    authorize :glossary
+  end
 
   def glossary_params
     params.require(:system_setting).permit(:glossary_content)

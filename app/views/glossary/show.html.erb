@@ -1,4 +1,6 @@
 <%= render partial: 'glossary/header' %>
-<%= link_to "Edit Glossary", edit_glossary_path, class: "btn" %>
+<% if policy(:glossary).change? %>
+  <%= link_to "Edit Glossary", edit_glossary_path, class: "btn" %>
+<% end %>
 <hr>
 <%= @system_settings.glossary_content %>

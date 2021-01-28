@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   around_action :switch_locale
 
   def set_admin_status
+    # FIXME: replace uses of @admin_status with pundit
     @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role? # allows admin user to simulate with param=false
   end
 
@@ -29,7 +30,10 @@ class ApplicationController < ActionController::Base
   end
 
   def context
-    @context ||= Context.new(user: current_user)
+    @context ||= Context.new(
+      user: current_user,
+      hide_admin?: params[:admin] == 'false',
+    )
   end
   helper_method :context
 

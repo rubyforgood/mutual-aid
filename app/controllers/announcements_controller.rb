@@ -1,31 +1,20 @@
 # frozen_string_literal: true
 
 class AnnouncementsController < ApplicationController
-  include NotUsingPunditYet
-
-  before_action :authenticate_user!, except: %i[new create]
-  before_action :set_announcement, only: %i[show edit update destroy]
+  skip_before_action :authenticate_user!, only: %i[index show new create]
 
   layout :determine_layout, only: %i[new show]
 
   def index
-    @announcements = Announcement.order(created_at: :desc)
+    @announcements = policy_scope(Announcement).order(created_at: :desc)
   end
 
-  def show
-    @announcement = Announcement.find(params[:id])
-  end
-
-  def new
-    @announcement = Announcement.new
-  end
-
-  def edit; end
+  def show; end
+  def new;  end
 
   def create
-    @announcement = Announcement.new(announcement_params)
-
-    if @announcement.save
+    announcement.assign_attributes permitted_attributes(announcement)
+    if announcement.save
       redirect_to @admin_status ? announcements_path : contribution_thank_you_path, notice: "Announcement was successfully submitted.#{" We'll review." unless @admin_status}"
     else
       render :new
@@ -33,7 +22,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def update
-    if @announcement.update(announcement_params)
+    if announcement.update(permitted_attributes announcement)
       redirect_to announcements_path, notice: 'Announcement was successfully updated.'
     else
       render :edit
@@ -41,27 +30,18 @@ class AnnouncementsController < ApplicationController
   end
 
   def destroy
-    @announcement.destroy
+    announcement.destroy
     redirect_to announcements_url, notice: 'Announcement was successfully destroyed.'
   end
 
   private
 
-    def set_announcement
-      @announcement = Announcement.find(params[:id])
+    def announcement
+      @announcement ||= authorize(params[:id] ? Announcement.find(params[:id]) : Announcement.new)
     end
+    helper_method :announcement
 
     def determine_layout
       'without_navbar' unless context.system_settings.display_navbar?
-    end
-
-    def announcement_params
-      params.require(:announcement).permit(
-          :name,
-          :description,
-          :is_approved,
-          :publish_from,
-          :publish_until
-      )
     end
 end

@@ -7,6 +7,10 @@ class AnnouncementsController < ApplicationController
 
   def index
     @announcements = policy_scope(Announcement).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.json { render json: @announcements }
+    end
   end
 
   def show; end

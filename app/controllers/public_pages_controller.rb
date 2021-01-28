@@ -8,14 +8,6 @@ class PublicPagesController < PublicController
     @about_us_text = HtmlSanitizer.new(@system_setting.about_us_text).sanitize
   end
 
-  def announcements
-    @announcements = Announcement.where(is_approved: true).published
-    respond_to do |format|
-      format.html
-      format.json { render json: @announcements }
-    end
-  end
-
   def contributions
     redirect_to listings_path # TODO: - change current /listings endpoint to point to this one
   end

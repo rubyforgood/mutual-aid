@@ -27,10 +27,10 @@ RSpec.describe '/contributions', type: :request do
         expect(response).to be_successful
       end
 
-      it 'includes a link to respond to the contribution' do
+      it 'includes a link to view to the contribution' do
         listing = create(:listing)
         get contributions_url
-        expect(response.body).to match(/#{respond_contribution_path(listing.id)}/)
+        expect(response.body).to match(/#{contribution_path(listing.id)}/)
       end
 
       it 'shows a contribution response page' do
@@ -52,11 +52,12 @@ RSpec.describe '/contributions', type: :request do
       end
 
       # TODO: change this behavior once Pundit is more thoroughly set up
-      it 'has no link to respond to the contribution' do
+      it 'has a link to view the contribution' do
         listing = create(:listing)
         get contributions_url
-        expect(response.body).to_not match(/#{respond_contribution_path(listing.id)}/)
+        expect(response.body).to match(/#{contribution_path(listing.id)}/)
       end
+      # the link shows minimal info
     end
 
     describe 'when logged out and p2p is disabled' do

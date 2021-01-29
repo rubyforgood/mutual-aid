@@ -1,80 +1,8 @@
 <% person = @contribution.person %>
-
-<div class="title is-5">
-  Respond to Contribution: <%= link_to "go to Contributions page", contributions_path %>
-  <br>
-  <span class="subtitle is-7 is-italic"><%= link_to "(1. Triage (or log Communication), then 2. Add tentative Match)", dispatch_steps_path %></span>
+<div class="block">
+  <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>
 </div>
-
-<br><br>
-<div class="columns">
-  <div class="contribution column">
-    <div class="summary">
-      <strong>Contribution:</strong>
-      <br>
-      <span class="title is-1">
-        <span class="<%= @contribution.icon_class %>"></span> <%= @contribution&.type %>: <%= @contribution&.all_tags_to_s&.upcase %>
-      </span>
-        <%#= edit(@contribution) %><!-- # TODO - add update action back in once we have moved controllers-->
-    </div>
-    <div class="created_at">Created on <%= shorthand_display(@contribution.created_at) %></div>
-    <% if @contribution.inexhaustible %>
-      <br>
-      <%= "<br>".html_safe if @contribution.title.present? %>
-      <span class="has-text-primary"><span class="fa fa-hourglass-half"></span>&nbsp;INHEXHAUSTIBLE (can be matched repeatedly)</span>
-      <%= "<br>".html_safe if @contribution.title.present? %>
-    <% end %>
-    <%= "<br>".html_safe if @contribution.title.present? || @contribution.description.present? %>
-    <div class="subtitle is-5"><%= @contribution.title %></div>
-    <div class="description"><%= @contribution.description %></div>
-    <br><br>
-    <%= triage_button(@contribution) %>
-    <br><br>
-
-    <% match_assn_name = @contribution.ask? ? "matches_as_receiver" : "matches_as_provider" %>
-    <% matches_for_this_contribution = @contribution.public_send(match_assn_name) %>
-
-    <% if matches_for_this_contribution.any? %>
-      <strong>This <%= @contribution.type %> has been Matched:</strong>
-      <br>
-      <% matches_for_this_contribution.order(created_at: :desc).each do |match| %>
-        <%= edit_button(match, "#{shorthand_display(match.created_at)} #{match.category.upcase}: #{match.short_name}", nil, nil, nil, {}, "View Match") %>
-        <br>
-      <% end %>
-      <br><br>
-    <% elsif @contribution.ask? %>
-      <%= render "layouts/view_add_new_button", button_text: "Add tentative Match", table_name: "matches", new_params: "receiver_id=#{@contribution.id}&receiver_type=Ask" %>
-      <%= link_to("Find Match [TBD]",
-                  match_listing_path(@contribution, receiver_id: @contribution.id, receiver_type: "Ask"),
-                  class: "button") if params[:admin] %>
-    <% elsif @contribution.offer? %>
-      <%= render "layouts/view_add_new_button", button_text: "Add tentative Match", table_name: "matches", new_params: "provider_id=#{@contribution.id}&provider_type=Offer" %>
-      <%= link_to("Find Match [TBD]",
-                  match_listing_path(@contribution, provider_id: @contribution.id, provider_type: "Offer"),
-                  class: "button") if params[:admin] %>
-    <% end %>
-    <br><br>
-  </div>
-  <div class="person column">
-    <div class="contact-info">
-      <strong>Created by:</strong>
-      <br>
-      <%= show_button(person, person&.name, "fa fa-user-circle", "title is-5", nil, contribution_id: @contribution.id) %>
-      <br><br>
-      <strong>Preferred contact info:</strong>
-      <br>
-      <span class="<%= person.preferred_contact_method.icon_class %>"></span>
-      <span class="subtitle is-5"><%= person.preferred_contact_info %></span>
-    </div>
-
-    <div class="all-time-match-info">
-      <br><br>
-      <strong>Participation summary:</strong>
-      <br>
-      <span><%= person.match_history %></span>
-    </div>
-  </div>
-</div>
+<%= render "top_level_card", person: person, contribution: @contribution %>
 
 <div class="columns">
   <div class="column">

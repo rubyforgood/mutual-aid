@@ -1,15 +1,61 @@
-<section class="section">
-  <h1>Request for Contribution</h1>
-  <h2 class="title"><%= contribution.type %>: <%= contribution.all_tags_unique.map(&:humanize).join(", ") %></h2>
-  <br>
-  <div class="box">
-    <p><strong><%= contribution.person.anonymized_name_and_email %></strong></p>
-    <p class="subtitle"><%= contribution.description %></p>
-    <% if contribution.matched? %>
-      <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
-    <% else %>
-      <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", method: :get %>
-    <% end %>
-  </div>
+<% person = @contribution.person %>
+<div class="block">
   <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>
-</section>
+</div>
+<%= render "top_level_card", person: person, contribution: @contribution %>
+
+<div class="columns">
+  <div class="column">
+    <hr>
+    <div class="title is-5">COMMUNICATION HISTORY:</div>
+    <hr>
+    <%= render "matches/communication_log_quick_buttons", person: person %>
+    <hr>
+    <%= render "matches/communication_history", person: person %>
+  </div>
+  <div class="column">
+    <hr>
+    <div class="title is-5">OTHER CONTRIBUTION AND MATCH INFO:</div>
+
+    <% Contribution::TYPES.each do |type| %>
+      <hr>
+      <% contribution_assn = type.to_s.pluralize.downcase %>
+      <strong><%= "#{person.name}'s " %> other matchable <%= contribution_assn.titleize %>:</strong>
+      <br>
+      <% if @contribution.person.public_send(contribution_assn).matchable.
+          where.not("listings.id = ?", @contribution.id).any? %>
+        <% @contribution.person.public_send(contribution_assn).matchable.
+            where.not("listings.id = ?", @contribution.id).
+            order(created_at: :desc).each do |contribution| %>
+          <%= link_to("<span class='#{contribution.icon_class}'></span>  #{
+                       shorthand_display(contribution.created_at)} #{contribution.all_tags_to_s.upcase}".html_safe,
+                       respond_contribution_path(contribution,
+                                                 contribution_type: type),
+                      class: "button", title: "View Match") %>
+          <br>
+        <% end %>
+      <% end %>
+      <%= "<br>".html_safe if contribution_assn == Contribution::TYPES.last %>
+    <% end %>
+
+    <hr>
+
+    <strong><%= "#{person.name}'s " %> Match history:</strong>
+    <br>
+    <% no_matches_comments = [] %>
+    <% @contribution.person.listings.where.not(id: @contribution).order(created_at: :desc).each do |listing| %>
+      <% match_assn_name = listing.ask? ? "matches_as_receiver" : "matches_as_provider" %>
+      <% other_matches = listing.public_send(match_assn_name) %>
+      <% if other_matches.any? %>
+        <% listing.public_send(match_assn_name).order(created_at: :desc).each do |match| %>
+          <%= edit_button(match, "#{shorthand_display(match.created_at)} #{match.category.upcase}: #{match.short_name}", nil, nil, nil, {}, "View Match") %>
+          <br>
+        <% end %>
+        <% no_matches_comments << "has_matches" %>
+      <% else %>
+        <% no_matches_comments << "(No other matches)" %>
+      <% end %>
+    <% end %>
+    <%= no_matches_comments.uniq.join if no_matches_comments.uniq.length == 1 %>
+  </div>
+</div>

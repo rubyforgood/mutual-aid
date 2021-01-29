@@ -31,20 +31,20 @@ RSpec.describe ApplicationPolicy do
   end
 
   describe 'hiding admin privileges' do
-    let(:context) { Context.new user: user, hide_admin?: hide_admin }
+    let(:context) { Context.new user: user, admin_param: admin_param }
 
     subject { policy.admin? }
 
     context 'for a user without admin privileges' do
       let(:user) { instance_double 'User', admin_role?: false }
 
-      context 'with admin role visible' do
-        let(:hide_admin) { false }
+      context 'without ?admin override' do
+        let(:admin_param) { nil }
         it { is_expected.to be false }
       end
 
-      context 'with admin role hidden' do
-        let(:hide_admin) { true }
+      context 'with ?admin=false' do
+        let(:admin_param) { 'false' }
         it { is_expected.to be false }
       end
     end
@@ -52,13 +52,13 @@ RSpec.describe ApplicationPolicy do
     context 'for a user with admin privileges' do
       let(:user) { instance_double 'User', admin_role?: true }
 
-      context 'with admin role visible' do
-        let(:hide_admin) { false }
+      context 'without ?admin override' do
+        let(:admin_param) { nil }
         it { is_expected.to be true }
       end
 
-      context 'with admin role hidden' do
-        let(:hide_admin) { true }
+      context 'with ?admin=false' do
+        let(:admin_param) { 'false' }
         it { is_expected.to be false }
       end
     end
@@ -68,13 +68,13 @@ RSpec.describe ApplicationPolicy do
 
       subject { policy.sys_admin? }
 
-      context 'with sysadmin role visible' do
-        let(:hide_admin) { false }
+      context 'without ?admin override' do
+        let(:admin_param) { nil }
         it { is_expected.to be true }
       end
 
-      context 'with sysadmin role hidden' do
-        let(:hide_admin) { true }
+      context 'with ?admin=false' do
+        let(:admin_param) { 'false' }
         it { is_expected.to be false }
       end
     end

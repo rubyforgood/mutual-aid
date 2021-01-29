@@ -1,23 +1,21 @@
 class ApplicationPolicy
   module Utils
-    attr_reader :acting_user, :system_settings
+    attr_reader :acting_user, :admin_param, :system_settings
 
     def sys_admin?
-      acting_user && acting_user.sys_admin_role? && !hide_admin?
+      acting_user && acting_user.sys_admin_role? && admin_param != 'false'
     end
 
     def admin?
-      acting_user && acting_user.admin_role? && !hide_admin?
+      acting_user && acting_user.admin_role? && admin_param != 'false'
     end
 
     private
 
-    def hide_admin?; @hide_admin end
-
     # Allowing for context || user simplifies policy specs that don't use additional context.
     def extract(context)
       if context.respond_to?(:user)
-        [context.user, context.system_settings, context.hide_admin?]
+        [context.user, context.system_settings, context.admin_param]
       else
         [context, nil, nil]
       end
@@ -31,7 +29,7 @@ class ApplicationPolicy
     attr_reader :original_scope
 
     def initialize(context, original_scope)
-      @acting_user, @system_settings, @hide_admin = extract context
+      @acting_user, @system_settings, @admin_param = extract context
       @original_scope = original_scope
     end
 
@@ -45,7 +43,7 @@ class ApplicationPolicy
 
   # We've configured pundit to provide a user context (See https://github.com/varvet/pundit/#additional-context).
   def initialize(context, record)
-    @acting_user, @system_settings, @hide_admin = extract context
+    @acting_user, @system_settings, @admin_param = extract context
     @record = record
   end
 

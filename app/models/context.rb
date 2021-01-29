@@ -1,5 +1,5 @@
 Context = Struct.new(
-  :hide_admin?,
+  :admin_param,
   :system_settings,
   :user,
   keyword_init: true

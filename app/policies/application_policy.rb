@@ -10,6 +10,10 @@ class ApplicationPolicy
       acting_user && acting_user.admin_role? && admin_param != 'false'
     end
 
+    def can_admin?
+      admin? || sys_admin?
+    end
+
     private
 
     # Allowing for context || user simplifies policy specs that don't use additional context.

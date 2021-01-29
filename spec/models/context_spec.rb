@@ -51,4 +51,66 @@ RSpec.describe Context do
         to eq ['positional', 'non_context', user, system_settings]
     end
   end
+
+  describe 'can_admin?' do
+    let(:context) { Context.new user: user, admin_param: admin_param }
+
+    subject { context.can_admin? }
+
+    context 'sysadmin' do
+      let(:user) { instance_double 'User', admin_role?: false, sys_admin_role?: true }
+
+      context '?admin not overriden' do
+        let(:admin_param) { nil }
+        it { is_expected.to be true }
+      end
+
+      context '?admin=false' do
+        let(:admin_param) { 'false' }
+        it { is_expected.to be false }
+      end
+    end
+
+    context 'admin' do
+      let(:user) { instance_double 'User', admin_role?: true, sys_admin_role?: false }
+
+      context '?admin not overriden' do
+        let(:admin_param) { nil }
+        it { is_expected.to be true }
+      end
+
+      context '?admin=false' do
+        let(:admin_param) { 'false' }
+        it { is_expected.to be false }
+      end
+    end
+
+    context 'neighbor' do
+      let(:user) { instance_double 'User', admin_role?: false, sys_admin_role?: false }
+
+      context '?admin not overriden' do
+        let(:admin_param) { nil }
+        it { is_expected.to be false }
+      end
+
+      context '?admin=false' do
+        let(:admin_param) { 'false' }
+        it { is_expected.to be false }
+      end
+    end
+
+    context 'guest' do
+      let(:user) { nil }
+
+      context '?admin not overriden' do
+        let(:admin_param) { nil }
+        it { is_expected.to be_falsey }
+      end
+
+      context '?admin=false' do
+        let(:admin_param) { 'false' }
+        it { is_expected.to be_falsey }
+      end
+    end
+  end
 end

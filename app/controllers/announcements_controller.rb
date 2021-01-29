@@ -15,11 +15,12 @@ class AnnouncementsController < ApplicationController
 
   def show; end
   def new;  end
+  def edit; end
 
   def create
     announcement.assign_attributes permitted_attributes(announcement)
     if announcement.save
-      redirect_to @admin_status ? announcements_path : contribution_thank_you_path, notice: "Announcement was successfully submitted.#{" We'll review." unless @admin_status}"
+      redirect_after_create
     else
       render :new
     end
@@ -34,7 +35,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def destroy
-    announcement.destroy
+    announcement.destroy!
     redirect_to announcements_url, notice: 'Announcement was successfully destroyed.'
   end
 
@@ -44,6 +45,15 @@ class AnnouncementsController < ApplicationController
       @announcement ||= authorize(params[:id] ? Announcement.find(params[:id]) : Announcement.new)
     end
     helper_method :announcement
+
+    def redirect_after_create
+      notice = 'Announcement was successfully submitted.'
+      if context.can_admin?
+        redirect_to announcements_path, notice: "#{notice} We'll review."
+      else
+        redirect_to contribution_thank_you_path, notice: notice
+      end
+    end
 
     def determine_layout
       'without_navbar' unless context.system_settings.display_navbar?

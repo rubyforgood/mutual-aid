@@ -7,7 +7,7 @@ class Announcement < ApplicationRecord
 
   acts_as_taggable_on :tags
 
-  validates :description, presence: true
+  validates :name, :description, :publish_from, presence: true
 
   scope :approved, ->()       { where is_approved: true }
   scope :pending_review, ->() { where is_approved: false }

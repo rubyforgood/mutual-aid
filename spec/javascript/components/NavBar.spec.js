@@ -2,7 +2,7 @@ import {createLocalVue, mount} from '@vue/test-utils'
 import {configure} from 'vue_config'
 import NavBar from 'components/NavBar'
 
-describe.only('NavBar', () => {
+describe('NavBar', () => {
   def('wrapper', () => mount(NavBar, {
     localVue: configure(createLocalVue()),
     propsData: {

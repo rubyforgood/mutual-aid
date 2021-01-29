@@ -2,7 +2,7 @@ class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       case
-      when sys_admin? || admin?
+      when can_admin?
         original_scope.all
       when acting_user.present?
         original_scope.where(id: acting_user.id)
@@ -13,15 +13,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def read?
-    target_user_is_acting_user? ||
-      sys_admin? ||
-      admin?
+    target_user_is_acting_user? || can_admin?
   end
 
   def change?
-    target_user_is_acting_user? ||
-      sys_admin? ||
-      admin?
+    target_user_is_acting_user? || can_admin?
   end
 
   def add?

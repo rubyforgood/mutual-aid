@@ -2,13 +2,12 @@ import {createLocalVue, mount} from '@vue/test-utils'
 import {configure} from 'vue_config'
 import NavBar from 'components/NavBar'
 
-describe.only('NavBar', () => {
+describe('NavBar', () => {
   def('wrapper', () => mount(NavBar, {
     localVue: configure(createLocalVue()),
     propsData: {
-      loggedIn:   $loggedIn,
-      logoUrl:    '/some-url',
-      p2pEnabled: $p2pEnabled,
+      logoUrl: '/some-url',
+      visibleButtons: $visibleButtons,
     },
   }))
 
@@ -19,13 +18,11 @@ describe.only('NavBar', () => {
     return [...navLinks, ...navButtons, ...navForms].map(link => link.text())
   })
 
-  describe('when not logged in', () => {
-    def('loggedIn', false)
+  describe('visible buttons', () => {
+    describe('when not instructed to show additional buttons', () => {
+      def('visibleButtons', ['Login'])
 
-    describe('when p2p is not enabled', () => {
-      def('p2pEnabled', false)
-
-      it('shows publicly accessible links except Contributions', () => {
+      it('shows publicly accessible links', () => {
         assert.sameMembers($renderedNavItems, [
           '', // home
           'About',
@@ -36,10 +33,10 @@ describe.only('NavBar', () => {
       })
     })
 
-    describe('when p2p is enabled', () => {
-      def('p2pEnabled', true)
+    describe('when instructed to show Contributions', () => {
+      def('visibleButtons', ['Contributions', 'Login'])
 
-      it('also includes Contributions', () => {
+      it('includes specified buttons', () => {
         assert.sameMembers($renderedNavItems, [
           '', // home
           'About',
@@ -50,23 +47,22 @@ describe.only('NavBar', () => {
         ])
       })
     })
-  })
 
-  describe('when logged in', () => {
-    def('loggedIn', true)
-
-    it('includes admin links', () => {
-      assert.sameMembers($renderedNavItems, [
-        '',
-        'About',
-        'Community Resources',
-        'Announcements',
-        'Contributions',
-        'Matches',
-        'Admin',
-        'Feedback',
-        'Logout',
-      ])
+    describe('when instructed to show all admin buttons', () => {
+      def('visibleButtons', ['Contributions', 'Matches', 'Admin', 'Feedback', 'Logout'])
+      it('includes specified buttons', () => {
+        assert.sameMembers($renderedNavItems, [
+          '',
+          'About',
+          'Community Resources',
+          'Announcements',
+          'Contributions',
+          'Matches',
+          'Admin',
+          'Feedback',
+          'Logout',
+        ])
+      })
     })
   })
 })

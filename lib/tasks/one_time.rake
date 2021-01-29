@@ -18,4 +18,10 @@ namespace :one_time do
       new_listings.each{ |new_listing| puts "+, #{new_listing.id}, #{new_listing.tag_list}" }
     end
   end
+
+  # FIXME: remove this after existing installations are upgraded
+  desc 'give existing users admin privileges'
+  task make_users_admins: :environment do
+    User.connection.update("update users set role = 'admin' where role = 'unset'")
+  end
 end

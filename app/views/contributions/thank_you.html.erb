@@ -26,11 +26,11 @@
   </div>
 
   <div class="community-resources-link">
-    <%= link_to "Community Resources", community_resources_public_path if @system_setting.community_resources_module? %>
+    <%= link_to "Community Resources", community_resources_path if @system_setting.community_resources_module? %>
   </div>
 
   <div class="announcements-link">
-    <%= link_to "Announcements", announcements_public_path if @system_setting.announcements_module? %>
+    <%= link_to "Announcements", announcements_path if @system_setting.announcements_module? %>
   </div>
 </div>
 

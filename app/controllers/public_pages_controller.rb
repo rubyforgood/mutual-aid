@@ -1,16 +1,11 @@
 # frozen_string_literal: true
 
+# FIXME: Extract actions into separate controllers or consolidate with existing ones
 class PublicPagesController < PublicController
-  include NotUsingPunditYet
-
   layout :determine_layout
 
   def about
     @about_us_text = HtmlSanitizer.new(@system_setting.about_us_text).sanitize
-  end
-
-  def determine_layout
-    'without_navbar' unless @system_setting.display_navbar?
   end
 
   def announcements
@@ -46,5 +41,11 @@ class PublicPagesController < PublicController
       status: version,
       color: 'blue'
     }
+  end
+
+  private
+
+  def determine_layout
+    'without_navbar' unless @system_setting.display_navbar?
   end
 end

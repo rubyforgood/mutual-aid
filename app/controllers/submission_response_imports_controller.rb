@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class SubmissionResponseImportsController < ApplicationController
-  include NotUsingPunditYet
-
+class SubmissionResponseImportsController < AdminController
   def new; end
 
   def create
@@ -15,6 +13,6 @@ class SubmissionResponseImportsController < ApplicationController
     )
 
     flash[:notice] = 'Your file has been uploaded and is being imported'
-    redirect_to landing_page_admin_path
+    redirect_to admin_dashboard_path
   end
 end

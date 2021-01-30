@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class FormQuestionsController < ApplicationController
-  include NotUsingPunditYet
-
+class FormQuestionsController < AdminController
   before_action :set_form_question, only: %i[show edit update destroy]
 
   def index

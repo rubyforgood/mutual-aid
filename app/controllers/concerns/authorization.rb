@@ -8,6 +8,11 @@ module Authorization
     after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
 
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+    # define this late so it will override the one in the Pundit module
+    define_method(:pundit_user) do
+      UserContext.new(current_user, SystemSetting.current_settings)
+    end
   end
 
   module ClassMethods

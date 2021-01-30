@@ -27,7 +27,13 @@ RSpec.describe '/contributions', type: :request do
         expect(response).to be_successful
       end
 
-      it 'is shows a contribution response page' do
+      it 'includes a link to respond to the contribution' do
+        listing = create(:listing)
+        get contributions_url
+        expect(response.body).to match(/#{respond_contribution_path(listing.id)}/)
+      end
+
+      it 'shows a contribution response page' do
         contribution = create(:listing)
         get contribution_url(contribution)
         expect(response).to be_successful
@@ -45,14 +51,12 @@ RSpec.describe '/contributions', type: :request do
         expect(response).to be_successful
       end
 
-      # # This test is commented out because it probably should redirect to
-      # # a page that's different than would dispatchers etc. see
-      #
-      # it 'is shows a contribution response page' do
-      #   contribution = create(:listing)
-      #   get contribution_url(contribution)
-      #   expect(response).to be_successful
-      # end
+      # TODO: change this behavior once Pundit is more thoroughly set up
+      it 'has no link to respond to the contribution' do
+        listing = create(:listing)
+        get contributions_url
+        expect(response.body).to_not match(/#{respond_contribution_path(listing.id)}/)
+      end
     end
 
     describe 'when logged out and p2p is disabled' do

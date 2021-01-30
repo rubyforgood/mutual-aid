@@ -1,5 +1,5 @@
 class ApplicationPolicy
-  module RoleUtils
+  module Utils
     def sys_admin?
       acting_user.sys_admin_role?
     end
@@ -7,15 +7,25 @@ class ApplicationPolicy
     def admin?
       acting_user.admin_role?
     end
+
+    private
+
+    # Allowing for user_context || user simplifies policy specs that don't use additional context.
+    def extract(user_context)
+      [
+        user_context.respond_to?(:user) ? user_context.user : user_context,
+        user_context.respond_to?(:system_settings) ? user_context.system_settings : nil,
+      ]
+    end
   end
-  include RoleUtils
+  include Utils
 
   class Scope
-    include RoleUtils
+    include Utils
     attr_reader :acting_user, :original_scope
 
-    def initialize(acting_user, original_scope)
-      @acting_user = acting_user
+    def initialize(user_context, original_scope)
+      @acting_user, @system_settings = extract user_context
       @original_scope = original_scope
     end
 
@@ -25,13 +35,14 @@ class ApplicationPolicy
     end
   end
 
-  attr_reader :acting_user, :record
+  attr_reader :acting_user, :record, :system_settings
 
-  def initialize(acting_user, record)
-    @acting_user = acting_user
+  # We've configured pundit to provide a UserContext (See https://github.com/varvet/pundit/#additional-context).
+  def initialize(user_context, record)
+    @acting_user, @system_settings = extract user_context
     @record = record
   end
-  
+
   # Pundit has a "policy scope" feature for narrowing down records returned by `Model.all`.
   # Using policy scopes is almost always more secure and more performant than iterating over
   # every returned record with an index action policy.

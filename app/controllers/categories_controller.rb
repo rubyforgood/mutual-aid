@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class CategoriesController < ApplicationController
-  include NotUsingPunditYet
-
+class CategoriesController < AdminController
   before_action :set_category, only: %i[show edit update destroy]
 
   def index

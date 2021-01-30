@@ -5,8 +5,11 @@
   <div class="box">
     <p><strong><%= contribution.person.anonymized_name_and_email %></strong></p>
     <p class="subtitle"><%= contribution.description %></p>
+    <% require "pry"; binding.pry %>
     <% if contribution.matched? %>
       <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
+    <% elsif @peer_to_peer && !contribution.person.email %>
+      <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", disabled: true, method: :get %>
     <% else %>
       <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", method: :get %>
     <% end %>

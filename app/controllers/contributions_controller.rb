@@ -20,6 +20,7 @@ class ContributionsController < ApplicationController
 
   def show
     contribution = Listing.find(params[:id])
+    @peer_to_peer = peer_to_peer_mode?
 
     render(
       :show,

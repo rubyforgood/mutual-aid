@@ -1,7 +1,7 @@
-<%= simple_form_for @community_resource do |f| %>
+<%= simple_form_for community_resource do |f| %>
   <% if f.object.errors.any? %>
     <div id="error_explanation">
-      <h2 class="subtitle"><%= pluralize(@community_resource.errors.count, "error") %> prohibited this community_resource from being saved:</h2>
+      <h2 class="subtitle"><%= pluralize(community_resource.errors.count, "error") %> prohibited this community_resource from being saved:</h2>
 
       <ul>
         <% f.object.errors.full_messages.each do |message| %>

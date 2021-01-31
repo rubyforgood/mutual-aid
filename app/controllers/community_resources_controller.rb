@@ -4,7 +4,6 @@ class CommunityResourcesController < ApplicationController
   include NotUsingPunditYet
 
   before_action :authenticate_user!, except: %i[new create]
-  before_action :set_community_resource, only: %i[show edit update destroy]
 
   layout :determine_layout, only: %i[new show]
 
@@ -16,14 +15,13 @@ class CommunityResourcesController < ApplicationController
   def edit; end
 
   def new
-    @community_resource = CommunityResource.new
-    @community_resource.build_organization
+    community_resource.build_organization
   end
 
   def create
-    @community_resource = CommunityResource.new(community_resource_params)
+    community_resource.assign_attributes community_resource_params
 
-    if @community_resource.save
+    if community_resource.save
       redirect_to @admin_status ? community_resources_path : contribution_thank_you_path, notice: "Community resource was successfully submitted.#{" We'll review." unless @admin_status}"
     else
       render :new
@@ -31,7 +29,7 @@ class CommunityResourcesController < ApplicationController
   end
 
   def update
-    if @community_resource.update(community_resource_params)
+    if community_resource.update(community_resource_params)
       redirect_to community_resources_path, notice: 'Community resource was successfully updated.'
     else
       render :edit
@@ -39,20 +37,19 @@ class CommunityResourcesController < ApplicationController
   end
 
   def destroy
-    @community_resource.destroy
+    community_resource.destroy!
     redirect_to community_resources_public_path, notice: 'Community resource was successfully destroyed.'
   end
 
   private
 
-    def set_community_resource
-      @community_resource = CommunityResource.find(params[:id])
+    def community_resource
+      @community_resource ||= params[:id] ? CommunityResource.find(params[:id]) : CommunityResource.new
     end
 
     def available_tags
-      @available_tags ||= Category.visible.pluck(:name) + @community_resource&.tag_list || []
+      @available_tags ||= Category.visible.pluck(:name) + community_resource&.tag_list || []
     end
-    helper_method :available_tags
 
     def determine_layout
       'without_navbar' unless @system_setting.display_navbar?
@@ -74,4 +71,6 @@ class CommunityResourcesController < ApplicationController
           organization_attributes: %i[id name _destroy]
           )
     end
+
+    helper_method :available_tags, :community_resource
 end

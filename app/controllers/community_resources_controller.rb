@@ -9,19 +9,15 @@ class CommunityResourcesController < ApplicationController
   layout :determine_layout, only: %i[new show]
 
   def index
-    @community_resources = CommunityResource.includes(:organization).references(:organization).order(created_at: :desc)
+    @community_resources = CommunityResource.includes(:organization).order(created_at: :desc)
   end
 
   def show; end
+  def edit; end
 
   def new
     @community_resource = CommunityResource.new
     @community_resource.build_organization
-    set_form_dropdowns
-  end
-
-  def edit
-    set_form_dropdowns
   end
 
   def create
@@ -30,7 +26,6 @@ class CommunityResourcesController < ApplicationController
     if @community_resource.save
       redirect_to @admin_status ? community_resources_path : contribution_thank_you_path, notice: "Community resource was successfully submitted.#{" We'll review." unless @admin_status}"
     else
-      set_form_dropdowns
       render :new
     end
   end
@@ -39,7 +34,6 @@ class CommunityResourcesController < ApplicationController
     if @community_resource.update(community_resource_params)
       redirect_to community_resources_path, notice: 'Community resource was successfully updated.'
     else
-      set_form_dropdowns
       render :edit
     end
   end
@@ -55,9 +49,10 @@ class CommunityResourcesController < ApplicationController
       @community_resource = CommunityResource.find(params[:id])
     end
 
-    def set_form_dropdowns
-      @available_tags = Category.visible.pluck(:name) + @community_resource&.tag_list || []
+    def available_tags
+      @available_tags ||= Category.visible.pluck(:name) + @community_resource&.tag_list || []
     end
+    helper_method :available_tags
 
     def determine_layout
       'without_navbar' unless @system_setting.display_navbar?

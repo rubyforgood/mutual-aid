@@ -6,13 +6,22 @@
       <li class="box">
         <p class="title is-4"><%= community_resource.name %></p>
         <p class="subtitle is-5"><%= community_resource.organization&.name %></p>
-        <p class="block"><%= community_resource.description&.truncate(20) %></p>
-        <p class="block has-text-weight-light"><%= community_resource.phone %> <%= community_resource.service_area&.name %></p>
         <div class="tags">
           <% community_resource.all_tags_unique.each do |tag| %>
             <span class="tag is-light is-info"><%= tag %></span>
           <% end %>
         </div>
+        <p class="block">
+          <%= community_resource.description&.truncate(100) %>
+          <%= link_to("More [*]", community_resource_path(community_resource)) if community_resource.description&.length.to_i > 100 %>
+        </p>
+        <p class="block has-text-weight-light">
+          <%= community_resource.phone %> <%= community_resource.service_area&.name %>
+        </p>
+        <%= link_to("Website", community_resource.website_url, title: "Go to #{community_resource.website_url}",
+                    class: "button is-link is-small") if community_resource.website_url.present? %>
+        <%= link_to("Facebook", community_resource.facebook_url, title: "Go to #{community_resource.facebook_url}",
+                    class: "button is-link is-small") if community_resource.facebook_url.present? %>
 
         <% if policy(community_resource).change? %>
           <footer class="level is-mobile mt-1">
@@ -30,5 +39,5 @@
 </div>
 
 <% if context.can_admin? %>
-  <p><%= link_to "Admin home", admin_dashboard_path %></p>
+  <p class="mt-2"><%= link_to "Admin home", admin_dashboard_path %></p>
 <% end %>

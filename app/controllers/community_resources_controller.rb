@@ -36,7 +36,7 @@ class CommunityResourcesController < ApplicationController
 
   def destroy
     community_resource.destroy!
-    redirect_to community_resources_public_path, notice: 'Community resource was successfully destroyed.'
+    redirect_to community_resources_path, notice: 'Community resource was successfully destroyed.'
   end
 
   private

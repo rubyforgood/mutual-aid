@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :community_resource do
-    name { 'MyString' }
+    name { 'Free breakfast for School Children Program' }
+    description { 'Food for the revolution' }
+    publish_from { Date.current }
   end
 end
 

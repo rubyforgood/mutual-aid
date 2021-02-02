@@ -5,6 +5,8 @@ RSpec.describe '/community_resources', type: :request do
 
   let(:params) {{ community_resource: {
     name: 'Free Breakfast Program',
+    description: 'Food for the rev!',
+    publish_from: Date.current,
     organization_attributes: { name: 'Black Panther Party' },
   }}}
 

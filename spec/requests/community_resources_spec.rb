@@ -9,16 +9,16 @@ RSpec.describe '/community_resources', type: :request do
   }}}
 
   describe 'GET /community_resources' do
-    it 'requires login' do
+    it 'is publicly accessible' do
       get community_resources_path
-      expect(response).to redirect_to new_user_session_path
+      expect(response).to be_successful
     end
   end
 
   describe 'GET /community_resource/:id' do
-    it 'requires login' do
+    it 'is publicly accessible' do
       get community_resource_path community_resource
-      expect(response).to redirect_to new_user_session_path
+      expect(response).to be_successful
     end
   end
 

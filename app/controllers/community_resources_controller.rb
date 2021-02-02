@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 class CommunityResourcesController < ApplicationController
-  include NotUsingPunditYet
-
-  before_action :authenticate_user!, except: %i[new create]
+  skip_before_action :authenticate_user!, only: %i[index show new create]
 
   layout :determine_layout, only: %i[new show]
 
   def index
-    @community_resources = CommunityResource.includes(:organization).order(created_at: :desc)
+    @community_resources = policy_scope(CommunityResource).includes(:organization).order(created_at: :desc)
   end
 
   def show; end
@@ -19,7 +17,7 @@ class CommunityResourcesController < ApplicationController
   end
 
   def create
-    community_resource.assign_attributes community_resource_params
+    community_resource.assign_attributes permitted_attributes(community_resource)
 
     if community_resource.save
       redirect_to @admin_status ? community_resources_path : contribution_thank_you_path, notice: "Community resource was successfully submitted.#{" We'll review." unless @admin_status}"
@@ -29,7 +27,7 @@ class CommunityResourcesController < ApplicationController
   end
 
   def update
-    if community_resource.update(community_resource_params)
+    if community_resource.update(permitted_attributes(community_resource))
       redirect_to community_resources_path, notice: 'Community resource was successfully updated.'
     else
       render :edit
@@ -44,7 +42,7 @@ class CommunityResourcesController < ApplicationController
   private
 
     def community_resource
-      @community_resource ||= params[:id] ? CommunityResource.find(params[:id]) : CommunityResource.new
+      @community_resource ||= authorize(params[:id] ? CommunityResource.find(params[:id]) : CommunityResource.new)
     end
 
     def available_tags
@@ -53,23 +51,6 @@ class CommunityResourcesController < ApplicationController
 
     def determine_layout
       'without_navbar' unless @system_setting.display_navbar?
-    end
-
-    def community_resource_params
-      params.require(:community_resource).permit(
-          :description,
-          :facebook_url,
-          :is_approved,
-          :name,
-          :phone,
-          :publish_from,
-          :publish_until,
-          :service_area_id,
-          :website_url,
-          :youtube_identifier,
-          tag_list: [],
-          organization_attributes: %i[id name _destroy]
-          )
     end
 
     helper_method :available_tags, :community_resource

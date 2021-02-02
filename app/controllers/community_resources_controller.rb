@@ -20,7 +20,7 @@ class CommunityResourcesController < ApplicationController
     community_resource.assign_attributes permitted_attributes(community_resource)
 
     if community_resource.save
-      redirect_to @admin_status ? community_resources_path : contribution_thank_you_path, notice: "Community resource was successfully submitted.#{" We'll review." unless @admin_status}"
+      redirect_after_create
     else
       render :new
     end
@@ -50,7 +50,16 @@ class CommunityResourcesController < ApplicationController
     end
 
     def determine_layout
-      'without_navbar' unless @system_setting.display_navbar?
+      'without_navbar' unless context.system_settings.display_navbar?
+    end
+
+    def redirect_after_create
+      notice = "Community resource was successfully submitted."
+      if context.can_admin?
+        redirect_to community_resources_path, notice: notice
+      else
+        redirect_to contribution_thank_you_path, notice: "#{notice} We'll review."
+      end
     end
 
     helper_method :available_tags, :community_resource

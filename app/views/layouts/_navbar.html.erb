@@ -1,10 +1,9 @@
 <div id="navBar"></div>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    EntryPoints.navBar('#navBar', {
-      loggedIn: <%= current_user.present? %>,
-      logoUrl: '<%= Organization.current_organization.logo_url %>',
-      p2pEnabled: <%= SystemSetting.current_settings.peer_to_peer? %>,
-    })
+    EntryPoints.navBar('#navBar', <%= raw({
+      logoUrl: Organization.current_organization.logo_url,
+      visibleButtons: policy(:nav_bar).visible_buttons,
+    }.to_json) %>)
   })
 </script>

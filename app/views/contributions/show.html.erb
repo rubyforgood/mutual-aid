@@ -8,7 +8,8 @@
     <% if contribution.matched? %>
       <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
     <% else  %>
-      <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", disabled: (@peer_to_peer && !contribution.person.email), method: :get %>
+    <% require "pry"; binding.pry %>
+      <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", disabled: not_claimable?(contribution), method: :get %>
     <% end %>
   </div>
   <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>

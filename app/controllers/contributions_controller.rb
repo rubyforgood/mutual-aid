@@ -6,6 +6,8 @@ class ContributionsController < ApplicationController
   before_action :authenticate_user!, except: %i[thank_you], unless: :peer_to_peer_mode?
   before_action :set_contribution, only: %i[respond triage]
 
+  helper_method :not_claimable?
+
   layout 'without_navbar', only: [:thank_you]
 
   def index
@@ -20,7 +22,6 @@ class ContributionsController < ApplicationController
 
   def show
     contribution = Listing.find(params[:id])
-    @peer_to_peer = peer_to_peer_mode?
 
     render(
       :show,
@@ -57,6 +58,10 @@ class ContributionsController < ApplicationController
     else
       render triage_contribution_path(@contribution)
     end
+  end
+
+  def not_claimable?(contribution)
+    peer_to_peer_mode? && !contribution.person.email
   end
 
   private

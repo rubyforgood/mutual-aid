@@ -26,7 +26,7 @@ class CommunicationLogsController < AdminController
       if params[:commit]&.include?('Save and go to Match')
         redirect_to edit_match_path(@communication_log.match), notice: 'Communication log was successfully created.'
       elsif params[:commit]&.include?('Save and go to Respond')
-        redirect_to respond_contribution_path(params[:communication_log][:contribution_id]), notice: 'Communication log was successfully created.'
+        redirect_to contribution_path(params[:communication_log][:contribution_id]), notice: 'Communication log was successfully created.'
       else
         redirect_to communication_logs_path, notice: 'Communication log was successfully created.'
       end
@@ -51,7 +51,7 @@ class CommunicationLogsController < AdminController
       if params[:commit]&.include?('Save and go to Match')
         redirect_to edit_match_path(@communication_log.match), notice: 'Communication log was successfully updated.'
       elsif params[:commit]&.include?('Save and go to Respond')
-        redirect_to respond_contribution_path(params[:communication_log][:contribution_id]), notice: 'Communication log was successfully updated.'
+        redirect_to contribution_path(params[:communication_log][:contribution_id]), notice: 'Communication log was successfully updated.'
       else
         redirect_to communication_logs_path, notice: 'Communication log was successfully updated.'
       end

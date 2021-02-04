@@ -29,7 +29,7 @@
             order(created_at: :desc).each do |contribution| %>
           <%= link_to("<span class='#{contribution.icon_class}'></span>  #{
                        shorthand_display(contribution.created_at)} #{contribution.all_tags_to_s.upcase}".html_safe,
-                       respond_contribution_path(contribution,
+                       contribution_path(contribution,
                                                  contribution_type: type),
                       class: "button", title: "View Match") %>
           <br>

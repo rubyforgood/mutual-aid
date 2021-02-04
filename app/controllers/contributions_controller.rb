@@ -49,7 +49,7 @@ class ContributionsController < ApplicationController
       #                          subject: "triaged by #{current_user.name}",
       #                          delivery_status: "connected",
       #                          delivery_method: @contribution.person.preferred_contact_method)
-      redirect_to respond_contribution_path(@contribution), notice: 'Contribution was successfully updated.'
+      redirect_to contribution_path(@contribution), notice: 'Contribution was successfully updated.'
     else
       render triage_contribution_path(@contribution)
     end

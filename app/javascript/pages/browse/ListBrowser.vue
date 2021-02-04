@@ -7,7 +7,7 @@
         <th>Urgency</th>
         <th>Service Area</th>
         <th>Connect</th>
-        <th><span v-if="showRespondColumn">Respond</span></th>
+        <th>Respond</th>
 <!--        <th>Details</th>-->
       </tr>
       <tr v-for="contribution in contributions" :key="contribution.id">
@@ -28,8 +28,8 @@
           <SingleIcon :iconType="contribution.contact_types[0].name" />
         </td>
         <td>
-          <div v-if="contribution.respond_path">
-            <a :href="contribution.respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
+          <div>
+            <a :href="contribution.path" class="button icon-list is-primary"><span class=""> Respond</span></a>
           </div>
         </td>
 <!--        <td>{{ contribution.title }}</td>-->
@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     showRespondColumn() {
-      return this.contributions.some( contribution => contribution.respond_path)
+      return this.contributions.some( contribution => contribution.path)
     }
   },
 }

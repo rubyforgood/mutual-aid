@@ -55,9 +55,8 @@ RSpec.describe '/contributions', type: :request do
       it 'has a link to view the contribution' do
         listing = create(:listing)
         get contributions_url
-        expect(response.body).to match(/#{contribution_path(listing.id)}/)
+        expect(response.body).not_to match(/#{contribution_path(listing.id)}/)
       end
-      # the link shows minimal info
     end
 
     describe 'when logged out and p2p is disabled' do

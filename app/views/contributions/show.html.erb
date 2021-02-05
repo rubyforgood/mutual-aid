@@ -8,7 +8,12 @@
     <% if contribution.matched? %>
       <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
     <% else  %>
-      <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", disabled: !contribution.has_email?, method: :get %>
+      <% if contribution.has_email? %>
+        <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", method: :get %>
+      <% else %>
+        <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", disabled: true, method: :get %>
+        <p class="is-6 is-italic">An ask without an email address cannot be claimed in peer-to-peer mode</p>
+      <% end %>
     <% end %>
   </div>
   <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>

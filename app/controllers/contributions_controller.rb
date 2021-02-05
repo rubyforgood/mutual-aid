@@ -6,8 +6,6 @@ class ContributionsController < ApplicationController
   before_action :authenticate_user!, except: %i[thank_you], unless: :peer_to_peer_mode?
   before_action :set_contribution, only: %i[respond triage]
 
-  helper_method :not_claimable?
-
   layout 'without_navbar', only: [:thank_you]
 
   def index

@@ -13,4 +13,18 @@ RSpec.describe Listing, type: :model do
     end
   end
 
+  describe 'properties' do
+    example 'with email' do
+      listing = build(:offer, person: build(:person, email: 'user@email.com'))
+
+      expect(listing.has_email?).to eq(true)
+    end
+
+    example 'without email' do
+      listing = build(:offer, person: build(:person, email: nil))
+
+      expect(listing.has_email?).to eq(false)
+    end
+  end
+
 end

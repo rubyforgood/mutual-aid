@@ -59,11 +59,7 @@ class ContributionsController < ApplicationController
       render triage_contribution_path(@contribution)
     end
   end
-
-  def not_claimable?(contribution)
-    peer_to_peer_mode? && !contribution.person.email
-  end
-
+  
   private
 
   def peer_to_peer_mode?

@@ -13,23 +13,24 @@ RSpec.describe Context do
     end
   end
 
-  describe 'lazy, memoized, overridable readers' do
+  describe 'custom reader methods' do
     let(:current_settings) { double :current_settings }
     let(:system_setting) { class_double('SystemSetting').as_stubbed_const }
     let(:context) { Context.new }
 
-    it 'is lazy' do
-      expect(system_setting).to receive(:current_settings) { current_settings }
+    example 'can be lazy' do
+      expect(context[:system_settings]).to be_nil # not provided during initialization
+      expect(system_setting).to receive(:current_settings).and_return current_settings
       expect(context.system_settings).to be current_settings
     end
 
-    it 'is memoized' do
-      expect(system_setting).to receive(:current_settings).once { current_settings }
+    example 'can be memoized' do
+      expect(system_setting).to receive(:current_settings).once.and_return current_settings
       context.system_settings
       context.system_settings
     end
 
-    it 'can be overriden' do
+    example 'can be overriden' do
       expect(system_setting).to receive(:current_settings).never
       context.system_settings = double(:override)
       context.system_settings

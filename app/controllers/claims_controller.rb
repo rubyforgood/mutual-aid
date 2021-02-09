@@ -11,7 +11,7 @@ class ClaimsController < ApplicationController
     end
     render locals: {
       contribution: contribution,
-      email: current_user.person&.email
+      email: current_user.email
     }
   end
 

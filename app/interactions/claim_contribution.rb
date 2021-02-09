@@ -2,6 +2,7 @@
 
 class ClaimContribution < ActiveInteraction::Base
   string :peer_alias
+  string :email
   string :message
   record :contribution, class: Listing
   object :current_user, class: User
@@ -9,7 +10,7 @@ class ClaimContribution < ActiveInteraction::Base
   def execute
     # TODO: Need to handle race conditions to prevent creating multiple matches for same contribution
     ActiveRecord::Base.transaction do
-      ensure_person_record
+      add_person_details
       create_match_for_contribution
     end
     email_peer
@@ -17,15 +18,21 @@ class ClaimContribution < ActiveInteraction::Base
 
   private
 
-  def ensure_person_record
+  def add_person_details
     if current_user.person.blank?
-      Person.create!(
-        name: peer_alias,
-        user: current_user,
-        email: current_user.email,
-        preferred_contact_method: ContactMethod.email,
-      )
+      Person.create!(new_person_params)
+    else
+      current_user.person.update!(email: email)
     end
+  end
+
+  def new_person_params
+    {
+      name: peer_alias,
+      preferred_contact_method: ContactMethod.email,
+      user: current_user,
+      email: email,
+    }
   end
 
   def create_match_for_contribution

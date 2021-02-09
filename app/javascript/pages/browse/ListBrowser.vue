@@ -7,7 +7,7 @@
         <th>Urgency</th>
         <th>Service Area</th>
         <th>Connect</th>
-        <th>Respond</th>
+        <th>View</th>
 <!--        <th>Details</th>-->
       </tr>
       <tr v-for="contribution in contributions" :key="contribution.id">
@@ -29,7 +29,7 @@
         </td>
         <td>
           <div>
-            <a :href="contribution.path" class="button icon-list is-primary"><span class=""> Respond</span></a>
+            <a :href="contribution.view_path" class="button icon-list is-primary"><span class=""> View</span></a>
           </div>
         </td>
 <!--        <td>{{ contribution.title }}</td>-->
@@ -52,11 +52,6 @@ export default {
     TagList,
     SingleIcon,
     MappedIconList,
-  },
-  computed: {
-    showRespondColumn() {
-      return this.contributions.some( contribution => contribution.path)
-    }
   },
 }
 </script>

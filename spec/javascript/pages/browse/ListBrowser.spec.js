@@ -23,7 +23,7 @@ describe('ListBrowser', () => {
     describe('when contributions do not come with response urls', () => {
       def('contributions', () => {
         testData.contributions.map(contribution => {
-          contribution.respond_path = ''
+          contribution.view_path = ''
           return contribution
         })
       })

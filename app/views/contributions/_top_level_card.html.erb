@@ -19,7 +19,7 @@
         <% end %>
       </p>
       <br>
-      <% if policy(:contributions).read? %>
+      <% if policy(:contribution).change? %>
         <div class="field is-grouped">
           <p class="control"> <%= triage_button(@contribution) %> </p>
           <br>
@@ -29,7 +29,7 @@
       <% end %>
     </div>
     <div class="person column">
-      <% if policy(:contributions).read? %>
+      <% if policy(:contribution).read? %>
         <div class="contact-info block">
           <strong>Created by:</strong>
           <br>

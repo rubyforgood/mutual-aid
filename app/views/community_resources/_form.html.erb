@@ -1,4 +1,4 @@
-<%= simple_form_for @community_resource do |f| %>
+<%= simple_form_for community_resource do |f| %>
   <% if f.object.errors.any? %>
     <div id="error_explanation">
       <h2 class="subtitle"><%= pluralize(community_resource.errors.count, "error") %> prohibited this community_resource from being saved:</h2>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="field is-grouped">
-      <%= f.input :tag_list, as: :check_boxes, collection: @available_tags %>
+      <%= f.input :tag_list, as: :check_boxes, collection: available_tags %>
       <%= f.association :service_area, label: "Service area", label_method: "full_name" %>
       <%= f.association :location, label: "Address", label_method: "address" %>
     </div>

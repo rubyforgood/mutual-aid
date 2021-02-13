@@ -1,25 +1,27 @@
 <%= render "layouts/view_header", resource: @announcements.first %>
 
 <div class="row">
-  <% @announcements.each do |announcement| %>
-    <article class="box">
-      <p class="title is-5"><%= announcement.name %></p>
-      <p>
+  <ul>
+    <% @announcements.each do |announcement| %>
+      <li class="box">
+        <p class="title is-5"><%= announcement.name %></p>
+        <p>
         <%= announcement.description.truncate(100) %>
         <%= link_to("More [*]", announcement_path(announcement)) if announcement.description.length > 100 %>
-      </p>
-      <% if policy(announcement).change? %>
-        <footer class="level is-mobile mt-1">
-          <p class="level-left"></p>
-          <div class="level-right">
-            <p class="level-item is-size-7"><%= announcement.published? ? 'Published' : 'Unpublished' %></p>
-            <p class="level-item"><%= yes_no(announcement.published?) %></p>
-            <p class="level-item"><%= link_to('Edit', edit_announcement_path(announcement)) %></p>
-          </div>
-        </footer>
-      <% end %>
-    </article>
-  <% end %>
+        </p>
+        <% if policy(announcement).change? %>
+          <footer class="level is-mobile mt-1">
+            <p class="level-left"></p>
+            <div class="level-right">
+              <p class="level-item is-size-7"><%= announcement.published? ? 'Published' : 'Unpublished' %></p>
+              <p class="level-item"><%= yes_no(announcement.published?) %></p>
+              <p class="level-item"><%= link_to('Edit', edit_announcement_path(announcement)) %></p>
+            </div>
+          </footer>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
 <br><br>

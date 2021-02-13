@@ -11,6 +11,13 @@ RSpec.describe Listing, type: :model do
 
       expect(Listing.tagged_with('cash')).to match_array([listing])
     end
+
+    example 'name method' do
+      listing.tag_list.add('grocery shopping', 'childcare')
+      listing.save!
+
+      expect(listing.name).to eq("Offer: grocery shopping, childcare")
+    end
   end
 
 end

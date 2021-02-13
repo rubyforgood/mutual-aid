@@ -10,9 +10,7 @@ module Authorization
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
     # define this late so it will override the one in the Pundit module
-    define_method(:pundit_user) do
-      UserContext.new(current_user, SystemSetting.current_settings)
-    end
+    define_method(:pundit_user) { context } # see ApplicationController#context
   end
 
   module ClassMethods

@@ -9,9 +9,9 @@ end
 
 RSpec.describe ClaimPolicy do
   let(:system_settings) { double :system_setting }
-  let(:user_context)    { UserContext.new user, system_settings }
+  let(:context) { Context.new user: user, system_settings: system_settings }
 
-  subject { ClaimPolicy.new(user_context, :claim) }
+  subject { ClaimPolicy.new(context, :claim) }
 
   context 'with a guest user' do
     let(:user) { nil }

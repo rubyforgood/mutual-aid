@@ -10,11 +10,11 @@ class ApplicationPolicy
 
     private
 
-    # Allowing for user_context || user simplifies policy specs that don't use additional context.
-    def extract(user_context)
+    # Allowing for context || user simplifies policy specs that don't use additional context.
+    def extract(context)
       [
-        user_context.respond_to?(:user) ? user_context.user : user_context,
-        user_context.respond_to?(:system_settings) ? user_context.system_settings : nil,
+        context.respond_to?(:user) ? context.user : context,
+        context.respond_to?(:system_settings) ? context.system_settings : nil,
       ]
     end
   end
@@ -24,8 +24,8 @@ class ApplicationPolicy
     include Utils
     attr_reader :acting_user, :original_scope
 
-    def initialize(user_context, original_scope)
-      @acting_user, @system_settings = extract user_context
+    def initialize(context, original_scope)
+      @acting_user, @system_settings = extract context
       @original_scope = original_scope
     end
 
@@ -37,9 +37,9 @@ class ApplicationPolicy
 
   attr_reader :acting_user, :record, :system_settings
 
-  # We've configured pundit to provide a UserContext (See https://github.com/varvet/pundit/#additional-context).
-  def initialize(user_context, record)
-    @acting_user, @system_settings = extract user_context
+  # We've configured pundit to provide a user context (See https://github.com/varvet/pundit/#additional-context).
+  def initialize(context, record)
+    @acting_user, @system_settings = extract context
     @record = record
   end
 

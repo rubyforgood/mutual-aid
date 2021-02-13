@@ -28,6 +28,11 @@ class ApplicationController < ActionController::Base
     { locale: I18n.locale }
   end
 
+  def context
+    @context ||= Context.new(user: current_user)
+  end
+  helper_method :context
+
   private
 
   # TODO: this appears to be unused?

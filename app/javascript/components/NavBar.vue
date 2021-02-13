@@ -9,7 +9,7 @@
     <template slot="start">
       <b-navbar-item href="/about">About</b-navbar-item>
       <b-navbar-item href="/community_resources">Community Resources</b-navbar-item>
-      <b-navbar-item href="/announcements_list">Announcements</b-navbar-item>
+      <b-navbar-item href="/announcements">Announcements</b-navbar-item>
     </template>
 
     <template slot="end" v-if="loggedIn">

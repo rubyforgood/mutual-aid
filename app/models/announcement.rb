@@ -7,18 +7,24 @@ class Announcement < ApplicationRecord
 
   acts_as_taggable_on :tags
 
-  scope :pending_review, -> (){ where(is_approved: false) }
+  validates :name, :description, :publish_from, presence: true
+
+  scope :approved, ->()       { where is_approved: true }
+  scope :pending_review, ->() { where is_approved: false }
 
   def self.published
-    now_strftime = Time.now.strftime('%Y-%m-%d %H:%M')
+    before_now = DateTime.new..Time.current
+    after_now  = Time.current..DateTime::Infinity.new
 
-    where(is_approved: true)
-      .where("(publish_from IS NOT NULL AND publish_from <= '#{now_strftime}') AND
-           (publish_until IS NULL OR '#{now_strftime}' <= COALESCE(publish_until, now()) )")
+    approved
+      .where(publish_from: before_now, publish_until: nil).or(
+    approved
+      .where(publish_from: before_now, publish_until: after_now)
+    )
   end
 
   def published?
-    now = Time.now
+    now = Time.current
     is_approved &&
         (publish_from.present? ? publish_from <= now : true) &&
         (publish_until == nil || now < publish_until)

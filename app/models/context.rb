@@ -7,4 +7,11 @@ Context = Struct.new(
   def system_settings
     self[:system_settings] ||= SystemSetting.current_settings
   end
+
+  def to_h
+    {
+      system_settings: system_settings,
+      user: user,
+    }
+  end
 end

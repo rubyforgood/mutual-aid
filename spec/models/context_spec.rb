@@ -36,4 +36,19 @@ RSpec.describe Context do
       context.system_settings
     end
   end
+
+  describe 'to_h' do
+    let(:user) { double 'User' }
+    let(:system_settings) { double 'SystemSettings' }
+    let(:context) { Context.new user: user, system_settings: system_settings }
+
+    def method_with_keyword_args positional_arg, non_context_keyword_arg:, user:, system_settings:
+      [positional_arg, non_context_keyword_arg, user, system_settings]
+    end
+
+    it 'can be converted to a hash and passed as keyword args' do
+      expect(method_with_keyword_args 'positional', non_context_keyword_arg: 'non_context', **context.to_h).
+        to eq ['positional', 'non_context', user, system_settings]
+    end
+  end
 end

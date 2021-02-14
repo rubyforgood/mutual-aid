@@ -47,7 +47,7 @@ class ContributionsController < ApplicationController
 
   def contribution_blueprint_options
     options = {}
-    options[:view_path] = ->(id) { contribution_path(id) } if SystemSetting.current_settings.peer_to_peer?
+    options[:view_path] = ->(id) { contribution_path(id) }
     options
   end
 

@@ -29,7 +29,6 @@ RSpec.describe ContributionBlueprint do
                                # "publish_until" => "2021-10-11",
                                # "publish_until_humanized" => "this year",
                                'created_at' => (contribution.created_at.to_f * 1000), # Javascript wants miliseconds, not seconds
-                               'respond_path' => nil,
                                'view_path' => nil,
                                'profile_path' => nil,
                                'match_path' => nil,
@@ -46,10 +45,10 @@ RSpec.describe ContributionBlueprint do
     expect(JSON.parse(result)).to match(expected_data)
   end
 
-  it 'allows injecting a url formatter for the respond_path' do
+  it 'allows injecting a url formatter for the view_path' do
     expected_path = "/testing_#{contribution.id}"
-    result = ContributionBlueprint.render(contribution, respond_path: ->(p_id) { "/testing_#{p_id}"})
-    expect(JSON.parse(result)['respond_path']).to eq(expected_path)
+    result = ContributionBlueprint.render(contribution, view_path: ->(p_id) { "/testing_#{p_id}"})
+    expect(JSON.parse(result)['view_path']).to eq(expected_path)
   end
 
   it 'allows injecting a url formatter for the profile_path' do

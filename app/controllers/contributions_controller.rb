@@ -4,7 +4,7 @@ class ContributionsController < ApplicationController
   include NotUsingPunditYet
 
   before_action :authenticate_user!, except: %i[thank_you], unless: :peer_to_peer_mode?
-  before_action :set_contribution, only: %i[respond triage]
+  before_action :set_contribution, only: %i[show triage]
 
   layout 'without_navbar', only: [:thank_you]
 
@@ -20,6 +20,7 @@ class ContributionsController < ApplicationController
 
   def show
     contribution = Listing.find(params[:id])
+    @communication_logs = CommunicationLog.where(person: @contribution.person).order(sent_at: :desc)
 
     render(
       :show,
@@ -30,10 +31,6 @@ class ContributionsController < ApplicationController
   end
 
   def combined_form; end
-
-  def respond
-    @communication_logs = CommunicationLog.where(person: @contribution.person).order(sent_at: :desc)
-  end
 
   def thank_you; end
 
@@ -52,7 +49,7 @@ class ContributionsController < ApplicationController
       #                          subject: "triaged by #{current_user.name}",
       #                          delivery_status: "connected",
       #                          delivery_method: @contribution.person.preferred_contact_method)
-      redirect_to respond_contribution_path(@contribution), notice: 'Contribution was successfully updated.'
+      redirect_to contribution_path(@contribution), notice: 'Contribution was successfully updated.'
     else
       render triage_contribution_path(@contribution)
     end
@@ -66,7 +63,6 @@ class ContributionsController < ApplicationController
 
   def contribution_blueprint_options
     options = {}
-    options[:respond_path] = ->(id) { respond_contribution_path(id)} if current_user
     options[:view_path] = ->(id) { contribution_path(id) } if SystemSetting.current_settings.peer_to_peer?
     options
   end

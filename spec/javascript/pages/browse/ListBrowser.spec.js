@@ -17,7 +17,7 @@ describe('ListBrowser', () => {
 
   describe('respond column', () => {
     it('shows the column with typical data', function () {
-      assert.isTrue($tableHeaders.some(header => header.text() == 'Respond'))
+      assert.isTrue($tableHeaders.some(header => header.text() == 'View'))
     })
 
     describe('when contributions do not come with response urls', () => {

@@ -2,15 +2,12 @@ require 'rails_helper'
 
 RSpec.describe '/contributions', type: :request do
   let(:valid_attributes) {{
-      location_attributes: { zip: '12345' },
-      tag_list: ['', 'cash'],
-      # name: Faker::Name.name,
-      # email: Faker::Internet.email,
-      # phone: Faker::PhoneNumber.phone_number
+    location_attributes: { zip: '12345' },
+    tag_list: ['', 'cash'],
   }}
 
   let(:invalid_attributes) {{
-      location_attributes: { zip: '12e45' },
+    location_attributes: { zip: '12e45' },
   }}
 
   let(:user) { create(:user) }
@@ -21,19 +18,12 @@ RSpec.describe '/contributions', type: :request do
         sign_in user
       end
 
-      it 'renders the index of contributions' do
-        create(:listing)
+      it 'index is accessible' do
         get contributions_url
         expect(response).to be_successful
       end
 
-      it 'includes a link to view to the contribution' do
-        listing = create(:listing)
-        get contributions_url
-        expect(response.body).to match(/#{contribution_path(listing.id)}/)
-      end
-
-      it 'shows a contribution response page' do
+      it 'show is accessible' do
         contribution = create(:listing)
         get contribution_url(contribution)
         expect(response).to be_successful
@@ -45,14 +35,13 @@ RSpec.describe '/contributions', type: :request do
         allow_any_instance_of(SystemSetting).to receive(:peer_to_peer?).and_return(true)
       end
 
-      it 'renders the index of contributions' do
-        create(:listing)
+      it 'index is accessible' do
         get contributions_url
         expect(response).to be_successful
       end
 
       # TODO: change this behavior once Pundit is more thoroughly set up
-      it 'has a link to view the contribution' do
+      it 'show is accessible' do
         listing = create(:listing)
         get contributions_url
         expect(response.body).to match(/#{contribution_path(listing.id)}/)
@@ -64,13 +53,12 @@ RSpec.describe '/contributions', type: :request do
         allow_any_instance_of(SystemSetting).to receive(:peer_to_peer?).and_return(false)
       end
 
-      it 'redirects to the user login page for the index of contributions' do
-        create(:listing)
+      it 'index requires login' do
         get contributions_url
         assert_redirected_to new_user_session_url
       end
 
-      it 'redirects to the user login page for a link to an individual contribution' do
+      it 'show requires login' do
         contribution = create(:listing)
         get contribution_url(contribution)
         assert_redirected_to new_user_session_url

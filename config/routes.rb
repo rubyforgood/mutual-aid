@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
-  # FIXME: drop controller override when the pundit work is ready, #514
-  devise_for :users, controllers: { registrations: 'registrations_sans_signup' }
+  devise_for :users
 
   scope '/admin' do
     root to: 'admin_dashboard#show', as: 'admin_dashboard'

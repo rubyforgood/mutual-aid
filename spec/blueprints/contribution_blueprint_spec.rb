@@ -45,11 +45,11 @@ RSpec.describe ContributionBlueprint do
     expect(JSON.parse(result)).to match(expected_data)
   end
 
-  # it 'allows injecting a url formatter for the respond_path' do
-  #   expected_path = "/testing_#{contribution.id}"
-  #   result = ContributionBlueprint.render(contribution, respond_path: ->(p_id) { "/testing_#{p_id}"})
-  #   expect(JSON.parse(result)['respond_path']).to eq(expected_path)
-  # end
+  it 'allows injecting a url formatter for the view_path' do
+    expected_path = "/testing_#{contribution.id}"
+    result = ContributionBlueprint.render(contribution, view_path: ->(p_id) { "/testing_#{p_id}"})
+    expect(JSON.parse(result)['view_path']).to eq(expected_path)
+  end
 
   it 'allows injecting a url formatter for the profile_path' do
     expected_path = "/testing_#{contribution.person.id}"

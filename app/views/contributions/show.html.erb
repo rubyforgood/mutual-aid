@@ -4,7 +4,7 @@
 </div>
 <%= render "top_level_card", person: person, contribution: @contribution %>
 
-<% if policy(:contribution).change? %>
+<% if policy(:contribution).read_details? %>
   <div class="columns">
     <div class="column">
       <hr>

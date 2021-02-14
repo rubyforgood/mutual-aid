@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   end
   resources :community_resources
   resources :contact_methods
-  get '/combined_form', to: 'contributions#combined_form', as: 'combined_form'
   get '/thank_you', to: 'contributions#thank_you', as: 'contribution_thank_you'
   resources :contributions, only: %i[index show] do
     member do

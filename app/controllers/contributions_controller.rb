@@ -30,8 +30,6 @@ class ContributionsController < ApplicationController
     )
   end
 
-  def combined_form; end
-
   def thank_you; end
 
   def triage; end

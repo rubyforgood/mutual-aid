@@ -4,7 +4,7 @@ class ContributionsController < ApplicationController
   include NotUsingPunditYet
 
   before_action :authenticate_user!, unless: :peer_to_peer_mode?
-  before_action :set_contribution, only: %i[show triage]
+  before_action :set_contribution, only: %i[show edit update]
 
   def index
     @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
@@ -17,21 +17,12 @@ class ContributionsController < ApplicationController
   end
 
   def show
-    contribution = Listing.find(params[:id])
     @communication_logs = CommunicationLog.where(person: @contribution.person).order(sent_at: :desc)
-
-    render(
-      :show,
-      locals: {
-        contribution: contribution,
-      }
-    )
   end
 
-  def triage; end
+  def edit; end
 
-  def triage_update
-    @contribution = Listing.find(params[:id])
+  def update
     contribution_params = params[@contribution.type.downcase.to_sym]
     title = contribution_params[:title]
     description = contribution_params[:description]
@@ -45,7 +36,7 @@ class ContributionsController < ApplicationController
       #                          delivery_method: @contribution.person.preferred_contact_method)
       redirect_to contribution_path(@contribution), notice: 'Contribution was successfully updated.'
     else
-      render triage_contribution_path(@contribution)
+      render :edit
     end
   end
 

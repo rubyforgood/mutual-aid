@@ -1,7 +1,8 @@
-<%= render "layouts/view_header", resource: @contribution,
-           page_title: "Update #{@contribution.name}", human_name: @contribution.type %>
-<br><br>
-<%= simple_form_for @contribution, url: triage_contribution_path(@contribution) do |f| %>
+<h1 class="title is-3">
+  <%= "Update #{@contribution.name}" %>
+</h1>
+
+<%= simple_form_for @contribution, url: contribution_path(@contribution) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -13,7 +14,5 @@
     <%= f.input :inexhaustible, as: :radio_buttons %>
   </div>
 
-  <%= f.button :submit,
-               "Update #{@contribution.type}",
-               class: "button mt-1 is-primary" %>
+  <%= f.button :submit, "Update #{@contribution.type}", class: "button mt-1 is-primary" %>
 <% end %>

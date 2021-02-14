@@ -24,7 +24,7 @@ class DonationsController < AdminController
     @donation = Donation.new(donation_params)
 
     if @donation.save
-      redirect_to @admin_status ? donations_path : contribution_thank_you_path, notice: 'Donation was successfully created.'
+      redirect_to @admin_status ? donations_path : thank_you_path, notice: 'Donation was successfully created.'
     else
       set_form_dropdowns
       render :new

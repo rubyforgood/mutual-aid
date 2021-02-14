@@ -15,7 +15,7 @@ class OffersController < PublicController
     submission = SubmissionForm.build submission_params
     if submission.save
       EmailNewSubmission.run! submission: submission, user: current_user
-      redirect_to contribution_thank_you_path, notice: 'Offer was successfully created.'
+      redirect_to thank_you_path, notice: 'Offer was successfully created.'
     else
       render_form(submission)
     end

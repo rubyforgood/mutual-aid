@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
   resources :community_resources
   resources :contact_methods
-  get '/thank_you', to: 'contributions#thank_you', as: 'contribution_thank_you'
+  resource :thank_you, only: %i[show], controller: :thank_you
   resources :contributions, only: %i[index show] do
     member do
       get '/triage', to: 'contributions#triage', as: 'triage'

@@ -51,7 +51,7 @@ class AnnouncementsController < ApplicationController
       if context.can_admin?
         redirect_to announcements_path, notice: "#{notice} We'll review."
       else
-        redirect_to contribution_thank_you_path, notice: notice
+        redirect_to thank_you_path, notice: notice
       end
     end
 

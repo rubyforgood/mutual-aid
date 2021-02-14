@@ -58,7 +58,7 @@ class CommunityResourcesController < ApplicationController
       if context.can_admin?
         redirect_to community_resources_path, notice: notice
       else
-        redirect_to contribution_thank_you_path, notice: "#{notice} We'll review."
+        redirect_to thank_you_path, notice: "#{notice} We'll review."
       end
     end
 

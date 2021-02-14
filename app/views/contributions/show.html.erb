@@ -1,8 +1,8 @@
-<% person = @contribution.person %>
+<% person = contribution.person %>
 <div class="block">
   <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>
 </div>
-<%= render "top_level_card", person: person, contribution: @contribution %>
+<%= render "top_level_card", person: person, contribution: contribution %>
 
 <% if policy(:contribution).read_details? %>
   <div class="columns">
@@ -23,10 +23,10 @@
         <% contribution_assn = type.to_s.pluralize.downcase %>
         <strong><%= "#{person.name}'s " %> other matchable <%= contribution_assn.titleize %>:</strong>
         <br>
-        <% if @contribution.person.public_send(contribution_assn).matchable.
-            where.not("listings.id = ?", @contribution.id).any? %>
-          <% @contribution.person.public_send(contribution_assn).matchable.
-              where.not("listings.id = ?", @contribution.id).
+        <% if contribution.person.public_send(contribution_assn).matchable.
+            where.not("listings.id = ?", contribution.id).any? %>
+          <% contribution.person.public_send(contribution_assn).matchable.
+              where.not("listings.id = ?", contribution.id).
               order(created_at: :desc).each do |contribution| %>
             <%= link_to("<span class='#{contribution.icon_class}'></span>  #{
                         shorthand_display(contribution.created_at)} #{contribution.all_tags_to_s.upcase}".html_safe,
@@ -44,7 +44,7 @@
       <strong><%= "#{person.name}'s " %> Match history:</strong>
       <br>
       <% no_matches_comments = [] %>
-      <% @contribution.person.listings.where.not(id: @contribution).order(created_at: :desc).each do |listing| %>
+      <% contribution.person.listings.where.not(id: contribution).order(created_at: :desc).each do |listing| %>
         <% match_assn_name = listing.ask? ? "matches_as_receiver" : "matches_as_provider" %>
         <% other_matches = listing.public_send(match_assn_name) %>
         <% if other_matches.any? %>

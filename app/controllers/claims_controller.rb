@@ -20,6 +20,6 @@ class ClaimsController < ApplicationController
       contribution: params[:contribution_id],
       current_user: current_user
     ))
-    redirect_to contribution_path(params[:contribution_id]), notice: 'Claim was successful!'
+    redirect_to contributions_path, notice: 'Claim was successful!'
   end
 end

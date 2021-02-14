@@ -16,7 +16,7 @@
               <a href="/asks/new" class="button is-primary">Submit an Ask</a>
             </div>
             <div>
-              <a href="/contributions?ContributionType[Ask]=1">View asks</a>
+              <a href="/contributions?ContributionType[Offer]=1">View offers</a>
             </div>
           </div>
         </div>
@@ -27,7 +27,7 @@
               <a href="/offers/new" class="button is-primary">Submit an Offer</a>
             </div>
             <div>
-              <a href="/contributions?ContributionType[Offer]=1">View offers</a>
+              <a href="/contributions?ContributionType[Ask]=1">View asks</a>
             </div>
           </div>
         </div>

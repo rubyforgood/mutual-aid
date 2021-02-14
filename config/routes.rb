@@ -27,14 +27,8 @@ Rails.application.routes.draw do
   end
   resources :community_resources
   resources :contact_methods
-  get '/combined_form', to: 'contributions#combined_form', as: 'combined_form'
-  get '/thank_you', to: 'contributions#thank_you', as: 'contribution_thank_you'
-  resources :contributions, only: %i[index show] do
-    member do
-      get '/triage', to: 'contributions#triage', as: 'triage'
-      patch '/triage', to: 'contributions#triage_update'
-      post '/triage', to: 'contributions#triage_update'
-    end
+  resource :thank_you, only: %i[show], controller: :thank_you
+  resources :contributions, except: %i[destroy] do
     resources :claims, only: %i[new create]
   end
   resources :custom_form_questions

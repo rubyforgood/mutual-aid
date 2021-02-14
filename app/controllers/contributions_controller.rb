@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 class ContributionsController < ApplicationController
-  include NotUsingPunditYet
+  before_action :authenticate_user!, unless: :peer_to_peer_mode?
+  skip_after_action :verify_policy_scoped
 
-  before_action :authenticate_user!, except: %i[thank_you], unless: :peer_to_peer_mode?
-  before_action :set_contribution, only: %i[show triage]
-
-  layout 'without_navbar', only: [:thank_you]
-
+  # FIXME: this should probably be wrapped by a policy scope?
   def index
     @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
     filter = BrowseFilter.new(filter_params)
@@ -19,39 +16,26 @@ class ContributionsController < ApplicationController
   end
 
   def show
-    contribution = Listing.find(params[:id])
-    @communication_logs = CommunicationLog.where(person: @contribution.person).order(sent_at: :desc)
-
-    render(
-      :show,
-      locals: {
-        contribution: contribution,
-      }
-    )
+    @communication_logs = CommunicationLog.where(person: contribution.person).order(sent_at: :desc)
   end
 
-  def combined_form; end
+  def edit; end
 
-  def thank_you; end
-
-  def triage; end
-
-  def triage_update
-    @contribution = Listing.find(params[:id])
-    contribution_params = params[@contribution.type.downcase.to_sym]
+  def update
+    contribution_params = params[contribution.type.downcase.to_sym]
     title = contribution_params[:title]
     description = contribution_params[:description]
     inexhaustible = contribution_params[:inexhaustible]
 
-    if @contribution.update(title: title, description: description, inexhaustible: inexhaustible)
-      # CommunicationLog.create!(person: @contribution.person,
+    if contribution.update(title: title, description: description, inexhaustible: inexhaustible)
+      # CommunicationLog.create!(person: contribution.person,
       #                          sent_at: Time.current,
       #                          subject: "triaged by #{current_user.name}",
       #                          delivery_status: "connected",
-      #                          delivery_method: @contribution.person.preferred_contact_method)
-      redirect_to contribution_path(@contribution), notice: 'Contribution was successfully updated.'
+      #                          delivery_method: contribution.person.preferred_contact_method)
+      redirect_to contribution_path(contribution), notice: 'Contribution was successfully updated.'
     else
-      render triage_contribution_path(@contribution)
+      render :edit
     end
   end
 
@@ -79,7 +63,8 @@ class ContributionsController < ApplicationController
     @allowed_params ||= params.permit(:format, **BrowseFilter::ALLOWED_PARAMS)
   end
 
-  def set_contribution
-    @contribution = Listing.find(params[:id])
+  def contribution
+    @contribution ||= authorize Listing.find(params[:id]), policy_class: ContributionPolicy
   end
+  helper_method :contribution
 end

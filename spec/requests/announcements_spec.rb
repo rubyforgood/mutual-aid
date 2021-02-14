@@ -44,7 +44,7 @@ RSpec.describe '/announcements', type: :request do
         it 'redirects to /thank_you' do
           post announcements_path, params: params.merge(admin: 'false')
           expect(response).to have_http_status :found
-          expect(response.location).to match contribution_thank_you_path
+          expect(response.location).to match thank_you_path
         end
       end
     end

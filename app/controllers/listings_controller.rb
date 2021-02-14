@@ -69,7 +69,7 @@ class ListingsController < AdminController
   def create
     @listing = Listing.new(listing_params)
     if @listing.save
-      redirect_to contribution_thank_you_path, notice: 'Listing was successfully created.'
+      redirect_to thank_you_path, notice: 'Listing was successfully created.'
     else
       set_form_dropdowns
       render :new

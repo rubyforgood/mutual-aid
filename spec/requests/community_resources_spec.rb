@@ -45,7 +45,7 @@ RSpec.describe '/community_resources', type: :request do
         it 'redirects to /thank_you' do
           post community_resources_path, params: params.merge(admin: 'false')
           expect(response).to have_http_status :found
-          expect(response.location).to match contribution_thank_you_path
+          expect(response.location).to match thank_you_path
         end
       end
     end
@@ -54,7 +54,7 @@ RSpec.describe '/community_resources', type: :request do
       it 'succeeds' do
         expect { post community_resources_path, params: params }.to change(CommunityResource, :count).by 1
         expect(response).to have_http_status :found
-        expect(response.location).to match contribution_thank_you_path
+        expect(response.location).to match thank_you_path
       end
     end
   end

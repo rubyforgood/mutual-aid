@@ -42,7 +42,7 @@ module ApplicationHelper
     if resource_class != Person && (resource_class.superclass != ApplicationRecord)
       resource = resource.becomes(resource.class.superclass)
     end
-    link_to(triage_contribution_path(resource),
+    link_to(edit_contribution_path(resource),
             title: 'Triage',
             class: "button triage-button #{button_color_class || 'is-primary'}") do
       "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage</span>".html_safe

@@ -57,7 +57,7 @@ class ContributionsController < ApplicationController
       render triage_contribution_path(@contribution)
     end
   end
-  
+
   private
 
   def peer_to_peer_mode?

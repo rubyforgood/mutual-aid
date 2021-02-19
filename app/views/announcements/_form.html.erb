@@ -1,4 +1,4 @@
-<%= simple_form_for @announcement do |f| %>
+<%= simple_form_for announcement do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -15,5 +15,5 @@
     </div>
   </div>
 
-  <%= render "layouts/view_footer_buttons", f: f, resource: @announcement, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
+  <%= render "layouts/view_footer_buttons", f: f, resource: announcement, top_divider: true, extra_form_button_1: nil, extra_form_button_2: nil %>
 <% end %>

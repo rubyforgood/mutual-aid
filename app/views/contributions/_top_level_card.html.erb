@@ -1,0 +1,54 @@
+<div class="box">
+  <div class="block">
+    <span class="title is-1">
+      <span class="<%= contribution.icon_class %>"></span> <%= contribution&.type %>: <%= contribution&.all_tags_to_s %>
+    </span>
+  </div>
+  <div class="columns">
+    <div class="contribution column">
+      <%#= edit(contribution) %><!-- # TODO - add update action back in once we have moved controllers-->
+      <div class="created_at">Created on <%= shorthand_display(contribution.created_at) %></div>
+      <div class="block"><p class="subtitle"><%= contribution.description %></p></div>
+      <p class="control">
+        <% if contribution.matched? %>
+          <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
+        <% else %>
+          <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", method: :get %>
+        <% end %>
+      </p>
+      <br>
+      <% if policy(:contribution).read_details? %>
+        <div class="field is-grouped">
+          <p class="control"> <%= triage_button(contribution) %> </p>
+          <br>
+          <%= render "tentative_match", contribution: contribution %>
+        </div>
+        <span class="subtitle is-7 is-italic"><%= link_to "More info about Triage", dispatch_steps_path %></span>
+      <% end %>
+    </div>
+    <div class="person column">
+      <% if policy(:contribution).read_details? %>
+        <div class="contact-info block">
+          <strong>Created by:</strong>
+          <br>
+          <%= show_button(person, person&.name, "fa fa-user-circle", "title is-5", nil, contribution_id: contribution.id) %>
+          <br>
+          <strong>Preferred contact info:</strong>
+          <span class="<%= person.preferred_contact_method.icon_class %>"></span>
+          <span class="subtitle is-5"><%= person.preferred_contact_info %></span>
+        </div>
+        <div class="all-time-match-info">
+          <strong>Participation summary:</strong>
+          <br>
+          <span><%= person.match_history %></span>
+        </div>
+      <% else %>
+        <div class="block">
+          <strong>Created by:</strong>
+          <br>
+          <strong><%= contribution.person.anonymized_name_and_email %></strong>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

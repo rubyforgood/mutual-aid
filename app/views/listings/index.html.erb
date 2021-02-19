@@ -50,7 +50,7 @@
           <% end %>
         </td>
         <td>
-          <%= link_to("<span class='fa fa-reply'></span> <span> &nbsp Respond</span>".html_safe, respond_contribution_path(listing, contribution_type: listing.type),
+          <%= link_to("<span class='fa fa-reply'></span> <span> &nbsp View</span>".html_safe, contribution_path(listing, contribution_type: listing.type),
                       class: "button #{unmatched ? "is-primary" : "is-primary is-outlined"}") %>
         </td>
         <td>

@@ -4,7 +4,7 @@
   <% listings.order(:created_at).each do |listing| %>
     <li>
       <%= link_to ("(#{shorthand_display(listing.created_at)}) #{listing.all_tags_to_s.upcase}"),
-                  respond_contribution_path(listing), class: "button" %>
+                  contribution_path(listing), class: "button" %>
     </li>
   <% end %>
 </ul>

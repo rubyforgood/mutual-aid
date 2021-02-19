@@ -51,7 +51,7 @@ class Listing < ApplicationRecord
   end
 
   def name
-    type + ": #{all_tags_to_s} (#{person.name})"
+    type + ": #{all_tags_to_s}"
   end
 
   def name_and_match_history

@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
-  # FIXME: drop controller override when the pundit work is ready, #514
-  devise_for :users, controllers: { registrations: 'registrations_sans_signup' }
+  devise_for :users
 
   scope '/admin' do
     root to: 'admin_dashboard#show', as: 'admin_dashboard'
@@ -15,8 +13,6 @@ Rails.application.routes.draw do
 
   get '/public',                   to: 'public_pages#landing_page',        as: 'landing_page_public'
   get '/about',                    to: 'public_pages#about',               as: 'about_public'
-  get '/announcements_list',       to: 'public_pages#announcements',       as: 'announcements_public'
-  get '/community_resources_list', to: 'public_pages#community_resources', as: 'community_resources_public'
   get '/version',                  to: 'public_pages#version',             as: 'version'
 
   resources :announcements
@@ -29,15 +25,8 @@ Rails.application.routes.draw do
   end
   resources :community_resources
   resources :contact_methods
-  get '/combined_form', to: 'contributions#combined_form', as: 'combined_form'
-  get '/thank_you', to: 'contributions#thank_you', as: 'contribution_thank_you'
-  resources :contributions, only: %i[index show] do
-    member do
-      get '/respond', to: 'contributions#respond', as: 'respond'
-      get '/triage', to: 'contributions#triage', as: 'triage'
-      patch '/triage', to: 'contributions#triage_update'
-      post '/triage', to: 'contributions#triage_update'
-    end
+  resource :thank_you, only: %i[show], controller: :thank_you
+  resources :contributions, except: %i[destroy] do
     resources :claims, only: %i[new create]
   end
   resources :custom_form_questions

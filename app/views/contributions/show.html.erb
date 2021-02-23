@@ -12,7 +12,7 @@
         <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", method: :get %>
       <% else %>
         <button class="button is-primary" disabled="true">Claim This <%= contribution.type %></button>
-        <p class="is-6 is-italic">An ask without an email address cannot be claimed in peer-to-peer mode</p>
+        <p class="is-6 is-italic">This person has not yet entered contact information so that you can claim this contribution. You may need to check back later</p>
       <% end %>
     <% end %>
   </div>

@@ -13,6 +13,11 @@ FactoryBot.define do
       name  { 'Email' }
       field { 'email' }
     end
+
+    factory :contact_method_phone do
+      name  { 'Phone' }
+      field { 'phone' }
+    end
   end
 end
 

@@ -100,6 +100,11 @@ class Listing < ApplicationRecord
   def categories_for_tags
     Category.where(name: tag_list)
   end
+
+  def has_email?
+    person.email.present?
+  end
+
 end
 
 # == Schema Information

@@ -1,7 +1,27 @@
+<section class="section">
+  <h1>Request for Contribution</h1>
+  <h2 class="title"><%= contribution.type %>: <%= contribution.all_tags_unique.map(&:humanize).join(", ") %></h2>
+  <br>
+  <div class="box">
+    <p><strong><%= contribution.person.anonymized_name_and_email %></strong></p>
+    <p class="subtitle"><%= contribution.description %></p>
+    <% if contribution.matched? %>
+      <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
+    <% else  %>
+      <% if contribution.has_email? %>
+        <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", method: :get %>
+      <% else %>
+        <button class="button is-primary" disabled="true">Claim This <%= contribution.type %></button>
+        <p class="is-6 is-italic">An ask without an email address cannot be claimed in peer-to-peer mode</p>
+      <% end %>
+    <% end %>
+  </div>
+
 <% person = contribution.person %>
 <div class="block">
   <%= link_to "<i class=\"fas fa-arrow-left\"></i> View Contributions".html_safe, contributions_path %>
 </div>
+</section>
 <%= render "top_level_card", person: person, contribution: contribution %>
 
 <% if policy(:contribution).read_details? %>

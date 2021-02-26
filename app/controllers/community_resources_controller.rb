@@ -49,6 +49,10 @@ class CommunityResourcesController < ApplicationController
       @available_tags ||= Category.visible.pluck(:name) + community_resource&.tag_list || []
     end
 
+    def service_areas
+      @service_areas ||= ServiceArea.i18n.pluck(:name, :id) || []
+    end
+
     def determine_layout
       'without_navbar' unless context.system_settings.display_navbar?
     end
@@ -62,5 +66,5 @@ class CommunityResourcesController < ApplicationController
       end
     end
 
-    helper_method :available_tags, :community_resource
+    helper_method :available_tags, :community_resource, :service_areas
 end

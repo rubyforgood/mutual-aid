@@ -26,7 +26,7 @@ class CommunityResourcePolicy < ApplicationPolicy
 
   class Scope < ApplicationPolicy::Scope
     def resolve
-      can_admin? ? original_scope : original_scope.published
+      can_admin? ? scope : scope.published
     end
   end
 end

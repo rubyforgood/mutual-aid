@@ -1,12 +1,5 @@
 require 'spec_helper'
 
-# FIXME: remove or consolidate this block once #834 is resolved
-RSpec.configure do
-  Pundit::Matchers.configure do |config|
-    config.user_alias = :acting_user
-  end
-end
-
 RSpec.describe ClaimPolicy do
   let(:system_settings) { double :system_setting }
   let(:context) { Context.new user: user, system_settings: system_settings }

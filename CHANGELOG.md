@@ -10,6 +10,26 @@ We're still in the [initial development phase](https://www.jering.tech/articles/
 * Patch version (0.x.Y) -> incremented whenever we release backward compatible changes, including new features, bugfixes etc.
 
 This changelog also serves to acknowledge the incredible people who've contributed brilliance, effort and being. Their handles are listed under the first release they each  touched. 💗🙏🏾
+## [Unreleased]
+### Breaking changes
+* All users prior to this change now need to have their permission level set. Use the `make_users_admins` rake task to give existing users admin privileges #853
+* Registration is now re-enabled! This isn’t breaking per se, but important to know that users can now self-register #840, #859
+* Logged in users’ email is autopopulated when claiming a contribution (instead of letting them manually enter one) #855
+* Claim button is disabled when p2p and no email related to contribution (because our system currently only sends notification emails) #846, #868
+
+### Enhancements
+* Allow CommunityResources to have many ServiceAreas #870
+* Show/hide buttons on NavBar based on user role #850
+* Remove name in map view #847
+* Implement permissions #834, #835, #836, #837, #838, #841, #845, #851, #848, #858
+    * Some pages now combined into one page (admin-only sections will display if user has admin permissions):
+        * Contributions Show and Respond are now combined #851
+        * CommunityResources Show and Edit are now combined #848
+        * Announcements Show and Edit are now combined #845
+
+### Developer notes
+* We took a new approach to making system-wide variables available #844, #849
+
 
 ## [0.3.1] - 2021-01-22
 ### Enhancements

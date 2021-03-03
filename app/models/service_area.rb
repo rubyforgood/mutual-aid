@@ -16,6 +16,7 @@ class ServiceArea < ApplicationRecord
   has_many :listings
   has_many :people
   has_many :service_areas, inverse_of: :parent
+  has_many :community_resources, through: :community_resource_service_areas
 
   TYPES = %w[pod neighborhood region county city other]
 

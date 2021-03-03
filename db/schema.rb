@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_21_210339) do
+ActiveRecord::Schema.define(version: 2021_02_26_012229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,13 @@ ActiveRecord::Schema.define(version: 2020_11_21_210339) do
     t.index ["delivery_method_id"], name: "index_communication_logs_on_delivery_method_id"
     t.index ["match_id"], name: "index_communication_logs_on_match_id"
     t.index ["person_id"], name: "index_communication_logs_on_person_id"
+  end
+
+  create_table "community_resource_service_areas", force: :cascade do |t|
+    t.bigint "community_resource_id", null: false
+    t.bigint "service_area_id", null: false
+    t.index ["community_resource_id"], name: "index_community_resource_service_areas_on_community_resource_id"
+    t.index ["service_area_id"], name: "index_community_resource_service_areas_on_service_area_id"
   end
 
   create_table "community_resources", force: :cascade do |t|
@@ -548,6 +555,8 @@ ActiveRecord::Schema.define(version: 2020_11_21_210339) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "communication_logs", "matches"
   add_foreign_key "communication_logs", "people"
+  add_foreign_key "community_resource_service_areas", "community_resources"
+  add_foreign_key "community_resource_service_areas", "service_areas"
   add_foreign_key "community_resources", "locations"
   add_foreign_key "community_resources", "organizations"
   add_foreign_key "community_resources", "service_areas"

@@ -7,12 +7,13 @@ class CommunityResource < ApplicationRecord
 
   acts_as_taggable_on :tags
 
-  belongs_to :service_area, optional: true # TODO: - should this be optional???
   belongs_to :location, optional: true
   belongs_to :organization, optional: true # TODO: - should this be optional???
 
   has_many :matches_as_receiver
   has_many :matches_as_provider
+  has_many :community_resource_service_areas
+  has_many :service_areas, through: :community_resource_service_areas
 
   validates :name, :description, :publish_from, presence: true
 

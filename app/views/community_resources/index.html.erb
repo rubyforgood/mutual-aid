@@ -16,7 +16,7 @@
           <%= link_to("More [*]", community_resource_path(community_resource)) if community_resource.description&.length.to_i > 100 %>
         </p>
         <p class="block has-text-weight-light">
-          <%= community_resource.phone %> <%= community_resource.service_area&.name %>
+          <%= community_resource.phone %> <%= community_resource.service_areas.map(&:name).to_sentence %>
         </p>
         <%= link_to("Website", community_resource.website_url, title: "Go to #{community_resource.website_url}",
                     class: "button is-link is-small") if community_resource.website_url.present? %>

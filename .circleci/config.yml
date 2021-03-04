@@ -1,5 +1,5 @@
 docker_image: &docker_image
-  image: circleci/ruby:2.7.0-node
+  image: circleci/ruby:2.7.2-node
 
 version: 2.1
 commands:

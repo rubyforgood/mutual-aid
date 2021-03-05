@@ -16,7 +16,7 @@ class CommunityResourcePolicy < ApplicationPolicy
       :website_url,
       :youtube_identifier,
       tag_list: [],
-      organization_attributes: %i[id name _destroy],
+      organization_attributes: %i[id name _destroy]
     ]
       .tap do |permitted|
         permitted.push :is_approved if can_admin?

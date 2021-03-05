@@ -38,11 +38,11 @@
       <%= f.input :tag_list, as: :check_boxes, collection: available_tags %>
       <%= f.association :service_area, label: "Service area", label_method: "full_name" %>
       <%= f.simple_fields_for :location do |location_form| %>
-        <%= location_form.input :street_address %>
-        <%= location_form.input :city %>
-        <%= location_form.input :state %>
-        <%= location_form.input :zip %>
-        <%= location_form.collection_select :location_type_id, LocationType.order(:name), :id, :name, include_blank: false %> 
+        <%= location_form.input :street_address, required: true %>
+        <%= location_form.input :city, required: true %>
+        <%= location_form.input :state, required: true %>
+        <%= location_form.input :zip, required: true %>
+        <%= location_form.collection_select :location_type_id, LocationType.order(:name), :id, :name, include_blank: false, required: true %> 
       <% end %>
     </div>
 

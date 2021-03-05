@@ -8,6 +8,13 @@ RSpec.describe '/community_resources', type: :request do
     description: 'Food for the rev!',
     publish_from: Date.current,
     organization_attributes: { name: 'Black Panther Party' },
+    location: { 
+      street_address: '123 Sesame Street',
+      city: 'Kings Park',
+      state: 'NY',
+      zip: '11754',
+      location_type_id: 1
+    }
   }}}
 
   describe 'GET /community_resources' do

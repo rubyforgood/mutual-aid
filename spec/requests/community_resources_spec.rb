@@ -60,6 +60,7 @@ RSpec.describe '/community_resources', type: :request do
     context 'as a guest' do
       it 'succeeds' do
         expect { post community_resources_path, params: params }.to change(CommunityResource, :count).by 1
+        expect(Location.count).to eq(1)
         expect(response).to have_http_status :found
         expect(response.location).to match thank_you_path
       end

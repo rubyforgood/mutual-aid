@@ -11,6 +11,10 @@ We're still in the [initial development phase](https://www.jering.tech/articles/
 
 This changelog also serves to acknowledge the incredible people who've contributed brilliance, effort and being. Their handles are listed under the first release they each  touched. 💗🙏🏾
 
+## [Unreleased]
+### Development notes
+* Remove `credentials.yml.enc` #896
+
 ## [0.4.0] - 2021-03-03
 ### Breaking changes
 * All users prior to this change now need to have their permission level set. Use the `make_users_admins` rake task to give existing users admin privileges #853

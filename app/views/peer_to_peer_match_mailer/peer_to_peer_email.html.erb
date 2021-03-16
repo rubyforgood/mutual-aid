@@ -1,1 +1,12 @@
-<%= content_tag(:div, message) %>
+<div>
+  Good news! You have a match through <%= Organization.current_organization.name %>.
+  <br><br>
+  <%= contribution.person.name %> would like to connect with you about <%= contribution.tag_list.last %>, and they sent this message:
+  <br>
+  <%= content_tag(:div, message) %>
+  Please contact them within two days at <%= @peer_email_address %> to make arrangements.
+  <br><br>
+  If you aren’t able to connect, let us know so we can reinstate your <%= contribution.type %>.
+  <br><br>
+  Thanks for participating in Mutual Aid!
+</div>

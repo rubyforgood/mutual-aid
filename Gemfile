@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '2.7.2'
 
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 
@@ -36,7 +36,7 @@ gem 'reform-rails'
 gem 'rubocop-rails'
 gem 'sendgrid-ruby'
 gem 'simple_form'
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

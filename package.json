@@ -20,6 +20,7 @@
     "mapbox-gl-vue": "^2.0.4",
     "node-fetch": "^2.6.1",
     "null-loader": "^4.0.0",
+    "sass": "^1.32.8",
     "sass-loader": "8.0.2",
     "style-loader": "^1.1.4",
     "trix": "^1.2.0",

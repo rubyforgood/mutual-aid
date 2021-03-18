@@ -5,6 +5,16 @@
     <%= f.input :email %>
   </div>
 
+  <% if context.can_admin? %>
+    <div class="field">
+      <div class="control">
+        <div class="select">
+          <%= f.input :role, label: "Role", collection: UserRole::ROLES.map { |role| [role.titleize, role] } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <%= f.simple_fields_for :person, as: :person, method: :patch do |ff| %>
     <%#= render "person_fields", ff: ff, f: f %><!-- # TODO - improve user creation workflow-->
   <% end %>

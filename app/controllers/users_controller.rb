@@ -54,6 +54,19 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, person_attributes: %i[id name email phone preferred_contact_method_id _destroy] )
+    params.require(:user).permit(permitted_attributes)
+  end
+
+  def permitted_attributes
+    [
+      :email,
+      { person_attributes: %i[id name email phone preferred_contact_method_id _destroy] }
+    ].tap do |attributes|
+      attributes << admin_only_attributes if context.can_admin?
+    end
+  end
+
+  def admin_only_attributes
+    %i[role]
   end
 end

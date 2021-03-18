@@ -48,13 +48,29 @@ RSpec.describe "/users", type: :request do
   end
 
   describe "PATCH /update" do
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user, role: "unset") }
 
     it "updates the user" do
       patch "/users/#{user.id}", params: { user: { email: "atorvingen@example.com" } }
 
       user.reload.confirm
       expect(user.email).to eq("atorvingen@example.com")
+    end
+
+    context "when changing roles" do
+      it "allows admins to change a user's role" do
+        patch "/users/#{user.id}", params: { user: { role: "neighbor" } }
+
+        expect(user.reload.role).to eq("neighbor")
+      end
+
+      it "does not allow non-admin users to change another user's role" do
+        sign_in FactoryBot.create(:user, :volunteer)
+
+        patch "/users/#{user.id}", params: { user: { role: "neighbor" } }
+
+        expect(response).to be_forbidden
+      end
     end
   end
 

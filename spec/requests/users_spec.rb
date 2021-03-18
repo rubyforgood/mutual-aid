@@ -37,7 +37,7 @@ RSpec.describe "/users", type: :request do
 
   describe "POST /create" do
     it "creates the user" do
-      skip "something weird is up with this action/test -- I can't even get a byebug to trigger"
+      skip "To be implemented when we have a #create action."
 
       expect {
         post "/users", params: { user: FactoryBot.attributes_for(:user) }
@@ -51,10 +51,9 @@ RSpec.describe "/users", type: :request do
     let(:user) { FactoryBot.create(:user) }
 
     it "updates the user" do
-      skip "something weird is up with this action/test -- @user.update returns true but the email doesn't change"
-
       patch "/users/#{user.id}", params: { user: { email: "atorvingen@example.com" } }
-      user.reload
+
+      user.reload.confirm
       expect(user.email).to eq("atorvingen@example.com")
     end
   end

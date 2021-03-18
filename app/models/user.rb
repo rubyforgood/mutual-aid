@@ -12,10 +12,6 @@ class User < ApplicationRecord
 
   enum role: UserRole.roles_as_hash, _suffix: true
 
-  def role
-    @role ||= UserRole.new(read_attribute(:role))
-  end
-
   def name
     "#{person&.name || email}"
   end

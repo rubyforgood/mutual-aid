@@ -7,7 +7,7 @@
 class BasicFilter
   # This method should be overridden to return a hash with the following keys:
   # * :name => a short string that the user will see that describes what type of filters these are
-  # * :filters => the output a call to FilterOptionsBlueprint.render_as_hash that represent each filter option to check or uncheck
+  # * :filters => the output a call to FilterOptionBlueprint.render_as_hash that represent each filter option to check or uncheck
   def self.options
     {}
   end

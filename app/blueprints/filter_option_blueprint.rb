@@ -6,7 +6,7 @@
 # We assume that there's a top level type of filter (e.g ContactMethodFilter)
 # that then references a series of these FilterOptionBlueprint objects for
 # each element (e.g. each available contact method)
-class FilterOptionsBlueprint < Blueprinter::Base
+class FilterOptionBlueprint < Blueprinter::Base
   # The identifier here needs to be in a format that the BrowseFilter can then
   # interpret and use to filter results
   identifier :id do |category, _options|

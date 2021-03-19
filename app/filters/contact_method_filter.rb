@@ -2,7 +2,7 @@ class ContactMethodFilter < BasicFilter
   def self.options
     {
       name: 'Contact Methods',
-      filters: FilterOptionsBlueprint.render_as_hash(ContactMethod.enabled.distinct(:name))
+      filters: FilterOptionBlueprint.render_as_hash(ContactMethod.enabled.distinct(:name))
     }
   end
 

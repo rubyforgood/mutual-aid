@@ -37,7 +37,15 @@
     <div class="field is-grouped">
       <%= f.input :tag_list, as: :check_boxes, collection: available_tags %>
       <%= f.input :service_area_ids, label: "Service area", as: :check_boxes, collection: service_areas %>
-      <%= f.association :location, label: "Address", label_method: "address" %>
+      <div class="form-vertical">
+        <%= f.simple_fields_for :location do |location_form| %>
+          <%= location_form.input :street_address, required: true %>
+          <%= location_form.input :city, required: true %>
+          <%= location_form.input :state, required: true, maxlength: 2 %>
+          <%= location_form.input :zip, required: true, maxlength: 5 %>
+          <%= location_form.collection_select :location_type_id, LocationType.order(:name), :id, :name, include_blank: false, required: true %> 
+        <% end %>
+      </div>
     </div>
 
     <div class="label is-expanded">Links</div>

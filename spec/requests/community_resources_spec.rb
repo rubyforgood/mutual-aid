@@ -8,6 +8,13 @@ RSpec.describe '/community_resources', type: :request do
     description: 'Food for the rev!',
     publish_from: Date.current,
     organization_attributes: { name: 'Black Panther Party' },
+    location: {
+      street_address: '123 Sesame Street',
+      city: 'Kings Park',
+      state: 'NY',
+      zip: '11754',
+      location_type_id: 1
+    }
   }}}
 
   describe 'GET /community_resources' do
@@ -52,10 +59,38 @@ RSpec.describe '/community_resources', type: :request do
     end
 
     context 'as a guest' do
-      it 'succeeds' do
-        expect { post community_resources_path, params: params }.to change(CommunityResource, :count).by 1
+      it 'redirects to the thank you page' do
+        post community_resources_path, params: params
+
         expect(response).to have_http_status :found
         expect(response.location).to match thank_you_path
+      end
+
+      it 'creates a new community resource and location' do
+        expect { post community_resources_path, params: params }.to(
+          change(CommunityResource, :count).by(1).and(
+          change(Location, :count).by(1)
+        ))
+      end
+
+      context 'when a matching location already exists' do
+        let(:location_attrs) {{
+          street_address: '42 existing location',
+          location_type_id: 1,
+        }}
+
+        before do
+          Location.create! location_attrs
+        end
+
+        it 'creates a new community resource using the existing location' do
+          params[:community_resource][:location] = location_attrs
+
+          expect { post community_resources_path, params: params }.to(
+            change(CommunityResource, :count).by(1).and(
+            change(Location, :count).by(0)
+          ))
+        end
       end
     end
   end

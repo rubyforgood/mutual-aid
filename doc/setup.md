@@ -7,7 +7,7 @@ This is a Ruby on Rails 6.0 application with Vue + Webpack included.
 To get started developing on your machine, you'll need the following tools installed:
 
 * ruby 2.7+, bundler 2+
-* node 10+, yarn 1.16+
+* node 14+, yarn 1.16+
 
 This project uses webpacker to bundle front end assets, including:
 

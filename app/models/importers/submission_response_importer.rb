@@ -224,7 +224,12 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   end
 
   def create_organization_community_resource
-    CommunityResource.where(organization: @current_organization).first_or_create!(is_created_by_admin: true, name: 'PLACEHOLDER')
+    CommunityResource.where(organization: @current_organization).first_or_create!(
+      is_created_by_admin: true, 
+      name: 'PLACEHOLDER', 
+      description: 'DESCRIPTION PLACEHOLDER', 
+      publish_from: Date.current
+    )
   end
 
   def create_listings_data_from_category_questions(row, submission)

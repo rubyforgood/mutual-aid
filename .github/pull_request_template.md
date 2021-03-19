@@ -5,17 +5,6 @@ A summary of what problem this pull request is trying to solve. Include a #refer
 If appropriate, use github's [issue linking keywords](https://docs.github.com/en/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) to automatically close any issues that this pull request resolves.
 -->
 
-### Pre-Merge Checklist
-<!-- All these boxes should be checked off before any pull request is merged! -->
-
-- [ ] All new features have been described in the pull request
-- [ ] Security & accessibility have been considered
-- [ ] High quality tests have been added, or an explanation has been given why the features cannot be tested
-- [ ] New features have been documented, and the code is understandable and well commented
-- [ ] Entry added to CHANGELOG.md if appropriate
-- [ ] All outstanding questions and concerns have been resolved
-- [ ] Any next steps that seem like good ideas have been created as issues for future discussion & implementation
-
 ### What
 <!--
 A list of the changes included in this pull request. A checkbox list is probably a good choice here, and the boxes should be checked off as tasks are completed. This section may be omitted if the Why section provides enough information and only a few changes were made (eg, for simple bug reports).
@@ -71,3 +60,13 @@ Address how this change will improve/lessen the security of the application - fo
 <!--
 Any additional notes you have regarding your experience working on this pull request as a contributor. If this is very detailed, it could be a good idea to create an issue to address it.
 -->
+
+### Pre-Merge Checklist
+<!-- All these boxes should be checked off before any pull request is merged! -->
+
+- [ ] Security & accessibility have been considered
+- [ ] Tests have been added, or an explanation has been given why the features cannot be tested
+- [ ] Documentation and comments have been added to the codebase where required
+- [ ] Entry added to CHANGELOG.md if appropriate
+- [ ] Outstanding questions and concerns have been resolved
+- [ ] Any next steps have been turned into Issues or Discussions as appropriate

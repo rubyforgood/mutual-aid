@@ -8,13 +8,14 @@ class CommunityResourcePolicy < ApplicationPolicy
     [
       :description,
       :facebook_url,
+      :location_id,
       :name,
       :phone,
       :publish_from,
       :publish_until,
-      :service_area_id,
       :website_url,
       :youtube_identifier,
+      service_area_ids: [],
       tag_list: [],
       organization_attributes: %i[id name _destroy]
     ]
@@ -25,7 +26,7 @@ class CommunityResourcePolicy < ApplicationPolicy
 
   class Scope < ApplicationPolicy::Scope
     def resolve
-      can_admin? ? original_scope : original_scope.published
+      can_admin? ? scope : scope.published
     end
   end
 end

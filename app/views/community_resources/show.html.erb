@@ -42,8 +42,8 @@
   </p>
 
   <p>
-    <strong>ServiceArea:</strong>
-    <%= community_resource.service_area&.name %>
+    <strong>Service areas:</strong>
+    <%= community_resource.service_areas.map(&:name).to_sentence %>
   </p>
 
   <p>

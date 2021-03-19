@@ -36,7 +36,7 @@
 
     <div class="field is-grouped">
       <%= f.input :tag_list, as: :check_boxes, collection: available_tags %>
-      <%= f.association :service_area, label: "Service area", label_method: "full_name" %>
+      <%= f.input :service_area_ids, label: "Service area", as: :check_boxes, collection: service_areas %>
       <div class="form-vertical">
         <%= f.simple_fields_for :location do |location_form| %>
           <%= location_form.input :street_address, required: true %>

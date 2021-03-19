@@ -1,13 +1,13 @@
 class ApplicationPolicy
   module Utils
-    attr_reader :acting_user, :admin_param, :system_settings
+    attr_reader :user, :admin_param, :system_settings
 
     def sys_admin?
-      acting_user && acting_user.sys_admin_role? && admin_param != 'false'
+      user && user.sys_admin_role? && admin_param != 'false'
     end
 
     def admin?
-      acting_user && acting_user.admin_role? && admin_param != 'false'
+      user && user.admin_role? && admin_param != 'false'
     end
 
     def can_admin?
@@ -30,16 +30,16 @@ class ApplicationPolicy
   class Scope
     include Utils
 
-    attr_reader :original_scope
+    attr_reader :scope
 
-    def initialize(context, original_scope)
-      @acting_user, @system_settings, @admin_param = extract context
-      @original_scope = original_scope
+    def initialize(context, scope)
+      @user, @system_settings, @admin_param = extract context
+      @scope = scope
     end
 
     # We default all permissions to false, and expect you to override as needed.
     def resolve
-      original_scope.none
+      scope.none
     end
   end
 
@@ -47,7 +47,7 @@ class ApplicationPolicy
 
   # We've configured pundit to provide a user context (See https://github.com/varvet/pundit/#additional-context).
   def initialize(context, record)
-    @acting_user, @system_settings, @admin_param = extract context
+    @user, @system_settings, @admin_param = extract context
     @record = record
   end
 

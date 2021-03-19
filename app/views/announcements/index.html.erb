@@ -6,8 +6,8 @@
       <li class="box">
         <p class="title is-5"><%= announcement.name %></p>
         <p>
-        <%= announcement.description.truncate(100) %>
-        <%= link_to("More [*]", announcement_path(announcement)) if announcement.description.length > 100 %>
+        <%= announcement.description&.truncate(100) %>
+        <%= link_to("More [*]", announcement_path(announcement)) if announcement.description&.length.to_i > 100 %>
         </p>
         <% if policy(announcement).change? %>
           <footer class="level is-mobile mt-1">

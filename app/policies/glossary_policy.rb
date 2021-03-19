@@ -1,9 +1,4 @@
 class GlossaryPolicy < ApplicationPolicy
-  def read?
-    true
-  end 
-
-  def change?
-    acting_user && (acting_user.admin_role? || acting_user.sys_admin_role? )
-  end
+  def read?;   true        end
+  def change?; can_admin?  end
 end

@@ -1,4 +1,4 @@
-FROM ruby:2.7.0-alpine
+FROM ruby:2.7.2-alpine
 
 RUN apk add --update-cache openssl-dev build-base sqlite-dev
 

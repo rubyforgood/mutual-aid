@@ -18,6 +18,7 @@ RSpec.describe '/community_resources', type: :request do
   }}}
 
   describe 'GET /community_resources' do
+    before { create_list :community_resource, 2 }
     it 'is publicly accessible' do
       get community_resources_path
       expect(response).to be_successful

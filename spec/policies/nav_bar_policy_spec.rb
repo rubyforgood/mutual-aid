@@ -15,7 +15,7 @@ RSpec.describe NavBarPolicy do
 
       context 'in peer_to_peer mode' do
         let(:peer_to_peer?) { true }
-        it { is_expected.to match_array %w[Contributions Login] }
+        it { is_expected.to match_array %w[Glossary Contributions Login] }
       end
     end
 
@@ -26,7 +26,7 @@ RSpec.describe NavBarPolicy do
 
       context 'in peer_to_peer mode' do
         let(:peer_to_peer?) { true }
-        it { is_expected.to match_array %w[Contributions Feedback Logout] }
+        it { is_expected.to match_array %w[Glossary Contributions Feedback Logout] }
       end
     end
 

@@ -18,6 +18,7 @@ class AnnouncementsController < ApplicationController
   def edit; end
 
   def create
+    # @announcement = Announcement.new(announcement_params)
     announcement.assign_attributes permitted_attributes(announcement)
     if announcement.save
       redirect_after_create
@@ -27,6 +28,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def update
+    # if @announcement.update(announcement_params)
     if announcement.update(permitted_attributes announcement)
       redirect_to announcements_path, notice: 'Announcement was successfully updated.'
     else
@@ -58,4 +60,18 @@ class AnnouncementsController < ApplicationController
     def determine_layout
       'without_navbar' unless context.system_settings.display_navbar?
     end
+
+    # def announcement_params
+    #   params.require(:announcement).permit(policy(@announcement).permitted_attributes)
+    # end
+
+
+    # def announcement_params
+    #   params.require(:announcement).permit(
+    #       :name,
+    #       :description,
+    #       :publish_from,
+    #       :publish_until
+    #     )
+    # end
 end

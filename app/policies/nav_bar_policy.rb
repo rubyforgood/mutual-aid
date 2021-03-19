@@ -3,7 +3,7 @@ class NavBarPolicy < ApplicationPolicy
     visible = Set.new
     visible << (user ? 'Logout' : 'Login')
     visible << 'Feedback' if user
-    visible << 'Contributions' if system_settings.peer_to_peer?
+    visible.merge %w[Glossary Contributions] if system_settings.peer_to_peer?
     visible.merge %w[Contributions Matches Admin] if can_admin?
     visible.to_a
   end

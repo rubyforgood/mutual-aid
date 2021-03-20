@@ -43,7 +43,7 @@
           <%= location_form.input :city, required: true %>
           <%= location_form.input :state, required: true, maxlength: 2 %>
           <%= location_form.input :zip, required: true, maxlength: 5 %>
-          <%= location_form.collection_select :location_type_id, LocationType.order(:name), :id, :name, include_blank: false, required: true %> 
+          <%= location_form.input :location_type_id, as: :select, collection: LocationType.order(:name), required: true %>
         <% end %>
       </div>
     </div>

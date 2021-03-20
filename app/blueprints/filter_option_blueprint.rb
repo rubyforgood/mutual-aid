@@ -9,8 +9,8 @@
 class FilterOptionBlueprint < Blueprinter::Base
   # The identifier here needs to be in a format that the BrowseFilter can then
   # interpret and use to filter results
-  identifier :id do |category, _options|
-    "#{category.class}[#{category.id}]"
+  identifier :id do |filter_option, _options|
+    "#{filter_option.class}[#{filter_option.id}]"
   end
 
   # This is currently used as a display name so people can understand

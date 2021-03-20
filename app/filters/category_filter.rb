@@ -1,9 +1,9 @@
 class CategoryFilter < BasicFilter
-  def self.options
+  def self.filter_group
     {
       name: "Categories",
       # Currently only filtering by top-level categories
-      filters: FilterOptionBlueprint.render_as_hash(Category.roots)
+      filter_options: FilterOptionBlueprint.render_as_hash(Category.roots)
     }
   end
 

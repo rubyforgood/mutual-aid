@@ -1,6 +1,6 @@
 class ContributionTypeFilter
-  def self.options
-    { name: 'Contribution Types', filters: [
+  def self.filter_group
+    { name: 'Contribution Types', filter_options: [
       { id: 'ContributionType[Ask]', name: 'Ask' },
       { id: 'ContributionType[Offer]', name: 'Offer' }
     ]}

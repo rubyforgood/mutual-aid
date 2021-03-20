@@ -17,8 +17,8 @@ class BrowseFilter
 
   attr_reader :parameters
 
-  def self.filter_options_json
-    FILTER_CLASSES.map(&:options).to_json
+  def self.filter_groups_json
+    FILTER_CLASSES.map(&:filter_group).to_json
   end
 
   def initialize(parameters)

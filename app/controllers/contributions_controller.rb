@@ -3,11 +3,20 @@
 class ContributionsController < ApplicationController
   before_action :authenticate_user!, unless: :peer_to_peer_mode?
   skip_after_action :verify_policy_scoped
-
   # FIXME: this should probably be wrapped by a policy scope?
+  # Nomenclature note:
+  # Filter —
+  #   An object that handles the logic or action of filtering
+  # Filter Group —
+  #   A higher-level category or other grouping of filter options. Example: Contact Method can be
+  # a *filter group* that then has *filter options* for things like "email" or "text message"
+  # Filter Option —
+  #   An individual item that can be chosen to change what's filtered. Each *filter option* is 
+  # associated to one and only one *filter group*
+
   def index
-    @filter_types = BrowseFilter.filter_options_json
-    # The BrowserFilter takes the result of the parameters from the FilterType checkboxes and returns a list of contributions
+    @filter_groups = BrowseFilter.filter_groups_json
+    # The BrowserFilter takes the result of the parameters from the filter checkboxes and returns a list of contributions
     filter = BrowseFilter.new(allowed_params)
     @contributions = ContributionBlueprint.render(filter.contributions, contribution_blueprint_options)
     respond_to do |format|

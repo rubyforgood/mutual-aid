@@ -17,32 +17,32 @@
       <div class="columns">
         <b-collapse
           class="column"
-          v-for="(type, index) of filterTypes"
+          v-for="(filterGroup, index) of filterGroups"
           :key="index"
           :open="initialOpenStatus(index)"
         >
           <span class="subtitle is-5" slot="trigger" slot-scope="props">
-            {{ type.name }} <a>{{ props.open ? '-' : '+' }}</a>
+            {{ filterGroup.name }} <a>{{ props.open ? '-' : '+' }}</a>
           </span>
           <b-checkbox
-            :id="`toggle-filters-${type.name}`"
-            @input="toggleFilters(type.filters)"
-            :value="filterTypeSelectAllValue(type.filters)"
-            :indeterminate="indeterminate(type.filters)"
+            :id="`toggle-filters-${filterGroup.name}`"
+            @input="toggleFilters(filterGroup.filter_options)"
+            :value="filterGroupSelectAllValue(filterGroup.filter_options)"
+            :indeterminate="indeterminate(filterGroup.filter_options)"
           >
             Select all
           </b-checkbox>
           <ul class="mt-1">
-            <li v-for="filter of type.filters" :key="filter.id">
+            <li v-for="filterOption of filterGroup.filter_options" :key="filterOption.id">
               <b-checkbox
-                :native-value="filter.id"
+                :native-value="filterOption.id"
                 :value="currentFilters"
                 @input="$emit('change', $event)"
               >
-                {{ filter.name }}
+                {{ filterOption.name }}
                 <MappedIconList
-                  :iconTypes="[{id: filter.name, name: filter.name}]"
-                  v-if="showIconsForFilter(filter.name)"
+                  :iconTypes="[{id: filterOption.name, name: filterOption.name}]"
+                  v-if="showIconsForFilter(filterOption.name)"
                   class="is-inline"
                 />
               </b-checkbox>
@@ -57,12 +57,12 @@
 <script>
 import MappedIconList from 'components/MappedIconList'
 
-// TODO: consider extracting a FilterType component.
+// TODO: consider extracting a FilterGroup component.
 // see this comment: https://github.com/rubyforgood/mutual-aid/pull/799#pullrequestreview-554188100
 export default {
   components: {MappedIconList},
   props: {
-    filterTypes: {type: Array, default: () => []},
+    filterGroups: {type: Array, default: () => []},
     currentFilters: {type: Array, default: () => []},
   },
   model: {
@@ -87,22 +87,22 @@ export default {
     showIconsForFilter(filterName) {
       return !!this.hasFilterIcons[filterName]
     },
-    currentFiltersForFilterType(filterIds) {
-      return this.currentFilters.filter((el) => filterIds.includes(el))
+    currentFiltersOptionsForFilterGroup(filterOptionIds) {
+      return this.currentFilters.filter((el) => filterOptionIds.includes(el))
     },
-    filterTypeSelectAllValue(filters) {
+    filterGroupSelectAllValue(filters) {
       let filterIds = filters.map((f) => f.id)
-      return this.currentFiltersForFilterType(filterIds).length == filterIds.length
+      return this.currentFiltersOptionsForFilterGroup(filterIds).length == filterIds.length
     },
     indeterminate(filters) {
       let filterIds = filters.map((f) => f.id)
-      return this.currentFiltersForFilterType(filterIds).length == 0
+      return this.currentFiltersOptionsForFilterGroup(filterIds).length == 0
         ? false
-        : this.currentFiltersForFilterType(filterIds).length < filterIds.length
+        : this.currentFiltersOptionsForFilterGroup(filterIds).length < filterIds.length
     },
     toggleFilters(filters) {
       let filterIds = filters.map((f) => f.id)
-      if (this.currentFiltersForFilterType(filterIds).length < filterIds.length) {
+      if (this.currentFiltersOptionsForFilterGroup(filterIds).length < filterIds.length) {
         this.$emit('change', [...new Set([...this.currentFilters, ...filterIds])])
       } else {
         this.$emit(
@@ -121,16 +121,16 @@ export default {
   },
   data() {
     return {
-      hasFilterIcons: this.filterTypes
-        .map((type) => type.filters)
-        .reduce(function (memo, filters) {
-          filters.map(function (filter) {
-            memo[filter.name] = MappedIconList.iconNameMapping[filter.name]
+      hasFilterIcons: this.filterGroups
+        .map((fGroup) => fGroup.filter_options)
+        .reduce(function (memo, filterOptions) {
+          filterOptions.map(function (fOption) {
+            memo[fOption.name] = MappedIconList.iconNameMapping[fOption.name]
           })
           return memo
         }, {}),
       allFilters: [].concat(
-        ...this.filterTypes.map((fType) => fType.filters.map((filter) => filter.id))
+        ...this.filterGroups.map((fGroup) => fGroup.filter_options.map((fOption) => fOption.id))
       ),
     }
   },

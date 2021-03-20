@@ -8,7 +8,7 @@
         // EntryPoints.publicListings('#public-listings')
         EntryPoints.browse('#entry-point', {
             contributions: <%= raw json_escape(@contributions) %>,
-            filterTypes: <%= raw json_escape(@filter_types) %>
+            filterGroups: <%= raw json_escape(@filter_groups) %>
         });
     });
 </script>

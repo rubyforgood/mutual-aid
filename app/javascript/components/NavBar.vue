@@ -2,7 +2,7 @@
   <b-navbar fixed-top transparent shadow>
     <template slot="brand">
       <b-navbar-item href="/">
-        <img :src="logoUrl || $options.defaultLogo" alt="mutual-aid-app logo" height="300px">
+        <img :src="logoUrl || $options.defaultLogo" alt="mutual-aid-app logo" height="300px" />
       </b-navbar-item>
     </template>
 
@@ -16,7 +16,10 @@
       <b-navbar-item tag="div" v-if="visible('Feedback')">
         <FeedbackButton action="software_feedbacks/new">Feedback</FeedbackButton>
       </b-navbar-item>
-      <b-navbar-item href="/contributions" v-if="visible('Contributions')">Contributions</b-navbar-item>
+      <b-navbar-item href="/glossary" v-if="visible('Glossary')">Glossary</b-navbar-item>
+      <b-navbar-item href="/contributions" v-if="visible('Contributions')"
+        >Contributions</b-navbar-item
+      >
       <b-navbar-item href="/matches" v-if="visible('Matches')">Matches</b-navbar-item>
       <b-navbar-item href="/admin" v-if="visible('Admin')">Admin</b-navbar-item>
       <b-navbar-item tag="div" v-if="visible('Login')">
@@ -36,12 +39,12 @@ import {FeedbackButton} from 'components/forms'
 
 export default {
   props: {
-    logoUrl: { type: String },
-    visibleButtons: { type: Array, default: [] },
+    logoUrl: {type: String},
+    visibleButtons: {type: Array, default: []},
   },
   components: {
     DeleteButton,
-    FeedbackButton
+    FeedbackButton,
   },
   methods: {
     visible(button) {
@@ -52,4 +55,3 @@ export default {
   defaultLogo: logo,
 }
 </script>
-

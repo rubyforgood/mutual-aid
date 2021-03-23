@@ -25,4 +25,5 @@ class ContributionBlueprint < Blueprinter::Base
   field :match_path do |contribution, options|
     options[:match_path]&.call(contribution.id)
   end
+  association :person, blueprint: PersonBlueprint
 end

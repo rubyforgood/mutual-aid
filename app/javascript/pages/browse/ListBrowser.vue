@@ -8,6 +8,7 @@
         <th>Service Area</th>
         <th>Connect</th>
         <th>View</th>
+        <th>Contributor Name</th>
 <!--        <th>Details</th>-->
       </tr>
       <tr v-for="contribution in contributions" :key="contribution.id">
@@ -32,6 +33,7 @@
             <a :href="contribution.view_path" class="button icon-list is-primary"><span class=""> View</span></a>
           </div>
         </td>
+        <td>{{ contribution.person.name.split(" (")[0] }}</td>
 <!--        <td>{{ contribution.title }}</td>-->
       </tr>
     </table>

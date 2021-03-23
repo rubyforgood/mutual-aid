@@ -17,20 +17,8 @@ class CommunityResourcesController < ApplicationController
   end
 
   def create
-    location_params = params['community_resource']['location']
-
-    location = Location.where(
-      street_address: location_params['street_address'],
-      city: location_params['city'],
-      state: location_params['state'],
-      zip: location_params['zip'],
-      location_type_id: location_params['location_type_id']
-    ).first_or_create
-
-    community_resource.location = location
-    community_resource.update permitted_attributes(community_resource)
-
-    if community_resource.save
+    @community_resource = authorize CommunityResourceForm.build params[:community_resource]
+    if @community_resource.save
       redirect_after_create
     else
       render :new

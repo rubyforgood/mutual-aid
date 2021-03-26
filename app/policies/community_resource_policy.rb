@@ -4,6 +4,7 @@ class CommunityResourcePolicy < ApplicationPolicy
   def change?; can_admin? end
   def delete?; can_admin? end
 
+  # todo now: do we need this now that we're using CommunityResourceForm
   def permitted_attributes
     [
       :description,

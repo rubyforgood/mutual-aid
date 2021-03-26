@@ -7,7 +7,7 @@ class CommunityResource < ApplicationRecord
 
   acts_as_taggable_on :tags
 
-  belongs_to :location, optional: true, validate: true # todo now: test this change
+  belongs_to :location, optional: true, validate: true
   belongs_to :organization, optional: true # FIXME: - should this be optional?
 
   has_many :matches_as_receiver

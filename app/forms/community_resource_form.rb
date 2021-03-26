@@ -5,10 +5,13 @@ class CommunityResourceForm < BaseForm
   string :name
   date   :publish_from
 
+  # todo now: why the difference between location and org? probably org uses accepts_nested_attributes?
   hash :organization_attributes do
     string :id, default: nil
     string :name
   end
+
+  hash :location, strip: false, default: {}
 
   with_options default: nil do
     integer :id
@@ -20,9 +23,6 @@ class CommunityResourceForm < BaseForm
     string  :youtube_identifier
     array   :service_area_ids
     array   :tag_list
-
-    # todo now: rename
-    hash :location, strip: false
   end
 
   def execute

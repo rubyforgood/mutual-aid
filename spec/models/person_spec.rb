@@ -19,8 +19,34 @@ RSpec.describe Person, type: :model do
 
       it 'generates an error on the correct field' do
         person.valid?
-        expect(person.errors.messages).to eq({phone: ["can't be blank"]})
+        expect(person.errors.messages).to eq({ phone: ["can't be blank"] })
       end
+    end
+  end
+
+  describe "#anonymized_name_and_email" do
+    it "returns blank if name and email are empty" do
+      person = build(:person, name: nil, email: nil)
+
+      expect(person.anonymized_name_and_email).to be_blank
+    end
+
+    it "returns just anonymized name when only name is present" do
+      person = build(:person, name: "John Doe", email: nil)
+
+      expect(person.anonymized_name_and_email).to eq("J*** D**")
+    end
+
+    it "returns just anonymized email when only email is present" do
+      person = build(:person, name: nil, email: "john.doe@example.io")
+
+      expect(person.anonymized_name_and_email).to eq("********@*******.io")
+    end
+
+    it "returns anonymized name and email" do
+      person = build(:person, name: "John Doe", email: "john.doe@example.io")
+
+      expect(person.anonymized_name_and_email).to eq("J*** D** ********@*******.io")
     end
   end
 end

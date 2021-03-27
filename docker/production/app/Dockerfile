@@ -1,4 +1,4 @@
-FROM ruby:2.7.0-alpine
+FROM ruby:2.7.2-alpine
 
 RUN bundle config --global frozen 1
 WORKDIR /usr/src/app
@@ -16,10 +16,6 @@ ENV RAILS_ENV='' \
     POSTGRES_USER='postgres' \
     POSTGRES_DB='' \
     SECRET_KEY_BASE='' \
-    EMAIL_PORT='' \
-    EMAIL_HOST='' \
-    EMAIL_FROM_ADDR='' \
-    EMAIL_DEFAULT_URL_HOST=''
 
 COPY . ./
 

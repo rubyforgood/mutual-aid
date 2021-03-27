@@ -1,0 +1,22 @@
+<% match_assn_name = contribution.ask? ? "matches_as_receiver" : "matches_as_provider" %>
+<% matches_for_this_contribution = contribution.public_send(match_assn_name) %>
+
+<% if matches_for_this_contribution.any? %>
+  <strong>This <%= contribution.type %> has been Matched:</strong>
+  <br>
+  <% matches_for_this_contribution.order(created_at: :desc).each do |match| %>
+    <%= edit_button(match, "#{shorthand_display(match.created_at)} #{match.category.upcase}: #{match.short_name}", nil, nil, nil, {}, "View Match") %>
+    <br>
+  <% end %>
+  <br><br>
+<% elsif contribution.ask? %>
+  <%= render "layouts/view_add_new_button", button_text: "Add tentative Match", table_name: "matches", new_params: "receiver_id=#{contribution.id}&receiver_type=Ask" %>
+  <%= link_to("Find Match [TBD]",
+              match_listing_path(contribution, receiver_id: contribution.id, receiver_type: "Ask"),
+              class: "button") if params[:admin] %>
+<% elsif contribution.offer? %>
+  <%= render "layouts/view_add_new_button", button_text: "Add tentative Match", table_name: "matches", new_params: "provider_id=#{contribution.id}&provider_type=Offer" %>
+  <%= link_to("Find Match [TBD]",
+              match_listing_path(contribution, provider_id: contribution.id, provider_type: "Offer"),
+              class: "button") if params[:admin] %>
+<% end %>

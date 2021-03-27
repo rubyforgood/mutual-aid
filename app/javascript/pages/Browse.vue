@@ -7,13 +7,25 @@
       </p>
     </div>
 
-    <section class="section columns">
-      <section class="column is-one-quarter">
-        <BrowserSelector :browser="browser" @clicked="browser = $event" />
-
-        <Filters :filterTypes="filterTypes" v-model="activeFilters" />
+    <section>
+      <section class="mt-3 mb-3">
+        <div class="card">
+          <div class="card-content">
+            <Filters :filterTypes="filterTypes" v-model="activeFilters" />
+          </div>
+        </div>
       </section>
-      <component :is="browser" :contributions="activeContributions" class="column" />
+      <section>
+        <BrowserSelector :browser="browser" @clicked="browser = $event" />
+      </section>
+      <component :is="browser" :contributions="activeContributions" class="row" accessToken="pk.eyJ1IjoibXV0dWFsLWFpZC1hcHAiLCJhIjoiY2tmZTBvd3UwMDBhbTJ4cDlic2JmMWZoaiJ9.rWscBjdl1SMT5N0yekIJYg"/>
+      <section class="has-text-centered mt-2">
+        <h2 class="is-size-4 mb-1">Can't find what you're looking for?</h2>
+        <div>
+          <a href="/asks/new" class="button is-primary">Submit an Ask</a>
+          <a href="/offers/new" class="button is-primary">Submit an Offer</a>
+        </div>
+      </section>
     </section>
   </div>
 </template>
@@ -23,6 +35,7 @@ import BrowserSelector from './browse/BrowserSelector'
 import Filters from './browse/Filters'
 import ListBrowser from './browse/ListBrowser'
 import TileBrowser from './browse/TileBrowser'
+import MapBrowser from './browse/MapBrowser'
 import ContributionFetcher from './browse/ContributionFetcher'
 
 export default {
@@ -31,6 +44,7 @@ export default {
     Filters,
     ListBrowser,
     TileBrowser,
+    MapBrowser,
   },
   props: {
     contributions: {type: Array},
@@ -76,3 +90,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+  a {
+    margin: 0 0.5em;
+  }
+</style>

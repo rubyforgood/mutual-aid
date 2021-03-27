@@ -1,5 +1,7 @@
-class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy, :match, :match_confirm]
+# frozen_string_literal: true
+
+class ListingsController < AdminController
+  before_action :set_listing, only: %i[show edit update destroy match match_confirm]
 
   def index
     @listings = Listing.all
@@ -46,15 +48,14 @@ class ListingsController < ApplicationController
     match_polymorphic_params = listing_type == Ask ? { receiver: @listing } : { provider: @listing }
     @match = Match.new
     @match.update(match_polymorphic_params)
-    @possible_providers = Listing.offers # TODO - get this to be a filtered list -- need to add logic by which to match
+    @possible_providers = Listing.offers # TODO: - get this to be a filtered list -- need to add logic by which to match
   end
 
   def match_confirm
-    @match = Match.first # TODO - implement match id here
+    @match = Match.first # TODO: - implement match id here
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @listing = Listing.new
@@ -68,7 +69,7 @@ class ListingsController < ApplicationController
   def create
     @listing = Listing.new(listing_params)
     if @listing.save
-      redirect_to contribution_thank_you_path, notice: 'Listing was successfully created.'
+      redirect_to thank_you_path, notice: 'Listing was successfully created.'
     else
       set_form_dropdowns
       render :new

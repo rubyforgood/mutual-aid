@@ -1,97 +1,166 @@
 {
-  "_comment": "This is useful seed data. It could go into `spec/fixtures` at some point. For now, we're using it as examples to develop against, so I've put it in `lib`",
-  "contributions": [
-    {
-      "id": 1,
-      "contribution_type": {"id": 1, "name": "ask"},
-      "category_tags": [{"id": 1, "name": "Care"}],
-      "availability": [
-        {"id": 1, "name": "AM"},
-        {"id": 2, "name": "PM"},
-        {"id": 3, "name": "EVE"}
-      ],
-      "urgency": {"id": 1, "name": "Within 1-2 days"},
-      "publish_until": "2021-10-11",
-      "publish_until_humanized": "this year",
-      "created_at": "2020-04-11T02:15:50.499Z",
-      "service_area": {"id": 1, "name": "East Bay"},
-      "map_location": "44.5,-85.1",
-      "title": "Look after my kid",
-      "description": "Lorem Ipsum is the name of my child. They are a very nice child. You won't have much trouble, but they are young and need the help",
-      "contact_types": [{"id": 1, "name": "text"}]
+  "_comment": "This is useful seed data copied from a development environment. Feel free to update it as the API changes.",
+  "_commentTODO": "TODO: move into the spec folder",
+  "contributions": [{
+    "id": 6,
+    "category_tags": [{
+        "id": 14,
+        "name": "accessing healthcare"
+    }],
+    "contact_types": [{
+        "id": 3,
+        "name": "Email"
+    }],
+    "contribution_type": "Offer",
+    "created_at": 1607039850483.441,
+    "description": null,
+    "inexhaustible": false,
+    "location": null,
+    "match_path": null,
+    "name": "Offer: accessing healthcare (Dr. Jill Koss)",
+    "profile_path": null,
+    "respond_path": "/contributions/3/respond?locale=en",
+    "service_area": {
+        "id": 6,
+        "description": null,
+        "location": {
+            "id": 6,
+            "city": null,
+            "county": null,
+            "neighborhood": null,
+            "region": null,
+            "state": null,
+            "street_address": null,
+            "zip": null
+        },
+        "name": "University Acres"
     },
-    {
-      "id": 2,
-      "category_tags": [
-        {"id": 1, "name": "Care"},
-        {"id": 2, "name": "Meals"}
-      ],
-      "availability": [
-        {"id": 1, "name": "AM"},
-        {"id": 2, "name": "PM"},
-        {"id": 3, "name": "EVE"}
-      ],
-      "urgency": {"id": 3, "name": "Any Time"},
-      "publish_until": "2021-01-01",
-      "publish_until_humanized": "this week",
-      "service_area": null,
-      "map_location": null,
-      "contribution_type": {"id": 4, "name": "community resource"},
-      "contact_types": [
-        {"id": 2, "name": "call"},
-        {"id": 3, "name": "email"}
-      ]
+    "title": null,
+    "urgency": {
+        "id": 1,
+        "name": "Within 1-2 days"
     },
-    {
-      "id": 3,
-      "category_tags": [{"id": 3, "name": "Housework"}],
-      "availability": [{"id": 3, "name": "EVE"}],
-      "urgency": {"id": 3, "name": "I can wait a week"},
-      "created_at": "2020-04-11T04:17:31.288Z",
-      "publish_until": "2021-09-11",
-      "service_area": {"id": 1, "name": "East Bay"},
-      "contribution_type": {"id": 4, "name": "ask"},
-      "title": "bathroom help, like cleaning specifically if that's okay",
-      "description": "I'm afraid I'll fall and hurt my hip again. Can someone help me clean?",
-      "contact_types": [
-        {"id": 2, "name": "call"},
-        {"id": 3, "name": "email"}
-      ]
+    "view_path": "/contributions/6?locale=en"
+}, {
+    "id": 7,
+    "category_tags": [{
+        "id": 10,
+        "name": "services"
+    }],
+    "contact_types": [{
+        "id": 1,
+        "name": "Call"
+    }],
+    "contribution_type": "Offer",
+    "created_at": 1607039850532.4119,
+    "description": null,
+    "inexhaustible": false,
+    "location": null,
+    "match_path": null,
+    "name": "Offer: services (Romeo Leannon)",
+    "profile_path": null,
+    "respond_path": "/contributions/4/respond?locale=en",
+    "service_area": {
+        "id": 3,
+        "description": null,
+        "location": {
+            "id": 3,
+            "city": null,
+            "county": null,
+            "neighborhood": null,
+            "region": null,
+            "state": null,
+            "street_address": null,
+            "zip": null
+        },
+        "name": "Eagle Estates"
     },
-    {
-      "id": 4,
-      "category_tags": [{"id": 3, "name": "Housework"}],
-      "availability": [{"id": 3, "name": "EVE"}],
-      "urgency": {"id": 3, "name": "I can wait a week"},
-      "created_at": "2020-04-11T04:17:31.288Z",
-      "publish_until": "2021-09-11",
-      "service_area": {"id": 1, "name": "East Bay"},
-      "contribution_type": {"id": 4, "name": "ask"},
-      "title": "bathroom help, like cleaning specifically if that's okay",
-      "description": "I'm afraid I'll fall and hurt my hip again. Can someone help me clean?",
-      "contact_types": [
-        {"id": 2, "name": "call"},
-        {"id": 3, "name": "email"}
-      ]
+    "title": null,
+    "urgency": {
+        "id": 4,
+        "name": "Anytime"
     },
-    {
-      "id": 5,
-      "contribution_type": {"id": 1, "name": "ask"},
-      "category_tags": [{"id": 1, "name": "Care"}],
-      "availability": [
-        {"id": 1, "name": "AM"},
-        {"id": 2, "name": "PM"},
-        {"id": 3, "name": "EVE"}
-      ],
-      "urgency": {"id": 1, "name": "Within 1-2 days"},
-      "publish_until": "2021-10-11",
-      "publish_until_humanized": "this year",
-      "created_at": "2020-04-11T02:15:50.499Z",
-      "service_area": {"id": 1, "name": "East Bay"},
-      "map_location": "44.5,-85.1",
-      "title": "Look after my kid",
-      "description": "Lorem Ipsum is the name of my child. They are a very nice child. You won't have much trouble, but they are young and need the help",
-      "contact_types": [{"id": 1, "name": "text"}]
-    }
+    "view_path": "/contributions/7?locale=en"
+}, {
+    "id": 8,
+    "category_tags": [{
+        "id": 23,
+        "name": "emotional"
+    }],
+    "contact_types": [{
+        "id": 1,
+        "name": "Call"
+    }],
+    "contribution_type": "Offer",
+    "created_at": 1607039850580.138,
+    "description": null,
+    "inexhaustible": false,
+    "location": null,
+    "match_path": null,
+    "name": "Offer: emotional (Romeo Leannon)",
+    "profile_path": null,
+    "respond_path": "/contributions/5/respond?locale=en",
+    "service_area": {
+        "id": 2,
+        "description": null,
+        "location": {
+            "id": 2,
+            "city": null,
+            "county": null,
+            "neighborhood": null,
+            "region": null,
+            "state": null,
+            "street_address": null,
+            "zip": null
+        },
+        "name": "Eagle Court"
+    },
+    "title": null,
+    "urgency": {
+        "id": 1,
+        "name": "Within 1-2 days"
+    },
+    "view_path": "/contributions/8?locale=en"
+}, {
+    "id": 9,
+    "category_tags": [{
+        "id": 11,
+        "name": "tech support"
+    }],
+    "contact_types": [{
+        "id": 1,
+        "name": "Call"
+    }],
+    "contribution_type": "Offer",
+    "created_at": 1607039850634.96,
+    "description": null,
+    "inexhaustible": false,
+    "location": null,
+    "match_path": null,
+    "name": "Offer: tech support (Romeo Leannon)",
+    "profile_path": null,
+    "respond_path": "/contributions/6/respond?locale=en",
+    "service_area": {
+        "id": 4,
+        "description": null,
+        "location": {
+            "id": 4,
+            "city": null,
+            "county": null,
+            "neighborhood": null,
+            "region": null,
+            "state": null,
+            "street_address": null,
+            "zip": null
+        },
+        "name": "Park Village"
+    },
+    "title": null,
+    "urgency": {
+        "id": 1,
+        "name": "Within 1-2 days"
+    },
+    "view_path": "/contributions/9?locale=en"
+}
   ]
 }

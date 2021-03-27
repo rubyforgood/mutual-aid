@@ -1,15 +1,25 @@
-<div class="title is-3">Profile</div>
+<div class="title is-3">Account Settings</div>
 <div class="title is-5"><%= @user.person&.name %></div>
 
 <p>
-  <strong>Name:</strong>
-  <%= @user.person&.name %>
+  <strong>E-mail:</strong>
+  <%= @user.email %>
 </p>
 
 <p>
   <strong>Permission level:</strong>
-  <%= "[NOT IMPLEMENTED YET]" %>
+  <%= @user.role %>
 </p>
 
-<%= edit_button(@user.person, @user.person.name) %>
+<% if @user.person %>
+<p>
+  <strong>Name:</strong>
+  <%= @user.person&.name %>
+</p>
+<%= edit_button(@user.person, @user.email) if @user.person %>
+<% else %>
+  <% # Add link to create a new profile for the user %>
+<% end %>
+
+
 <%= link_to 'Users index', users_path(@user) %>

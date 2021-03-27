@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module IndexActionButtons
   def clear_search_button(path=nil)
     if path

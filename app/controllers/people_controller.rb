@@ -1,25 +1,35 @@
+# frozen_string_literal: true
+
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: %i[show edit update destroy]
+
+  include Pagination
 
   def index
-    @people = Person.includes(:user, :preferred_contact_method, :location, :service_area).
-                     references(:user, :preferred_contact_method, :location, :service_area)
+    @pagy, @people = pagy(
+      policy_scope(Person).includes(:user, :preferred_contact_method, :location, :service_area)
+             .references(:user, :preferred_contact_method, :location, :service_area)
+    )
   end
 
   def show
+    authorize @person
+
     @receiver_matches = @person.matches_as_receiver
     @provider_matches = @person.matches_as_provider
-    receiver_match_ids = @receiver_matches.pluck("matches.id")
-    provider_match_ids = @provider_matches.pluck("matches.id")
+    receiver_match_ids = @receiver_matches.pluck('matches.id')
+    provider_match_ids = @provider_matches.pluck('matches.id')
     @match_ids = receiver_match_ids + provider_match_ids
   end
 
   def new
     @person = Person.new
+    authorize @person
     set_form_dropdowns
   end
 
   def edit
+    authorize @person
     unless @person.location
       @person.location = Location.new
     end
@@ -28,6 +38,8 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(person_params)
+    @person.user ||= current_user
+    authorize @person
 
     if @person.save
       redirect_to people_path, notice: 'Person was successfully created.'
@@ -38,6 +50,7 @@ class PeopleController < ApplicationController
   end
 
   def update
+    authorize @person
     if @person.update(person_params)
       redirect_to people_path, notice: 'Person was successfully updated.'
     else
@@ -47,11 +60,13 @@ class PeopleController < ApplicationController
   end
 
   def destroy
+    authorize @person
     @person.destroy
     redirect_to people_url, notice: 'Person was successfully destroyed.'
   end
 
   private
+
     def set_person
       @person = Person.find(params[:id])
     end
@@ -61,7 +76,7 @@ class PeopleController < ApplicationController
       enabled_locales = SystemLocale.where(publish_in_dropdowns: true)
       @system_locales = enabled_locales.pluck(:locale_name, :locale)
       @preferred_locale = enabled_locales.where(locale: @person.preferred_locale).first&.locale
-      @preferred_contact_timeframes = [["Morning", "AM"], ["Afternoon", "PM"], ["Evening", "EVE"]]
+      @preferred_contact_timeframes = [['Morning', 'AM'], ['Afternoon', 'PM'], ['Evening', 'EVE']]
     end
 
     def person_params
@@ -81,17 +96,17 @@ class PeopleController < ApplicationController
           :preferred_locale,
           :preferred_contact_timeframe,
           :preferred_contact_method_id,
-          location_attributes: [
-              :id,
-              :location_type_id,
-              :street_address,
-              :city,
-              :state,
-              :zip,
-              :county,
-              :region,
-              :neighborhood,
-              :_destroy,
+          location_attributes: %i[
+              id
+              location_type_id
+              street_address
+              city
+              state
+              zip
+              county
+              region
+              neighborhood
+              _destroy
           ],
       )
     end

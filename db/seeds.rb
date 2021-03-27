@@ -5,6 +5,7 @@
 User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(
   password: "#{ENV["SYSTEM_PASSWORD"]}",
   confirmed_at: Time.current,
+  role: "sys_admin"
 )
 
 # create categories -- these are then editable by admin users

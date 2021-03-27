@@ -1,7 +1,7 @@
-class SubmissionResponseImportsController < ApplicationController
+# frozen_string_literal: true
 
-  def new
-  end
+class SubmissionResponseImportsController < AdminController
+  def new; end
 
   def create
     uploaded_file = params[:submission_response_import][:file]
@@ -13,6 +13,6 @@ class SubmissionResponseImportsController < ApplicationController
     )
 
     flash[:notice] = 'Your file has been uploaded and is being imported'
-    redirect_to landing_page_admin_path
+    redirect_to admin_dashboard_path
   end
 end

@@ -17,8 +17,8 @@ postgresql_service_state: started
 postgresql_service_enabled: true
 postgres_users_no_log: false
 ruby_install_from_source: true
-ruby_download_url: https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.0.tar.bz2
-ruby_version: 2.7.0
+ruby_download_url: https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.2.tar.bz2
+ruby_version: 2.7.2
 nodejs_npm_global_packages:
   - name: yarn
 npm_config_prefix: "/home/{{ ansible_ssh_user}}/npm"

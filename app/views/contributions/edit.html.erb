@@ -1,0 +1,18 @@
+<h1 class="title is-3">
+  <%= "Update #{contribution.name}" %>
+</h1>
+
+<%= simple_form_for contribution, url: contribution_path(contribution) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title, label: "Summary/title (45 chars)", input_html: { maxlength: 45 } %>
+    <%= f.input :description,
+                label: "Notes (for THIS CATEGORY only! create a new <a href='/asks/new?person_id=#{contribution.person&.id}'> Ask
+                  </a> or <a href='/offers/new?person_id=#{contribution.person&.id}'> Offer
+                  </a>, as needed, but save this form first!)".html_safe %>
+    <%= f.input :inexhaustible, as: :radio_buttons %>
+  </div>
+
+  <%= f.button :submit, "Update #{contribution.type}", class: "button mt-1 is-primary" %>
+<% end %>

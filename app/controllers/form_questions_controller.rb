@@ -1,12 +1,13 @@
-class FormQuestionsController < ApplicationController
-  before_action :set_form_question, only: [:show, :edit, :update, :destroy]
+# frozen_string_literal: true
+
+class FormQuestionsController < AdminController
+  before_action :set_form_question, only: %i[show edit update destroy]
 
   def index
     @form_questions = FormQuestion.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @form_question = FormQuestion.new
@@ -46,6 +47,7 @@ class FormQuestionsController < ApplicationController
   end
 
   private
+
   def set_form_question
     @form_question = FormQuestion.find(params[:id])
   end

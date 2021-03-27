@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubmissionForm < BaseForm
   hash :responses_attributes, strip: false, default: {}
 
@@ -8,7 +10,7 @@ class SubmissionForm < BaseForm
     hash    :location_attributes,  strip: false
     hash    :person_attributes,    strip: false
     string  :form_name
-    string  :privacy_level_requested  # fixme: not submitted as yet
+    string  :privacy_level_requested  # FIXME: not submitted as yet
   end
 
   def execute
@@ -42,7 +44,7 @@ class SubmissionForm < BaseForm
 
     def build_submission
       submission.tap do |submission|
-        # todo: this has to be smarter if we want to support partial updates
+        # TODO: this has to be smarter if we want to support partial updates
         submission.attributes = submission_attributes
       end
     end

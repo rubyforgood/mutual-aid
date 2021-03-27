@@ -1,0 +1,27 @@
+<section>
+  <%= content_tag(:h1, "Claim This #{contribution.type}", class: "title") %>
+  <div class="box">
+    <p class='block'>
+      The information you enter below will be sent to the other party.
+      Remember to protect yourself and never provide sensitive personal details to strangers.
+    </p>
+    <p>
+      Your email, <span class="is-size-5 is-family-monospace has-text-weight-bold"><%= email %></span>, will also be shared with them.
+    </p>
+    <p class='block'>
+      If you'd like to use a different email address, you can
+      <%= link_to 'change it here', edit_user_registration_path %>.
+    </p>
+
+    <%= simple_form_for :claim, url: contribution_claims_path(contribution) do |f| %>
+      <%= f.input :peer_alias, as: :string, label: 'Alias', required: true,
+            placeholder: "Your alias, handle or name to include in the message" %>
+      <%= f.input :message, as: :text, required: true,
+            placeholder: "Add some introductory text here.
+            Please only share information that you are comfortable
+            sharing to facilitate this conversation.".squish %>
+      <%= f.button :submit, "I understand, let's go!", class: "is-primary" %>
+    <% end %>
+  </div>
+  <%= link_to "<i class=\"fas fa-arrow-left\"></i> Nevermind, I'm not ready".html_safe, :back %>
+</section>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Person < ApplicationRecord
   acts_as_taggable_on :tags
 
@@ -10,8 +12,8 @@ class Person < ApplicationRecord
   has_many :offers, inverse_of: :person
   has_many :listings
   has_many :matches, through: :listings
-  has_many :matches_as_receiver, through: :asks, class_name: "Match", foreign_key: "receiver_id"
-  has_many :matches_as_provider, through: :offers, class_name: "Match", foreign_key: "provider_id"
+  has_many :matches_as_receiver, through: :asks, class_name: 'Match', foreign_key: 'receiver_id'
+  has_many :matches_as_provider, through: :offers, class_name: 'Match', foreign_key: 'provider_id'
 
   has_many :communication_logs
   has_many :donations
@@ -31,7 +33,7 @@ class Person < ApplicationRecord
   end
 
   def profile_photo(fest_code)
-    "missing.png"
+    'missing.png'
   end
 
   def match_history
@@ -43,7 +45,7 @@ class Person < ApplicationRecord
   end
 
   def all_tags_to_s
-    all_tags_unique.join(", ")
+    all_tags_unique.join(', ')
   end
 
   def ask_tag_list
@@ -54,9 +56,49 @@ class Person < ApplicationRecord
     offers.any? ? offers&.map(&:all_tags_unique) : []
   end
 
+  def anonymized_name_and_email
+    "#{Anonymize.name(name)} #{Anonymize.email(email)}".strip
+  end
+
   private def preferred_contact_method_present!
     return unless preferred_contact_method
     field = preferred_contact_method.field
     errors.add(field, :blank) if self[field].blank?
   end
 end
+
+# == Schema Information
+#
+# Table name: people
+#
+#  id                          :bigint           not null, primary key
+#  email                       :string
+#  email_2                     :string
+#  monthly_donation_amount_max :float            default(0.0)
+#  monthly_matches_max         :integer          default(0)
+#  name                        :string
+#  notes                       :text
+#  phone                       :string
+#  phone_2                     :string
+#  preferred_contact_timeframe :string
+#  preferred_locale            :string           default("en"), not null
+#  skills                      :text
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  location_id                 :bigint
+#  preferred_contact_method_id :integer
+#  service_area_id             :bigint
+#  user_id                     :bigint
+#
+# Indexes
+#
+#  index_people_on_location_id      (location_id)
+#  index_people_on_service_area_id  (service_area_id)
+#  index_people_on_user_id          (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (location_id => locations.id)
+#  fk_rails_...  (service_area_id => service_areas.id)
+#  fk_rails_...  (user_id => users.id)
+#

@@ -7,6 +7,12 @@
 @import './yearbook';  // TODO: remove this once listings/new is refactored
 @import './listings';  // TODO: remove this once listings/new is refactored
 
+@import './custom_text';
+
+@import './mapbox-gl';
+@import './maps';
+@import "./actiontext.scss";
+
  // TODO: use has-text-centered instead
 .text-center {
   text-align: center;

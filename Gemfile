@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '2.7.2'
 
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 
@@ -27,13 +27,16 @@ gem 'devise'
 gem 'faker' # need this in prod for demo seeds to work
 gem 'jbuilder', '~> 2.7'
 gem 'mobility', '~> 0.8.9'
+gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.0'
+gem 'pundit'
 gem 'rack-timeout'
 gem 'reform-rails'
+gem 'rubocop-rails'
 gem 'sendgrid-ruby'
 gem 'simple_form'
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -47,12 +50,13 @@ end
 group :test do
   # an XML formatter is required for fancier CircleCI results
   gem 'rspec_junit_formatter'
+  gem 'pundit-matchers'
 end
 
 group :development do
   gem 'annotate'
-  gem 'guard-rspec', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rerun'
   gem 'spring'
   gem 'spring-commands-rspec', require: false
   gem 'spring-watcher-listen', '~> 2.0.0'

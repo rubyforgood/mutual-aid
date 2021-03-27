@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -54,25 +56,6 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "mutualaid_production"
 
-  config.action_mailer.perform_caching = false
-
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: ENV['SYSTEM_HOST_NAME'] }
-  config.action_mailer.smtp_settings = {
-      address:              ENV['SMTP_ADDRESS'],
-      port:                 "#{ENV['SMTP_PORT'] || 587}".to_i,
-      domain:               ENV['SYSTEM_HOST_NAME'],
-      user_name:            ENV['SMTP_USERNAME'],
-      password:             ENV['SMTP_PASSWORD'],
-      authentication:       'plain',
-      enable_starttls_auto: true
-  }
-
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -87,7 +70,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
@@ -95,6 +78,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Set default mailer url
+  config.action_mailer.default_url_options = { host: ENV['SYSTEM_HOST_NAME'] }
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector

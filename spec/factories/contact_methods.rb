@@ -13,5 +13,27 @@ FactoryBot.define do
       name  { 'Email' }
       field { 'email' }
     end
+
+    factory :contact_method_phone do
+      name  { 'Phone' }
+      field { 'phone' }
+    end
   end
 end
+
+# == Schema Information
+#
+# Table name: contact_methods
+#
+#  id         :bigint           not null, primary key
+#  enabled    :boolean          default(TRUE), not null
+#  field      :string
+#  icon_class :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_contact_methods_on_enabled  (enabled)
+#

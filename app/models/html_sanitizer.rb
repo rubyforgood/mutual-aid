@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HtmlSanitizer
   def self.tags
     %w[a abbr b blockquote br cite code dd dfn div dl dt h1 h2 h3 h4 h5 h6 img
@@ -13,14 +15,10 @@ class HtmlSanitizer
     @string = string
   end
 
-  def sanitize_for_rails
-    return "" unless @string
+  def sanitize
+    return '' unless @string
     safe_list_sanitizer = Rails::Html::SafeListSanitizer.new
     safe_list_sanitizer.sanitize(@string,
                                  tags: self.class.tags, attributes: self.class.html_attributes).html_safe
-  end
-
-  def sanitize_for_vue
-    sanitize_for_rails.gsub(/"/, "\\\"").gsub(/'/, "\\'").gsub(/[\r\n]+/, "\\\n").html_safe
   end
 end

@@ -1,8 +1,17 @@
 // Import Bulma's core if needed for customizations
-// @import "bulma/sass/utilities/_all";
+@import "bulma/sass/utilities/_all";
+@import "bulma/sass/components/navbar";
 
 // Our customizations
 $input-placeholder-color: hsl(0, 0%, 86%); //has-text-grey-lighter
+
+.subnav {
+  .navbar-item {
+    &.is-active {
+      color: $navbar-item-hover-color;
+    }
+  }
+}
 
 
 @import "bulma/bulma";

@@ -33,7 +33,7 @@
         <td><%= show_button(submission.person.communication_logs.last, "Autoemail", "fa fa-envelope") if submission.person&.communication_logs&.any? %></td>
         <td>
           <% submission.listings.each do |listing| %>
-            <%= link_to("Respond", respond_contribution_path(listing, contribution_type: listing.type), class: "button") %>
+            <%= link_to("Respond", contribution_path(listing, contribution_type: listing.type), class: "button") %>
           <% end %>
         </td>
         <td>
@@ -52,4 +52,4 @@
   </table>
 </div>
 <br><br>
-<%= link_to "Admin home", landing_page_admin_path %>
+<%= link_to "Admin home", admin_dashboard_path %>

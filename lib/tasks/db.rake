@@ -1,28 +1,27 @@
+# frozen_string_literal: true
+
 require 'csv'
 
-desc "Extra db functions: stats_check, reset db with seeds, import csv and seed data"
+desc 'Extra db functions: stats_check, reset db with seeds, import csv and seed data'
 
 namespace :db do
 
-  task :rebuild_and_seed_dev => ['db:drop',
-                                 'db:create',
+  task :rebuild_and_seed_dev => ['db:reset',
                                  'db:migrate',
-                                 'db:seed',
                                  'db:import_all_seeds',
                                  'db:stats_check']
 
-  task :rebuild_and_seed => ['db:drop',
-                             'db:create',
+  task :rebuild_and_seed => ['db:reset',
                              'db:migrate',
                              'db:seed',
                              'db:stats_check']
 
   task :recreate_all_seeds => ['db:truncate_tables',
-                               'db:seed',
                                'db:import_all_seeds',
                                'db:stats_check']
 
-  task :import_all_seeds => ['db:import_dev_seeds',
+  task :import_all_seeds => ['db:seed',
+                             'db:import_dev_seeds',
                              'db:import_submission_response_seeds',
                              'db:import_user_seeds',
                              'db:import_custom_form_question_seeds',

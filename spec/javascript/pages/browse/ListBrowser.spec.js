@@ -1,16 +1,36 @@
-import {assert} from 'chai'
-import {mount} from '@vue/test-utils'
+import {createLocalVue, shallowMount} from '@vue/test-utils'
+import {configure} from 'vue_config'
 import ListBrowser from 'pages/browse/ListBrowser'
 import testData from '../../../../lib/contributions.json'
 
 describe('ListBrowser', () => {
-  it('works with reasonable data', function () {
-    // TODO - get this working again!!!
-    // const wrapper = mount(ListBrowser, {
-    //   propsData: {
-    //     contributions: testData.contributions,
-    //   },
-    // })
-    // assert.match(wrapper.text(), /look after my kid/i)
+  def('contributions', testData)
+
+  def('wrapper', () => {
+    return shallowMount(ListBrowser, {
+      localVue: configure(createLocalVue()),
+      propsData: $contributions,
+    })
+  })
+
+  def('tableHeaders', () => $wrapper.findAll('th').wrappers)
+
+  describe('respond column', () => {
+    it('shows the column with typical data', function () {
+      assert.isTrue($tableHeaders.some(header => header.text() == 'View'))
+    })
+
+    describe('when contributions do not come with response urls', () => {
+      def('contributions', () => {
+        testData.contributions.map(contribution => {
+          contribution.view_path = ''
+          return contribution
+        })
+      })
+
+      it('hides the respond button', function() {
+        assert.isFalse($tableHeaders.some(header => header.text() == 'Respond'))
+      })
+    })
   })
 })

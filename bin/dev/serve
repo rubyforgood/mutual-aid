@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+services="${*:-email webpacker app}"
+
+docker-compose -f ./docker/development/docker-compose.yml up --build $services

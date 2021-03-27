@@ -10,10 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_153314) do
+ActiveRecord::Schema.define(version: 2021_02_26_012229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "announcements", force: :cascade do |t|
     t.string "name"
@@ -51,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_06_25_153314) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "delivery_status"
     t.string "subject"
-    t.bigint "created_by_id", default: 1, null: false
+    t.bigint "created_by_id"
     t.string "body"
     t.boolean "outbound", default: true, null: false
     t.bigint "delivery_method_id", null: false
@@ -60,6 +91,13 @@ ActiveRecord::Schema.define(version: 2020_06_25_153314) do
     t.index ["delivery_method_id"], name: "index_communication_logs_on_delivery_method_id"
     t.index ["match_id"], name: "index_communication_logs_on_match_id"
     t.index ["person_id"], name: "index_communication_logs_on_person_id"
+  end
+
+  create_table "community_resource_service_areas", force: :cascade do |t|
+    t.bigint "community_resource_id", null: false
+    t.bigint "service_area_id", null: false
+    t.index ["community_resource_id"], name: "index_community_resource_service_areas_on_community_resource_id"
+    t.index ["service_area_id"], name: "index_community_resource_service_areas_on_service_area_id"
   end
 
   create_table "community_resources", force: :cascade do |t|
@@ -445,6 +483,7 @@ ActiveRecord::Schema.define(version: 2020_06_25_153314) do
     t.string "confirmation_page_text_body"
     t.string "confirmation_page_text_link_header"
     t.string "confirmation_page_text_footer"
+    t.boolean "display_navbar", default: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -513,8 +552,11 @@ ActiveRecord::Schema.define(version: 2020_06_25_153314) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "communication_logs", "matches"
   add_foreign_key "communication_logs", "people"
+  add_foreign_key "community_resource_service_areas", "community_resources"
+  add_foreign_key "community_resource_service_areas", "service_areas"
   add_foreign_key "community_resources", "locations"
   add_foreign_key "community_resources", "organizations"
   add_foreign_key "community_resources", "service_areas"

@@ -3,8 +3,8 @@
   <div class="has-text-weight-bold"><%= contribution&.type %>:</div>
   <div>
     <%=
-      link_to(respond_contribution_path(contribution),
-              title: "Respond",
+      link_to(contribution_path(contribution),
+              title: "View",
               class: "button show-button title is-3") do
         "<span class='#{contribution.icon_class}'></span><span class='' style='padding-left: 0.25em'> #{contribution&.all_tags_to_s&.upcase}</span>".html_safe
       end

@@ -1,0 +1,2 @@
+class VolunteerAdminController < AdminController
+end

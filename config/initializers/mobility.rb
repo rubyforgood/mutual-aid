@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Mobility.configure do |config|
   # Sets the default backend to use in models. This can be overridden in models
   # by passing +backend: ...+ to +translates+.

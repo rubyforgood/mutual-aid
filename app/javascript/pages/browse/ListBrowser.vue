@@ -1,13 +1,13 @@
 <template>
   <div class="listBrowser">
-    <table class="table table-hover table-curved table-condensed is-hoverable">
+    <table class="table table-hover table-curved table-condensed is-hoverable is-fullwidth">
       <tr>
         <th>Type</th>
         <th>Categories</th>
         <th>Urgency</th>
         <th>Service Area</th>
         <th>Connect</th>
-        <th>Respond</th>
+        <th>View</th>
 <!--        <th>Details</th>-->
       </tr>
       <tr v-for="contribution in contributions" :key="contribution.id">
@@ -28,7 +28,9 @@
           <SingleIcon :iconType="contribution.contact_types[0].name" />
         </td>
         <td>
-          <a :href="contribution.respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
+          <div>
+            <a :href="contribution.view_path" class="button icon-list is-primary"><span class=""> View</span></a>
+          </div>
         </td>
 <!--        <td>{{ contribution.title }}</td>-->
       </tr>
@@ -50,14 +52,6 @@ export default {
     TagList,
     SingleIcon,
     MappedIconList,
-  },
-  computed: {
-    showUrgentIcon() {
-      return !(this.urgency && this.urgency.id > 1)
-    },
-    urgencyColor() {
-      return this.showUrgentIcon ? 'is-warning' : 'is-light is-warning'
-    },
   },
 }
 </script>

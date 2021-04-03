@@ -44,7 +44,8 @@
           <%= location_form.input :city %>
           <%= location_form.input :state, maxlength: 2 %>
           <%= location_form.input :zip, maxlength: 5 %>
-          <%= location_form.input :location_type, as: :select, collection: LocationType.order(:name), required: false %>
+          <%= location_form.input :location_type_id, as: :select, collection: LocationType.order(:name), required: false,
+                                  input_html: {name: 'community_resource[location][location_type]'} %>
         <% end %>
       </div>
     </div>

@@ -4,8 +4,8 @@ require 'spec_helper'
 
 RSpec.describe BaseForm do
   describe '#given_inputs' do
-    let(:form) do
-      Class.new(BaseForm) {
+    let(:form_class) do
+      Class.new(BaseForm) do
         string :string, default: nil
         date   :date, default: nil
 
@@ -16,10 +16,10 @@ RSpec.describe BaseForm do
         def self.model_name # needed for anonymous classes
           ActiveModel::Name.new(self, nil, "BaseFormSpec")
         end
-      }
+      end
     end
 
-    let(:result) { form.build params }
+    let(:result) { form_class.build params }
     let(:inputs) { result[0] }
     let(:given_inputs) { result[1] }
 
@@ -76,5 +76,37 @@ RSpec.describe BaseForm do
         expect(given_inputs).to be_empty
       end
     end
+  end
+
+  describe '.filter_keys' do
+    let(:form_class) do
+      Class.new(BaseForm) do
+        array :array
+        date  :date
+        hash  :raw_hash, strip: false
+        hash  :nested_hash do
+          date :nested_date
+          hash :doubly_nested_hash do
+            integer :id
+          end
+        end
+
+        def self.model_name # needed for anonymous classes
+          ActiveModel::Name.new(self, nil, "BaseFormSpec")
+        end
+      end
+    end
+
+    subject(:keys) { form_class.filter_keys }
+
+    it { is_expected.to eq [
+      :date,
+      array: [],
+      raw_hash: {},
+      nested_hash: [
+        :nested_date,
+        doubly_nested_hash: [:id],
+      ],
+    ]}
   end
 end

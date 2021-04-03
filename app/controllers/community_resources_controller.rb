@@ -17,20 +17,8 @@ class CommunityResourcesController < ApplicationController
   end
 
   def create
-    location_params = params['community_resource']['location']
-
-    location = Location.where(
-      street_address: location_params['street_address'],
-      city: location_params['city'],
-      state: location_params['state'],
-      zip: location_params['zip'],
-      location_type_id: location_params['location_type_id']
-    ).first_or_create
-
-    community_resource.location = location
-    community_resource.update permitted_attributes(community_resource)
-
-    if community_resource.save
+    @community_resource = authorize populate(CommunityResource.new)
+    if @community_resource.save
       redirect_after_create
     else
       render :new
@@ -38,7 +26,8 @@ class CommunityResourcesController < ApplicationController
   end
 
   def update
-    if community_resource.update(permitted_attributes(community_resource))
+    @community_resource = authorize populate(CommunityResource.find(params[:id]))
+    if @community_resource.save
       redirect_to community_resources_path, notice: 'Community resource was successfully updated.'
     else
       render :edit
@@ -52,8 +41,12 @@ class CommunityResourcesController < ApplicationController
 
   private
 
+    def populate(community_resource)
+      CommunityResourceForm.build permitted_attributes(community_resource).merge(id: params[:id])
+    end
+
     def community_resource
-      @community_resource ||= authorize(params[:id] ? CommunityResource.find(params[:id]) : CommunityResource.new)
+      @community_resource ||= authorize CommunityResource.find_or_new params[:id]
     end
 
     def available_tags

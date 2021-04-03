@@ -7,7 +7,7 @@ RSpec.describe CommunityResourceForm do
     publish_from: '1969-01-01',
     location: {
       city: 'Oakland',
-      location_type: LocationType.first,
+      location_type: LocationType.first.id,
     },
     organization_attributes: {
       name: 'Black Panther Party',
@@ -31,8 +31,13 @@ RSpec.describe CommunityResourceForm do
       expect(community_resource.location.city).to eq 'Oakland'
     end
 
-    context 'when location is omitted' do
-      before { params.delete :location }
+    context 'when location params are empty' do
+      before do
+        params[:location] = {
+          city: '',
+          location_type: '',
+        }
+      end
 
       it 'does not populate an associated location' do
         expect(community_resource.location).to be nil
@@ -83,9 +88,12 @@ RSpec.describe CommunityResourceForm do
 
     let(:community_resource) { CommunityResourceForm.build update_params }
 
-    it 'applies updated attributes' do
+    it 'applies updated attributes to the community resource' do
       expect(community_resource.name).to eq 'new name'
       expect(community_resource.description).to eq 'new description'
+    end
+
+    it 'applies updated attributes to nested models' do
       expect(community_resource.location.city).to eq 'new city'
       expect(community_resource.organization.name).to eq 'new org'
     end

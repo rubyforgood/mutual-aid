@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
-gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
+gem 'rails', '~> 6.0'
 
 # This should after rails but before any gems that might require it
 gem 'dotenv-rails', require: 'dotenv/rails-now'
@@ -32,7 +32,6 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.0'
 gem 'pundit'
 gem 'rack-timeout'
-gem 'reform-rails'
 gem 'rubocop-rails'
 gem 'sendgrid-ruby'
 gem 'simple_form'
@@ -55,7 +54,7 @@ end
 
 group :development do
   gem 'annotate'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '~> 3.0'
   gem 'rerun'
   gem 'spring'
   gem 'spring-commands-rspec', require: false

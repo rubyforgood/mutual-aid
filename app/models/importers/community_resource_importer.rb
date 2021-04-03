@@ -27,25 +27,22 @@ class Importers::CommunityResourceImporter < Importers::BaseImporter
       end
     end
 
-    # Have to filter resources in memory because mobility prevents the
-    # `name` attribute from being persisted to the `community_resources`
-    # table. This prevents us from querying CommunityResource records by
-    # their name using ActiveRecord.
-    resource = organization.community_resources.detect { |resource| resource.name == row["name"] }
-    if resource
-      # Add breaks after the description so that if we are updating this resource with other row data there are visible
-      # gaps between each description entry
-      resource.description += "\n\n#{row["description"]}"
-      resource.tag_list.add(row["category_name"])
+    community_resource = organization.community_resources.i18n.where(name: row["name"], publish_from: row["publish_from"])
+    if community_resource
+      community_resource.description = row["description"]
 
-      resource.save
+      row["category_name"].split(/,\s*/).each do |category|
+        community_resource.tag_list << category
+      end
+
+      community_resource.save
 
       # Resource exists so there's nothing else to update. Return early and move onto the new row.
       # This assumes nothing else needs to be updated for existing data.
       return
     end
 
-    resource = CommunityResource.create!(
+    community_resource = CommunityResource.create!(
         name: row["name"],
         website_url: row["website_url"],
         facebook_url: row["facebook_url"],
@@ -59,9 +56,11 @@ class Importers::CommunityResourceImporter < Importers::BaseImporter
         organization: organization
     )
 
-    resource.tag_list.add(row["category_name"])
+    row["category_name"].split(/,\s*/).each do |category|
+      community_resource.tag_list << category
+    end
 
-    resource.location = Location.create! do |location|
+    community_resource.location = Location.create! do |location|
       location.street_address = row["street"]
       location.city = row["city"]
       location.state = row["state"]
@@ -71,7 +70,7 @@ class Importers::CommunityResourceImporter < Importers::BaseImporter
     end
 
     service_location_type = LocationType.find_or_create_by(name: "service_area")
-    resource.service_area = ServiceArea.create! do |service_area|
+    community_resource.service_area = ServiceArea.create! do |service_area|
       if row["service_area_name"]
         service_area.name = row["service_area_name"]
       elsif row["service_area_town_names"]
@@ -88,7 +87,7 @@ class Importers::CommunityResourceImporter < Importers::BaseImporter
         service_area.service_area_type = "city"
       end
 
-      service_area.organization = resource.organization
+      service_area.organization = community_resource.organization
       service_area.location = Location.create! do |location|
         location.location_type = service_location_type
 
@@ -100,6 +99,6 @@ class Importers::CommunityResourceImporter < Importers::BaseImporter
       end
     end
 
-    resource.save
+    community_resource.save
   end
 end

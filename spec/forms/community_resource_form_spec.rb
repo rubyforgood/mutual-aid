@@ -46,7 +46,9 @@ RSpec.describe CommunityResourceForm do
 
     describe 'on save' do
       it 'persists the new community resource with new associated records' do
-        expect { community_resource.save! }.to(
+        expect {
+          community_resource.save!
+        }.to(
           change(CommunityResource, :count).by(1).and(
           change(Organization, :count).by(1)).and(
           change(Location, :count).by(1))
@@ -63,7 +65,7 @@ RSpec.describe CommunityResourceForm do
         end
 
         it 'gathers errors from nested models' do
-          expect(community_resource.errors.keys).to include(:description, :location, :"organization.name")
+          expect(community_resource.errors.keys).to include(:description, :"location.location_type", :"organization.name")
         end
       end
     end
@@ -78,11 +80,13 @@ RSpec.describe CommunityResourceForm do
       description: 'new description',
       publish_from: existing.publish_from.to_s,
       location: {
+        id: existing.location.id,
         city: 'new city',
         location_type: existing.location.location_type_id,
       },
       organization_attributes: {
-        name: 'new org'
+        id: existing.organization.id,
+        name: 'new org',
       },
     }}
 
@@ -96,6 +100,27 @@ RSpec.describe CommunityResourceForm do
     it 'applies updated attributes to nested models' do
       expect(community_resource.location.city).to eq 'new city'
       expect(community_resource.organization.name).to eq 'new org'
+    end
+
+    describe 'on save' do
+      it 'does not create any new records' do
+        expect {
+          community_resource.save!
+        }.to(
+          change(CommunityResource, :count).by(0).and(
+          change(Organization, :count).by(0)).and(
+          change(Location, :count).by(0))
+        )
+      end
+
+      it 'persists updated values correctly' do
+        community_resource.save!
+        existing.reload
+        expect(existing.name).to eq 'new name'
+        expect(existing.description).to eq 'new description'
+        expect(existing.location.city).to eq 'new city'
+        expect(existing.organization.name).to eq 'new org'
+      end
     end
   end
 end

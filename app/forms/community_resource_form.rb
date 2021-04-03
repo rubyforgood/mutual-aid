@@ -7,8 +7,8 @@ class CommunityResourceForm < BaseForm
 
   # todo now: why the difference between location and org? probably org uses accepts_nested_attributes?
   hash :organization_attributes do
-    string :id, default: nil
-    string :name
+    integer :id, default: nil
+    string  :name
   end
 
   hash :location, strip: false, default: {}

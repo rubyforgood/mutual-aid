@@ -39,6 +39,7 @@
       <%= f.input :service_area_ids, label: "Service area", as: :check_boxes, collection: service_areas %>
       <div class="form-vertical">
         <%= f.simple_fields_for community_resource.location || Location.new, as: :location do |location_form| %>
+          <%= location_form.hidden_field :id %>
           <%= location_form.input :street_address %>
           <%= location_form.input :city %>
           <%= location_form.input :state, maxlength: 2 %>

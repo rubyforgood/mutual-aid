@@ -17,7 +17,8 @@ class CommunityResourcesController < ApplicationController
   end
 
   def create
-    if build_community_resource.save
+    @community_resource = authorize populate(CommunityResource.new)
+    if @community_resource.save
       redirect_after_create
     else
       render :new
@@ -25,8 +26,8 @@ class CommunityResourcesController < ApplicationController
   end
 
   def update
-    # todo now: this is now allowing `is_approved` to be set by any user
-    if build_community_resource.save
+    @community_resource = authorize populate(CommunityResource.find(params[:id]))
+    if @community_resource.save
       redirect_to community_resources_path, notice: 'Community resource was successfully updated.'
     else
       render :edit
@@ -40,12 +41,12 @@ class CommunityResourcesController < ApplicationController
 
   private
 
-    def community_resource
-      @community_resource ||= authorize CommunityResource.find_or_new params[:id]
+    def populate(community_resource)
+      CommunityResourceForm.build permitted_attributes(community_resource).merge(id: params[:id])
     end
 
-    def build_community_resource
-      @community_resource = authorize CommunityResourceForm.build params[:community_resource].merge(id: params[:id])
+    def community_resource
+      @community_resource ||= authorize CommunityResource.find_or_new params[:id]
     end
 
     def available_tags

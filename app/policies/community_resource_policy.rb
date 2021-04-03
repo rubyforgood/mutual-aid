@@ -4,25 +4,10 @@ class CommunityResourcePolicy < ApplicationPolicy
   def change?; can_admin? end
   def delete?; can_admin? end
 
-  # todo now: do we need this now that we're using CommunityResourceForm
   def permitted_attributes
-    [
-      :description,
-      :facebook_url,
-      :location_id,
-      :name,
-      :phone,
-      :publish_from,
-      :publish_until,
-      :website_url,
-      :youtube_identifier,
-      service_area_ids: [],
-      tag_list: [],
-      organization_attributes: %i[id name _destroy]
-    ]
-      .tap do |permitted|
-        permitted.push :is_approved if can_admin?
-      end
+    CommunityResourceForm.filter_keys.tap do |keys|
+      keys.delete(:is_approved) unless can_admin?
+    end
   end
 
   class Scope < ApplicationPolicy::Scope

@@ -11,11 +11,11 @@ RSpec.describe NavBarPolicy do
     context 'guest' do
       let(:user) { nil }
 
-      it { is_expected.to match_array %w[Login] }
+      it { is_expected.to match_array ["Login", "Sign Up"] }
 
       context 'in peer_to_peer mode' do
         let(:peer_to_peer?) { true }
-        it { is_expected.to match_array %w[Glossary Contributions Login] }
+        it { is_expected.to match_array ["Glossary", "Contributions", "Login", "Sign Up"] }
       end
     end
 

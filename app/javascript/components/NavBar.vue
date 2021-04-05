@@ -25,6 +25,9 @@
       <b-navbar-item tag="div" v-if="visible('Login')">
         <a href="/users/sign_in" class="button is-outlined">Login</a>
       </b-navbar-item>
+      <b-navbar-item tag="div" v-if="visible('Sign Up')">
+        <a href="/users/sign_up" class="button is-outlined">Sign Up</a>
+      </b-navbar-item>
       <b-navbar-item tag="div" v-if="visible('Logout')">
         <DeleteButton action="/users/sign_out">Logout</DeleteButton>
       </b-navbar-item>

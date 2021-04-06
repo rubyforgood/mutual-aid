@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe CommunityResourceForm do
+  let!(:location_type) { create :location_type }
   let(:params) {{
     name: 'Free breakfast program',
     description: 'Feed the people!',
     publish_from: '1969-01-01',
     location: {
       city: 'Oakland',
-      location_type: LocationType.first.id,
+      location_type: location_type.id,
     },
     organization_attributes: {
       name: 'Black Panther Party',

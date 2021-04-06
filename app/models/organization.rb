@@ -11,9 +11,12 @@ class Organization < ApplicationRecord
   validates :name, presence: true
   validates_uniqueness_of :is_instance_owner, conditions: -> { where is_instance_owner: true }
 
-  # TODO: rename to instance_owner?
-  scope :current_organization, -> { find_by(is_instance_owner: true) }
   scope :org_chart, -> { where(display_on_org_chart: true) }
+
+  # TODO: rename to instance_owner?
+  def self.current_organization
+    find_by(is_instance_owner: true)
+  end
 
   def primary_contact
     positions.find_by(is_primary: true)

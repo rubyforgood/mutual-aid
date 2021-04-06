@@ -7,7 +7,7 @@ RSpec.describe Organization, type: :model do
 
     context 'with an existing instance owner' do
       before do
-        Organization.current_organization || create(:organization, is_instance_owner: true)
+        Organization.instance_owner || create(:organization, is_instance_owner: true)
       end
 
       it { is_expected.to_not be_valid }
@@ -16,7 +16,7 @@ RSpec.describe Organization, type: :model do
     context 'without an existing instance owner' do
       before do
         # in case test db was seeded
-        Organization.current_organization.update!(is_instance_owner: false) if Organization.current_organization
+        Organization.instance_owner.update!(is_instance_owner: false) if Organization.instance_owner
       end
 
       it { is_expected.to be_valid }

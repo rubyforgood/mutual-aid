@@ -13,8 +13,7 @@ class Organization < ApplicationRecord
 
   scope :org_chart, -> { where(display_on_org_chart: true) }
 
-  # TODO: rename to instance_owner?
-  def self.current_organization
+  def self.instance_owner
     find_by(is_instance_owner: true)
   end
 
@@ -23,15 +22,15 @@ class Organization < ApplicationRecord
   end
 
   def ask_form_contact
-    positions.where(position_type: Position::ASK_FORM_CONTACT_TITLE, organization: Organization.current_organization).first
+    positions.where(position_type: Position::ASK_FORM_CONTACT_TITLE, organization: Organization.instance_owner).first
   end
 
   def offer_form_contact
-    positions.where(position_type: Position::OFFER_FORM_CONTACT_TITLE, organization: Organization.current_organization).first
+    positions.where(position_type: Position::OFFER_FORM_CONTACT_TITLE, organization: Organization.instance_owner).first
   end
 
   def community_resources_contact
-    positions.where(position_type: Position::COMMUNITY_RESOURCES_CONTACT_TITLE, organization: Organization.current_organization).first
+    positions.where(position_type: Position::COMMUNITY_RESOURCES_CONTACT_TITLE, organization: Organization.instance_owner).first
   end
 end
 

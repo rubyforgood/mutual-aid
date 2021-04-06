@@ -2,7 +2,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     EntryPoints.navBar('#navBar', <%= raw({
-      logoUrl: Organization.current_organization.present? ? Organization.current_organization.logo_url : "",
+      logoUrl: Organization.instance_owner.present? ? Organization.instance_owner.logo_url : "",
       visibleButtons: policy(:nav_bar).visible_buttons,
     }.to_json) %>)
   })

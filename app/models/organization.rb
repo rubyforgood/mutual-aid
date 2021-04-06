@@ -9,6 +9,7 @@ class Organization < ApplicationRecord
   has_many :teams
 
   validates :name, presence: true
+  validates_uniqueness_of :is_instance_owner, conditions: -> { where is_instance_owner: true }
 
   # TODO: rename to instance_owner?
   scope :current_organization, -> { find_by(is_instance_owner: true) }

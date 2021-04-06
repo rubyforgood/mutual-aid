@@ -1,10 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe EmailNewSubmission do
-  let(:user)       { create :user }
-  let(:submission) { create :submission }
+  let(:user)           { create :user }
+  let(:submission)     { create :submission }
+  let(:system_setting) { build  :system_setting }
 
-  subject(:interaction) { EmailNewSubmission.run! submission: submission, user: user }
+  subject(:interaction) do
+    EmailNewSubmission.run! submission: submission, user: user, system_setting: system_setting
+  end
 
   let(:last_email) { ActionMailer::Base.deliveries.last }
   let(:last_log)   { CommunicationLog.last }

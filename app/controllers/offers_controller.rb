@@ -14,7 +14,7 @@ class OffersController < PublicController
   def create
     submission = SubmissionForm.build submission_params
     if submission.save
-      EmailNewSubmission.run! submission: submission, user: current_user
+      EmailNewSubmission.run! submission: submission, user: current_user, system_setting: context.system_settings
       redirect_to thank_you_path, notice: 'Offer was successfully created.'
     else
       render_form(submission)

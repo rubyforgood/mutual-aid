@@ -5,12 +5,13 @@ include ApplicationHelper  # TODO: better way to solve this?
 
 # TODO: could do with specs
 class SubmissionMailer < ApplicationMailer
-  def new_submission_confirmation_email(submission, system_setting=nil)
+  def new_submission_confirmation_email(submission, system_setting)
     @submission = submission
+    @system_setting = system_setting
 
+    # FIXME: inject instance_owner similar to system_setting
     instance_owner = Organization.instance_owner
     @organization_name = instance_owner.name
-    @system_setting = system_setting || SystemSetting.first
 
     @form_name = @submission.form_name
     if @form_name.downcase.include?('ask')
@@ -23,8 +24,6 @@ class SubmissionMailer < ApplicationMailer
 
     @person = @submission.person
     @locale = @person.preferred_locale || 'en'
-
-    @system_settings = SystemSetting.current_settings
 
     system_email = ENV['SYSTEM_EMAIL']
     smtp_from_email = ENV['SMTP_FROM_EMAIL']

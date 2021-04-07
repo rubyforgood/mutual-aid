@@ -53,6 +53,7 @@ RSpec.describe "/users", type: :request do
     it "updates the user" do
       patch "/users/#{user.id}", params: { user: { email: "atorvingen@example.com" } }
 
+      # Manually confirming because it's required by Devise when changing a user's email address
       user.reload.confirm
       expect(user.email).to eq("atorvingen@example.com")
     end

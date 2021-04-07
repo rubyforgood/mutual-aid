@@ -10,4 +10,8 @@ class UserRole
   def initialize(role)
     @role = role
   end
+
+  def to_s
+    @role
+  end
 end

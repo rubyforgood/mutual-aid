@@ -64,14 +64,6 @@ RSpec.describe "/users", type: :request do
 
         expect(user.reload.role).to eq("neighbor")
       end
-
-      it "does not allow non-admin users to change another user's role" do
-        sign_in FactoryBot.create(:user, :volunteer)
-
-        patch "/users/#{user.id}", params: { user: { role: "neighbor" } }
-
-        expect(response).to be_forbidden
-      end
     end
   end
 

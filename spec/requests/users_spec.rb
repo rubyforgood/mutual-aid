@@ -37,7 +37,7 @@ RSpec.describe "/users", type: :request do
 
   describe "POST /create" do
     it "creates the user" do
-      skip "something weird is up with this action/test -- I can't even get a byebug to trigger"
+      skip "To be implemented when we have a #create action."
 
       expect {
         post "/users", params: { user: FactoryBot.attributes_for(:user) }
@@ -48,14 +48,22 @@ RSpec.describe "/users", type: :request do
   end
 
   describe "PATCH /update" do
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user, role: "unset") }
 
     it "updates the user" do
-      skip "something weird is up with this action/test -- @user.update returns true but the email doesn't change"
-
       patch "/users/#{user.id}", params: { user: { email: "atorvingen@example.com" } }
-      user.reload
+
+      # Manually confirming because it's required by Devise when changing a user's email address
+      user.reload.confirm
       expect(user.email).to eq("atorvingen@example.com")
+    end
+
+    context "when changing roles" do
+      it "allows admins to change a user's role" do
+        patch "/users/#{user.id}", params: { user: { role: "neighbor" } }
+
+        expect(user.reload.role).to eq("neighbor")
+      end
     end
   end
 

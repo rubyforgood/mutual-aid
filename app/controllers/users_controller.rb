@@ -2,25 +2,23 @@
 
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: %i[new create]
-  before_action :set_user, only: %i[show edit update destroy]
 
   def index
     @users = policy_scope(User).all
   end
 
   def show
-    authorize @user
+    authorize user
   end
 
   def new
-    @user = User.new
-    authorize @user
+    authorize user
     set_form_dropdowns
   end
 
   def edit
-    authorize @user
-    if @user == current_user
+    authorize user
+    if user == current_user
       redirect_to edit_user_registration_path
     else
       set_form_dropdowns
@@ -28,8 +26,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    authorize @user
-    if @user.update(user_params)
+    authorize user
+    if user.update(permitted_attributes(user))
       redirect_to users_path, notice: 'User was successfully updated.'
     else
       set_form_dropdowns
@@ -38,15 +36,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    authorize @user
-    @user.destroy
-    redirect_to users_path, notice: 'User was successfully destroyed.'
+    authorize user
+    user.destroy
+    redirect_to users_path, notice: 'User record was successfully deleted.'
   end
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
+  def user
+    @user ||= params[:id] ? User.find(params[:id]) : User.new
   end
 
   def set_form_dropdowns
@@ -54,6 +52,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, person_attributes: %i[id name email phone preferred_contact_method_id _destroy] )
+    params.require(:user).permit(permitted_attributes)
   end
 end

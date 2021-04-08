@@ -13,7 +13,7 @@ class User < ApplicationRecord
   enum role: UserRole.roles_as_hash, _suffix: true
 
   def role
-    @role ||= UserRole.new(read_attribute(:role))
+    UserRole.new(read_attribute(:role)).to_s
   end
 
   def name

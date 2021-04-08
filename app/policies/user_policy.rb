@@ -12,6 +12,15 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
+  def permitted_attributes
+    [
+      :email,
+      person_attributes: %i[id name email phone preferred_contact_method_id _destroy],
+    ].tap do |permitted|
+      permitted << :role if can_admin?
+    end
+  end
+
   def read?
     own_user? || can_admin?
   end

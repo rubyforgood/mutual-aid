@@ -5,21 +5,18 @@ include ApplicationHelper  # TODO: better way to solve this?
 
 # TODO: could do with specs
 class SubmissionMailer < ApplicationMailer
-  def new_submission_confirmation_email(submission, system_setting)
+  def new_submission_confirmation_email(submission:, system_setting:, organization:)
     @submission = submission
     @system_setting = system_setting
-
-    # FIXME: inject instance_owner similar to system_setting
-    instance_owner = Organization.instance_owner
-    @organization_name = instance_owner.name
+    @organization_name = organization.name
 
     @form_name = @submission.form_name
     if @form_name.downcase.include?('ask')
-      @form_contact = instance_owner.ask_form_contact
+      @form_contact = organization.ask_form_contact
     elsif @form_name.downcase.include?('offer')
-      @form_contact = instance_owner.offer_form_contact
+      @form_contact = organization.offer_form_contact
     elsif @form_name.downcase.include?('community_resource')
-      @form_contact = instance_owner.community_resources_contact
+      @form_contact = organization.community_resources_contact
     end
 
     @person = @submission.person
@@ -29,7 +26,7 @@ class SubmissionMailer < ApplicationMailer
     smtp_from_email = ENV['SMTP_FROM_EMAIL']
     contact_email = @form_contact&.person&.email || "#{smtp_from_email}"
     contact_name =  @form_contact&.person&.name || @form_contact&.name || contact_email
-    contact_email_with_name = %("#{contact_name} (#{instance_owner.name})" <#{contact_email}>)
+    contact_email_with_name = %("#{contact_name} (#{organization.name})" <#{contact_email}>)
     bcc_emails = [contact_email, smtp_from_email, system_email].uniq.join('; ')
 
     @subject = "#{ENV["SYSTEM_APP_NAME"]} confirmation (" + @person.updated_at.to_date.to_s + ')'

@@ -22,7 +22,12 @@ class SubmissionsController < AdminController
     @submission = Submission.new(submission_params)
 
     if @submission.save
-      EmailNewSubmission.run! submission: @submission, user: current_user, system_setting: context.system_settings
+      EmailNewSubmission.run!(
+        submission: @submission,
+        user: current_user,
+        system_setting: context.system_settings,
+        organization: Organization.instance_owner,
+      )
       redirect_to submissions_path, notice: 'Submission successfully created.'
     else
       set_form_dropdowns

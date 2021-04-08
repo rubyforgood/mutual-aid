@@ -4,9 +4,15 @@ RSpec.describe EmailNewSubmission do
   let(:user)           { create :user }
   let(:submission)     { create :submission }
   let(:system_setting) { build  :system_setting }
+  let(:organization)   { build  :organization }
 
   subject(:interaction) do
-    EmailNewSubmission.run! submission: submission, user: user, system_setting: system_setting
+    EmailNewSubmission.run!(
+      submission: submission,
+      user: user,
+      system_setting: system_setting,
+      organization: organization,
+    )
   end
 
   let(:last_email) { ActionMailer::Base.deliveries.last }

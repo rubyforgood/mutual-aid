@@ -3,10 +3,15 @@
 class EmailNewSubmission < ActiveInteraction::Base
   object :submission
   object :system_setting
+  object :organization
   object :user, default: nil
 
   def execute
-    email = SubmissionMailer.new_submission_confirmation_email(submission, system_setting)
+    email = SubmissionMailer.new_submission_confirmation_email(
+      submission: submission,
+      system_setting: system_setting,
+      organization: organization,
+    )
 
     status = Messenger.new(email, 'new_submission_confirmation_email').deliver_now
 

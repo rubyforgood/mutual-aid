@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe '/community_resources', type: :request do
+  let!(:location_type) { create :location_type }
   let(:community_resource) { create :community_resource }
 
   let(:params) {{ community_resource: {
@@ -15,7 +16,7 @@ RSpec.describe '/community_resources', type: :request do
       city: 'Kings Park',
       state: 'NY',
       zip: '11754',
-      location_type: 1,
+      location_type: location_type.id,
     }
   }}}
 

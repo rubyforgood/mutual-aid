@@ -1,5 +1,0 @@
-<% if Organization.instance_owner.logo_url.present? %>
-  <%= image_tag Organization.instance_owner.logo_url, width: 300, alt: 'Logo' %>
-<% else %>
-  <%= image_pack_tag 'media/images/logo.png', width: 300, alt: 'Logo' %>
-<% end %>

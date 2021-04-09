@@ -1,12 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe EmailPeer do
-  let(:user)       { create(:user, :with_person) }
+  let(:user)         { create(:user, :with_person) }
   let(:contribution) { create :listing }
-  let(:peer_alias) { "peer_alias" }
-  let(:message) { "contribution P2P message" }
+  let(:organization) { build :organization }
+  let(:peer_alias)   { "peer_alias" }
+  let(:message)      { "contribution P2P message" }
 
-  subject(:interaction) { EmailPeer.run!(contribution: contribution, user: user, peer_alias: peer_alias, message: message) }
+  subject(:interaction) do
+    EmailPeer.run!(
+      contribution: contribution,
+      organization: organization,
+      user: user,
+      peer_alias: peer_alias,
+      message: message
+    )
+  end
 
   let(:last_email) { ActionMailer::Base.deliveries.last }
   let(:last_log)   { CommunicationLog.last }

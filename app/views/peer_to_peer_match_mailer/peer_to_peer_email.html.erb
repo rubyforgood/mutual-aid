@@ -1,5 +1,5 @@
 <div>
-  Good news! You have a match through <%= Organization.current_organization.name %>.
+  Good news! You have a match through <%= Organization.instance_owner.name %>.
   <br><br>
   <%= contribution.person.name %> would like to connect with you about <%= contribution.tag_list.last %>, and they sent this message:
   <br>

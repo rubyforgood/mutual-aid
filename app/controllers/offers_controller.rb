@@ -32,7 +32,7 @@ class OffersController < PublicController
 
     def render_form(submission)
       @form = Form.find_by!(contribution_type_name: 'Offer')
-      @organization = Organization.current_organization
+      @organization = Organization.instance_owner
 
       @json = {
         submission: SubmissionBlueprint.render_as_hash(submission),

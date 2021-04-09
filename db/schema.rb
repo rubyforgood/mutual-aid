@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_26_012229) do
+ActiveRecord::Schema.define(version: 2021_04_06_164255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -295,7 +295,7 @@ ActiveRecord::Schema.define(version: 2021_02_26_012229) do
     t.string "facebook_url"
     t.string "website_url"
     t.string "phone"
-    t.boolean "is_instance_owner", default: true, null: false
+    t.boolean "is_instance_owner", default: false, null: false
     t.boolean "has_sms_account", default: false, null: false
     t.boolean "has_hosting_account", default: false, null: false
     t.boolean "has_mailer_account", default: false, null: false

@@ -56,9 +56,7 @@ class ContributionsController < ApplicationController
   end
 
   def contribution_blueprint_options
-    options = {}
-    options[:view_path] = ->(id) { contribution_path(id) }
-    options
+    { show_view_path: true }
   end
 
   def allowed_params

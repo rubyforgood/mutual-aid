@@ -16,7 +16,7 @@ class AsksController < PublicController
     if submission.save
       EmailNewSubmission.run!(
         submission: submission,
-        user: current_user,
+        user: context.user,
         system_setting: context.system_settings,
         organization: context.host_organization,
       )

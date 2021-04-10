@@ -57,7 +57,6 @@ class OrganizationsController < AdminController
           :has_hosting_account,
           :has_mailer_account,
           :has_sms_account,
-          :is_instance_owner,
           :logo_url,
           :name,
           :phone,

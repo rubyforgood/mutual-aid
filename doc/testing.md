@@ -11,8 +11,6 @@ When writing rspec tests within the spec/request directory, you can use `Warden:
 which give you access to the `login_as(user, :scope => :user)` method, as well as the `logout` method.
 You use `FactoryBot.create(:user)` before the `login_as` method and pass it in as the required resource variable.
 
-BE SURE to include the line `after { Warden.test_reset! }` after the `before do` block with the `login_as` method within it. This prevents unexpected state data of the user from hanging around and causing errors.
-
 ## Test app on heroku
 We have a heroku install for testing!
 [http://mutual-aid-demo.herokuapp.com/](http://mutual-aid-demo.herokuapp.com/)

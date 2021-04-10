@@ -14,7 +14,12 @@ class OffersController < PublicController
   def create
     submission = SubmissionForm.build submission_params
     if submission.save
-      EmailNewSubmission.run! submission: submission, user: current_user
+      EmailNewSubmission.run!(
+        submission: submission,
+        user: current_user,
+        system_setting: context.system_settings,
+        organization: Organization.instance_owner,
+      )
       redirect_to thank_you_path, notice: 'Offer was successfully created.'
     else
       render_form(submission)
@@ -32,7 +37,7 @@ class OffersController < PublicController
 
     def render_form(submission)
       @form = Form.find_by!(contribution_type_name: 'Offer')
-      @organization = Organization.current_organization
+      @organization = Organization.instance_owner
 
       @json = {
         submission: SubmissionBlueprint.render_as_hash(submission),

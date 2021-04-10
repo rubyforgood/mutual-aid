@@ -2,7 +2,7 @@
   <b-navbar fixed-top transparent shadow>
     <template slot="brand">
       <b-navbar-item href="/">
-        <img :src="logoUrl || $options.defaultLogo" alt="mutual-aid-app logo" height="300px" />
+        <img :src="logoUrl" alt="mutual-aid-app logo" height="300px" />
       </b-navbar-item>
     </template>
 
@@ -25,6 +25,9 @@
       <b-navbar-item tag="div" v-if="visible('Login')">
         <a href="/users/sign_in" class="button is-outlined">Login</a>
       </b-navbar-item>
+      <b-navbar-item tag="div" v-if="visible('Sign Up')">
+        <a href="/users/sign_up" class="button is-outlined">Sign Up</a>
+      </b-navbar-item>
       <b-navbar-item tag="div" v-if="visible('Logout')">
         <DeleteButton action="/users/sign_out">Logout</DeleteButton>
       </b-navbar-item>
@@ -33,7 +36,6 @@
 </template>
 
 <script>
-import logo from 'images/logo.png'
 import {DeleteButton} from 'components/forms'
 import {FeedbackButton} from 'components/forms'
 
@@ -51,7 +53,5 @@ export default {
       return this.visibleButtons.includes(button)
     },
   },
-
-  defaultLogo: logo,
 }
 </script>

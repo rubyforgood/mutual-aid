@@ -75,4 +75,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # https://github.com/wardencommunity/warden/wiki/Testing#requirements
+  config.after type: :request do
+    Warden.test_reset!
+  end
 end

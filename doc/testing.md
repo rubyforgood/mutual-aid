@@ -1,22 +1,15 @@
 ## Running specs
-Running `bin/test` will run ruby tests (rspec) and then the js tests (mocha) if all the rspec tests pass
+Running `bin/test` will run ruby tests (rspec) and then the js tests (mocha via mochapack) if all the rspec tests pass
 
 To run front end tests and back end tests individually:
 
-* Vue.js front end tests: `yarn test` or `yarn test -w` (mocha and chai are included in the `package.json` )
-* Rails front end and back end tests: `bin/rspec` (rspec is included in the Gemfile)
-
-Note that we currently rely on seeding in some of our backend specs, so before running `rspec`, first seed the test database:
-```
-bin/rake db:seed RAILS_ENV=test
-```
+* Front end: `yarn test` or `yarn test -w` (to watch for changes and rerun)
+* Back end: `bin/rspec` or `rerun bin/rspec spec/some/dir/or_spec.rb` (to watch for changes and rerun)
 
 ## Request specs
 When writing rspec tests within the spec/request directory, you can use `Warden::Test:Helpers`
 which give you access to the `login_as(user, :scope => :user)` method, as well as the `logout` method.
 You use `FactoryBot.create(:user)` before the `login_as` method and pass it in as the required resource variable.
-
-BE SURE to include the line `after { Warden.test_reset! }` after the `before do` block with the `login_as` method within it. This prevents unexpected state data of the user from hanging around and causing errors.
 
 ## Test app on heroku
 We have a heroku install for testing!

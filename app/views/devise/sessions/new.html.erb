@@ -1,6 +1,6 @@
 <div class="columns text-center login-screen" style="vertical-align:middle;">
   <div class="column is-half logo-image text-center">
-    <%= render 'shared/organization_logo' %>
+    <%= image_tag site_logo_url, width: 300, alt: 'Logo' %>
   </div>
   <div class="column is-half text-center">
     <div class="section">
@@ -36,8 +36,11 @@
                             :type => "password"%>
               </div>
             </div>
-            <div class="" id="login_button">
-              <%= f.button :submit, "Log in", class: "button is-primary" %>
+            <div class="is-flex columns is-centered mt-1">
+              <div class="" id="login_button">
+                <%= f.button :submit, "Log in", class: "button is-primary" %>
+              </div>
+              <%= link_to "Sign Up", new_user_registration_path, class: "button is-success ml-1" %>
             </div>
           </div>
         <% end %>

@@ -3,7 +3,7 @@ class ThankYouController < PublicController
   layout 'without_navbar'
 
   def show
-    @current_organization = Organization.current_organization
+    @organization = Organization.instance_owner
     @system_setting = context.system_settings
   end
 end

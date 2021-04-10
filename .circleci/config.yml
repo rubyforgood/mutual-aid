@@ -46,7 +46,7 @@ commands:
           command: |
             set -euxo pipefail
             bundle config path .bundle
-            bundle exec rails db:setup
+            bundle exec rails db:create
             bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml
   yarn_tests:
     description: "Run the Mocha test suite"

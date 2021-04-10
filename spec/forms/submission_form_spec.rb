@@ -89,6 +89,7 @@ RSpec.describe SubmissionForm do
           before do
             params[:location_attributes] = {
               street_address: '',
+              location_type: '',
             }
           end
 

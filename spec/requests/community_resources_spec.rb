@@ -1,19 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe '/community_resources', type: :request do
+  let!(:location_type) { create :location_type }
   let(:community_resource) { create :community_resource }
 
   let(:params) {{ community_resource: {
     name: 'Free Breakfast Program',
     description: 'Food for the rev!',
-    publish_from: Date.current,
+    'publish_from(1i)' => '2020',
+    'publish_from(2i)' => '12',
+    'publish_from(3i)' => '31',
     organization_attributes: { name: 'Black Panther Party' },
     location: {
       street_address: '123 Sesame Street',
       city: 'Kings Park',
       state: 'NY',
       zip: '11754',
-      location_type_id: 1
+      location_type: location_type.id,
     }
   }}}
 
@@ -40,11 +43,18 @@ RSpec.describe '/community_resources', type: :request do
   end
 
   describe 'PUT /community_resources' do
+    it 'creates a new community resource and location' do
+      expect { post community_resources_path, params: params }.to(
+        change(CommunityResource, :count).by(1).and(
+        change(Location, :count).by(1)
+      ))
+    end
+
     context 'as an admin' do
       before { sign_in create :user, :admin }
 
-      it 'succeeds and redirects to /community_resources' do
-        expect { post community_resources_path, params: params }.to change(CommunityResource, :count).by 1
+      it 'redirects to /community_resources' do
+        post community_resources_path, params: params
         expect(response).to have_http_status :found
         expect(response.location).to match community_resources_path
       end
@@ -61,36 +71,8 @@ RSpec.describe '/community_resources', type: :request do
     context 'as a guest' do
       it 'redirects to the thank you page' do
         post community_resources_path, params: params
-
         expect(response).to have_http_status :found
         expect(response.location).to match thank_you_path
-      end
-
-      it 'creates a new community resource and location' do
-        expect { post community_resources_path, params: params }.to(
-          change(CommunityResource, :count).by(1).and(
-          change(Location, :count).by(1)
-        ))
-      end
-
-      context 'when a matching location already exists' do
-        let(:location_attrs) {{
-          street_address: '42 existing location',
-          location_type_id: 1,
-        }}
-
-        before do
-          Location.create! location_attrs
-        end
-
-        it 'creates a new community resource using the existing location' do
-          params[:community_resource][:location] = location_attrs
-
-          expect { post community_resources_path, params: params }.to(
-            change(CommunityResource, :count).by(1).and(
-            change(Location, :count).by(0)
-          ))
-        end
       end
     end
   end

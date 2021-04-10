@@ -76,6 +76,6 @@ module ApplicationHelper
 
   def site_logo_url
     # There should always be a current org, but being defensive here helps simplify tests
-    Organization.instance_owner&.logo_url.presence || asset_pack_path('media/images/logo.png')
+    context.host_organization&.logo_url.presence || asset_pack_path('media/images/logo.png')
   end
 end

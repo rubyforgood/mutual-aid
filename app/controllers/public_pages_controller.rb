@@ -15,7 +15,7 @@ class PublicPagesController < PublicController
   def landing_page
     @json = GenerateLandingPageJson.run!(
       system_setting: context.system_settings,
-      organization: Organization.instance_owner,
+      organization: context.host_organization,
     )
   end
 

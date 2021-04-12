@@ -9,12 +9,12 @@ class Organization < ApplicationRecord
   has_many :teams
 
   validates :name, presence: true
-  validates_uniqueness_of :is_instance_owner, conditions: -> { where is_instance_owner: true }
+  validates_uniqueness_of :is_host, conditions: -> { where is_host: true }
 
   scope :org_chart, -> { where(display_on_org_chart: true) }
 
   def self.host_organization
-    find_by(is_instance_owner: true)
+    find_by(is_host: true)
   end
 
   def primary_contact
@@ -46,7 +46,7 @@ end
 #  has_hosting_account  :boolean          default(FALSE), not null
 #  has_mailer_account   :boolean          default(FALSE), not null
 #  has_sms_account      :boolean          default(FALSE), not null
-#  is_instance_owner    :boolean          default(FALSE), not null
+#  is_host              :boolean          default(FALSE), not null
 #  logo_url             :string
 #  name                 :string
 #  phone                :string

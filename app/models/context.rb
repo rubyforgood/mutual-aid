@@ -7,7 +7,7 @@ Context = Struct.new(
 ) do
 
   def host_organization
-    self[:host_organization] ||= Organization.instance_owner
+    self[:host_organization] ||= Organization.host_organization
   end
 
   def system_settings

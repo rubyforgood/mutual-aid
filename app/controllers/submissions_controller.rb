@@ -51,22 +51,22 @@ class SubmissionsController < AdminController
 
   private
 
-    def set_submission
-      @submission = Submission.find(params[:id])
-    end
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @form_names = ['ask_form', 'offer_form', 'community_resources_form', 'announcements_form']
-    end
+  def set_form_dropdowns
+    @form_names = ['ask_form', 'offer_form', 'community_resources_form', 'announcements_form']
+  end
 
-    def submission_params
-      params.require(:submission).permit(
-          :body,
-          :created_at,
-          :form_name,
-          :person_id,
-          :privacy_level_requested,
-          :service_area_id,
-      )
-    end
+  def submission_params
+    params.require(:submission).permit(
+      :body,
+      :created_at,
+      :form_name,
+      :person_id,
+      :privacy_level_requested,
+      :service_area_id,
+    )
+  end
 end

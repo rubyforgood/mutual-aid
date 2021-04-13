@@ -24,7 +24,7 @@ class LocationForm < BaseForm
 
   private
 
-    def given_inputs_without_location_type
-      given_inputs.reject { |key| key == :location_type }
-    end
+  def given_inputs_without_location_type
+    given_inputs.reject { |key| key == :location_type }
+  end
 end

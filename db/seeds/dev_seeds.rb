@@ -234,8 +234,13 @@ end
 
 # submissions
 Listing.all.each do |listing|
-  submission = Submission.where(person: listing.person, service_area: listing.service_area, form_name: "#{listing.type}_form", privacy_level_requested: Submission::PRIVACY_LEVELS.sample,
-                   body: listing.to_json).create!
+  submission = Submission.where(
+    person: listing.person,
+    service_area: listing.service_area,
+    form_name: "#{listing.type}_form",
+    privacy_level_requested: Submission::PRIVACY_LEVELS.sample,
+    body: listing.to_json,
+  ).create!
   listing.submission = submission
   matches = listing.ask? ? listing.matches_as_receiver : listing.matches_as_provider
   listing.state = matches.any? ? "matched" : "unmatched"

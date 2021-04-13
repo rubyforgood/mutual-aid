@@ -39,10 +39,12 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def process_headers_as_data(rows)
     rows.headers.each_with_index do |header_name, idx|
       if header_name # skip blank headers!
-        question = CustomFormQuestion.where('LOWER(name) = ?', header_name.downcase.strip)
-            .where(form_type: @form_type).first_or_create!(display_order: idx, input_type: 'string',
-                                                          name: header_name.downcase.strip)
+        question = CustomFormQuestion
+          .where('LOWER(name) = ?', header_name.downcase.strip)
+          .where(form_type: @form_type)
+          .first_or_create!(display_order: idx, input_type: 'string', name: header_name.downcase.strip)
         # where.not(name: @categories_question_name). # TODO exclude categories answer from import
+
         question.update_attributes!(display_order: idx, input_type: 'string') # in case question was already in db
 
         question.save!
@@ -92,8 +94,9 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       email ||= 'ImportedWithNoEmail@example.com'
     end
     Person.where(name: row['Name']&.strip, email: email&.strip, phone: phone&.strip)
-           .first_or_create!(preferred_contact_method: preferred_contact_method,
-                            service_area: service_area, location: location,
+          .first_or_create!(preferred_contact_method: preferred_contact_method,
+                            service_area: service_area,
+                            location: location,
                             skills: row['skills']&.strip,
                             preferred_locale: preferred_locale&.locale || 'en')
   end
@@ -113,7 +116,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     location_type = LocationType.where(name: 'service_area').first_or_create!
     location = Location.where(location_type: location_type).first_or_create!
     ServiceArea.translated_name(row['service_area_name']&.strip.downcase)
-                .first_or_create!(name: row['service_area_name']&.strip || 'Unknown County',
+               .first_or_create!(name: row['service_area_name']&.strip || 'Unknown County',
                                  service_area_type: row['service_area_type_name'] || 'county',
                                  organization: Organization.first,
                                  location: location)

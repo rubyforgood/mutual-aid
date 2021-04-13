@@ -222,24 +222,6 @@ Layout/FirstHashElementIndentation:
     - 'config/initializers/simple_form_bulma.rb'
     - 'spec/blueprints/contribution_blueprint_spec.rb'
 
-# Offense count: 76
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleStyles, EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle.
-# SupportedHashRocketStyles: key, separator, table
-# SupportedColonStyles: key, separator, table
-# SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
-Layout/HashAlignment:
-  Exclude:
-    - 'app/models/importers/base_importer.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-    - 'config/application.rb'
-    - 'config/initializers/simple_form.rb'
-    - 'config/initializers/simple_form_bulma.rb'
-    - 'db/seeds/dev_seeds.rb'
-    - 'lib/tasks/auto_annotate_models.rake'
-    - 'spec/interactions/generate_landing_page_json_spec.rb'
-    - 'spec/lib/tasks/support/listing_converter_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth, EnforcedStyle.

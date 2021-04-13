@@ -19,8 +19,8 @@ RSpec.describe GenerateLandingPageJson do
   it 'pulls landing page text from system settings' do
     expect(JSON.parse(json)).to include(
       "landing_page_text_what" => 'what?',
-      "landing_page_text_who" =>  'who?',
-      "landing_page_text_how" =>  'how?',
+      "landing_page_text_who"  => 'who?',
+      "landing_page_text_how"  => 'how?',
     )
   end
 end

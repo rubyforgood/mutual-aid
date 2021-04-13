@@ -38,15 +38,15 @@ SimpleForm.setup do |config|
   # Wrappers for forms and inputs
   config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
-      boolean:       :horizontal_boolean,
-      check_boxes:   :vertical_checkboxes,
-      collection:    :vertical_collection,
-      date:          :horizontal_multi_select,
-      datetime:      :horizontal_multi_select,
-      file:          :vertical_file,
-      radio_buttons: :horizontal_radio,
-      range:         :vertical_range,
-      time:          :horizontal_multi_select,
+    boolean:       :horizontal_boolean,
+    check_boxes:   :vertical_checkboxes,
+    collection:    :vertical_collection,
+    date:          :horizontal_multi_select,
+    datetime:      :horizontal_multi_select,
+    file:          :vertical_file,
+    radio_buttons: :horizontal_radio,
+    range:         :vertical_range,
+    time:          :horizontal_multi_select,
   }
 
   # vertical forms
@@ -69,7 +69,7 @@ SimpleForm.setup do |config|
       ba.use :label, class: 'label', wrap_with: {tag: 'label', class: 'label'}
       ba.use :input, class: 'input'
       ba.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
-      ba.use :hint,  wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
+      ba.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
     end
   end
 

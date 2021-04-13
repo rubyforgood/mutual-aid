@@ -248,12 +248,6 @@ Layout/IndentationStyle:
   Exclude:
     - 'spec/factories/users.rb'
 
-# Offense count: 98
-# Cop supports --auto-correct.
-# Configuration parameters: Width, IgnoredPatterns.
-Layout/IndentationWidth:
-  Enabled: false
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

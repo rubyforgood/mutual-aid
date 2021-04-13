@@ -6,7 +6,7 @@ FactoryBot.define do
 
     trait :admin do
       role { :admin }
-	  end
+    end
 
     trait :neighbor do
       role { :neighbor }

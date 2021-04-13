@@ -263,7 +263,7 @@ RSpec.describe SubmissionForm do
       # expect(submission.listings.first).to be_changed
       expect(submission.person.location).to be_changed
       expect(submission.person).to be_changed
-      expect(submission).to be_changed  # TODO: should submissions be editable?
+      expect(submission).to be_changed # TODO: should submissions be editable?
     end
 
     it 'applies new values to submission and nested objects' do

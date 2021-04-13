@@ -201,12 +201,6 @@ Layout/EndAlignment:
     - 'app/mailers/peer_to_peer_match_mailer.rb'
     - 'config/initializers/simple_form_bulma.rb'
 
-# Offense count: 247
-# Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.
-Layout/ExtraSpacing:
-  Enabled: false
-
 # Offense count: 24
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, IndentationWidth.

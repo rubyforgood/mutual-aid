@@ -14,6 +14,9 @@ inherit_gem:
   # https://evilmartians.com/chronicles/rubocoping-with-legacy-bring-your-ruby-code-up-to-standard#one-standard-to-rule-them-all
   standard: config/base.yml
 
+inherit_from:
+  - .rubocop_todo.yml
+
 Metrics:
   # Disabled in Standard by default
   Enabled: true

@@ -38,9 +38,6 @@ commands:
       - restore_cache:
           keys:
             - bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
-      - restore_cache:
-          keys:
-            - node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
       - run:
           name: Rubocop
           command: |
@@ -130,7 +127,6 @@ workflows:
       - rubocop:
           requires:
             - bundle
-            - node_modules
       - ruby_tests:
           requires:
             - bundle

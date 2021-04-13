@@ -44,11 +44,9 @@ class MatchesController < AdminController
     if @match.save
       save_and_continue = params[:commit]&.downcase&.include?('save and view match')
       if save_and_continue
-        redirect_to edit_match_path(@match),
-                    notice: 'Match was successfully created.'
+        redirect_to edit_match_path(@match), notice: 'Match was successfully created.'
       else
-        redirect_to matches_path,
-                    notice: 'Match was successfully created.'
+        redirect_to matches_path, notice: 'Match was successfully created.'
       end
     else
       set_form_dropdowns
@@ -61,11 +59,12 @@ class MatchesController < AdminController
     update_connections = params[:commit]&.downcase&.include?('edit who this match connects')
     if @match.update(match_params)
       if save_and_continue || update_connections
-        redirect_to edit_match_path(@match, edit_connection_mode: update_connections ? true : false),
-                    notice: 'Match was successfully updated.'
+        redirect_to(
+          edit_match_path(@match, edit_connection_mode: update_connections ? true : false),
+          notice: 'Match was successfully updated.'
+        )
       else
-        redirect_to matches_path,
-                    notice: 'Match was successfully updated.'
+        redirect_to matches_path, notice: 'Match was successfully updated.'
       end
     else
       set_form_dropdowns

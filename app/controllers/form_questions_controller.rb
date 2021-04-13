@@ -59,8 +59,8 @@ class FormQuestionsController < AdminController
 
   def form_question_params
     params.require(:form_question).permit(
-        :form_id,
-        :custom_form_question_id,
+      :form_id,
+      :custom_form_question_id,
     )
   end
 end

@@ -17,8 +17,11 @@ class HtmlSanitizer
 
   def sanitize
     return '' unless @string
-    safe_list_sanitizer = Rails::Html::SafeListSanitizer.new
-    safe_list_sanitizer.sanitize(@string,
-                                 tags: self.class.tags, attributes: self.class.html_attributes).html_safe
+
+    Rails::Html::SafeListSanitizer.new.sanitize(
+      @string,
+      tags: self.class.tags,
+      attributes: self.class.html_attributes
+    ).html_safe
   end
 end

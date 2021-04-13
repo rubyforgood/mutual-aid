@@ -17,9 +17,11 @@ module ApplicationHelper
       if resource_class.superclass != ApplicationRecord
         resource = resource.becomes(resource.class.superclass)
       end
-      link_to(path.present? ? "#{path}?#{params}" : edit_polymorphic_path(resource, params),
-              title: button_title || (action_name || button_text + ' ' + controller_path || resource_class.to_s),
-              class: "button edit-button #{button_class}") do
+      link_to(
+        path.present? ? "#{path}?#{params}" : edit_polymorphic_path(resource, params),
+        title: button_title || (action_name || button_text + ' ' + controller_path || resource_class.to_s),
+        class: "button edit-button #{button_class}"
+      ) do
         "<span class='#{icon_class || resource_class::ICON}'></span><span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
       end
     end
@@ -30,9 +32,11 @@ module ApplicationHelper
     if resource_class != Person && (resource_class.superclass != ApplicationRecord)
       resource = resource.becomes(resource.class.superclass)
     end
-    link_to(polymorphic_path(resource, params),
-            title: action_name || button_text + ' ' + controller_path || resource_class.to_s,
-            class: "button show-button #{margin_class}") do
+    link_to(
+      polymorphic_path(resource, params),
+      title: action_name || button_text + ' ' + controller_path || resource_class.to_s,
+      class: "button show-button #{margin_class}"
+    ) do
       "<span class='#{icon_class}'></span><span class='#{button_text_class}' style='padding-left: 0.25em'> #{button_text}</span>".html_safe
     end
   end
@@ -42,9 +46,11 @@ module ApplicationHelper
     if resource_class != Person && (resource_class.superclass != ApplicationRecord)
       resource = resource.becomes(resource.class.superclass)
     end
-    link_to(edit_contribution_path(resource),
-            title: 'Triage',
-            class: "button triage-button #{button_color_class || 'is-primary'}") do
+    link_to(
+      edit_contribution_path(resource),
+      title: 'Triage',
+      class: "button triage-button #{button_color_class || 'is-primary'}"
+    ) do
       "<span class='fa fa-edit'></span><span style='padding-left: 0.25em'> Triage</span>".html_safe
     end
   end

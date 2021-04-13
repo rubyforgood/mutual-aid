@@ -20,8 +20,14 @@ class Match < ApplicationRecord
   scope :match_ids, ->(match_ids) { where('matches.id::text = ANY (ARRAY[?])', match_ids) }
   scope :needs_follow_up, ->() { joins(:communication_logs).where('communication_logs.needs_follow_up = ?', true) }
   scope :status, ->(status) { where(status == 'all' || !status.present? ? 'matches.id IS NOT NULL' : "matches.status = '#{status.downcase}'") }
-  scope :this_month, -> { where('matches.created_at >= ? AND matches.created_at <= ?',
-                                Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }
+
+  scope :this_month, -> {
+    where(
+      'matches.created_at >= ? AND matches.created_at <= ?',
+      Time.zone.now.beginning_of_month,
+      Time.zone.now.end_of_month,
+    )
+  }
 
   def self.connected_to_person_id(person)
     communication_match_ids = []

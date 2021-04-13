@@ -12,9 +12,14 @@ class Position < ApplicationRecord
                          COMMUNITY_RESOURCES_CONTACT_TITLE, 'Point of contact', 'Member']
 
   scope :org_chart, -> { where(display_on_org_chart: true) }
-  scope :yearbook_year, ->(yearbook_year) { where('start_date >= ? AND end_date <= ?',
-                                                  yearbook_year || Time.zone.now.beginning_of_year,
-                                                  yearbook_year || Time.zone.now.end_of_year) }
+
+  scope :yearbook_year, ->(yearbook_year) {
+    where(
+      'start_date >= ? AND end_date <= ?',
+      yearbook_year || Time.zone.now.beginning_of_year,
+      yearbook_year || Time.zone.now.end_of_year,
+    )
+  }
 
   def name
     (person.present? ? "#{person.name}, " : '') + position_type.to_s

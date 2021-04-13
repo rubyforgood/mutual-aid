@@ -5,11 +5,11 @@ RSpec.describe ContributionBlueprint do
   let(:expected_category_id) { create(:category, name: expected_category).id }
   let(:contribution) do
     create(
-        :ask,
-        tag_list: [expected_category],
-        title: Faker::Lorem.word,
-        description: Faker::Lorem.sentence,
-        urgency_level_id: 1
+      :ask,
+      tag_list: [expected_category],
+      title: Faker::Lorem.word,
+      description: Faker::Lorem.sentence,
+      urgency_level_id: 1
     )
   end
   let(:expected_contact_method) { contribution.person.preferred_contact_method }

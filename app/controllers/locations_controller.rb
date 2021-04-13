@@ -84,13 +84,14 @@ class LocationsController < AdminController
 
   def location_params
     params.require(:location).permit(
-        :location_type_id,
-        :street_address,
-        :city,
-        :state,
-        :zip,
-        :county,
-        :region,
-        :neighborhood)
+      :location_type_id,
+      :street_address,
+      :city,
+      :state,
+      :zip,
+      :county,
+      :region,
+      :neighborhood,
+    )
   end
 end

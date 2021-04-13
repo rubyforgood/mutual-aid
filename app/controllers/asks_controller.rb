@@ -17,8 +17,8 @@ class AsksController < PublicController
       EmailNewSubmission.run!(
         submission: submission,
         user: current_user,
-        system_setting: context.system_settings
-        organization: Organization.instance_owner
+        system_setting: context.system_settings,
+        organization: Organization.instance_owner,
       )
       redirect_to thank_you_path, notice: 'Ask was successfully created.'
     else

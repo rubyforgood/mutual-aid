@@ -21,7 +21,7 @@ class Listing < ApplicationRecord
 
   validates :type, presence: true
 
-  enum state: { unmatched: 0, matched: 1 }
+  enum state: {unmatched: 0, matched: 1}
 
   MATCH_STATUSES = ['matched', 'unmatched']
 

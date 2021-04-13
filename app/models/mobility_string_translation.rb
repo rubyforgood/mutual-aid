@@ -9,7 +9,7 @@ class MobilityStringTranslation < ApplicationRecord
   validates :key, presence: true
   validates :value, presence: true
 
-  validates :translatable_id, uniqueness: { scope: %i[translatable_type locale key] }
+  validates :translatable_id, uniqueness: {scope: %i[translatable_type locale key]}
 
   scope :translatable, ->(record) { where(translatable_id: record.id).where(translatable_type: record.class.to_s) }
   scope :locale, ->(locale) { where('locale ILIKE ?', locale) }

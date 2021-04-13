@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe '/listings', type: :request do
   let(:valid_attributes) {{
-    location_attributes: { zip: '12345' },
+    location_attributes: {zip: '12345'},
     tag_list: ['', 'cash'],
     # name: Faker::Name.name,
     # email: Faker::Internet.email,
@@ -10,7 +10,7 @@ RSpec.describe '/listings', type: :request do
   }}
 
   let(:invalid_attributes) {{
-    location_attributes: { zip: '12e45' },
+    location_attributes: {zip: '12e45'},
   }}
 
   before { sign_in create(:user, :admin) }
@@ -78,14 +78,14 @@ RSpec.describe '/listings', type: :request do
       it 'creates a new Listing and Location' do
         pending 'relationship between contribution form and addresses is tbd'
         expect {
-          post listings_url, params: { listing: valid_attributes }
+          post listings_url, params: {listing: valid_attributes}
         }.to  change(Listing, :count).by(1)
          .and change(Location, :count).by(1)
       end
 
       it 'redirects to the created listing' do
         pending 'relationship between contribution form and addresses is tbd'
-        post listings_url, params: { listing: valid_attributes }
+        post listings_url, params: {listing: valid_attributes}
         expect(response).to redirect_to(listing_url(Listing.last))
       end
     end
@@ -93,12 +93,12 @@ RSpec.describe '/listings', type: :request do
     context 'with invalid parameters' do
       it 'does not create a new Listing' do
         expect {
-          post listings_url, params: { listing: invalid_attributes }
+          post listings_url, params: {listing: invalid_attributes}
         }.to change(Listing, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post listings_url, params: { listing: invalid_attributes }
+        post listings_url, params: {listing: invalid_attributes}
         expect(response).to be_successful
       end
     end
@@ -110,7 +110,7 @@ RSpec.describe '/listings', type: :request do
     context 'with valid parameters' do
       let(:new_street_address) { Faker::Address.street_address }
       let(:new_attributes) {{
-        location_attributes: { street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI') },
+        location_attributes: {street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI')},
       }}
 
       before do
@@ -131,7 +131,7 @@ RSpec.describe '/listings', type: :request do
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         pending 'relationship between contribution form and addresses is tbd'
-        patch listing_url(listing), params: { listing: invalid_attributes }
+        patch listing_url(listing), params: {listing: invalid_attributes}
         expect(response).to be_successful
       end
     end

@@ -13,9 +13,9 @@ class MatchContribution < ActiveInteraction::Base
 
   def match_receiver_and_provider
     if contribution.ask?
-      { receiver: contribution, provider: Offer.create!(counter_contribution_params) }
+      {receiver: contribution, provider: Offer.create!(counter_contribution_params)}
     elsif contribution.offer?
-      { receiver: Ask.create!(counter_contribution_params), provider: contribution }
+      {receiver: Ask.create!(counter_contribution_params), provider: contribution}
     else
       # TODO: check if community resource type when it's added
       raise "Unhandled contribution type: #{contribution.type}"
@@ -23,7 +23,7 @@ class MatchContribution < ActiveInteraction::Base
   end
 
   def counter_contribution_params
-    { person: person, service_area: contribution.service_area }
+    {person: person, service_area: contribution.service_area}
   end
 
   def person

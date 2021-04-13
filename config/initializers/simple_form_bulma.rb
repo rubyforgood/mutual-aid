@@ -66,10 +66,10 @@ SimpleForm.setup do |config|
     # b.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
     # b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
     b.wrapper tag: 'div', class: 'field' do |ba|
-      ba.use :label, class: 'label', wrap_with: { tag: 'label', class: 'label' }
+      ba.use :label, class: 'label', wrap_with: {tag: 'label', class: 'label'}
       ba.use :input, class: 'input'
-      ba.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+      ba.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
+      ba.use :hint,  wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
     end
   end
 
@@ -79,8 +79,8 @@ SimpleForm.setup do |config|
     b.use :placeholder
     b.optional :pattern
     b.optional :readonly
-    b.use :input, wrap_with: { tag: 'div', class: 'select' }
-    b.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
+    b.use :input, wrap_with: {tag: 'div', class: 'select'}
+    b.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
     # b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
   end
 
@@ -94,9 +94,9 @@ SimpleForm.setup do |config|
     b.wrapper tag: 'div', class: 'control' do |ba|
       ba.use :input, class: 'input'
     end
-    b.use :input, class: 'file-input', wrap_with: { tag: 'label', class: 'file-label' }
-    b.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
-    b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    b.use :input, class: 'file-input', wrap_with: {tag: 'label', class: 'file-label'}
+    b.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
+    b.use :hint, wrap_with: {tag: 'small', class: 'form-text text-muted'}
   end
 
   # bulma extension vertical input for boolean
@@ -106,10 +106,10 @@ SimpleForm.setup do |config|
     b.use :input, class: 'is-checkradio is-info'
     b.use :label
     b.wrapper :form_check_wrapper, tag: 'div', class: 'control' do |bb|
-      bb.use :input, wrap_with: { tag: 'label', class: 'checkbox' }
+      bb.use :input, wrap_with: {tag: 'label', class: 'checkbox'}
       bb.use :label, class: 'checkbox'
-      bb.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
-      bb.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+      bb.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
+      bb.use :hint, wrap_with: {tag: 'small', class: 'form-text text-muted'}
     end
     # b.wrapper tag: 'div', class: 'checkbox' do |ba|
       #     ba.use :label_input
@@ -128,8 +128,8 @@ SimpleForm.setup do |config|
     b.optional :step
     b.use :label
     b.use :input, class: 'form-control-range', error_class: 'is-invalid', valid_class: 'is-valid'
-    b.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
-    b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    b.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
+    b.use :hint, wrap_with: {tag: 'small', class: 'form-text text-muted'}
   end
 
   config.wrappers :vertical_radio, tag: 'div', class: 'vertical-radio', error_class: 'has-error' do |b|
@@ -143,8 +143,8 @@ SimpleForm.setup do |config|
        end
      end
     end
-    b.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-    b.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+    b.use :full_error, wrap_with: {tag: 'span', class: 'help invalid-feedback is-danger'}
+    b.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
   end
 
   config.wrappers :vertical_checkboxes, tag: 'div', class: 'vertical-checkboxes', error_class: 'has-error' do |b|
@@ -158,8 +158,8 @@ SimpleForm.setup do |config|
         end
       end
     end
-    b.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-    b.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+    b.use :full_error, wrap_with: {tag: 'span', class: 'help invalid-feedback is-danger'}
+    b.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
   end
 
     ## vertical input for radio buttons and check boxes
@@ -202,8 +202,8 @@ SimpleForm.setup do |config|
       b.wrapper :input, tag: 'div', class: 'field-body' do |bi|
         bi.wrapper :input, tag: 'div', class: 'field' do |bf|
           bf.use :input, class: 'input'
-          bf.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-          bf.optional :hint, wrap_with: { tag: 'p', class: 'help' }
+          bf.use :full_error, wrap_with: {tag: 'span', class: 'help invalid-feedback is-danger'}
+          bf.optional :hint, wrap_with: {tag: 'p', class: 'help'}
         end
       end
     end
@@ -230,10 +230,10 @@ SimpleForm.setup do |config|
       b.optional :min_max
       b.optional :readonly
       b.wrapper :grid_wrapper, tag: 'div', class: 'field' do |ba|
-        ba.use :label, class: 'label', wrap_with: { tag: 'label', class: 'label' }
+        ba.use :label, class: 'label', wrap_with: {tag: 'label', class: 'label'}
         ba.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
-        ba.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
-        ba.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+        ba.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
+        ba.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
       end
     end
 
@@ -262,10 +262,10 @@ SimpleForm.setup do |config|
       b.use :label
       b.wrapper tag: 'div', class: 'field-body' do |ba|
         ba.wrapper :form_check_wrapper, tag: 'div', class: 'control field is-horizontal' do |bb|
-          bb.use :input, wrap_with: { tag: 'label field-label field-label-left', class: 'checkbox' }
+          bb.use :input, wrap_with: {tag: 'label field-label field-label-left', class: 'checkbox'}
           bb.use :label, class: 'checkbox'
-          bb.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
-          bb.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+          bb.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
+          bb.use :hint, wrap_with: {tag: 'small', class: 'form-text text-muted'}
         end
       end
       # b.wrapper tag: 'div', class: 'checkbox' do |ba|
@@ -287,8 +287,8 @@ SimpleForm.setup do |config|
            baaa.use :input, class: 'radio', type: 'radio'
          end
        end
-       ba.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-       ba.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+       ba.use :full_error, wrap_with: {tag: 'span', class: 'help invalid-feedback is-danger'}
+       ba.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
       end
     end
 
@@ -303,8 +303,8 @@ SimpleForm.setup do |config|
           end
         end
       end
-      b.use :full_error, wrap_with: { tag: 'span', class: 'help invalid-feedback is-danger' }
-      b.use :hint, wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
+      b.use :full_error, wrap_with: {tag: 'span', class: 'help invalid-feedback is-danger'}
+      b.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
     end
 
     ## horizontal input for radio buttons and check boxes
@@ -360,8 +360,8 @@ SimpleForm.setup do |config|
     #     ba.use :error, wrap_with: { tag: 'span', class: 'help has-text-grey-light' }
     #     ba.use :hint,  wrap_with: { tag: 'p', class: 'help has-text-grey-light' }
     # end
-    b.use :full_error, wrap_with: { tag: 'div', class: 'help invalid-feedback is-danger' }
-    b.use :hint, wrap_with: { tag: 'small', class: 'help' }
+    b.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
+    b.use :hint, wrap_with: {tag: 'small', class: 'help'}
   end
 
     ## horizontal multi select
@@ -372,9 +372,9 @@ SimpleForm.setup do |config|
       b.wrapper :grid_wrapper, tag: 'div', class: 'control' do |ba|
         ba.wrapper tag: 'div', class: 'field is-grouped' do |bb|
           bb.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
-          ba.use :hint, wrap_with: { tag: 'small', class: 'help' } # adds hint above select
+          ba.use :hint, wrap_with: {tag: 'small', class: 'help'} # adds hint above select
         end
-        ba.use :full_error, wrap_with: { tag: 'div', class: 'help is-invalid invalid-feedback is-danger' }
+        ba.use :full_error, wrap_with: {tag: 'div', class: 'help is-invalid invalid-feedback is-danger'}
       end
     end
 

@@ -45,7 +45,7 @@ RSpec.describe "/people", type: :request do
 
   describe "POST /create" do
     it "can render" do
-      post "/people", params: { person: FactoryBot.attributes_for(:person) }
+      post "/people", params: {person: FactoryBot.attributes_for(:person)}
       expect(response).to be_successful
     end
   end
@@ -54,7 +54,7 @@ RSpec.describe "/people", type: :request do
     let(:person) { FactoryBot.create(:person) }
 
     it "updates the person" do
-      patch "/people/#{person.id}", params: { person: { name: "Aud Torvingen" } }
+      patch "/people/#{person.id}", params: {person: {name: "Aud Torvingen"}}
       person.reload
       expect(person.name).to eq("Aud Torvingen")
     end

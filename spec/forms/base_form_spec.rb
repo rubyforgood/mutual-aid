@@ -33,7 +33,7 @@ RSpec.describe BaseForm do
     end
 
     context 'with an explicitly nil param' do
-      let(:params) {{ date: nil }}
+      let(:params) {{date: nil}}
 
       specify 'inputs show all params with defaults' do
         expect(inputs).to eq(string: nil, date: nil)
@@ -45,7 +45,7 @@ RSpec.describe BaseForm do
     end
 
     context 'with params given' do
-      let(:params) {{ string: 'a string', date: '2020-12-31' }}
+      let(:params) {{string: 'a string', date: '2020-12-31'}}
 
       it 'recognizes the given params' do
         expect(inputs).to eq(string: 'a string', date: Date.new(2020, 12, 31))

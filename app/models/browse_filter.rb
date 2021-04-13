@@ -6,7 +6,7 @@
 class BrowseFilter
   FILTERS = {
     'ServiceArea' => ->(ids, scope) { scope.where(service_area: ids) },
-    'ContactMethod' => ->(ids, scope) { scope.joins(:person).where(people: { preferred_contact_method: ids })},
+    'ContactMethod' => ->(ids, scope) { scope.joins(:person).where(people: {preferred_contact_method: ids})},
     'Category' => lambda do |ids, scope|
       scope.tagged_with(
         Category.roots.where(id: ids).pluck('name'),

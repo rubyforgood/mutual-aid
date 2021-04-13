@@ -45,7 +45,7 @@ class ListingsController < AdminController
 
   def match
     listing_type = @listing.type
-    match_polymorphic_params = listing_type == Ask ? { receiver: @listing } : { provider: @listing }
+    match_polymorphic_params = listing_type == Ask ? {receiver: @listing} : {provider: @listing}
     @match = Match.new
     @match.update(match_polymorphic_params)
     @possible_providers = Listing.offers # TODO: - get this to be a filtered list -- need to add logic by which to match

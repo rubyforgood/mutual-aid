@@ -380,20 +380,6 @@ Layout/SpaceBeforeComment:
   Exclude:
     - 'app/models/user.rb'
 
-# Offense count: 15
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBrackets.
-# SupportedStyles: space, no_space, compact
-# SupportedStylesForEmptyBrackets: space, no_space
-Layout/SpaceInsideArrayLiteralBrackets:
-  Exclude:
-    - 'app/controllers/matches_controller.rb'
-    - 'app/models/software_feedback.rb'
-    - 'config/environments/production.rb'
-    - 'db/migrate/20201121210338_create_active_storage_tables.active_storage.rb'
-    - 'db/migrate/20201121210339_create_action_text_tables.action_text.rb'
-    - 'db/seeds.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

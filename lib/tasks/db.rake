@@ -6,26 +6,34 @@ desc 'Extra db functions: stats_check, reset db with seeds, import csv and seed 
 
 namespace :db do
 
-  task :rebuild_and_seed_dev => ['db:reset',
-                                 'db:migrate',
-                                 'db:import_all_seeds',
-                                 'db:stats_check']
+  task :rebuild_and_seed_dev => [
+    'db:reset',
+    'db:migrate',
+    'db:import_all_seeds',
+    'db:stats_check'
+  ]
 
-  task :rebuild_and_seed => ['db:reset',
-                             'db:migrate',
-                             'db:seed',
-                             'db:stats_check']
+  task :rebuild_and_seed => [
+    'db:reset',
+    'db:migrate',
+    'db:seed',
+    'db:stats_check'
+  ]
 
-  task :recreate_all_seeds => ['db:truncate_tables',
-                               'db:import_all_seeds',
-                               'db:stats_check']
+  task :recreate_all_seeds => [
+    'db:truncate_tables',
+    'db:import_all_seeds',
+    'db:stats_check'
+  ]
 
-  task :import_all_seeds => ['db:seed',
-                             'db:import_dev_seeds',
-                             'db:import_submission_response_seeds',
-                             'db:import_user_seeds',
-                             'db:import_custom_form_question_seeds',
-                             'db:stats_check']
+  task :import_all_seeds => [
+    'db:seed',
+    'db:import_dev_seeds',
+    'db:import_submission_response_seeds',
+    'db:import_user_seeds',
+    'db:import_custom_form_question_seeds',
+    'db:stats_check'
+  ]
 
   task :stats_check => :environment do
     require "#{Rails.root}/db/scripts/tuple_counts.rb"

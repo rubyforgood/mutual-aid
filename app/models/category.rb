@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
-  belongs_to(:parent,
+  belongs_to :parent, {
     class_name: 'Category',
     inverse_of: :categories,
     optional: true,
-  )
-  has_many(:categories, -> { order(:display_order, :name) },
+  }
+  has_many :categories, -> { order(:display_order, :name) }, {
     class_name: 'Category',
     foreign_key: :parent_id,
-    inverse_of: :parent
-  )
+    inverse_of: :parent,
+  }
 
   validates :name, presence: true
 

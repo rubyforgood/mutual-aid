@@ -61,6 +61,7 @@ class MobilityStringTranslationsController < AdminController
       :key,
       :value,
       :created_by_id,
-      :is_approved)
+      :is_approved
+    )
   end
 end

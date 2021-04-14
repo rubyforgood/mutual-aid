@@ -29,12 +29,13 @@ state = ["NY", "MI", "DC", "NC"].sample
   contact_method = ContactMethod.sample_one
   email = Faker::Internet.email
   phone = Faker::PhoneNumber.phone_number
-  Person.where(location: location,
-               name: Faker::Name.name, 
-               preferred_contact_method: contact_method,
-               email: contact_method&.field&.downcase == "email" ? email : [nil, email].sample,
-               phone: contact_method&.field&.downcase == "phone" ? phone : [nil, phone].sample,
-               ).first_or_create!
+  Person.where(
+    location: location,
+    name: Faker::Name.name, 
+    preferred_contact_method: contact_method,
+    email: contact_method&.field&.downcase == "email" ? email : [nil, email].sample,
+    phone: contact_method&.field&.downcase == "phone" ? phone : [nil, phone].sample,
+  ).first_or_create!
 end
 
 # asks for person
@@ -190,34 +191,36 @@ Listing.all.each do |listing|
   elsif listing.offer?
     match = listing.matches_as_provider.first
   end
-  CommunicationLog.create!(person: listing.person,
-                           match: match,
-                           created_by: User.first,
-                           outbound: [true, false].sample,
-                           sent_at: listing.created_at,
-                           delivery_method: ContactMethod.email,
-                           needs_follow_up: [true, false].sample,
-                           delivery_status: Messenger.delivery_statuses.sample,
-                           subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
-                           auto_generated: true,
-                          )
+  CommunicationLog.create!(
+    person: listing.person,
+    match: match,
+    created_by: User.first,
+    outbound: [true, false].sample,
+    sent_at: listing.created_at,
+    delivery_method: ContactMethod.email,
+    needs_follow_up: [true, false].sample,
+    delivery_status: Messenger.delivery_statuses.sample,
+    subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
+    body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
+    auto_generated: true,
+  )
 end
 # 70% get random manual logs
 Listing.all.sample((Listing.count * 70) / 100) do |listing|
   delivery_status = (Messenger.delivery_statuses - Messenger.default_status).sample
-  CommunicationLog.create!(person: listing.person,
-                           match: listing.matches.first,
-                           created_by: User.all.sample,
-                           outbound: [true, false].sample,
-                           sent_at: Faker::Time.between(from: listing.created_at, to: DateTime.now),
-                           delivery_method: ContactMethod.sample_one,
-                           needs_follow_up: [true, false].sample,
-                           delivery_status: delivery_status,
-                           subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
-                           auto_generated: false,
-                          )
+  CommunicationLog.create!(
+    person: listing.person,
+    match: listing.matches.first,
+    created_by: User.all.sample,
+    outbound: [true, false].sample,
+    sent_at: Faker::Time.between(from: listing.created_at, to: DateTime.now),
+    delivery_method: ContactMethod.sample_one,
+    needs_follow_up: [true, false].sample,
+    delivery_status: delivery_status,
+    subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
+    body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
+    auto_generated: false,
+  )
 end
 
 def update_status(match)

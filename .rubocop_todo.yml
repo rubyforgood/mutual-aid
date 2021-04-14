@@ -231,24 +231,6 @@ Layout/MultilineHashBraceLayout:
   Exclude:
     - 'spec/blueprints/contribution_blueprint_spec.rb'
 
-# Offense count: 17
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: symmetrical, new_line, same_line
-Layout/MultilineMethodCallBraceLayout:
-  Exclude:
-    - 'app/controllers/categories_controller.rb'
-    - 'app/controllers/locations_controller.rb'
-    - 'app/controllers/matches_controller.rb'
-    - 'app/controllers/mobility_string_translations_controller.rb'
-    - 'app/helpers/communication_log_buttons.rb'
-    - 'app/models/category.rb'
-    - 'app/models/importers/custom_form_question_importer.rb'
-    - 'db/seeds/dev_seeds.rb'
-    - 'spec/forms/community_resource_form_spec.rb'
-    - 'spec/forms/submission_form_spec.rb'
-    - 'spec/requests/community_resources_spec.rb'
-
 # Offense count: 7
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, IndentationWidth.

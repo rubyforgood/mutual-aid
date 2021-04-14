@@ -118,6 +118,7 @@ class MatchesController < AdminController
       :status,
       :notes,
       :tentative,
-      :completed)
+      :completed
+    )
   end
 end

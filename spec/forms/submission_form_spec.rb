@@ -219,12 +219,12 @@ RSpec.describe SubmissionForm do
     let(:existing_location) { create :location, city: 'Chicago', zip: '10101' }
     let(:existing_person)   { create :person, location: existing_location, name: 'old name', email: 'keep@me.org' }
 
-    let(:existing_submission) { create(:submission,
+    let(:existing_submission) { create :submission, {
       person: existing_person,
       listings: [existing_listing],
       form_name: 'Offer_form',
       privacy_level_requested: 'volunteers',
-    )}
+    } }
     let(:existing_response) { create :submission_response, submission: existing_submission }
 
     let(:params) { {

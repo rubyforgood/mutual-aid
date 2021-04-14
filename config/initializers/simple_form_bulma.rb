@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:todo Layout/CommentIndentation
 SimpleForm.setup do |config|
   # Default class for buttons
   config.button_class = 'button'
@@ -112,11 +113,11 @@ SimpleForm.setup do |config|
       bb.use :hint, wrap_with: {tag: 'small', class: 'form-text text-muted'}
     end
     # b.wrapper tag: 'div', class: 'checkbox' do |ba|
-      #     ba.use :label_input
-      #   end
-      #
-      #   b.use :error, wrap_with: { tag: 'span', class: 'hint' }
-      #   b.use :hint,  wrap_with: { tag: 'p', class: 'hint' }
+    #     ba.use :label_input
+    #   end
+    #
+    #   b.use :error, wrap_with: { tag: 'span', class: 'hint' }
+    #   b.use :hint,  wrap_with: { tag: 'p', class: 'hint' }
     # end
   end
 
@@ -542,6 +543,8 @@ SimpleForm.setup do |config|
     # b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
     # b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
     # end
+
+# rubocop:enable Layout/CommentIndentation
 
   class StringInput < SimpleForm::Inputs::StringInput
     def input(wrapper_options)

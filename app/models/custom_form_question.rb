@@ -3,7 +3,7 @@
 class CustomFormQuestion < ApplicationRecord
   extend Mobility
   translates :name, type: :string
-#   translates :option_list, type: :string # if this is json, ok to say string here?
+  #   translates :option_list, type: :string # if this is json, ok to say string here?
   translates :hint_text, type: :string
 
   has_many :submission_responses

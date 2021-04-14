@@ -47,13 +47,10 @@ RSpec.describe CommunityResourceForm do
 
     describe 'on save' do
       it 'persists the new community resource with new associated records' do
-        expect {
-          community_resource.save!
-        }.to(
-          change(CommunityResource, :count).by(1).and(
-          change(Organization, :count).by(1)).and(
-          change(Location, :count).by(1))
-        )
+        expect { community_resource.save! }
+          .to  change(CommunityResource, :count).by(1)
+          .and change(Organization, :count).by(1)
+          .and change(Location, :count).by(1)
       end
 
       context 'with validation errors' do
@@ -105,13 +102,10 @@ RSpec.describe CommunityResourceForm do
 
     describe 'on save' do
       it 'does not create any new records' do
-        expect {
-          community_resource.save!
-        }.to(
-          change(CommunityResource, :count).by(0).and(
-          change(Organization, :count).by(0)).and(
-          change(Location, :count).by(0))
-        )
+        expect { community_resource.save!  }
+          .to  change(CommunityResource, :count).by(0)
+          .and change(Organization, :count).by(0)
+          .and change(Location, :count).by(0)
       end
 
       it 'persists updated values correctly' do

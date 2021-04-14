@@ -88,10 +88,13 @@ end
 org = Organization.where(name: "Diaper Bank").first_or_create!
 # community_resources
 CommunityResource.where(
-    name: "this is diapers for you", 
-    description: "first come first serve", 
-    organization: org
-  ).first_or_create!(publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now))
+  name: "this is diapers for you",
+  description: "first come first serve",
+  organization: org
+).first_or_create!(
+  publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now)
+)
+
 5.times do
   org = Organization.create!(name: Faker::Company.name)
   CommunityResource.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
@@ -114,20 +117,22 @@ end
 
 # communication_logs
 CommunicationLog.where(
-    subject: "hello from LAMA",
-    body: "we'd love to talk with you!",
-    person: person,
-    delivery_method: ContactMethod.sample_one,
-    delivery_status: "completed"
-).first_or_create!(sent_at: Time.now - 3.days) # wow!!!
+  subject: "hello from LAMA",
+  body: "we'd love to talk with you!",
+  person: person,
+  delivery_method: ContactMethod.sample_one,
+  delivery_status: "completed"
+).first_or_create!(
+  sent_at: Time.now - 3.days # wow!!!
+)
 
 CommunicationLog.where(
-    subject: "we'd like your feedback!",
-    body: "how was your experience?",
-    person: person,
-    delivery_method: ContactMethod.email,
-    delivery_status: "completed",
-    auto_generated: true,
+  subject: "we'd like your feedback!",
+  body: "how was your experience?",
+  person: person,
+  delivery_method: ContactMethod.email,
+  delivery_status: "completed",
+  auto_generated: true,
 ).first_or_create!(sent_at: Time.now - 1.day)
 
 # offers for person

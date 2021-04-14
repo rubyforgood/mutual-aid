@@ -44,10 +44,9 @@ RSpec.describe '/community_resources', type: :request do
 
   describe 'PUT /community_resources' do
     it 'creates a new community resource and location' do
-      expect { post community_resources_path, params: params }.to(
-        change(CommunityResource, :count).by(1).and(
-        change(Location, :count).by(1)
-      ))
+      expect { post community_resources_path, params: params }
+        .to  change(CommunityResource, :count).by(1)
+        .and change(Location, :count).by(1)
     end
 
     context 'as an admin' do

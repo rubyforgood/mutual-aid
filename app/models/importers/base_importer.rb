@@ -225,10 +225,10 @@ class Importers::BaseImporter
   def create_history_log(row, error_message = nil)
     begin
       extra_detail = '+++ row_number#: ' +
-          @row_number.to_s +
-          " +++ #{history_log_name(row.to_s)}" +
-          " +++ #{row.to_s}" +
-          " +++ DID NOT IMPORT -- #{error_message}  -- imported by #{@current_user&.name}"
+        @row_number.to_s +
+        " +++ #{history_log_name(row.to_s)}" +
+        " +++ #{row.to_s}" +
+        " +++ DID NOT IMPORT -- #{error_message}  -- imported by #{@current_user&.name}"
       HistoryLog.generate_import_log!(@current_user, self.class, extra_detail) # TODO
     rescue
       binding.pry

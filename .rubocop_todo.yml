@@ -14,25 +14,6 @@ Layout/BlockAlignment:
   Exclude:
     - 'spec/factories/users.rb'
 
-# Offense count: 16
-# Cop supports --auto-correct.
-Layout/ClosingParenthesisIndentation:
-  Exclude:
-    - 'app/controllers/communication_logs_controller.rb'
-    - 'app/controllers/custom_form_questions_controller.rb'
-    - 'app/controllers/donations_controller.rb'
-    - 'app/controllers/form_questions_controller.rb'
-    - 'app/controllers/forms_controller.rb'
-    - 'app/controllers/organizations_controller.rb'
-    - 'app/controllers/people_controller.rb'
-    - 'app/controllers/service_areas_controller.rb'
-    - 'app/controllers/submissions_controller.rb'
-    - 'app/models/announcement.rb'
-    - 'app/models/community_resource.rb'
-    - 'app/models/importers/custom_form_question_importer.rb'
-    - 'db/seeds/dev_seeds.rb'
-    - 'spec/blueprints/contribution_blueprint_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleAlignWith, Severity.
@@ -143,24 +124,6 @@ Layout/EndAlignment:
 
 # Offense count: 3
 # Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: special_inside_parentheses, consistent, align_brackets
-Layout/FirstArrayElementIndentation:
-  Exclude:
-    - 'app/controllers/people_controller.rb'
-    - 'app/models/system_setting.rb'
-    - 'db/seeds.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: IndentationWidth, EnforcedStyle.
-# SupportedStyles: spaces, tabs
-Layout/IndentationStyle:
-  Exclude:
-    - 'spec/factories/users.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: symmetrical, new_line, same_line
 Layout/MultilineArrayBraceLayout:
@@ -176,25 +139,6 @@ Layout/MultilineArrayBraceLayout:
 Layout/MultilineHashBraceLayout:
   Exclude:
     - 'spec/blueprints/contribution_blueprint_spec.rb'
-
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: aligned, indented
-Layout/MultilineOperationIndentation:
-  Exclude:
-    - 'app/models/announcement.rb'
-    - 'app/models/importers/base_importer.rb'
-    - 'db/scripts/tuple_counts.rb'
-
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: with_first_parameter, with_fixed_indentation
-Layout/ParameterAlignment:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/communication_log_buttons.rb'
 
 # Offense count: 11
 # Cop supports --auto-correct.

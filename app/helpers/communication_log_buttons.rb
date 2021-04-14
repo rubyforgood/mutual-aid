@@ -2,20 +2,22 @@
 
 module CommunicationLogButtons
 
-  def remote_communication_log_button(person,
-                                      match: nil,
-                                      needs_follow_up: false,
-                                      subject: nil,
-                                      body: nil,
-                                      delivery_method_name: 'email',
-                                      delivery_status: 'sent',
-                                      button_text: 'Add Communication Log',
-                                      icon_class: 'fa fa-plus',
-                                      margin_class: nil,
-                                      created_by: nil,
-                                      path: nil,
-                                      method: :post,
-                                      remote: true)
+  def remote_communication_log_button(
+    person,
+    match: nil,
+    needs_follow_up: false,
+    subject: nil,
+    body: nil,
+    delivery_method_name: 'email',
+    delivery_status: 'sent',
+    button_text: 'Add Communication Log',
+    icon_class: 'fa fa-plus',
+    margin_class: nil,
+    created_by: nil,
+    path: nil,
+    method: :post,
+    remote: true
+  )
 
     delivery_method = ContactMethod.where(name: delivery_method_name.titleize).first_or_create!(name: delivery_method_name.titleize, field: nil, enabled: false)
 

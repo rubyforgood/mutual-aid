@@ -24,8 +24,8 @@ class Announcement < ApplicationRecord
   def published?
     now = Time.current
     is_approved &&
-        (publish_from.present? ? publish_from <= now : true) &&
-        (publish_until == nil || now < publish_until)
+      (publish_from.present? ? publish_from <= now : true) &&
+      (publish_until == nil || now < publish_until)
   end
 
   def all_tags_unique

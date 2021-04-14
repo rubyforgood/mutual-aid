@@ -12,7 +12,7 @@ class Importers::UserImporter < Importers::BaseImporter
   end
 
   def klasses_array
-    [Person,User]
+    [Person, User]
   end
 
   def required_fields_array

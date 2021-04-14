@@ -343,45 +343,6 @@ Layout/ParameterAlignment:
     - 'app/helpers/application_helper.rb'
     - 'app/helpers/communication_log_buttons.rb'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-Layout/SpaceAfterComma:
-  Exclude:
-    - 'app/controllers/service_areas_controller.rb'
-    - 'app/models/importers/user_importer.rb'
-    - 'db/seeds/dev_seeds.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment, EnforcedStyleForExponentOperator.
-# SupportedStylesForExponentOperator: space, no_space
-Layout/SpaceAroundOperators:
-  Exclude:
-    - 'db/seeds/dev_seeds.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Layout/SpaceBeforeComment:
-  Exclude:
-    - 'app/models/user.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: space, no_space
-Layout/SpaceInsideParens:
-  Exclude:
-    - 'app/helpers/communication_log_buttons.rb'
-    - 'db/seeds/dev_seeds.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: space, no_space
-Layout/SpaceInsideStringInterpolation:
-  Exclude:
-    - 'db/scripts/tuple_counts.rb'
-
 # Offense count: 11
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

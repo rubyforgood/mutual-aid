@@ -14,25 +14,6 @@ Layout/BlockAlignment:
   Exclude:
     - 'spec/factories/users.rb'
 
-# Offense count: 24
-# Cop supports --auto-correct.
-Layout/BlockEndNewline:
-  Exclude:
-    - 'app/mailers/submission_mailer.rb'
-    - 'app/models/custom_form_question.rb'
-    - 'app/models/donation.rb'
-    - 'app/models/match.rb'
-    - 'app/models/position.rb'
-    - 'app/models/service_area.rb'
-    - 'spec/forms/base_form_spec.rb'
-    - 'spec/forms/community_resource_form_spec.rb'
-    - 'spec/forms/submission_form_spec.rb'
-    - 'spec/lib/tasks/support/listing_converter_spec.rb'
-    - 'spec/requests/announcements_spec.rb'
-    - 'spec/requests/community_resources_spec.rb'
-    - 'spec/requests/contributions_spec.rb'
-    - 'spec/requests/listings_spec.rb'
-
 # Offense count: 16
 # Cop supports --auto-correct.
 Layout/ClosingParenthesisIndentation:

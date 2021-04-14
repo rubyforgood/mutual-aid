@@ -101,14 +101,16 @@ RSpec.describe BaseForm do
 
     subject(:keys) { form_class.filter_keys }
 
-    it { is_expected.to eq [ # rubocop:disable Layout/MultilineBlockLayout
-      :date,
-      array: [],
-      raw_hash: {},
-      nested_hash: [
-        :nested_date,
-        doubly_nested_hash: [:id],
-      ],
-    ]}
+    it do
+      is_expected.to eq [
+        :date,
+        array: [],
+        raw_hash: {},
+        nested_hash: [
+          :nested_date,
+          doubly_nested_hash: [:id],
+        ],
+      ]
+    end
   end
 end

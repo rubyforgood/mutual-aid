@@ -351,21 +351,6 @@ Layout/SpaceAfterComma:
     - 'app/models/importers/user_importer.rb'
     - 'db/seeds/dev_seeds.rb'
 
-# Offense count: 20
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: space, no_space
-Layout/SpaceAroundEqualsInParameterDefault:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/index_action_buttons.rb'
-    - 'app/models/communication_log.rb'
-    - 'app/models/history_log.rb'
-    - 'app/models/importers/base_importer.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-    - 'app/models/importers/user_importer.rb'
-    - 'app/models/service_area.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: AllowForAlignment, EnforcedStyleForExponentOperator.

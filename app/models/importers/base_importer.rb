@@ -223,7 +223,7 @@ class Importers::BaseImporter
     @final_diff_model_counts = final_counts_hash
   end
 
-  def create_history_log(row, error_message=nil)
+  def create_history_log(row, error_message = nil)
     begin
       extra_detail = '+++ row_number#: ' +
           @row_number.to_s +

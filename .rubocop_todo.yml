@@ -249,21 +249,6 @@ Layout/MultilineMethodCallBraceLayout:
     - 'spec/forms/submission_form_spec.rb'
     - 'spec/requests/community_resources_spec.rb'
 
-# Offense count: 21
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: aligned, indented, indented_relative_to_receiver
-Layout/MultilineMethodCallIndentation:
-  Exclude:
-    - 'app/controllers/categories_controller.rb'
-    - 'app/controllers/communication_logs_controller.rb'
-    - 'app/models/custom_form_question.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-    - 'app/models/listing.rb'
-    - 'app/models/location.rb'
-    - 'app/models/service_area.rb'
-    - 'spec/requests/listings_spec.rb'
-
 # Offense count: 7
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, IndentationWidth.

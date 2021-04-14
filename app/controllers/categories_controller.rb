@@ -4,8 +4,11 @@ class CategoriesController < AdminController
   before_action :set_category, only: %i[show edit update destroy]
 
   def index
-    @root_categories = Category.roots.includes(:categories).references(:categories)
-            .order(display_to_public: :desc, display_order: :asc, name: :asc, parent_id: :asc)
+    @root_categories = Category
+      .roots
+      .includes(:categories)
+      .references(:categories)
+      .order(display_to_public: :desc, display_order: :asc, name: :asc, parent_id: :asc)
   end
 
   def show; end

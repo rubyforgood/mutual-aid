@@ -77,10 +77,9 @@ RSpec.describe '/listings', type: :request do
     context 'with valid parameters' do
       it 'creates a new Listing and Location' do
         pending 'relationship between contribution form and addresses is tbd'
-        expect {
-          post listings_url, params: {listing: valid_attributes}
-        }.to  change(Listing, :count).by(1)
-         .and change(Location, :count).by(1)
+        expect { post listings_url, params: {listing: valid_attributes} }
+          .to  change(Listing,  :count).by(1)
+          .and change(Location, :count).by(1)
       end
 
       it 'redirects to the created listing' do

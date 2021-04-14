@@ -380,16 +380,6 @@ Layout/SpaceBeforeComment:
   Exclude:
     - 'app/models/user.rb'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: require_no_space, require_space
-Layout/SpaceInLambdaLiteral:
-  Exclude:
-    - 'app/models/contact_method.rb'
-    - 'app/models/match.rb'
-    - 'app/models/service_area.rb'
-
 # Offense count: 15
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBrackets.

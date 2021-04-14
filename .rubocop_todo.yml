@@ -170,17 +170,6 @@ Layout/FirstArrayElementIndentation:
     - 'app/models/system_setting.rb'
     - 'db/seeds.rb'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: special_inside_parentheses, consistent, align_braces
-Layout/FirstHashElementIndentation:
-  Exclude:
-    - 'app/helpers/communication_log_buttons.rb'
-    - 'app/models/custom_form_question.rb'
-    - 'config/initializers/simple_form_bulma.rb'
-    - 'spec/blueprints/contribution_blueprint_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth, EnforcedStyle.

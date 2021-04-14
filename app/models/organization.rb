@@ -9,12 +9,12 @@ class Organization < ApplicationRecord
   has_many :teams
 
   validates :name, presence: true
-  validates_uniqueness_of :is_instance_owner, conditions: -> { where is_instance_owner: true }
+  validates_uniqueness_of :is_host, conditions: -> { where is_host: true }
 
   scope :org_chart, -> { where(display_on_org_chart: true) }
 
-  def self.instance_owner
-    find_by(is_instance_owner: true)
+  def self.host_organization
+    find_by(is_host: true)
   end
 
   def primary_contact
@@ -22,15 +22,15 @@ class Organization < ApplicationRecord
   end
 
   def ask_form_contact
-    positions.where(position_type: Position::ASK_FORM_CONTACT_TITLE, organization: Organization.instance_owner).first
+    positions.where(position_type: Position::ASK_FORM_CONTACT_TITLE, organization: Organization.host_organization).first
   end
 
   def offer_form_contact
-    positions.where(position_type: Position::OFFER_FORM_CONTACT_TITLE, organization: Organization.instance_owner).first
+    positions.where(position_type: Position::OFFER_FORM_CONTACT_TITLE, organization: Organization.host_organization).first
   end
 
   def community_resources_contact
-    positions.where(position_type: Position::COMMUNITY_RESOURCES_CONTACT_TITLE, organization: Organization.instance_owner).first
+    positions.where(position_type: Position::COMMUNITY_RESOURCES_CONTACT_TITLE, organization: Organization.host_organization).first
   end
 end
 
@@ -46,7 +46,7 @@ end
 #  has_hosting_account  :boolean          default(FALSE), not null
 #  has_mailer_account   :boolean          default(FALSE), not null
 #  has_sms_account      :boolean          default(FALSE), not null
-#  is_instance_owner    :boolean          default(FALSE), not null
+#  is_host              :boolean          default(FALSE), not null
 #  logo_url             :string
 #  name                 :string
 #  phone                :string

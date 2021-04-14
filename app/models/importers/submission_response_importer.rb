@@ -16,7 +16,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       elsif form_type.include?('offer')
         'What resources can you offer? check all applicable'
       end
-    @instance_owner = Organization.instance_owner
+    @host_organization = Organization.host_organization
     @organization_listing = create_organization_community_resource
   end
 
@@ -224,7 +224,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   end
 
   def create_organization_community_resource
-    CommunityResource.where(organization: @instance_owner).first_or_create!(
+    CommunityResource.where(organization: @host_organization).first_or_create!(
       is_created_by_admin: true, 
       name: 'PLACEHOLDER', 
       description: 'DESCRIPTION PLACEHOLDER', 

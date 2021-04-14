@@ -27,7 +27,7 @@
         <td><%= organization.website_url %></td>
         <td><%= organization.phone %></td>
         <td><%= organization.primary_contact&.name %></td>
-        <td><%= yes_no(organization.is_instance_owner) %></td>
+        <td><%= yes_no(organization.is_host) %></td>
         <td><%= yes_no(organization.display_on_org_chart) %></td>
         <td><%= yes_no(organization.has_sms_account) %></td>
         <td><%= yes_no(organization.has_hosting_account) %></td>

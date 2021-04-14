@@ -19,7 +19,7 @@ end
 #  has_hosting_account  :boolean          default(FALSE), not null
 #  has_mailer_account   :boolean          default(FALSE), not null
 #  has_sms_account      :boolean          default(FALSE), not null
-#  is_instance_owner    :boolean          default(FALSE), not null
+#  is_host              :boolean          default(FALSE), not null
 #  logo_url             :string
 #  name                 :string
 #  phone                :string

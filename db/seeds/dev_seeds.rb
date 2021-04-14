@@ -3,7 +3,7 @@
 
 require 'faker'
 
-host_organization = Organization.where(is_instance_owner: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
+host_organization = Organization.where(is_host: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
 
 # rename default service_area
 ServiceArea.first.update_attributes(name: Faker::Address.community, organization: host_organization, service_area_type: ServiceArea::TYPES.sample)

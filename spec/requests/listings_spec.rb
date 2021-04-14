@@ -1,17 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe '/listings', type: :request do
-  let(:valid_attributes) { {
-    location_attributes: {zip: '12345'},
-    tag_list: ['', 'cash'],
-    # name: Faker::Name.name,
-    # email: Faker::Internet.email,
-    # phone: Faker::PhoneNumber.phone_number
-  } }
+  let(:valid_attributes) do
+    {
+      location_attributes: {zip: '12345'},
+      tag_list: ['', 'cash'],
+      # name: Faker::Name.name,
+      # email: Faker::Internet.email,
+      # phone: Faker::PhoneNumber.phone_number
+    }
+  end
 
-  let(:invalid_attributes) { {
-    location_attributes: {zip: '12e45'},
-  } }
+  let(:invalid_attributes) do
+    {location_attributes: {zip: '12e45'}}
+  end
 
   before { sign_in create(:user, :admin) }
 
@@ -108,9 +110,9 @@ RSpec.describe '/listings', type: :request do
 
     context 'with valid parameters' do
       let(:new_street_address) { Faker::Address.street_address }
-      let(:new_attributes) { {
-        location_attributes: {street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI')},
-      } }
+      let(:new_attributes) do
+        {location_attributes: {street_address: new_street_address, zip: Faker::Address.zip(state_abbreviation: 'MI')}}
+      end
 
       before do
         # patch listing_url(listing), params: { listing: new_attributes }

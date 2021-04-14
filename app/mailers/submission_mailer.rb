@@ -31,13 +31,14 @@ class SubmissionMailer < ApplicationMailer
 
     @subject = "#{ENV["SYSTEM_APP_NAME"]} confirmation (" + @person.updated_at.to_date.to_s + ')'
 
-    mail(to: @person.email,
-         from: contact_email_with_name,
-         bcc: bcc_emails,
-         reply_to: contact_email_with_name.to_s + ', ' + system_email.to_s,
-         subject: @subject) do |format|
-      format.html { render template_path: 'submission_mailer',
-                           template_name: 'new_submission_confirmation_email' }
+    mail(
+      to: @person.email,
+      from: contact_email_with_name,
+      bcc: bcc_emails,
+      reply_to: contact_email_with_name.to_s + ', ' + system_email.to_s,
+      subject: @subject
+    ) do |format|
+      format.html { render template_path: 'submission_mailer', template_name: 'new_submission_confirmation_email' }
     end
   end
 end

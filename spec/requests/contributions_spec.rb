@@ -1,14 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe '/contributions', type: :request do
-  let(:valid_attributes) { {
-    location_attributes: {zip: '12345'},
-    tag_list: ['', 'cash'],
-  } }
+  let(:valid_attributes) do
+    {
+      location_attributes: {zip: '12345'},
+      tag_list: ['', 'cash'],
+    }
+  end
 
-  let(:invalid_attributes) { {
-    location_attributes: {zip: '12e45'},
-  } }
+  let(:invalid_attributes) do
+    {
+      location_attributes: {zip: '12e45'},
+    }
+  end
 
   let(:user) { create(:user) }
 

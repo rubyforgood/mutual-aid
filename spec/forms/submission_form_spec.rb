@@ -6,37 +6,41 @@ RSpec.describe SubmissionForm do
   let(:service_area)   { create :service_area }
   let(:questions)      { create_list :custom_form_question, 2 }
 
-  let(:categories) { [
-    create(:category, name: 'toys'),
-    create(:category, name: 'groceries'),
-  ] }
+  let(:categories) do
+    [
+      create(:category, name: 'toys'),
+      create(:category, name: 'groceries'),
+    ]
+  end
 
   describe 'creating a new submission' do
-    let(:params) { {
-      form_name: 'Offer_form',
-      privacy_level_requested: 'anyone',
-      service_area: service_area.id,
-      listings_attributes: {
-        type: 'Offer',
-        categories: categories.map(&:id),
-        description: 'on a quiet day i can hear her breathing',
-      },
-      location_attributes: {
-        id: nil,
-        city: 'Anakwashtank',
-        state: 'DC', # statehood now!
-        location_type: location_type.id
-      },
-      person_attributes: {
-        id: nil,
-        preferred_contact_method: contact_method.id,
-        email: 'we@together.coop',
-        name: 'Harriet Tubman',
-      },
-      responses_attributes: questions.map.with_index { |question, index|
-        [question.id.to_s, "answer #{index + 1}"]
-      }.to_h,
-    } }
+    let(:params) do
+      {
+        form_name: 'Offer_form',
+        privacy_level_requested: 'anyone',
+        service_area: service_area.id,
+        listings_attributes: {
+          type: 'Offer',
+          categories: categories.map(&:id),
+          description: 'on a quiet day i can hear her breathing',
+        },
+        location_attributes: {
+          id: nil,
+          city: 'Anakwashtank',
+          state: 'DC', # statehood now!
+          location_type: location_type.id
+        },
+        person_attributes: {
+          id: nil,
+          preferred_contact_method: contact_method.id,
+          email: 'we@together.coop',
+          name: 'Harriet Tubman',
+        },
+        responses_attributes: questions.map.with_index { |question, index|
+          [question.id.to_s, "answer #{index + 1}"]
+        }.to_h,
+      }
+    end
 
     subject(:submission) { SubmissionForm.build params }
 
@@ -219,34 +223,39 @@ RSpec.describe SubmissionForm do
     let(:existing_location) { create :location, city: 'Chicago', zip: '10101' }
     let(:existing_person)   { create :person, location: existing_location, name: 'old name', email: 'keep@me.org' }
 
-    let(:existing_submission) { create :submission, {
-      person: existing_person,
-      listings: [existing_listing],
-      form_name: 'Offer_form',
-      privacy_level_requested: 'volunteers',
-    } }
+    let(:existing_submission) do
+      create :submission, {
+        person: existing_person,
+        listings: [existing_listing],
+        form_name: 'Offer_form',
+        privacy_level_requested: 'volunteers',
+      }
+    end
+
     let(:existing_response) { create :submission_response, submission: existing_submission }
 
-    let(:params) { {
-      id: existing_submission.id,
-      form_name: 'Ask_form',
-      service_area: existing_listing.service_area.id,
-      listings_attributes: {
-        id: existing_listing.id,
-        state: 'matched',
-      },
-      location_attributes: {
-        id: existing_location.id,
-        city: 'Shikaakwa',
-      },
-      person_attributes: {
-        id: existing_person.id,
-        name: 'new name',
-      },
-      responses_attributes: {
-        existing_response.custom_form_question_id.to_s => 'updated answer',
-      },
-    } }
+    let(:params) do
+      {
+        id: existing_submission.id,
+        form_name: 'Ask_form',
+        service_area: existing_listing.service_area.id,
+        listings_attributes: {
+          id: existing_listing.id,
+          state: 'matched',
+        },
+        location_attributes: {
+          id: existing_location.id,
+          city: 'Shikaakwa',
+        },
+        person_attributes: {
+          id: existing_person.id,
+          name: 'new name',
+        },
+        responses_attributes: {
+          existing_response.custom_form_question_id.to_s => 'updated answer',
+        },
+      }
+    end
 
     let(:submission) { SubmissionForm.build params }
 

@@ -2,18 +2,20 @@ require 'rails_helper'
 
 RSpec.describe CommunityResourceForm do
   let!(:location_type) { create :location_type }
-  let(:params) { {
-    name: 'Free breakfast program',
-    description: 'Feed the people!',
-    publish_from: '1969-01-01',
-    location: {
-      city: 'Oakland',
-      location_type: location_type.id,
-    },
-    organization_attributes: {
-      name: 'Black Panther Party',
-    },
-  } }
+  let(:params) do
+    {
+      name: 'Free breakfast program',
+      description: 'Feed the people!',
+      publish_from: '1969-01-01',
+      location: {
+        city: 'Oakland',
+        location_type: location_type.id,
+      },
+      organization_attributes: {
+        name: 'Black Panther Party',
+      },
+    }
+  end
 
   describe 'creating a new community resource' do
     let(:community_resource) { CommunityResourceForm.build params }
@@ -72,21 +74,23 @@ RSpec.describe CommunityResourceForm do
   describe 'updating an existing community resource' do
     let!(:existing) { CommunityResourceForm.build(params).tap { |o| o.save! } }
 
-    let(:update_params) { {
-      id: existing.id,
-      name: 'new name',
-      description: 'new description',
-      publish_from: existing.publish_from.to_s,
-      location: {
-        id: existing.location.id,
-        city: 'new city',
-        location_type: existing.location.location_type_id,
-      },
-      organization_attributes: {
-        id: existing.organization.id,
-        name: 'new org',
-      },
-    }}
+    let(:update_params) do
+      {
+        id: existing.id,
+        name: 'new name',
+        description: 'new description',
+        publish_from: existing.publish_from.to_s,
+        location: {
+          id: existing.location.id,
+          city: 'new city',
+          location_type: existing.location.location_type_id,
+        },
+        organization_attributes: {
+          id: existing.organization.id,
+          name: 'new org',
+        },
+      }
+    end
 
     let(:community_resource) { CommunityResourceForm.build update_params }
 

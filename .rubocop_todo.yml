@@ -218,11 +218,6 @@ Layout/MultilineArrayBraceLayout:
     - 'app/models/software_feedback.rb'
     - 'db/seeds.rb'
 
-# Offense count: 26
-# Cop supports --auto-correct.
-Layout/MultilineBlockLayout:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
@@ -349,7 +344,7 @@ Metrics/AbcSize:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
 Metrics/BlockLength:
-  Max: 241
+  Max: 249
 
 # Offense count: 2
 # Configuration parameters: CountComments, Max, CountAsOne.

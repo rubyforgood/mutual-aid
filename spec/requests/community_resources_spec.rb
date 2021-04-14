@@ -4,21 +4,23 @@ RSpec.describe '/community_resources', type: :request do
   let!(:location_type) { create :location_type }
   let(:community_resource) { create :community_resource }
 
-  let(:params) { {community_resource: {
-    name: 'Free Breakfast Program',
-    description: 'Food for the rev!',
-    'publish_from(1i)' => '2020',
-    'publish_from(2i)' => '12',
-    'publish_from(3i)' => '31',
-    organization_attributes: {name: 'Black Panther Party'},
-    location: {
-      street_address: '123 Sesame Street',
-      city: 'Kings Park',
-      state: 'NY',
-      zip: '11754',
-      location_type: location_type.id,
-    }
-  }} }
+  let(:params) do
+    {community_resource: {
+      name: 'Free Breakfast Program',
+      description: 'Food for the rev!',
+      'publish_from(1i)' => '2020',
+      'publish_from(2i)' => '12',
+      'publish_from(3i)' => '31',
+      organization_attributes: {name: 'Black Panther Party'},
+      location: {
+        street_address: '123 Sesame Street',
+        city: 'Kings Park',
+        state: 'NY',
+        zip: '11754',
+        location_type: location_type.id,
+      }
+    }}
+  end
 
   describe 'GET /community_resources' do
     before { create_list :community_resource, 2 }

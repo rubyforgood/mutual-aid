@@ -73,7 +73,7 @@ RSpec.describe CommunityResourceForm do
   end
 
   describe 'updating an existing community resource' do
-    let!(:existing) { CommunityResourceForm.build(params).tap{|o| o.save! } }
+    let!(:existing) { CommunityResourceForm.build(params).tap {|o| o.save! } }
 
     let(:update_params) {{
       id: existing.id,

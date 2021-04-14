@@ -15,7 +15,7 @@ namespace :one_time do
       new_listings = converter.convert listing
 
       puts "-, #{listing.id}, #{listing.reload.tag_list}"
-      new_listings.each{ |new_listing| puts "+, #{new_listing.id}, #{new_listing.tag_list}" }
+      new_listings.each { |new_listing| puts "+, #{new_listing.id}, #{new_listing.tag_list}" }
     end
   end
 

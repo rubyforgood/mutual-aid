@@ -25,14 +25,14 @@ class Listing < ApplicationRecord
 
   MATCH_STATUSES = ['matched', 'unmatched']
 
-  scope :asks, ->(){ where(type: Ask.to_s) }
-  scope :offers, ->(){ where(type: Offer.to_s) }
-  scope :created_on, ->(created_on){ where('created_at::date = ?', created_on) }
+  scope :asks, ->() { where(type: Ask.to_s) }
+  scope :offers, ->() { where(type: Offer.to_s) }
+  scope :created_on, ->(created_on) { where('created_at::date = ?', created_on) }
   scope :inexhaustible, ->() { where(inexhaustible: true) }
-  scope :location_id, ->(location_id){ where(location_id: location_id.to_i) }
-  scope :match_status, ->(match_status){ where(state: match_status.to_s) }
-  scope :person_id, ->(person_id){ where(person_id: person_id.to_i) }
-  scope :service_area_name, ->(service_area_name){ includes(service_area: :mobility_string_translations)
+  scope :location_id, ->(location_id) { where(location_id: location_id.to_i) }
+  scope :match_status, ->(match_status) { where(state: match_status.to_s) }
+  scope :person_id, ->(person_id) { where(person_id: person_id.to_i) }
+  scope :service_area_name, ->(service_area_name) { includes(service_area: :mobility_string_translations)
       .references(:mobility_string_translations)
       .where('mobility_string_translations.value = ?', service_area_name.to_s)
   }
@@ -63,9 +63,9 @@ class Listing < ApplicationRecord
   def status
     status = 'unmatched'
     if matches_as_receiver.any?
-      status = matches_as_receiver.map{|m| m.completed?}.any? ? 'completed' : 'matched'
+      status = matches_as_receiver.map {|m| m.completed?}.any? ? 'completed' : 'matched'
     elsif matches_as_provider.any?
-      status = matches_as_provider.map{|m| m.completed?}.any? ? 'completed' : 'matched'
+      status = matches_as_provider.map {|m| m.completed?}.any? ? 'completed' : 'matched'
     end
     update(state: status)
     status

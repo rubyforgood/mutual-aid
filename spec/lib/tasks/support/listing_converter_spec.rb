@@ -9,7 +9,7 @@ RSpec.describe ListingConverter do
 
   context 'without sub-categories' do
     let(:tags)        { %w[cash errands housing] }
-    let!(:categories) { tags.map{ |name| create :category, name: name }}
+    let!(:categories) { tags.map { |name| create :category, name: name }}
     let(:listing)     { create :listing, tag_list: tags }
 
     it 'removes all but one tag from the original listing' do
@@ -62,7 +62,7 @@ RSpec.describe ListingConverter do
     let!(:listing)     { create :listing, tag_list: %w[food meals] }
 
     it 'does not create any new listings' do
-      expect{ convert }.to_not change(Listing, :count)
+      expect { convert }.to_not change(Listing, :count)
     end
 
     it 'leaves the listing tags unchanged' do

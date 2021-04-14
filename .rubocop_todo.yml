@@ -374,14 +374,6 @@ Layout/SpaceAroundOperators:
   Exclude:
     - 'db/seeds/dev_seeds.rb'
 
-# Offense count: 37
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces.
-# SupportedStyles: space, no_space
-# SupportedStylesForEmptyBraces: space, no_space
-Layout/SpaceBeforeBlockBraces:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Layout/SpaceBeforeComment:

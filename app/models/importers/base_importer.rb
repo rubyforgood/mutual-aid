@@ -66,7 +66,7 @@ class Importers::BaseImporter
     results = []
     required_fields_array.map do |rr|
       if rr.class == Array
-        if rr.map {|r| row[r]}.any?
+        if rr.map { |r| row[r] }.any?
           results << true
         else
           rr.map do |r|

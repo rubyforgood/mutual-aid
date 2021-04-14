@@ -7,7 +7,7 @@ class MatchesController < AdminController
     @matches = Match.status(params[:status] || 'all').order(updated_at: :desc)
 
     # follow_up_status filter
-    @statuses = Match::STATUSES.map {|s| [s.titleize, s]}
+    @statuses = Match::STATUSES.map { |s| [s.titleize, s] }
     if params[:follow_up_status].present?
       @matches = @matches.follow_up_status(params[:follow_up_status])
     end
@@ -101,7 +101,7 @@ class MatchesController < AdminController
       else
 
       end
-      @statuses = Match::STATUSES.map {|s| [s.titleize, s]}
+      @statuses = Match::STATUSES.map { |s| [s.titleize, s] }
 
       @communication_logs = CommunicationLog.where(match: @match)
 

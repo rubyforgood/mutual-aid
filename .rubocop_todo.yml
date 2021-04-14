@@ -404,14 +404,6 @@ Layout/SpaceInsideArrayLiteralBrackets:
     - 'db/migrate/20201121210339_create_action_text_tables.action_text.rb'
     - 'db/seeds.rb'
 
-# Offense count: 56
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
-# SupportedStyles: space, no_space
-# SupportedStylesForEmptyBraces: space, no_space
-Layout/SpaceInsideBlockBraces:
-  Enabled: false
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

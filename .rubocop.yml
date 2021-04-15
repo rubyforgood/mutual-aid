@@ -32,3 +32,6 @@ Style/StringLiterals:
 
 Style/StringLiteralsInInterpolation:
   Enabled: false
+
+Style/SingleLineMethods:
+  Enabled: false

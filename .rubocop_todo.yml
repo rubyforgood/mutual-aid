@@ -498,9 +498,3 @@ Style/SafeNavigation:
     - 'app/models/importers/custom_form_question_importer.rb'
     - 'app/policies/application_policy.rb'
     - 'spec/models/organization_spec.rb'
-
-# Offense count: 66
-# Cop supports --auto-correct.
-# Configuration parameters: AllowIfMethodIsEmpty.
-Style/SingleLineMethods:
-  Enabled: false

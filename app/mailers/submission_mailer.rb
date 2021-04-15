@@ -24,7 +24,7 @@ class SubmissionMailer < ApplicationMailer
 
     system_email = ENV['SYSTEM_EMAIL']
     smtp_from_email = ENV['SMTP_FROM_EMAIL']
-    contact_email = @form_contact&.person&.email || "#{smtp_from_email}"
+    contact_email = @form_contact&.person&.email || smtp_from_email
     contact_name =  @form_contact&.person&.name || @form_contact&.name || contact_email
     contact_email_with_name = %("#{contact_name} (#{organization.name})" <#{contact_email}>)
     bcc_emails = [contact_email, smtp_from_email, system_email].uniq.join('; ')

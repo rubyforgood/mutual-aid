@@ -170,7 +170,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
         system_status = 'match_confirmed'
       elsif status&.downcase == 'reoccurring'
         system_status = nil # TODO: - not sure if these should be nil on import?
-      elsif status == nil
+      elsif status.nil?
         system_status = nil
       else
         raise "what's your status?"

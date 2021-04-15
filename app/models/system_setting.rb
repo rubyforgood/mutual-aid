@@ -32,7 +32,7 @@ class SystemSetting < ApplicationRecord
   #
 
   def self.current_settings
-    self.last
+    last
   end
 
   def dispatch_assisted?

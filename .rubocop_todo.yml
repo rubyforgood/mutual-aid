@@ -177,14 +177,6 @@ Style/ColonMethodCall:
   Exclude:
     - 'db/seeds.rb'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/CommentedKeyword:
-  Exclude:
-    - 'app/models/match.rb'
-    - 'db/scripts/tuple_counts.rb'
-    - 'spec/forms/base_form_spec.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/EmptyCaseCondition:
@@ -244,16 +236,6 @@ Style/MultilineIfModifier:
   Exclude:
     - 'app/models/listing.rb'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: predicate, comparison
-Style/NilComparison:
-  Exclude:
-    - 'app/models/announcement.rb'
-    - 'app/models/community_resource.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: IncludeSemanticChanges.
@@ -273,35 +255,3 @@ Style/RedundantConditional:
   Exclude:
     - 'app/models/shift.rb'
     - 'db/scripts/tuple_counts.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: SafeForConstants.
-Style/RedundantFetchBlock:
-  Exclude:
-    - 'config/puma.rb'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/RedundantInterpolation:
-  Exclude:
-    - 'app/mailers/application_mailer.rb'
-    - 'app/mailers/submission_mailer.rb'
-    - 'app/models/user.rb'
-    - 'config/initializers/devise.rb'
-    - 'db/seeds.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/RedundantParentheses:
-  Exclude:
-    - 'db/seeds/dev_seeds.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/RedundantSelf:
-  Exclude:
-    - 'app/models/history_log.rb'
-    - 'app/models/match.rb'
-    - 'app/models/system_setting.rb'
-    - 'app/presenters/announcement_presenter.rb'

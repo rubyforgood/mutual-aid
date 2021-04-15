@@ -2,8 +2,8 @@
 
 # create a base user using ENV vars
 # we currently have Devise :confirmable strategy turned on, so all new users need their email confirmed
-User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(
-  password: "#{ENV["SYSTEM_PASSWORD"]}",
+User.where(email: ENV["SYSTEM_EMAIL"]).first_or_create!(
+  password: ENV["SYSTEM_PASSWORD"],
   confirmed_at: Time.current,
   role: "sys_admin"
 )

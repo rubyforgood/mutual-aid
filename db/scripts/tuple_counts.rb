@@ -1,6 +1,7 @@
 # run from the command line with:  rails runner -e development db/scripts/tuple_counts.rb
 
-def check_table_has_id_column(table_name, connection) # that's an integer
+# that's an integer
+def check_table_has_id_column(table_name, connection)
   sql = "SELECT count(1)
            FROM information_schema.columns
            WHERE table_schema = 'public'

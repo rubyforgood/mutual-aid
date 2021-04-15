@@ -6,13 +6,13 @@ RSpec.describe '/community_resources', type: :request do
 
   let(:params) do
     {community_resource: {
-      name: 'Free Breakfast Program',
-      description: 'Food for the rev!',
+      :name => 'Free Breakfast Program',
+      :description => 'Food for the rev!',
       'publish_from(1i)' => '2020',
       'publish_from(2i)' => '12',
       'publish_from(3i)' => '31',
-      organization_attributes: {name: 'Black Panther Party'},
-      location: {
+      :organization_attributes => {name: 'Black Panther Party'},
+      :location => {
         street_address: '123 Sesame Street',
         city: 'Kings Park',
         state: 'NY',

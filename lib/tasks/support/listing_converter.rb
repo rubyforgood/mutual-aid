@@ -11,7 +11,7 @@ class ListingConverter
         listing.dup.tap do |new_listing|
           new_listing.update!(
             tag_list: tag_set,
-            created_at: listing.created_at,
+            created_at: listing.created_at
           )
         end
       end

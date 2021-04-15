@@ -22,7 +22,7 @@ class Position < ApplicationRecord
     where(
       'start_date >= ? AND end_date <= ?',
       yearbook_year || Time.zone.now.beginning_of_year,
-      yearbook_year || Time.zone.now.end_of_year,
+      yearbook_year || Time.zone.now.end_of_year
     )
   }
 

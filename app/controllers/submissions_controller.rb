@@ -26,7 +26,7 @@ class SubmissionsController < AdminController
         submission: @submission,
         user: context.user,
         system_setting: context.system_settings,
-        organization: context.host_organization,
+        organization: context.host_organization
       )
       redirect_to submissions_path, notice: 'Submission successfully created.'
     else
@@ -66,7 +66,7 @@ class SubmissionsController < AdminController
       :form_name,
       :person_id,
       :privacy_level_requested,
-      :service_area_id,
+      :service_area_id
     )
   end
 end

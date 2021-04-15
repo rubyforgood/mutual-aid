@@ -10,7 +10,7 @@ class User < ApplicationRecord
     :confirmable,
     :lockable,
     :timeoutable,
-    :trackable,
+    :trackable
     # :omniauthable,
   )
 

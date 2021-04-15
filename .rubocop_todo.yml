@@ -505,13 +505,6 @@ Style/SafeNavigation:
 Style/SingleLineMethods:
   Enabled: false
 
-# Offense count: 41
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArguments:
-  Enabled: false
-
 # Offense count: 8
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleForMultiline.

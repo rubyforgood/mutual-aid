@@ -18,7 +18,7 @@ class OffersController < PublicController
         submission: submission,
         user: context.user,
         system_setting: context.system_settings,
-        organization: context.host_organization,
+        organization: context.host_organization
       )
       redirect_to thank_you_path, notice: 'Offer was successfully created.'
     else

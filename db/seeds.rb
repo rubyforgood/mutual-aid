@@ -92,12 +92,12 @@ end
     name: type.name,
     contribution_type_name: type.name,
     display_categories: true,
-    organization: host_organization,
+    organization: host_organization
   )
 
   form.update(
     header_html: %|<p>This is some PLACEHOLDER header text.</p>\n<p>You can <a href="/forms/#{form.id}/edit">change it here</a>.</p>|,
-    footer_html: %|<p>This is some PLACEHOLDER footer text.</p>\n<p>You can <a href="/forms/#{form.id}/edit">change it here</a>.</p>|,
+    footer_html: %|<p>This is some PLACEHOLDER footer text.</p>\n<p>You can <a href="/forms/#{form.id}/edit">change it here</a>.</p>|
   )
 end
 

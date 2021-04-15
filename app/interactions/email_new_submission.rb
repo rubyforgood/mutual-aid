@@ -10,7 +10,7 @@ class EmailNewSubmission < ActiveInteraction::Base
     email = SubmissionMailer.new_submission_confirmation_email(
       submission: submission,
       system_setting: system_setting,
-      organization: organization,
+      organization: organization
     )
 
     status = Messenger.new(email, 'new_submission_confirmation_email').deliver_now
@@ -19,7 +19,7 @@ class EmailNewSubmission < ActiveInteraction::Base
       email: email,
       delivery_status: status,
       person: submission.person,
-      initiator: user,
+      initiator: user
     )
   end
 end

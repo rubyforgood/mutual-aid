@@ -20,7 +20,7 @@ RSpec.describe GenerateLandingPageJson do
     expect(JSON.parse(json)).to include(
       "landing_page_text_what" => 'what?',
       "landing_page_text_who"  => 'who?',
-      "landing_page_text_how"  => 'how?',
+      "landing_page_text_how"  => 'how?'
     )
   end
 end

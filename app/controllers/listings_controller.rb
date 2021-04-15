@@ -111,7 +111,7 @@ class ListingsController < AdminController
       :submission_id,
       :title,
       :type,
-      tag_list: [],
+      tag_list: []
     )
   end
 

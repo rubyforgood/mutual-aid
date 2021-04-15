@@ -32,7 +32,7 @@ default_tags = [
   ['housing', 'temporary'],
   ['housing', 'permanent'],
   ['housing', 'storage'],
-  ['cash', ''],
+  ['cash', '']
 ]
 default_tags.each do |tag_name_parent, subtag_name|
   parent = Category.where(name: tag_name_parent).first_or_create!
@@ -76,7 +76,7 @@ end
   ['Call', 'phone', 'fa fa-phone'],
   ['Text', 'phone', 'fa fa-comment'],
   ['Email', 'email', 'fa fa-envelope'],
-  ['WhatsApp', 'phone', 'fa fa-whatsapp'],
+  ['WhatsApp', 'phone', 'fa fa-whatsapp']
   # ['Instagram', 'notes', 'fa fa-instagram'], # TODO - enable social media options
   # ['Facebook', 'notes', 'fa fa-facebook'],
   # ['Twitter', 'notes', 'fa fa-twitter'],

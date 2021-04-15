@@ -865,19 +865,6 @@ Style/SafeNavigation:
 Style/SingleLineMethods:
   Enabled: false
 
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiteralsInInterpolation:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/donation.rb'
-    - 'app/models/importers/base_importer.rb'
-    - 'app/models/importers/custom_form_question_importer.rb'
-    - 'app/models/match.rb'
-    - 'db/scripts/tuple_counts.rb'
-
 # Offense count: 41
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleForMultiline.

@@ -23,3 +23,6 @@ Metrics:
 
 Style/StringLiterals:
   Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false

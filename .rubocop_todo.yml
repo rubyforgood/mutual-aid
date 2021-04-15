@@ -21,16 +21,6 @@ Layout/EmptyLineAfterMagicComment:
     - 'spec/interactions/generate_landing_page_json_spec.rb'
     - 'spec/models/organization_spec.rb'
 
-# Offense count: 8
-# Cop supports --auto-correct.
-Layout/EmptyLines:
-  Exclude:
-    - 'db/migrate/20200331013236_devise_create_users.rb'
-    - 'db/scripts/submission_response_seeds_gitignored_csvs.rb'
-    - 'db/seeds/dev_seeds.rb'
-    - 'spec/policies/person_policy_spec.rb'
-    - 'spec/requests/community_resources_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

@@ -76,7 +76,6 @@ end
   end
 end
 
-
 # matches
 #
 
@@ -257,7 +256,6 @@ end
 
 # add a person to whom the system User account is connected
 Person.where(name: "[SYSTEM USER]", preferred_contact_method: ContactMethod.field_name("email").last, email: User.first.email, user: User.first).first_or_create!
-
 
 # custom_form_questions (separate importer)
 # submission_responses (separate importer)

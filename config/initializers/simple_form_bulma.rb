@@ -566,7 +566,6 @@ SimpleForm.setup do |config|
         @builder.text_field(nil, input_html_options.merge(value: array_el,
                                                           id: "input_#{object_name}_#{attribute_name}_#{idx}",
                                                           name: "#{object_name}[#{attribute_name}][]"))
-
       end.join.html_safe
 
       empty = @builder.text_field(nil, input_html_options.merge(value: nil,

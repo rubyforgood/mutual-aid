@@ -35,20 +35,6 @@ Layout/EmptyLinesAroundArguments:
   Exclude:
     - 'app/controllers/system_settings_controller.rb'
 
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: empty_lines, no_empty_lines
-Layout/EmptyLinesAroundBlockBody:
-  Exclude:
-    - 'app/models/context.rb'
-    - 'config/initializers/simple_form_bulma.rb'
-    - 'lib/tasks/db.rake'
-    - 'spec/factories/asks.rb'
-    - 'spec/factories/matches.rb'
-    - 'spec/factories/offers.rb'
-    - 'spec/models/listing_spec.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

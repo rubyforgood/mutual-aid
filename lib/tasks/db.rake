@@ -5,7 +5,6 @@ require 'csv'
 desc 'Extra db functions: stats_check, reset db with seeds, import csv and seed data'
 
 namespace :db do
-
   task :rebuild_and_seed_dev => [
     'db:reset',
     'db:migrate',

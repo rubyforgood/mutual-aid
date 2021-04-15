@@ -215,19 +215,6 @@ Style/EmptyElse:
   Exclude:
     - 'app/controllers/matches_controller.rb'
 
-# Offense count: 17
-# Cop supports --auto-correct.
-Style/EmptyLambdaParameter:
-  Exclude:
-    - 'app/models/announcement.rb'
-    - 'app/models/ask.rb'
-    - 'app/models/community_resource.rb'
-    - 'app/models/custom_form_question.rb'
-    - 'app/models/listing.rb'
-    - 'app/models/match.rb'
-    - 'app/models/offer.rb'
-    - 'app/models/shift.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/EmptyLiteral:

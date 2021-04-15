@@ -9,8 +9,8 @@ class Announcement < ApplicationRecord
 
   validates :name, :description, :publish_from, presence: true
 
-  scope :approved, ->()       { where is_approved: true }
-  scope :pending_review, ->() { where is_approved: false }
+  scope :approved, ->       { where is_approved: true }
+  scope :pending_review, -> { where is_approved: false }
 
   def self.published
     before_now = DateTime.new..Time.current

@@ -25,10 +25,10 @@ class Listing < ApplicationRecord
 
   MATCH_STATUSES = ['matched', 'unmatched']
 
-  scope :asks, ->() { where(type: Ask.to_s) }
-  scope :offers, ->() { where(type: Offer.to_s) }
+  scope :asks, -> { where(type: Ask.to_s) }
+  scope :offers, -> { where(type: Offer.to_s) }
   scope :created_on, ->(created_on) { where('created_at::date = ?', created_on) }
-  scope :inexhaustible, ->() { where(inexhaustible: true) }
+  scope :inexhaustible, -> { where(inexhaustible: true) }
   scope :location_id, ->(location_id) { where(location_id: location_id.to_i) }
   scope :match_status, ->(match_status) { where(state: match_status.to_s) }
   scope :person_id, ->(person_id) { where(person_id: person_id.to_i) }

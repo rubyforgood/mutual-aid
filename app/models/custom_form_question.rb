@@ -29,7 +29,7 @@ class CustomFormQuestion < ApplicationRecord
 
   scope :for_form, ->(form) { joins(:form_questions).where(form_questions: {form: form}) }
 
-  scope :ordered, ->() { order(:display_order) }
+  scope :ordered, -> { order(:display_order) }
 
   # FIXME: can this be replaced by using .i18n ?
   scope :translated_name, ->(name) {

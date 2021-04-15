@@ -6,7 +6,7 @@ RSpec.describe GenerateLandingPageJson do
     build :system_setting, {
       landing_page_text_what: 'what?',
       landing_page_text_who: 'who?',
-      landing_page_text_how: 'how?',
+      landing_page_text_how: 'how?'
     }
   end
 

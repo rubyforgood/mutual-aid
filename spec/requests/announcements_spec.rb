@@ -7,7 +7,7 @@ RSpec.describe '/announcements', type: :request do
       name: 'Ni una mas',
       description: 'Not one more',
       publish_from: Date.current,
-      is_approved: true,
+      is_approved: true
     }}
   end
 

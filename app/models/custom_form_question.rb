@@ -24,7 +24,7 @@ class CustomFormQuestion < ApplicationRecord
     'select' => 'string_response',
     'string' => 'string_response',
     'textarea' => 'string_response', # for some reason textarea are being stored as string_response
-    'youtube_video_id' => 'string_response',
+    'youtube_video_id' => 'string_response'
   }
 
   scope :for_form, ->(form) { joins(:form_questions).where(form_questions: {form: form}) }

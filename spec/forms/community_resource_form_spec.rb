@@ -9,11 +9,11 @@ RSpec.describe CommunityResourceForm do
       publish_from: '1969-01-01',
       location: {
         city: 'Oakland',
-        location_type: location_type.id,
+        location_type: location_type.id
       },
       organization_attributes: {
-        name: 'Black Panther Party',
-      },
+        name: 'Black Panther Party'
+      }
     }
   end
 
@@ -38,7 +38,7 @@ RSpec.describe CommunityResourceForm do
       before do
         params[:location] = {
           city: '',
-          location_type: '',
+          location_type: ''
         }
       end
 
@@ -83,12 +83,12 @@ RSpec.describe CommunityResourceForm do
         location: {
           id: existing.location.id,
           city: 'new city',
-          location_type: existing.location.location_type_id,
+          location_type: existing.location.location_type_id
         },
         organization_attributes: {
           id: existing.organization.id,
-          name: 'new org',
-        },
+          name: 'new org'
+        }
       }
     end
 

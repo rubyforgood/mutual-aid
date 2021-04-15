@@ -58,7 +58,7 @@ RSpec.describe BaseForm do
         {
           'date(1i)' => '2020',
           'date(2i)' => '12',
-          'date(3i)' => '31',
+          'date(3i)' => '31'
         }
       end
 

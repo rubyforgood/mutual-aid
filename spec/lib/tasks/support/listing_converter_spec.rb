@@ -101,7 +101,7 @@ RSpec.describe ListingConverter do
         'child'       => %w[parent child],
         'other_child' => %w[parent other_child],
         'parent'      => %w[parent],
-        'orphan'      => %w[orphan],
+        'orphan'      => %w[orphan]
       }
     end
 

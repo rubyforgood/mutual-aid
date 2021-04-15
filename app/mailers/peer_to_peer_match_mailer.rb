@@ -11,7 +11,7 @@ class PeerToPeerMatchMailer < ApplicationMailer
           contribution: contribution,
           message: message,
           organization: organization,
-          peer_email_address: peer_email_address,
+          peer_email_address: peer_email_address
         }
       end
     end

@@ -261,16 +261,6 @@ Style/NonNilCheck:
   Exclude:
     - 'app/models/importers/submission_response_importer.rb'
 
-# Offense count: 5
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  Exclude:
-    - 'Guardfile'
-    - 'app/lib/user_role.rb'
-    - 'db/seeds.rb'
-    - 'spec/factories/listings.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/RedundantBegin:

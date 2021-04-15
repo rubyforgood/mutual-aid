@@ -35,3 +35,6 @@ Style/StringLiteralsInInterpolation:
 
 Style/SingleLineMethods:
   Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: compact

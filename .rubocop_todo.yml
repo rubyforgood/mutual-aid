@@ -350,13 +350,6 @@ Style/EmptyLiteral:
   Exclude:
     - 'app/controllers/listings_controller.rb'
 
-# Offense count: 42
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: compact, expanded
-Style/EmptyMethod:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/GlobalStdStream:

@@ -194,8 +194,6 @@ SimpleForm.setup do |config|
     #   b.use :hint,  wrap_with: { tag: :span, class: "help has-text-grey-light" }
     # end
 
-    #
-    #
   config.wrappers :inline_input, tag: 'div', class: 'field is-horizontal' do |b|
     b.wrapper :label, tag: 'div', class: 'field-label-left is-normal' do |bl|
       bl.optional :label, class: 'label'

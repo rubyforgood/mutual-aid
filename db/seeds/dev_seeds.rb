@@ -224,12 +224,12 @@ end
 
 def update_status(match)
   status = "match_confirmed"
-  if match.feedbacks.where(is_from_receiver: true).any?
-    status = "receiver_gave_feedback"
+  status = if match.feedbacks.where(is_from_receiver: true).any?
+    "receiver_gave_feedback"
   elsif match.feedbacks.any?
-    status = "provider_gave_feedback"
+    "provider_gave_feedback"
   else
-    status = ["match_completed", "match_confirmed", "matched_tentatively"].sample
+    ["match_completed", "match_confirmed", "matched_tentatively"].sample
   end
   match.update_attributes(status: status)
 end

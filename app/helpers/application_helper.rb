@@ -60,14 +60,14 @@ module ApplicationHelper
   def shorthand_display(date_or_datetime)
     # if date is in the future OR not earlier than 7 days ago, show long version
     today = Time.zone.today
-    if date_or_datetime.to_date == today
-      strftime = 'Today'
+    strftime = if date_or_datetime.to_date == today
+      'Today'
     elsif date_or_datetime.to_date == (today - 1.day)
-      strftime = 'Yesterday'
+      'Yesterday'
     elsif (date_or_datetime.to_date >= today + 1.day) || !(date_or_datetime.to_date > (today - 7.days))
-      strftime = '%a, %b %d, %Y'
+      '%a, %b %d, %Y'
     else
-      strftime = '%a'
+      '%a'
     end
     date_or_datetime.strftime("#{strftime}#{' @ %l:%M %P' if date_or_datetime.is_a?(DateTime)}")
   end

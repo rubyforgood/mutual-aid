@@ -18,19 +18,19 @@ def check_table_count(table_name, connection, class_name)
   # get count of records in table. set to count empty string if result == 0.
   sql = "select count(1) from #{table_name}"
   result = connection.execute(sql).values.flatten.join.to_i
-  if result == 0
-    count = "   "
+  count = if result == 0
+    "   "
   else
-    count = result
+    result
   end
 
   # get value of highest id in table. set to "na" if result == 0.
   sql = "select max(id) from #{table_name};"
   result = connection.execute(sql).values.flatten.join.to_i
-  if result == 0
-    max_id = "___"
+  max_id = if result == 0
+    "___"
   else
-    max_id = result
+    result
   end
 
   puts "#{count.to_s.rjust(3, " ")} / #{max_id.to_s.ljust(3, "_")}" + "___" + class_name.to_s

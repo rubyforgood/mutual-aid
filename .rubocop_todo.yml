@@ -185,21 +185,6 @@ Style/CommentedKeyword:
     - 'db/scripts/tuple_counts.rb'
     - 'spec/forms/base_form_spec.rb'
 
-# Offense count: 10
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SingleLineConditionsOnly, IncludeTernaryExpressions.
-# SupportedStyles: assign_to_condition, assign_inside_condition
-Style/ConditionalAssignment:
-  Exclude:
-    - 'app/controllers/communication_logs_controller.rb'
-    - 'app/controllers/shift_matches_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/importers/base_importer.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-    - 'app/models/match.rb'
-    - 'db/scripts/tuple_counts.rb'
-    - 'db/seeds/dev_seeds.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/EmptyCaseCondition:

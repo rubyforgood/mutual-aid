@@ -42,11 +42,10 @@ class Match < ApplicationRecord
   def self.follow_up_status(follow_up_status)
     needs_follow_up = self.needs_follow_up
     if YAML.load(follow_up_status) == false
-      result = self.where.not(id: needs_follow_up)
+      self.where.not(id: needs_follow_up)
     else
-      result = needs_follow_up
+      needs_follow_up
     end
-    result
   end
 
   def category

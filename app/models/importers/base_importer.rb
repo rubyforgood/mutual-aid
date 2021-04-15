@@ -245,10 +245,10 @@ class Importers::BaseImporter
         if model == Person
           Person.where.not("email ILIKE 'admin%' OR email ILIKE 'mutual%'").destroy_all
         else
-          if today_only
-            records = model.where("created_at::text ILIKE '#{Time.zone.today.strftime('%Y-%m-%d')}%'")
+          records = if today_only
+            model.where("created_at::text ILIKE '#{Time.zone.today.strftime('%Y-%m-%d')}%'")
           else
-            records = model.all
+            model.all
           end
           records.each do |object_instance|
             if object_instance.can_destroy?

@@ -112,7 +112,7 @@ RSpec.describe '/announcements', type: :request do
 
       it 'destroys the announcement' do
         delete announcement_path(announcement)
-        expect(Announcement.exists? announcement.id).to be false
+        expect(Announcement.exists?(announcement.id)).to be false
       end
     end
 

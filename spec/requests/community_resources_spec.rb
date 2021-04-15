@@ -121,7 +121,7 @@ RSpec.describe '/community_resources', type: :request do
 
       it 'destroys the announcement' do
         delete community_resource_path(community_resource)
-        expect(Announcement.exists? community_resource.id).to be false
+        expect(Announcement.exists?(community_resource.id)).to be false
       end
     end
 

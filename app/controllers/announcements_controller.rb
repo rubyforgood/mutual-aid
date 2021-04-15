@@ -27,7 +27,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def update
-    if announcement.update(permitted_attributes announcement)
+    if announcement.update(permitted_attributes(announcement))
       redirect_to announcements_path, notice: 'Announcement was successfully updated.'
     else
       render :edit

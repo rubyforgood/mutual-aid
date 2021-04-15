@@ -183,7 +183,7 @@ class Importers::BaseImporter
       logs << log
       initial_counts_hash[klass_name] = count
     end
-    Rails.logger.info(pp logs)
+    Rails.logger.info(pp(logs))
     @initial_model_logs = logs
     @counts_hash['INITIAL COUNTS'] = initial_counts_hash
     @initial_model_counts = initial_counts_hash
@@ -211,9 +211,9 @@ class Importers::BaseImporter
       final_logs << final_log
       diff_logs << diff_log
     end
-    Rails.logger.info(pp @initial_model_logs)
-    Rails.logger.info(pp final_logs)
-    Rails.logger.info(pp diff_logs)
+    Rails.logger.info(pp(@initial_model_logs))
+    Rails.logger.info(pp(final_logs))
+    Rails.logger.info(pp(diff_logs))
 
     @counts_hash['FINAL COUNTS'] = final_counts_hash
     @counts_hash['+DIFF COUNTS'] = diff_counts_hash

@@ -77,24 +77,6 @@ Layout/EmptyLinesAroundModuleBody:
   Exclude:
     - 'app/helpers/communication_log_buttons.rb'
 
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: final_newline, final_blank_line
-Layout/TrailingEmptyLines:
-  Exclude:
-    - 'app/blueprints/filter_type_blueprint.rb'
-    - 'app/controllers/claims_controller.rb'
-    - 'app/controllers/concerns/not_using_pundit_yet.rb'
-    - 'config/initializers/mobility.rb'
-    - 'db/migrate/20200605030804_add_role_to_user.rb'
-    - 'db/scripts/truncate_tables.rb'
-    - 'lib/tasks/db.rake'
-    - 'spec/blueprints/filter_type_blueprint_spec.rb'
-    - 'spec/interactions/generate_landing_page_json_spec.rb'
-    - 'spec/models/community_resource_spec.rb'
-    - 'spec/policies/glossary_policy_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Lint/BooleanSymbol:

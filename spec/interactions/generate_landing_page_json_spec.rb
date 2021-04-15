@@ -24,4 +24,3 @@ RSpec.describe GenerateLandingPageJson do
     )
   end
 end
-

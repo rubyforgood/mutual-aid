@@ -1,5 +1,5 @@
-class CategoryFilter < BasicFilter
-  def self.filter_group
+class CategoryFilter < BaseFilter
+  def self.filter_grouping
     {
       name: "Categories",
       # Currently only filtering by top-level categories

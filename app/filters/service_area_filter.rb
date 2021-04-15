@@ -1,5 +1,5 @@
-class ServiceAreaFilter < BasicFilter
-  def self.filter_group
+class ServiceAreaFilter < BaseFilter
+  def self.filter_grouping
     {
       name: 'Service Areas',
       filter_options: FilterOptionBlueprint.render_as_hash(ServiceArea.i18n)

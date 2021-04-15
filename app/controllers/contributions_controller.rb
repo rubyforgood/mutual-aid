@@ -7,15 +7,15 @@ class ContributionsController < ApplicationController
   # Nomenclature note:
   # Filter —
   #   An object that handles the logic or action of filtering
-  # Filter Group —
+  # Filter Grouping —
   #   A higher-level category or other grouping of filter options. Example: Contact Method can be
-  # a *filter group* that then has *filter options* for things like "email" or "text message"
+  # a *filter grouping* that then has *filter options* for things like "email" or "text message"
   # Filter Option —
   #   An individual item that can be chosen to change what's filtered. Each *filter option* is 
-  # associated to one and only one *filter group*
+  # associated to one and only one *filter grouping*
 
   def index
-    @filter_groups = BrowseFilter.filter_groups_json
+    @filter_groupings = BrowseFilter.filter_groupings_json
     # The BrowserFilter takes the result of the parameters from the filter checkboxes and returns a list of contributions
     filter = BrowseFilter.new(allowed_params)
     @contributions = ContributionBlueprint.render(filter.contributions, contribution_blueprint_options)

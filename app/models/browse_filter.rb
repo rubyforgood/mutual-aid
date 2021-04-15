@@ -17,8 +17,8 @@ class BrowseFilter
 
   attr_reader :parameters
 
-  def self.filter_groups_json
-    FILTER_CLASSES.map(&:filter_group).to_json
+  def self.filter_groupings_json
+    FILTER_CLASSES.map(&:filter_grouping).to_json
   end
 
   def initialize(parameters)
@@ -46,11 +46,6 @@ class BrowseFilter
   private
 
   def filter(model)
-    # parameters.keys.reduce(model.unmatched) do |scope, key|
-    #   filter = FILTERS.fetch(key, ->(_condition, s) {s})
-    #   filter.call(parameters[key], scope)
-    # end
-
     FILTERS.reduce(model.unmatched) do |relation, filter|
       filter.filter(relation, parameters)
     end

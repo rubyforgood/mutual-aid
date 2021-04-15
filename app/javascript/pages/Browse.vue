@@ -11,7 +11,7 @@
       <section class="mt-3 mb-3">
         <div class="card">
           <div class="card-content">
-            <Filters :filterGroups="filterGroups" v-model="activeFilters" />
+            <Filters :filterGroupings="filterGroupings" v-model="activeFilters" />
           </div>
         </div>
       </section>
@@ -48,12 +48,12 @@ export default {
   },
   props: {
     contributions: {type: Array},
-    filterGroups: {type: Array, default: ()=>[]},
+    filterGroupings: {type: Array, default: ()=>[]},
     initialFilters: {
       type: Array,
       default: function () {
         return [].concat(
-          ...this.filterGroups.map((fGroup) => fGroup.filter_options.map((filter_option) => filter_option.id))
+          ...this.filterGroupings.map((fGrouping) => fGrouping.filter_options.map((filter_option) => filter_option.id))
         )
       },
     },

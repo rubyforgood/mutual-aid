@@ -17,23 +17,23 @@
       <div class="columns">
         <b-collapse
           class="column"
-          v-for="(filterGroup, index) of filterGroups"
+          v-for="(filterGrouping, index) of filterGroupings"
           :key="index"
           :open="initialOpenStatus(index)"
         >
           <span class="subtitle is-5" slot="trigger" slot-scope="props">
-            {{ filterGroup.name }} <a>{{ props.open ? '-' : '+' }}</a>
+            {{ filterGrouping.name }} <a>{{ props.open ? '-' : '+' }}</a>
           </span>
           <b-checkbox
-            :id="`toggle-filters-${filterGroup.name}`"
-            @input="toggleFilters(filterGroup.filter_options)"
-            :value="filterGroupSelectAllValue(filterGroup.filter_options)"
-            :indeterminate="indeterminate(filterGroup.filter_options)"
+            :id="`toggle-filters-${filterGrouping.name}`"
+            @input="toggleFilters(filterGrouping.filter_options)"
+            :value="filterGroupingSelectAllValue(filterGrouping.filter_options)"
+            :indeterminate="indeterminate(filterGrouping.filter_options)"
           >
             Select all
           </b-checkbox>
           <ul class="mt-1">
-            <li v-for="filterOption of filterGroup.filter_options" :key="filterOption.id">
+            <li v-for="filterOption of filterGrouping.filter_options" :key="filterOption.id">
               <b-checkbox
                 :native-value="filterOption.id"
                 :value="currentFilters"
@@ -57,12 +57,12 @@
 <script>
 import MappedIconList from 'components/MappedIconList'
 
-// TODO: consider extracting a FilterGroup component.
+// TODO: consider extracting a FilterGrouping component.
 // see this comment: https://github.com/rubyforgood/mutual-aid/pull/799#pullrequestreview-554188100
 export default {
   components: {MappedIconList},
   props: {
-    filterGroups: {type: Array, default: () => []},
+    filterGroupings: {type: Array, default: () => []},
     currentFilters: {type: Array, default: () => []},
   },
   model: {
@@ -87,22 +87,22 @@ export default {
     showIconsForFilter(filterName) {
       return !!this.hasFilterIcons[filterName]
     },
-    currentFiltersOptionsForFilterGroup(filterOptionIds) {
+    currentFiltersOptionsForFilterGrouping(filterOptionIds) {
       return this.currentFilters.filter((el) => filterOptionIds.includes(el))
     },
-    filterGroupSelectAllValue(filters) {
+    filterGroupingSelectAllValue(filters) {
       let filterIds = filters.map((f) => f.id)
-      return this.currentFiltersOptionsForFilterGroup(filterIds).length == filterIds.length
+      return this.currentFiltersOptionsForFilterGrouping(filterIds).length == filterIds.length
     },
     indeterminate(filters) {
       let filterIds = filters.map((f) => f.id)
-      return this.currentFiltersOptionsForFilterGroup(filterIds).length == 0
+      return this.currentFiltersOptionsForFilterGrouping(filterIds).length == 0
         ? false
-        : this.currentFiltersOptionsForFilterGroup(filterIds).length < filterIds.length
+        : this.currentFiltersOptionsForFilterGrouping(filterIds).length < filterIds.length
     },
     toggleFilters(filters) {
       let filterIds = filters.map((f) => f.id)
-      if (this.currentFiltersOptionsForFilterGroup(filterIds).length < filterIds.length) {
+      if (this.currentFiltersOptionsForFilterGrouping(filterIds).length < filterIds.length) {
         this.$emit('change', [...new Set([...this.currentFilters, ...filterIds])])
       } else {
         this.$emit(
@@ -121,8 +121,8 @@ export default {
   },
   data() {
     return {
-      hasFilterIcons: this.filterGroups
-        .map((fGroup) => fGroup.filter_options)
+      hasFilterIcons: this.filterGroupings
+        .map((fGrouping) => fGrouping.filter_options)
         .reduce(function (memo, filterOptions) {
           filterOptions.map(function (fOption) {
             memo[fOption.name] = MappedIconList.iconNameMapping[fOption.name]
@@ -130,7 +130,7 @@ export default {
           return memo
         }, {}),
       allFilters: [].concat(
-        ...this.filterGroups.map((fGroup) => fGroup.filter_options.map((fOption) => fOption.id))
+        ...this.filterGroupings.map((fGrouping) => fGrouping.filter_options.map((fOption) => fOption.id))
       ),
     }
   },

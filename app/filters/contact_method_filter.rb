@@ -1,5 +1,5 @@
-class ContactMethodFilter < BasicFilter
-  def self.filter_group
+class ContactMethodFilter < BaseFilter
+  def self.filter_grouping
     {
       name: 'Contact Methods',
       filter_options: FilterOptionBlueprint.render_as_hash(ContactMethod.enabled.distinct(:name))

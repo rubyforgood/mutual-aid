@@ -21,20 +21,6 @@ Layout/EmptyLineAfterMagicComment:
     - 'spec/interactions/generate_landing_page_json_spec.rb'
     - 'spec/models/organization_spec.rb'
 
-# Offense count: 19
-# Cop supports --auto-correct.
-# Configuration parameters: EmptyLineBetweenMethodDefs, EmptyLineBetweenClassDefs, EmptyLineBetweenModuleDefs, AllowAdjacentOneLineDefs, NumberOfEmptyLines.
-Layout/EmptyLineBetweenDefs:
-  Exclude:
-    - 'app/controllers/announcements_controller.rb'
-    - 'app/controllers/community_resources_controller.rb'
-    - 'app/controllers/glossary_controller.rb'
-    - 'app/policies/announcement_policy.rb'
-    - 'app/policies/application_policy.rb'
-    - 'app/policies/community_resource_policy.rb'
-    - 'app/policies/contribution_policy.rb'
-    - 'app/policies/glossary_policy.rb'
-
 # Offense count: 8
 # Cop supports --auto-correct.
 Layout/EmptyLines:

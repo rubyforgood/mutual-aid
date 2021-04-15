@@ -8,5 +8,5 @@ RSpec.describe CommunityResource do
     it "should not belong to a single service area" do
       should_not respond_to(:service_area)
     end
-  end 
+  end
 end

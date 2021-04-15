@@ -31,7 +31,7 @@ state = ["NY", "MI", "DC", "NC"].sample
   phone = Faker::PhoneNumber.phone_number
   Person.where(
     location: location,
-    name: Faker::Name.name, 
+    name: Faker::Name.name,
     preferred_contact_method: contact_method,
     email: contact_method&.field&.downcase == "email" ? email : [nil, email].sample,
     phone: contact_method&.field&.downcase == "phone" ? phone : [nil, phone].sample
@@ -106,7 +106,7 @@ end
 
 # announcements
 Announcement.where(
-  name: "Lansing urgent care are sharing free face masks", 
+  name: "Lansing urgent care are sharing free face masks",
   description: "Announcement announcement urgent care! Free masks!"
 ).first_or_create!(publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now))
 5.times do

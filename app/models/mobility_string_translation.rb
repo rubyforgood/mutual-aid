@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class MobilityStringTranslation < ApplicationRecord
-  
   belongs_to :translatable, polymorphic: true
   belongs_to :created_by, class_name: 'User', optional: true
 

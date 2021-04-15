@@ -231,9 +231,9 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
   def create_organization_community_resource
     CommunityResource.where(organization: @host_organization).first_or_create!(
-      is_created_by_admin: true, 
-      name: 'PLACEHOLDER', 
-      description: 'DESCRIPTION PLACEHOLDER', 
+      is_created_by_admin: true,
+      name: 'PLACEHOLDER',
+      description: 'DESCRIPTION PLACEHOLDER',
       publish_from: Date.current
     )
   end

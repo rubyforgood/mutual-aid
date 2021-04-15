@@ -23,7 +23,7 @@ RSpec.describe HtmlSanitizer, type: :model do
             <span class="has-text-weight-bold">Mutual Aid</span> is political and anti-oppressive by nature, and focused on creating <span class="has-text-weight-bold has-text-italic">long-term, sustainable systems of interdependent community care</span> that ultimately lead to a more resilient and self-reliant region. We want to foster a culture of collectivism in the Greater Glens Falls area that operates outside individualism and existing government and non-profit systems.
             <br><br><br><br>
           </li>
-      
+
           <li>
             <span class='title is-5'>Why is Mutual Aid necessary?</span>
             <br><br>
@@ -31,7 +31,7 @@ RSpec.describe HtmlSanitizer, type: :model do
             <br><br>It is central, human-focused, and, at its roots, it is <span class="has-text-weight-bold">ANTI-OPPRESSION</span>.
       <br><br><br><br>
           </li>
-      
+
           <li>
             <span class='title is-5'>What are the foundations of Mutual Aid?</span>
             <br><br>
@@ -46,7 +46,7 @@ RSpec.describe HtmlSanitizer, type: :model do
             </ol>
             <br><br><br><br>
           </li>
-      
+
           <li>
             <span class='title is-5'>What do volunteers do?</span>
             <br><br>

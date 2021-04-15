@@ -95,19 +95,6 @@ Layout/TrailingEmptyLines:
     - 'spec/models/community_resource_spec.rb'
     - 'spec/policies/glossary_policy_spec.rb'
 
-# Offense count: 15
-# Cop supports --auto-correct.
-# Configuration parameters: AllowInHeredoc.
-Layout/TrailingWhitespace:
-  Exclude:
-    - 'app/blueprints/filter_type_blueprint.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-    - 'app/models/mobility_string_translation.rb'
-    - 'app/models/mobility_text_translation.rb'
-    - 'db/seeds/dev_seeds.rb'
-    - 'spec/models/community_resource_spec.rb'
-    - 'spec/models/html_sanitizer_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Lint/BooleanSymbol:

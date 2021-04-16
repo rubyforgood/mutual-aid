@@ -5,11 +5,11 @@ class Anonymize
     return if name.blank?
 
     names = name.split(' ')
-    names.map do |n|
+    names.map { |n|
       initial = n.first
       n = '*' * n.length
       initial + n[1..-1]
-    end.join(' ')
+    }.join(' ')
   end
 
   def self.email(email)

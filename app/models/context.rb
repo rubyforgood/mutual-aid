@@ -1,10 +1,10 @@
-Context = Struct.new(
+class Context < Struct.new(
   :admin_param,
   :host_organization,
   :system_settings,
   :user,
   keyword_init: true
-) do
+)
   def host_organization
     self[:host_organization] ||= Organization.host_organization
   end

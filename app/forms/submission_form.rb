@@ -32,14 +32,14 @@ class SubmissionForm < BaseForm
   end
 
   def build_listings
-    @listings = (listings_attributes[:categories] || []).map do |category_id|
+    @listings = (listings_attributes[:categories] || []).map { |category_id|
       ListingForm.build listings_attributes.merge(
         category: category_id,
         location: @location,
         person: @person,
         service_area: service_area
       )
-    end
+    }
   end
 
   def build_submission
@@ -50,13 +50,13 @@ class SubmissionForm < BaseForm
   end
 
   def build_submission_responses
-    @submission_responses = responses_attributes.map do |(custom_form_question_id, answer)|
+    @submission_responses = responses_attributes.map { |(custom_form_question_id, answer)|
       SubmissionResponseForm.build(
         submission: submission,
         custom_form_question_id: custom_form_question_id,
         string_response: answer
       )
-    end
+    }
   end
 
   def submission_attributes

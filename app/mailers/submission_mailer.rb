@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require "#{Rails.root}/app/helpers/application_helper.rb"
-include ApplicationHelper # TODO: better way to solve this?
 
 # TODO: could do with specs
 class SubmissionMailer < ApplicationMailer
+  include ApplicationHelper # TODO: better way to solve this?
+
   def new_submission_confirmation_email(submission:, system_setting:, organization:)
     @submission = submission
     @system_setting = system_setting

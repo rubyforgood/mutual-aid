@@ -1,10 +1,9 @@
 class PersonPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      case
-      when can_admin?
+      if can_admin?
         scope.all
-      when user.present?
+      elsif user.present?
         scope.where(user_id: user.id)
       else
         scope.none

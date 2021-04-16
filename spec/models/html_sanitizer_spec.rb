@@ -8,7 +8,7 @@ RSpec.describe HtmlSanitizer, type: :model do
     subject { sanitizer.sanitize }
 
     let(:string) do
-      %Q{
+      %{
       <div class="title is-3">About us</div>
       <script>alert('I did something bad!');</script>
       <ul>

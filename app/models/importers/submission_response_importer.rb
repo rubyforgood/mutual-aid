@@ -184,7 +184,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
     type = listing.type
 
-    if system_status != nil
+    if !system_status.nil?
       match = if type == 'Ask'
         Match.where(receiver: listing, provider: @organization_listing).first_or_create!
       else
@@ -211,7 +211,6 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       end
       question = response.custom_form_question
       question.input_type ||= 'radio'
-      question.save!
     else
       if responses.none?
         @new_records_count += 1
@@ -224,8 +223,8 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       end
       question = response.custom_form_question
       question.input_type ||= 'string'
-      question.save!
     end
+    question.save!
     response
   end
 

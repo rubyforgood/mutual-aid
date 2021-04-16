@@ -97,8 +97,6 @@ class MatchesController < AdminController
     if @match.receiver_id && @match.provider_id
       @matched_asks = (@matchable_asks + [[@match.receiver&.name_and_match_history.html_safe, @match.receiver&.id]]).sort_by(&:first)
       @matched_offers = (@matchable_offers + [[@match.provider&.name_and_match_history.html_safe, @match.provider&.id]]).sort_by(&:first)
-    else
-
     end
     @statuses = Match::STATUSES.map { |s| [s.titleize, s] }
 

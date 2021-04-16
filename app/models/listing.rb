@@ -57,9 +57,18 @@ class Listing < ApplicationRecord
   end
 
   def name_and_match_history
-    "(#{type}-#{all_tags_to_s.upcase}#{" ***INEXHAUSTIBLE*** " if inexhaustible?}) #{
-        person.match_history}. (#{person.name}#{" --- $" +
-        person.monthly_donation_amount_max.to_s + "/mo left" if person&.monthly_donation_amount_max.to_f > 0.0})"
+    inexhaustible_str = inexhaustible ? ' ***INEXHAUSTIBLE***' : ''
+
+    donation_amount_str =
+      if person&.monthly_donation_amount_max.to_f > 0.0
+        " --- $#{person.monthly_donation_amount_max}/mo left"
+      else
+        ''
+      end
+
+    "(#{type}-#{all_tags_to_s.upcase}#{inexhaustible_str})" \
+    " #{person.match_history}. " \
+    "(#{person.name}#{donation_amount_str})"
   end
 
   def status

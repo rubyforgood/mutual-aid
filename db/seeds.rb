@@ -65,7 +65,7 @@ Position.where(position_type: Position::COMMUNITY_RESOURCES_CONTACT_TITLE, organ
 
 # create system locales. all are set to show up in dropdowns and
 locales_file = Rails.root.join('config', 'locales', 'locales.yml')
-yml_data = YAML::load_file(locales_file)
+yml_data = YAML.load_file(locales_file)
 locales = yml_data["vendor"]["iso"]["languages"]
 
 locales.each do |locale, locale_name|

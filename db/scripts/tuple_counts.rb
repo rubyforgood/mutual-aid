@@ -8,11 +8,7 @@ def check_table_has_id_column(table_name, connection)
              AND column_name = 'id'
              AND table_name = '#{table_name}'"
   result = connection.execute(sql).values.flatten.join.to_i
-  if result == 0
-    false
-  else
-    true
-  end
+  !(result == 0)
 end
 
 def check_table_count(table_name, connection, class_name)

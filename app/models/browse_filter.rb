@@ -11,7 +11,7 @@ class BrowseFilter
     # 'UrgencyLevel' => UrgencyLevelFilter
   }.freeze
   FILTER_CLASSES = FILTERS.values.freeze
-  ALLOWED_PARAMS_FILTER = FILTERS.keys.each_with_object({}) do |key, hash|
+  ALLOWED_PARAMS = FILTERS.keys.each_with_object({}) do |key, hash|
     hash[key] = {}
   end.freeze
 

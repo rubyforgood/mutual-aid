@@ -60,7 +60,7 @@ class ContributionsController < ApplicationController
   end
 
   def allowed_params
-    params.permit(:format, BrowseFilter::ALLOWED_PARAMS_FILTER)
+    params.permit(:format, BrowseFilter::ALLOWED_PARAMS)
   end
 
   def contribution

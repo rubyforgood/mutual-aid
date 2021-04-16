@@ -41,15 +41,6 @@ Layout/DefEndAlignment:
   Exclude:
     - 'db/migrate/20200605030804_add_role_to_user.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: leading, trailing
-Layout/DotPosition:
-  Exclude:
-    - 'db/seeds.rb'
-    - 'spec/models/context_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Layout/ElseAlignment:

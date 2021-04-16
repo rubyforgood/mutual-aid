@@ -42,12 +42,4 @@ class BrowseFilter
       end
     end.flatten
   end
-
-  private
-
-  def filter(model)
-    FILTERS.reduce(model.unmatched) do |relation, filter|
-      filter.filter(relation, parameters)
-    end
-  end
 end

@@ -11,6 +11,10 @@ We're still in the [initial development phase](https://www.jering.tech/articles/
 
 This changelog also serves to acknowledge the incredible people who've contributed brilliance, effort and being. Their handles are listed under the first release they each  touched. 💗🙏🏾
 
+## [Unreleased]
+### Development notes
+* Rework how contribution filtering works under the hood #546
+
 ## [0.5.0] - 2021-04-08
 ### Enhancements
 * Change address field on community resource form from dropdown to text input #900, #909, #923

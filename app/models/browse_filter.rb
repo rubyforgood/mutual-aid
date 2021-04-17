@@ -8,7 +8,7 @@ class BrowseFilter
     ServiceAreaFilter,
     ContactMethodFilter,
     ContributionTypeFilter,
-    # UrgencyLevelFilter
+    UrgencyFilter
   ].freeze
   ALLOWED_PARAMS = FILTER_CLASSES.each_with_object({}) do |filter, hash|
     hash.merge! filter::ALLOWED_PARAMS

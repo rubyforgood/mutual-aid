@@ -1,8 +1,11 @@
 class ContributionTypeFilter
+  PARAM_NAME = 'ContributionType'
+  ALLOWED_PARAMS = {PARAM_NAME => {}}
+
   def self.filter_grouping
     { name: 'Contribution Types', filter_options: [
-      { id: 'ContributionType[Ask]', name: 'Ask' },
-      { id: 'ContributionType[Offer]', name: 'Offer' }
+      { id: "#{PARAM_NAME}[Ask]", name: 'Ask' },
+      { id: "#{PARAM_NAME}[Offer]", name: 'Offer' }
     ]}
   end
   ALL_ALLOWED_TYPES = ['Ask', 'Offer'].freeze
@@ -14,7 +17,7 @@ class ContributionTypeFilter
   end
 
   def scopes
-    classes = parameters.blank? ? ALL_ALLOWED_TYPES : parameters.keys
+    classes = parameters.blank? || parameters[PARAM_NAME].blank? ? ALL_ALLOWED_TYPES : parameters[PARAM_NAME].keys
     classes.intersection(ALL_ALLOWED_TYPES).map do |type|
       type.constantize.matchable
     end

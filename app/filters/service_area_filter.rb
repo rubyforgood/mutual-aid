@@ -1,4 +1,7 @@
 class ServiceAreaFilter < BaseFilter
+  PARAM_NAME = 'ServiceArea'
+  ALLOWED_PARAMS = {PARAM_NAME => {}}
+
   def self.filter_grouping
     {
       name: 'Service Areas',
@@ -7,7 +10,7 @@ class ServiceAreaFilter < BaseFilter
   end
 
   def filter(scope)
-    return super unless parameters
-    scope.where(service_area_id: parameters.keys)
+    return super if parameters[PARAM_NAME].blank?
+    scope.where(service_area_id: parameters[PARAM_NAME].keys)
   end
 end

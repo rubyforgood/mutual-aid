@@ -1,4 +1,7 @@
 class ContactMethodFilter < BaseFilter
+  PARAM_NAME = 'ContactMethod'
+  ALLOWED_PARAMS = {PARAM_NAME => {}}
+
   def self.filter_grouping
     {
       name: 'Contact Methods',
@@ -7,7 +10,7 @@ class ContactMethodFilter < BaseFilter
   end
 
   def filter(scope)
-    return super unless parameters
-    scope.joins(:person).where(people: { preferred_contact_method: parameters.keys })
+    return super if parameters[PARAM_NAME].blank?
+    scope.joins(:person).where(people: { preferred_contact_method: parameters[PARAM_NAME].keys })
   end
 end

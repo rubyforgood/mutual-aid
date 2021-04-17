@@ -1,4 +1,7 @@
 class CategoryFilter < BaseFilter
+  PARAM_NAME = 'Category'
+  ALLOWED_PARAMS = {PARAM_NAME => {}}
+
   def self.filter_grouping
     {
       name: "Categories",
@@ -8,9 +11,9 @@ class CategoryFilter < BaseFilter
   end
 
   def filter(scope)
-    return super unless parameters
+    return super if parameters[PARAM_NAME].blank?
     scope.tagged_with(
-      Category.roots.where(id: parameters.keys).pluck('name'),
+      Category.roots.where(id: parameters[PARAM_NAME].keys).pluck('name'),
       any: true
     )
   end

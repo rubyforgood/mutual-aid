@@ -68,13 +68,6 @@ Metrics/PerceivedComplexity:
     - 'app/models/importers/submission_response_importer.rb'
     - 'app/models/shift.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Performance/InefficientHashSearch:
-  Exclude:
-    - 'app/controllers/contributions_controller.rb'
-    - 'app/controllers/listings_controller.rb'
-
 # Offense count: 7
 # Cop supports --auto-correct.
 Security/YAMLLoad:

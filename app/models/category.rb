@@ -18,7 +18,7 @@ class Category < ApplicationRecord
   scope :roots,   -> { where(parent: nil).order(:display_order, :name) }
 
   def full_name
-    "#{parent&.name&.upcase + ": " if parent}#{parent.present? ? name : name.upcase}"
+    parent ? "#{parent.name.upcase}: #{name}" : name.upcase
   end
 
   def lineage

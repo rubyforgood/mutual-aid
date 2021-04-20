@@ -44,16 +44,6 @@ Lint/RedundantStringCoercion:
     - 'app/blueprints/subfilter_type_blueprint.rb'
     - 'app/models/importers/base_importer.rb'
 
-# Offense count: 5
-# Configuration parameters: AllowedMethods.
-# AllowedMethods: present?, blank?, presence, try, try!, in?
-Lint/SafeNavigationChain:
-  Exclude:
-    - 'app/controllers/contributions_controller.rb'
-    - 'app/controllers/matches_controller.rb'
-    - 'app/models/category.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-
 # Offense count: 32
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:

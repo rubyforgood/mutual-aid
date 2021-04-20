@@ -118,7 +118,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     location_type = LocationType.where(name: 'service_area').first_or_create!
     location = Location.where(location_type: location_type).first_or_create!
     ServiceArea
-      .translated_name(row['service_area_name']&.strip.downcase)
+      .translated_name(row['service_area_name']&.strip&.downcase)
       .first_or_create!(name: row['service_area_name']&.strip || 'Unknown County',
                         service_area_type: row['service_area_type_name'] || 'county',
                         organization: Organization.first,

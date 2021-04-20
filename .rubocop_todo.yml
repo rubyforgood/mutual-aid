@@ -13,13 +13,6 @@ Lint/BooleanSymbol:
     - 'db/migrate/20200523184552_add_auto_generated_to_communication_log.rb'
 
 # Offense count: 4
-# Configuration parameters: AllowedMethods.
-# AllowedMethods: enums
-Lint/ConstantDefinitionInBlock:
-  Exclude:
-    - 'config/initializers/simple_form_bulma.rb'
-
-# Offense count: 4
 # Configuration parameters: DebuggerReceivers, DebuggerMethods.
 # DebuggerReceivers: binding, Kernel, Pry
 # DebuggerMethods: debugger, byebug, remote_byebug, pry, remote_pry, pry_remote, console, rescue, save_and_open_page, save_and_open_screenshot, irb

@@ -31,7 +31,7 @@
       <% elsif ["boolean", "radio"].include?(input_type) %>
         <% unedited_response = r.send(question_field_name(input_type)).to_s.html_safe %>
         <li><em><%= question.name.html_safe %><br/></em></li>
-        <%# puts "RESPONSE_id=#{r.id}...unedited: #{unedited_response}...boolean: #{r.send("boolean_response")&.to_s&.html_safe}(#{yes_no(YAML.load(response.to_s))})...#{r.inspect}" %>
+        <%# puts "RESPONSE_id=#{r.id}...unedited: #{unedited_response}...boolean: #{r.send("boolean_response")&.to_s&.html_safe}(#{yes_no(response)})...#{r.inspect}" %>
         <% if input_type == "radio" &&
             question.option_list != ["Yes", "No"] &&
             question.option_list != ["yes", "no"] &&
@@ -48,16 +48,16 @@
                 question.option_list == ["yes", "no"] ||
                 question.option_list == ["true", "false"] ||
                 question.option_list == ["True", "False"]) %>
-          <%# puts "RADIO 2: #{yes_no(YAML.load(response.to_s))}" %>
+          <%# puts "RADIO 2: #{yes_no(response)}" %>
           <% response = unedited_response %>
           <ul>
-            <li style="list-style-type:none;"><%= response_link %><strong><%= yes_no(YAML.load(response)) %></strong></li> (<%#= unedited_response %>)
+            <li style="list-style-type:none;"><%= response_link %><strong><%= yes_no(response) %></strong></li> (<%#= unedited_response %>)
           </ul>
         <% else %>
-          <%# puts "ELSE: #{yes_no(YAML.load(response.to_s))}" %>
+          <%# puts "ELSE: #{yes_no(response)}" %>
           <% response = r.send("boolean_response").to_s.html_safe %>
           <ul>
-            <li style="list-style-type:none;"><%= response_link %><strong><%= yes_no(YAML.load(response.to_s)) %></strong></li>
+            <li style="list-style-type:none;"><%= response_link %><strong><%= yes_no(response) %></strong></li>
           </ul>
         <% end %>
         <!--<br>-->

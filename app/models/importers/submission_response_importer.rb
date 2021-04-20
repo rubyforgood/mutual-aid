@@ -128,11 +128,11 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def create_listings_data_from_row(row, submission)
     person = submission.person
     created_at = submission.created_at
-    service_area = submission.service_area
+    service_area = submission.service_area # rubocop:todo Lint/UselessAssignment
     listings = []
     categories_cfq = CustomFormQuestion.where(name: @categories_question_name).first_or_create!
     categories = row[@categories_question_name].to_s.strip.split(/[,;]/)
-    row_status = row['status']&.strip
+    row_status = row['status']&.strip # rubocop:todo Lint/UselessAssignment
 
     categories.each do |category|
       listing = Listing.where(person: person,
@@ -247,8 +247,8 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       answer = YAML.load(row[category_cfq.name].to_s)
       if answer
         category_name = category_cfq.name.downcase.gsub('offer_category_', '').gsub('ask_category_', '')
-        category = Category.where(name: category_name).first_or_create!
-        row_status = row['status']&.strip
+        category = Category.where(name: category_name).first_or_create! # rubocop:todo Lint/UselessAssignment
+        row_status = row['status']&.strip # rubocop:todo Lint/UselessAssignment
         listing = Listing.where(
           person: person,
           service_area: service_area,

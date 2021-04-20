@@ -7,7 +7,8 @@ RSpec.describe Offer do
       match = create(:match, :with_ask_and_offer)
       matched_offer = match.provider
 
-      expect(Offer.matched).to eq([matched_offer])
+      expect(Offer.matched).to include matched_offer
+      expect(Offer.matched).to_not include unmatched_offer
     end
   end
 
@@ -17,7 +18,8 @@ RSpec.describe Offer do
       match = create(:match, :with_ask_and_offer)
       matched_offer = match.provider
 
-      expect(Offer.matchable).to eq([unmatched_offer])
+      expect(Offer.matchable).to include unmatched_offer
+      expect(Offer.matchable).to_not include matched_offer
     end
   end
 end

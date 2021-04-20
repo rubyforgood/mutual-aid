@@ -5,7 +5,7 @@
   <% r = response %>
   <% question = r.custom_form_question %>
 
-  <% if params && YAML.load(params[:admin].to_s) %>
+  <% if context.can_admin? %>
     <% if r %>
       <% response_link = link_to(r.id, edit_submission_response_path(r.id)) %>
       Q<%= link_to(question.id,

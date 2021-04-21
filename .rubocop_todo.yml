@@ -11,20 +11,6 @@
 Metrics/AbcSize:
   Max: 62
 
-# Offense count: 15
-# Configuration parameters: IgnoredMethods, Max.
-Metrics/CyclomaticComplexity:
-  Exclude:
-    - 'app/controllers/listings_controller.rb'
-    - 'app/controllers/locations_controller.rb'
-    - 'app/controllers/matches_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/mailers/submission_mailer.rb'
-    - 'app/models/importers/base_importer.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-    - 'app/models/shift.rb'
-    - 'db/migrate/20200510043917_add_missing_indexes_on_taggings.acts_as_taggable_on_engine.rb'
-
 # Offense count: 65
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 Metrics/MethodLength:

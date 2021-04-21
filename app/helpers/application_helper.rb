@@ -65,7 +65,7 @@ module ApplicationHelper
     end
   end
 
-  def shorthand_display(date_or_datetime)
+  def shorthand_display(date_or_datetime) # rubocop:todo Metrics/AbcSize
     # if date is in the future OR not earlier than 7 days ago, show long version
     today = Time.zone.today
     strftime = if date_or_datetime.to_date == today

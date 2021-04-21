@@ -6,7 +6,7 @@ require "#{Rails.root}/app/helpers/application_helper.rb"
 class SubmissionMailer < ApplicationMailer
   include ApplicationHelper # TODO: better way to solve this?
 
-  def new_submission_confirmation_email( # rubocop:todo Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+  def new_submission_confirmation_email( # rubocop:todo Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/AbcSize
     organization:,
     submission:,
     system_setting:

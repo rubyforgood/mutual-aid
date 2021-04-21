@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # rubocop:todo Layout/CommentIndentation
-SimpleForm.setup do |config|
+SimpleForm.setup do |config| # rubocop:disable Metrics/BlockLength
   # Default class for buttons
   config.button_class = 'button'
 

@@ -11,12 +11,6 @@
 Metrics/AbcSize:
   Max: 62
 
-# Offense count: 54
-# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
-# IgnoredMethods: refine
-Metrics/BlockLength:
-  Max: 249
-
 # Offense count: 15
 # Configuration parameters: IgnoredMethods, Max.
 Metrics/CyclomaticComplexity:

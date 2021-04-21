@@ -17,9 +17,17 @@ inherit_gem:
 inherit_from:
   - .rubocop_todo.yml
 
+# -------------------------
+# StandardRB rule overrides
+# -------------------------
 Metrics:
-  # Disabled in Standard by default
   Enabled: true
+
+Metrics/BlockLength:
+  IgnoredMethods:
+    - FactoryBot.define
+    - describe
+    - context
 
 Layout/EmptyLineBetweenDefs:
   AllowAdjacentOneLineDefs: true
@@ -30,6 +38,12 @@ Layout/ExtraSpacing:
 Layout/HashAlignment:
   Enabled: false
 
+Style/EmptyMethod:
+  EnforcedStyle: compact
+
+Style/SafeNavigation:
+  Enabled: false
+
 Style/StringLiterals:
   Enabled: false
 
@@ -37,10 +51,4 @@ Style/StringLiteralsInInterpolation:
   Enabled: false
 
 Style/SingleLineMethods:
-  Enabled: false
-
-Style/EmptyMethod:
-  EnforcedStyle: compact
-
-Style/SafeNavigation:
   Enabled: false

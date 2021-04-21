@@ -66,7 +66,7 @@ class Importers::BaseImporter # rubocop:todo Metrics/ClassLength
     row['to_import'] && row['to_import'].downcase == 'n'
   end
 
-  def row_processing_requirement(row)
+  def row_processing_requirement(row) # rubocop:todo Metrics/PerceivedComplexity
     results = []
     required_fields_array.map do |rr|
       if rr.instance_of?(Array)
@@ -269,7 +269,7 @@ class Importers::BaseImporter # rubocop:todo Metrics/ClassLength
   end
 end
 
-def parse_date(date_string)
+def parse_date(date_string) # rubocop:todo Metrics/PerceivedComplexity
   date = nil
   if date_string&.include?('/')
     m, d, y = date_string.split('/')

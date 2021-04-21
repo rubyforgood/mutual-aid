@@ -3,7 +3,7 @@
 class ListingsController < AdminController
   before_action :set_listing, only: %i[show edit update destroy match match_confirm]
 
-  def index
+  def index # rubocop:todo Metrics/PerceivedComplexity
     @listings = Listing.all
 
     # contribution_type filter

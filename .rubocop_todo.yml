@@ -30,18 +30,6 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Max: 30
 
-# Offense count: 13
-# Configuration parameters: IgnoredMethods, Max.
-Metrics/PerceivedComplexity:
-  Exclude:
-    - 'app/controllers/listings_controller.rb'
-    - 'app/controllers/locations_controller.rb'
-    - 'app/controllers/matches_controller.rb'
-    - 'app/mailers/submission_mailer.rb'
-    - 'app/models/importers/base_importer.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-    - 'app/models/shift.rb'
-
 # Offense count: 7
 # Cop supports --auto-correct.
 Security/YAMLLoad:

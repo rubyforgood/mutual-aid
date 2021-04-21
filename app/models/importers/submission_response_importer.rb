@@ -53,7 +53,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter # rubocop:
     end
   end
 
-  def create_contact_method_from_row(row)
+  def create_contact_method_from_row(row) # rubocop:todo Metrics/PerceivedComplexity
     preferred_contact_method = row['preferred_contact_method']&.strip
     if preferred_contact_method.present?
       field_name = ContactMethod.map_common_names_to_fields(preferred_contact_method)
@@ -80,7 +80,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter # rubocop:
     SystemLocale.where('LOWER(locale_name) = ?', locale_name).first
   end
 
-  def create_person_from_row(row)
+  def create_person_from_row(row) # rubocop:todo Metrics/PerceivedComplexity
     preferred_locale = find_preferred_locale_in_row(row)
     service_area = create_service_area_from_row(row)
     location = create_location_from_row(row, service_area)
@@ -103,7 +103,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter # rubocop:
                         preferred_locale: preferred_locale&.locale || 'en')
   end
 
-  def create_location_from_row(row, service_area)
+  def create_location_from_row(row, service_area) # rubocop:todo Metrics/PerceivedComplexity
     if row['Address'].present? || row['City'].present? || row['State'].present? ||
         row['Zip'].present? || row['County'].present? || row['Region'].present? ||
         row['Neighborhood'].present?
@@ -153,7 +153,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter # rubocop:
     listings
   end
 
-  def get_system_status(row)
+  def get_system_status(row) # rubocop:todo Metrics/PerceivedComplexity
     # STATUSES = ["matched_tentatively", "match_confirmed", "match_completed",
     # "provider_gave_feedback", "receiver_gave_feedback"]
     #
@@ -196,7 +196,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter # rubocop:
     end
   end
 
-  def create_submission_response_from_row(row, question, submission)
+  def create_submission_response_from_row(row, question, submission) # rubocop:todo Metrics/PerceivedComplexity
     response_value = row[question.name]&.strip
     responses = SubmissionResponse.where(custom_form_question: question, submission: submission, created_at: submission.created_at)
     if ['Yes', 'No', 'Maybe'].include?(response_value)

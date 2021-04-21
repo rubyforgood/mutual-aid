@@ -7,7 +7,7 @@ require 'csv'
 # would also require removing the rescue blocks; otherwise they would swallow errors.
 # Leaving this as a todo to be cleaned up.
 
-class Importers::BaseImporter
+class Importers::BaseImporter # rubocop:todo Metrics/ClassLength
   attr_accessor :row_count, :new_records_count, :dupe_records_count, :row_success_count, :row_error_count
 
   def initialize(current_user)

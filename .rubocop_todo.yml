@@ -17,13 +17,6 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Max: 249
 
-# Offense count: 2
-# Configuration parameters: CountComments, Max, CountAsOne.
-Metrics/ClassLength:
-  Exclude:
-    - 'app/models/importers/base_importer.rb'
-    - 'app/models/importers/submission_response_importer.rb'
-
 # Offense count: 15
 # Configuration parameters: IgnoredMethods, Max.
 Metrics/CyclomaticComplexity:
@@ -42,12 +35,6 @@ Metrics/CyclomaticComplexity:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 Metrics/MethodLength:
   Max: 30
-
-# Offense count: 1
-# Configuration parameters: CountComments, Max, CountAsOne.
-Metrics/ModuleLength:
-  Exclude:
-    - 'app/helpers/communication_log_buttons.rb'
 
 # Offense count: 8
 # Configuration parameters: Max, CountKeywordArgs, MaxOptionalParameters.

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Importers::SubmissionResponseImporter < Importers::BaseImporter
+class Importers::SubmissionResponseImporter < Importers::BaseImporter # rubocop:todo Metrics/ClassLength
   def initialize(current_user, form_type, categories_question_name = nil)
     require "#{Rails.root}/db/scripts/tuple_counts.rb"
     # audit_info(current_user) # TODO

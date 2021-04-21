@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module CommunicationLogButtons
+module CommunicationLogButtons # rubocop:todo Metrics/ModuleLength
   def remote_communication_log_button(
     person,
     match: nil,

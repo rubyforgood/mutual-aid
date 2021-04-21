@@ -30,13 +30,6 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Max: 30
 
-# Offense count: 8
-# Configuration parameters: Max, CountKeywordArgs, MaxOptionalParameters.
-Metrics/ParameterLists:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/communication_log_buttons.rb'
-
 # Offense count: 13
 # Configuration parameters: IgnoredMethods, Max.
 Metrics/PerceivedComplexity:

@@ -580,7 +580,7 @@ class ArrayInput < SimpleForm::Inputs::StringInput
 end
 
 class DatePickerInput < SimpleForm::Inputs::StringInput
-  def input # rubocop:todo Metrics/AbcSize
+  def input # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
     value = @builder.object.send(attribute_name)
     input_html_options[:value] =
       case value

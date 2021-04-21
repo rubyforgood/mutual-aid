@@ -29,6 +29,15 @@ Metrics/BlockLength:
     - describe
     - context
 
+Metrics/MethodLength:
+  IgnoredMethods:
+    - !ruby/regexp /_params$/
+  CountAsOne:
+    - array
+    - hash
+  Exclude:
+    - db/migrate/2020*
+
 Layout/EmptyLineBetweenDefs:
   AllowAdjacentOneLineDefs: true
 

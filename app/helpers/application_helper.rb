@@ -11,7 +11,7 @@ module ApplicationHelper
     "<span class='#{boolean ? "fa fa-check-circle has-text-success" : "fa fa-ban"}'></span>".html_safe
   end
 
-  def edit_button( # rubocop:todo Metrics/ParameterLists, Metrics/CyclomaticComplexity
+  def edit_button( # rubocop:todo Metrics/ParameterLists, Metrics/CyclomaticComplexity, Metrics/MethodLength
     resource, button_text = 'Edit', icon_class = 'fa fa-edit',
     button_text_class = nil, button_class = nil, params = {}, button_title = nil, path = nil
   )
@@ -65,7 +65,7 @@ module ApplicationHelper
     end
   end
 
-  def shorthand_display(date_or_datetime) # rubocop:todo Metrics/AbcSize
+  def shorthand_display(date_or_datetime) # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
     # if date is in the future OR not earlier than 7 days ago, show long version
     today = Time.zone.today
     strftime = if date_or_datetime.to_date == today

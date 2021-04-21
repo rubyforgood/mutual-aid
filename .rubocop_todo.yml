@@ -6,37 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/BooleanSymbol:
-  Exclude:
-    - 'db/migrate/20200523184552_add_auto_generated_to_communication_log.rb'
-
-# Offense count: 4
-# Configuration parameters: DebuggerReceivers, DebuggerMethods.
-# DebuggerReceivers: binding, Kernel, Pry
-# DebuggerMethods: debugger, byebug, remote_byebug, pry, remote_pry, pry_remote, console, rescue, save_and_open_page, save_and_open_screenshot, irb
-Lint/Debugger:
-  Exclude:
-    - 'app/models/importers/base_importer.rb'
-
-# Offense count: 1
-Lint/DuplicateMethods:
-  Exclude:
-    - 'app/models/submission.rb'
-
-# Offense count: 2
-Lint/IneffectiveAccessModifier:
-  Exclude:
-    - 'app/forms/base_form.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Lint/RedundantStringCoercion:
-  Exclude:
-    - 'app/blueprints/subfilter_type_blueprint.rb'
-    - 'app/models/importers/base_importer.rb'
-
 # Offense count: 32
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:

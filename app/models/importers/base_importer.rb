@@ -2,6 +2,11 @@
 
 require 'csv'
 
+# rubocop:todo Lint/Debugger: there are several instances of binding.pry here within rescue blocks.
+# It's possible they are being used to discover issues during real prod imports and removing them
+# would also require removing the rescue blocks; otherwise they would swallow errors.
+# Leaving this as a todo to be cleaned up.
+
 class Importers::BaseImporter
   attr_accessor :row_count, :new_records_count, :dupe_records_count, :row_success_count, :row_error_count
 
@@ -227,7 +232,7 @@ class Importers::BaseImporter
       '+++ row_number#: ',
       @row_number.to_s,
       " +++ #{history_log_name(row.to_s)}",
-      " +++ #{row.to_s}",
+      " +++ #{row}",
       " +++ DID NOT IMPORT -- #{error_message}  -- imported by #{@current_user&.name}"
     ].join
     HistoryLog.generate_import_log!(@current_user, self.class, extra_detail) # TODO
@@ -289,3 +294,4 @@ def parse_date(date_string)
   end
   date
 end
+# rubocop:enable Lint/Debugger

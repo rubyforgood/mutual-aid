@@ -17,10 +17,6 @@ class Submission < ApplicationRecord
     privacy_level_requested == 'moderation_requested'
   end
 
-  def name
-    "#{created_at.strftime("%m-%d-%Y")}: #{person.name}. [#{all_tags_list}] (#{service_area.name})"
-  end
-
   def category_list
     all_tags_list # ["transportation", "groceries"]
   end
@@ -30,6 +26,10 @@ class Submission < ApplicationRecord
   end
 
   def name
+    "#{created_at.strftime("%m-%d-%Y")}: #{person.name}. [#{all_tags_list}] (#{service_area.name})"
+  end
+
+  def name # rubocop:todo Lint/DuplicateMethods
     "(#{created_at.strftime("%m-%d-%Y")}) #{form_name.titleize} - #{service_area.name}"
   end
 end

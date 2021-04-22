@@ -8,7 +8,7 @@ class ContributionsController < ApplicationController
   def index
     @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
     filter = BrowseFilter.new(filter_params)
-    @contributions = ContributionBlueprint.render(filter.contributions, contribution_blueprint_options)
+    @contributions = ContributionBlueprint.render(ContributionPresenter.map(filter.contributions, self))
     respond_to do |format|
       format.html
       format.json { render inline: @contributions }
@@ -43,12 +43,6 @@ class ContributionsController < ApplicationController
 
   def peer_to_peer_mode?
     @system_setting.peer_to_peer?
-  end
-
-  def contribution_blueprint_options
-    options = {}
-    options[:view_path] = ->(id) { contribution_path(id) }
-    options
   end
 
   def filter_params

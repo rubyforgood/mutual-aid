@@ -3,6 +3,10 @@ class BasePresenter < SimpleDelegator
   delegate :context, to: :h
   alias_method :object, :__getobj__
 
+  def self.map collection, view_context
+    collection.map { |object| new(object, view_context) }
+  end
+
   def initialize object, view_context
     super object
     @h = view_context

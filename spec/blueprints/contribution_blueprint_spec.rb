@@ -12,6 +12,9 @@ RSpec.describe ContributionBlueprint do
         urgency_level_id: 1
     )
   end
+  let(:presenter) do
+    ContributionPresenter.new(contribution, double('ViewContext', contribution_path: '/fake/contribution/path'))
+  end
   let(:expected_contact_method) { contribution.person.preferred_contact_method }
   it 'returns reasonable data by default' do
     expected_area_name = Faker::Address.community
@@ -29,7 +32,7 @@ RSpec.describe ContributionBlueprint do
                                # "publish_until" => "2021-10-11",
                                # "publish_until_humanized" => "this year",
                                'created_at' => (contribution.created_at.to_f * 1000), # Javascript wants miliseconds, not seconds
-                               'view_path' => nil,
+                               'view_path' => '/fake/contribution/path',
                                'profile_path' => nil,
                                'match_path' => nil,
                                'name' => contribution.name,
@@ -44,19 +47,7 @@ RSpec.describe ContributionBlueprint do
                                'contact_types' => [{ 'id' => expected_contact_method.id, 'name' => expected_contact_method.name }]
                            }]
     }
-    result = ContributionBlueprint.render([contribution], root: 'contributions')
+    result = ContributionBlueprint.render([presenter], root: 'contributions')
     expect(JSON.parse(result)).to match(expected_data)
-  end
-
-  it 'allows injecting a url formatter for the view_path' do
-    expected_path = "/testing_#{contribution.id}"
-    result = ContributionBlueprint.render(contribution, view_path: ->(p_id) { "/testing_#{p_id}"})
-    expect(JSON.parse(result)['view_path']).to eq(expected_path)
-  end
-
-  it 'allows injecting a url formatter for the profile_path' do
-    expected_path = "/testing_#{contribution.person.id}"
-    result = ContributionBlueprint.render(contribution, profile_path: ->(p_id) { "/testing_#{p_id}"})
-    expect(JSON.parse(result)['profile_path']).to eq(expected_path)
   end
 end

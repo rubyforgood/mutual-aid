@@ -49,7 +49,7 @@ class SystemSettingsController < AdminController
     end
 
     def set_primary_organization
-      @primary_organization = Organization.where(is_instance_owner: true).last
+      @primary_organization = context.host_organization
     end
 
     def system_setting_params

@@ -51,7 +51,7 @@ end
 # host org and set system defaults
 SystemSetting.first_or_create!(exchange_type: "fully_moderated")
 
-host_organization = Organization.where(is_instance_owner: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
+host_organization = Organization.where(is_host: true).first_or_create!(name: "[CHANGEME] Default Mutual Aid Group")
 
 # we need at least one ServiceArea, and every service_area gets its own location
 location_type = LocationType.first

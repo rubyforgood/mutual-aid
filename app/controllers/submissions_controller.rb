@@ -24,9 +24,9 @@ class SubmissionsController < AdminController
     if @submission.save
       EmailNewSubmission.run!(
         submission: @submission,
-        user: current_user,
+        user: context.user,
         system_setting: context.system_settings,
-        organization: Organization.instance_owner,
+        organization: context.host_organization,
       )
       redirect_to submissions_path, notice: 'Submission successfully created.'
     else

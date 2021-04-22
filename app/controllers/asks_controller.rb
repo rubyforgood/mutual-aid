@@ -16,9 +16,9 @@ class AsksController < PublicController
     if submission.save
       EmailNewSubmission.run!(
         submission: submission,
-        user: current_user,
-        system_setting: context.system_settings
-        organization: Organization.instance_owner
+        user: context.user,
+        system_setting: context.system_settings,
+        organization: context.host_organization,
       )
       redirect_to thank_you_path, notice: 'Ask was successfully created.'
     else
@@ -37,7 +37,7 @@ class AsksController < PublicController
 
     def render_form(submission)
       @form = Form.find_by!(contribution_type_name: 'Ask')
-      @organization = Organization.instance_owner
+      @organization = context.host_organization
 
       @json = {
         submission: SubmissionBlueprint.render_as_hash(submission),

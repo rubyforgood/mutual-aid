@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Context do
   describe 'initialization' do
     it 'allows keyword init' do
-      context = Context.new user: double(:user)
+      context = Context.new user: instance_double(User)
       expect(context.user).to be_present
     end
 
@@ -14,7 +14,7 @@ RSpec.describe Context do
   end
 
   describe 'custom reader methods' do
-    let(:current_settings) { double :current_settings }
+    let(:current_settings) { instance_double SystemSetting }
     let(:system_setting) { class_double('SystemSetting').as_stubbed_const }
     let(:context) { Context.new }
 
@@ -38,11 +38,11 @@ RSpec.describe Context do
   end
 
   describe 'to_h' do
-    let(:user) { double 'User' }
-    let(:system_settings) { double 'SystemSettings' }
+    let(:user) { instance_double User, 'admin_role?' => true }
+    let(:system_settings) { instance_double SystemSetting }
     let(:context) { Context.new user: user, system_settings: system_settings }
 
-    def method_with_keyword_args positional_arg, non_context_keyword_arg:, user:, system_settings:
+    def method_with_keyword_args positional_arg, non_context_keyword_arg:, user:, system_settings:, **_rest
       [positional_arg, non_context_keyword_arg, user, system_settings]
     end
 
@@ -58,7 +58,7 @@ RSpec.describe Context do
     subject { context.can_admin? }
 
     context 'sysadmin' do
-      let(:user) { instance_double 'User', admin_role?: false, sys_admin_role?: true }
+      let(:user) { instance_double User, admin_role?: false, sys_admin_role?: true }
 
       context '?admin not overriden' do
         let(:admin_param) { nil }
@@ -72,7 +72,7 @@ RSpec.describe Context do
     end
 
     context 'admin' do
-      let(:user) { instance_double 'User', admin_role?: true, sys_admin_role?: false }
+      let(:user) { instance_double User, admin_role?: true, sys_admin_role?: false }
 
       context '?admin not overriden' do
         let(:admin_param) { nil }
@@ -86,7 +86,7 @@ RSpec.describe Context do
     end
 
     context 'neighbor' do
-      let(:user) { instance_double 'User', admin_role?: false, sys_admin_role?: false }
+      let(:user) { instance_double User, admin_role?: false, sys_admin_role?: false }
 
       context '?admin not overriden' do
         let(:admin_param) { nil }

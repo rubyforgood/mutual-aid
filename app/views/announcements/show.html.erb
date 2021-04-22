@@ -1,5 +1,7 @@
-<% announcement_presenter = AnnouncementPresenter.new(announcement) %>
+<% announcement_presenter = present announcement, AnnouncementPresenter %>
+
 <p id="notice"><%= notice %></p>
+
 <div class="card">
   <header class="card-header">
     <p class="card-header-title title is-3">

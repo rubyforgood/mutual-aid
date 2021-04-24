@@ -33,7 +33,7 @@
             <a :href="contribution.view_path" class="button icon-list is-primary"><span class=""> View</span></a>
           </div>
         </td>
-        <td>{{ contribution.person.name.split(" (")[0] }}</td>
+        <td>{{ contribution.person.name }}</td>
 <!--        <td>{{ contribution.title }}</td>-->
       </tr>
     </table>

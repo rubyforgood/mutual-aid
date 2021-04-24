@@ -13,7 +13,7 @@ RSpec.describe ContributionBlueprint do
     )
   end
   let(:presenter) do
-    ContributionPresenter.new(contribution, double('ViewContext', contribution_path: '/fake/contribution/path'))
+    ContributionPresenter.new(contribution, double('ViewContext', contribution_path: '/fake/contribution/path', context: Context.new))
   end
   let(:expected_contact_method) { contribution.person.preferred_contact_method }
   it 'returns reasonable data by default' do
@@ -36,7 +36,7 @@ RSpec.describe ContributionBlueprint do
                                'profile_path' => nil,
                                'match_path' => nil,
                                'name' => contribution.name,
-                               'person' => { 'id' => contribution.person.id, 'name' => contribution.person.name, 'email' => contribution.person.email,
+                               'person' => { 'id' => contribution.person.id, 'name' => nil, 'email' => contribution.person.email,
                                              'phone' => contribution.person.phone, 'skills' =>  contribution.person.skills,
                                              'preferred_contact_method' => { 'id' => contribution.person.preferred_contact_method.id, 'name' => contribution.person.preferred_contact_method.name }},
                                'location' => nil,

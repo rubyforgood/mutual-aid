@@ -33,7 +33,7 @@
             {{ service_area.name }}
           </div>
           <div>
-            {{ `From: ${person.name.split(" (")[0]}` }}
+            {{ `From: ${person.name}` }}
 
           </div>
         </div>

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PersonBlueprint < Blueprinter::Base
+  transform HideRestrictedFieldsTransformer
+
   identifier :id
 
   fields :name, :email, :phone, :skills

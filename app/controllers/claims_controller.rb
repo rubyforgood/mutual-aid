@@ -18,7 +18,8 @@ class ClaimsController < ApplicationController
   def create
     ClaimContribution.run!(params[:claim].merge(
       contribution: params[:contribution_id],
-      current_user: current_user
+      current_user: context.user,
+      organization: context.host_organization
     ))
     redirect_to contributions_path, notice: 'Claim was successful!'
   end

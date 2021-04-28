@@ -5,6 +5,7 @@ class ClaimContribution < ActiveInteraction::Base
   string :message
   record :contribution, class: Listing
   object :current_user, class: User
+  object :organization
 
   def execute
     # TODO: Need to handle race conditions to prevent creating multiple matches for same contribution
@@ -37,6 +38,7 @@ class ClaimContribution < ActiveInteraction::Base
       contribution: contribution,
       peer_alias: peer_alias,
       message: message,
+      organization: organization,
       user: current_user
     )
   end

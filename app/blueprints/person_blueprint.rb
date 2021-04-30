@@ -9,6 +9,8 @@ class PersonBlueprint < Blueprinter::Base
   field  :preferred_contact_method
 
   view :with_location do
+    transform HideRestrictedFieldsTransformer
+
     association :location, blueprint: LocationBlueprint, view: :with_location_type
   end
 end

@@ -43,20 +43,20 @@ class CustomFormQuestionsController < AdminController
 
   private
 
-    def set_custom_form_question
-      @custom_form_question = CustomFormQuestion.find(params[:id])
-    end
+  def set_custom_form_question
+    @custom_form_question = CustomFormQuestion.find(params[:id])
+  end
 
-    def custom_form_question_params
-      params.require(:custom_form_question).permit(
-          :input_type,
-          :is_required,
-          :form_type,
-          :hint_text,
-          :name,
-          :display_order,
-          :form_hook,
-          option_list: [],
-          )
-    end
+  def custom_form_question_params
+    params.require(:custom_form_question).permit(
+      :input_type,
+      :is_required,
+      :form_type,
+      :hint_text,
+      :name,
+      :display_order,
+      :form_hook,
+      option_list: [],
+    )
+  end
 end

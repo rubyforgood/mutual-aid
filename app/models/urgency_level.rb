@@ -18,6 +18,6 @@ class UrgencyLevel
 
   def self.where(id: [])
     ids = [id].flatten
-    ids.map {|i| TYPES.select {|t| t.id == i }}
+    ids.map { |i| TYPES.select { |t| t.id == i } }
   end
 end

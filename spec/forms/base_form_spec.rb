@@ -24,7 +24,7 @@ RSpec.describe BaseForm do
     let(:given_inputs) { result[1] }
 
     context 'with no params given' do
-      let(:params) {{}}
+      let(:params) { {} }
 
       it 'recognizes no params were given' do
         expect(inputs).to eq(string: nil, date: nil)
@@ -33,7 +33,7 @@ RSpec.describe BaseForm do
     end
 
     context 'with an explicitly nil param' do
-      let(:params) {{ date: nil }}
+      let(:params) { {date: nil} }
 
       specify 'inputs show all params with defaults' do
         expect(inputs).to eq(string: nil, date: nil)
@@ -45,7 +45,7 @@ RSpec.describe BaseForm do
     end
 
     context 'with params given' do
-      let(:params) {{ string: 'a string', date: '2020-12-31' }}
+      let(:params) { {string: 'a string', date: '2020-12-31'} }
 
       it 'recognizes the given params' do
         expect(inputs).to eq(string: 'a string', date: Date.new(2020, 12, 31))
@@ -54,11 +54,11 @@ RSpec.describe BaseForm do
     end
 
     context 'with a complete multi-part date param' do
-      let(:params) {{
+      let(:params) { {
         'date(1i)' => '2020',
         'date(2i)' => '12',
         'date(3i)' => '31',
-      }}
+      } }
 
       it 'recognizes the multi-part date was given' do
         expect(inputs).to eq(string: nil, date: Date.new(2020, 12, 31))
@@ -67,9 +67,9 @@ RSpec.describe BaseForm do
     end
 
     context 'with a partial multi-part date param' do
-      let(:params) {{
+      let(:params) { {
         'date(1i)' => '2020',
-      }}
+      } }
 
       it 'ignores the date' do
         expect(inputs).to eq(string: nil, date: nil)

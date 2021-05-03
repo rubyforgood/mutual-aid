@@ -72,7 +72,8 @@ locales.each do |locale, locale_name|
   SystemLocale.where(locale: locale).first_or_create!(locale_name: locale_name)
 end
 
-[ ['Call', 'phone', 'fa fa-phone'],
+[
+  ['Call', 'phone', 'fa fa-phone'],
   ['Text', 'phone', 'fa fa-comment'],
   ['Email', 'email', 'fa fa-envelope'],
   ['WhatsApp', 'phone', 'fa fa-whatsapp'],

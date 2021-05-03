@@ -45,15 +45,15 @@ class ContactMethodsController < AdminController
 
   private
 
-    def set_contact_method
-      @contact_method = ContactMethod.find(params[:id])
-    end
+  def set_contact_method
+    @contact_method = ContactMethod.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @fields = ['email', 'phone']
-    end
+  def set_form_dropdowns
+    @fields = ['email', 'phone']
+  end
 
-    def contact_method_params
-      params.require(:contact_method).permit(:name, :field, :enabled, :icon_class)
-    end
+  def contact_method_params
+    params.require(:contact_method).permit(:name, :field, :enabled, :icon_class)
+  end
 end

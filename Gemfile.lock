@@ -188,7 +188,7 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rexml (3.2.4)
+    rexml (3.2.5)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
     rspec-expectations (3.9.1)
@@ -219,10 +219,16 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.4.0)
       parser (>= 2.7.1.5)
+    rubocop-performance (1.9.2)
+      rubocop (>= 0.90.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
     rubocop-rails (2.9.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 0.90.0, < 2.0)
+    rubocop-rspec (2.2.0)
+      rubocop (~> 1.0)
+      rubocop-ast (>= 1.1.0)
     ruby-progressbar (1.11.0)
     ruby_http_client (3.5.0)
     semantic_range (3.0.0)
@@ -244,6 +250,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    standard (0.12.0)
+      rubocop (= 1.8.1)
+      rubocop-performance (= 1.9.2)
     thor (1.1.0)
     thread_safe (0.3.6)
     tzinfo (1.2.9)
@@ -297,11 +306,13 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   rubocop-rails
+  rubocop-rspec
   sendgrid-ruby
   simple_form
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
+  standard
   web-console (>= 3.3.0)
   webpacker (~> 5.0)
 

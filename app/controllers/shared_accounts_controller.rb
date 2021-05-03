@@ -40,11 +40,11 @@ class SharedAccountsController < AdminController
 
   private
 
-    def set_shared_account
-      @shared_account = SharedAccount.find(params[:id])
-    end
+  def set_shared_account
+    @shared_account = SharedAccount.find(params[:id])
+  end
 
-    def shared_account_params
-      params.require(:shared_account).permit(:name, :account_url, :username, :password_hint, :notes)
-    end
+  def shared_account_params
+    params.require(:shared_account).permit(:name, :account_url, :username, :password_hint, :notes)
+  end
 end

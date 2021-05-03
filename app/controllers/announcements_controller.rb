@@ -41,21 +41,21 @@ class AnnouncementsController < ApplicationController
 
   private
 
-    def announcement
-      @announcement ||= authorize(params[:id] ? Announcement.find(params[:id]) : Announcement.new)
-    end
-    helper_method :announcement
+  def announcement
+    @announcement ||= authorize(params[:id] ? Announcement.find(params[:id]) : Announcement.new)
+  end
+  helper_method :announcement
 
-    def redirect_after_create
-      notice = 'Announcement was successfully submitted.'
-      if context.can_admin?
-        redirect_to announcements_path, notice: "#{notice} We'll review."
-      else
-        redirect_to thank_you_path, notice: notice
-      end
+  def redirect_after_create
+    notice = 'Announcement was successfully submitted.'
+    if context.can_admin?
+      redirect_to announcements_path, notice: "#{notice} We'll review."
+    else
+      redirect_to thank_you_path, notice: notice
     end
+  end
 
-    def determine_layout
-      'without_navbar' unless context.system_settings.display_navbar?
-    end
+  def determine_layout
+    'without_navbar' unless context.system_settings.display_navbar?
+  end
 end

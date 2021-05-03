@@ -9,7 +9,7 @@ RSpec.describe PersonPolicy do
 
   let(:user)         { create(:user) }
   let(:own_person)   { create(:person, user: user) }
-  let(:other_person) { create(:person) }
+  let(:other_person) { create(:person, user: create(:user)) }
 
 
   context "given a normal signed-in user and their Person" do
@@ -91,6 +91,34 @@ RSpec.describe PersonPolicy do
 
     it "includes the person in its scope" do
       expect(resolved_scope).to include(person)
+    end
+  end
+
+  context "given a guest user and a different Person" do
+    let(:user) { nil }
+    let(:person) { other_person }
+
+    it { is_expected.to forbid_action(:show) }
+    it { is_expected.to forbid_new_and_create_actions }
+    it { is_expected.to forbid_edit_and_update_actions }
+    it { is_expected.to forbid_action(:destroy) }
+
+    it "does not includes the person in its scope" do
+      expect(resolved_scope).to_not include(person)
+    end
+  end
+
+  context "given a guest user and a Person without an associated User" do
+    let(:user) { nil }
+    let(:person) { create :person, user: nil }
+
+    it { is_expected.to forbid_action(:show) }
+    it { is_expected.to forbid_new_and_create_actions }
+    it { is_expected.to forbid_edit_and_update_actions }
+    it { is_expected.to forbid_action(:destroy) }
+
+    it "does not includes the person in its scope" do
+      expect(resolved_scope).to_not include(person)
     end
   end
 end

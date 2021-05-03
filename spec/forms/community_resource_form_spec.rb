@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CommunityResourceForm do
   let!(:location_type) { create :location_type }
-  let(:params) {{
+  let(:params) { {
     name: 'Free breakfast program',
     description: 'Feed the people!',
     publish_from: '1969-01-01',
@@ -13,7 +13,7 @@ RSpec.describe CommunityResourceForm do
     organization_attributes: {
       name: 'Black Panther Party',
     },
-  }}
+  } }
 
   describe 'creating a new community resource' do
     let(:community_resource) { CommunityResourceForm.build params }
@@ -73,9 +73,9 @@ RSpec.describe CommunityResourceForm do
   end
 
   describe 'updating an existing community resource' do
-    let!(:existing) { CommunityResourceForm.build(params).tap{|o| o.save! } }
+    let!(:existing) { CommunityResourceForm.build(params).tap { |o| o.save! } }
 
-    let(:update_params) {{
+    let(:update_params) { {
       id: existing.id,
       name: 'new name',
       description: 'new description',

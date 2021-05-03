@@ -35,6 +35,6 @@ class PersonPolicy < ApplicationPolicy
   end
 
   def own_person?
-    person.user_id == user&.id
+    person.user_id && person.user_id == user&.id
   end
 end

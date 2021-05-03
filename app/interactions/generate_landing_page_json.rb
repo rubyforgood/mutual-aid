@@ -15,7 +15,7 @@ class GenerateLandingPageJson < ActiveInteraction::Base
 
   private
 
-    def sanitize string
-      HtmlSanitizer.new(string).sanitize
-    end
+  def sanitize string
+    HtmlSanitizer.new(string).sanitize
+  end
 end

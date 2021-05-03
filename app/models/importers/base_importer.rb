@@ -32,11 +32,11 @@ class Importers::BaseImporter
     @new_records_count = 0
     @dupe_records_count = 0
     @row_processing_error_messages = []
-    @counts_hash = { row_count: @row_count,
+    @counts_hash = {row_count: @row_count,
                     row_success_count: @row_success_count,
                     new_records_count: @new_records_count,
                     dupe_records_count: @dupe_records_count,
-                    row_error_count: @row_error_count }
+                    row_error_count: @row_error_count}
     @initial_model_logs = ''
     @initial_model_counts = {}
     @final_diff_model_counts = {}
@@ -66,7 +66,7 @@ class Importers::BaseImporter
     results = []
     required_fields_array.map do |rr|
       if rr.class == Array
-        if rr.map{|r| row[r]}.any?
+        if rr.map { |r| row[r] }.any?
           results << true
         else
           rr.map do |r|
@@ -223,7 +223,7 @@ class Importers::BaseImporter
     @final_diff_model_counts = final_counts_hash
   end
 
-  def create_history_log(row, error_message=nil)
+  def create_history_log(row, error_message = nil)
     begin
       extra_detail = '+++ row_number#: ' +
           @row_number.to_s +
@@ -276,14 +276,14 @@ def parse_date(date_string)
       date = Date.new(y.to_i, m.to_i, d.to_i)
     else
       begin
-        date = date_string.to_date  # TODO: - add exception?
+        date = date_string.to_date # TODO: - add exception?
       rescue => e
         binding.pry ### USE FOR TESTING IMPORTERS
       end
     end
   elsif date_string&.include?('-')
     begin
-      date = date_string.to_date  # TODO: - add exception?
+      date = date_string.to_date # TODO: - add exception?
     rescue => e
       binding.pry ### USE FOR TESTING IMPORTERS
     end

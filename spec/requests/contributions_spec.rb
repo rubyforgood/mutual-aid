@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe '/contributions', type: :request do
-  let(:valid_attributes) {{
-    location_attributes: { zip: '12345' },
+  let(:valid_attributes) { {
+    location_attributes: {zip: '12345'},
     tag_list: ['', 'cash'],
-  }}
+  } }
 
-  let(:invalid_attributes) {{
-    location_attributes: { zip: '12e45' },
-  }}
+  let(:invalid_attributes) { {
+    location_attributes: {zip: '12e45'},
+  } }
 
   let(:user) { create(:user) }
 
@@ -69,13 +69,13 @@ RSpec.describe '/contributions', type: :request do
       sign_in user
       ask = create(:ask, title: 'this is the ask title')
       offer = create(:offer, title: 'this is the offer title')
-      get contributions_url, params: { ContributionType: { 'Ask' => 1 } }
+      get contributions_url, params: {ContributionType: {'Ask' => 1}}
       expect(response.body).to match(ask.title)
       expect(response.body).not_to match(offer.title)
-      get contributions_url, params: { ContributionType: { 'Offer' => 1 } }
+      get contributions_url, params: {ContributionType: {'Offer' => 1}}
       expect(response.body).not_to match(ask.title)
       expect(response.body).to match(offer.title)
-      get contributions_url, params: { ContributionType: { 'Ask' => 1, 'Offer' => 1 } }
+      get contributions_url, params: {ContributionType: {'Ask' => 1, 'Offer' => 1}}
       expect(response.body).to match(ask.title)
       expect(response.body).to match(offer.title)
     end
@@ -96,13 +96,13 @@ RSpec.describe '/contributions', type: :request do
 
       # passing `as: json` to `get` does some surprising things to the request and its params that would break this test
       get contributions_url, {
-        params: { "Category[#{categories[0].id}]": 1, "Category[#{categories[1].id}]": 1, "ServiceArea[#{expected_area.id}]": 1 },
-        headers: { 'HTTP_ACCEPT' => 'application/json' }
+        params: {"Category[#{categories[0].id}]": 1, "Category[#{categories[1].id}]": 1, "ServiceArea[#{expected_area.id}]": 1},
+        headers: {'HTTP_ACCEPT' => 'application/json'}
       }
 
       expect(response.body).to match(/#{expected_area.name.to_json}/)
 
-      response_ids = JSON.parse(response.body).map { |hash| hash['id']}
+      response_ids = JSON.parse(response.body).map { |hash| hash['id'] }
       expect(response_ids).to include(both_tags_listing.id)
       expect(response_ids).to include(one_tag_listing.id)
       expect(response_ids).not_to include(both_tags_wrong_area_listing.id)

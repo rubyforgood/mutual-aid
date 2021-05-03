@@ -40,7 +40,7 @@ RSpec.describe "/users", type: :request do
       skip "To be implemented when we have a #create action."
 
       expect {
-        post "/users", params: { user: FactoryBot.attributes_for(:user) }
+        post "/users", params: {user: FactoryBot.attributes_for(:user)}
       }.to change {
         User.count
       }.by(1)
@@ -51,7 +51,7 @@ RSpec.describe "/users", type: :request do
     let(:user) { FactoryBot.create(:user, role: "unset") }
 
     it "updates the user" do
-      patch "/users/#{user.id}", params: { user: { email: "atorvingen@example.com" } }
+      patch "/users/#{user.id}", params: {user: {email: "atorvingen@example.com"}}
 
       # Manually confirming because it's required by Devise when changing a user's email address
       user.reload.confirm
@@ -60,7 +60,7 @@ RSpec.describe "/users", type: :request do
 
     context "when changing roles" do
       it "allows admins to change a user's role" do
-        patch "/users/#{user.id}", params: { user: { role: "neighbor" } }
+        patch "/users/#{user.id}", params: {user: {role: "neighbor"}}
 
         expect(user.reload.role).to eq("neighbor")
       end

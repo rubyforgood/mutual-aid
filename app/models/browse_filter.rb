@@ -6,7 +6,7 @@
 class BrowseFilter
   FILTERS = {
     'ServiceArea' => ->(ids, scope) { scope.where(service_area: ids) },
-    'ContactMethod' => ->(ids, scope) { scope.joins(:person).where(people: { preferred_contact_method: ids })},
+    'ContactMethod' => ->(ids, scope) { scope.joins(:person).where(people: {preferred_contact_method: ids}) },
     'Category' => lambda do |ids, scope|
       scope.tagged_with(
         Category.roots.where(id: ids).pluck('name'),
@@ -41,7 +41,7 @@ class BrowseFilter
 
   def filter(model)
     parameters.keys.reduce(model.matchable) do |scope, key|
-      filter = FILTERS.fetch(key, ->(_condition, s) {s})
+      filter = FILTERS.fetch(key, ->(_condition, s) { s })
       filter.call(parameters[key], scope)
     end
   end

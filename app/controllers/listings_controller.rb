@@ -13,13 +13,13 @@ class ListingsController < AdminController
     end
 
     # follow_up_status filter
-    @match_statuses = Listing::MATCH_STATUSES.map{|s| [s.titleize, s]}
+    @match_statuses = Listing::MATCH_STATUSES.map { |s| [s.titleize, s] }
     if params[:match_status].present?
       @listings = @listings.match_status(params[:match_status])
     end
 
     # person_id filter
-    @people = Person.all.map{ |p| [p.name, p.id] }.sort_by(&:first)
+    @people = Person.all.map { |p| [p.name, p.id] }.sort_by(&:first)
     if params[:person_id].present?
       person_id = Person.find(params[:person_id])&.id # verify the person is in the db
       @listings = @listings.person_id(person_id)
@@ -45,7 +45,7 @@ class ListingsController < AdminController
 
   def match
     listing_type = @listing.type
-    match_polymorphic_params = listing_type == Ask ? { receiver: @listing } : { provider: @listing }
+    match_polymorphic_params = listing_type == Ask ? {receiver: @listing} : {provider: @listing}
     @match = Match.new
     @match.update(match_polymorphic_params)
     @possible_providers = Listing.offers # TODO: - get this to be a filtered list -- need to add logic by which to match
@@ -121,8 +121,8 @@ class ListingsController < AdminController
 
     def filter_params
       return Hash.new unless allowed_params && allowed_params.to_h.any?
-      allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key}.tap do |hash|
-        hash.keys.each { |key| hash[key] = hash[key].keys}
+      allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key }.tap do |hash|
+        hash.keys.each { |key| hash[key] = hash[key].keys }
       end
     end
 end

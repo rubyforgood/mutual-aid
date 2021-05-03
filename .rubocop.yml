@@ -21,6 +21,9 @@ Metrics:
   # Disabled in Standard by default
   Enabled: true
 
+Layout/ExtraSpacing:
+  AllowForAlignment: true
+
 Style/StringLiterals:
   Enabled: false
 

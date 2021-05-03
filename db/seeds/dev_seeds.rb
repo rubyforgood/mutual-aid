@@ -81,7 +81,7 @@ end
 
 match_1 = Match.where(receiver: person.asks.last, provider: person_2.offers.last).first_or_create!
 5.times do
-  Match.where(receiver: Ask.all.sample, provider: Offer.all.sample).first_or_create!(created_at: Time.current - ( ((1..10).to_a.sample).days))
+  Match.where(receiver: Ask.all.sample, provider: Offer.all.sample).first_or_create!(created_at: Time.current - (((1..10).to_a.sample).days))
 end
 
 # organization
@@ -95,7 +95,7 @@ CommunityResource.where(
 5.times do
   org = Organization.create!(name: Faker::Company.name)
   CommunityResource.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                            is_approved: [true,false].sample,
+                            is_approved: [true, false].sample,
                             publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now),
                             description: Faker::Lorem.sentences(number: (1..5).to_a.sample).join(" "), organization: org)
 end
@@ -107,7 +107,7 @@ Announcement.where(
 ).first_or_create!(publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now))
 5.times do
   Announcement.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                       is_approved: [true,false].sample,
+                       is_approved: [true, false].sample,
                        publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now),
                        description: Faker::Lorem.sentences(number: (1..6).to_a.sample).join(" "))
 end
@@ -158,7 +158,7 @@ end
                          urgency: SoftwareFeedback::URGENCIES.sample).first_or_create!
 end
 
-Match.all.sample((Match.count * 50)/100).each do |match|
+Match.all.sample((Match.count * 50) / 100).each do |match|
   Feedback.create!(match: match,
                    is_from_receiver: [true, false].sample,
                    completed: [true, false].sample,
@@ -199,7 +199,7 @@ Listing.all.each do |listing|
                           )
 end
 # 70% get random manual logs
-Listing.all.sample((Listing.count * 70)/100) do |listing|
+Listing.all.sample((Listing.count * 70) / 100) do |listing|
   delivery_status = (Messenger.delivery_statuses - Messenger.default_status).sample
   CommunicationLog.create!(person: listing.person,
                            match: listing.matches.first,

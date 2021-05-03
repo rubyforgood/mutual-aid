@@ -33,7 +33,7 @@ def check_table_count(table_name, connection, class_name)
     max_id = result
   end
 
-  puts "#{ count.to_s.rjust(3, " ") } / #{max_id.to_s.ljust(3, "_")}" +
+  puts "#{count.to_s.rjust(3, " ")} / #{max_id.to_s.ljust(3, "_")}" +
            "___" + class_name.to_s
 end
 

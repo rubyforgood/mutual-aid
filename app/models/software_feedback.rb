@@ -5,16 +5,19 @@ class SoftwareFeedback < ApplicationRecord
 
   FEEDBACK_TYPES = ['new feature', 'change', 'bug']
   MODULE_NAMES = [
-    'ask form', 'offer form', 'contributions page' ] + [
-      'admin',
-      'system settings',
-      'community resources module',
-      'announcements module',
-      'donations module',
-      'positions module',
-      'shared accounts module',
-      'yearbook'
-    ].sort
+    'ask form',
+    'offer form',
+    'contributions page'
+  ] + [
+    'admin',
+    'system settings',
+    'community resources module',
+    'announcements module',
+    'donations module',
+    'positions module',
+    'shared accounts module',
+    'yearbook'
+  ].sort
   URGENCIES = ['critical', 'anytime', 'blue sky']
 end
 

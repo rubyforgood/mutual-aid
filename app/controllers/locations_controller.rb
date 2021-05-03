@@ -29,7 +29,7 @@ class LocationsController < AdminController
     end
 
     # person_id filter
-    @people = Person.all.map{ |p| [p.name, p.id] }.sort_by(&:first)
+    @people = Person.all.map { |p| [p.name, p.id] }.sort_by(&:first)
     if params[:person_id].present?
       person_id = Person.find(params[:person_id])&.id # verify the person is in the db
       @locations = @locations.person_id(person_id)
@@ -79,7 +79,7 @@ class LocationsController < AdminController
   end
 
   def set_form_dropdowns
-    @service_areas = ServiceArea.all.map{ |t| [t.full_name, t.id] }.sort_by(&:first)
+    @service_areas = ServiceArea.all.map { |t| [t.full_name, t.id] }.sort_by(&:first)
   end
 
   def location_params

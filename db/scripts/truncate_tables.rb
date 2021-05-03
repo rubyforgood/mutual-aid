@@ -15,7 +15,7 @@ def truncate_table(table_name, connection)
 end
 
 ActiveRecord::Base.connection.tables.each do |table_name|
-  unless  ["ar_internal_metadata", "schema_migrations"].include?(table_name)
+  unless ["ar_internal_metadata", "schema_migrations"].include?(table_name)
     truncate_table(table_name, connection)
   end
 end

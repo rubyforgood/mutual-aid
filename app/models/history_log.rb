@@ -13,7 +13,7 @@ class HistoryLog < ApplicationRecord
   #                topic: "#{klass.name} #{log_type}")
   # end
 
-  def self.generate_import_log!(current_user, import_klass, extra_detail=nil)
+  def self.generate_import_log!(current_user, import_klass, extra_detail = nil)
     self.create!(name: extra_detail + ' +++ ' + "IMPORTED BY: #{current_user&.name}",
                  topic: "#{import_klass.name} IMPORTED")
   end

@@ -20,3 +20,9 @@ inherit_from:
 Metrics:
   # Disabled in Standard by default
   Enabled: true
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false

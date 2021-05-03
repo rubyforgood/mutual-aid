@@ -32,7 +32,6 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.0'
 gem 'pundit'
 gem 'rack-timeout'
-gem 'rubocop-rails'
 gem 'sendgrid-ruby'
 gem 'simple_form'
 gem 'webpacker', '~> 5.0'
@@ -56,9 +55,12 @@ group :development do
   gem 'annotate'
   gem 'listen', '~> 3.0'
   gem 'rerun'
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   gem 'spring'
   gem 'spring-commands-rspec', require: false
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'standard', require: false
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
 end

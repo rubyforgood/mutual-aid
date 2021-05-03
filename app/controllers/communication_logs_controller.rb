@@ -68,34 +68,34 @@ class CommunicationLogsController < AdminController
 
   private
 
-    def set_communication_log
-      @communication_log = CommunicationLog.find(params[:id])
-    end
+  def set_communication_log
+    @communication_log = CommunicationLog.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      if params[:delivery_method_name].present?
-        @delivery_method_id = ContactMethod.where('LOWER(name) = ?', params[:delivery_method_name].downcase).last&.id
-      else
-        @delivery_method_id = ContactMethod.where('LOWER(name) = ?', 'call').last&.id
-      end
-      @person = @communication_log.person || Person.where(id: params[:person_id]).last
-      @match = @communication_log.match || Match.where(id: params[:match_id]).last
-      @contribution = Listing.where(id: params[:contribution_id]).last
+  def set_form_dropdowns
+    if params[:delivery_method_name].present?
+      @delivery_method_id = ContactMethod.where('LOWER(name) = ?', params[:delivery_method_name].downcase).last&.id
+    else
+      @delivery_method_id = ContactMethod.where('LOWER(name) = ?', 'call').last&.id
     end
+    @person = @communication_log.person || Person.where(id: params[:person_id]).last
+    @match = @communication_log.match || Match.where(id: params[:match_id]).last
+    @contribution = Listing.where(id: params[:contribution_id]).last
+  end
 
-    def communication_log_params
-      params.require(:communication_log).permit(
-          :person_id,
-          :match_id,
-          :body,
-          :created_by_id,
-          :delivery_method_id,
-          :delivery_status,
-          :needs_follow_up,
-          :outbound,
-          :sent_at,
-          :subject,
-          :auto_generated
-      )
-    end
+  def communication_log_params
+    params.require(:communication_log).permit(
+      :person_id,
+      :match_id,
+      :body,
+      :created_by_id,
+      :delivery_method_id,
+      :delivery_status,
+      :needs_follow_up,
+      :outbound,
+      :sent_at,
+      :subject,
+      :auto_generated
+    )
+  end
 end

@@ -247,13 +247,6 @@ Layout/HashAlignment:
     - 'spec/interactions/generate_landing_page_json_spec.rb'
     - 'spec/lib/tasks/support/listing_converter_spec.rb'
 
-# Offense count: 103
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: normal, indented_internal_methods
-Layout/IndentationConsistency:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth, EnforcedStyle.

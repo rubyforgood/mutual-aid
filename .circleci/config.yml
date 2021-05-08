@@ -33,11 +33,23 @@ commands:
   webpacker_compile:
     steps:
       - run:
+          name: 'Generate file containing checksums of all our javascript source'
+          command: |
+            find app/javascript -type f -exec md5sum {} + | LC_ALL=C sort > tmp/app_javascript_checksums.txt
+      - restore_cache:
+          keys:
+            - webpacker-cache-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}-{{ checksum "tmp/app_javascript_checksums.txt" }}
+      - run:
           name: 'Compile webpacker assets'
           command: |
             set -euxo pipefail
             bundle config path .bundle
             bundle exec rails webpacker:compile
+      - save_cache:
+          key: webpacker-cache-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}-{{ checksum "tmp/app_javascript_checksums.txt" }}
+          paths:
+            - public/packs-test
+            - tmp/cache/webpacker # should match the cache_path entry in config/webpacker.yml
   run_rubocop:
     description: 'Run rubocop'
     steps:

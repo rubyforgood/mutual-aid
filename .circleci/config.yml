@@ -1,7 +1,7 @@
 version: 2.1
 
 commands:
-  bundle_install:
+  bundle_install_cmd:
     description: 'Perform bundler installation, relying on CircleCI cache for performance'
     steps:
       - restore_cache:
@@ -16,7 +16,7 @@ commands:
           key: bundler-cache-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
           paths:
             - .bundle
-  yarn_install:
+  yarn_install_cmd:
     description: 'Perform node module installation, relying on CircleCI cache for performance'
     steps:
       - restore_cache:
@@ -29,7 +29,7 @@ commands:
           key: node-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-  webpacker_compile:
+  webpacker_compile_cmd:
     steps:
       - run:
           name: 'Generate file containing checksums of all our javascript source'
@@ -48,7 +48,7 @@ commands:
           paths:
             - public/packs-test
             - tmp/cache/webpacker # should match the cache_path entry in config/webpacker.yml
-  run_rubocop:
+  rubocop_cmd:
     description: 'Run rubocop'
     steps:
       - run:
@@ -56,7 +56,7 @@ commands:
           command: |
             bundle config path .bundle
             bundle exec rubocop
-  rspec:
+  rspec_cmd:
     parameters:
       specs:
         type: string
@@ -71,7 +71,7 @@ commands:
             bundle config path .bundle
             bundle exec rails db:create
             bundle exec rspec --format progress --format RspecJunitFormatter -o << parameters.output >> << parameters.specs >>
-  mocha_specs:
+  mocha_cmd:
     description: 'Run mocha specs'
     parameters:
       output:
@@ -107,7 +107,7 @@ jobs:
     executor: app_only
     steps:
       - checkout
-      - bundle_install
+      - bundle_install_cmd
       - persist_to_workspace:
           root: .
           paths: [.bundle]
@@ -115,7 +115,7 @@ jobs:
     executor: app_only
     steps:
       - checkout
-      - yarn_install
+      - yarn_install_cmd
       - persist_to_workspace:
           root: .
           paths: [node_modules]
@@ -126,7 +126,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace: {at: .}
-      - webpacker_compile
+      - webpacker_compile_cmd
       - persist_to_workspace:
           root: .
           paths: [public/packs-test]
@@ -135,20 +135,20 @@ jobs:
     steps:
       - checkout
       - attach_workspace: {at: .}
-      - run_rubocop
+      - rubocop_cmd
   backend_specs:
     executor: app_and_db
     steps:
       - checkout
       - attach_workspace: {at: .}
-      - rspec: {output: /tmp/rspec_backend/rspec.xml}
+      - rspec_cmd: {output: /tmp/rspec_backend/rspec.xml}
       - store_test_results: {path: /tmp/rspec_backend}
   frontend_specs:
     executor: app_only
     steps:
       - checkout
       - attach_workspace: {at: .}
-      - mocha_specs: {output: /tmp/mocha/mocha.xml}
+      - mocha_cmd: {output: /tmp/mocha/mocha.xml}
       - store_test_results: {path: /tmp/mocha}
       - store_artifacts: {path: /tmp/mocha}
   system_specs:
@@ -158,7 +158,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace: {at: .}
-      - rspec:
+      - rspec_cmd:
           specs: spec/system
           output: /tmp/rspec_system/rspec.xml
       - store_test_results: {path: /tmp/rspec_system}

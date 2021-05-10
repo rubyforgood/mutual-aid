@@ -2,21 +2,21 @@ version: 2.1
 
 workflows:
   version: 2.1
-  mutual_aid:
+  test:
     jobs:
       - bundle
       - yarn
       - rubocop:
           requires:
             - bundle
-      - backend_specs:
+      - webpacker:
           requires:
             - bundle
             - yarn
       - frontend_specs:
           requires:
             - yarn
-      - webpacker:
+      - backend_specs:
           requires:
             - bundle
             - yarn
@@ -61,6 +61,12 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: [node_modules]
+  rubocop:
+    executor: app_only
+    steps:
+      - checkout
+      - attach_workspace: {at: .}
+      - rubocop_cmd
   webpacker:
     executor: app_only
     environment:
@@ -72,19 +78,6 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: [public/packs-test]
-  rubocop:
-    executor: app_only
-    steps:
-      - checkout
-      - attach_workspace: {at: .}
-      - rubocop_cmd
-  backend_specs:
-    executor: app_and_db
-    steps:
-      - checkout
-      - attach_workspace: {at: .}
-      - rspec_cmd: {output: /tmp/rspec_backend/rspec.xml}
-      - store_test_results: {path: /tmp/rspec_backend}
   frontend_specs:
     executor: app_only
     steps:
@@ -93,6 +86,13 @@ jobs:
       - mocha_cmd: {output: /tmp/mocha/mocha.xml}
       - store_test_results: {path: /tmp/mocha}
       - store_artifacts: {path: /tmp/mocha}
+  backend_specs:
+    executor: app_and_db
+    steps:
+      - checkout
+      - attach_workspace: {at: .}
+      - rspec_cmd: {output: /tmp/rspec_backend/rspec.xml}
+      - store_test_results: {path: /tmp/rspec_backend}
   system_specs:
     executor: app_and_db
     environment:

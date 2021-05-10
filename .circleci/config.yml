@@ -10,7 +10,6 @@ commands:
       - run:
           name: 'Bundle install'
           command: |
-            set -euxo pipefail
             bundle config set frozen 'true'
             bundle install --path=.bundle
       - save_cache:
@@ -42,7 +41,6 @@ commands:
       - run:
           name: 'Compile webpacker assets'
           command: |
-            set -euxo pipefail
             bundle config path .bundle
             bundle exec rails webpacker:compile
       - save_cache:
@@ -56,7 +54,6 @@ commands:
       - run:
           name: 'Run rubocop'
           command: |
-            set -euxo pipefail
             bundle config path .bundle
             bundle exec rubocop
   rspec:
@@ -71,7 +68,6 @@ commands:
       - run:
           name: 'Run rspec'
           command: |
-            set -euxo pipefail
             bundle config path .bundle
             bundle exec rails db:create
             bundle exec rspec --format progress --format RspecJunitFormatter -o << parameters.output >> << parameters.specs >>
@@ -86,9 +82,11 @@ commands:
 
 executors:
   app_only:
+    shell: /bin/bash -euxo pipefail
     docker:
       - image: circleci/ruby:2.7.2-node
   app_and_db:
+    shell: /bin/bash -euxo pipefail
     docker:
       - image: circleci/ruby:2.7.2-node-browsers
         environment:

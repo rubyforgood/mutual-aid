@@ -73,12 +73,16 @@ commands:
             bundle exec rspec --format progress --format RspecJunitFormatter -o << parameters.output >> << parameters.specs >>
   mocha_specs:
     description: 'Run mocha specs'
+    parameters:
+      output:
+        type: string
+        default: /tmp/mocha/mocha.xml
     steps:
       - run:
           name: 'Run mocha specs'
           command: yarn test --reporter mocha-junit-reporter
           environment:
-            MOCHA_FILE: /tmp/frontend/test-results.xml
+            MOCHA_FILE: << parameters.output >>
 
 executors:
   app_only:
@@ -144,9 +148,9 @@ jobs:
     steps:
       - checkout
       - attach_workspace: {at: .}
-      - mocha_specs
-      - store_test_results: {path: /tmp/frontend}
-      - store_artifacts: {path: /tmp/frontend}
+      - mocha_specs: {output: /tmp/mocha/mocha.xml}
+      - store_test_results: {path: /tmp/mocha}
+      - store_artifacts: {path: /tmp/mocha}
   system_specs:
     executor: app_and_db
     environment:

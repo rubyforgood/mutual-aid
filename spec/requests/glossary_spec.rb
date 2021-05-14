@@ -28,7 +28,7 @@ describe '/glossary', type: :request do
       let(:new_html) { "<b>Word</b>: Definition" }
 
       it 'updates glossary_content of the system_setting object' do
-        patch glossary_url, params: { system_setting: { glossary_content: new_html } }
+        patch glossary_url, params: {system_setting: {glossary_content: new_html}}
         expect(response.status).to eq 302
         expect(system_setting.reload.glossary_content.to_s).to include new_html
       end

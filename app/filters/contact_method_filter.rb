@@ -8,6 +8,6 @@ class ContactMethodFilter < BaseFilter
 
   def filter(scope)
     return super unless parameters
-    scope.joins(:person).where(people: { preferred_contact_method: parameters.keys })
+    scope.joins(:person).where(people: {preferred_contact_method: parameters.keys})
   end
 end

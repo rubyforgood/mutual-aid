@@ -46,22 +46,23 @@ class CategoriesController < AdminController
 
   private
 
-    def set_category
-      @category = Category.find(params[:id])
-    end
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
-    def set_form_dropdowns
-      @parent_categories = Category.where.not(id: @category.id).order(:name).map{ |t| [t.name.titleize, t.id] }
-    end
+  def set_form_dropdowns
+    @parent_categories = Category.where.not(id: @category.id).order(:name).map { |t| [t.name.titleize, t.id] }
+  end
 
-    def category_params
-      params.require(:category).permit(
-          :name,
-          :description,
-          :display_order,
-          :display_to_public,
-          :is_created_by_admin,
-          :parent_id,
-          categories_attributes: [])
-    end
+  def category_params
+    params.require(:category).permit(
+      :name,
+      :description,
+      :display_order,
+      :display_to_public,
+      :is_created_by_admin,
+      :parent_id,
+      categories_attributes: [],
+    )
+  end
 end

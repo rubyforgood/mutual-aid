@@ -34,15 +34,15 @@ class BaseForm < ActiveInteraction::Base
 
   private
 
-    def self.append_array_keys_to(collector, array_filters)
-      array_filters.each do |key, filter|
-        collector[key] = []
-      end
+  def self.append_array_keys_to(collector, array_filters)
+    array_filters.each do |key, filter|
+      collector[key] = []
     end
+  end
 
-    def self.append_nested_hash_keys_to(collector, hash_filters)
-      hash_filters.each do |key, filter|
-        collector[key] = filter.filters.empty? ? {} : filter_keys(filter)
-      end
+  def self.append_nested_hash_keys_to(collector, hash_filters)
+    hash_filters.each do |key, filter|
+      collector[key] = filter.filters.empty? ? {} : filter_keys(filter)
     end
+  end
 end

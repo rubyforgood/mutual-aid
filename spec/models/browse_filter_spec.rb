@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BrowseFilter do
-  let(:all_models) { ContributionType::TYPES.map(&:model)}
+  let(:all_models) { ContributionType::TYPES.map(&:model) }
   it 'ignores urgency levels if all urgency levels are checked because urgency levels are not fully implemented' do
     pending
     unmodified_scope = double

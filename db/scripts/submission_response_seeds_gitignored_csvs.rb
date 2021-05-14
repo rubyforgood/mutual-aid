@@ -17,11 +17,11 @@ old_offers_csv = 'Old offers-Table 1.csv'
 csvs = [requests_csv, offers_csv, old_offers_csv]
 # csvs.each do |csv| # TODO uncomment
 
-  csv = requests_csv # TODO remove
-  path = Rails.root.join('db', 'seeds', 'gitignored_csvs', csv)
-  importer = Importers::SubmissionResponseImporter.new(User.first, csv)
-  importer.import(path)
-  puts "completed #{csv}"
+csv = requests_csv # TODO remove
+path = Rails.root.join('db', 'seeds', 'gitignored_csvs', csv)
+importer = Importers::SubmissionResponseImporter.new(User.first, csv)
+importer.import(path)
+puts "completed #{csv}"
 
 # end # TODO uncomment
 

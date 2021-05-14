@@ -53,3 +53,6 @@ en:
       zero: Match Feedback
   pundit:
     default: 'You cannot perform this action.'
+  date:
+    formats:
+      long_month: "%B %d, %Y"

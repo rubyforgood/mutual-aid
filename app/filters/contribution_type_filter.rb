@@ -1,8 +1,8 @@
 class ContributionTypeFilter
   def self.filter_grouping
-    { name: 'Contribution Types', filter_options: [
-      { id: 'ContributionType[Ask]', name: 'Ask' },
-      { id: 'ContributionType[Offer]', name: 'Offer' }
+    {name: 'Contribution Types', filter_options: [
+      {id: 'ContributionType[Ask]', name: 'Ask'},
+      {id: 'ContributionType[Offer]', name: 'Offer'}
     ]}
   end
   ALL_ALLOWED_TYPES = ['Ask', 'Offer'].freeze

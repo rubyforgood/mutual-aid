@@ -40,11 +40,11 @@ class ShiftsController < AdminController
 
   private
 
-    def set_shift
-      @shift = Shift.find(params[:id])
-    end
+  def set_shift
+    @shift = Shift.find(params[:id])
+  end
 
-    def shift_params
-      params.require(:shift).permit(:person_id, :team_id, :started_at, :ended_at, :notes)
-    end
+  def shift_params
+    params.require(:shift).permit(:person_id, :team_id, :started_at, :ended_at, :notes)
+  end
 end

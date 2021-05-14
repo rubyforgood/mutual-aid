@@ -12,6 +12,13 @@ We're still in the [initial development phase](https://www.jering.tech/articles/
 This changelog also serves to acknowledge the incredible people who've contributed brilliance, effort and being. Their handles are listed under the first release they each  touched. 💗🙏🏾
 
 ## [Unreleased]
+### Security vulnerabilities fixed
+* Fix bug in authorization logic that allows a guest user to view names, emails, addresses of other people #951
+    * We recommend all installations update to this release IMMEDIATELY.
+
+### Other bugfixes
+* Fix breakage in claiming a contribution #946
+
 ### Development notes
 * Rework how contribution filtering works under the hood #546
 

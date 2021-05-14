@@ -41,34 +41,34 @@ class CommunityResourcesController < ApplicationController
 
   private
 
-    def populate(community_resource)
-      CommunityResourceForm.build permitted_attributes(community_resource).merge(id: params[:id])
-    end
+  def populate(community_resource)
+    CommunityResourceForm.build permitted_attributes(community_resource).merge(id: params[:id])
+  end
 
-    def community_resource
-      @community_resource ||= authorize CommunityResource.find_or_new params[:id]
-    end
+  def community_resource
+    @community_resource ||= authorize CommunityResource.find_or_new params[:id]
+  end
 
-    def available_tags
-      @available_tags ||= Category.visible.pluck(:name) + community_resource&.tag_list || []
-    end
+  def available_tags
+    @available_tags ||= Category.visible.pluck(:name) + community_resource&.tag_list || []
+  end
 
-    def service_areas
-      @service_areas ||= ServiceArea.i18n.pluck(:name, :id) || []
-    end
+  def service_areas
+    @service_areas ||= ServiceArea.i18n.pluck(:name, :id) || []
+  end
 
-    def determine_layout
-      'without_navbar' unless context.system_settings.display_navbar?
-    end
+  def determine_layout
+    'without_navbar' unless context.system_settings.display_navbar?
+  end
 
-    def redirect_after_create
-      notice = "Community resource was successfully submitted."
-      if context.can_admin?
-        redirect_to community_resources_path, notice: notice
-      else
-        redirect_to thank_you_path, notice: "#{notice} We'll review."
-      end
+  def redirect_after_create
+    notice = "Community resource was successfully submitted."
+    if context.can_admin?
+      redirect_to community_resources_path, notice: notice
+    else
+      redirect_to thank_you_path, notice: "#{notice} We'll review."
     end
+  end
 
-    helper_method :available_tags, :community_resource, :service_areas
+  helper_method :available_tags, :community_resource, :service_areas
 end

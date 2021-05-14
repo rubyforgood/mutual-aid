@@ -22,7 +22,7 @@ RSpec.describe NavBarPolicy do
     context 'neighbor' do
       let(:user) { instance_double 'User', admin_role?: false, sys_admin_role?: false }
 
-      it { is_expected.to match_array %w[Feedback Logout]  }
+      it { is_expected.to match_array %w[Feedback Logout] }
 
       context 'in peer_to_peer mode' do
         let(:peer_to_peer?) { true }
@@ -32,12 +32,12 @@ RSpec.describe NavBarPolicy do
 
     context 'admin' do
       let(:user) { instance_double 'User', admin_role?: true, sys_admin_role?: false }
-      it { is_expected.to match_array %w[Contributions Matches Admin Feedback Logout]  }
+      it { is_expected.to match_array %w[Contributions Matches Admin Feedback Logout] }
     end
 
     context 'sys_admin' do
       let(:user) { instance_double 'User', admin_role?: false, sys_admin_role?: true }
-      it { is_expected.to match_array %w[Contributions Matches Admin Feedback Logout]  }
+      it { is_expected.to match_array %w[Contributions Matches Admin Feedback Logout] }
     end
   end
 end

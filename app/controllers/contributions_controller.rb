@@ -11,7 +11,7 @@ class ContributionsController < ApplicationController
   #   A higher-level category or other grouping of filter options. Example: Contact Method can be
   # a *filter grouping* that then has *filter options* for things like "email" or "text message"
   # Filter Option —
-  #   An individual item that can be chosen to change what's filtered. Each *filter option* is 
+  #   An individual item that can be chosen to change what's filtered. Each *filter option* is
   # associated to one and only one *filter grouping*
 
   def index
@@ -56,7 +56,7 @@ class ContributionsController < ApplicationController
   end
 
   def contribution_blueprint_options
-    { show_view_path: true }
+    {show_view_path: true}
   end
 
   def allowed_params

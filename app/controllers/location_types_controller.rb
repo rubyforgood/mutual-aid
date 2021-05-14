@@ -40,11 +40,11 @@ class LocationTypesController < AdminController
 
   private
 
-    def set_location_type
-      @location_type = LocationType.find(params[:id])
-    end
+  def set_location_type
+    @location_type = LocationType.find(params[:id])
+  end
 
-    def location_type_params
-      params.require(:location_type).permit(:name, :description, :display_to_public)
-    end
+  def location_type_params
+    params.require(:location_type).permit(:name, :description, :display_to_public)
+  end
 end

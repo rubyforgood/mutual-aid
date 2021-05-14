@@ -101,10 +101,17 @@ class Listing < ApplicationRecord
     Category.where(name: tag_list)
   end
 
+  def service_areas
+    [service_area]
+  end
+
   def has_email?
     person.email.present?
   end
 
+  def preferred_contact_method
+    person.preferred_contact_method
+  end
 end
 
 # == Schema Information

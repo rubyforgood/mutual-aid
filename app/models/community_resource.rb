@@ -40,12 +40,32 @@ class CommunityResource < ApplicationRecord
       (publish_until == nil || now < publish_until)
   end
 
+  def categories_for_tags
+    Category.where(name: tag_list)
+  end
+
   def all_tags_unique
     all_tags_list.flatten.map(&:downcase).uniq
   end
 
   def all_tags_to_s
     all_tags_unique.join(', ')
+  end
+
+  def preferred_contact_method
+    ContactMethod.method_name('call').first
+  end
+
+  def type
+    "Community Resource"
+  end
+
+  def inexhaustible
+    true
+  end
+
+  def urgency_level_id
+    UrgencyLevel::TYPES.last.id
   end
 end
 

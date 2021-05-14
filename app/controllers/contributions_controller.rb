@@ -18,8 +18,9 @@ class ContributionsController < ApplicationController
     @filter_groupings = BrowseFilter.filter_groupings_json
     # The BrowserFilter takes the result of the parameters from the filter checkboxes and returns a list of contributions
     filter = BrowseFilter.new(allowed_params)
+    spike_array = filter.contributions + CommunityResource.published
     @contributions = ContributionBlueprint.render(
-      filter.contributions,
+      spike_array,
       show_view_path: true,
       current_user: context.user
     )

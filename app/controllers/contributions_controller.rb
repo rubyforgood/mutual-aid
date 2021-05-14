@@ -8,9 +8,7 @@ class ContributionsController < ApplicationController
   def index
     @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
     filter = BrowseFilter.new(filter_params)
-    # binding.pry
-    spike_array = filter.contributions + CommunityResource.published
-    @contributions = ContributionBlueprint.render(spike_array, contribution_blueprint_options)
+    @contributions = ContributionBlueprint.render(filter.contributions, contribution_blueprint_options)
     respond_to do |format|
       format.html
       format.json { render inline: @contributions }

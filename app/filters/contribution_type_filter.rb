@@ -1,4 +1,4 @@
-class ContributionTypeFilter
+class ContributionTypeFilter < BaseFilter
   def self.filter_grouping
     {name: 'Contribution Types', filter_options: [
       {id: 'ContributionType[Ask]', name: 'Ask'},
@@ -7,10 +7,12 @@ class ContributionTypeFilter
   end
   ALL_ALLOWED_TYPES = ['Ask', 'Offer'].freeze
 
-  attr_reader :parameters
-
-  def initialize(params)
-    @parameters = params
+  def filter(scope)
+    raise NotImplementedError.new(
+      # So far the best solution I've found for filtering scopes by contribution types would require
+      # using SQL UNIONs, which have no good support in Rails
+      "Can't filter an existing scope by contribution type. Use the `ContributionTypeFilter#scopes` method generate scopes for other filters"
+    )
   end
 
   def scopes

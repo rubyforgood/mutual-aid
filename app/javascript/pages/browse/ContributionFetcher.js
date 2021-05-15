@@ -14,7 +14,7 @@ export default class {
       .catch((error) => ({error: error, data: fallback}))
   }
   parsedFilters(filters = []) {
-    return filters.map((filter) => '' + filter + '=1').join('&')
+    return filters.map((filterOption) => '' + filterOption + '=1').join('&')
   }
   defaultFetch() {
     return typeof window === 'undefined' ? this.noopFetch : (args) => window.fetch(args)

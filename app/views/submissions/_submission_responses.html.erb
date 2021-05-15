@@ -116,7 +116,6 @@
       <td>
         <% custom_form_questions = CustomFormQuestion.where(form_type: @submission.form_name).order(:display_order)
           custom_form_questions.each do |cfq| %>
-          <% binding.pry %>
           <% responses = cfq.submission_responses.where(submission_id: @submission.id) %>
           <% responses.each do |r| %>
               <% display_response(r, email_display) %>

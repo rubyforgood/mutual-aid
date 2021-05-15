@@ -3,11 +3,21 @@
 class ContributionsController < ApplicationController
   before_action :authenticate_user!, unless: :peer_to_peer_mode?
   skip_after_action :verify_policy_scoped
-
   # FIXME: this should probably be wrapped by a policy scope?
+  # Nomenclature note:
+  # Filter —
+  #   An object that handles the logic or action of filtering
+  # Filter Grouping —
+  #   A higher-level category or other grouping of filter options. Example: Contact Method can be
+  # a *filter grouping* that then has *filter options* for things like "email" or "text message"
+  # Filter Option —
+  #   An individual item that can be chosen to change what's filtered. Each *filter option* is
+  # associated to one and only one *filter grouping*
+
   def index
-    @filter_types = FilterTypeBlueprint.render([ContributionType, Category, ServiceArea, UrgencyLevel, ContactMethod])
-    filter = BrowseFilter.new(filter_params)
+    @filter_groupings = BrowseFilter.filter_groupings_json
+    # The BrowserFilter takes the result of the parameters from the filter checkboxes and returns a list of contributions
+    filter = BrowseFilter.new(allowed_params)
     @contributions = ContributionBlueprint.render(filter.contributions, contribution_blueprint_options)
     respond_to do |format|
       format.html
@@ -46,21 +56,11 @@ class ContributionsController < ApplicationController
   end
 
   def contribution_blueprint_options
-    options = {}
-    options[:view_path] = ->(id) { contribution_path(id) }
-    options
-  end
-
-  def filter_params
-    return {} unless allowed_params&.to_h.any?
-
-    allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key }.tap do |hash|
-      hash.each_key { |key| hash[key] = hash[key].keys }
-    end
+    {show_view_path: true}
   end
 
   def allowed_params
-    @allowed_params ||= params.permit(:format, **BrowseFilter::ALLOWED_PARAMS)
+    params.permit(:format, BrowseFilter::ALLOWED_PARAMS)
   end
 
   def contribution

@@ -29,12 +29,13 @@ state = ["NY", "MI", "DC", "NC"].sample
   contact_method = ContactMethod.sample_one
   email = Faker::Internet.email
   phone = Faker::PhoneNumber.phone_number
-  Person.where(location: location,
-               name: Faker::Name.name, 
-               preferred_contact_method: contact_method,
-               email: contact_method&.field&.downcase == "email" ? email : [nil, email].sample,
-               phone: contact_method&.field&.downcase == "phone" ? phone : [nil, phone].sample,
-               ).first_or_create!
+  Person.where(
+    location: location,
+    name: Faker::Name.name, 
+    preferred_contact_method: contact_method,
+    email: contact_method&.field&.downcase == "email" ? email : [nil, email].sample,
+    phone: contact_method&.field&.downcase == "phone" ? phone : [nil, phone].sample,
+  ).first_or_create!
 end
 
 # asks for person
@@ -88,10 +89,13 @@ end
 org = Organization.where(name: "Diaper Bank").first_or_create!
 # community_resources
 CommunityResource.where(
-    name: "this is diapers for you", 
-    description: "first come first serve", 
-    organization: org
-  ).first_or_create!(publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now))
+  name: "this is diapers for you",
+  description: "first come first serve",
+  organization: org
+).first_or_create!(
+  publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now)
+)
+
 5.times do
   org = Organization.create!(name: Faker::Company.name)
   CommunityResource.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
@@ -114,20 +118,22 @@ end
 
 # communication_logs
 CommunicationLog.where(
-    subject: "hello from LAMA",
-    body: "we'd love to talk with you!",
-    person: person,
-    delivery_method: ContactMethod.sample_one,
-    delivery_status: "completed"
-).first_or_create!(sent_at: Time.now - 3.days) # wow!!!
+  subject: "hello from LAMA",
+  body: "we'd love to talk with you!",
+  person: person,
+  delivery_method: ContactMethod.sample_one,
+  delivery_status: "completed"
+).first_or_create!(
+  sent_at: Time.now - 3.days # wow!!!
+)
 
 CommunicationLog.where(
-    subject: "we'd like your feedback!",
-    body: "how was your experience?",
-    person: person,
-    delivery_method: ContactMethod.email,
-    delivery_status: "completed",
-    auto_generated: true,
+  subject: "we'd like your feedback!",
+  body: "how was your experience?",
+  person: person,
+  delivery_method: ContactMethod.email,
+  delivery_status: "completed",
+  auto_generated: true,
 ).first_or_create!(sent_at: Time.now - 1.day)
 
 # offers for person
@@ -185,34 +191,36 @@ Listing.all.each do |listing|
   elsif listing.offer?
     match = listing.matches_as_provider.first
   end
-  CommunicationLog.create!(person: listing.person,
-                           match: match,
-                           created_by: User.first,
-                           outbound: [true, false].sample,
-                           sent_at: listing.created_at,
-                           delivery_method: ContactMethod.email,
-                           needs_follow_up: [true, false].sample,
-                           delivery_status: Messenger.delivery_statuses.sample,
-                           subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
-                           auto_generated: true,
-                          )
+  CommunicationLog.create!(
+    person: listing.person,
+    match: match,
+    created_by: User.first,
+    outbound: [true, false].sample,
+    sent_at: listing.created_at,
+    delivery_method: ContactMethod.email,
+    needs_follow_up: [true, false].sample,
+    delivery_status: Messenger.delivery_statuses.sample,
+    subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
+    body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
+    auto_generated: true,
+  )
 end
 # 70% get random manual logs
 Listing.all.sample((Listing.count * 70) / 100) do |listing|
   delivery_status = (Messenger.delivery_statuses - Messenger.default_status).sample
-  CommunicationLog.create!(person: listing.person,
-                           match: listing.matches.first,
-                           created_by: User.all.sample,
-                           outbound: [true, false].sample,
-                           sent_at: Faker::Time.between(from: listing.created_at, to: DateTime.now),
-                           delivery_method: ContactMethod.sample_one,
-                           needs_follow_up: [true, false].sample,
-                           delivery_status: delivery_status,
-                           subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
-                           body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
-                           auto_generated: false,
-                          )
+  CommunicationLog.create!(
+    person: listing.person,
+    match: listing.matches.first,
+    created_by: User.all.sample,
+    outbound: [true, false].sample,
+    sent_at: Faker::Time.between(from: listing.created_at, to: DateTime.now),
+    delivery_method: ContactMethod.sample_one,
+    needs_follow_up: [true, false].sample,
+    delivery_status: delivery_status,
+    subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
+    body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
+    auto_generated: false,
+  )
 end
 
 def update_status(match)
@@ -234,8 +242,13 @@ end
 
 # submissions
 Listing.all.each do |listing|
-  submission = Submission.where(person: listing.person, service_area: listing.service_area, form_name: "#{listing.type}_form", privacy_level_requested: Submission::PRIVACY_LEVELS.sample,
-                   body: listing.to_json).create!
+  submission = Submission.where(
+    person: listing.person,
+    service_area: listing.service_area,
+    form_name: "#{listing.type}_form",
+    privacy_level_requested: Submission::PRIVACY_LEVELS.sample,
+    body: listing.to_json,
+  ).create!
   listing.submission = submission
   matches = listing.ask? ? listing.matches_as_receiver : listing.matches_as_provider
   listing.state = matches.any? ? "matched" : "unmatched"

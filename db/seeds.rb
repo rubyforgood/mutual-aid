@@ -11,28 +11,28 @@ User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(
 # create categories -- these are then editable by admin users
 # TODO: i don't think these should live here
 default_tags = [
-    ['meals', 'prepared meals'],
-    ['meals', 'groceries'],
-    ['errands', 'and deliveries'],
-    ['care', 'childcare'],
-    ['care', 'animal care'],
-    ['care', 'elder or disability care'],
-    ['services', 'tech support'],
-    ['services', 'translation'],
-    ['services', 'accessing unemployment'],
-    ['services', 'accessing healthcare'],
-    ['services', 'transportation'],
-    ['services', 'housework'],
-    ['services', 'yardwork'],
-    ['services', 'laundry'],
-    ['supplies', 'household'],
-    ['supplies', 'clothing'],
-    ['support', 'emotional'],
-    ['support', 'religious'],
-    ['housing', 'temporary'],
-    ['housing', 'permanent'],
-    ['housing', 'storage'],
-    ['cash', ''],
+  ['meals', 'prepared meals'],
+  ['meals', 'groceries'],
+  ['errands', 'and deliveries'],
+  ['care', 'childcare'],
+  ['care', 'animal care'],
+  ['care', 'elder or disability care'],
+  ['services', 'tech support'],
+  ['services', 'translation'],
+  ['services', 'accessing unemployment'],
+  ['services', 'accessing healthcare'],
+  ['services', 'transportation'],
+  ['services', 'housework'],
+  ['services', 'yardwork'],
+  ['services', 'laundry'],
+  ['supplies', 'household'],
+  ['supplies', 'clothing'],
+  ['support', 'emotional'],
+  ['support', 'religious'],
+  ['housing', 'temporary'],
+  ['housing', 'permanent'],
+  ['housing', 'storage'],
+  ['cash', ''],
 ]
 default_tags.each do |tag_name_parent, subtag_name|
   parent = Category.where(name: tag_name_parent).first_or_create!
@@ -80,8 +80,8 @@ end
   # ['Instagram', 'notes', 'fa fa-instagram'], # TODO - enable social media options
   # ['Facebook', 'notes', 'fa fa-facebook'],
   # ['Twitter', 'notes', 'fa fa-twitter'],
-].
-  each do |(name, field, icon_class)|
+]
+  .each do |(name, field, icon_class)|
     ContactMethod.find_or_create_by!(name: name, field: field, enabled: true, icon_class: icon_class)
   end
 

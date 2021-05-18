@@ -47,8 +47,8 @@ RSpec.describe Context do
     end
 
     it 'can be converted to a hash and passed as keyword args' do
-      expect(method_with_keyword_args 'positional', non_context_keyword_arg: 'non_context', **context.to_h).
-        to eq ['positional', 'non_context', user, system_settings]
+      expect(method_with_keyword_args 'positional', non_context_keyword_arg: 'non_context', **context.to_h)
+        .to eq ['positional', 'non_context', user, system_settings]
     end
   end
 

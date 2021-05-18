@@ -26,10 +26,8 @@ class CommunityResource < ApplicationRecord
     before_now = DateTime.new..Time.current
     after_now  = Time.current..DateTime::Infinity.new
 
-    approved
-      .where(publish_from: before_now, publish_until: nil).or(
-    approved
-      .where(publish_from: before_now, publish_until: after_now)
+    approved.where(publish_from: before_now, publish_until: nil).or(
+      approved.where(publish_from: before_now, publish_until: after_now)
     )
   end
 

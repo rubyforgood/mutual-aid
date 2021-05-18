@@ -39,14 +39,15 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
       custom_form_question = dupes_query.last
     else
       @log = 'CREATED'
-      custom_form_question = CustomFormQuestion.create!(form_type: form_type,
-                                                        input_type: input_type,
-                                                        is_required: is_required,
-                                                        display_order: display_order,
-                                                        hint_text: hint_text,
-                                                        option_list: option_list,
-                                                        form_hook: form_hook,
-                                                        )
+      custom_form_question = CustomFormQuestion.create!(
+        form_type: form_type,
+        input_type: input_type,
+        is_required: is_required,
+        display_order: display_order,
+        hint_text: hint_text,
+        option_list: option_list,
+        form_hook: form_hook,
+      )
       @new_records_count += 1
     end
     custom_form_question

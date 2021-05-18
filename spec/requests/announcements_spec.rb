@@ -2,12 +2,14 @@ require 'rails_helper'
 
 RSpec.describe '/announcements', type: :request do
   let(:announcement) { create :announcement, is_approved: false }
-  let(:params) { {announcement: {
-    name: 'Ni una mas',
-    description: 'Not one more',
-    publish_from: Date.current,
-    is_approved: true,
-  }} }
+  let(:params) do
+    {announcement: {
+      name: 'Ni una mas',
+      description: 'Not one more',
+      publish_from: Date.current,
+      is_approved: true,
+    }}
+  end
 
   describe 'GET /announcements' do
     it 'is accessible to guests' do

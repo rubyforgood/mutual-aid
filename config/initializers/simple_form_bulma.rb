@@ -194,8 +194,6 @@ SimpleForm.setup do |config|
     #   b.use :hint,  wrap_with: { tag: :span, class: "help has-text-grey-light" }
     # end
 
-    #
-    #
   config.wrappers :inline_input, tag: 'div', class: 'field is-horizontal' do |b|
     b.wrapper :label, tag: 'div', class: 'field-label-left is-normal' do |bl|
       bl.optional :label, class: 'label'
@@ -566,7 +564,6 @@ SimpleForm.setup do |config|
         @builder.text_field(nil, input_html_options.merge(value: array_el,
                                                           id: "input_#{object_name}_#{attribute_name}_#{idx}",
                                                           name: "#{object_name}[#{attribute_name}][]"))
-
       end.join.html_safe
 
       empty = @builder.text_field(nil, input_html_options.merge(value: nil,

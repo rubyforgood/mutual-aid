@@ -38,6 +38,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   private
+
   def target_user
     record
   end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe GenerateLandingPageJson do
@@ -24,4 +25,3 @@ RSpec.describe GenerateLandingPageJson do
     )
   end
 end
-

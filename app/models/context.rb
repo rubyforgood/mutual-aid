@@ -5,7 +5,6 @@ Context = Struct.new(
   :user,
   keyword_init: true
 ) do
-
   def host_organization
     self[:host_organization] ||= Organization.host_organization
   end

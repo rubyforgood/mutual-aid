@@ -11,7 +11,6 @@ RSpec.describe PersonPolicy do
   let(:own_person)   { create(:person, user: user) }
   let(:other_person) { create(:person, user: create(:user)) }
 
-
   context "given a normal signed-in user and their Person" do
     let(:person) { own_person }
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ThankYouController < PublicController
   layout 'without_navbar'
 

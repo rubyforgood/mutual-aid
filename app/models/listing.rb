@@ -106,7 +106,6 @@ class Listing < ApplicationRecord
   def has_email?
     person.email.present?
   end
-
 end
 
 # == Schema Information

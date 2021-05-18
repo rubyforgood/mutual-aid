@@ -115,7 +115,6 @@ RSpec.describe '/community_resources', type: :request do
     end
   end
 
-
   describe 'DELETE /community_resource/:id' do
     context 'as an admin' do
       before { sign_in create :user, :admin }

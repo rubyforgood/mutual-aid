@@ -17,7 +17,7 @@ RSpec.describe '/community_resources', type: :request do
         city: 'Kings Park',
         state: 'NY',
         zip: '11754',
-        location_type: location_type.id,
+        location_type: location_type.id
       }
     }}
   end

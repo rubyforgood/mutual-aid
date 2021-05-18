@@ -73,7 +73,7 @@ class SystemSettingsController < AdminController
       :confirmation_page_text_footer,
       :landing_page_text_what,
       :landing_page_text_who,
-      :landing_page_text_how,
+      :landing_page_text_how
     )
   end
 end

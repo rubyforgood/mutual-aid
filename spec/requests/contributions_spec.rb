@@ -4,13 +4,13 @@ RSpec.describe '/contributions', type: :request do
   let(:valid_attributes) do
     {
       location_attributes: {zip: '12345'},
-      tag_list: ['', 'cash'],
+      tag_list: ['', 'cash']
     }
   end
 
   let(:invalid_attributes) do
     {
-      location_attributes: {zip: '12e45'},
+      location_attributes: {zip: '12e45'}
     }
   end
 

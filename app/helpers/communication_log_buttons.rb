@@ -40,7 +40,7 @@ module CommunicationLogButtons
       title: 'New communication log',
       class: "button add-button #{margin_class} is-primary is-outlined",
       method: method,
-      remote: remote,
+      remote: remote
     ) do
       "<span class='#{icon_class}'></span><span style='padding-left: 0.25em'> #{button_text}</span>".html_safe
     end
@@ -136,7 +136,7 @@ module CommunicationLogButtons
       subject: subject,
       body: body,
       created_by_id: created_by&.id,
-      sent_at: Time.now,
+      sent_at: Time.now
     )
     link_to(
       link_path,

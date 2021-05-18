@@ -85,7 +85,7 @@ class ServiceAreasController < AdminController
         name
         description
         _destroy
-      ],
+      ]
     )
   end
 end

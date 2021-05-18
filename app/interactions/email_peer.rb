@@ -12,7 +12,7 @@ class EmailPeer < ActiveInteraction::Base
       contribution,
       organization: organization,
       peer_alias: peer_alias,
-      message: message,
+      message: message
     )
 
     status = Messenger.new(peer_to_peer_email, 'peer_to_peer_email').deliver_now
@@ -21,7 +21,7 @@ class EmailPeer < ActiveInteraction::Base
       email: peer_to_peer_email,
       delivery_status: status,
       person: contribution.person,
-      initiator: user,
+      initiator: user
     )
   end
 end

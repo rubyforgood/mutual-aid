@@ -25,7 +25,7 @@ class Match < ApplicationRecord
     where(
       'matches.created_at >= ? AND matches.created_at <= ?',
       Time.zone.now.beginning_of_month,
-      Time.zone.now.end_of_month,
+      Time.zone.now.end_of_month
     )
   }
 

@@ -29,7 +29,7 @@ class CommunityResourceForm < BaseForm
   def execute
     CommunityResource.find_or_new(id).tap do |community_resource|
       community_resource.attributes = given_inputs.merge(
-        location: LocationForm.build(location),
+        location: LocationForm.build(location)
       )
     end
   end

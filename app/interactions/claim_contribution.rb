@@ -24,7 +24,7 @@ class ClaimContribution < ActiveInteraction::Base
         name: peer_alias,
         user: current_user,
         email: current_user.email,
-        preferred_contact_method: ContactMethod.email,
+        preferred_contact_method: ContactMethod.email
       )
     end
   end

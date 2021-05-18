@@ -46,7 +46,7 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
         display_order: display_order,
         hint_text: hint_text,
         option_list: option_list,
-        form_hook: form_hook,
+        form_hook: form_hook
       )
       @new_records_count += 1
     end

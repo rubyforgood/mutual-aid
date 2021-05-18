@@ -34,7 +34,7 @@ state = ["NY", "MI", "DC", "NC"].sample
     name: Faker::Name.name, 
     preferred_contact_method: contact_method,
     email: contact_method&.field&.downcase == "email" ? email : [nil, email].sample,
-    phone: contact_method&.field&.downcase == "phone" ? phone : [nil, phone].sample,
+    phone: contact_method&.field&.downcase == "phone" ? phone : [nil, phone].sample
   ).first_or_create!
 end
 
@@ -107,7 +107,7 @@ end
 # announcements
 Announcement.where(
   name: "Lansing urgent care are sharing free face masks", 
-  description: "Announcement announcement urgent care! Free masks!",
+  description: "Announcement announcement urgent care! Free masks!"
 ).first_or_create!(publish_from: Faker::Time.between(from: Time.now - 20.days, to: DateTime.now))
 5.times do
   Announcement.create!(name: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
@@ -133,7 +133,7 @@ CommunicationLog.where(
   person: person,
   delivery_method: ContactMethod.email,
   delivery_status: "completed",
-  auto_generated: true,
+  auto_generated: true
 ).first_or_create!(sent_at: Time.now - 1.day)
 
 # offers for person
@@ -202,7 +202,7 @@ Listing.all.each do |listing|
     delivery_status: Messenger.delivery_statuses.sample,
     subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
     body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
-    auto_generated: true,
+    auto_generated: true
   )
 end
 # 70% get random manual logs
@@ -219,7 +219,7 @@ Listing.all.sample((Listing.count * 70) / 100) do |listing|
     delivery_status: delivery_status,
     subject: Faker::Lorem.words(number: (2..5).to_a.sample).join(" "),
     body: Faker::Lorem.sentences(number: (5..15).to_a.sample).join(" "),
-    auto_generated: false,
+    auto_generated: false
   )
 end
 
@@ -247,7 +247,7 @@ Listing.all.each do |listing|
     service_area: listing.service_area,
     form_name: "#{listing.type}_form",
     privacy_level_requested: Submission::PRIVACY_LEVELS.sample,
-    body: listing.to_json,
+    body: listing.to_json
   ).create!
   listing.submission = submission
   matches = listing.ask? ? listing.matches_as_receiver : listing.matches_as_provider

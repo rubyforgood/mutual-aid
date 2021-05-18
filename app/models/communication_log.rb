@@ -17,7 +17,7 @@ class CommunicationLog < ApplicationRecord
       subject: email.subject,
       body: email.html_part&.body || email.body.raw_source,
       created_by: initiator,
-      auto_generated: true,
+      auto_generated: true
     )
   end
 

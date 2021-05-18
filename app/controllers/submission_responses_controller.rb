@@ -54,7 +54,7 @@ class SubmissionResponsesController < AdminController
       :integer_response,
       :string_response,
       :submission_id,
-      :text_response,
+      :text_response
     )
   end
 end

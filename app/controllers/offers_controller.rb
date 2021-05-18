@@ -18,7 +18,7 @@ class OffersController < PublicController
         submission: submission,
         user: context.user,
         system_setting: context.system_settings,
-        organization: context.host_organization,
+        organization: context.host_organization
       )
       redirect_to thank_you_path, notice: 'Offer was successfully created.'
     else
@@ -42,7 +42,7 @@ class OffersController < PublicController
     @json = {
       submission: SubmissionBlueprint.render_as_hash(submission),
       configuration: ConfigurationBlueprint.render_as_hash(nil),
-      form: FormBlueprint.render_as_hash(@form),
+      form: FormBlueprint.render_as_hash(@form)
     }.to_json
 
     render :new

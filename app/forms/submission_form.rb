@@ -37,7 +37,7 @@ class SubmissionForm < BaseForm
         category: category_id,
         location: @location,
         person: @person,
-        service_area: service_area,
+        service_area: service_area
       )
     end
   end
@@ -54,7 +54,7 @@ class SubmissionForm < BaseForm
       SubmissionResponseForm.build(
         submission: submission,
         custom_form_question_id: custom_form_question_id,
-        string_response: answer,
+        string_response: answer
       )
     end
   end
@@ -64,13 +64,13 @@ class SubmissionForm < BaseForm
       .slice(
         :form_name,
         :privacy_level_requested,
-        :service_area,
+        :service_area
       )
       .merge(
         body: body_json,
         person: @person,
         listings: @listings,
-        submission_responses: @submission_responses,
+        submission_responses: @submission_responses
       )
   end
 

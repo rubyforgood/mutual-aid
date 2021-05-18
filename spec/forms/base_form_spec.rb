@@ -58,7 +58,7 @@ RSpec.describe BaseForm do
         {
           'date(1i)' => '2020',
           'date(2i)' => '12',
-          'date(3i)' => '31',
+          'date(3i)' => '31'
         }
       end
 
@@ -108,8 +108,8 @@ RSpec.describe BaseForm do
         raw_hash: {},
         nested_hash: [
           :nested_date,
-          doubly_nested_hash: [:id],
-        ],
+          doubly_nested_hash: [:id]
+        ]
       ]
     end
   end

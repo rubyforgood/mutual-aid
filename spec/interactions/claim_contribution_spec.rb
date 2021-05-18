@@ -10,7 +10,7 @@ RSpec.describe ClaimContribution do
       current_user: user,
       organization: build(:organization),
       peer_alias: 'alias',
-      message: 'message',
+      message: 'message'
     )
   end
 
@@ -33,7 +33,7 @@ RSpec.describe ClaimContribution do
         user: user,
         email: user.email,
         name: 'alias',
-        preferred_contact_method: ContactMethod.email,
+        preferred_contact_method: ContactMethod.email
       )
     end
   end

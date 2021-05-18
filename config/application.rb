@@ -61,11 +61,11 @@ module Mutualaid
       password: ENV['SMTP_PASSWORD'],
       domain: ENV['SYSTEM_HOST_NAME'],
       authentication: 'plain',
-      enable_starttls_auto: true,
+      enable_starttls_auto: true
     }
     config.action_mailer.default_url_options = {
       host: ENV['SYSTEM_HOST_NAME'],
-      port: (ENV['PORT'].presence || 80).to_i,
+      port: (ENV['PORT'].presence || 80).to_i
     }
   end
 end

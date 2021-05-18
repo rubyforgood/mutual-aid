@@ -23,7 +23,7 @@ Context = Struct.new(
       can_admin: can_admin?,
       host_organization: host_organization,
       system_settings: system_settings,
-      user: user,
+      user: user
     }
   end
 end

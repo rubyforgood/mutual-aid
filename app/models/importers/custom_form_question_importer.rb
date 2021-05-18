@@ -22,7 +22,7 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
   end
 
   def find_or_create_custom_form_question(row)
-    locale = row['locale'] || 'en'
+    locale = row['locale'] || 'en' # rubocop:todo Lint/UselessAssignment
     form_type = row['form_type']
     input_type = row['input_type'] || 'string'
     is_required = YAML.load(row['is_required'].to_s)
@@ -54,7 +54,6 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
   end
 
   def process_row(row)
-    custom_form_question = nil
     valid_row = row['question_name'].present? ? true : false
 
     if valid_row

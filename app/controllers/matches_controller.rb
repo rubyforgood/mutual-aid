@@ -95,8 +95,10 @@ class MatchesController < AdminController
     @matchable_offers = Offer.matchable.map { |o| [o.name_and_match_history.html_safe, o.id] }.sort_by(&:first)
 
     if @match.receiver_id && @match.provider_id
+      # rubocop:todo Lint/SafeNavigationChain (easy enough to fix but these chains are a smell IMO)
       @matched_asks = (@matchable_asks + [[@match.receiver&.name_and_match_history.html_safe, @match.receiver&.id]]).sort_by(&:first)
       @matched_offers = (@matchable_offers + [[@match.provider&.name_and_match_history.html_safe, @match.provider&.id]]).sort_by(&:first)
+      # rubocop:enable Lint/SafeNavigationChain
     end
     @statuses = Match::STATUSES.map { |s| [s.titleize, s] }
 

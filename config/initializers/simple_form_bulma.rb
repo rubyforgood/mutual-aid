@@ -543,56 +543,56 @@ SimpleForm.setup do |config|
     # end
 
 # rubocop:enable Layout/CommentIndentation
+end
 
-  class StringInput < SimpleForm::Inputs::StringInput
-    def input(wrapper_options)
-      template.content_tag(:div, super, class: 'control')
-    end
+class StringInput < SimpleForm::Inputs::StringInput
+  def input(wrapper_options)
+    template.content_tag(:div, super, class: 'control')
+  end
+end
+
+class TextInput < SimpleForm::Inputs::TextInput
+  def input_html_classes
+    super.push('textarea')
+  end
+end
+
+class ArrayInput < SimpleForm::Inputs::StringInput
+  def input(wrapper_options)
+    input_html_options[:type] ||= input_type
+
+    present = Array(object.public_send(attribute_name)).each_with_index.map { |array_el, idx|
+      @builder.text_field(nil, input_html_options.merge(value: array_el,
+                                                        id: "input_#{object_name}_#{attribute_name}_#{idx}",
+                                                        name: "#{object_name}[#{attribute_name}][]"))
+    }.join.html_safe
+
+    empty = @builder.text_field(nil, input_html_options.merge(value: nil,
+                                                              id: "input_#{object_name}_#{attribute_name}_",
+                                                              name: "#{object_name}[#{attribute_name}][]"))
+
+    present + empty
   end
 
-  class TextInput < SimpleForm::Inputs::TextInput
-    def input_html_classes
-      super.push('textarea')
-    end
+  def input_type
+    :text
   end
+end
 
-  class ArrayInput < SimpleForm::Inputs::StringInput
-    def input(wrapper_options)
-      input_html_options[:type] ||= input_type
+class DatePickerInput < SimpleForm::Inputs::StringInput
+  def input
+    value = @builder.object.send(attribute_name)
+    input_html_options[:value] =
+      case value
+      when Date, Time, DateTime
+        format = options[:format] || :medium
+        value.to_s(format)
+      else
+        value.to_s
+      end
 
-      present = Array(object.public_send(attribute_name)).each_with_index.map { |array_el, idx|
-        @builder.text_field(nil, input_html_options.merge(value: array_el,
-                                                          id: "input_#{object_name}_#{attribute_name}_#{idx}",
-                                                          name: "#{object_name}[#{attribute_name}][]"))
-      }.join.html_safe
-
-      empty = @builder.text_field(nil, input_html_options.merge(value: nil,
-                                                                id: "input_#{object_name}_#{attribute_name}_",
-                                                                name: "#{object_name}[#{attribute_name}][]"))
-
-      present + empty
-    end
-
-    def input_type
-      :text
-    end
-  end
-
-  class DatePickerInput < SimpleForm::Inputs::StringInput
-    def input
-      value = @builder.object.send(attribute_name)
-      input_html_options[:value] =
-        case value
-        when Date, Time, DateTime
-          format = options[:format] || :medium
-          value.to_s(format)
-        else
-          value.to_s
-        end
-
-      input_html_options[:class] ||= []
-      input_html_options[:class] << 'date_picker_input'
-      @builder.text_field(attribute_name, input_html_options)
-    end
+    input_html_options[:class] ||= []
+    input_html_options[:class] << 'date_picker_input'
+    @builder.text_field(attribute_name, input_html_options)
   end
 end

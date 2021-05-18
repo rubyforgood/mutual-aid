@@ -560,11 +560,11 @@ SimpleForm.setup do |config|
     def input(wrapper_options)
       input_html_options[:type] ||= input_type
 
-      present = Array(object.public_send(attribute_name)).each_with_index.map do |array_el, idx|
+      present = Array(object.public_send(attribute_name)).each_with_index.map { |array_el, idx|
         @builder.text_field(nil, input_html_options.merge(value: array_el,
                                                           id: "input_#{object_name}_#{attribute_name}_#{idx}",
                                                           name: "#{object_name}[#{attribute_name}][]"))
-      end.join.html_safe
+      }.join.html_safe
 
       empty = @builder.text_field(nil, input_html_options.merge(value: nil,
                                                                 id: "input_#{object_name}_#{attribute_name}_",

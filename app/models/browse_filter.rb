@@ -11,9 +11,9 @@ class BrowseFilter
     # 'UrgencyLevel' => UrgencyLevelFilter
   }.freeze
   FILTER_CLASSES = FILTERS.values.freeze
-  ALLOWED_PARAMS = FILTERS.keys.each_with_object({}) do |key, hash|
+  ALLOWED_PARAMS = FILTERS.keys.each_with_object({}) { |key, hash|
     hash[key] = {}
-  end.freeze
+  }.freeze
 
   attr_reader :parameters
 
@@ -32,7 +32,7 @@ class BrowseFilter
     starting_relations = ContributionTypeFilter.new(parameters['ContributionType']).scopes
 
     # So using whatever relations ContributionTypeFilter gives us (unmatched asks, unmatched offers, etc.)
-    @contributions ||= FILTERS.reduce(starting_relations) do |resulting_relations, (filter_name, klass)|
+    @contributions ||= FILTERS.reduce(starting_relations) { |resulting_relations, (filter_name, klass)|
       # Skip ContributionTypeFilter because we've already used it
       next resulting_relations if klass == ContributionTypeFilter
 
@@ -40,6 +40,6 @@ class BrowseFilter
       resulting_relations.map do |scope|
         klass.new(parameters[filter_name]).filter(scope)
       end
-    end.flatten
+    }.flatten
   end
 end

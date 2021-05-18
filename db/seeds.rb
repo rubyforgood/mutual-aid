@@ -2,8 +2,8 @@
 
 # create a base user using ENV vars
 # we currently have Devise :confirmable strategy turned on, so all new users need their email confirmed
-User.where(email: "#{ENV["SYSTEM_EMAIL"]}").first_or_create!(
-  password: "#{ENV["SYSTEM_PASSWORD"]}",
+User.where(email: ENV["SYSTEM_EMAIL"]).first_or_create!(
+  password: ENV["SYSTEM_PASSWORD"],
   confirmed_at: Time.current,
   role: "sys_admin"
 )
@@ -65,7 +65,7 @@ Position.where(position_type: Position::COMMUNITY_RESOURCES_CONTACT_TITLE, organ
 
 # create system locales. all are set to show up in dropdowns and
 locales_file = Rails.root.join('config', 'locales', 'locales.yml')
-yml_data = YAML::load_file(locales_file)
+yml_data = YAML.load_file(locales_file)
 locales = yml_data["vendor"]["iso"]["languages"]
 
 locales.each do |locale, locale_name|
@@ -96,8 +96,8 @@ end
   )
 
   form.update(
-    header_html: %|<p>This is some PLACEHOLDER header text.</p>\n<p>You can <a href="/forms/#{form.id}/edit">change it here</a>.</p>|,
-    footer_html: %|<p>This is some PLACEHOLDER footer text.</p>\n<p>You can <a href="/forms/#{form.id}/edit">change it here</a>.</p>|
+    header_html: %(<p>This is some PLACEHOLDER header text.</p>\n<p>You can <a href="/forms/#{form.id}/edit">change it here</a>.</p>),
+    footer_html: %(<p>This is some PLACEHOLDER footer text.</p>\n<p>You can <a href="/forms/#{form.id}/edit">change it here</a>.</p>)
   )
 end
 

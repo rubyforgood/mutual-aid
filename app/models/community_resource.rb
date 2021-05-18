@@ -19,8 +19,8 @@ class CommunityResource < ApplicationRecord
 
   accepts_nested_attributes_for :organization
 
-  scope :approved,       ->() { where(is_approved: true) }
-  scope :pending_review, ->() { where(is_approved: false) }
+  scope :approved,       -> { where(is_approved: true) }
+  scope :pending_review, -> { where(is_approved: false) }
 
   def self.published
     before_now = DateTime.new..Time.current
@@ -35,7 +35,7 @@ class CommunityResource < ApplicationRecord
     now = Time.current
     is_approved &&
       (publish_from.present? ? publish_from <= now : true) &&
-      (publish_until == nil || now < publish_until)
+      (publish_until.nil? || now < publish_until)
   end
 
   def all_tags_unique

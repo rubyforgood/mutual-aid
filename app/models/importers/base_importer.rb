@@ -64,7 +64,7 @@ class Importers::BaseImporter
   def row_processing_requirement(row)
     results = []
     required_fields_array.map do |rr|
-      if rr.class == Array
+      if rr.instance_of?(Array)
         if rr.map { |r| row[r] }.any?
           results << true
         else
@@ -183,7 +183,7 @@ class Importers::BaseImporter
       logs << log
       initial_counts_hash[klass_name] = count
     end
-    Rails.logger.info(pp logs)
+    Rails.logger.info(pp(logs))
     @initial_model_logs = logs
     @counts_hash['INITIAL COUNTS'] = initial_counts_hash
     @initial_model_counts = initial_counts_hash
@@ -211,9 +211,9 @@ class Importers::BaseImporter
       final_logs << final_log
       diff_logs << diff_log
     end
-    Rails.logger.info(pp @initial_model_logs)
-    Rails.logger.info(pp final_logs)
-    Rails.logger.info(pp diff_logs)
+    Rails.logger.info(pp(@initial_model_logs))
+    Rails.logger.info(pp(final_logs))
+    Rails.logger.info(pp(diff_logs))
 
     @counts_hash['FINAL COUNTS'] = final_counts_hash
     @counts_hash['+DIFF COUNTS'] = diff_counts_hash
@@ -223,16 +223,16 @@ class Importers::BaseImporter
   end
 
   def create_history_log(row, error_message = nil)
-    begin
-      extra_detail = '+++ row_number#: ' +
-        @row_number.to_s +
-        " +++ #{history_log_name(row.to_s)}" +
-        " +++ #{row.to_s}" +
-        " +++ DID NOT IMPORT -- #{error_message}  -- imported by #{@current_user&.name}"
-      HistoryLog.generate_import_log!(@current_user, self.class, extra_detail) # TODO
-    rescue
-      binding.pry
-    end
+    extra_detail = [
+      '+++ row_number#: ',
+      @row_number.to_s,
+      " +++ #{history_log_name(row.to_s)}",
+      " +++ #{row.to_s}",
+      " +++ DID NOT IMPORT -- #{error_message}  -- imported by #{@current_user&.name}"
+    ].join
+    HistoryLog.generate_import_log!(@current_user, self.class, extra_detail) # TODO
+  rescue
+    binding.pry
   end
 
   def history_log_name(row)
@@ -245,10 +245,10 @@ class Importers::BaseImporter
         if model == Person
           Person.where.not("email ILIKE 'admin%' OR email ILIKE 'mutual%'").destroy_all
         else
-          if today_only
-            records = model.where("created_at::text ILIKE '#{Time.zone.today.strftime('%Y-%m-%d')}%'")
+          records = if today_only
+            model.where("created_at::text ILIKE '#{Time.zone.today.strftime('%Y-%m-%d')}%'")
           else
-            records = model.all
+            model.all
           end
           records.each do |object_instance|
             if object_instance.can_destroy?

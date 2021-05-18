@@ -75,10 +75,10 @@ class CommunicationLogsController < AdminController
   end
 
   def set_form_dropdowns
-    if params[:delivery_method_name].present?
-      @delivery_method_id = ContactMethod.where('LOWER(name) = ?', params[:delivery_method_name].downcase).last&.id
+    @delivery_method_id = if params[:delivery_method_name].present?
+      ContactMethod.where('LOWER(name) = ?', params[:delivery_method_name].downcase).last&.id
     else
-      @delivery_method_id = ContactMethod.where('LOWER(name) = ?', 'call').last&.id
+      ContactMethod.where('LOWER(name) = ?', 'call').last&.id
     end
     @person = @communication_log.person || Person.where(id: params[:person_id]).last
     @match = @communication_log.match || Match.where(id: params[:match_id]).last

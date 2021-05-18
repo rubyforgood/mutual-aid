@@ -41,3 +41,6 @@ Style/SingleLineMethods:
 
 Style/EmptyMethod:
   EnforcedStyle: compact
+
+Style/SafeNavigation:
+  Enabled: false

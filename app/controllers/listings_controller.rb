@@ -120,7 +120,7 @@ class ListingsController < AdminController
   end
 
   def filter_params
-    return Hash.new unless allowed_params && allowed_params.to_h.any?
+    return {} unless allowed_params && allowed_params.to_h.any?
 
     allowed_params.to_h.filter { |key, _v| BrowseFilter::ALLOWED_PARAMS.keys.include? key }.tap do |hash|
       hash.keys.each { |key| hash[key] = hash[key].keys }

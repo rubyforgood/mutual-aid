@@ -81,7 +81,7 @@ end
 
 match_1 = Match.where(receiver: person.asks.last, provider: person_2.offers.last).first_or_create!
 5.times do
-  Match.where(receiver: Ask.all.sample, provider: Offer.all.sample).first_or_create!(created_at: Time.current - (((1..10).to_a.sample).days))
+  Match.where(receiver: Ask.all.sample, provider: Offer.all.sample).first_or_create!(created_at: Time.current - (1..10).to_a.sample.days)
 end
 
 # organization
@@ -224,12 +224,12 @@ end
 
 def update_status(match)
   status = "match_confirmed"
-  if match.feedbacks.where(is_from_receiver: true).any?
-    status = "receiver_gave_feedback"
+  status = if match.feedbacks.where(is_from_receiver: true).any?
+    "receiver_gave_feedback"
   elsif match.feedbacks.any?
-    status = "provider_gave_feedback"
+    "provider_gave_feedback"
   else
-    status = ["match_completed", "match_confirmed", "matched_tentatively"].sample
+    ["match_completed", "match_confirmed", "matched_tentatively"].sample
   end
   match.update_attributes(status: status)
 end

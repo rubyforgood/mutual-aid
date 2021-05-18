@@ -4,7 +4,8 @@ module ApplicationHelper
   require "#{Rails.root}/app/helpers/index_action_buttons.rb"
   require "#{Rails.root}/app/helpers/communication_log_buttons.rb"
 
-  include IndexActionButtons, CommunicationLogButtons
+  include CommunicationLogButtons
+  include IndexActionButtons
 
   def yes_no(boolean)
     "<span class='#{boolean ? "fa fa-check-circle has-text-success" : "fa fa-ban"}'></span>".html_safe
@@ -60,14 +61,14 @@ module ApplicationHelper
   def shorthand_display(date_or_datetime)
     # if date is in the future OR not earlier than 7 days ago, show long version
     today = Time.zone.today
-    if date_or_datetime.to_date == today
-      strftime = 'Today'
+    strftime = if date_or_datetime.to_date == today
+      'Today'
     elsif date_or_datetime.to_date == (today - 1.day)
-      strftime = 'Yesterday'
+      'Yesterday'
     elsif (date_or_datetime.to_date >= today + 1.day) || !(date_or_datetime.to_date > (today - 7.days))
-      strftime = '%a, %b %d, %Y'
+      '%a, %b %d, %Y'
     else
-      strftime = '%a'
+      '%a'
     end
     date_or_datetime.strftime("#{strftime}#{' @ %l:%M %P' if date_or_datetime.is_a?(DateTime)}")
   end

@@ -67,5 +67,5 @@ Rails.application.routes.draw do
 
   resource :glossary, controller: :glossary, only: [:show, :edit, :update]
 
-  root :to => 'public_pages#landing_page'
+  root to: 'public_pages#landing_page'
 end

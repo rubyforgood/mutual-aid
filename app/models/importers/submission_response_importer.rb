@@ -170,7 +170,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
         system_status = 'match_confirmed'
       elsif status&.downcase == 'reoccurring'
         system_status = nil # TODO: - not sure if these should be nil on import?
-      elsif status == nil
+      elsif status.nil?
         system_status = nil
       else
         raise "what's your status?"
@@ -184,11 +184,11 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
     type = listing.type
 
-    if system_status != nil
-      if type == 'Ask'
-        match = Match.where(receiver: listing, provider: @organization_listing).first_or_create!
+    if !system_status.nil?
+      match = if type == 'Ask'
+        Match.where(receiver: listing, provider: @organization_listing).first_or_create!
       else
-        match = Match.where(provider: listing, receiver: @organization_listing).first_or_create!
+        Match.where(provider: listing, receiver: @organization_listing).first_or_create!
       end
 
       match.status = system_status
@@ -211,7 +211,6 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       end
       question = response.custom_form_question
       question.input_type ||= 'radio'
-      question.save!
     else
       if responses.none?
         @new_records_count += 1
@@ -224,8 +223,8 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       end
       question = response.custom_form_question
       question.input_type ||= 'string'
-      question.save!
     end
+    question.save!
     response
   end
 
@@ -279,10 +278,10 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       .where(created_at: created_at, person: person, form_name: @form_type)
       .first_or_create!(service_area: person.service_area)
 
-    if inline_response_categories?
-      listings = create_listings_data_from_category_questions(row, submission)
+    listings = if inline_response_categories?
+      create_listings_data_from_category_questions(row, submission)
     else
-      listings = create_listings_data_from_row(row, submission)
+      create_listings_data_from_row(row, submission)
     end
     submission.body = listings.map(&:inspect)
     submission.save!

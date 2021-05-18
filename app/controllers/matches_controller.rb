@@ -60,7 +60,7 @@ class MatchesController < AdminController
     if @match.update(match_params)
       if save_and_continue || update_connections
         redirect_to(
-          edit_match_path(@match, edit_connection_mode: update_connections ? true : false),
+          edit_match_path(@match, edit_connection_mode: !!update_connections),
           notice: 'Match was successfully updated.'
         )
       else

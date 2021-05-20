@@ -36,7 +36,7 @@ RSpec.describe "/users", type: :request do
 
     it "must redirect to the sign in page if the user is not authenticated" do
       sign_out :user
-      get "/users/edit"
+      get "/users/1/edit"
       expect(response).not_to be_successful
       expect(response.response_code).to eq(302) # Redirection
       expect(response.header["Location"]).to eq('http://www.example.com/users/sign_in')

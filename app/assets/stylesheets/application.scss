@@ -4,20 +4,24 @@
 @import './custom_spacing_helpers';
 @import './bulma_simple_form_customization';
 
-@import './yearbook';  // TODO: remove this once listings/new is refactored
-@import './listings';  // TODO: remove this once listings/new is refactored
+@import './yearbook'; // TODO: remove this once listings/new is refactored
+@import './listings'; // TODO: remove this once listings/new is refactored
 
 @import './custom_text';
 
 @import './mapbox-gl';
 @import './maps';
-@import "./actiontext.scss";
+@import './actiontext.scss';
 
- // TODO: use has-text-centered instead
+// TODO: use has-text-centered instead
 .text-center {
   text-align: center;
 }
 
 .section-detail {
   padding: 0rem 1.5rem 3rem 0rem;
+}
+
+.navbar {
+  z-index: 10;
 }

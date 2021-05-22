@@ -2,7 +2,7 @@
   <%= ff.error_notification %>
 
   <div class="form-inputs">
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= ff.hidden_field :id %>
       <% if @admin_status %>
         <%= f.association :person, label: "Donor",

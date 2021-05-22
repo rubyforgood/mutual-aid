@@ -2,17 +2,17 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.association :person %>
       <%= f.association :team %>
       <%= f.association :organization %>
     </div>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :position_type, as: :select, collection: Position::FORM_CONTACT_TITLES %>
       <%= f.input :name %>
     </div>
     <%= f.input :description %>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :start_date %>
       <%= f.input :end_date %>
     </div>

@@ -23,7 +23,7 @@
       </p>
       <br>
       <% if policy(:contribution).read_details? %>
-        <div class="field is-grouped">
+        <div class="field is-inline-flex">
           <p class="control"> <%= triage_button(contribution) %> </p>
           <br>
           <%= render "tentative_match", contribution: contribution %>

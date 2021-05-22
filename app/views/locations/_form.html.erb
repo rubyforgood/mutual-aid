@@ -3,14 +3,14 @@
 
   <div class="form-inputs">
     <%= f.association :location_type %>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :street_address, hint: "(can be an intersection or crosstreet)" %>
       <%= f.input :city %>
       <%= f.input :state, input_html: { maxlength: 2, size: 2 }, hint: "(e.g. TN, MI, NY)" %>
       <%= f.input :zip, input_html: { maxlength: 5, size: 5 }, hint: "(e.g. 12345)" %>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :county %>
       <%= f.input :region %>
       <%= f.input :neighborhood %>

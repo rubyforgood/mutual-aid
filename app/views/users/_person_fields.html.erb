@@ -2,7 +2,7 @@
   <%= ff.error_notification %>
 
   <div class="form-inputs">
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= ff.hidden_field :id %>
       <%= ff.input :name, label: "Person's name" %>
       <%= ff.input :preferred_contact_method_id, as: :select, collection: @contact_methods, label: "Preferred contact method" %>

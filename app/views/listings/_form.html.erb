@@ -7,7 +7,7 @@
                 label: "Notes (for THIS CATEGORY only! create a new <a href='/asks/new?person_id=#{@person&.id}'> Ask
                   </a> or <a href='/offers/new?person_id=#{@person&.id}'> Offer
                   </a>, as needed, but save this form first!)".html_safe %>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :type, as: :select, collection: ["Ask", "Offer"] %>
       <% if action_name == 'new' %>
         <%= f.hidden_field :state, value: f.object.state || "received" %>

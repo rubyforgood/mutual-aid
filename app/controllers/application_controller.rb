@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Authorization
+  include NavbarHelper
 
   protect_from_forgery with: :exception
 
@@ -37,10 +38,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :context
 
+  def shown?
+    NavbarHelper.show_navbar?(params[:controller], params[:action], context.system_settings.display_navbar?)
+  end
+
   private
 
   # TODO: this appears to be unused?
-  def user_not_authenticated(_exception)
+  def user_not_authenticated(exception)
     flash[:error] = 'This requires authentication, please sign-in first.'
     respond_to do |format|
       format.html { render 'devise/sessions/new.html.erb', layout: "application", status: 401 }

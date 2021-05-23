@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class OffersController < PublicController
-  layout 'without_navbar', only: %i[new create]
 
   def index
     redirect_to contributions_path

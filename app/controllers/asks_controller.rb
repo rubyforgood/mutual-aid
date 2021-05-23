@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class AsksController < PublicController
-  layout 'without_navbar', only: %i[new create]
-
   def index
     redirect_to contributions_path
   end

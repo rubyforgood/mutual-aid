@@ -3,7 +3,9 @@
   <%= render "layouts/head" %>
 
   <body>
+  <% if controller.shown? %>
     <%= render "layouts/navbar" %>
+  <% end %> 
     <%= render "layouts/notices_and_alerts" %>
     <%= render "layouts/main" %>
   </body>

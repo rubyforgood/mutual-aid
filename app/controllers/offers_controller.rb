@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class OffersController < PublicController
-
   def index
     redirect_to contributions_path
   end

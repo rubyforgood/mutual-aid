@@ -55,8 +55,6 @@ class CommunityResourcesController < ApplicationController
     @service_areas ||= ServiceArea.i18n.pluck(:name, :id) || []
   end
 
- 
-
   def redirect_after_create
     notice = "Community resource was successfully submitted."
     if context.can_admin?

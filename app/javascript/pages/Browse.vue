@@ -2,8 +2,9 @@
   <div>
     <div class="intro">
       <h1 class="title">Community Contributions</h1>
-      <p class="subtitle is-5">Below are contributions (asks, offers, and community resources) that are available.
-        <br>You can filter through them by choosing filter options on the side.
+      <p class="subtitle is-5">
+        Below are contributions (asks, offers, and community resources) that are available.
+        <br />You can filter through them by choosing filter options on the side.
       </p>
     </div>
 
@@ -18,7 +19,12 @@
       <section>
         <BrowserSelector :browser="browser" @clicked="browser = $event" />
       </section>
-      <component :is="browser" :contributions="activeContributions" class="row" accessToken="pk.eyJ1IjoibXV0dWFsLWFpZC1hcHAiLCJhIjoiY2tmZTBvd3UwMDBhbTJ4cDlic2JmMWZoaiJ9.rWscBjdl1SMT5N0yekIJYg"/>
+      <component
+        :is="browser"
+        :contributions="activeContributions"
+        class="row"
+        accessToken="pk.eyJ1IjoibXV0dWFsLWFpZC1hcHAiLCJhIjoiY2tmZTBvd3UwMDBhbTJ4cDlic2JmMWZoaiJ9.rWscBjdl1SMT5N0yekIJYg"
+      />
       <section class="has-text-centered mt-2">
         <h2 class="is-size-4 mb-1">Can't find what you're looking for?</h2>
         <div>
@@ -48,12 +54,14 @@ export default {
   },
   props: {
     contributions: {type: Array},
-    filterGroupings: {type: Array, default: ()=>[]},
+    filterGroupings: {type: Array, default: () => []},
     initialFilters: {
       type: Array,
       default: function () {
         return [].concat(
-          ...this.filterGroupings.map((fGrouping) => fGrouping.filter_options.map((filter_option) => filter_option.id))
+          ...this.filterGroupings.map((fGrouping) =>
+            fGrouping.filter_options.map((filter_option) => filter_option.id)
+          )
         )
       },
     },
@@ -92,7 +100,7 @@ export default {
 </script>
 
 <style scoped>
-  a {
-    margin: 0 0.5em;
-  }
+a {
+  margin: 0 0.5em;
+}
 </style>

@@ -18,7 +18,12 @@
       @geolocate-error="geolocateError"
       @geolocate-geolocate="geolocate"
       @map-init="initialized"
+      v-if="contributions.length > 0"
     />
+
+    <div v-if="contributions.length === 0">
+      <p style="text-align: center;">No match found.</p>
+    </div>
   </section>
 </template>
 
@@ -54,13 +59,15 @@ export default {
     geolocate(control, position) {
       console.log(`User position: ${position.coords.latitude}, ${position.coords.longitude}`)
     },
-    geojson(contributions) {
+    geocode(contributions) {
       let geojson = {
         type: 'FeatureCollection',
         features: [],
       }
+
       return new Promise((resolve) => {
         let forwarded = 0
+        if (contributions.length == 0) resolve(geojson)
         contributions.forEach((contribution) => {
           geoCodingService
             .forwardGeocode({
@@ -106,7 +113,7 @@ export default {
         })
       })
     },
-    add_markers: function (geojson, map = this.map) {
+    add_markers: function (geojson, map) {
       if (map.getLayer('points')) {
         map.removeLayer('points')
       }
@@ -114,7 +121,6 @@ export default {
       if (map.getSource('points')) {
         map.removeSource('points')
       }
-
       map.addLayer({
         id: 'points',
         type: 'symbol',
@@ -157,7 +163,7 @@ export default {
     },
 
     loaded: function () {
-      this.geojson(this.contributions).then((geojson) => this.add_markers(geojson))
+      this.geocode(this.contributions).then((geojson) => this.add_markers(geojson, this.map))
     },
     initialized: function (map) {
       this.map = map
@@ -170,8 +176,8 @@ export default {
   },
   watch: {
     contributions: function (new_val, old_val) {
-      if (!(JSON.stringify(new_val) === JSON.stringify(old_val))) {
-        this.geojson(new_val).then((geojson) => this.add_markers(geojson, this.map))
+      if (new_val.length > 0 && !(JSON.stringify(new_val) === JSON.stringify(old_val))) {
+        this.geocode(new_val).then((geojson) => this.add_markers(geojson, this.map))
       }
     },
   },

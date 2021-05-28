@@ -8,7 +8,7 @@ RSpec.describe HideRestrictedFieldsTransformer do
   let(:object) { model.new(name: 'person-name', location: FactoryBot.build(:location)) }
 
   subject(:serialize) do
-    PersonBlueprint.render_as_hash(object, view: :with_location, current_user: current_user)
+    PersonBlueprint.render_as_hash(object, current_user: current_user)
   end
 
   context 'when serializing an object without a policy' do
@@ -21,14 +21,21 @@ RSpec.describe HideRestrictedFieldsTransformer do
     end
 
     it { is_expected.to include(name: 'person-name') }
-    it { is_expected.to include(:location) }
   end
 
   context 'when serializing an object with a policy that implements `restricted_attributes`' do
     let(:model) { Person }
 
     it { is_expected.to include(name: nil) }
-    it { is_expected.to include(location: nil) }
+
+    context 'with a specified view' do
+      subject(:serialize) do
+        PersonBlueprint.render_as_hash(object, view: :with_location, current_user: current_user)
+      end
+
+      it { is_expected.to include(name: nil) }
+      it { is_expected.to include(location: nil) }
+    end
   end
 
   context 'when serializing an object with a policy that does not implement `restricted_attributes`' do

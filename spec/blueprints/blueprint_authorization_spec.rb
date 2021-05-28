@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe HideRestrictedFieldsTransformer do
+RSpec.describe 'Blueprint authorization' do
   let(:current_user) do
     FactoryBot.build(:user, id: 42)
   end

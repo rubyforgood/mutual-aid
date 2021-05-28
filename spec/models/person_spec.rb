@@ -24,20 +24,6 @@ RSpec.describe Person, type: :model do
     end
   end
 
-  describe 'email validation' do
-    let(:contact_method) { build :contact_method, name: 'Email', field: 'email' }
-    subject(:person) { build :person, preferred_contact_method: contact_method, email: 'test@missingtld' }
-
-    context 'when the email field is not valid' do
-      it { is_expected.not_to be_valid }
-
-      it 'generates an error on the correct field' do
-        person.valid?
-        expect(person.errors.messages).to eq({email: ['is not valid']})
-      end
-    end
-  end
-
   describe "#anonymized_name_and_email" do
     it "returns blank if name and email are empty" do
       person = build(:person, name: nil, email: nil)

@@ -3,9 +3,9 @@
   <%= render "layouts/head" %>
 
   <body>
-  <% if controller.shown? %>
-    <%= render "layouts/navbar" %>
-  <% end %> 
+    <% if NavbarVisibility.shown_navbar?(controller_name, action_name, context.system_settings.display_navbar?) %>
+      <%= render "layouts/navbar" %>
+    <% end %> 
     <%= render "layouts/notices_and_alerts" %>
     <%= render "layouts/main" %>
   </body>

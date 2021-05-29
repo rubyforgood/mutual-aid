@@ -45,4 +45,8 @@ class AsksController < PublicController
 
     render :new
   end
+
+  def determine_layout
+    'without_navbar' unless context.system_settings.display_navbar?
+  end
 end

@@ -11,7 +11,8 @@ module NavbarVisibility
   def self.shown?(controller, action, display_navbar)
     display_navbar || !hidden?(controller, action)
   end
+
   def self.hidden?(controller, action)
     NAVBAR_HIDEABLE[controller]&.include?(action)
-  end 
+  end
 end

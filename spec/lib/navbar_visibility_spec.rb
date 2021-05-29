@@ -6,12 +6,12 @@ RSpec.describe NavbarVisibility do
 
     it "should return true for the pages where the navbar can be hidden" do
       subject::NAVBAR_HIDEABLE.each do |controller, actions|
-        actions.each { |action| expect(subject.shown_navbar?(controller, action, display_navbar)).to eq(true) }
+        actions.each { |action| expect(subject.shown?(controller, action, display_navbar)).to eq(true) }
       end
     end
 
     it "should return true for the pages not concerned by the displaying option" do
-      expect(subject.shown_navbar?('always_displayed_controller', 'index', display_navbar))
+      expect(subject.shown?('always_displayed_controller', 'index', display_navbar))
     end
   end
 
@@ -20,12 +20,12 @@ RSpec.describe NavbarVisibility do
 
     it "should return false for the pages where the navbar can be hidden" do
       subject::NAVBAR_HIDEABLE.each do |controller, actions|
-        actions.each { |action| expect(subject.shown_navbar?(controller, action, display_navbar)).to eq(false) }
+        actions.each { |action| expect(subject.shown?(controller, action, display_navbar)).to eq(false) }
       end
     end
 
     it "should return true for the pages not concerned by the displaying option" do
-      expect(subject.shown_navbar?('always_displayed_controller', 'index', display_navbar))
+      expect(subject.shown?('always_displayed_controller', 'index', display_navbar))
     end
   end
 end

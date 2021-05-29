@@ -8,8 +8,10 @@ module NavbarVisibility
     'thank_you' => ['show']
   }
 
-  def self.shown_navbar?(controller, action, display_navbar)
-    always_display = NAVBAR_HIDEABLE[controller].nil? || !NAVBAR_HIDEABLE[controller].include?(action)
-    always_display || display_navbar
+  def self.shown?(controller, action, display_navbar)
+    display_navbar || !hidden?(controller, action)
   end
+  def self.hidden?(controller, action)
+    NAVBAR_HIDEABLE[controller]&.include?(action)
+  end 
 end

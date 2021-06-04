@@ -11,6 +11,10 @@ class PersonPolicy < ApplicationPolicy
     end
   end
 
+  def restricted_attributes
+    read? ? [] : %i[name email phone skills location]
+  end
+
   def read?
     own_person? || can_admin?
   end

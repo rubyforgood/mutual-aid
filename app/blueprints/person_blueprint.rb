@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PersonBlueprint < Blueprinter::Base
+  extend BlueprintAuthorization
+
   identifier :id
 
   fields :name, :email, :phone, :skills

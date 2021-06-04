@@ -4,7 +4,8 @@ class Messenger
   attr_reader :email, :identifier
 
   def self.delivery_statuses
-    %i[sent
+    %i[
+      sent
       connected
       undeliverable
       error

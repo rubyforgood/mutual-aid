@@ -25,14 +25,16 @@ class Listing < ApplicationRecord
 
   MATCH_STATUSES = ['matched', 'unmatched']
 
-  scope :asks, ->() { where(type: Ask.to_s) }
-  scope :offers, ->() { where(type: Offer.to_s) }
+  scope :asks, -> { where(type: Ask.to_s) }
+  scope :offers, -> { where(type: Offer.to_s) }
   scope :created_on, ->(created_on) { where('created_at::date = ?', created_on) }
-  scope :inexhaustible, ->() { where(inexhaustible: true) }
+  scope :inexhaustible, -> { where(inexhaustible: true) }
   scope :location_id, ->(location_id) { where(location_id: location_id.to_i) }
   scope :match_status, ->(match_status) { where(state: match_status.to_s) }
   scope :person_id, ->(person_id) { where(person_id: person_id.to_i) }
-  scope :service_area_name, ->(service_area_name) { includes(service_area: :mobility_string_translations)
+
+  scope :service_area_name, ->(service_area_name) {
+    includes(service_area: :mobility_string_translations)
       .references(:mobility_string_translations)
       .where('mobility_string_translations.value = ?', service_area_name.to_s)
   }
@@ -55,9 +57,18 @@ class Listing < ApplicationRecord
   end
 
   def name_and_match_history
-    "(#{type}-#{all_tags_to_s.upcase}#{" ***INEXHAUSTIBLE*** " if inexhaustible?}) #{
-        person.match_history}. (#{person.name}#{" --- $" +
-        person.monthly_donation_amount_max.to_s + "/mo left" if person&.monthly_donation_amount_max.to_f > 0.0})"
+    inexhaustible_str = inexhaustible ? ' ***INEXHAUSTIBLE***' : ''
+
+    donation_amount_str =
+      if person&.monthly_donation_amount_max.to_f > 0.0
+        " --- $#{person.monthly_donation_amount_max}/mo left"
+      else
+        ''
+      end
+
+    "(#{type}-#{all_tags_to_s.upcase}#{inexhaustible_str})" \
+    " #{person.match_history}. " \
+    "(#{person.name}#{donation_amount_str})"
   end
 
   def status
@@ -104,7 +115,6 @@ class Listing < ApplicationRecord
   def has_email?
     person.email.present?
   end
-
 end
 
 # == Schema Information

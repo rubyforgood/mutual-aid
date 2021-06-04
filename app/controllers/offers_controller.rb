@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class OffersController < PublicController
-  layout 'without_navbar', only: %i[new create]
-
   def index
     redirect_to contributions_path
   end
@@ -18,7 +16,7 @@ class OffersController < PublicController
         submission: submission,
         user: context.user,
         system_setting: context.system_settings,
-        organization: context.host_organization,
+        organization: context.host_organization
       )
       redirect_to thank_you_path, notice: 'Offer was successfully created.'
     else
@@ -42,9 +40,13 @@ class OffersController < PublicController
     @json = {
       submission: SubmissionBlueprint.render_as_hash(submission),
       configuration: ConfigurationBlueprint.render_as_hash(nil),
-      form: FormBlueprint.render_as_hash(@form),
+      form: FormBlueprint.render_as_hash(@form)
     }.to_json
 
     render :new
+  end
+
+  def determine_layout
+    'without_navbar' unless context.system_settings.display_navbar?
   end
 end

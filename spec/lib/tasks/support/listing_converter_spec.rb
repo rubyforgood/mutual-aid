@@ -88,20 +88,22 @@ RSpec.describe ListingConverter do
     it 'creates listing for the remaining tag sets' do
       expect(convert.map(&:tag_list)).to match_array [
         %w[cash],
-        %w[food groceries],
+        %w[food groceries]
       ]
     end
   end
 
   describe 'TagSplitter' do
     let(:splitter) { ListingConverter::TagSplitter.new(lineages) }
-    let(:lineages) { {
-      'grandchild'  => %w[parent child grandchild],
-      'child'       => %w[parent child],
-      'other_child' => %w[parent other_child],
-      'parent'      => %w[parent],
-      'orphan'      => %w[orphan],
-    } }
+    let(:lineages) do
+      {
+        'grandchild'  => %w[parent child grandchild],
+        'child'       => %w[parent child],
+        'other_child' => %w[parent other_child],
+        'parent'      => %w[parent],
+        'orphan'      => %w[orphan]
+      }
+    end
 
     subject { splitter.split tag_list }
 

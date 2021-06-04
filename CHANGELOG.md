@@ -19,6 +19,8 @@ This changelog also serves to acknowledge the incredible people who've contribut
 ### Other bugfixes
 * Fix breakage in claiming a contribution #946
 
+### Development notes
+* Rework how contribution filtering works under the hood #546
 
 ## [0.5.0] - 2021-04-08
 ### Enhancements

@@ -11,7 +11,7 @@ RSpec.describe EmailNewSubmission do
       submission: submission,
       user: user,
       system_setting: system_setting,
-      organization: organization,
+      organization: organization
     )
   end
 

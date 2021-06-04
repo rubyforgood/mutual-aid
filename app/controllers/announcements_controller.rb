@@ -3,8 +3,6 @@
 class AnnouncementsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show new create]
 
-  layout :determine_layout, only: %i[new show]
-
   def index
     @announcements = policy_scope(Announcement).order(created_at: :desc)
     respond_to do |format|
@@ -27,7 +25,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def update
-    if announcement.update(permitted_attributes announcement)
+    if announcement.update(permitted_attributes(announcement))
       redirect_to announcements_path, notice: 'Announcement was successfully updated.'
     else
       render :edit
@@ -53,9 +51,5 @@ class AnnouncementsController < ApplicationController
     else
       redirect_to thank_you_path, notice: notice
     end
-  end
-
-  def determine_layout
-    'without_navbar' unless context.system_settings.display_navbar?
   end
 end

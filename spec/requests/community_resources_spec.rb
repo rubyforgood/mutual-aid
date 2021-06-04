@@ -4,21 +4,23 @@ RSpec.describe '/community_resources', type: :request do
   let!(:location_type) { create :location_type }
   let(:community_resource) { create :community_resource }
 
-  let(:params) { {community_resource: {
-    name: 'Free Breakfast Program',
-    description: 'Food for the rev!',
-    'publish_from(1i)' => '2020',
-    'publish_from(2i)' => '12',
-    'publish_from(3i)' => '31',
-    organization_attributes: {name: 'Black Panther Party'},
-    location: {
-      street_address: '123 Sesame Street',
-      city: 'Kings Park',
-      state: 'NY',
-      zip: '11754',
-      location_type: location_type.id,
-    }
-  }} }
+  let(:params) do
+    {community_resource: {
+      :name => 'Free Breakfast Program',
+      :description => 'Food for the rev!',
+      'publish_from(1i)' => '2020',
+      'publish_from(2i)' => '12',
+      'publish_from(3i)' => '31',
+      :organization_attributes => {name: 'Black Panther Party'},
+      :location => {
+        street_address: '123 Sesame Street',
+        city: 'Kings Park',
+        state: 'NY',
+        zip: '11754',
+        location_type: location_type.id
+      }
+    }}
+  end
 
   describe 'GET /community_resources' do
     before { create_list :community_resource, 2 }
@@ -44,10 +46,9 @@ RSpec.describe '/community_resources', type: :request do
 
   describe 'PUT /community_resources' do
     it 'creates a new community resource and location' do
-      expect { post community_resources_path, params: params }.to(
-        change(CommunityResource, :count).by(1).and(
-        change(Location, :count).by(1)
-      ))
+      expect { post community_resources_path, params: params }
+        .to  change(CommunityResource, :count).by(1)
+        .and change(Location, :count).by(1)
     end
 
     context 'as an admin' do
@@ -114,14 +115,13 @@ RSpec.describe '/community_resources', type: :request do
     end
   end
 
-
   describe 'DELETE /community_resource/:id' do
     context 'as an admin' do
       before { sign_in create :user, :admin }
 
       it 'destroys the announcement' do
         delete community_resource_path(community_resource)
-        expect(Announcement.exists? community_resource.id).to be false
+        expect(Announcement.exists?(community_resource.id)).to be false
       end
     end
 

@@ -39,10 +39,12 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def process_headers_as_data(rows)
     rows.headers.each_with_index do |header_name, idx|
       if header_name # skip blank headers!
-        question = CustomFormQuestion.where('LOWER(name) = ?', header_name.downcase.strip)
-            .where(form_type: @form_type).first_or_create!(display_order: idx, input_type: 'string',
-                                                          name: header_name.downcase.strip)
+        question = CustomFormQuestion
+          .where('LOWER(name) = ?', header_name.downcase.strip)
+          .where(form_type: @form_type)
+          .first_or_create!(display_order: idx, input_type: 'string', name: header_name.downcase.strip)
         # where.not(name: @categories_question_name). # TODO exclude categories answer from import
+
         question.update_attributes!(display_order: idx, input_type: 'string') # in case question was already in db
 
         question.save!
@@ -91,11 +93,14 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     if preferred_contact_method.name.downcase == 'email'
       email ||= 'ImportedWithNoEmail@example.com'
     end
-    Person.where(name: row['Name']&.strip, email: email&.strip, phone: phone&.strip)
-           .first_or_create!(preferred_contact_method: preferred_contact_method,
-                            service_area: service_area, location: location,
-                            skills: row['skills']&.strip,
-                            preferred_locale: preferred_locale&.locale || 'en')
+
+    Person
+      .where(name: row['Name']&.strip, email: email&.strip, phone: phone&.strip)
+      .first_or_create!(preferred_contact_method: preferred_contact_method,
+                        service_area: service_area,
+                        location: location,
+                        skills: row['skills']&.strip,
+                        preferred_locale: preferred_locale&.locale || 'en')
   end
 
   def create_location_from_row(row, service_area)
@@ -112,21 +117,22 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def create_service_area_from_row(row)
     location_type = LocationType.where(name: 'service_area').first_or_create!
     location = Location.where(location_type: location_type).first_or_create!
-    ServiceArea.translated_name(row['service_area_name']&.strip.downcase)
-                .first_or_create!(name: row['service_area_name']&.strip || 'Unknown County',
-                                 service_area_type: row['service_area_type_name'] || 'county',
-                                 organization: Organization.first,
-                                 location: location)
+    ServiceArea
+      .translated_name(row['service_area_name']&.strip&.downcase)
+      .first_or_create!(name: row['service_area_name']&.strip || 'Unknown County',
+                        service_area_type: row['service_area_type_name'] || 'county',
+                        organization: Organization.first,
+                        location: location)
   end
 
   def create_listings_data_from_row(row, submission)
     person = submission.person
     created_at = submission.created_at
-    service_area = submission.service_area
+    service_area = submission.service_area # rubocop:todo Lint/UselessAssignment
     listings = []
     categories_cfq = CustomFormQuestion.where(name: @categories_question_name).first_or_create!
     categories = row[@categories_question_name].to_s.strip.split(/[,;]/)
-    row_status = row['status']&.strip
+    row_status = row['status']&.strip # rubocop:todo Lint/UselessAssignment
 
     categories.each do |category|
       listing = Listing.where(person: person,
@@ -164,7 +170,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
         system_status = 'match_confirmed'
       elsif status&.downcase == 'reoccurring'
         system_status = nil # TODO: - not sure if these should be nil on import?
-      elsif status == nil
+      elsif status.nil?
         system_status = nil
       else
         raise "what's your status?"
@@ -178,11 +184,11 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
 
     type = listing.type
 
-    if system_status != nil
-      if type == 'Ask'
-        match = Match.where(receiver: listing, provider: @organization_listing).first_or_create!
+    if !system_status.nil?
+      match = if type == 'Ask'
+        Match.where(receiver: listing, provider: @organization_listing).first_or_create!
       else
-        match = Match.where(provider: listing, receiver: @organization_listing).first_or_create!
+        Match.where(provider: listing, receiver: @organization_listing).first_or_create!
       end
 
       match.status = system_status
@@ -205,7 +211,6 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       end
       question = response.custom_form_question
       question.input_type ||= 'radio'
-      question.save!
     else
       if responses.none?
         @new_records_count += 1
@@ -218,16 +223,16 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       end
       question = response.custom_form_question
       question.input_type ||= 'string'
-      question.save!
     end
+    question.save!
     response
   end
 
   def create_organization_community_resource
     CommunityResource.where(organization: @host_organization).first_or_create!(
-      is_created_by_admin: true, 
-      name: 'PLACEHOLDER', 
-      description: 'DESCRIPTION PLACEHOLDER', 
+      is_created_by_admin: true,
+      name: 'PLACEHOLDER',
+      description: 'DESCRIPTION PLACEHOLDER',
       publish_from: Date.current
     )
   end
@@ -242,14 +247,17 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
       answer = YAML.load(row[category_cfq.name].to_s)
       if answer
         category_name = category_cfq.name.downcase.gsub('offer_category_', '').gsub('ask_category_', '')
-        category = Category.where(name: category_name).first_or_create!
-        row_status = row['status']&.strip
-        listing = Listing.where(person: person,
-                                service_area: service_area,
-                                submission: submission,
-                                type: category_cfq.name.split('_').first.classify,
-                                created_at: created_at)
-                          .first_or_create!(title: "imported #{Time.current}") # TODO: add descriptions
+        category = Category.where(name: category_name).first_or_create! # rubocop:todo Lint/UselessAssignment
+        row_status = row['status']&.strip # rubocop:todo Lint/UselessAssignment
+        listing = Listing.where(
+          person: person,
+          service_area: service_area,
+          submission: submission,
+          type: category_cfq.name.split('_').first.classify,
+          created_at: created_at
+        ).first_or_create!(
+          title: "imported #{Time.current}"
+        ) # TODO: add descriptions
         category_cfq.option_list << category_name unless category_cfq.option_list.include?(category_name)
         listing.tag_list << category_name
         category_cfq.save!
@@ -266,13 +274,14 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def process_row(row)
     created_at = parse_date(row['Timestamp'])
     person = create_person_from_row(row) # NOTE: this calls create_location_from_row
-    submission = Submission.where(created_at: created_at, person: person, form_name: @form_type)
-                            .first_or_create!(service_area: person.service_area)
+    submission = Submission
+      .where(created_at: created_at, person: person, form_name: @form_type)
+      .first_or_create!(service_area: person.service_area)
 
-    if inline_response_categories?
-      listings = create_listings_data_from_category_questions(row, submission)
+    listings = if inline_response_categories?
+      create_listings_data_from_category_questions(row, submission)
     else
-      listings = create_listings_data_from_row(row, submission)
+      create_listings_data_from_row(row, submission)
     end
     submission.body = listings.map(&:inspect)
     submission.save!

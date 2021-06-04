@@ -10,7 +10,7 @@ module Log
     lines = [
       preamble,
       "#{exception.message} (#{exception.class})",
-      *Rails.backtrace_cleaner.clean(exception.backtrace),
+      *Rails.backtrace_cleaner.clean(exception.backtrace)
     ]
 
     Rails.logger.error lines.compact.join("\n")

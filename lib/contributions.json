@@ -22,7 +22,6 @@
         "id": 1,
         "name": "Marcus Garvey"
     },
-    "profile_path": null,
     "respond_path": "/contributions/3/respond?locale=en",
     "service_area": {
         "id": 6,
@@ -62,7 +61,6 @@
     "location": null,
     "match_path": null,
     "name": "Offer: services (Romeo Leannon)",
-    "profile_path": null,
     "person": {
         "id": 1,
         "name": "Marcus Garvey"
@@ -106,7 +104,6 @@
     "location": null,
     "match_path": null,
     "name": "Offer: emotional (Romeo Leannon)",
-    "profile_path": null,
     "person": {
         "id": 1,
         "name": "Marcus Garvey"
@@ -150,7 +147,6 @@
     "location": null,
     "match_path": null,
     "name": "Offer: tech support (Romeo Leannon)",
-    "profile_path": null,
     "person": {
         "id": 1,
         "name": "Marcus Garvey"

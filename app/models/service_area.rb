@@ -26,17 +26,19 @@ class ServiceArea < ApplicationRecord
   accepts_nested_attributes_for :location
 
   scope :order_by_translated_name, ->(locale = :en) {
-    includes(:mobility_string_translations).references(:mobility_string_translations)
-    .where('mobility_string_translations.locale = ?', locale.to_s)
-    .where('mobility_string_translations.key = ?', 'name')
-    .order(MobilityStringTranslation.arel_table['value'].lower.asc)
+    includes(:mobility_string_translations)
+      .references(:mobility_string_translations)
+      .where('mobility_string_translations.locale = ?', locale.to_s)
+      .where('mobility_string_translations.key = ?', 'name')
+      .order(MobilityStringTranslation.arel_table['value'].lower.asc)
   }
 
-  scope :translated_name, ->(name) { joins(:mobility_string_translations)
+  scope :translated_name, ->(name) {
+    joins(:mobility_string_translations)
       .where("mobility_string_translations.key = 'name' AND mobility_string_translations.locale = 'en'")
-      .where('LOWER(mobility_string_translations.value) = ?', name) }
+      .where('LOWER(mobility_string_translations.value) = ?', name)
+  }
 
-  scope :as_filter_types, -> { i18n.select :id, :name }
   scope :publicly_visible, -> { where(display_to_public: true) }
 
   def full_name

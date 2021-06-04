@@ -60,7 +60,7 @@ class OrganizationsController < AdminController
       :logo_url,
       :name,
       :phone,
-      :website_url,
+      :website_url
     )
   end
 end

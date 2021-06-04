@@ -21,11 +21,26 @@ Metrics:
   # Disabled in Standard by default
   Enabled: true
 
+Layout/EmptyLineBetweenDefs:
+  AllowAdjacentOneLineDefs: true
+
 Layout/ExtraSpacing:
   AllowForAlignment: true
+
+Layout/HashAlignment:
+  Enabled: false
 
 Style/StringLiterals:
   Enabled: false
 
 Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Style/SingleLineMethods:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: compact
+
+Style/SafeNavigation:
   Enabled: false

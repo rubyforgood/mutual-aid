@@ -13,7 +13,8 @@ RSpec.describe BaseForm do
           [inputs, given_inputs]
         end
 
-        def self.model_name # needed for anonymous classes
+        # needed for anonymous classes
+        def self.model_name
           ActiveModel::Name.new(self, nil, "BaseFormSpec")
         end
       end
@@ -54,11 +55,13 @@ RSpec.describe BaseForm do
     end
 
     context 'with a complete multi-part date param' do
-      let(:params) { {
-        'date(1i)' => '2020',
-        'date(2i)' => '12',
-        'date(3i)' => '31',
-      } }
+      let(:params) do
+        {
+          'date(1i)' => '2020',
+          'date(2i)' => '12',
+          'date(3i)' => '31'
+        }
+      end
 
       it 'recognizes the multi-part date was given' do
         expect(inputs).to eq(string: nil, date: Date.new(2020, 12, 31))
@@ -67,9 +70,9 @@ RSpec.describe BaseForm do
     end
 
     context 'with a partial multi-part date param' do
-      let(:params) { {
-        'date(1i)' => '2020',
-      } }
+      let(:params) do
+        {'date(1i)' => '2020'}
+      end
 
       it 'ignores the date' do
         expect(inputs).to eq(string: nil, date: nil)
@@ -91,7 +94,8 @@ RSpec.describe BaseForm do
           end
         end
 
-        def self.model_name # needed for anonymous classes
+        # needed for anonymous classes
+        def self.model_name
           ActiveModel::Name.new(self, nil, "BaseFormSpec")
         end
       end
@@ -99,14 +103,16 @@ RSpec.describe BaseForm do
 
     subject(:keys) { form_class.filter_keys }
 
-    it { is_expected.to eq [
-      :date,
-      array: [],
-      raw_hash: {},
-      nested_hash: [
-        :nested_date,
-        doubly_nested_hash: [:id],
-      ],
-    ]}
+    it do
+      is_expected.to eq [
+        :date,
+        array: [],
+        raw_hash: {},
+        nested_hash: [
+          :nested_date,
+          doubly_nested_hash: [:id]
+        ]
+      ]
+    end
   end
 end

@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :match do
-
     association :provider
     association :receiver
 
@@ -8,7 +7,6 @@ FactoryBot.define do
       association :provider, factory: :offer
       association :receiver, factory: :ask
     end
-
   end
 end
 

@@ -44,11 +44,9 @@ class MatchesController < AdminController
     if @match.save
       save_and_continue = params[:commit]&.downcase&.include?('save and view match')
       if save_and_continue
-        redirect_to edit_match_path(@match),
-                    notice: 'Match was successfully created.'
+        redirect_to edit_match_path(@match), notice: 'Match was successfully created.'
       else
-        redirect_to matches_path,
-                    notice: 'Match was successfully created.'
+        redirect_to matches_path, notice: 'Match was successfully created.'
       end
     else
       set_form_dropdowns
@@ -61,11 +59,12 @@ class MatchesController < AdminController
     update_connections = params[:commit]&.downcase&.include?('edit who this match connects')
     if @match.update(match_params)
       if save_and_continue || update_connections
-        redirect_to edit_match_path(@match, edit_connection_mode: update_connections ? true : false),
-                    notice: 'Match was successfully updated.'
+        redirect_to(
+          edit_match_path(@match, edit_connection_mode: !!update_connections),
+          notice: 'Match was successfully updated.'
+        )
       else
-        redirect_to matches_path,
-                    notice: 'Match was successfully updated.'
+        redirect_to matches_path, notice: 'Match was successfully updated.'
       end
     else
       set_form_dropdowns
@@ -96,10 +95,10 @@ class MatchesController < AdminController
     @matchable_offers = Offer.matchable.map { |o| [o.name_and_match_history.html_safe, o.id] }.sort_by(&:first)
 
     if @match.receiver_id && @match.provider_id
+      # rubocop:todo Lint/SafeNavigationChain (easy enough to fix but these chains are a smell IMO)
       @matched_asks = (@matchable_asks + [[@match.receiver&.name_and_match_history.html_safe, @match.receiver&.id]]).sort_by(&:first)
       @matched_offers = (@matchable_offers + [[@match.provider&.name_and_match_history.html_safe, @match.provider&.id]]).sort_by(&:first)
-    else
-
+      # rubocop:enable Lint/SafeNavigationChain
     end
     @statuses = Match::STATUSES.map { |s| [s.titleize, s] }
 
@@ -119,6 +118,7 @@ class MatchesController < AdminController
       :status,
       :notes,
       :tentative,
-      :completed)
+      :completed
+    )
   end
 end

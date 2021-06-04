@@ -1,9 +1,18 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :timeoutable, :trackable # and :omniauthable
+  devise(
+    :database_authenticatable,
+    :registerable,
+    :recoverable,
+    :rememberable,
+    :validatable,
+    :confirmable,
+    :lockable,
+    :timeoutable,
+    :trackable
+    # :omniauthable,
+  )
 
   has_many :communication_logs, as: :created_by
   has_one :person
@@ -17,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def name
-    "#{person&.name || email}"
+    person&.name || email
   end
 
   def preferred_locale

@@ -56,7 +56,7 @@ class CustomFormQuestionsController < AdminController
       :name,
       :display_order,
       :form_hook,
-      option_list: [],
+      option_list: []
     )
   end
 end

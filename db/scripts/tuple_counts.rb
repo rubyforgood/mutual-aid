@@ -1,40 +1,36 @@
 # run from the command line with:  rails runner -e development db/scripts/tuple_counts.rb
 
-def check_table_has_id_column(table_name, connection) # that's an integer
+# that's an integer
+def check_table_has_id_column(table_name, connection)
   sql = "SELECT count(1)
            FROM information_schema.columns
            WHERE table_schema = 'public'
              AND column_name = 'id'
              AND table_name = '#{table_name}'"
   result = connection.execute(sql).values.flatten.join.to_i
-  if result == 0
-    false
-  else
-    true
-  end
+  !(result == 0)
 end
 
 def check_table_count(table_name, connection, class_name)
   # get count of records in table. set to count empty string if result == 0.
   sql = "select count(1) from #{table_name}"
   result = connection.execute(sql).values.flatten.join.to_i
-  if result == 0
-    count = "   "
+  count = if result == 0
+    "   "
   else
-    count = result
+    result
   end
 
   # get value of highest id in table. set to "na" if result == 0.
   sql = "select max(id) from #{table_name};"
   result = connection.execute(sql).values.flatten.join.to_i
-  if result == 0
-    max_id = "___"
+  max_id = if result == 0
+    "___"
   else
-    max_id = result
+    result
   end
 
-  puts "#{count.to_s.rjust(3, " ")} / #{max_id.to_s.ljust(3, "_")}" +
-           "___" + class_name.to_s
+  puts "#{count.to_s.rjust(3, " ")} / #{max_id.to_s.ljust(3, "_")}" + "___" + class_name.to_s
 end
 
 puts "--------------------TABLE TOTALS (count/max id)---------------------"

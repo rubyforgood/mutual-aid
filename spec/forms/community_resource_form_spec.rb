@@ -2,18 +2,20 @@ require 'rails_helper'
 
 RSpec.describe CommunityResourceForm do
   let!(:location_type) { create :location_type }
-  let(:params) { {
-    name: 'Free breakfast program',
-    description: 'Feed the people!',
-    publish_from: '1969-01-01',
-    location: {
-      city: 'Oakland',
-      location_type: location_type.id,
-    },
-    organization_attributes: {
-      name: 'Black Panther Party',
-    },
-  } }
+  let(:params) do
+    {
+      name: 'Free breakfast program',
+      description: 'Feed the people!',
+      publish_from: '1969-01-01',
+      location: {
+        city: 'Oakland',
+        location_type: location_type.id
+      },
+      organization_attributes: {
+        name: 'Black Panther Party'
+      }
+    }
+  end
 
   describe 'creating a new community resource' do
     let(:community_resource) { CommunityResourceForm.build params }
@@ -36,7 +38,7 @@ RSpec.describe CommunityResourceForm do
       before do
         params[:location] = {
           city: '',
-          location_type: '',
+          location_type: ''
         }
       end
 
@@ -47,13 +49,10 @@ RSpec.describe CommunityResourceForm do
 
     describe 'on save' do
       it 'persists the new community resource with new associated records' do
-        expect {
-          community_resource.save!
-        }.to(
-          change(CommunityResource, :count).by(1).and(
-          change(Organization, :count).by(1)).and(
-          change(Location, :count).by(1))
-        )
+        expect { community_resource.save! }
+          .to  change(CommunityResource, :count).by(1)
+          .and change(Organization, :count).by(1)
+          .and change(Location, :count).by(1)
       end
 
       context 'with validation errors' do
@@ -75,21 +74,23 @@ RSpec.describe CommunityResourceForm do
   describe 'updating an existing community resource' do
     let!(:existing) { CommunityResourceForm.build(params).tap { |o| o.save! } }
 
-    let(:update_params) { {
-      id: existing.id,
-      name: 'new name',
-      description: 'new description',
-      publish_from: existing.publish_from.to_s,
-      location: {
-        id: existing.location.id,
-        city: 'new city',
-        location_type: existing.location.location_type_id,
-      },
-      organization_attributes: {
-        id: existing.organization.id,
-        name: 'new org',
-      },
-    }}
+    let(:update_params) do
+      {
+        id: existing.id,
+        name: 'new name',
+        description: 'new description',
+        publish_from: existing.publish_from.to_s,
+        location: {
+          id: existing.location.id,
+          city: 'new city',
+          location_type: existing.location.location_type_id
+        },
+        organization_attributes: {
+          id: existing.organization.id,
+          name: 'new org'
+        }
+      }
+    end
 
     let(:community_resource) { CommunityResourceForm.build update_params }
 
@@ -105,13 +106,10 @@ RSpec.describe CommunityResourceForm do
 
     describe 'on save' do
       it 'does not create any new records' do
-        expect {
-          community_resource.save!
-        }.to(
-          change(CommunityResource, :count).by(0).and(
-          change(Organization, :count).by(0)).and(
-          change(Location, :count).by(0))
-        )
+        expect { community_resource.save!  }
+          .to  change(CommunityResource, :count).by(0)
+          .and change(Organization, :count).by(0)
+          .and change(Location, :count).by(0)
       end
 
       it 'persists updated values correctly' do

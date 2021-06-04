@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:todo Layout/CommentIndentation
 SimpleForm.setup do |config|
   # Default class for buttons
   config.button_class = 'button'
@@ -38,15 +39,15 @@ SimpleForm.setup do |config|
   # Wrappers for forms and inputs
   config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
-      boolean:       :horizontal_boolean,
-      check_boxes:   :vertical_checkboxes,
-      collection:    :vertical_collection,
-      date:          :horizontal_multi_select,
-      datetime:      :horizontal_multi_select,
-      file:          :vertical_file,
-      radio_buttons: :horizontal_radio,
-      range:         :vertical_range,
-      time:          :horizontal_multi_select,
+    boolean:       :horizontal_boolean,
+    check_boxes:   :vertical_checkboxes,
+    collection:    :vertical_collection,
+    date:          :horizontal_multi_select,
+    datetime:      :horizontal_multi_select,
+    file:          :vertical_file,
+    radio_buttons: :horizontal_radio,
+    range:         :vertical_range,
+    time:          :horizontal_multi_select
   }
 
   # vertical forms
@@ -69,7 +70,7 @@ SimpleForm.setup do |config|
       ba.use :label, class: 'label', wrap_with: {tag: 'label', class: 'label'}
       ba.use :input, class: 'input'
       ba.use :full_error, wrap_with: {tag: 'div', class: 'help invalid-feedback is-danger'}
-      ba.use :hint,  wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
+      ba.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
     end
   end
 
@@ -112,11 +113,11 @@ SimpleForm.setup do |config|
       bb.use :hint, wrap_with: {tag: 'small', class: 'form-text text-muted'}
     end
     # b.wrapper tag: 'div', class: 'checkbox' do |ba|
-      #     ba.use :label_input
-      #   end
-      #
-      #   b.use :error, wrap_with: { tag: 'span', class: 'hint' }
-      #   b.use :hint,  wrap_with: { tag: 'p', class: 'hint' }
+    #     ba.use :label_input
+    #   end
+    #
+    #   b.use :error, wrap_with: { tag: 'span', class: 'hint' }
+    #   b.use :hint,  wrap_with: { tag: 'p', class: 'hint' }
     # end
   end
 
@@ -136,12 +137,12 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
     b.wrapper tag: 'div', class: 'field' do |ba|
-     ba.use :label, class: 'label field-label field-label-left'
-     ba.wrapper tag: 'div', class: 'field-body' do |baa|
-       baa.wrapper tag: 'div', class: 'control' do |baaa|
-         baaa.use :input, class: 'radio', type: 'radio'
-       end
-     end
+      ba.use :label, class: 'label field-label field-label-left'
+      ba.wrapper tag: 'div', class: 'field-body' do |baa|
+        baa.wrapper tag: 'div', class: 'control' do |baaa|
+          baaa.use :input, class: 'radio', type: 'radio'
+        end
+      end
     end
     b.use :full_error, wrap_with: {tag: 'span', class: 'help invalid-feedback is-danger'}
     b.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
@@ -193,8 +194,6 @@ SimpleForm.setup do |config|
     #   b.use :hint,  wrap_with: { tag: :span, class: "help has-text-grey-light" }
     # end
 
-    #
-    #
   config.wrappers :inline_input, tag: 'div', class: 'field is-horizontal' do |b|
     b.wrapper :label, tag: 'div', class: 'field-label-left is-normal' do |bl|
       bl.optional :label, class: 'label'
@@ -281,14 +280,14 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
     b.wrapper tag: 'div', class: 'field' do |ba|
-     ba.use :label, class: 'label field-label'
-     ba.wrapper tag: 'div', class: 'field-body' do |baa|
-       baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
-         baaa.use :input, class: 'radio', type: 'radio'
-       end
-     end
-     ba.use :full_error, wrap_with: {tag: 'span', class: 'help invalid-feedback is-danger'}
-     ba.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
+      ba.use :label, class: 'label field-label'
+      ba.wrapper tag: 'div', class: 'field-body' do |baa|
+        baa.wrapper tag: 'div', class: 'control field is-horizontal' do |baaa|
+          baaa.use :input, class: 'radio', type: 'radio'
+        end
+      end
+      ba.use :full_error, wrap_with: {tag: 'span', class: 'help invalid-feedback is-danger'}
+      ba.use :hint, wrap_with: {tag: 'p', class: 'help has-text-grey-light'}
     end
   end
 
@@ -543,55 +542,57 @@ SimpleForm.setup do |config|
     # b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
     # end
 
-  class StringInput < SimpleForm::Inputs::StringInput
-    def input(wrapper_options)
-      template.content_tag(:div, super, class: 'control')
-    end
+# rubocop:enable Layout/CommentIndentation
+end
+
+class StringInput < SimpleForm::Inputs::StringInput
+  def input(wrapper_options)
+    template.content_tag(:div, super, class: 'control')
+  end
+end
+
+class TextInput < SimpleForm::Inputs::TextInput
+  def input_html_classes
+    super.push('textarea')
+  end
+end
+
+class ArrayInput < SimpleForm::Inputs::StringInput
+  def input(wrapper_options)
+    input_html_options[:type] ||= input_type
+
+    present = Array(object.public_send(attribute_name)).each_with_index.map { |array_el, idx|
+      @builder.text_field(nil, input_html_options.merge(value: array_el,
+                                                        id: "input_#{object_name}_#{attribute_name}_#{idx}",
+                                                        name: "#{object_name}[#{attribute_name}][]"))
+    }.join.html_safe
+
+    empty = @builder.text_field(nil, input_html_options.merge(value: nil,
+                                                              id: "input_#{object_name}_#{attribute_name}_",
+                                                              name: "#{object_name}[#{attribute_name}][]"))
+
+    present + empty
   end
 
-  class TextInput < SimpleForm::Inputs::TextInput
-    def input_html_classes
-      super.push('textarea')
-    end
+  def input_type
+    :text
   end
+end
 
-  class ArrayInput < SimpleForm::Inputs::StringInput
-    def input(wrapper_options)
-      input_html_options[:type] ||= input_type
+class DatePickerInput < SimpleForm::Inputs::StringInput
+  def input
+    value = @builder.object.send(attribute_name)
+    input_html_options[:value] =
+      case value
+      when Date, Time, DateTime
+        format = options[:format] || :medium
+        value.to_s(format)
+      else
+        value.to_s
+      end
 
-      present = Array(object.public_send(attribute_name)).each_with_index.map do |array_el, idx|
-        @builder.text_field(nil, input_html_options.merge(value: array_el,
-                                                          id: "input_#{object_name}_#{attribute_name}_#{idx}",
-                                                          name: "#{object_name}[#{attribute_name}][]"))
-
-      end.join.html_safe
-
-      empty = @builder.text_field(nil, input_html_options.merge(value: nil,
-                                                                id: "input_#{object_name}_#{attribute_name}_",
-                                                                name: "#{object_name}[#{attribute_name}][]"))
-
-      present + empty
-    end
-
-    def input_type
-      :text
-    end
-  end
-
-  class DatePickerInput < SimpleForm::Inputs::StringInput
-    def input
-      value = @builder.object.send(attribute_name)
-      input_html_options[:value] = case value
-                                   when Date, Time, DateTime
-                                     format = options[:format] || :medium
-                                     value.to_s(format)
-                                   else
-                                     value.to_s
-                                   end
-
-      input_html_options[:class] ||= []
-      input_html_options[:class] << 'date_picker_input'
-      @builder.text_field(attribute_name, input_html_options)
-    end
+    input_html_options[:class] ||= []
+    input_html_options[:class] << 'date_picker_input'
+    @builder.text_field(attribute_name, input_html_options)
   end
 end

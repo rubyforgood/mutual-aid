@@ -33,5 +33,4 @@ RSpec.describe Listing, type: :model do
       expect(listing.has_email?).to eq(false)
     end
   end
-
 end

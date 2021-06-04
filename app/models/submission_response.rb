@@ -7,10 +7,17 @@ class SubmissionResponse < ApplicationRecord
   def name
     # self.public_send(Question::INPUT_TYPES_AND_STORAGE[question.input_type])
     name = nil
-    [string_response, text_response, YAML.load(boolean_response.to_s), integer_response.to_s,
-     array_response.join(', '), date_response&.strftime('%Y-%m-%d'), datetime_response&.strftime('%Y-%m-%d @ %l:%m')].each do |string|
+    [
+      string_response,
+      text_response,
+      YAML.load(boolean_response.to_s),
+      integer_response.to_s,
+      array_response.join(', '),
+      date_response&.strftime('%Y-%m-%d'),
+      datetime_response&.strftime('%Y-%m-%d @ %l:%m')
+    ].each do |string|
       if string.present?
-        name = string
+        name = string # FIXME: this will find the _last_ present string, is that what we want?
       end
     end
     name

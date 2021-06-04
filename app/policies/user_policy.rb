@@ -1,10 +1,9 @@
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      case
-      when can_admin?
+      if can_admin?
         scope.all
-      when user.present?
+      elsif user.present?
         scope.where(id: user.id)
       else
         scope.none
@@ -15,7 +14,7 @@ class UserPolicy < ApplicationPolicy
   def permitted_attributes
     [
       :email,
-      person_attributes: %i[id name email phone preferred_contact_method_id _destroy],
+      person_attributes: %i[id name email phone preferred_contact_method_id _destroy]
     ].tap do |permitted|
       permitted << :role if can_admin?
     end
@@ -38,6 +37,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   private
+
   def target_user
     record
   end

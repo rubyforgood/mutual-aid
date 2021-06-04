@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   def context
     @context ||= Context.new(
       user: current_user,
-      admin_param: params[:admin],
+      admin_param: params[:admin]
     )
   end
   helper_method :context

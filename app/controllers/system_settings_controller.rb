@@ -53,6 +53,8 @@ class SystemSettingsController < AdminController
   end
 
   def system_setting_params
+    # rubocop:disable Layout/EmptyLinesAroundArguments
+    # FIXME: It seems these empty lines are meaningful, but i'm not sure this is the most reliable way to represent that meaning?
     params.require(:system_setting).permit(
       :allow_sms,
       :exchange_type,
@@ -73,7 +75,8 @@ class SystemSettingsController < AdminController
       :confirmation_page_text_footer,
       :landing_page_text_what,
       :landing_page_text_who,
-      :landing_page_text_how,
+      :landing_page_text_how
     )
+    # rubocop:enable Layout/EmptyLinesAroundArguments
   end
 end

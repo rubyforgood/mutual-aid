@@ -6,7 +6,7 @@ FactoryBot.define do
 
     trait :admin do
       role { :admin }
-	  end
+    end
 
     trait :neighbor do
       role { :neighbor }
@@ -28,7 +28,7 @@ FactoryBot.define do
       association :person
       # TODO: make sure the simpler version above works
       # after(:create) do |instance, evaluated|
-        # create(:person, user: instance)
+      #   create(:person, user: instance)
       # end
     end
   end

@@ -2,8 +2,6 @@
 
 # FIXME: Extract actions into separate controllers or consolidate with existing ones
 class PublicPagesController < PublicController
-  layout :determine_layout
-
   def about
     @about_us_text = HtmlSanitizer.new(@system_setting.about_us_text).sanitize
   end
@@ -15,7 +13,7 @@ class PublicPagesController < PublicController
   def landing_page
     @json = GenerateLandingPageJson.run!(
       system_setting: context.system_settings,
-      organization: context.host_organization,
+      organization: context.host_organization
     )
   end
 
@@ -26,11 +24,5 @@ class PublicPagesController < PublicController
       status: version,
       color: 'blue'
     }
-  end
-
-  private
-
-  def determine_layout
-    'without_navbar' unless @system_setting.display_navbar?
   end
 end

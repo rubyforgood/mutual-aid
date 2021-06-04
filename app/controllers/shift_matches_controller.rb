@@ -50,10 +50,10 @@ class ShiftMatchesController < AdminController
   end
 
   def set_form_dropdowns
-    if action_name == 'new'
-      @shifts = Shift.active
+    @shifts = if action_name == 'new'
+      Shift.active
     else
-      @shifts = Shift.all
+      Shift.all
     end
 
     if params[:person_id].present?

@@ -33,10 +33,10 @@ module Mutualaid
 
     # Don't generate system test files.
     config.generators do |g|
-      g.assets            false
-      g.helper            false
-      g.test_framework    :rspec
-      g.jbuilder          false
+      g.assets              false
+      g.helper              false
+      g.test_framework      :rspec
+      g.jbuilder            false
       g.scaffold_stylesheet false
     end
 
@@ -55,17 +55,17 @@ module Mutualaid
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = ENV['RAISE_MAIL_DELIVERY_ERRORS'] != 'false'
     config.action_mailer.smtp_settings = {
-      address:   ENV['SMTP_HOST'],
-      port:      (ENV['SMTP_PORT'].presence || 587).to_i,
+      address: ENV['SMTP_HOST'],
+      port: (ENV['SMTP_PORT'].presence || 587).to_i,
       user_name: ENV['SMTP_USERNAME'],
-      password:  ENV['SMTP_PASSWORD'],
-      domain:    ENV['SYSTEM_HOST_NAME'],
+      password: ENV['SMTP_PASSWORD'],
+      domain: ENV['SYSTEM_HOST_NAME'],
       authentication: 'plain',
-      enable_starttls_auto: true,
+      enable_starttls_auto: true
     }
     config.action_mailer.default_url_options = {
       host: ENV['SYSTEM_HOST_NAME'],
-      port: (ENV['PORT'].presence || 80).to_i,
+      port: (ENV['PORT'].presence || 80).to_i
     }
   end
 end

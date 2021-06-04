@@ -33,7 +33,7 @@ class Importers::UserImporter < Importers::BaseImporter
     if !skip_create && @create_users_if_possible
       user = users.first_or_create!(password: row['password'] || '[CHANGEMENOW]')
     end
-    user ||= users.last
+    user || users.last
   end
 
   def process_row(row)

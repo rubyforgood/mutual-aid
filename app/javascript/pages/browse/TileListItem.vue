@@ -32,9 +32,8 @@
           <div v-if="service_area" class="has-text-grey-lighter">
             {{ service_area.name }}
           </div>
-          <div>
+          <div v-if="person.name" class="contributor-name">
             {{ `From: ${person.name}` }}
-
           </div>
         </div>
       </div>
@@ -63,8 +62,6 @@ export default {
     created_at: Number,
     urgency: Object,
     contact_types: {type: Array, default: () => []},
-    profile_path: String,
-    respond_path: String,
     view_path: String,
     match_path: String,
     person: {type: Object, default: null}

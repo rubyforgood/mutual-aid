@@ -1,10 +1,11 @@
 ## Running specs
-Running `bin/test` will run ruby tests (rspec) and then the js tests (mocha via mochapack) if all the rspec tests pass
+Running `bin/test` will run our complete test suite including front-end, back-end and system specs.
 
-To run front end tests and back end tests individually:
+To run each of these individully:
 
 * Front end: `yarn test` or `yarn test -w` (to watch for changes and rerun)
 * Back end: `bin/rspec` or `rerun bin/rspec spec/some/dir/or_spec.rb` (to watch for changes and rerun)
+* System specs: `bin/rspec spec/system`. Can be run in-browser or with headless chrome. See `spec/rails_helper.rb`.
 
 ## Request specs
 When writing rspec tests within the spec/request directory, you can use `Warden::Test:Helpers`

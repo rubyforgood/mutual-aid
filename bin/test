@@ -1,11 +1,14 @@
 #!/usr/bin/env ruby
 APP_ROOT = File.expand_path("..", __dir__)
 
-def system!(*args)
+def system!(message, *args)
+  puts('=' * 80, message) if message
   system(*args) || abort("\n== Command #{args} failed ==")
 end
 
 Dir.chdir(APP_ROOT) do
-  system! 'bin/rspec'
-  system! 'bin/yarn test'
+  system! '1/4 Running front-end specs', 'bin/yarn test'
+  system! '2/4 Recompiling webpack',     'RAILS_ENV=test bin/webpack'
+  system! '3/4 Running back-end specs',  'bin/rspec'
+  system! '4/4 Running system specs',    'HEADLESS_CHROME=true bin/rspec spec/system'
 end

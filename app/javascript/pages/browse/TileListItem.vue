@@ -32,12 +32,12 @@
           <div v-if="service_area" class="has-text-grey-lighter">
             {{ service_area.name }}
           </div>
+          <div v-if="person.name" class="contributor-name">
+            {{ `From: ${person.name}` }}
+          </div>
         </div>
       </div>
       <div class="actions">
-        <div class="buttonSpacing" v-if="respond_path">
-          <a :href="respond_path" class="button icon-list is-primary"><span class=""> Respond</span></a>
-        </div>
         <div class="buttonSpacing" v-if="view_path">
           <a :href="view_path" class="button icon-list is-primary"><span class=""> View</span></a>
         </div>
@@ -62,10 +62,9 @@ export default {
     created_at: Number,
     urgency: Object,
     contact_types: {type: Array, default: () => []},
-    profile_path: String,
-    respond_path: String,
     view_path: String,
-    match_path: String
+    match_path: String,
+    person: {type: Object, default: null}
   },
   components: {
     TagList,

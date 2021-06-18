@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ContributionBlueprint do
+  let(:user) { build :user, :admin }
   let(:expected_category) { Faker::Lorem.word }
   let(:expected_category_id) { create(:category, name: expected_category).id }
   let(:contribution) do
@@ -32,6 +33,17 @@ RSpec.describe ContributionBlueprint do
       'match_path' => nil,
       'name' => contribution.name,
       'location' => nil,
+      'person' => {
+        'id' => contribution.person.id,
+        'name' => contribution.person.name,
+        'email' => contribution.person.email,
+        'phone' => contribution.person.phone,
+        'skills' => contribution.person.skills,
+        'preferred_contact_method' => {
+          'id' => contribution.person.preferred_contact_method.id,
+          'name' => contribution.person.preferred_contact_method.name
+        }
+      },
       'service_area' => {
         'description' => contribution.service_area.description,
         'id' => contribution.service_area.id,
@@ -52,13 +64,13 @@ RSpec.describe ContributionBlueprint do
       'description' => contribution.description,
       'contact_types' => [{'id' => expected_contact_method.id, 'name' => expected_contact_method.name}]
     }]}
-    result = ContributionBlueprint.render([contribution], root: 'contributions')
+    result = ContributionBlueprint.render([contribution], root: 'contributions', current_user: user)
     expect(JSON.parse(result)).to match(expected_data)
   end
 
   it 'emits contribution_path as view_path if the show_view_path option is present' do
     expected_path = Rails.application.routes.url_helpers.contribution_path(contribution)
-    result = ContributionBlueprint.render(contribution, show_view_path: true)
+    result = ContributionBlueprint.render(contribution, show_view_path: true, current_user: user)
     expect(JSON.parse(result)['view_path']).to eq(expected_path)
   end
 end

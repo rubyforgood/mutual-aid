@@ -33,6 +33,16 @@ RSpec.describe 'Blueprint authorization' do
         expect(serialized_hash).to include(location: nil)
       end
     end
+
+    describe 'current_user option' do
+      it 'raises an error if current_user is not provided' do
+        expect { PersonBlueprint.render_as_hash(object) }.to raise_error ArgumentError
+      end
+
+      it 'allows current_user to be nil' do
+        expect { PersonBlueprint.render_as_hash(object, current_user: nil) }.not_to raise_error
+      end
+    end
   end
 
   context 'when serializing the parent of a blueprint with authorization' do

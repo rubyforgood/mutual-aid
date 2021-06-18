@@ -31,4 +31,5 @@ class ContributionBlueprint < Blueprinter::Base
       Rails.application.routes.url_helpers
     end
   end
+  association :person, blueprint: PersonBlueprint
 end

@@ -8,7 +8,7 @@
         <th>Service Area</th>
         <th>Connect</th>
         <th>View</th>
-<!--        <th>Details</th>-->
+        <th v-if="showContributorNames">Contributor Name</th>
       </tr>
       <tr v-for="contribution in contributions" :key="contribution.id">
         <td>
@@ -32,7 +32,7 @@
             <a :href="contribution.view_path" class="button icon-list is-primary"><span class=""> View</span></a>
           </div>
         </td>
-<!--        <td>{{ contribution.title }}</td>-->
+        <td v-if="showContributorNames">{{ contribution.person.name }}</td>
       </tr>
     </table>
   </div>
@@ -52,6 +52,11 @@ export default {
     TagList,
     SingleIcon,
     MappedIconList,
+  },
+  computed: {
+    showContributorNames() {
+      return this.contributions.some(contribution => contribution.person.name)
+    },
   },
 }
 </script>

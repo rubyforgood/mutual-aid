@@ -18,6 +18,10 @@
     "location": null,
     "match_path": null,
     "name": "Offer: accessing healthcare (Dr. Jill Koss)",
+    "person": {
+        "id": 1,
+        "name": "Marcus Garvey"
+    },
     "respond_path": "/contributions/3/respond?locale=en",
     "service_area": {
         "id": 6,
@@ -57,6 +61,10 @@
     "location": null,
     "match_path": null,
     "name": "Offer: services (Romeo Leannon)",
+    "person": {
+        "id": 1,
+        "name": "Marcus Garvey"
+    },
     "respond_path": "/contributions/4/respond?locale=en",
     "service_area": {
         "id": 3,
@@ -96,6 +104,10 @@
     "location": null,
     "match_path": null,
     "name": "Offer: emotional (Romeo Leannon)",
+    "person": {
+        "id": 1,
+        "name": "Marcus Garvey"
+    },
     "respond_path": "/contributions/5/respond?locale=en",
     "service_area": {
         "id": 2,
@@ -135,6 +147,10 @@
     "location": null,
     "match_path": null,
     "name": "Offer: tech support (Romeo Leannon)",
+    "person": {
+        "id": 1,
+        "name": "Marcus Garvey"
+    },
     "respond_path": "/contributions/6/respond?locale=en",
     "service_area": {
         "id": 4,

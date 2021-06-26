@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <% if @person.present? %>
         <%= "<div>To:<br><span class='subtitle is-3'>#{@person.name}</span></div>".html_safe %>
         <%= f.hidden_field :person_id, value: @communication_log.person_id || params[:person_id] %>
@@ -40,7 +40,7 @@
 
     <hr>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :delivery_method_id, as: :select, required: true,
                   label: "How was this message sent?",
                   collection: ContactMethod.enabled.pluck(:name, :id),
@@ -51,7 +51,7 @@
                   selected: f.object.delivery_status || params[:delivery_status] || Messenger.default_status %>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :sent_at, label: "When was the message sent?", default: Time.now, required: true %>
       <%= f.input :outbound, as: :radio_buttons, checked: f.object.outbound.present? ? f.object.outbound : true, label: "Did you send this message?",
                   hint: "(select No if you are logging an incoming message #{" from #{@person.name}" if @person.present?})" %>
@@ -59,7 +59,7 @@
 
     <hr>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :needs_follow_up, as: :radio_buttons,
                   checked: f.object.needs_follow_up || params[:needs_follow_up],
                   hint: "(if re a match, this will determine if the Match needs follow up)" %>

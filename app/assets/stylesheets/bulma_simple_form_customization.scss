@@ -9,14 +9,8 @@
     padding-top: 3em;
   }
 
-  .is-grouped {
-    &.field {
-      inline-size: max-content;
-    }
-  }
-
   .field {
-    padding: 0em 2em 1em 0em;  // spacing between fields
+    padding: 0em 2em 1em 0em; // spacing between fields
   }
 
   .field-label {
@@ -29,9 +23,12 @@
     margin-right: 1rem !important;
   }
 
-  .checkbox, .radio {
-    &.check_boxes, .radio_buttons { // spacing between radio/checkbox input and label
-      margin-right: .25em;
+  .checkbox,
+  .radio {
+    &.check_boxes,
+    .radio_buttons {
+      // spacing between radio/checkbox input and label
+      margin-right: 0.25em;
     }
   }
 
@@ -40,8 +37,9 @@
     overflow: scroll;
   }
 
-  .radio+.radio, .checkbox+.checkbox {
-    margin-left: .75em; // spacing between radio/checkbox items
+  .radio + .radio,
+  .checkbox + .checkbox {
+    margin-left: 0.75em; // spacing between radio/checkbox items
   }
 
   .collection_radio_buttons {
@@ -87,6 +85,7 @@
   color: #fff;
 }
 
-.button.is-primary.is-focused:not(:active), .button.is-primary:focus:not(:active) {
+.button.is-primary.is-focused:not(:active),
+.button.is-primary:focus:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(0, 0, 0, 0.76);
 }

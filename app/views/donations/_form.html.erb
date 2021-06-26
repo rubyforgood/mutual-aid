@@ -3,7 +3,7 @@
     <%= f.simple_fields_for :person do |ff| %>
       <%= render "person_fields", ff: ff, f: f %>
     <% end %>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :value, as: :float, label: "Amount of donation" %>
       <%= f.input :notes, as: :string, label: "Description" %>
       <%= f.input :channel, as: :select, collection: Donation::CHANNELS,

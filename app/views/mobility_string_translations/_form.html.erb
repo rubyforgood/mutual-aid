@@ -9,7 +9,7 @@
   <hr>
 
   <div class="form-inputs">
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <div class="field">
         <%= f.label :current_language, class: "label readonly" %>
         <%= f.label :english, class: "input is-valid text readonly light-invert", style: "background-color: lightgrey" %>
@@ -25,11 +25,11 @@
         </textarea>
       </div>
     </div>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :locale, label: "Locale/language to translate to", as: :select, collection: @system_locales, input_html: { rows: 2 }, class: "is-wide" %>
       <%= f.input :value, label: "Translated value", as: :text, input_html: { rows: 1 }, class: "is-wide" %>
     </div>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.association :created_by %>
       <%= f.input :is_approved, as: :radio_buttons %>
     </div>

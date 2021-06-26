@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :name, required: true %>
       <%= f.input :field, as: :select, collection: @fields, required: true %>
       <%= f.input :enabled, as: :radio_buttons %>

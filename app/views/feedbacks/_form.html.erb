@@ -2,11 +2,11 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.association :match, label_method: "full_name" %>
       <%= f.input :is_from_receiver, as: :radio_buttons, label: "Is this feedback from the receiver?" %>
     </div>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :completed, as: :radio_buttons, label: "Was this match completed?" %>
       <%= f.input :quality,
                   as: :select,

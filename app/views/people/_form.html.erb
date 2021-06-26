@@ -2,27 +2,27 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :name, required: true %>
       <%= f.input :preferred_locale, required: true, as: :select, selected: f.object.preferred_locale || @preferred_locale, collection: @system_locales %>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.association :preferred_contact_method, required: true, as: :select, selected: f.object.preferred_contact_method_id, label_method: :name, value_method: :id %>
       <%= f.input :preferred_contact_timeframe, as: :select, collection: @preferred_contact_timeframes, selected: f.object.preferred_contact_timeframe %>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :phone %>
       <%= f.input :phone_2 %>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :email %>
       <%= f.input :email_2 %>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :monthly_matches_max, as: :integer, label: "Matches/month", hint: "(Self-reported monthly quota)" %>
       <%= f.input :monthly_donation_amount_max, as: :float, label: "Cash $/month", hint: "(Self-reported monthly quota)" %>
     </div>

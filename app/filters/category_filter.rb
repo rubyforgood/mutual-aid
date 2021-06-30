@@ -1,4 +1,4 @@
-class CategoryFilter < BasicFilter
+class CategoryFilter < BaseFilter
   def self.filter_group_name
     'Categories'
   end

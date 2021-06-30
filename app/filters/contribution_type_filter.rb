@@ -1,4 +1,4 @@
-class ContributionTypeFilter
+class ContributionTypeFilter < BaseFilter
   def self.filter_group_name
     'Contribution Types'
   end

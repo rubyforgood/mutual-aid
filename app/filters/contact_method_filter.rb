@@ -1,4 +1,4 @@
-class ContactMethodFilter < BasicFilter
+class ContactMethodFilter < BaseFilter
   def self.filter_group_name
     'Contact Methods'
   end

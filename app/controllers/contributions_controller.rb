@@ -15,7 +15,7 @@ class ContributionsController < ApplicationController
   # associated to one and only one *filter grouping*
 
   def index
-    @filter_groupings = BrowseFilter.filter_groupings_json
+    @filter_groupings = BrowseFilter.filter_groups_json
     # The BrowserFilter takes the result of the parameters from the filter checkboxes and returns a list of contributions
     filter = BrowseFilter.new(allowed_params)
     @contributions = ContributionBlueprint.render(

@@ -1,4 +1,4 @@
-class ServiceAreaFilter < BasicFilter
+class ServiceAreaFilter < BaseFilter
   def self.filter_group_name
     'Service Areas'
   end

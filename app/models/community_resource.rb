@@ -31,6 +31,9 @@ class CommunityResource < ApplicationRecord
     )
   end
 
+  def title; description; end
+  def self.matchable; published; end
+
   def published?
     now = Time.current
     is_approved &&
@@ -65,6 +68,8 @@ class CommunityResource < ApplicationRecord
   def urgency_level_id
     UrgencyLevel::TYPES.last.id
   end
+
+  def person; end
 end
 
 # == Schema Information

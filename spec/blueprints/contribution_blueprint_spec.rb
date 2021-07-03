@@ -73,4 +73,25 @@ RSpec.describe ContributionBlueprint do
     result = ContributionBlueprint.render(contribution, show_view_path: true, current_user: user)
     expect(JSON.parse(result)['view_path']).to eq(expected_path)
   end
+
+  it 'can serialize a community resource as a contribution' do
+    expected_result = {"id" => nil, # not bothering to save the record in this test
+      "category_tags" => [],
+      "contact_types" => [{"id" => 1, "name" => "Call"}],
+      "contribution_type" => "Community Resource",
+      "created_at" => 0,
+      "description" => "Food for the revolution",
+      "inexhaustible" => true,
+      "location" => nil,
+      "match_path" => nil,
+      "name" => "Free breakfast for School Children Program",
+      "person" => nil,
+      "service_area" => nil,
+      "title" => "Food for the revolution",
+      "urgency" => {"id" => 4, "name" => "Anytime"},
+      "view_path" => nil
+    }
+    result = ContributionBlueprint.render(build(:community_resource), current_user: user)
+    expect(JSON.parse(result)).to eq(expected_result)
+  end
 end

@@ -21,6 +21,8 @@ class CommunityResource < ApplicationRecord
 
   scope :approved,       -> { where(is_approved: true) }
   scope :pending_review, -> { where(is_approved: false) }
+  # TODO: add tests for this?
+  scope :in_service_areas, ->(ids) { joins(:service_areas).where(service_areas: {id: ids}).distinct }
 
   def self.published
     before_now = DateTime.new..Time.current
@@ -28,7 +30,7 @@ class CommunityResource < ApplicationRecord
 
     approved.where(publish_from: before_now, publish_until: nil).or(
       approved.where(publish_from: before_now, publish_until: after_now)
-    )
+    ) 
   end
 
   def title; description; end

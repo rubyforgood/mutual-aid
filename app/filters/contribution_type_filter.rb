@@ -6,7 +6,7 @@ class ContributionTypeFilter < BaseFilter
       {id: 'ContributionType[CommunityResource]', name: 'Community Resource'}
     ]}
   end
-  ALL_ALLOWED_TYPES = ['Ask', 'Offer', 'CommunityResource'].freeze
+  ALL_ALLOWED_TYPES = %w[Ask Offer CommunityResource].freeze
 
   def filter(scope)
     raise NotImplementedError.new(

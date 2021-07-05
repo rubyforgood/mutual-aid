@@ -75,11 +75,15 @@ RSpec.describe ContributionBlueprint do
   end
 
   it 'can serialize a community resource as a contribution' do
-    expected_result = {"id" => nil, # not bothering to save the record in this test
+    resource = create(:community_resource)
+    # The test database defaults to having no contact methods, so we need at least one
+    default_contact_method = create(:contact_method)
+    expected_result = {
+      "id" => resource.id, # not bothering to save the record in this test
       "category_tags" => [],
-      "contact_types" => [{"id" => 1, "name" => "Call"}],
+      "contact_types" => [{"id" => default_contact_method.id, "name" => "Call"}],
       "contribution_type" => "Community Resource",
-      "created_at" => 0,
+      "created_at" => resource.created_at.to_f * 1000,
       "description" => "Food for the revolution",
       "inexhaustible" => true,
       "location" => nil,
@@ -91,7 +95,7 @@ RSpec.describe ContributionBlueprint do
       "urgency" => {"id" => 4, "name" => "Anytime"},
       "view_path" => nil
     }
-    result = ContributionBlueprint.render(build(:community_resource), current_user: user)
+    result = ContributionBlueprint.render(resource, current_user: user)
     expect(JSON.parse(result)).to eq(expected_result)
   end
 end

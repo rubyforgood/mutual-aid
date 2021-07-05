@@ -79,7 +79,7 @@ RSpec.describe ContributionBlueprint do
     # The test database defaults to having no contact methods, so we need at least one
     default_contact_method = create(:contact_method)
     expected_result = {
-      "id" => resource.id, # not bothering to save the record in this test
+      "id" => resource.id,
       "category_tags" => [],
       "contact_types" => [{"id" => default_contact_method.id, "name" => "Call"}],
       "contribution_type" => "Community Resource",

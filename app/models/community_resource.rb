@@ -56,7 +56,9 @@ class CommunityResource < ApplicationRecord
   end
 
   def preferred_contact_method
-    # TODO: This is a hack that makes the tests pass for now
+    # TODO: This is a hack that makes things work for now
+    # The test creates a contact method that will match this
+    # and the dev db seeding creates a couple, too
     ContactMethod.method_name('call').last
   end
 

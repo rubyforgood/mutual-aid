@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using ToBoolean
+
 class MatchesController < AdminController
   before_action :set_match, only: %i[edit update destroy]
 
@@ -104,7 +106,7 @@ class MatchesController < AdminController
 
     @communication_logs = CommunicationLog.where(match: @match)
 
-    @edit_connection_mode = YAML.load(params[:edit_connection_mode].to_s)
+    @edit_connection_mode = params[:edit_connection_mode].to_boolean
   end
 
   def match_params

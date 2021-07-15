@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using ToBoolean
+
 class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def initialize(current_user, form_type, categories_question_name = nil)
     require "#{Rails.root}/db/scripts/tuple_counts.rb"
@@ -202,7 +204,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     if ['Yes', 'No', 'Maybe'].include?(response_value)
       if responses.none?
         @new_records_count += 1
-        response = responses.first_or_create!(string_response: response_value, boolean_response: YAML.load(response_value.to_s))
+        response = responses.first_or_create!(string_response: response_value, boolean_response: response_value.to_boolean)
       else
         response = responses.last
         log = 'GOT DUPE'
@@ -244,7 +246,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     listings = []
     category_headers = CustomFormQuestion.translated_name_stem('_category_').where.not('mobility_string_translations.value ILIKE ? OR  mobility_string_translations.value ILIKE ?', '%_funding%', '%_description')
     category_headers.each do |category_cfq|
-      answer = YAML.load(row[category_cfq.name].to_s)
+      answer = row[category_cfq.name].to_boolean
       if answer
         category_name = category_cfq.name.downcase.gsub('offer_category_', '').gsub('ask_category_', '')
         category = Category.where(name: category_name).first_or_create! # rubocop:todo Lint/UselessAssignment

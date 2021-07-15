@@ -68,17 +68,6 @@ RSpec.describe BaseForm do
         expect(given_inputs).to eq(date: Date.new(2020, 12, 31))
       end
     end
-
-    context 'with a partial multi-part date param' do
-      let(:params) do
-        {'date(1i)' => '2020'}
-      end
-
-      it 'ignores the date' do
-        expect(inputs).to eq(string: nil, date: nil)
-        expect(given_inputs).to be_empty
-      end
-    end
   end
 
   describe '.filter_keys' do

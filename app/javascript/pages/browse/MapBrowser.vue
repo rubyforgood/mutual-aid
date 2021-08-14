@@ -36,6 +36,11 @@
       filters: Object,
     },
     components: { Mapbox },
+    computed: {
+      mappableContributions() {
+        return this.contributions.filter((c) => { return c.location || c.service_areas && c.service_areas.length > 0 })
+      }
+    },
     methods: {
       loaded(map) {
         let geojson = {
@@ -47,9 +52,9 @@
           return new Promise((resolve) => {
             let forwarded = 0
 
-            this.contributions.forEach(contribution => {
+            this.mappableContributions.forEach(contribution => {
               geoCodingService.forwardGeocode({
-                query: `${contribution.location && contribution.location.street_address ? contribution.location.street_address : ""} ${contribution.service_area.location.city} ${contribution.service_area.location.state} ${contribution.service_area.location.zip_code}`,
+                query: `${contribution.location && contribution.location.street_address ? contribution.location.street_address : ""} ${contribution.service_areas[0].location.city} ${contribution.service_areas[0].location.state} ${contribution.service_areas[0].location.zip}`,
                 limit: 1
               }).send()
                 .then(response => {

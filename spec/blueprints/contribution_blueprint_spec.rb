@@ -44,7 +44,7 @@ RSpec.describe ContributionBlueprint do
           'name' => contribution.person.preferred_contact_method.name
         }
       },
-      'service_area' => {
+      'service_areas' => [{
         'description' => contribution.service_area.description,
         'id' => contribution.service_area.id,
         'name' => expected_area_name,
@@ -58,7 +58,7 @@ RSpec.describe ContributionBlueprint do
           'street_address' => contribution.service_area.location.street_address,
           'zip' => contribution.service_area.location.zip
         }
-      },
+      }],
       # "map_location" => "44.5,-85.1",
       'title' => contribution.title,
       'description' => contribution.description,
@@ -90,7 +90,7 @@ RSpec.describe ContributionBlueprint do
       "match_path" => nil,
       "name" => "Free breakfast for School Children Program",
       "person" => nil,
-      "service_area" => nil,
+      "service_areas" => [],
       "title" => "Food for the revolution",
       "urgency" => {"id" => 4, "name" => "Anytime"},
       "view_path" => nil

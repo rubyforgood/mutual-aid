@@ -3,10 +3,7 @@
 class ContributionBlueprint < Blueprinter::Base
   identifier :id
   association :categories_for_tags, name: :category_tags, blueprint: DefaultBlueprint
-  association :service_area, blueprint: ServiceAreaBlueprint, view: :with_location do |contribution|
-    contribution.service_areas.first
-  end
-
+  association :service_areas, blueprint: ServiceAreaBlueprint, view: :with_location
   association :contact_types, blueprint: DefaultBlueprint do |contribution, _options|
     [contribution.preferred_contact_method]
   end

@@ -23,7 +23,11 @@
             {{ contribution.urgency.name }}
           </b-tag>
         </td>
-        <td>{{ contribution.service_area.name }}</td>
+        <td>
+          <div v-for="service_area in contribution.service_areas" :key="service_area.id" class="has-text-grey-lighter">
+            {{ service_area.name }}
+          </div>
+        </td>
         <td style="text: nowrap;">
           <SingleIcon :iconType="contribution.contact_types[0].name" />
         </td>
@@ -32,7 +36,7 @@
             <a :href="contribution.view_path" class="button icon-list is-primary"><span class=""> View</span></a>
           </div>
         </td>
-        <td v-if="showContributorNames">{{ contribution.person.name }}</td>
+        <td v-if="showContributorNames ">{{ !!contribution.person ? contribution.person.name : ' ' }}</td>
       </tr>
     </table>
   </div>
@@ -55,7 +59,7 @@ export default {
   },
   computed: {
     showContributorNames() {
-      return this.contributions.some(contribution => contribution.person.name)
+      return this.contributions.some(contribution => contribution.person && contribution.person.name)
     },
   },
 }

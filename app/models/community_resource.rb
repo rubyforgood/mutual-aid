@@ -17,6 +17,11 @@ class CommunityResource < ApplicationRecord
 
   validates :name, :description, :publish_from, presence: true
 
+  # We're not sure if we need or want these validations. Adding them now assuming it will be easier to remove them later than the other way around
+  validates :service_areas, presence: true
+  validates_associated :service_areas
+  validates :tag_list, presence: true
+
   accepts_nested_attributes_for :organization
 
   scope :approved,       -> { where(is_approved: true) }

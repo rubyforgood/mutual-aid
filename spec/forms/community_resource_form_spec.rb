@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe CommunityResourceForm do
   let!(:location_type) { create :location_type }
+  let!(:service_area) { create :service_area }
+  let(:category) { create :category }
   let(:params) do
     {
       name: 'Free breakfast program',
@@ -13,7 +15,9 @@ RSpec.describe CommunityResourceForm do
       },
       organization_attributes: {
         name: 'Black Panther Party'
-      }
+      },
+      service_area_ids: [service_area.id],
+      tag_list: [category.name]
     }
   end
 

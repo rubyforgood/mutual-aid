@@ -12,7 +12,7 @@ class CommunityResource < ApplicationRecord
 
   has_many :matches_as_receiver
   has_many :matches_as_provider
-  has_many :community_resource_service_areas
+  has_many :community_resource_service_areas, dependent: :destroy
   has_many :service_areas, through: :community_resource_service_areas
 
   validates :name, :description, :publish_from, presence: true

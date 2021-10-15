@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using ToBoolean
+
 class Match < ApplicationRecord
   belongs_to :receiver, polymorphic: true, inverse_of: :matches_as_receiver
   belongs_to :provider, polymorphic: true, inverse_of: :matches_as_provider
@@ -41,7 +43,7 @@ class Match < ApplicationRecord
 
   def self.follow_up_status(follow_up_status)
     needs_follow_up = self.needs_follow_up
-    if YAML.load(follow_up_status) == false
+    if follow_up_status.to_boolean == false
       where.not(id: needs_follow_up)
     else
       needs_follow_up

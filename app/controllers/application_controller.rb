@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using ToBoolean
+
 class ApplicationController < ActionController::Base
   include Authorization
 
@@ -12,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def set_admin_status
     # FIXME: replace uses of @admin_status with pundit
-    @admin_status = params[:admin] ? YAML.load(params[:admin]) : current_user&.admin_role? # allows admin user to simulate with param=false
+    @admin_status = params[:admin] ? params[:admin].to_boolean : current_user&.admin_role? # allows admin user to simulate with param=false
   end
 
   def set_system_setting

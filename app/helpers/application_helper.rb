@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using ToBoolean
+
 module ApplicationHelper
   require "#{Rails.root}/app/helpers/index_action_buttons.rb"
   require "#{Rails.root}/app/helpers/communication_log_buttons.rb"
@@ -7,7 +9,8 @@ module ApplicationHelper
   include CommunicationLogButtons
   include IndexActionButtons
 
-  def yes_no(boolean)
+  def yes_no(boolean_or_string)
+    boolean = boolean_or_string.to_boolean
     "<span class='#{boolean ? "fa fa-check-circle has-text-success" : "fa fa-ban"}'></span>".html_safe
   end
 

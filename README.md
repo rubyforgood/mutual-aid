@@ -5,20 +5,18 @@
 **Welcome, and thanks for coming by! 👋🏾**
 
 ## What is mutual aid?
-Mutual Aid is when people get together to build community by volunarily sharing resources with each other. Mutual Aid groups are more concerned about local resiliency than global campaigns, and prefer solidarity before charity. Mutual aid groups have existed around the world for over 200 years. Mutual aid groups generally prioritize the needs of minorities and other underserved communities.
+Mutual aid is when people get together to build community by volunarily sharing resources with each other. Mutual aid groups are more concerned with local resiliency than global campaigns, prefer solidarity over charity, and have existed around the world for over 200 years. Mutual aid groups recognize that structural inequality and injustice must be accounted for and addressed in their work.
 
 To learn more about mutual aid, checkout this [list](https://bigdoorbrigade.wordpress.com/2017/01/31/what-do-we-mean-by-mutual-aid/) and [video](https://www.deanspade.net/2019/07/10/animated-video-about-mutual-aid/).
 
-Many people working in mutual aid were overwhelmed by requests early this year due to the COVID pandemic. Some of these groups were relying on dispatchers to match up people who could help each other. These dispatchers were in turn relying on spreadsheets, and the spreadsheets grew to be unmanageable.
+Many people working in mutual aid were overwhelmed by requests in early 2020 due to the COVID pandemic. Some of these groups were relying on dispatchers to match up people who could help each other. These dispatchers were in turn relying on spreadsheets, and the spreadsheets grew to be unmanageable.
 
-We've created an app to support this work, currently used by seven mutual aid groups in cities across the country.
-
-Our current status is that dispatcher capacity is waning as local governments restart schools and lift pandemic bans. While we contiune to support the ongoing work of **dispatch-based** mutual aid, we're now building out a new **peer-to-peer** communication path that will ease reliance on dispatchers.
+We've created an app to support this work, currently used by several mutual aid groups in cities across the country.
 
 More (and snazzier!) details in this [project pitch deck](https://docs.google.com/presentation/d/1iUakTWYsj1tMAyOUO-1gp4oxNJzwGTFsZnkkDJk8Ax8/edit?usp=drive_web&ouid=109561030287749477812).
 
 ## Contribute!
-We would love contributions from newbies, experienced devs, UX/UI designers and PM folks. We have standalone tickets that can be worked on fairly **independently**, as well as some that will need more **collaboration**.
+We would love contributions from engineers of all skill levels, UX/UI designers and PM folks. We have standalone tickets that can be worked on fairly **independently**, as well as some that will need more **collaboration**.
 
 Check out [this guide](doc/contributing.md) for how to get started.
 
@@ -46,8 +44,7 @@ Visit our [deployment guide](doc/deployment.md) for more information on deployin
 * [Dev environment setup](doc/setup.md)
 * [Seeding and importing data](doc/seeding.md)
 * [Some testing tips](doc/testing.md)
-* [Rudimentary ERD and workflow diagrams](db/db_diagram_yEd.graphml)
-* Customization (WIP)
+* [Rudimentary ERD and workflow diagrams](db/db_diagram_yEd.graphml) (outdated)
 
 ## Get involved in your local mutual aid efforts!
 Mutual aid is not new. If it is new to you, please check out the history of mutual aid in your neighborhood or region, as likely you will find mentors and partners ready to accept your help. There are most likely leaders of color in your area. Please see if there are ways to support them before creating your own new network. There is also plenty of research to be done, and national and regional networks to connect in to.

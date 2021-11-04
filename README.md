@@ -43,6 +43,7 @@ Visit our [deployment guide](doc/deployment.md) for more information on deployin
 * [Releases and Changelog](https://github.com/rubyforgood/mutual-aid/releases)
 * [Dev environment setup](doc/setup.md)
 * [Seeding and importing data](doc/seeding.md)
+* [Stack and notes on architecture](doc/architecture.md)
 * [Some testing tips](doc/testing.md)
 * [Rudimentary ERD and workflow diagrams](db/db_diagram_yEd.graphml) (outdated)
 

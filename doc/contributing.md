@@ -16,6 +16,8 @@ In any case, go ahead and 'Assign' yourself to the issue (if someone's already a
 ## Setup your development environment
 See our [setup guide](setup.md).
 
+Optionally review our [stack and notes on architecture](doc/architecture.md)
+
 ## Put together a Pull Request
 
 Here are the basic steps to submit a pull request. Make sure that you're working on an issue in the [Roadmap]—if the relevant issue doesn't exist, open it!

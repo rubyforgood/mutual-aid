@@ -24,7 +24,7 @@ environment.config.merge({
   output: {
     // Exposes the export from last pack (application.js) as a global var.
     // https://webpack.js.org/configuration/output/#outputlibrary
-    library: ['EntryPoints'],
+    library: ['VueInstances'],
   },
 })
 

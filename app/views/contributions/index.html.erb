@@ -1,14 +1,12 @@
 <section class="section">
-  <div id="entry-point" />
+  <div id="contributions" />
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // TODO: remove public listings (this, entry point, component) once Browse is ready
-        // EntryPoints.publicListings('#public-listings')
-        EntryPoints.browse('#entry-point', {
-            contributions: <%= raw json_escape(@contributions) %>,
-            filterGroupings: <%= raw json_escape(@filter_groupings) %>
-        });
+  document.addEventListener('DOMContentLoaded', () => {
+    VueInstances.browse('#contributions', {
+      contributions: <%= raw json_escape(@contributions) %>,
+      filterGroupings: <%= raw json_escape(@filter_groupings) %>
     });
+  });
 </script>

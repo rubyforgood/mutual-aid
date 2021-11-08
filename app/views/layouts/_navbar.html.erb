@@ -1,7 +1,7 @@
 <div id="navBar"></div>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    EntryPoints.navBar('#navBar', <%= raw({
+    VueInstances.navBar('#navBar', <%= raw({
       logoUrl: site_logo_url,
       visibleButtons: policy(:nav_bar).visible_buttons,
     }.to_json) %>)

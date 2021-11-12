@@ -36,12 +36,12 @@ RSpec.describe Listing, type: :model do
 
   describe 'claim button text' do
     example 'when listing is an offer' do
-      expect(listing.claim_button_text).to eq ('Claim this offer')
+      expect(listing.claim_button_text).to eq('Claim this offer')
     end
 
     example 'when listing is an ask' do
       listing = build(:ask, person: create(:person))
-      expect(listing.claim_button_text).to eq ('Help this person')
+      expect(listing.claim_button_text).to eq('Help this person')
     end
   end
 end

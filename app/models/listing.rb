@@ -90,6 +90,10 @@ class Listing < ApplicationRecord
     type == 'Offer'
   end
 
+  def claim_button_text
+    ask? ? "Help this person" : "Claim this offer"
+  end
+
   def icon_class
     if ask?
       'fa fa-hand-sparkles'

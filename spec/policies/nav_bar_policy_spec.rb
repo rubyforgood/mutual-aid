@@ -22,11 +22,11 @@ RSpec.describe NavBarPolicy do
     context 'neighbor' do
       let(:user) { instance_double 'User', admin_role?: false, sys_admin_role?: false }
 
-      it { is_expected.to match_array %w[Feedback Logout] }
+      it { is_expected.to match_array %w[Logout] }
 
       context 'in peer_to_peer mode' do
         let(:peer_to_peer?) { true }
-        it { is_expected.to match_array %w[Glossary Contributions Feedback Logout] }
+        it { is_expected.to match_array %w[Glossary Contributions Logout] }
       end
     end
 

@@ -18,6 +18,6 @@ require.context('images', true)
 // Induce webpack to process css
 import 'stylesheets/application'
 
-// Entrypoints into JS, made available as window.EntryPoints
+// Entry points into JS, made available as window.VueInstances
 // See config/webpack/environment.js
-export * from '../entry_points'
+export * from '../vue_instances'

@@ -31,7 +31,7 @@
     "webpack": "^4.43.0"
   },
   "devDependencies": {
-    "@release-it/keep-a-changelog": "^1.1.0",
+    "@release-it/keep-a-changelog": "^2.3.0",
     "@vue/test-utils": "^1.0.0-beta.33",
     "bdd-lazy-var": "^2.5.4",
     "chai": "^4.2.0",
@@ -42,7 +42,7 @@
     "mocha-junit-reporter": "^1.23.3",
     "mochapack": "^2.1.2",
     "prettier": "2.0.5",
-    "release-it": "^13.6.2",
+    "release-it": "^14.10.0",
     "sinon": "9.0.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.10.3",

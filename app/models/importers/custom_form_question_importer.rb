@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using ToBoolean
+
 class Importers::CustomFormQuestionImporter < Importers::BaseImporter
   def klasses_array
     [CustomFormQuestion]
@@ -21,11 +23,11 @@ class Importers::CustomFormQuestionImporter < Importers::BaseImporter
     CustomFormQuestion.i18n.where(name: value)
   end
 
-  def find_or_create_custom_form_question(row)
+  def find_or_create_custom_form_question(row) # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
     locale = row['locale'] || 'en' # rubocop:todo Lint/UselessAssignment
     form_type = row['form_type']
     input_type = row['input_type'] || 'string'
-    is_required = YAML.load(row['is_required'].to_s)
+    is_required = row['is_required'].to_boolean
     display_order = row['display_order'].present? ? row['display_order'].to_i : 10
     hint_text = row['hint_text']
     option_list = row['option_list'].present? ? row['option_list'].split(';') : []

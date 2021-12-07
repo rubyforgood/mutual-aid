@@ -14,9 +14,9 @@
           <i class="far fa-check-circle has-text-primary is-size-5 has-text-weight-semibold"><span class="ml-1">Claimed</span></i>
         <% else %>
           <% if contribution.has_email? %>
-            <%= button_to "Claim This #{contribution.type}", new_contribution_claim_path(contribution), class: "button is-primary", method: :get %>
+            <%= button_to contribution.claim_button_text, new_contribution_claim_path(contribution), class: "button is-primary", method: :get%>
           <% else %>
-            <button class="button is-primary" disabled="true">Claim This <%= contribution.type %></button>
+            <button class="button is-primary" disabled="true"><%= contribution.claim_button_text %></button>
             <p class="is-6 is-italic">This person has not yet entered contact information so that you can claim this contribution. You may need to check back later</p>
           <% end %>
         <% end %>

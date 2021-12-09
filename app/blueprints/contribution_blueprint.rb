@@ -18,7 +18,14 @@ class ContributionBlueprint < Blueprinter::Base
   field :type, name: :contribution_type
 
   field :view_path do |contribution, options|
-    routes.contribution_path(contribution.id) if options[:show_view_path]
+    # FIXME: ugly conditional here requires some cleaning up of our contributon, listing and community resource models
+    if options[:show_view_path]
+      if contribution.type == "Community Resource"
+        routes.community_resource_path(contribution.id)
+      else
+        routes.contribution_path(contribution.id)
+      end
+    end
   end
   field :match_path do |contribution, options|
     routes.match_listing_listing_path(contribution.id) if options[:show_match_path]

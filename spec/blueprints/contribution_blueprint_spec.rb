@@ -93,9 +93,9 @@ RSpec.describe ContributionBlueprint do
       "person" => nil,
       "title" => "Food for the revolution",
       "urgency" => {"id" => 4, "name" => "Anytime"},
-      "view_path" => nil
+      "view_path" => "/community_resources/#{resource.id}"
     }
-    result = JSON.parse(ContributionBlueprint.render(resource, current_user: user))
+    result = JSON.parse(ContributionBlueprint.render(resource, current_user: user, show_view_path: true))
     result_without_service_areas = result.dup
     result_without_service_areas.delete("service_areas")
     expect(result_without_service_areas).to eq(expected_result_without_service_area)

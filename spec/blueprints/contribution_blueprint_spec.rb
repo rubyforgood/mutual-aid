@@ -21,6 +21,7 @@ RSpec.describe ContributionBlueprint do
     contribution.service_area.save!
     expected_data = {'contributions' => [{
       'id' => contribution.id,
+      'key' => "ask-#{contribution.id}",
       'contribution_type' => 'Ask',
       'category_tags' => [{'id' => expected_category_id, 'name' => expected_category}],
       'inexhaustible' => contribution.inexhaustible,
@@ -81,6 +82,7 @@ RSpec.describe ContributionBlueprint do
     default_contact_method = create(:contact_method)
     expected_result_without_service_area = {
       "id" => resource.id,
+      "key" => "community_resource-#{resource.id}",
       "category_tags" => [{"id" => expected_category_id, "name" => expected_category}],
       "contact_types" => [{"id" => default_contact_method.id, "name" => "Call"}],
       "contribution_type" => "Community Resource",

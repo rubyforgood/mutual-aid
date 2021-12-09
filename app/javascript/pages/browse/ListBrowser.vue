@@ -10,7 +10,7 @@
         <th>View</th>
         <th v-if="showContributorNames">Contributor Name</th>
       </tr>
-      <tr v-for="contribution in contributions" :key="contribution.id">
+      <tr v-for="contribution in contributions" :key="contribution.key">
         <td>
           <MappedIconList :iconTypes="contribution.inexhaustible ? [{name: contribution.contribution_type}, {name: 'Inexhaustible'}] : [{name: contribution.contribution_type}]" />
         </td>

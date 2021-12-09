@@ -16,7 +16,9 @@ class ContributionBlueprint < Blueprinter::Base
     contribution.created_at.to_f * 1000 # Javascript wants miliseconds, not seconds
   end
   field :type, name: :contribution_type
-
+  field :key do |contribution|
+    "#{contribution.type.parameterize.underscore}-#{contribution.id}"
+  end
   field :view_path do |contribution, options|
     # FIXME: ugly conditional here requires some cleaning up of our contributon, listing and community resource models
     if options[:show_view_path]

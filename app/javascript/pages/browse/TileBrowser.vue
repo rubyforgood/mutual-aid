@@ -3,7 +3,7 @@
     <ul class="columns is-multiline is-centered">
       <TileListItem
         v-for="contribution in contributions"
-        :key="contribution.id"
+        :key="contribution.key"
         v-bind="contribution"
         class="column is-one-quarter"
       />

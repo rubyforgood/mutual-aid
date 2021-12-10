@@ -18,7 +18,11 @@ class ContributionsController < ApplicationController
     @filter_groupings = BrowseFilter.filter_groupings_json
     # The BrowserFilter takes the result of the parameters from the filter checkboxes and returns a list of contributions
     filter = BrowseFilter.new(allowed_params)
-    @contributions = ContributionBlueprint.render(filter.contributions, contribution_blueprint_options)
+    @contributions = ContributionBlueprint.render(
+      filter.contributions,
+      show_view_path: true,
+      current_user: context.user
+    )
     respond_to do |format|
       format.html
       format.json { render inline: @contributions }
@@ -53,10 +57,6 @@ class ContributionsController < ApplicationController
 
   def peer_to_peer_mode?
     @system_setting.peer_to_peer?
-  end
-
-  def contribution_blueprint_options
-    {show_view_path: true}
   end
 
   def allowed_params

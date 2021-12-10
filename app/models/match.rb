@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+using ToBoolean
+
 class Match < ApplicationRecord
   belongs_to :receiver, polymorphic: true, inverse_of: :matches_as_receiver
   belongs_to :provider, polymorphic: true, inverse_of: :matches_as_provider
@@ -41,7 +43,7 @@ class Match < ApplicationRecord
 
   def self.follow_up_status(follow_up_status)
     needs_follow_up = self.needs_follow_up
-    if YAML.load(follow_up_status) == false
+    if follow_up_status.to_boolean == false
       where.not(id: needs_follow_up)
     else
       needs_follow_up
@@ -61,7 +63,7 @@ class Match < ApplicationRecord
   end
 
   # TODO: move this to presenter
-  def person_names
+  def person_names # rubocop:todo Metrics/AbcSize
     receiver_name = [Listing, Ask, Offer].include?(receiver.class) ? receiver.person&.name : receiver.name if receiver
     provider_name = [Listing, Ask, Offer].include?(provider.class) ? provider.person&.name : provider.name if provider
     "#{receiver_name} -and- #{provider_name}" # TODO: need to adjust for community resource

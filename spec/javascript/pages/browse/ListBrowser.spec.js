@@ -15,21 +15,21 @@ describe('ListBrowser', () => {
 
   def('tableHeaders', () => $wrapper.findAll('th').wrappers)
 
-  describe('respond column', () => {
+  describe('contributor name column', () => {
     it('shows the column with typical data', function () {
-      assert.isTrue($tableHeaders.some(header => header.text() == 'View'))
+      assert.isTrue($tableHeaders.some(header => header.text() == 'Contributor Name'))
     })
 
-    describe('when contributions do not come with response urls', () => {
+    describe('when contributor names have been witheld based on authorization', () => {
       def('contributions', () => {
-        testData.contributions.map(contribution => {
-          contribution.view_path = ''
-          return contribution
+        testData.contributions.forEach((contribution) => {
+          contribution.person.name = null  // FIXME: this mutates fixture data
         })
+        return testData
       })
 
-      it('hides the respond button', function() {
-        assert.isFalse($tableHeaders.some(header => header.text() == 'Respond'))
+      it('hides the contributor name column', function() {
+        assert.isFalse($tableHeaders.some(header => header.text() == 'Contributor Name'))
       })
     })
   })

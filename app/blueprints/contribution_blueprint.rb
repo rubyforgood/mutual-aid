@@ -3,9 +3,9 @@
 class ContributionBlueprint < Blueprinter::Base
   identifier :id
   association :categories_for_tags, name: :category_tags, blueprint: DefaultBlueprint
-  association :service_area, blueprint: ServiceAreaBlueprint, view: :with_location
+  association :service_areas, blueprint: ServiceAreaBlueprint, view: :with_location
   association :contact_types, blueprint: DefaultBlueprint do |contribution, _options|
-    [contribution.person.preferred_contact_method]
+    [contribution.preferred_contact_method]
   end
   association :urgency, blueprint: DefaultBlueprint do |contribution, _options|
     UrgencyLevel.find(contribution.urgency_level_id)
@@ -16,9 +16,18 @@ class ContributionBlueprint < Blueprinter::Base
     contribution.created_at.to_f * 1000 # Javascript wants miliseconds, not seconds
   end
   field :type, name: :contribution_type
-
+  field :key do |contribution|
+    "#{contribution.type.parameterize.underscore}-#{contribution.id}"
+  end
   field :view_path do |contribution, options|
-    routes.contribution_path(contribution.id) if options[:show_view_path]
+    # FIXME: ugly conditional here requires some cleaning up of our contributon, listing and community resource models
+    if options[:show_view_path]
+      if contribution.type == "Community Resource"
+        routes.community_resource_path(contribution.id)
+      else
+        routes.contribution_path(contribution.id)
+      end
+    end
   end
   field :match_path do |contribution, options|
     routes.match_listing_listing_path(contribution.id) if options[:show_match_path]
@@ -31,4 +40,5 @@ class ContributionBlueprint < Blueprinter::Base
       Rails.application.routes.url_helpers
     end
   end
+  association :person, blueprint: PersonBlueprint
 end

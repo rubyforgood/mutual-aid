@@ -4,11 +4,11 @@
   <div class="form-inputs">
     <div class="columns">
       <div class="column">
-        <div class="is-grouped">
+        <div class="is-inline-flex">
           <%= f.association :person %>
           <%= f.association :team %>
         </div>
-        <div class="is-grouped">
+        <div class="is-inline-flex">
           <%= f.input :started_at, required: true %>
           <%= f.input :ended_at, required: true %>
         </div>

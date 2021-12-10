@@ -3,8 +3,6 @@
 class CommunityResourcesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show new create]
 
-  layout :determine_layout, only: %i[new show]
-
   def index
     @community_resources = policy_scope(CommunityResource).includes(:organization).order(created_at: :desc)
   end
@@ -55,10 +53,6 @@ class CommunityResourcesController < ApplicationController
 
   def service_areas
     @service_areas ||= ServiceArea.i18n.pluck(:name, :id) || []
-  end
-
-  def determine_layout
-    'without_navbar' unless context.system_settings.display_navbar?
   end
 
   def redirect_after_create

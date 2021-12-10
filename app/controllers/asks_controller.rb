@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class AsksController < PublicController
-  layout 'without_navbar', only: %i[new create]
-
   def index
     redirect_to contributions_path
   end
@@ -46,5 +44,9 @@ class AsksController < PublicController
     }.to_json
 
     render :new
+  end
+
+  def determine_layout
+    'without_navbar' unless context.system_settings.display_navbar?
   end
 end

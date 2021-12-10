@@ -12,15 +12,22 @@ class CommunityResource < ApplicationRecord
 
   has_many :matches_as_receiver
   has_many :matches_as_provider
-  has_many :community_resource_service_areas
+  has_many :community_resource_service_areas, dependent: :destroy
   has_many :service_areas, through: :community_resource_service_areas
 
   validates :name, :description, :publish_from, presence: true
+
+  # We're not sure if we need or want these validations. Adding them now assuming it will be easier to remove them later than the other way around
+  validates :service_areas, presence: true
+  validates_associated :service_areas
+  validates :tag_list, presence: true
 
   accepts_nested_attributes_for :organization
 
   scope :approved,       -> { where(is_approved: true) }
   scope :pending_review, -> { where(is_approved: false) }
+  # TODO: add tests for this?
+  scope :in_service_areas, ->(ids) { joins(:service_areas).where(service_areas: {id: ids}).distinct }
 
   def self.published
     before_now = DateTime.new..Time.current
@@ -31,11 +38,18 @@ class CommunityResource < ApplicationRecord
     )
   end
 
+  def title; description; end
+  def self.matchable; published; end
+
   def published?
     now = Time.current
     is_approved &&
       (publish_from.present? ? publish_from <= now : true) &&
       (publish_until.nil? || now < publish_until)
+  end
+
+  def categories_for_tags
+    Category.where(name: tag_list)
   end
 
   def all_tags_unique
@@ -45,6 +59,27 @@ class CommunityResource < ApplicationRecord
   def all_tags_to_s
     all_tags_unique.join(', ')
   end
+
+  def preferred_contact_method
+    # TODO: This is a hack that makes things work for now
+    # The test creates a contact method that will match this
+    # and the dev db seeding creates a couple, too
+    ContactMethod.method_name('call').last
+  end
+
+  def type
+    "Community Resource"
+  end
+
+  def inexhaustible
+    true
+  end
+
+  def urgency_level_id
+    UrgencyLevel::TYPES.last.id
+  end
+
+  def person; end
 end
 
 # == Schema Information

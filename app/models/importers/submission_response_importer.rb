@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-class Importers::SubmissionResponseImporter < Importers::BaseImporter
-  def initialize(current_user, form_type, categories_question_name = nil)
+using ToBoolean
+
+class Importers::SubmissionResponseImporter < Importers::BaseImporter # rubocop:todo Metrics/ClassLength
+  def initialize(current_user, form_type, categories_question_name = nil) # rubocop:todo Metrics/MethodLength
     require "#{Rails.root}/db/scripts/tuple_counts.rb"
     # audit_info(current_user) # TODO
     set_klasses
@@ -36,7 +38,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     ['timestamp'].include?(row['Timestamp']&.downcase)
   end
 
-  def process_headers_as_data(rows)
+  def process_headers_as_data(rows) # rubocop:todo Metrics/MethodLength
     rows.headers.each_with_index do |header_name, idx|
       if header_name # skip blank headers!
         question = CustomFormQuestion
@@ -53,7 +55,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     end
   end
 
-  def create_contact_method_from_row(row)
+  def create_contact_method_from_row(row) # rubocop:todo Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength
     preferred_contact_method = row['preferred_contact_method']&.strip
     if preferred_contact_method.present?
       field_name = ContactMethod.map_common_names_to_fields(preferred_contact_method)
@@ -80,7 +82,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     SystemLocale.where('LOWER(locale_name) = ?', locale_name).first
   end
 
-  def create_person_from_row(row)
+  def create_person_from_row(row) # rubocop:todo Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength
     preferred_locale = find_preferred_locale_in_row(row)
     service_area = create_service_area_from_row(row)
     location = create_location_from_row(row, service_area)
@@ -103,7 +105,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
                         preferred_locale: preferred_locale&.locale || 'en')
   end
 
-  def create_location_from_row(row, service_area)
+  def create_location_from_row(row, service_area) # rubocop:todo Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength
     if row['Address'].present? || row['City'].present? || row['State'].present? ||
         row['Zip'].present? || row['County'].present? || row['Region'].present? ||
         row['Neighborhood'].present?
@@ -125,7 +127,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
                         location: location)
   end
 
-  def create_listings_data_from_row(row, submission)
+  def create_listings_data_from_row(row, submission) # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
     person = submission.person
     created_at = submission.created_at
     service_area = submission.service_area # rubocop:todo Lint/UselessAssignment
@@ -153,7 +155,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     listings
   end
 
-  def get_system_status(row)
+  def get_system_status(row) # rubocop:todo Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength
     # STATUSES = ["matched_tentatively", "match_confirmed", "match_completed",
     # "provider_gave_feedback", "receiver_gave_feedback"]
     #
@@ -182,10 +184,8 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
   def create_any_needed_matches(listing, row)
     system_status = get_system_status(row)
 
-    type = listing.type
-
     if !system_status.nil?
-      match = if type == 'Ask'
+      match = if listing.type == 'Ask'
         Match.where(receiver: listing, provider: @organization_listing).first_or_create!
       else
         Match.where(provider: listing, receiver: @organization_listing).first_or_create!
@@ -196,13 +196,13 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     end
   end
 
-  def create_submission_response_from_row(row, question, submission)
+  def create_submission_response_from_row(row, question, submission) # rubocop:todo Metrics/PerceivedComplexity, Metrics/AbcSize, Metrics/MethodLength
     response_value = row[question.name]&.strip
     responses = SubmissionResponse.where(custom_form_question: question, submission: submission, created_at: submission.created_at)
     if ['Yes', 'No', 'Maybe'].include?(response_value)
       if responses.none?
         @new_records_count += 1
-        response = responses.first_or_create!(string_response: response_value, boolean_response: YAML.load(response_value.to_s))
+        response = responses.first_or_create!(string_response: response_value, boolean_response: response_value.to_boolean)
       else
         response = responses.last
         log = 'GOT DUPE'
@@ -237,14 +237,14 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     )
   end
 
-  def create_listings_data_from_category_questions(row, submission)
+  def create_listings_data_from_category_questions(row, submission) # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
     created_at = submission.created_at
     person = submission.person
     service_area = submission.service_area
     listings = []
     category_headers = CustomFormQuestion.translated_name_stem('_category_').where.not('mobility_string_translations.value ILIKE ? OR  mobility_string_translations.value ILIKE ?', '%_funding%', '%_description')
     category_headers.each do |category_cfq|
-      answer = YAML.load(row[category_cfq.name].to_s)
+      answer = row[category_cfq.name].to_boolean
       if answer
         category_name = category_cfq.name.downcase.gsub('offer_category_', '').gsub('ask_category_', '')
         category = Category.where(name: category_name).first_or_create! # rubocop:todo Lint/UselessAssignment
@@ -271,7 +271,7 @@ class Importers::SubmissionResponseImporter < Importers::BaseImporter
     listings
   end
 
-  def process_row(row)
+  def process_row(row) # rubocop:todo Metrics/MethodLength
     created_at = parse_date(row['Timestamp'])
     person = create_person_from_row(row) # NOTE: this calls create_location_from_row
     submission = Submission

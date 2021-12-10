@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'mobility', '~> 0.8.9'
 gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.3'
+gem 'puma', '~> 5.5'
 gem 'pundit'
 gem 'rack-timeout'
 gem 'sendgrid-ruby'
@@ -46,9 +46,10 @@ group :development, :test do
 end
 
 group :test do
-  # an XML formatter is required for fancier CircleCI results
-  gem 'rspec_junit_formatter'
+  gem 'capybara'
   gem 'pundit-matchers'
+  gem 'rspec_junit_formatter' # an XML formatter is required for fancier CircleCI results
+  gem 'selenium-webdriver'
 end
 
 group :development do

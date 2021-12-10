@@ -4,6 +4,9 @@ class ContactMethodBlueprint < Blueprinter::Base
   identifier :id
 
   field :name
-  field :field, name: :field_name
-  field :label, name: :field_label
+
+  view :with_form_fields do
+    field :field, name: :field_name
+    field :label, name: :field_label
+  end
 end

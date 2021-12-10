@@ -141,22 +141,30 @@ Remember to configure environment variables in Heroku or wherever you deploy!
 Only the development environment uses `.env` files.
 
 
-## Running the App!
+## Running the app!
 
 First, make sure local services or docker are running.
 
-Then, to run the app locally:
+Before starting the app for the first time, you'll want to:
 ```
 $ bundle && yarn
 $ bin/rake db:rebuild_and_seed_dev
-$ bin/rails s # or, rails s -p 9000 (or whatever port you want to use that's not the default 3000)
 ```
-And in a separate terminal:
+Which will seed the development db with necessary accounts and some test data.
+
+In development, running the app involves firing up several processes, which are defined in [Procfile.dev](Procfile.dev). You can manage these processes yourself, by invoking each of them in separate terminals (or backgrounding them). For example, run
+* `bin/rails server` in one terminal and
+* `bin/webpack-dev-server` in another.
+* Note that `mailcatcher` is only necessary for some features and can also be skipped (see [.env](.env)).
+
+Alternatively, you can use a process manager such as [foreman](https://github.com/ddollar/foreman), [invoker](https://invoker.codemancers.com/), [node-foreman](https://github.com/strongloop/node-foreman), etc., eg one of:
 ```
-$ bin/webpack-dev-server
+$ foreman start -f Procfile.dev
+$ invoker start Procfile.dev
+$ nf start -f Procfile.dev
 ```
 
-You should now be able to see the app running at http://localhost:3000
+You should now be able to see the app running at http://localhost:3000 (or whichever port the rails server is running on).
 
 
 ## Running tests

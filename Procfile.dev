@@ -1,0 +1,3 @@
+mail: mailcatcher -f
+pack: bin/webpack-dev-server
+web: bin/rails server

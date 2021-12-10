@@ -10,7 +10,7 @@
   <div class="has-text-left label">Search:</div>
   <div id="search-boxes" class="has-text-left search-boxes">
     <div class="">
-      <div class="is-grouped is-inline-flex">
+      <div class="is-inline-flex">
         <%= select_tag :contribution_type,
                        options_for_select(@contribution_types || [], selected: params[:contribution_type]),
                        include_blank: "-- Type --",

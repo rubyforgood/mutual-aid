@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= ff.hidden_field :id %>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= ff.association :location_type %>
       <%= ff.input :street_address, hint: "(can be an intersection or crosstreet)" %>
       <%= ff.input :city %>
@@ -12,7 +12,7 @@
       <%= ff.input :zip, input_html: { maxlength: 5, size: 5 }, hint: "(e.g. 12345)" %>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= ff.input :county %>
       <%= ff.input :region %>
       <%= ff.input :neighborhood %>

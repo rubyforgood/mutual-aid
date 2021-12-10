@@ -10,7 +10,7 @@
                 size: 2500,
                 input_html: { rows: 1 } %>
     <br>
-    <div class="is-grouped">
+    <div class="is-inline-flex">
       <%= f.input :input_type,
                   as: :select,
                   label: "Input/data type for the answer",
@@ -47,7 +47,7 @@
                 label: "Option list (if radio, select, or multiselect input type)",
                 input_html: { value: f.object.option_list&.reject(&:empty?),
                               class: "input" } %>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :form_hook, readonly: true, hint: "(internal value used to connect questions to code on the forms, e.g. category checkboxes)" %>
     </div>
   </div>

@@ -25,7 +25,7 @@
     <% end %>
 
     <div class="label">Dates to publish this resource</div>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <div class="field">
         <%= f.input :publish_from, hint: "(leave blank unless you want to schedule it)" %>
       </div>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :tag_list, as: :check_boxes, collection: available_tags %>
       <%= f.input :service_area_ids, label: "Service area", as: :check_boxes, collection: service_areas %>
       <div class="form-vertical">
@@ -51,7 +51,7 @@
     </div>
 
     <div class="label is-expanded">Links</div>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <%= f.input :facebook_url, placeholder: "https://www.google.com" %>
       <%= f.input :website_url, placeholder: "https://www.google.com" %>
       <%= f.input :youtube_identifier, placeholder: "h3hKGbXEzyM" %>

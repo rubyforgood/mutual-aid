@@ -1,7 +1,7 @@
 <% if alert || notice %>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      EntryPoints.notice(<%= raw({
+      VueInstances.notice(<%= raw({
         message: alert ? alert : notice,
         type: alert ? 'is-danger' : 'is-info',
         indefinite: alert.present?,

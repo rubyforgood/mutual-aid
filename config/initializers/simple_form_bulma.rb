@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # rubocop:todo Layout/CommentIndentation
-SimpleForm.setup do |config|
+SimpleForm.setup do |config| # rubocop:disable Metrics/BlockLength
   # Default class for buttons
   config.button_class = 'button'
 
@@ -369,7 +369,7 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.use :label, class: 'label'
     b.wrapper :grid_wrapper, tag: 'div', class: 'control' do |ba|
-      ba.wrapper tag: 'div', class: 'field is-grouped' do |bb|
+      ba.wrapper tag: 'div', class: 'field is-inline-flex' do |bb|
         bb.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
         ba.use :hint, wrap_with: {tag: 'small', class: 'help'} # adds hint above select
       end
@@ -558,7 +558,7 @@ class TextInput < SimpleForm::Inputs::TextInput
 end
 
 class ArrayInput < SimpleForm::Inputs::StringInput
-  def input(wrapper_options)
+  def input(wrapper_options) # rubocop:todo Metrics/AbcSize
     input_html_options[:type] ||= input_type
 
     present = Array(object.public_send(attribute_name)).each_with_index.map { |array_el, idx|
@@ -580,7 +580,7 @@ class ArrayInput < SimpleForm::Inputs::StringInput
 end
 
 class DatePickerInput < SimpleForm::Inputs::StringInput
-  def input
+  def input # rubocop:todo Metrics/AbcSize, Metrics/MethodLength
     value = @builder.object.send(attribute_name)
     input_html_options[:value] =
       case value

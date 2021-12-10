@@ -31,7 +31,7 @@
   <span class="label">Submission Responses:</span>
   <% @submission.submission_responses.each do |response| %>
     <span class="label"><%= response.custom_form_question.name %></span>
-    <div class="field is-grouped">
+    <div class="field is-inline-flex">
       <span class="input"><%= response.name %></span>
       <%= edit_button(response) if current_user.sys_admin_role? %>
     </div>

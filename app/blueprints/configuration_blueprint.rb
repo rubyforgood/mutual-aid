@@ -5,7 +5,7 @@ class ConfigurationBlueprint < Blueprinter::Base
     Category.visible.roots.includes(:categories)
   end
 
-  association :contact_methods, blueprint: ContactMethodBlueprint do
+  association :contact_methods, blueprint: ContactMethodBlueprint, view: :with_form_fields do
     ContactMethod.enabled
   end
 

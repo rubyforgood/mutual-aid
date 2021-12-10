@@ -23,6 +23,7 @@ class Person < ApplicationRecord
   accepts_nested_attributes_for :location
 
   validate :preferred_contact_method_present!
+  validates_with EmailValidator, fields: [:email, :email_2]
 
   def name_and_email
     "#{name} (#{email})"

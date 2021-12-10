@@ -3,6 +3,8 @@ FactoryBot.define do
     name { 'Free breakfast for School Children Program' }
     description { 'Food for the revolution' }
     publish_from { Date.current }
+    service_areas { [association(:service_area)] }
+    tag_list { [association(:category).name] }
   end
 end
 

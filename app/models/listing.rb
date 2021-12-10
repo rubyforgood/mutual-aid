@@ -33,6 +33,7 @@ class Listing < ApplicationRecord
   scope :match_status, ->(match_status) { where(state: match_status.to_s) }
   scope :person_id, ->(person_id) { where(person_id: person_id.to_i) }
 
+  scope :in_service_areas, ->(ids) { where(service_area_id: ids) }
   scope :service_area_name, ->(service_area_name) {
     includes(service_area: :mobility_string_translations)
       .references(:mobility_string_translations)
@@ -116,8 +117,16 @@ class Listing < ApplicationRecord
     Category.where(name: tag_list)
   end
 
+  def service_areas
+    [service_area]
+  end
+
   def has_email?
     person.email.present?
+  end
+
+  def preferred_contact_method
+    person.preferred_contact_method
   end
 end
 

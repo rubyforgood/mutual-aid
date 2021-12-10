@@ -2,9 +2,12 @@ require 'rails_helper'
 
 RSpec.describe '/community_resources', type: :request do
   let!(:location_type) { create :location_type }
+  let!(:service_area) { create :service_area }
   let(:community_resource) { create :community_resource }
+  let(:category) { create :category }
 
   let(:params) do
+    # binding.pry
     {community_resource: {
       :name => 'Free Breakfast Program',
       :description => 'Food for the rev!',
@@ -18,7 +21,9 @@ RSpec.describe '/community_resources', type: :request do
         state: 'NY',
         zip: '11754',
         location_type: location_type.id
-      }
+      },
+      :service_area_ids => [service_area.id],
+      :tag_list => [category.name]
     }}
   end
 

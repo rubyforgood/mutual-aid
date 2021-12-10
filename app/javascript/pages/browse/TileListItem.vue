@@ -29,10 +29,10 @@
           </div>
           <h5 class="has-text-weight-bold">{{ title }}</h5>
           <p>{{ description }}</p>
-          <div v-if="service_area" class="has-text-grey-lighter">
+          <div v-for="service_area in service_areas" :key="service_area.id" class="has-text-grey-lighter">
             {{ service_area.name }}
           </div>
-          <div v-if="person.name" class="contributor-name">
+          <div v-if="person && person.name" class="contributor-name">
             {{ `From: ${person.name}` }}
           </div>
         </div>
@@ -55,7 +55,7 @@ export default {
   props: {
     contribution_type: String,
     category_tags: {type: Array, default: () => []},
-    service_area: {type: Object, default: null},
+    service_areas: {type: Array, default: () => []},
     title: String,
     inexhaustible: Boolean,
     description: String,

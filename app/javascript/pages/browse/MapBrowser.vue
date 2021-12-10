@@ -42,6 +42,11 @@
       filters: Object,
     },
     components: { Mapbox },
+    computed: {
+      mappableContributions() {
+        return this.contributions.filter((c) => { return c.location || c.service_areas && c.service_areas.length > 0 })
+      }
+    },
     methods: {
       zoomend(map, e) {
         console.log('Map zoomed')
@@ -73,9 +78,9 @@
                   contribution.location && contribution.location.street_address
                     ? contribution.location.street_address
                     : ''
-                } ${contribution.service_area.location.city} ${
-                  contribution.service_area.location.state
-                } ${contribution.service_area.location.zip_code}`,
+                } ${contribution.service_areas[0].location.city} ${
+                  contribution.service_areas[0].location.state
+                } ${contribution.service_areas[0].location.zip}`,
                 limit: 1,
               })
               .send()
@@ -154,7 +159,7 @@
         map.fitBounds(bounds, {padding: 50})
       },
       loaded: function () {
-        this.geocode(this.contributions).then((geojson) => this.add_markers(geojson, this.map))
+        this.geocode(this.mappableContributions).then((geojson) => this.add_markers(geojson, this.map))
       },
       initialized: function (map) {
         this.map = map

@@ -2,7 +2,9 @@
   <form :action="action" method="post" ref="form">
     <AuthTokenInput />
     <input type="hidden" name="_method" value="delete" />
-    <a href="#" :class="classes" v-on:click="submit"><slot /></a>
+    <a href="#" :class="classes" v-on:click="submit">
+      <slot />
+    </a>
   </form>
 </template>
 

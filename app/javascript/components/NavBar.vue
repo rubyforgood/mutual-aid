@@ -35,10 +35,8 @@
         <div class="sub-item">
           <FeedbackButton
             classes="navbar-item"
-            action="software_feedbacks/new"
             v-if="visible('Feedback')"
-            >Feedback</FeedbackButton
-          >
+          >Feedback</FeedbackButton>
         </div>
         <div class="sub-item">
           <DeleteLink classes="navbar-item" action="/users/sign_out">Logout</DeleteLink>

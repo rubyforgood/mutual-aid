@@ -1,20 +1,28 @@
 <template>
-  <form :action="action" method="post">
+  <form :action="action" method="post" ref="form">
     <AuthTokenInput />
     <input type="hidden" name="_method" value="delete" />
-    <button type="submit" class="button is-outlined">
+    <a href="#" :class="classes" v-on:click="submit">
       <slot />
-    </button>
+    </a>
   </form>
 </template>
 
 <script>
 import AuthTokenInput from './AuthTokenInput'
-
 export default {
   components: {AuthTokenInput},
   props: {
     action: String,
+    classes: {
+      default: '',
+      type: String,
+    },
+  },
+  methods: {
+    submit: function () {
+      this.$refs.form.submit()
+    },
   },
 }
 </script>

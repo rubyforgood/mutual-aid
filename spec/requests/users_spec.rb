@@ -33,6 +33,12 @@ RSpec.describe "/users", type: :request do
       get "/users/#{user.id}/edit"
       expect(response).to be_successful
     end
+
+    it "must redirect to the sign in page if the user is not authenticated" do
+      sign_out :user
+      get "/users/1/edit"
+      expect(response).to redirect_to new_user_session_path
+    end
   end
 
   describe "POST /create" do

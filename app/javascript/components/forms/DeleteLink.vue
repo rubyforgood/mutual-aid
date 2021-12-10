@@ -22,10 +22,5 @@ export default {
       this.$refs.form.submit()
     },
   },
-  computed: {
-    authenticityToken() {
-      return document.querySelector('meta[name="csrf-token"]').content
-    },
-  },
 }
 </script>

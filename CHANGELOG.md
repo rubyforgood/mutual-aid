@@ -13,8 +13,17 @@ This changelog also serves to acknowledge the incredible people who've contribut
 
 ## [Unreleased]
 
+### Breaking change / enhancement
+* Show Community Resources in the same contributions page as all other contributions #980
+    * Note: this isn't technically a breaking change, but significant enough that we felt it important to highlight.
+
 ### Enhancements
-* Show Community Resources in the same contributions page as all the other contributions
+* Improvements to single announcement display #928
+* Have the 'display nav bar' setting apply more consistently #806, #966, #968
+* Emails are now validated #965
+* Display contributor names to authorized viewers #917, #791
+* Add simple script to a single user to the app #977
+* Make admin section of nav bar a dropdown #963
 
 ### Security vulnerabilities fixed
 * Fix bug in authorization logic that allows a guest user to view names, emails, addresses of other people #951
@@ -22,9 +31,24 @@ This changelog also serves to acknowledge the incredible people who've contribut
 
 ### Other bugfixes
 * Fix breakage in claiming a contribution #946
+* Ensure only one organization is able to own an installation #926
+* Update map view as filters are toggled #970
+* Only show Feedback button to authorized users #996
 
 ### Development notes
+* Simplify and enhance our Rubocop setup, based on customizations on top of StandardRB #935 (see other PRs listed therein)
+* Add rubocop checks to CI #801, #935
+* Change specs so they don't rely on the test DB being seeded #927
 * Rework how contribution filtering works under the hood #546
+* Add authorization checks to our serializers #953
+* Lay groundwork for system specs #956
+* Add Procfile.dev to document local processes required and support `foreman`, `invoker` etc #997
+
+### New contributors! 🙏🏾 💞
+* @vurtn
+* @jadedickinson
+* @dianaliao
+* @bobmazanec
 
 ## [0.5.0] - 2021-04-08
 ### Enhancements

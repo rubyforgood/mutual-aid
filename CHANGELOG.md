@@ -11,6 +11,11 @@ We're still in the [initial development phase](https://www.jering.tech/articles/
 
 This changelog also serves to acknowledge the incredible people who've contributed brilliance, effort and being. Their handles are listed under the first release they each  touched. 💗🙏🏾
 
+## [Unreleased]
+
+### Bugfixes
+* Constrain supported nodejs engines #1000
+
 ## [0.6.0] - 2021-12-14
 
 ### Breaking change / enhancement

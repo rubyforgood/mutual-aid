@@ -2,7 +2,14 @@
 |-|-|-|
 |[![CircleCI](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main.svg?style=svg)](https://circleci.com/gh/rubyforgood/mutual-aid/tree/main)|[![Heroku Mutual Aid Demo Version](https://badgen.net/https/mutual-aid-demo.herokuapp.com/version)](https://mutual-aid-demo.herokuapp.com)|[![Heroku Mutual Aid Test Version](https://badgen.net/https/mutual-aid-test.herokuapp.com/version)](https://mutual-aid-test.herokuapp.com)|
 
-**Welcome, and thanks for coming by! 👋🏾**
+## ✋🏾 On Hiatus...
+Thanks for coming by! This project is in a period of **diminution** 〽️.
+* ⚒️ We, the current maintainers, no longer have enough capacity to dedicate to it, and
+* ♻️ Mutual aid efforts we'd been connected to have evolved. As of now, none of them are actively using the app.
+
+We of course welcome any injection of energy in the form of new **maintainers, contributors** or interest in **using the app**. Please get in touch by commenting [here](https://github.com/rubyforgood/mutual-aid/discussions/1003).
+
+---
 
 ## What is mutual aid?
 Mutual aid is when people get together to build community by volunarily sharing resources with each other. Mutual aid groups are more concerned with local resiliency than global campaigns, prefer solidarity over charity, and have existed around the world for over 200 years. Mutual aid groups recognize that structural inequality and injustice must be accounted for and addressed in their work.

@@ -1,21 +1,21 @@
 <template>
   <div>
     <b-field
-      :label-for="withPrefix('street_address')"
+      :label-for="fieldName('street_address')"
       label="Street address"
       custom-class="is-medium"
     >
-      <b-input :name="withPrefix('street_address')" v-model="streetAddress" />
+      <b-input :name="fieldName('street_address')" v-model="streetAddress" />
     </b-field>
 
     <b-field
       v-if="streetAddress.length"
-      :label-for="withPrefix('location_type')"
+      :label-for="fieldName('location_type')"
       label="Address type"
       custom-class="required-field is-medium"
     >
       <b-select
-        :name="withPrefix('location_type')"
+        :name="fieldName('location_type')"
         :value="location_type.id"
         placeholder="Type"
         required
@@ -31,7 +31,7 @@
 <script>
 import {partial} from 'utils/function'
 import {capitalize, replace} from 'utils/string'
-import {fieldNameWithPrefix} from 'utils/form'
+import {composeFieldName} from 'utils/form'
 
 export default {
   props: {
@@ -46,8 +46,7 @@ export default {
     }
   },
   created: function() {
-    // TODO: tiny bit of duplication with partial+fieldNameWithPrefix
-    this.withPrefix = partial(fieldNameWithPrefix, this.fieldNamePrefix)
+    this.fieldName = partial(composeFieldName, this.fieldNamePrefix)
   },
   filters: {
     capitalize,

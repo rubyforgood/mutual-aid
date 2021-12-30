@@ -1,27 +1,22 @@
-import {partial} from 'utils/function'
-import {fieldNameWithPrefix} from 'utils/form'
+import {composeFieldName} from 'utils/form'
 
 describe('form utils', () => {
-  describe('fieldNameWithPrefix', () => {
-    describe('without a prefix', () => {
-      it('returns the field name given', () => {
-        assert.equal(fieldNameWithPrefix(null, 'field'), 'field')
-        assert.equal(fieldNameWithPrefix('',   'field'), 'field')
-      })
+  describe('composeFieldName', () => {
+    it('returns the field with a rails style prefix', () => {
+      assert.equal(composeFieldName('prefix', 'field'), 'prefix[field]')
     })
 
-    describe('with a prefix', () => {
-      def('withPrefix', () => partial(fieldNameWithPrefix, 'prefix'))
+    it('appends all segments given', () => {
+      assert.equal(composeFieldName('prefix', 'two', 'segments'), 'prefix[two][segments]')
+    })
 
-      it('returns the field with a rails style prefix', () => {
-        assert.equal($withPrefix('field'), 'prefix[field]')
-      })
+    it('understands an array signifier', () => {
+      assert.equal(composeFieldName('prefix', 'arrayField', '[]'), 'prefix[arrayField][]')
+    })
 
-      describe('an array field', () => {
-        it('correctly appends the bracket', () => {
-          assert.equal($withPrefix('arrayField[]'), 'prefix[arrayField][]')
-        })
-      })
+    it('ignores a missing prefix and combines other segments given', () => {
+      assert.equal(composeFieldName(null, 'field'), 'field')
+      assert.equal(composeFieldName('',   'one', 'two'), 'one[two]')
     })
   })
 })

@@ -34,7 +34,7 @@
     /><SpacerField />
 
     <CategoryFields
-      :fieldNamePrefix="withListingPrefix('categories[]')"
+      :fieldNamePrefix="withListingPrefix('categories', '[]')"
       :categories="configuration.categories"
       :tags="listing.tag_list"
     >
@@ -73,7 +73,7 @@
 
 <script>
 import {partial} from 'utils/function'
-import {fieldNameWithPrefix} from 'utils/form'
+import {composeFieldName} from 'utils/form'
 import {
   AuthTokenInput,
   CategoryFields,
@@ -125,8 +125,8 @@ export default {
     }
   },
   created: function() {
-    this.withListingPrefix = partial(fieldNameWithPrefix, 'submission[listings_attributes]')
-    this.withPersonPrefix  = partial(fieldNameWithPrefix, 'submission[person_attributes]')
+    this.withListingPrefix = partial(composeFieldName, 'submission', 'listings_attributes')
+    this.withPersonPrefix  = partial(composeFieldName, 'submission', 'person_attributes')
   },
   skillsMessage,
 }

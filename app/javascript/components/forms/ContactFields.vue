@@ -35,7 +35,7 @@
 
 <script>
 import {partial} from 'utils/function'
-import {fieldNameWithPrefix} from 'utils/form'
+import {composeFieldName} from 'utils/form'
 
 export default {
   props: {
@@ -47,7 +47,7 @@ export default {
     const preference = this.person.preferred_contact_method
     return {
       preferredContactMethodId: preference ? preference.id : null,
-      withPrefix: partial(fieldNameWithPrefix, this.fieldNamePrefix),
+      withPrefix: partial(composeFieldName, this.fieldNamePrefix),
     }
   },
   computed: {

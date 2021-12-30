@@ -1,11 +1,12 @@
 class ContributionTypeFilter < BaseFilter
-  def self.filter_grouping
-    {name: 'Contribution Types', filter_options: [
-      {id: 'ContributionType[Ask]', name: 'Ask'},
-      {id: 'ContributionType[Offer]', name: 'Offer'},
-      {id: 'ContributionType[CommunityResource]', name: 'Community Resource'}
-    ]}
+  def self.filter_grouping_name
+    'Contribution Types'
   end
+
+  def self.filter_options
+    ALL_ALLOWED_TYPES
+  end
+
   ALL_ALLOWED_TYPES = %w[Ask Offer CommunityResource].freeze
 
   def filter(scope)
